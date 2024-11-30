@@ -1,7 +1,11 @@
 $background: #ffeefe;
+$outline: #000;
+
 $accent: #5335cc;
 $accent-highlight: lighten($accent, 10%);
-$outline: #000;
+
+$accent-secondary: #c7d6e2;
+$accent-secondary-highlight: darken($accent-secondary, 7%);
 
 $text-primary: #000000;
 $text-secondary: lighten($text-primary, 20%);
