@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: $text-primary;
+  background-color: $background;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,4 +30,27 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  @include button;
+}
+
+i.icon {
+  color: $text-primary;
+}
+
+button i.icon {
+  color: $text-accent;
+}
+
+a {
+  color: $text-primary;
+  text-decoration: none;
+  transition: all 0.1s ease-out;
+
+  &:hover,
+  &:focus-visible {
+    color: $accent;
+  }
 }

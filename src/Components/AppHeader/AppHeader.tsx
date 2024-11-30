@@ -16,9 +16,9 @@ export default function AppHeader() {
         <Link to="/profiles">Profiles</Link>
       </div>
 
-      <button className="apply-button">
-        <Link to="/apply">Apply now</Link>
-      </button>
+      <Link className="apply-link" to="/apply">
+        Apply now
+      </Link>
 
       <button className="search-button">
         <Icon name="magnifying-glass" />

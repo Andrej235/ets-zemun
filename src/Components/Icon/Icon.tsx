@@ -11,7 +11,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
   ({ name, className, ...attributes }, ref) => {
     return (
       <i
-        className={`fa fa-${name}${className ? " " + className : ""}`}
+        className={`icon fa fa-${name}${className ? " " + className : ""}`}
         ref={ref}
         {...attributes}
       />

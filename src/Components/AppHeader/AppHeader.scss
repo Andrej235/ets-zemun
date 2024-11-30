@@ -1,9 +1,9 @@
 #app-header {
   width: 100%;
   height: max-content;
-  background-color: #000;
   color: #fff;
   text-align: center;
+  border-bottom: 1px solid $outline;
 
   display: grid;
   grid-template-columns: max-content 1fr max-content max-content;
@@ -16,5 +16,9 @@
     display: flex;
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .apply-link {
+    @include button;
   }
 }

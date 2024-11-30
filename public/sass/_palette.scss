@@ -1,2 +1,8 @@
-$text: #ff0;
-$secondary-text: #f00;
+$background: #ffeefe;
+$accent: #5335cc;
+$accent-highlight: lighten($accent, 10%);
+$outline: #000;
+
+$text-primary: #000000;
+$text-secondary: lighten($text-primary, 20%);
+$text-accent: #fff;
