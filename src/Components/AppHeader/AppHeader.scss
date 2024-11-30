@@ -6,6 +6,9 @@
 
   display: grid;
   grid-template-columns: max-content 1fr max-content max-content;
+  grid-template-rows: 1fr;
+  justify-items: end;
+
   gap: 1rem;
   padding: 1.2rem 4rem;
 
@@ -45,6 +48,30 @@
     &:hover,
     &:focus-visible {
       background-color: $accent-secondary-highlight;
+    }
+  }
+
+  .search-bar-container {
+    @include input-field-container;
+    font-size: 1.9rem;
+    width: 35rem;
+  }
+
+  @media screen and (min-width: 1075px) {
+    .nav-bar:has(~ .search-bar-container) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1075px) {
+    grid-template-columns: max-content 1fr max-content;
+
+    .nav-bar {
+      display: none;
+    }
+
+    .apply-link:has(~ .search-bar-container) {
+      display: none;
     }
   }
 }

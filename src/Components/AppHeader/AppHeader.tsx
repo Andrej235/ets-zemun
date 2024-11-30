@@ -1,8 +1,11 @@
 import { Link } from "react-router";
 import "./AppHeader.scss";
 import Icon from "../Icon/Icon";
+import { useState } from "react";
 
 export default function AppHeader() {
+  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+
   return (
     <div id="app-header">
       <Link to="/" className="logo">
@@ -22,9 +25,18 @@ export default function AppHeader() {
         Apply now
       </Link>
 
-      <button className="search-button">
+      <button
+        className="search-button"
+        onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
+      >
         <Icon name="magnifying-glass" />
       </button>
+
+      {isSearchBarVisible && (
+        <div className="search-bar-container">
+          <input type="text" className="search-bar" placeholder="Pretrazi..." />
+        </div>
+      )}
     </div>
   );
 }
