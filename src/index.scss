@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-size: 10px;
 }
 
 body {
@@ -24,4 +26,8 @@ body {
 #root {
   min-width: 100svw;
   min-height: 100svh;
+}
+
+* {
+  box-sizing: border-box;
 }
