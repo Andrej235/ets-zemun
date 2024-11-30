@@ -16,8 +16,8 @@ export default function AppHeader() {
       <div className="nav-bar">
         <Link to="/">O nama</Link>
         <Link to="/">Obrazovni profili</Link>
-        <Link to="/">Radnici</Link>
-        <Link to="/">Prijava</Link>
+        <Link to="/">Nastavnici</Link>
+        <Link to="/">Upis</Link>
         <Link to="/">Novosti</Link>
       </div>
 

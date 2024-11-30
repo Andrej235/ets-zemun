@@ -33,8 +33,18 @@
     height: 100%;
     justify-content: flex-end;
     align-items: center;
-    gap: 3rem;
     padding-right: 4rem;
+
+    a {
+      padding: 1rem 1rem;
+      border-radius: 1rem;
+
+      &:hover,
+      &:focus-visible {
+        color: $text-accent;
+        background-color: $accent-secondary-highlight;
+      }
+    }
   }
 
   .apply-link {
