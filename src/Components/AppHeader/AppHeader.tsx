@@ -10,7 +10,7 @@ export default function AppHeader() {
     <div id="app-header">
       <Link to="/" className="logo">
         <img src="./logo.png" alt="Logo" />
-        ETS Zemun
+        <p>Elektrotehnicka skola "Zemun"</p>
       </Link>
 
       <div className="nav-bar">
