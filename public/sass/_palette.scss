@@ -1,12 +1,23 @@
-$background: #ffeefe;
-$outline: #000;
+@use "./private/palette.private" as *;
 
-$accent: #5335cc;
-$accent-highlight: lighten($accent, 10%);
+$background: light-dark($light-background, $dark-background);
+$outline: light-dark(#000, #fff);
 
-$accent-secondary: #c7d6e2;
-$accent-secondary-highlight: darken($accent-secondary, 7%);
+$accent: light-dark($light-accent, $dark-accent);
+$accent-highlight: light-dark(
+  lighten($light-accent, 10%),
+  lighten($dark-accent, 10%)
+);
 
-$text-primary: #000000;
-$text-secondary: lighten($text-primary, 20%);
-$text-accent: #fff;
+$accent-secondary: light-dark($light-secondary-accent, $dark-secondary-accent);
+$accent-secondary-highlight: light-dark(
+  darken($light-secondary-accent, 7%),
+  darken($dark-secondary-accent, 7%)
+);
+
+$text-primary: light-dark($light-primary-text-color, $dark-primary-text-color);
+$text-secondary: light-dark(
+  lighten($light-primary-text-color, 20%),
+  darken($dark-primary-text-color, 20%)
+);
+$text-accent: light-dark($light-text-on-accent-color, $dark-text-on-accent-color);
