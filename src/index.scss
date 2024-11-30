@@ -4,13 +4,15 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: $text-primary;
+  background-color: $background;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-size: 10px;
 }
 
 body {
@@ -22,6 +24,34 @@ body {
 }
 
 #root {
-  min-width: 100vw;
-  min-height: 100vh;
+  min-width: 100svw;
+  min-height: 100svh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  @include button;
+}
+
+i.icon {
+  color: $text-primary;
+}
+
+button i.icon {
+  color: $text-accent;
+}
+
+a {
+  color: $text-primary;
+  text-decoration: none;
+  transition: all 0.1s ease-out;
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    color: $accent;
+  }
 }
