@@ -1,6 +1,10 @@
 @use "./private/palette.private" as *;
 
-$background: light-dark($light-background, $dark-background);
+$background: light-dark($light-primary-background, $dark-primary-background);
+$secondary-background: light-dark(
+  $light-secondary-background,
+  $dark-secondary-background
+);
 $outline: light-dark(#000, #fff);
 
 $accent: light-dark($light-accent, $dark-accent);
@@ -20,4 +24,7 @@ $text-secondary: light-dark(
   lighten($light-primary-text-color, 20%),
   darken($dark-primary-text-color, 20%)
 );
-$text-accent: light-dark($light-text-on-accent-color, $dark-text-on-accent-color);
+$text-accent: light-dark(
+  $light-text-on-accent-color,
+  $dark-text-on-accent-color
+);
