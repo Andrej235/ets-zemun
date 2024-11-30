@@ -68,7 +68,7 @@
   }
 
   @media screen and (min-width: 1075px) {
-    .nav-bar:has(~ .search-bar-container) {
+    .apply-link:has(~ .search-bar-container) {
       display: none;
     }
   }
