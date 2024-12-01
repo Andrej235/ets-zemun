@@ -3,6 +3,7 @@ import Icon from "../Icon/Icon";
 import InfoCard from "../InfoCard/InfoCard";
 import "./About.scss";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
+import NewsPreview from "../../NewsPreview/NewsPreview";
 
 export default function About() {
   return (
@@ -164,6 +165,31 @@ export default function About() {
           briefDescription="Elektromehaničar za rashladne i termičke uređaje obučava učenike za rad sa različitim vrstama rashladnih i klimatskih uređaja, kao i za montažu, održavanje i popravku ovih sistema. Učenici stiču znanja o električnim instalacijama, termalnim procesima i uređajima koji koriste termalne i rashladne sisteme. Ovaj profil pruža praktične veštine za rad u industriji, domaćinstvima i servisima za klimatizaciju i hlađenje."
           image="/profile-representations/klime.png"
           layout="image-left"
+        />
+      </div>
+
+      <div className="news-container">
+        <h1 className="news-section-title">Novosti</h1>
+
+        <NewsPreview
+          date={new Date()}
+          title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quasi cumque enim dolores molestiae dolorum dolore accusamus! In, praesentium quibusdam."
+          image="/mock-news-preview/1.png"
+        />
+
+        <NewsPreview
+          date={new Date("2024-05-15")}
+          title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+          description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+          image="/mock-news-preview/2.png"
+        />
+
+        <NewsPreview
+          date={new Date("2024-01-23")}
+          title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
+          description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+          image="/mock-news-preview/3.png"
         />
       </div>
     </div>

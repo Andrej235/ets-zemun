@@ -95,10 +95,22 @@
   }
 
   .profiles-overview-container {
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .news-container {
+    margin-top: 5rem;
+
     display: flex;
     flex-direction: column;
     gap: 3rem;
 
-    margin-top: 5rem;
+    .news-section-title {
+      font-size: 4rem;
+    }
   }
 }
