@@ -57,3 +57,10 @@ a {
     color: $accent;
   }
 }
+
+.os-theme-dark,
+.os-theme-light {
+  --os-handle-bg: #{$accent-secondary} !important;
+  --os-handle-bg-hover: #{$accent-secondary-highlight} !important;
+  --os-handle-bg-active: #{$accent-secondary-highlight} !important;
+}

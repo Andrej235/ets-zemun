@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./Components/App/App.tsx";
 import "./index.scss";
+import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import About from "./Components/About/About.tsx";
 

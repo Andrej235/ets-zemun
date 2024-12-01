@@ -1,3 +1,4 @@
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import Icon from "../Icon/Icon";
 import InfoCard from "../InfoCard/InfoCard";
 import "./About.scss";
@@ -58,7 +59,19 @@ export default function About() {
         </p>
       </div>
 
-      <div className="info-cards-container">
+      <OverlayScrollbarsComponent
+        className="info-cards-container"
+        options={{
+          scrollbars: {
+            autoHide: "leave",
+            autoHideDelay: 150,
+          },
+          overflow: {
+            x: "scroll",
+            y: "hidden",
+          },
+        }}
+      >
         <InfoCard
           icon="history"
           link="/history"
@@ -114,7 +127,7 @@ export default function About() {
           text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
           title="Istorija"
         />
-      </div>
+      </OverlayScrollbarsComponent>
     </div>
   );
 }

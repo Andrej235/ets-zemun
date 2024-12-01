@@ -86,9 +86,11 @@
     margin-top: 3rem;
     max-width: 100%;
     padding: 2rem 0;
-    overflow-x: auto;
+    overflow: hidden;
 
-    display: flex;
-    gap: 3rem;
+    [data-overlayscrollbars-contents] {
+      display: flex;
+      gap: 3rem;
+    }
   }
 }
