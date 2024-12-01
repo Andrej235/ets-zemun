@@ -5,7 +5,7 @@ $secondary-background: light-dark(
   $light-secondary-background,
   $dark-secondary-background
 );
-$outline: light-dark(#000, #fff);
+$outline: light-dark(#24c9df, #fff);
 
 $accent: light-dark($light-accent, $dark-accent);
 $accent-highlight: light-dark(

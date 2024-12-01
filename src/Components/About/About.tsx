@@ -1,4 +1,5 @@
 import Icon from "../Icon/Icon";
+import InfoCard from "../InfoCard/InfoCard";
 import "./About.scss";
 
 export default function About() {
@@ -55,6 +56,64 @@ export default function About() {
           repudiandae totam et, deleniti dolor voluptatum culpa ab minus? Itaque
           exercitationem tempore, odit eaque excepturi aliquid blanditiis.
         </p>
+      </div>
+
+      <div className="info-cards-container">
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
+
+        <InfoCard
+          icon="history"
+          link="/history"
+          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
+          title="Istorija"
+        />
       </div>
     </div>
   );
