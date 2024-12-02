@@ -1,19 +1,109 @@
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import {
+  OverlayScrollbarsComponent,
+  OverlayScrollbarsComponentRef,
+} from "overlayscrollbars-react";
 import Icon from "../Icon/Icon";
 import InfoCard from "../InfoCard/InfoCard";
 import "./About.scss";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import NewsPreview from "../../NewsPreview/NewsPreview";
+import { animate, motion, scroll, Target, Transition } from "motion/react";
+import { useEffect, useRef } from "react";
+
+type ScrollAnimation = {
+  initial: Target;
+  whileInView: Target;
+  transition: Transition;
+  viewport: {
+    once: boolean;
+  };
+};
+
+const scrollAnimationFlyInTop: ScrollAnimation = {
+  initial: {
+    opacity: 0,
+    y: -30,
+  },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+  },
+  transition: {
+    duration: 0.5,
+  },
+  viewport: {
+    once: true,
+  },
+};
+
+const scrollAnimationFlyInLeft: ScrollAnimation = {
+  initial: {
+    opacity: 0,
+    x: -100,
+  },
+  whileInView: {
+    opacity: 1,
+    x: 0,
+  },
+  transition: {
+    duration: 0.5,
+  },
+  viewport: {
+    once: true,
+  },
+};
+
+// const scrollAnimationFlyInRight: ScrollAnimation = {
+//   initial: {
+//     opacity: 0,
+//     x: 100,
+//   },
+//   whileInView: {
+//     opacity: 1,
+//     x: 0,
+//   },
+//   transition: {
+//     duration: 0.5,
+//   },
+//   viewport: {
+//     once: true,
+//   },
+// };
+
+const delay: Transition = {
+  duration: 0.5,
+  delay: 0.2,
+};
 
 export default function About() {
+  const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
+
+  useEffect(() => {
+    if (!infoCardsContainerRef.current) return;
+    const infoCardsContainer = infoCardsContainerRef.current
+      .getElement()!
+      .querySelector("[data-overlayscrollbars-contents]")! as HTMLElement;
+
+    for (let i = 0; i < infoCardsContainer.children.length; i++) {
+      const card = infoCardsContainer.children[i];
+
+      scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
+        axis: "x",
+        target: card,
+        container: infoCardsContainer,
+        offset: ["start end", "end end", "start start", "end start"],
+      });
+    }
+  }, [infoCardsContainerRef.current]);
+
   return (
     <div id="about-page">
       <div className="hero-space">
-        <div className="hero-image">
+        <motion.div className="hero-image" {...scrollAnimationFlyInTop}>
           <img src="/hero-image.png" alt="Picture of a student" />
-        </div>
+        </motion.div>
 
-        <div className="hero-text">
+        <motion.div className="hero-text" {...scrollAnimationFlyInTop}>
           <h1>Dobrodošli u Elektrotehničku školu "Zemun"</h1>
 
           <p>
@@ -29,13 +119,15 @@ export default function About() {
             <input type="text" placeholder="Pretrazite nas" />
             <button>Pretrazi</button>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="overview">
-        <h1>Lorem ipsum dolor sit amet.</h1>
+        <motion.h1 {...scrollAnimationFlyInLeft}>
+          Lorem ipsum dolor sit amet.
+        </motion.h1>
 
-        <p>
+        <motion.p {...scrollAnimationFlyInTop} {...delay}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
           possimus tempore accusantium facere earum ab eligendi repellendus
           perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.
@@ -58,7 +150,7 @@ export default function About() {
           repellat officiis delectus voluptate omnis velit laboriosam
           repudiandae totam et, deleniti dolor voluptatum culpa ab minus? Itaque
           exercitationem tempore, odit eaque excepturi aliquid blanditiis.
-        </p>
+        </motion.p>
       </div>
 
       <OverlayScrollbarsComponent
@@ -73,6 +165,7 @@ export default function About() {
             y: "hidden",
           },
         }}
+        ref={infoCardsContainerRef}
       >
         <InfoCard
           icon="history"
