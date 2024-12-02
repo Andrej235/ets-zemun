@@ -169,58 +169,65 @@ export default function About() {
       >
         <InfoCard
           icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          title="Istorija škole"
+          link="/istorija"
+          text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="graduation-cap"
+          title="Programi obrazovanja"
+          link="/programi"
+          text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="building"
+          title="Infrastruktura i oprema"
+          link="/infrastruktura"
+          text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="chalkboard-teacher"
+          title="Nastavnici"
+          link="/nastavnici"
+          text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="trophy"
+          title="Takmičenja i nagrade"
+          link="/takmicenja"
+          text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="lightbulb"
+          title="Mentorski programi"
+          link="/mentori"
+          text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="pencil-alt"
+          title="Upis i prijem"
+          link="/upis"
+          text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
         />
 
         <InfoCard
-          icon="history"
-          link="/history"
-          text={`Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka.`}
-          title="Istorija"
+          icon="headset"
+          title="Podrška učenicima"
+          link="/podrska"
+          text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
+        />
+
+        <InfoCard
+          icon="gavel"
+          title="Pravni akte"
+          link="/pravni-akte"
+          text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
         />
       </OverlayScrollbarsComponent>
 
