@@ -17,7 +17,7 @@ export default function AppHeader() {
       </Link>
 
       <div className="app-header-navigation">
-        <div className="nav-bar">
+        <div className={`nav-bar${!isSearchBarVisible ? " search-bar-not-active-navbar" : ""}`}>
           <Link to="/">O nama</Link>
           <Link to="/">Obrazovni profili</Link>
           <Link to="/">Nastavnici</Link>
@@ -25,15 +25,10 @@ export default function AppHeader() {
           <Link to="/">Novosti</Link>
         </div>
 
-        {isSearchBarVisible && (
-          <div className="search-bar-container">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="Pretrazi..."
-            />
-          </div>
-        )}
+        <div className={`search-bar-container${!isSearchBarVisible ? " search-bar-not-active" : ""}`}>
+          <input type="text" className="search-bar" placeholder="Pretrazi..." />
+          <div className="search-bar-filler"></div>
+        </div>
 
         <button
           className="search-button"
