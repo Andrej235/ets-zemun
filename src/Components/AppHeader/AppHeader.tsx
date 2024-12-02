@@ -1,13 +1,16 @@
-import { Link } from "react-router";
 import "./AppHeader.scss";
-import Icon from "../Icon/Icon";
 import { useState } from "react";
+import { Link } from "react-router";
+import Icon from "../Icon/Icon";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 
 export default function AppHeader() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
 
   return (
     <div id="app-header">
+      <HamburgerMenu />
+
       <Link to="/" className="logo">
         <img src="./logo.png" alt="Logo" />
         <p>Elektrotehnicka skola "Zemun"</p>
