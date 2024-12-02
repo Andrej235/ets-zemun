@@ -25,13 +25,6 @@ export default function AppHeader() {
           <Link to="/">Novosti</Link>
         </div>
 
-        <button
-          className="search-button"
-          onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
-        >
-          <Icon name="magnifying-glass" />
-        </button>
-
         {isSearchBarVisible && (
           <div className="search-bar-container">
             <input
@@ -41,6 +34,13 @@ export default function AppHeader() {
             />
           </div>
         )}
+
+        <button
+          className="search-button"
+          onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
+        >
+          <Icon name="magnifying-glass" />
+        </button>
       </div>
     </div>
   );

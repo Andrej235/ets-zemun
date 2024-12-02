@@ -1,6 +1,5 @@
-import { DOMAttributes, HTMLAttributes, useRef } from 'react';
 import './HamburgerMenu.scss';
-
+import { DOMAttributes, HTMLAttributes, useRef } from 'react';
 
 interface HamburgerMenuProps
   extends DOMAttributes<HTMLElement>,
