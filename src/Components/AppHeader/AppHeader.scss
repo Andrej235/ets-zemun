@@ -7,10 +7,15 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   color: #fff;
   text-align: center;
   font-size: 2rem;
+
+  .app-header-hamburger-menu {
+    display: none;
+  }
 
   .logo {
     width: auto;
@@ -26,6 +31,7 @@
 
     img {
       height: 100%;
+      aspect-ratio: 1/1;
     }
 
     p {
@@ -98,6 +104,16 @@
 
     .apply-link:has(~ .search-bar-container) {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 799.98px) {
+  #app-header {
+    .logo {
+      p {
+        display: none;
+      }
     }
   }
 }
