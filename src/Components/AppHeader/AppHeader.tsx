@@ -13,30 +13,32 @@ export default function AppHeader() {
         <p>Elektrotehnicka skola "Zemun"</p>
       </Link>
 
-      <div className="nav-bar">
-        <Link to="/">O nama</Link>
-        <Link to="/">Obrazovni profili</Link>
-        <Link to="/">Nastavnici</Link>
-        <Link to="/">Upis</Link>
-        <Link to="/">Novosti</Link>
-      </div>
-
-      <Link className="apply-link" to="/apply">
-        Apply now
-      </Link>
-
-      <button
-        className="search-button"
-        onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
-      >
-        <Icon name="magnifying-glass" />
-      </button>
-
-      {isSearchBarVisible && (
-        <div className="search-bar-container">
-          <input type="text" className="search-bar" placeholder="Pretrazi..." />
+      <div className="app-header-navigation">
+        <div className="nav-bar">
+          <Link to="/">O nama</Link>
+          <Link to="/">Obrazovni profili</Link>
+          <Link to="/">Nastavnici</Link>
+          <Link to="/">Upis</Link>
+          <Link to="/">Novosti</Link>
         </div>
-      )}
+
+        <button
+          className="search-button"
+          onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
+        >
+          <Icon name="magnifying-glass" />
+        </button>
+
+        {isSearchBarVisible && (
+          <div className="search-bar-container">
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Pretrazi..."
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
