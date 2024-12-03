@@ -1,5 +1,6 @@
 .hamburger-navigation {
     position: fixed;
+    z-index: 1;
     top: 8rem;
     left: 50%;
     transform: translate(-50%);
@@ -8,6 +9,20 @@
     height: calc(100svh - 8rem);
     background-color: $secondary-background;
     transition: .25s ease-out;
+
+    font-size: 2rem;
+
+    .nav-bar {
+        width: 100%;
+        height: auto;
+        padding: 2rem 4rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        font-size: 2.25rem;
+    }
 }
 
 .navigation-not-active {
