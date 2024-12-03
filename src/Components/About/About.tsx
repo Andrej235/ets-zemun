@@ -10,7 +10,7 @@ import NewsPreview from "../../NewsPreview/NewsPreview";
 import { animate, motion, scroll, Target, Transition } from "motion/react";
 import { useEffect, useRef } from "react";
 
-type ScrollAnimation = {
+export type ScrollAnimation = {
   initial: Target;
   whileInView: Target;
   transition: Transition;
@@ -35,40 +35,6 @@ const scrollAnimationFlyInTop: ScrollAnimation = {
     once: true,
   },
 };
-
-const scrollAnimationFlyInLeft: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    x: -100,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
-};
-
-// const scrollAnimationFlyInRight: ScrollAnimation = {
-//   initial: {
-//     opacity: 0,
-//     x: 100,
-//   },
-//   whileInView: {
-//     opacity: 1,
-//     x: 0,
-//   },
-//   transition: {
-//     duration: 0.5,
-//   },
-//   viewport: {
-//     once: true,
-//   },
-// };
 
 const delay: Transition = {
   duration: 0.5,
@@ -123,7 +89,7 @@ export default function About() {
       </div>
 
       <div className="overview">
-        <motion.h1 {...scrollAnimationFlyInLeft}>
+        <motion.h1 {...scrollAnimationFlyInTop}>
           Lorem ipsum dolor sit amet.
         </motion.h1>
 
