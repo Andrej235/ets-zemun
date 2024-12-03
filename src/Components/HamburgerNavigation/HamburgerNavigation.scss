@@ -1,0 +1,10 @@
+.hamburger-navigation {
+    position: fixed;
+    top: 8rem;
+    left: 50%;
+    transform: translate(-50%);
+
+    width: 100svw;
+    height: calc(100svh - 8rem);
+    background-color: $secondary-background;
+}
