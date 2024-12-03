@@ -8,16 +8,11 @@ interface HamburgerMenuProps
 function HamburgerMenu({ ...attributes }: HamburgerMenuProps) {
   const hamburgerMenuRef = useRef<HTMLDivElement>(null);
 
-  const ClickHandler = () => {
-    hamburgerMenuRef.current?.classList.toggle("active");
-  };
-
   return (
     <div
       className="hamburger-menu-wrapper"
       {...attributes}
       ref={hamburgerMenuRef}
-      onClick={ClickHandler}
     >
       <label className="hamburger">
         <input type="checkbox" />

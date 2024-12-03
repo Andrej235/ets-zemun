@@ -13,16 +13,15 @@ export default function AppHeader() {
 
       <Link to="/" className="logo">
         <img src="./logo.png" alt="Logo" />
-        <p>Elektrotehnicka skola "Zemun"</p>
       </Link>
 
       <div className="app-header-navigation">
         <div className={`nav-bar${!isSearchBarVisible ? " search-bar-not-active-navbar" : ""}`}>
           <Link to="/">O nama</Link>
           <Link to="/">Obrazovni profili</Link>
-          <Link to="/">Nastavnici</Link>
-          <Link to="/">Upis</Link>
+          <Link to="/">Ucenici</Link>
           <Link to="/">Novosti</Link>
+          <Link to="/">Dokumenta</Link>
         </div>
 
         <div className={`search-bar-container${!isSearchBarVisible ? " search-bar-not-active" : ""}`}>
