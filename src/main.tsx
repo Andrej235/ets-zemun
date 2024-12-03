@@ -3,6 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./Components/App/App.tsx";
 import "./index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import Profiles from "./Components/Profiles/Profiles.tsx";
+import Students from "./Components/Students/Students.tsx";
+import News from "./Components/News/News.tsx";
+import Documents from "./Components/Documents/Documents.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,19 +19,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/profili",
-        element: <div>Obrazovni profili</div>,
+        element: <Profiles />,
       },
       {
         path: "/ucenici",
-        element: <div>Ucenici</div>,
+        element: <Students />,
       },
       {
         path: "/novosti",
-        element: <div>Novosti</div>,
+        element: <News />,
       },
       {
         path: "/dokumenta",
-        element: <div>Dokumenta</div>,
+        element: <Documents />,
       },
     ],
   },
