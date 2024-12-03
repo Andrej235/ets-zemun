@@ -7,4 +7,9 @@
     width: 100svw;
     height: calc(100svh - 8rem);
     background-color: $secondary-background;
+    transition: .25s ease-out;
+}
+
+.navigation-not-active {
+    top: -100%;
 }
