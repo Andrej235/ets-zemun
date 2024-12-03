@@ -16,15 +16,23 @@ export default function AppHeader() {
       </Link>
 
       <div className="app-header-navigation">
-        <div className={`nav-bar${!isSearchBarVisible ? " search-bar-not-active-navbar" : ""}`}>
+        <div
+          className={`nav-bar${
+            !isSearchBarVisible ? " search-bar-not-active-navbar" : ""
+          }`}
+        >
           <Link to="/">O nama</Link>
-          <Link to="/">Obrazovni profili</Link>
-          <Link to="/">Ucenici</Link>
-          <Link to="/">Novosti</Link>
-          <Link to="/">Dokumenta</Link>
+          <Link to="/profili">Obrazovni profili</Link>
+          <Link to="/ucenici">Ucenici</Link>
+          <Link to="/novosti">Novosti</Link>
+          <Link to="/dokumenta">Dokumenta</Link>
         </div>
 
-        <div className={`search-bar-container${!isSearchBarVisible ? " search-bar-not-active" : ""}`}>
+        <div
+          className={`search-bar-container${
+            !isSearchBarVisible ? " search-bar-not-active" : ""
+          }`}
+        >
           <input type="text" className="search-bar" placeholder="Pretrazi..." />
           <div className="search-bar-filler"></div>
         </div>
