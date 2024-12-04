@@ -1,3 +1,4 @@
+import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import "./Profiles.scss";
 import * as data from "@data/profiles.json";
@@ -7,9 +8,7 @@ export default function Profiles() {
     <div className="profiles-page">
       {data.profiles.map((profile) => (
         <ProfileOverview
-          name={profile.name}
-          briefDescription={profile.description}
-          image={profile.imagePath}
+          profile={profile as ProfileOverviewSchema}
           key={profile.name}
           layout="vertical"
         />

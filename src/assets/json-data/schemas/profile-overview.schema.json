@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Name of the profile"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "description": "Short description of the profile"
+    },
+    "imagePath": {
+      "type": "string",
+      "pattern": "^/images/profiles/[^/]+\\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg)$",
+      "description": "Path to the image of the profile\nMUST start with ''@images/profiles/''\nMUST end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp, .tiff, .svg\nThe referenced image MUST exist in the '/public/images/profiles/' folder",
+      "default": "/images/profiles/default.png",
+      "minLength": 20
+    },
+    "profileURL": {
+      "type": "array",
+      "description": "URL extensions of the page fully describing the profile\nEach URL extension MUST only contains lowercase letters and hyphens",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-zčćžšđ-]+$",
+        "default": "default-profile-url",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": ["name", "description", "imagePath", "profileURL"],
+  "additionalProperties": false
+}

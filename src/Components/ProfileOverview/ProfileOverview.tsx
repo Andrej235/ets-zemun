@@ -3,18 +3,15 @@ import "./ProfileOverview.scss";
 import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
 import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
 import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
+import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 
 type ProfileOverviewProps = {
-  name: string;
-  briefDescription: string;
-  image: string;
+  profile: ProfileOverviewSchema;
   layout: "image-left" | "image-right" | "vertical";
 };
 
 export default function ProfileOverview({
-  briefDescription,
-  image,
-  name,
+  profile,
   layout,
 }: ProfileOverviewProps) {
   return (
@@ -31,12 +28,12 @@ export default function ProfileOverview({
       }}
     >
       <div className="image-container">
-        <img src={image} alt={name} />
+        <img src={profile.imagePath} alt={profile.name} />
       </div>
 
       <div className="info">
-        <h1 className="title">{name}</h1>
-        <p className="description">{briefDescription}</p>
+        <h1 className="title">{profile.name}</h1>
+        <p className="description">{profile.description}</p>
       </div>
     </motion.div>
   );

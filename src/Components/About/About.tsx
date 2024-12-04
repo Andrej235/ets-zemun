@@ -11,6 +11,7 @@ import { useEffect, useRef } from "react";
 import NewsAndEventsPreviewContainer from "../NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
 import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
 import * as data from "@data/profiles.json";
+import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
@@ -171,9 +172,7 @@ export default function About() {
       <div className="profiles-overview-container">
         {data.profiles.map((profile, i) => (
           <ProfileOverview
-            name={profile.name}
-            briefDescription={profile.description}
-            image={profile.imagePath}
+            profile={profile as ProfileOverviewSchema}
             layout={i % 2 === 0 ? "image-left" : "image-right"}
             key={profile.name}
           />

@@ -2,15 +2,16 @@
   "json.schemas": [
     {
       "fileMatch": ["profiles.json"],
-      "url": "/src/assets/json-data/schemas/profiles.schema.json"
+      "url": "/src/assets/json-data/schemas/profiles-overview-collection.schema.json"
     }
   ],
   "emeraldwalk.runonsave": {
     "commands": [
       {
         "match": "\\.schema.json$",
-        "cmd": "json2ts -i ${relativeFile} -o ${relativeFile}\\..\\..\\ts-schemas\\${fileBasenameNoExt}.ts"
+        "cmd": "cmd /c ${workspaceFolder}\\.vscode\\tranform-json-schema-to-ts ${fileBasenameNoExt}"
       }
-    ]
+    ],
+    "cwd": "/src/assets/json-data/schemas"
   }
 }
