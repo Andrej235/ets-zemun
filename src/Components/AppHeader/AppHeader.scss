@@ -3,8 +3,8 @@
   z-index: 10;
 
   width: 100%;
-  height: 8rem;
-  padding: 1rem 4rem;
+  height: 10rem;
+  padding: 1rem 5rem;
   background-color: $secondary-background;
   box-shadow: 0 2px 15px $shadow;
 
@@ -74,7 +74,7 @@
   }
 
   .search-bar-not-active-navbar {
-    transform: translate(25rem);
+    transform: translate(22rem);
   }
 
   .search-button {
