@@ -19,9 +19,9 @@
           },
           "imagePath": {
             "type": "string",
-            "pattern": "^@images/profiles/[^/]+\\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg)$",
+            "pattern": "^/images/profiles/[^/]+\\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg)$",
             "description": "Path to the image of the profile\nMUST start with ''@images/profiles/''\nMUST end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp, .tiff, .svg\nThe referenced image MUST exist in the '/public/images/profiles/' folder",
-            "default": "@images/profiles/default.png"
+            "default": "/images/profiles/default.png"
           }
         },
         "required": ["name", "description", "imagePath"],
