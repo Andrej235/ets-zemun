@@ -1,46 +1,13 @@
 import { motion } from "motion/react";
 import "./ProfileOverview.scss";
-import { ScrollAnimation } from "../About/About";
+import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
+import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
 
 type ProfileOverviewProps = {
   name: string;
   briefDescription: string;
   image: string;
   layout: "image-left" | "image-right";
-};
-
-const scrollAnimationFlyInLeft: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    x: -100,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
-};
-
-const scrollAnimationFlyInRight: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    x: 100,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
 };
 
 export default function ProfileOverview({

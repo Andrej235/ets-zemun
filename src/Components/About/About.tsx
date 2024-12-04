@@ -6,40 +6,10 @@ import Icon from "../Icon/Icon";
 import InfoCard from "../InfoCard/InfoCard";
 import "./About.scss";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
-import { animate, motion, scroll, Target, Transition } from "motion/react";
+import { animate, motion, scroll } from "motion/react";
 import { useEffect, useRef } from "react";
 import NewsAndEventsPreviewContainer from "../NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
-
-export type ScrollAnimation = {
-  initial: Target;
-  whileInView: Target;
-  transition: Transition;
-  viewport: {
-    once: boolean;
-  };
-};
-
-const scrollAnimationFlyInTop: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    y: -30,
-  },
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
-};
-
-const delay: Transition = {
-  duration: 0.5,
-  delay: 0.2,
-};
+import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
@@ -93,7 +63,7 @@ export default function About() {
           Lorem ipsum dolor sit amet.
         </motion.h1>
 
-        <motion.p {...scrollAnimationFlyInTop} {...delay}>
+        <motion.p {...scrollAnimationFlyInTop}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
           possimus tempore accusantium facere earum ab eligendi repellendus
           perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.
