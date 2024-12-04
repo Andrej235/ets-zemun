@@ -8,12 +8,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
 
   width: 100.5svw;
   height: calc(100svh - 8rem);
   background-color: $secondary-background;
-  padding: 2.5rem 0;
+  padding: 4rem 0;
   transition: 0.25s ease-out;
 
   font-size: 2rem;
@@ -23,7 +23,9 @@
 
     position: relative;
 
-    width: 35rem;
+    min-width: 35rem;
+    width: 80%;
+    max-width: 60rem;
     height: 5rem;
 
     font-size: 1.9rem;
@@ -48,6 +50,10 @@
 
     font-size: 2rem;
     font-weight: 600;
+
+    >:last-child {
+        border-bottom: none !important;
+    }
 
     .nav-bar-tab {
       width: 100%;
