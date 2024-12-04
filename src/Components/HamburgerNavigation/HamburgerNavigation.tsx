@@ -16,12 +16,44 @@ export default function HamburgerNavigation({
         !isMenuActive ? " navigation-not-active" : ""
       }`}
     >
+      <div className="search-bar-container">
+        <input type="text" className="search-bar" placeholder="Pretrazi..." />
+        <button className="search-button">
+          <Icon name="magnifying-glass" />
+        </button>
+      </div>
+
       <div className="nav-bar">
-        <div className="nav-bar-tab"><Link to="/"><Icon name="school"/>&nbsp;&nbsp;O nama</Link></div>
-        <div className="nav-bar-tab"><Link to="/"><Icon name="graduation-cap"/>&nbsp;&nbsp;Obrazovni profili</Link></div>
-        <div className="nav-bar-tab"><Link to="/"><Icon name="user-graduate"/>&nbsp;&nbsp;Ucenici</Link></div>
-        <div className="nav-bar-tab"><Link to="/"><Icon name="newspaper"/>&nbsp;&nbsp;Novosti</Link></div>
-        <div className="nav-bar-tab"><Link to="/"><Icon name="folder-open" className="regular"/>&nbsp;&nbsp;Dokumenta</Link></div>
+        <div className="nav-bar-tab">
+          <Link to="/">
+            <Icon name="school" />
+            &nbsp;&nbsp;O nama
+          </Link>
+        </div>
+        <div className="nav-bar-tab">
+          <Link to="/">
+            <Icon name="graduation-cap" />
+            &nbsp;&nbsp;Obrazovni profili
+          </Link>
+        </div>
+        <div className="nav-bar-tab">
+          <Link to="/">
+            <Icon name="user-graduate" />
+            &nbsp;&nbsp;Ucenici
+          </Link>
+        </div>
+        <div className="nav-bar-tab">
+          <Link to="/">
+            <Icon name="newspaper" />
+            &nbsp;&nbsp;Novosti
+          </Link>
+        </div>
+        <div className="nav-bar-tab">
+          <Link to="/">
+            <Icon name="folder-open" className="regular" />
+            &nbsp;&nbsp;Dokumenta
+          </Link>
+        </div>
       </div>
     </div>,
     document.body

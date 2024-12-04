@@ -1,47 +1,74 @@
 .hamburger-navigation {
-    position: fixed;
-    z-index: 1;
-    top: 8rem;
-    left: 50%;
-    transform: translate(-50%);
+  position: fixed;
+  z-index: 1;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-50%);
 
-    width: 100.5svw;
-    height: calc(100svh - 8rem);
-    background-color: $secondary-background;
-    transition: .25s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  width: 100.5svw;
+  height: calc(100svh - 8rem);
+  background-color: $secondary-background;
+  padding: 2.5rem 0;
+  transition: 0.25s ease-out;
+
+  font-size: 2rem;
+
+  .search-bar-container {
+    @include input-field-container;
+
+    position: relative;
+
+    width: 35rem;
+    height: 5rem;
+
+    font-size: 1.9rem;
+
+    .search-button {
+        position: absolute;
+        right: 0;
+
+        height: 100%;
+        background-color: transparent;
+
+        cursor: pointer;
+    }
+  }
+
+  .nav-bar {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
 
     font-size: 2rem;
+    font-weight: 600;
 
-    .nav-bar {
-        width: 100%;
-        height: auto;
+    .nav-bar-tab {
+      width: 100%;
+      height: 9rem;
+      border-bottom: 1px solid $accent-secondary-highlight;
+      padding: 0 5rem;
 
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      align-items: center;
 
-        font-size: 2rem;
-        font-weight: 600;
+      @media screen and (max-width: 399.98px) {
+        padding: 0 2.5rem;
+      }
 
-        .nav-bar-tab {
-            width: 100%;
-            height: 9rem;
-            border-bottom: 1px solid $accent-secondary-highlight;
-            padding: 0 5rem;
-
-            display: flex;
-            align-items: center;
-
-            @media screen and (max-width: 399.98px) {
-                padding: 0 2.5rem;
-            }
-
-            .regular {
-                font-weight: 500;
-            }
-        }
+      .regular {
+        font-weight: 500;
+      }
     }
+  }
 }
 
 .navigation-not-active {
-    top: -100%;
+  top: -100%;
 }
