@@ -64,6 +64,13 @@
       display: flex;
       align-items: center;
 
+      :focus {
+        color: $accent-highlight;
+        * {
+            color: $accent-highlight;
+        }
+      }
+
       @media screen and (max-width: 399.98px) {
         padding: 0 2.5rem;
       }
