@@ -1,0 +1,16 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["profiles.json"],
+      "url": "/src/assets/json-data/schemas/profiles.schema.json"
+    }
+  ],
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.schema.json$",
+        "cmd": "json2ts -i ${relativeFile} -o ${relativeFile}\\..\\..\\ts-schemas\\${fileBasenameNoExt}.ts"
+      }
+    ]
+  }
+}

@@ -31,7 +31,7 @@ export default function About() {
         offset: ["start end", "end end", "start start", "end start"],
       });
     }
-  }, [infoCardsContainerRef.current]);
+  }, []);
 
   return (
     <div id="about-page">
