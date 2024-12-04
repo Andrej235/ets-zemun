@@ -2,12 +2,13 @@ import { motion } from "motion/react";
 import "./ProfileOverview.scss";
 import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
 import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
+import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
 
 type ProfileOverviewProps = {
   name: string;
   briefDescription: string;
   image: string;
-  layout: "image-left" | "image-right";
+  layout: "image-left" | "image-right" | "vertical";
 };
 
 export default function ProfileOverview({
@@ -18,9 +19,11 @@ export default function ProfileOverview({
 }: ProfileOverviewProps) {
   return (
     <motion.div
-      {...(layout !== "image-left"
+      {...(layout === "image-left"
+        ? scrollAnimationFlyInLeft
+        : layout === "image-right"
         ? scrollAnimationFlyInRight
-        : scrollAnimationFlyInLeft)}
+        : scrollAnimationFlyInTop)}
       className={"profile-overview " + layout}
       viewport={{
         once: true,
