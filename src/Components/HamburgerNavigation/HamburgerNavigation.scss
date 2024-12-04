@@ -5,7 +5,7 @@
     left: 50%;
     transform: translate(-50%);
 
-    width: 100svw;
+    width: 100.5svw;
     height: calc(100svh - 8rem);
     background-color: $secondary-background;
     transition: .25s ease-out;
@@ -15,13 +15,26 @@
     .nav-bar {
         width: 100%;
         height: auto;
-        padding: 2rem 4rem;
 
         display: flex;
         flex-direction: column;
-        gap: 3rem;
 
-        font-size: 2.25rem;
+        font-size: 2rem;
+        font-weight: 600;
+
+        .nav-bar-tab {
+            width: 100%;
+            height: 9rem;
+            border-bottom: 1px solid $accent-secondary-highlight;
+            padding: 0 5rem;
+
+            display: flex;
+            align-items: center;
+
+            @media screen and (max-width: 399.98px) {
+                padding: 0 2.5rem;
+            }
+        }
     }
 }
 
