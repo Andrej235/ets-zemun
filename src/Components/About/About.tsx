@@ -22,7 +22,7 @@ export type ScrollAnimation = {
 const scrollAnimationFlyInTop: ScrollAnimation = {
   initial: {
     opacity: 0,
-    y: -30,
+    y: -100,
   },
   whileInView: {
     opacity: 1,
@@ -79,12 +79,6 @@ export default function About() {
             za izazove budućnosti. Postanite deo naše zajednice i započnite
             svoje putovanje ka uspehu u svetu tehnologije!
           </p>
-
-          <div className="hero-search-container">
-            <Icon name="magnifying-glass" />
-            <input type="text" placeholder="Pretrazite nas" />
-            <button>Pretrazi</button>
-          </div>
         </motion.div>
       </div>
 
