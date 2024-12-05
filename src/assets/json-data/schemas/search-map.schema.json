@@ -1,33 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "url": {
-        "type": "string",
-        "description": "URL of the resource"
-      },
-      "matchFor": {
-        "type": "array",
-        "items": {
-          "type": "string",
-          "description": "Keywords to match for"
-        }
-      },
-      "title": {
-        "type": "string",
-        "description": "Title of the resource"
-      },
-      "description": {
-        "type": "string",
-        "description": "Description of the resource"
-      },
-      "type": {
-        "enum": ["page", "resource"]
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL of the resource"
+          },
+          "matchFor": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Keywords to match for"
+            }
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the resource"
+          },
+          "type": {
+            "enum": ["page", "resource"]
+          }
+        },
+        "required": ["url", "matchFor", "title", "description", "type"],
+        "additionalProperties": false
       }
-    },
-    "required": ["url", "matchFor", "title", "description", "type"],
-    "additionalProperties": false
-  }
+    }
+  },
+  "required": ["entries"],
+  "additionalProperties": false
 }
