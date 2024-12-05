@@ -17,10 +17,11 @@
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
-  max-width: 100vw;
-  min-height: 100vh;
+  min-width: 100svw;
+  min-height: 100svh;
 }
 
 #root {
@@ -63,4 +64,10 @@ a {
   --os-handle-bg: #{$accent-secondary} !important;
   --os-handle-bg-hover: #{$accent-secondary-highlight} !important;
   --os-handle-bg-active: #{$accent-secondary-highlight} !important;
+}
+
+@media screen and (max-width: 999.98px) {
+  :root {
+    font-size: 8px;
+  }
 }
