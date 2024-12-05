@@ -14,7 +14,10 @@ export default async function SingleProfilePageLoader({
   if (!preview) return redirect("/profili");
 
   const profile = await import(
-    `../../assets/json-data/data/profiles/elektrotehničar-informacionih-tehnologija.json`
+    `../../assets/json-data/data/profiles/${preview.fullProfileFileName.replace(
+      ".json",
+      ""
+    )}.json`
   );
 
   return {
