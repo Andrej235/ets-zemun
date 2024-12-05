@@ -2,7 +2,16 @@
   max-width: 100svw;
   padding: 3rem 20rem;
 
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
+
+  section {
+    position: relative;
+    width: 100%;
+    min-height: calc(100svh - 10rem);
+  }
 
   .hero-space {
     max-width: 100%;
@@ -78,6 +87,7 @@
   }
 
   .overview {
+    width: 50%;
     margin-top: 5rem;
 
     h1 {
@@ -93,8 +103,9 @@
   .info-cards-container {
     margin-top: 3rem;
     max-width: 100%;
-    padding: 2rem 0;
-    overflow: hidden;
+    padding: 5rem 0;
+
+    margin-bottom: 20rem;
 
     [data-overlayscrollbars-contents] {
       display: flex;
