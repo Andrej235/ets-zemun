@@ -1,0 +1,1 @@
+export default interface SearchMapSchema { /** * Description of the resource */ description: string; matchFor:    string[]; /** * Title of the resource */ title: string; type:  Type; /** * URL of the resource */ url: string; }  type Type = "page" | "resource"; 

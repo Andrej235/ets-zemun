@@ -1,0 +1,83 @@
+[
+  {
+    "title": "O Nama",
+    "description": "Stranica sa informacijama o skoli",
+    "matchFor": ["o nama", "o skoli"],
+    "type": "page",
+    "url": "/"
+  },
+  {
+    "title": "Profili",
+    "description": "Stranica sa informacijama o obrazovnim profilima",
+    "matchFor": ["profili", "obrazovni profili", "kursevi", "smerovi"],
+    "type": "page",
+    "url": "/profili"
+  },
+  {
+    "title": "Ucenici",
+    "description": "Stranica sa informacijama o ucenicima",
+    "matchFor": ["ucenici", "studenti"],
+    "type": "page",
+    "url": "/ucenici"
+  },
+  {
+    "title": "Elektrotehničar informacionih tehnologija",
+    "description": "Stranica sa informacijama o obrazovnom profilu \"Elektrotehničar informacionih tehnologija\"",
+    "matchFor": [
+      "elektrotehničar informacionih tehnologija",
+      "elektrotehnicar informacionih tehnologija",
+      "it",
+      "eit"
+    ],
+    "type": "page",
+    "url": "/profili/elektrotehničar-informacionih-tehnologija"
+  },
+  {
+    "title": "Administrator računarskih mreža",
+    "description": "Stranica sa informacijama o obrazovnom profilu \"Administrator računarskih mreža\"",
+    "matchFor": [
+      "administrator računarskih mreža",
+      "administrator racunarskih mreza",
+      "administrator",
+      "arm"
+    ],
+    "type": "page",
+    "url": "/profili/administrator-računarskih-mreža"
+  },
+  {
+    "title": "Elektrotehničar računara",
+    "description": "Stranica sa informacijama o obrazovnom profilu \"Elektrotehničar računara\"",
+    "matchFor": [
+      "elektrotehničar računara",
+      "elektrotehnicar računara",
+      "računari",
+      "racunari",
+      "racunarci"
+    ],
+    "type": "page",
+    "url": "/profili/elektrotehničar-računara"
+  },
+  {
+    "title": "Elektrotehničar automatike",
+    "description": "Stranica sa informacijama o obrazovnom profilu \"Elektrotehničar automatike\"",
+    "matchFor": [
+      "elektrotehničar automatike",
+      "elektrotehnicar automatike",
+      "automatika"
+    ],
+    "type": "page",
+    "url": "/profili/elektrotehničar-automatike"
+  },
+  {
+    "title": "Elektromehaničar za rashladne i termičke uređaje",
+    "description": "Stranica sa informacijama o obrazovnom profilu \"Elektromehaničar za rashladne i termičke uređaje\"",
+    "matchFor": [
+      "elektromehaničar za rashladne i termičke uređaje",
+      "elektromehanicar za rashladne i termicke uređaje",
+      "elektromehanicar",
+      "klime"
+    ],
+    "type": "page",
+    "url": "/profili/elektromehaničar-za-rashladne-i-termičke-uredjaje"
+  }
+]

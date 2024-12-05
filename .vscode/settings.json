@@ -7,6 +7,10 @@
     {
       "fileMatch": ["profiles/*.json"],
       "url": "/src/assets/json-data/schemas/profile.schema.json"
+    },
+    {
+      "fileMatch": ["search-map.json"],
+      "url": "/src/assets/json-data/schemas/search-map.schema.json"
     }
   ],
   "emeraldwalk.runonsave": {
