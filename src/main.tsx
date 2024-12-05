@@ -4,11 +4,13 @@ import App from "./Components/App/App.tsx";
 import "./index.scss";
 import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Profiles from "./Components/Profiles/Profiles.tsx";
+import ProfilesPage from "./Components/ProfilesPage/ProfilesPage.tsx";
 import Students from "./Components/Students/Students.tsx";
 import News from "./Components/News/News.tsx";
 import Documents from "./Components/Documents/Documents.tsx";
 import About from "./Components/About/About.tsx";
+import SingleProfilePage from "./Components/SingleProfilePage/SingleProfilePage.tsx";
+import SingleProfilePageLoader from "./Components/SingleProfilePage/SingleProfilePageLoader.ts";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/profili",
-        element: <Profiles />,
+        element: <ProfilesPage />,
+      },
+      {
+        path: "profili/:profileName",
+        element: <SingleProfilePage />,
+        loader: SingleProfilePageLoader,
       },
       {
         path: "/ucenici",
@@ -36,6 +43,7 @@ const router = createBrowserRouter([
         element: <Documents />,
       },
     ],
+    hydrateFallbackElement: <>Hydrate fallback</>,
   },
 ]);
 

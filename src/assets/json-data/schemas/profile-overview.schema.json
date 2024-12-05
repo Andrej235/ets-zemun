@@ -30,8 +30,19 @@
       },
       "minItems": 1,
       "uniqueItems": true
+    },
+    "fullProfileFileName": {
+      "type": "string",
+      "minLength": 6,
+      "pattern": "^[a-zčćžšđ-]+\\.json$"
     }
   },
-  "required": ["name", "description", "imagePath", "profileURL"],
+  "required": [
+    "name",
+    "description",
+    "imagePath",
+    "profileURL",
+    "fullProfileFileName"
+  ],
   "additionalProperties": false
 }

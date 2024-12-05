@@ -8,7 +8,8 @@
         "elektrotehničar-informacionih-tehnologija",
         "elektrotehnicar-informacionih-tehnologija",
         "it"
-      ]
+      ],
+      "fullProfileFileName": "elektrotehničar-informacionih-tehnologija.json"
     },
     {
       "name": "Administrator računarskih mreža",
@@ -18,7 +19,8 @@
         "administrator-računarskih-mreža",
         "administrator-racunarskih-mreza",
         "administrator"
-      ]
+      ],
+      "fullProfileFileName": "administrator-računarskih-mreža.json"
     },
     {
       "name": "Elektrotehničar računara",
@@ -29,7 +31,8 @@
         "elektrotehnicar-računara",
         "računari",
         "racunari"
-      ]
+      ],
+      "fullProfileFileName": "elektrotehničar-računara.json"
     },
     {
       "name": "Elektrotehničar automatike",
@@ -39,7 +42,8 @@
         "elektrotehničar-automatike",
         "elektrotehnicar-automatike",
         "automatika"
-      ]
+      ],
+      "fullProfileFileName": "elektrotehničar-automatike.json"
     },
     {
       "name": "Elektromehaničar za rashladne i termičke uređaje",
@@ -50,7 +54,8 @@
         "elektromehanicar-za-rashladne-i-termicke-uredjaje",
         "elektromehanicar",
         "klime"
-      ]
+      ],
+      "fullProfileFileName": "elektromehaničar-za-rashladne-i-termičke-uredjaje.json"
     }
   ]
 }
