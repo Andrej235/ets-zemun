@@ -4,6 +4,7 @@ import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-ani
 import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
 import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
+import { Link } from "react-router";
 
 type ProfileOverviewProps = {
   profile: ProfileOverviewSchema;
@@ -32,7 +33,10 @@ export default function ProfileOverview({
       </div>
 
       <div className="info">
-        <h1 className="title">{profile.name}</h1>
+        <Link to={`/profili/${profile.profileURL[0]}`}>
+          <h1 className="title">{profile.name}</h1>
+        </Link>
+
         <p className="description">{profile.description}</p>
       </div>
     </motion.div>
