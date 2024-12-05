@@ -16,7 +16,7 @@
   color: #fff;
   text-align: center;
   font-size: 2rem;
-  
+
   .logo {
     width: auto;
     height: 100%;
@@ -56,7 +56,7 @@
     align-items: center;
     gap: 1rem;
 
-    transition: .25s ease-out;
+    transition: 0.25s ease-out;
 
     a {
       width: auto;
@@ -71,25 +71,24 @@
         background-color: $accent-secondary-highlight;
       }
     }
-  }
 
-  .search-bar-not-active-navbar {
-    transform: translate(25rem);
+    &:has(~ .search-bar-not-active) {
+      transform: translate(25rem);
+    }
   }
 
   .search-button {
     position: relative;
-    
+
     min-width: 5rem;
     aspect-ratio: 1;
     background-color: $accent-secondary;
-  
+
     &:hover,
     &:focus-visible {
       background-color: $accent-secondary-highlight;
     }
   }
-  
 
   .search-bar-container {
     @include input-field-container;
@@ -110,12 +109,6 @@
     transform: translate(100%);
   }
 
-  @media screen and (min-width: 1075px) {
-    .apply-link:has(~ .search-bar-container) {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: 1075px) {
     grid-template-columns: max-content 1fr max-content;
 
@@ -132,10 +125,6 @@
     }
 
     .nav-bar {
-      display: none;
-    }
-
-    .apply-link:has(~ .search-bar-container) {
       display: none;
     }
   }
