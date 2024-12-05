@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "class": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "default": "default-class",
+            "minLength": 1,
+            "description": "Name of the class"
+          },
+          "perWeek": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "Weekly count\nFirst element cooresponds to first year, second element cooresponds to second year, third element cooresponds to third year, fourth element cooresponds to fourth year"
+          }
+        },
+        "minLength": 1,
+        "required": ["name", "perWeek"],
+        "additionalProperties": false
+      }
+    },
+    "allClasses": {
+      "type": "object",
+      "properties": {
+        "general": {
+          "$ref": "#/definitions/class"
+        },
+        "specific": {
+          "$ref": "#/definitions/class"
+        }
+      },
+      "required": ["general", "specific"],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Name of the profile"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "description": "Full description of the profile"
+    },
+    "imagePath": {
+      "type": "string",
+      "pattern": "^/images/profiles/[^/]+\\.(jpg|jpeg|png|gif|bmp|webp|tiff|svg)$",
+      "description": "Path to the image of the profile\nMUST start with ''@images/profiles/''\nMUST end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp, .tiff, .svg\nThe referenced image MUST exist in the '/public/images/profiles/' folder",
+      "default": "/images/profiles/default.png",
+      "minLength": 20
+    },
+    "classes": {
+      "$ref": "#/definitions/allClasses",
+      "additionalProperties": false
+    }
+  },
+  "required": ["name", "description", "imagePath", "classes"],
+  "additionalProperties": false
+}

@@ -1,0 +1,127 @@
+{
+  "name": "Elektrotehničar informacionih tehnologija",
+  "description": "Elektrotehničar informacionih tehnologija je obrazovni profil koji priprema učenike za rad u oblasti IT industrije. Fokusira se na razvoj softverskih aplikacija, kreiranje baza podataka, kao i dizajn i implementaciju statičkih i dinamičkih web stranica. Učenici se takođe osposobljavaju za održavanje i zaštitu informacionih sistema, što ih čini konkurentnim na tržištu rada u sektoru tehnologije i digitalnih rešenja.",
+  "imagePath": "/images/profiles/elektrotehnicar-informacionih-tehnologija.png",
+  "classes": {
+    "general": [
+      {
+        "name": "Srpski jezik i književnost",
+        "perWeek": [3, 3, 3, 3]
+      },
+      {
+        "name": "Engleski jezik",
+        "perWeek": [2, 2, 2, 2]
+      },
+      {
+        "name": "Fizičko vaspitanje",
+        "perWeek": [2, 2, 2, 2]
+      },
+      {
+        "name": "Мatematika",
+        "perWeek": [3, 3, 3, 3]
+      },
+      {
+        "name": "Računarstvo i informatika",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Istorija",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Geografija",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Hemija",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Likovna kultura",
+        "perWeek": [1, 0, 0, 0]
+      },
+      {
+        "name": "Biologija",
+        "perWeek": [0, 2, 0, 0]
+      },
+      {
+        "name": "Sociologija sa pravima građana",
+        "perWeek": [0, 0, 2, 0]
+      },
+      {
+        "name": "Verska nastava / Građansko vaspitanje",
+        "perWeek": [1, 1, 1, 1]
+      }
+    ],
+    "specific": [
+      {
+        "name": "Fizika",
+        "perWeek": [2, 2, 0, 0]
+      },
+      {
+        "name": "Osnove elektrotehnike",
+        "perWeek": [4, 4, 0, 0]
+      },
+      {
+        "name": "Programiranje",
+        "perWeek": [2, 4, 3, 3]
+      },
+      {
+        "name": "Računarska grafika i multimedija",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Elektronika",
+        "perWeek": [0, 4, 0, 0]
+      },
+      {
+        "name": "Veb dizajn",
+        "perWeek": [0, 2, 0, 0]
+      },
+      {
+        "name": "Baze podataka",
+        "perWeek": [0, 3, 2, 0]
+      },
+      {
+        "name": "Računarski sistemi",
+        "perWeek": [0, 0, 3, 0]
+      },
+      {
+        "name": "Veb programiranje",
+        "perWeek": [0, 0, 3, 3]
+      },
+      {
+        "name": "Računari u sistemima upravljanja",
+        "perWeek": [0, 0, 2, 0]
+      },
+      {
+        "name": "Računarske mreže i internet servisi",
+        "perWeek": [0, 0, 0, 3]
+      },
+      {
+        "name": "Zaštita informacionih sistema",
+        "perWeek": [0, 0, 0, 2]
+      },
+      {
+        "name": "Primenjene informacione tehnologije",
+        "perWeek": [0, 0, 6, 6]
+      },
+      {
+        "name": "Preduzetništvo",
+        "perWeek": [0, 0, 0, 2]
+      },
+      {
+        "name": "Elektronsko poslovanje",
+        "perWeek": [0, 0, 0, 2]
+      },
+      {
+        "name": "Praktična nastava",
+        "perWeek": [2, 0, 0, 0]
+      },
+      {
+        "name": "Izborni predmeti",
+        "perWeek": [0, 0, 2, 2]
+      }
+    ]
+  }
+}

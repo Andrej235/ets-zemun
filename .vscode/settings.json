@@ -3,6 +3,10 @@
     {
       "fileMatch": ["profiles.json"],
       "url": "/src/assets/json-data/schemas/profiles-overview-collection.schema.json"
+    },
+    {
+      "fileMatch": ["profiles/*.json"],
+      "url": "/src/assets/json-data/schemas/profile.schema.json"
     }
   ],
   "emeraldwalk.runonsave": {
