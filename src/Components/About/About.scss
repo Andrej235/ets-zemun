@@ -1,7 +1,12 @@
 #about-page {
+  max-width: 100svw;
   padding: 3rem 20rem;
 
+  overflow: hidden;
+
   .hero-space {
+    max-width: 100%;
+
     display: flex;
     align-items: flex-start;
     gap: 2rem;

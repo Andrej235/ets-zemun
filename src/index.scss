@@ -20,8 +20,9 @@ body {
   padding: 0;
   display: flex;
   place-items: center;
-  min-width: 100svw;
+  max-width: 100svw;
   min-height: 100svh;
+  max-height: 100svh;
 }
 
 #root {
