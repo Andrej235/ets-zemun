@@ -17,10 +17,11 @@
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  min-width: 100svw;
+  min-height: 100svh;
 }
 
 #root {
@@ -55,7 +56,6 @@ a {
     color: $accent;
   }
 }
-
 
 @media screen and (max-width: 999.98px) {
   :root {
