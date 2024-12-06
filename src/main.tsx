@@ -11,6 +11,8 @@ import Documents from "./Components/Documents/Documents.tsx";
 import About from "./Components/About/About.tsx";
 import SingleProfilePage from "./Components/SingleProfilePage/SingleProfilePage.tsx";
 import SingleProfilePageLoader from "./Components/SingleProfilePage/SingleProfilePageLoader.ts";
+import ClassPage from "./Components/ClassPage/ClassPage.tsx";
+import classPageLoader from "./Components/ClassPage/ClassPageLoader.ts";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,11 @@ const router = createBrowserRouter([
         path: "profili/:profileName",
         element: <SingleProfilePage />,
         loader: SingleProfilePageLoader,
+      },
+      {
+        path: "/predmeti/:className",
+        element: <ClassPage />,
+        loader: classPageLoader,
       },
       {
         path: "/ucenici",

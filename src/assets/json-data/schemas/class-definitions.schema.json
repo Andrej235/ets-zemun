@@ -5,7 +5,7 @@
     "classes": {
       "type": "array",
       "items": {
-        "$ref": "class.scheme.json"
+        "$ref": "class.schema.json"
       }
     }
   },
