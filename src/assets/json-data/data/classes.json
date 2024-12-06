@@ -1,0 +1,410 @@
+{
+  "classes": [
+    {
+      "name": "Srpski jezik i književnost",
+      "description": "Predmet koji obuhvata učenje srpskog jezika i književnosti, razvoj jezičkih veština i analiza književnih dela.",
+      "skillsEarned": [
+        {
+          "name": "Jezičke veštine",
+          "description": "Razvijanje sposobnosti za pravilnu upotrebu srpskog jezika u govoru i pisanju."
+        },
+        {
+          "name": "Analiza književnih dela",
+          "description": "Razumevanje i analiza književnih tekstova i njihovih poruka."
+        }
+      ]
+    },
+    {
+      "name": "Engleski jezik",
+      "description": "Predmet koji se bavi učenjem engleskog jezika kroz čitanje, pisanje, slušanje i govor.",
+      "skillsEarned": [
+        {
+          "name": "Komunikacija na engleskom jeziku",
+          "description": "Sposobnost efikasnog komuniciranja na engleskom jeziku u svakodnevnim situacijama."
+        },
+        {
+          "name": "Razumevanje engleskog teksta",
+          "description": "Sposobnost čitanja i razumevanja tekstova na engleskom jeziku."
+        }
+      ]
+    },
+    {
+      "name": "Fizičko vaspitanje",
+      "description": "Predmet koji se bavi fizičkim aktivnostima i razvojem fizičkih sposobnosti učenika.",
+      "skillsEarned": [
+        {
+          "name": "Fizička sprema",
+          "description": "Razvijanje telesne snage, izdržljivosti i koordinacije."
+        },
+        {
+          "name": "Timwork i sport",
+          "description": "Saradnja u timovima kroz sportske aktivnosti."
+        }
+      ]
+    },
+    {
+      "name": "Matematika",
+      "description": "Predmet koji se bavi osnovama matematičkih disciplina kao što su algebra, geometrija i analiza.",
+      "skillsEarned": [
+        {
+          "name": "Matematička logika",
+          "description": "Razvijanje sposobnosti za rešavanje matematičkih problema kroz logičko razmišljanje."
+        },
+        {
+          "name": "Računanje sa funkcijama",
+          "description": "Sposobnost rešavanja problema sa funkcijama, integralima i derivatima."
+        }
+      ]
+    },
+    {
+      "name": "Računarstvo i informatika",
+      "description": "Predmet koji se bavi osnovama računarskih sistema, programiranja i upotrebe računara.",
+      "skillsEarned": [
+        {
+          "name": "Korišćenje računara",
+          "description": "Razumevanje osnovnih funkcionalnosti računara i softverskih aplikacija."
+        },
+        {
+          "name": "Uvod u programiranje",
+          "description": "Sposobnost za početno programiranje u programskim jezicima."
+        }
+      ]
+    },
+    {
+      "name": "Istorija",
+      "description": "Predmet koji pokriva ključne događaje i procese u istoriji ljudskog društva.",
+      "skillsEarned": [
+        {
+          "name": "Istorijska analiza",
+          "description": "Razumevanje i analiza ključnih istorijskih događaja i njihovih uzroka."
+        },
+        {
+          "name": "Kritičko razmišljanje",
+          "description": "Razvijanje sposobnosti za kritičko razmišljanje o istorijskim činjenicama."
+        }
+      ]
+    },
+    {
+      "name": "Geografija",
+      "description": "Predmet koji se bavi proučavanjem geografskih karakteristika Zemlje i njenih resursa.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje geografskih pojava",
+          "description": "Razumevanje fizičkih i društvenih geografskih pojava na globalnom nivou."
+        },
+        {
+          "name": "Prostorna orijentacija",
+          "description": "Sposobnost orijentacije u prostoru i čitanje geografskih mapa."
+        }
+      ]
+    },
+    {
+      "name": "Hemija",
+      "description": "Predmet koji proučava hemijske reakcije, osobine materija i zakonitosti hemijskih procesa.",
+      "skillsEarned": [
+        {
+          "name": "Laboratorijske veštine",
+          "description": "Izvođenje hemijskih eksperimenata i analiza uzoraka u laboratoriji."
+        },
+        {
+          "name": "Razumevanje hemijskih reakcija",
+          "description": "Razumevanje osnovnih hemijskih reakcija i zakonitosti koje ih prate."
+        }
+      ]
+    },
+    {
+      "name": "Likovna kultura",
+      "description": "Predmet koji se bavi razvojem umetničkih veština i kreativnog izraza.",
+      "skillsEarned": [
+        {
+          "name": "Umetnički izraz",
+          "description": "Razvijanje sposobnosti za izražavanje umetničkih ideja kroz različite medije."
+        },
+        {
+          "name": "Vizuelna analiza",
+          "description": "Razumevanje i analiza umetničkih dela kroz vizuelni jezik."
+        }
+      ]
+    },
+    {
+      "name": "Biologija",
+      "description": "Predmet koji proučava životne procese i organizme u prirodi.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje bioloških procesa",
+          "description": "Razumevanje osnovnih bioloških funkcija organizama i ekosistema."
+        },
+        {
+          "name": "Biološka istraživanja",
+          "description": "Sposobnost izvođenja bioloških eksperimenata i istraživanja."
+        }
+      ]
+    },
+    {
+      "name": "Sociologija sa pravima građana",
+      "description": "Predmet koji istražuje socijalne procese, ljudske odnose i građanska prava.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje socijalnih fenomena",
+          "description": "Razumevanje ključnih socijalnih procesa i njihovih uticaja na društvo."
+        },
+        {
+          "name": "Građanska odgovornost",
+          "description": "Razvijanje svesti o pravima i obavezama građana."
+        }
+      ]
+    },
+    {
+      "name": "Verska nastava / Građansko vaspitanje",
+      "description": "Predmet koji se bavi religijskim učenjima ili građanskim vrednostima i odgovornostima.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje religijskih vrednosti",
+          "description": "Razumevanje osnovnih religijskih principa i učenja."
+        },
+        {
+          "name": "Građanska etika",
+          "description": "Razvijanje etičkog ponašanja i odgovornosti u društvu."
+        }
+      ]
+    },
+    {
+      "name": "Fizika",
+      "description": "Predmet koji proučava osnovne zakone prirode i njihove primene u svakodnevnom životu.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje fizičkih zakona",
+          "description": "Razumevanje osnovnih zakona fizike i njihovih primena."
+        },
+        {
+          "name": "Laboratorijske veštine u fizici",
+          "description": "Sposobnost izvođenja eksperimenata i merenja u fizici."
+        }
+      ]
+    },
+    {
+      "name": "Osnove elektrotehnike",
+      "description": "Predmet koji se bavi osnovama elektrotehnike, uključujući struju, napone i električne komponente.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje električnih krugova",
+          "description": "Sposobnost analize i dizajniranja jednostavnih električnih krugova."
+        },
+        {
+          "name": "Merenje električnih veličina",
+          "description": "Sposobnost merenja napona, struje i otpornosti."
+        }
+      ]
+    },
+    {
+      "name": "Programiranje",
+      "description": "Predmet koji se bavi učenjem osnovnih programskih jezika i veština programiranja.",
+      "skillsEarned": [
+        {
+          "name": "Osnovni programerski pojmovi",
+          "description": "Razumevanje osnovnih programerskih koncepata kao što su promenljive, petlje i uslovi."
+        },
+        {
+          "name": "Razvijanje programskih aplikacija",
+          "description": "Sposobnost za razvoj jednostavnih programskih aplikacija."
+        }
+      ]
+    },
+    {
+      "name": "Računarska grafika i multimedija",
+      "description": "Predmet koji se bavi tehnikama računarske grafike, dizajnom i multimedijalnim sadržajem.",
+      "skillsEarned": [
+        {
+          "name": "Računarska grafika",
+          "description": "Sposobnost kreiranja vizuelnih sadržaja putem računarskih alata za grafiku."
+        },
+        {
+          "name": "Multimedijalna produkcija",
+          "description": "Razvijanje veština za rad sa zvukom, videom i slikama u multimedijalnim projektima."
+        }
+      ]
+    },
+    {
+      "name": "Elektronika",
+      "description": "Predmet koji se bavi proučavanjem elektronskih komponenti i uređaja, njihovih funkcija i primene.",
+      "skillsEarned": [
+        {
+          "name": "Elektronski sklopovi",
+          "description": "Razumevanje i dizajniranje elektronskih sklopova sa osnovnim komponentama kao što su otpornici, kondenzatori i tranzistori."
+        },
+        {
+          "name": "Merenje u elektronici",
+          "description": "Sposobnost upotrebe merača i alata za testiranje elektronskih sklopova."
+        }
+      ]
+    },
+    {
+      "name": "Veb dizajn",
+      "description": "Predmet koji obuhvata osnove dizajniranja veb stranica, uključujući HTML, CSS i osnovne tehnike korisničkog iskustva (UX).",
+      "skillsEarned": [
+        {
+          "name": "Dizajn veb stranica",
+          "description": "Sposobnost za dizajniranje i implementaciju vizuelnih elemenata veb stranica."
+        },
+        {
+          "name": "Korisnički interfejs",
+          "description": "Razumevanje osnovnih principa dizajna korisničkog interfejsa (UI) i korisničkog iskustva (UX)."
+        }
+      ]
+    },
+    {
+      "name": "Baze podataka",
+      "description": "Predmet koji proučava teoriju i primenu baza podataka, uključujući SQL i dizajn baza podataka.",
+      "skillsEarned": [
+        {
+          "name": "Upravljanje bazama podataka",
+          "description": "Razvijanje veština za kreiranje, održavanje i optimizaciju baza podataka."
+        },
+        {
+          "name": "SQL programiranje",
+          "description": "Sposobnost za upisivanje upita i rad sa SQL jezikom za manipulaciju podacima."
+        }
+      ]
+    },
+    {
+      "name": "Računarski sistemi",
+      "description": "Predmet koji obuhvata osnovne komponente računarskih sistema i njihov rad, uključujući hardver i operativne sisteme.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje računarskog hardvera",
+          "description": "Sposobnost razumevanja osnovnih komponenata računarskog sistema, kao što su procesori, memorija i uređaji za unos/izlaz."
+        },
+        {
+          "name": "Upravljanje operativnim sistemima",
+          "description": "Razumevanje i rad sa osnovnim operativnim sistemima kao što su Windows i Linux."
+        }
+      ]
+    },
+    {
+      "name": "Veb programiranje",
+      "description": "Predmet koji obuhvata osnove programiranja za veb aplikacije koristeći različite tehnologije kao što su JavaScript, PHP i framework-e.",
+      "skillsEarned": [
+        {
+          "name": "Razvoj veb aplikacija",
+          "description": "Sposobnost za razvoj dinamičnih veb aplikacija koristeći moderne tehnologije."
+        },
+        {
+          "name": "Integracija sa bazama podataka",
+          "description": "Sposobnost za integraciju veb aplikacija sa bazama podataka za dinamičko preuzimanje podataka."
+        }
+      ]
+    },
+    {
+      "name": "Računari u sistemima upravljanja",
+      "description": "Predmet koji se bavi primenom računarskih sistema u industriji i poslovnim organizacijama, sa fokusom na sisteme za upravljanje.",
+      "skillsEarned": [
+        {
+          "name": "Automatizacija procesa",
+          "description": "Razumevanje i primena računarskih sistema za automatizaciju industrijskih i poslovnih procesa."
+        },
+        {
+          "name": "Upravljanje sistemima",
+          "description": "Sposobnost za implementaciju i održavanje sistema za upravljanje u različitim organizacijama."
+        }
+      ]
+    },
+    {
+      "name": "Računarske mreže i internet servisi",
+      "description": "Predmet koji obuhvata osnove računarskih mreža, protokole i internet servise, kao i bezbednost mreža.",
+      "skillsEarned": [
+        {
+          "name": "Dizajn računarskih mreža",
+          "description": "Razumevanje arhitekture i dizajniranje računarskih mreža."
+        },
+        {
+          "name": "Sigurnost mreža",
+          "description": "Sposobnost za implementaciju osnovnih tehnika zaštite računarskih mreža i internet servisa."
+        }
+      ]
+    },
+    {
+      "name": "Zaštita informacionih sistema",
+      "description": "Predmet koji se bavi teorijama i praksama zaštite informacionih sistema od napada i neovlašćenog pristupa.",
+      "skillsEarned": [
+        {
+          "name": "Sigurnost podataka",
+          "description": "Razumevanje i primena tehnika zaštite podataka u informacionim sistemima."
+        },
+        {
+          "name": "Upravljanje bezbednošću sistema",
+          "description": "Sposobnost za implementaciju bezbednosnih politika u informacionim sistemima."
+        }
+      ]
+    },
+    {
+      "name": "Primenjene informacione tehnologije",
+      "description": "Predmet koji se bavi primenom informacionih tehnologija u industriji i svakodnevnom životu.",
+      "skillsEarned": [
+        {
+          "name": "Primena IT u industriji",
+          "description": "Razumevanje kako se informaciona tehnologija koristi za poboljšanje poslovnih i industrijskih procesa."
+        },
+        {
+          "name": "Razvoj informacionih sistema",
+          "description": "Sposobnost za razvoj informacionih sistema za različite aplikacije."
+        }
+      ]
+    },
+    {
+      "name": "Preduzetništvo",
+      "description": "Predmet koji se bavi osnovama preduzetništva, poslovnim planiranjem i vođenjem preduzetničkog poslovanja.",
+      "skillsEarned": [
+        {
+          "name": "Poslovno planiranje",
+          "description": "Razvijanje veština za izradu i implementaciju poslovnog plana."
+        },
+        {
+          "name": "Menadžment preduzetništva",
+          "description": "Sposobnost za upravljanje preduzetničkim poslovima i resursima."
+        }
+      ]
+    },
+    {
+      "name": "Elektronsko poslovanje",
+      "description": "Predmet koji se bavi razvojem i primenom elektronskog poslovanja, e-trgovine i digitalnog marketinga.",
+      "skillsEarned": [
+        {
+          "name": "Razumevanje e-trgovine",
+          "description": "Razumevanje modela poslovanja na internetu i e-trgovine."
+        },
+        {
+          "name": "Digitalni marketing",
+          "description": "Sposobnost za upotrebu digitalnih alata u marketinške svrhe."
+        }
+      ]
+    },
+    {
+      "name": "Praktična nastava",
+      "description": "Praktično iskustvo u primeni naučenih veština i teorijskih znanja u stvarnim radnim uslovima.",
+      "skillsEarned": [
+        {
+          "name": "Praktične veštine",
+          "description": "Sposobnost za primenu teorijskog znanja u praktičnim situacijama."
+        },
+        {
+          "name": "Timskog rada",
+          "description": "Razvijanje sposobnosti za rad u timu u stvarnim radnim okruženjima."
+        }
+      ]
+    },
+    {
+      "name": "Izborni predmeti",
+      "description": "Predmeti koje učenici biraju prema svojim interesovanjima, koji mogu obuhvatiti različite oblasti u tehnologiji, umetnosti i društvenim naukama.",
+      "skillsEarned": [
+        {
+          "name": "Specijalizovana znanja",
+          "description": "Sticanje dubljeg znanja u specifičnim oblastima prema izboru učenika."
+        },
+        {
+          "name": "Fleksibilnost i prilagodljivost",
+          "description": "Razvijanje sposobnosti da se brzo adaptira na nove oblasti i uči nove discipline."
+        }
+      ]
+    }
+  ]
+}

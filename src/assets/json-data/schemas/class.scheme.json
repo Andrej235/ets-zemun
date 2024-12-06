@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the class"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the class"
+    },
+    "skillsEarned": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the skill"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the skill"
+          }
+        },
+        "required": ["name", "description"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "description"]
+}
