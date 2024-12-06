@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import ProfileSchema from "src/assets/json-data/ts-schemas/profile.schema";
 
 export default function SingleProfilePage() {
@@ -19,7 +19,9 @@ export default function SingleProfilePage() {
 
           {loaderData.classes.general.map((x) => (
             <tr key={x.name}>
-              <td>{x.name}</td>
+              <td>
+                <Link to={`/predmeti/${x.name}`}>{x.name}</Link>
+              </td>
               {x.perWeek.map((count, i) => (
                 <td key={i}>{count}</td>
               ))}
@@ -34,7 +36,9 @@ export default function SingleProfilePage() {
 
           {loaderData.classes.specific.map((x) => (
             <tr key={x.name}>
-              <td>{x.name}</td>
+              <td>
+                <Link to={`/predmeti/${x.name}`}>{x.name}</Link>
+              </td>
               {x.perWeek.map((count, i) => (
                 <td key={i}>{count}</td>
               ))}
