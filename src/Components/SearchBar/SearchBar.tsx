@@ -5,7 +5,7 @@ import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import { createPortal } from "react-dom";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function SearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -22,6 +22,22 @@ export default function SearchBar() {
   >([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
+
+  function handleClose() {
+    setIsSearchBarVisible(false);
+    setSearchAutoComplete([]);
+    inputRef.current!.value = "";
+  }
+
+  function handleOpen() {
+    setIsSearchBarVisible(true);
+    setTimeout(() => {
+      inputRef.current!.focus();
+    }, 300);
+  }
 
   return (
     <>
@@ -35,11 +51,17 @@ export default function SearchBar() {
           type="text"
           className="search-bar"
           placeholder="Pretrazi..."
+          ref={inputRef}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") handleClose();
+            else if (e.key === "Enter") {
+              navigate(searchAutoComplete[0].item.url);
+              handleClose();
+            }
+          }}
           onChange={(e) => {
             //TODO: Debounce this
-            const result = fuse.search(e.target.value);
-            setSearchAutoComplete(result);
-            console.log(result);
+            setSearchAutoComplete(fuse.search(e.target.value));
           }}
         />
         <div className="search-bar-filler"></div>
@@ -47,7 +69,7 @@ export default function SearchBar() {
 
       <button
         className="search-button"
-        onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
+        onClick={isSearchBarVisible ? handleClose : handleOpen}
       >
         <Icon name="magnifying-glass" />
       </button>
@@ -57,8 +79,7 @@ export default function SearchBar() {
           <div
             className="search-bar-auto-complete-container"
             style={(() => {
-              if (!containerRef.current) return;
-              const rect = containerRef.current.getBoundingClientRect();
+              const rect = containerRef.current!.getBoundingClientRect();
 
               return {
                 left: rect.left,
