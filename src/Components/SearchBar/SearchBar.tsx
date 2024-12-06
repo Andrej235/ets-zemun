@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "./SearchBar.scss";
 import Icon from "../Icon/Icon";
 import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
+import { createPortal } from "react-dom";
+import { Link } from "react-router";
 
 export default function SearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -19,12 +21,15 @@ export default function SearchBar() {
     FuseResult<SearchMapSchema["entries"][number]>[]
   >([]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <div
         className={`search-bar-container${
           !isSearchBarVisible ? " search-bar-not-active" : ""
         }`}
+        ref={containerRef}
       >
         <input
           type="text"
@@ -46,6 +51,39 @@ export default function SearchBar() {
       >
         <Icon name="magnifying-glass" />
       </button>
+
+      {isSearchBarVisible &&
+        createPortal(
+          <div
+            className="search-bar-auto-complete-container"
+            style={(() => {
+              if (!containerRef.current) return;
+              const rect = containerRef.current.getBoundingClientRect();
+
+              return {
+                left: rect.left,
+                top: rect.bottom,
+                width: rect.width,
+              };
+            })()}
+          >
+            {searchAutoComplete.map((result) => (
+              <div
+                className="search-bar-auto-complete-item"
+                key={result.item.url}
+              >
+                <Icon name={result.item.type === "page" ? "book" : "file"} />
+
+                <Link to={result.item.url}>
+                  <h1>{result.item.title}</h1>
+                </Link>
+
+                <p>{result.item.description}</p>
+              </div>
+            ))}
+          </div>,
+          document.body
+        )}
     </>
   );
 }

@@ -1,0 +1,32 @@
+.search-bar-auto-complete-container {
+  position: absolute;
+  background-color: #00f;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .search-bar-auto-complete-item {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    grid-template-columns: max-content 1fr;
+    grid-template-areas:
+      "icon title"
+      "description description";
+    place-items: center start;
+    gap: 0rem 2rem;
+
+    i {
+      grid-area: icon;
+      font-size: 3rem;
+    }
+
+    h1 {
+      grid-area: title;
+    }
+
+    p {
+      grid-area: description;
+    }
+  }
+}
