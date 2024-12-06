@@ -87,21 +87,21 @@
       "description": "Stranica sa informacijama o predmetu \"Srpski jezik i književnost\"",
       "matchFor": ["predmet srpski jezik i književnost"],
       "type": "page",
-      "url": "/predmeti/srpski jezik i književnost"
+      "url": "/predmeti/srpski-jezik-i-književnost"
     },
     {
       "title": "Predmet: Engleski jezik",
       "description": "Stranica sa informacijama o predmetu \"Engleski jezik\"",
       "matchFor": ["predmet engleski jezik"],
       "type": "page",
-      "url": "/predmeti/engleski jezik"
+      "url": "/predmeti/engleski-jezik"
     },
     {
       "title": "Predmet: Fizičko vaspitanje",
       "description": "Stranica sa informacijama o predmetu \"Fizičko vaspitanje\"",
       "matchFor": ["predmet fizičko vaspitanje"],
       "type": "page",
-      "url": "/predmeti/fizičko vaspitanje"
+      "url": "/predmeti/fizičko-vaspitanje"
     },
     {
       "title": "Predmet: Matematika",
@@ -115,7 +115,7 @@
       "description": "Stranica sa informacijama o predmetu \"Računarstvo i informatika\"",
       "matchFor": ["predmet računarstvo i informatika"],
       "type": "page",
-      "url": "/predmeti/računarstvo i informatika"
+      "url": "/predmeti/računarstvo-i-informatika"
     },
     {
       "title": "Predmet: Istorija",
@@ -143,7 +143,7 @@
       "description": "Stranica sa informacijama o predmetu \"Likovna kultura\"",
       "matchFor": ["predmet likovna kultura"],
       "type": "page",
-      "url": "/predmeti/likovna kultura"
+      "url": "/predmeti/likovna-kultura"
     },
     {
       "title": "Predmet: Biologija",
@@ -157,14 +157,14 @@
       "description": "Stranica sa informacijama o predmetu \"Sociologija sa pravima građana\"",
       "matchFor": ["predmet sociologija sa pravima građana"],
       "type": "page",
-      "url": "/predmeti/sociologija sa pravima građana"
+      "url": "/predmeti/sociologija-sa-pravima-građana"
     },
     {
       "title": "Predmet: Verska nastava / Građansko vaspitanje",
       "description": "Stranica sa informacijama o predmetu \"Verska nastava / Građansko vaspitanje\"",
       "matchFor": ["predmet verska nastava / Građansko vaspitanje"],
       "type": "page",
-      "url": "/predmeti/verska nastava / Građansko vaspitanje"
+      "url": "/predmeti/verska-nastava-/-Građansko-vaspitanje"
     },
     {
       "title": "Predmet: Fizika",
@@ -178,7 +178,7 @@
       "description": "Stranica sa informacijama o predmetu \"Osnove elektrotehnike\"",
       "matchFor": ["predmet osnove elektrotehnike"],
       "type": "page",
-      "url": "/predmeti/osnove elektrotehnike"
+      "url": "/predmeti/osnove-elektrotehnike"
     },
     {
       "title": "Predmet: Programiranje",
@@ -192,7 +192,7 @@
       "description": "Stranica sa informacijama o predmetu \"Računarska grafika i multimedija\"",
       "matchFor": ["predmet računarska grafika i multimedija"],
       "type": "page",
-      "url": "/predmeti/računarska grafika i multimedija"
+      "url": "/predmeti/računarska-grafika-i-multimedija"
     },
     {
       "title": "Predmet: Elektronika",
@@ -206,56 +206,56 @@
       "description": "Stranica sa informacijama o predmetu \"Veb dizajn\"",
       "matchFor": ["predmet veb dizajn"],
       "type": "page",
-      "url": "/predmeti/veb dizajn"
+      "url": "/predmeti/veb-dizajn"
     },
     {
       "title": "Predmet: Baze podataka",
       "description": "Stranica sa informacijama o predmetu \"Baze podataka\"",
       "matchFor": ["predmet baze podataka"],
       "type": "page",
-      "url": "/predmeti/baze podataka"
+      "url": "/predmeti/baze-podataka"
     },
     {
       "title": "Predmet: Računarski sistemi",
       "description": "Stranica sa informacijama o predmetu \"Računarski sistemi\"",
       "matchFor": ["predmet računarski sistemi"],
       "type": "page",
-      "url": "/predmeti/računarski sistemi"
+      "url": "/predmeti/računarski-sistemi"
     },
     {
       "title": "Predmet: Veb programiranje",
       "description": "Stranica sa informacijama o predmetu \"Veb programiranje\"",
       "matchFor": ["predmet veb programiranje"],
       "type": "page",
-      "url": "/predmeti/veb programiranje"
+      "url": "/predmeti/veb-programiranje"
     },
     {
       "title": "Predmet: Računari u sistemima upravljanja",
       "description": "Stranica sa informacijama o predmetu \"Računari u sistemima upravljanja\"",
       "matchFor": ["predmet računari u sistemima upravljanja"],
       "type": "page",
-      "url": "/predmeti/računari u sistemima upravljanja"
+      "url": "/predmeti/računari-u-sistemima-upravljanja"
     },
     {
       "title": "Predmet: Računarske mreže i internet servisi",
       "description": "Stranica sa informacijama o predmetu \"Računarske mreže i internet servisi\"",
       "matchFor": ["predmet računarske mreže i internet servisi"],
       "type": "page",
-      "url": "/predmeti/računarske mreže i internet servisi"
+      "url": "/predmeti/računarske-mreže-i-internet-servisi"
     },
     {
       "title": "Predmet: Zaštita informacionih sistema",
       "description": "Stranica sa informacijama o predmetu \"Zaštita informacionih sistema\"",
       "matchFor": ["predmet zaštita informacionih sistema"],
       "type": "page",
-      "url": "/predmeti/zaštita informacionih sistema"
+      "url": "/predmeti/zaštita-informacionih-sistema"
     },
     {
       "title": "Predmet: Primenjene informacione tehnologije",
       "description": "Stranica sa informacijama o predmetu \"Primenjene informacione tehnologije\"",
       "matchFor": ["predmet primenjene informacione tehnologije"],
       "type": "page",
-      "url": "/predmeti/primenjene informacione tehnologije"
+      "url": "/predmeti/primenjene-informacione-tehnologije"
     },
     {
       "title": "Predmet: Preduzetništvo",
@@ -269,21 +269,21 @@
       "description": "Stranica sa informacijama o predmetu \"Elektronsko poslovanje\"",
       "matchFor": ["predmet elektronsko poslovanje"],
       "type": "page",
-      "url": "/predmeti/elektronsko poslovanje"
+      "url": "/predmeti/elektronsko-poslovanje"
     },
     {
       "title": "Predmet: Praktična nastava",
       "description": "Stranica sa informacijama o predmetu \"Praktična nastava\"",
       "matchFor": ["predmet praktična nastava"],
       "type": "page",
-      "url": "/predmeti/praktična nastava"
+      "url": "/predmeti/praktična-nastava"
     },
     {
       "title": "Predmet: Izborni predmeti",
       "description": "Stranica sa informacijama o predmetu \"Izborni predmeti\"",
       "matchFor": ["predmet izborni predmeti"],
       "type": "page",
-      "url": "/predmeti/izborni predmeti"
+      "url": "/predmeti/izborni-predmeti"
     }
   ]
 }
