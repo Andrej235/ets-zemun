@@ -11,7 +11,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
 
   color: #fff;
   text-align: center;
@@ -43,7 +42,6 @@
   .app-header-navigation {
     position: relative;
     display: flex;
-    overflow-x: hidden;
     border-radius: 1rem;
   }
 
@@ -105,7 +103,7 @@
     background-color: $accent-secondary;
   }
 
-  .search-bar-not-active {
+  .search-bar-not-active .search-bar-container {
     transform: translate(100%);
   }
 

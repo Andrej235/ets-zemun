@@ -1,32 +1,47 @@
-.search-bar-auto-complete-container {
-  position: absolute;
-  background-color: #00f;
-
+.search-bar-container-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 
-  .search-bar-auto-complete-item {
-    display: grid;
-    grid-template-rows: max-content max-content;
-    grid-template-columns: max-content 1fr;
-    grid-template-areas:
-      "icon title"
-      "description description";
-    place-items: center start;
-    gap: 0rem 2rem;
+  width: max-content;
+  max-height: 100%;
 
-    i {
-      grid-area: icon;
-      font-size: 3rem;
-    }
+  overflow-x: visible;
+  overflow-y: auto;
 
-    h1 {
-      grid-area: title;
-    }
+  div {
+    display: flex;
+    overflow: hidden;
+  }
 
-    p {
-      grid-area: description;
+  .search-bar-auto-complete-container {
+    position: absolute;
+    top: 100%;
+    width: 27rem;
+    max-height: 50vh;
+    background-color: #00f;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+
+    .search-bar-auto-complete-item {
+      min-height: max-content;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      font-size: 1rem;
+
+      .header {
+        display: flex;
+        gap: 2rem;
+
+        i {
+          font-size: 3rem;
+        }
+      }
     }
   }
 }
