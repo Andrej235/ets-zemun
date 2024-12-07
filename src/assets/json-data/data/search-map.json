@@ -172,14 +172,21 @@
       "url": "/predmeti/sociologija-sa-pravima-građana"
     },
     {
-      "title": "Predmet: Verska nastava / Građansko vaspitanje",
-      "description": "Stranica sa informacijama o predmetu \"Verska nastava / Građansko vaspitanje\"",
+      "title": "Predmet: Veronauka",
+      "description": "Stranica sa informacijama o predmetu \"Veronauka\"",
+      "matchFor": ["predmet: veronauka", "predmet: verska nastava"],
+      "type": "page",
+      "url": "/predmeti/veronauka"
+    },
+    {
+      "title": "Građansko vaspitanje",
+      "description": "Stranica sa informacijama o predmetu \"Građansko vaspitanje\"",
       "matchFor": [
-        "predmet: verska nastava / Građansko vaspitanje",
-        "predmet: verska nastava / građansko vaspitanje"
+        "predmet: građansko vaspitanje",
+        "predmet: gradjansko vaspitanje"
       ],
       "type": "page",
-      "url": "/predmeti/verska-nastava-/-Građansko-vaspitanje"
+      "url": "/predmeti/građansko-vaspitanje"
     },
     {
       "title": "Predmet: Fizika",
