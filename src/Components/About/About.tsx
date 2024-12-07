@@ -55,7 +55,7 @@ export default function About() {
           <div className="hero-search-container">
             <Icon name="magnifying-glass" />
             <input type="text" placeholder="Pretrazite nas" />
-            <button>Pretrazi</button>
+            <button onClick={() => console.log("a")}>Pretrazi</button>
           </div>
         </motion.div>
       </div>
