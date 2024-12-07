@@ -24,7 +24,10 @@ export default function SearchBar() {
   const [isAutoCompleteShown, setIsAutoCompleteShown] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const autoCompleteContainerRef = useRef<HTMLDivElement>(null);
+
   const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const navigate = useNavigate();
 
@@ -40,20 +43,48 @@ export default function SearchBar() {
     }, 300);
   }
 
-  function onFocusChange(e: FocusEvent) {
-    if (!isSearchBarVisible) return;
+  function handleGlobalKeyDown(e: KeyboardEvent) {
+    if (!autoCompleteContainerRef.current) return;
+    const children = autoCompleteContainerRef.current.children;
+    const activeElement = document.activeElement;
 
-    const newTarget = e.target as HTMLElement;
+    let currentIndex =
+      activeElement === inputRef.current || activeElement === buttonRef.current
+        ? -1
+        : null;
 
-    const isFocusInside = containerRef.current!.contains(newTarget);
+    if (currentIndex === null) {
+      for (let i = 0; i < children.length; i++) {
+        const current = children[i];
+        if (current.contains(activeElement)) {
+          currentIndex = i;
+          break;
+        }
+      }
+    }
 
-    console.log(isFocusInside);
-    setIsAutoCompleteShown(isFocusInside);
+    currentIndex ??= 0;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+
+      const child = children[(currentIndex + 1) % children.length];
+      child?.querySelector("a")?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+
+      const child =
+        children[(currentIndex - 1 + children.length) % children.length];
+      child?.querySelector("a")?.focus();
+    }
   }
 
   useEffect(() => {
-    document.addEventListener("focusin", onFocusChange);
-    return () => document.removeEventListener("focusin", onFocusChange);
+    if (!isSearchBarVisible) return;
+
+    containerRef.current?.addEventListener("keydown", handleGlobalKeyDown);
+    return () =>
+      containerRef.current?.removeEventListener("keydown", handleGlobalKeyDown);
   }, [isSearchBarVisible]);
 
   return (
@@ -99,14 +130,18 @@ export default function SearchBar() {
           <button
             className="search-button"
             onClick={isSearchBarVisible ? handleClose : handleOpen}
+            ref={buttonRef}
           >
             <Icon name="magnifying-glass" />
           </button>
         </div>
 
-        <div className="search-bar-auto-complete-container">
+        <div
+          className="search-bar-auto-complete-container"
+          ref={autoCompleteContainerRef}
+        >
           {isAutoCompleteShown &&
-            searchAutoComplete.map((result) => (
+            searchAutoComplete.slice(0, 15).map((result) => (
               <div
                 className="search-bar-auto-complete-item"
                 key={result.item.url}
