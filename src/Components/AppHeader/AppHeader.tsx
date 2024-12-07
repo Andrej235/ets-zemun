@@ -1,7 +1,7 @@
 import "./AppHeader.scss";
 import { Link } from "react-router";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
-import SearchBar from "../SearchBar/SearchBar";
+import HeaderSearchBar from "../SearchBar/SearchBar";
 
 export default function AppHeader() {
   return (
@@ -21,7 +21,7 @@ export default function AppHeader() {
           <Link to="/dokumenta">Dokumenta</Link>
         </div>
 
-        <SearchBar />
+        <HeaderSearchBar />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
 import "./SearchBar.scss";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "../Icon/Icon";
 import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
@@ -7,7 +7,7 @@ import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import { Link, useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 
-export default function SearchBar() {
+export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const fuse = useMemo(
     () =>
