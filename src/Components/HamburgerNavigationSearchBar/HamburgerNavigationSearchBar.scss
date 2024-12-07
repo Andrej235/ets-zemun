@@ -1,0 +1,22 @@
+.hamburger-navigation .search-bar-container {
+  @include input-field-container;
+
+  position: relative;
+
+  min-width: 35rem;
+  width: 80%;
+  max-width: 60rem;
+  height: 5rem;
+
+  font-size: 1.9rem;
+
+  .search-button {
+    position: absolute;
+    right: 0;
+
+    height: 100%;
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+}

@@ -1,7 +1,8 @@
-import { createPortal } from "react-dom";
 import "./HamburgerNavigation.scss";
+import { createPortal } from "react-dom";
 import { Link } from "react-router";
 import Icon from "../Icon/Icon";
+import HamburgerNavigationSearchBar from "../HamburgerNavigationSearchBar/HamburgerNavigationSearchBar";
 
 type HamburgerNavigationProps = {
   isMenuActive: boolean;
@@ -16,12 +17,7 @@ export default function HamburgerNavigation({
         !isMenuActive ? " navigation-not-active" : ""
       }`}
     >
-      <div className="search-bar-container">
-        <input type="text" className="search-bar" placeholder="Pretrazi..." />
-        <button className="search-button">
-          <Icon name="magnifying-glass" />
-        </button>
-      </div>
+      <HamburgerNavigationSearchBar />
 
       <div className="nav-bar">
         <div className="nav-bar-tab">
