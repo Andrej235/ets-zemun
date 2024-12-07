@@ -36,6 +36,23 @@ const scrollAnimationFlyInTop: ScrollAnimation = {
   },
 };
 
+const scrollAnimationFlyInBottom: ScrollAnimation = {
+  initial: {
+    opacity: 0,
+    y: 150,
+  },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+  },
+  transition: {
+    duration: 0.5,
+  },
+  viewport: {
+    once: true,
+  },
+};
+
 const delay: Transition = {
   duration: 0.5,
   delay: 0.2,
@@ -66,19 +83,17 @@ export default function About() {
     <div id="about-page">
       <section>
         <div className="hero-space">
-          <motion.div className="hero-image" {...scrollAnimationFlyInTop}>
-            <img src="/hero-image.png" alt="Picture of a student" />
+          <motion.div className="hero-image">
+            <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
-          <motion.div className="hero-text" {...scrollAnimationFlyInTop}>
-            <h1>Dobrodošli u Elektrotehničku školu "Zemun"</h1>
+          <div className="hero-image-overlay"></div>
+
+          <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
+            <h1>Elektrotehnička škola "Zemun"</h1>
 
             <p>
-              U srcu Zemuna, naša škola pruža vrhunsko obrazovanje u oblasti
-              elektrotehnike i računarstva. Sa modernim učionicama, vrhunskim
-              nastavnicima i inovativnim pristupom učenju, pripremamo naše
-              učenike za izazove budućnosti. Postanite deo naše zajednice i
-              započnite svoje putovanje ka uspehu u svetu tehnologije!
+              Mi nečekamo budućnost, mi joj idemo u susret!
             </p>
           </motion.div>
         </div>
@@ -86,11 +101,11 @@ export default function About() {
 
       <section>
         <div className="overview">
-          <motion.h1 {...scrollAnimationFlyInTop}>
+          <motion.h1 {...scrollAnimationFlyInBottom}>
             Lorem ipsum dolor sit amet.
           </motion.h1>
 
-          <motion.p {...scrollAnimationFlyInTop} {...delay}>
+          <motion.p {...scrollAnimationFlyInBottom} {...delay}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
             possimus tempore accusantium facere earum ab eligendi repellendus
             perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.

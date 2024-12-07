@@ -1,6 +1,6 @@
 #about-page {
-  max-width: 100svw;
-  padding: 3rem 20rem;
+  justify-self: center;
+  max-width: 80svw;
 
   display: flex;
   flex-direction: column;
@@ -8,9 +8,11 @@
   overflow: hidden;
 
   section {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    min-height: calc(100svh - 10rem);
+    min-height: calc(80svh - 10rem);
   }
 
   .hero-space {
@@ -19,25 +21,42 @@
 
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
     padding-bottom: 10rem;
 
     .hero-image {
-      flex: 4;
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 10rem;
+
+      width: 100%;
+      height: calc(100svh - 10rem);
 
       img {
         width: 100%;
-        border-radius: 2rem;
+        height: 100%;        
+        object-fit: cover;
       }
     }
 
-    .hero-text {
-      flex: 6;
+    .hero-image-overlay {
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 10rem;
 
+      width: 100%;
+      height: calc(100svh - 10rem);
+      background: linear-gradient(rgb(0,0,0,0.5) 50%, $background 100%);
+    }
+
+    .hero-text {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 2rem;
+      align-items: center;
 
       h1 {
         font-size: 6rem;
@@ -45,7 +64,7 @@
       }
 
       p {
-        font-size: 3rem;
+        font-size: 6rem;
       }
 
       .hero-search-container {
@@ -119,6 +138,7 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    margin-bottom: 20rem;
   }
 
   .footer {
