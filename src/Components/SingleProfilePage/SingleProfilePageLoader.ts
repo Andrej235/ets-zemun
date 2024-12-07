@@ -1,11 +1,11 @@
 import { redirect } from "react-router";
 import * as profilePreviewData from "@data/profiles.json";
+import { LoaderArgs } from "src/types/utility/react-router-loader-args";
 
 export default async function SingleProfilePageLoader({
   params: { profileName },
-}: any) {
-  if (typeof profileName !== "string" || profileName.length < 1)
-    return redirect("/profili");
+}: LoaderArgs) {
+  if (!profileName) return redirect("/profili");
 
   const preview = profilePreviewData.profiles.find((x) =>
     x.profileURL.includes(profileName)

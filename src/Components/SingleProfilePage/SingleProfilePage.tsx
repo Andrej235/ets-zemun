@@ -23,7 +23,7 @@ export default function SingleProfilePage() {
                 <Link
                   to={`/predmeti/${x.name
                     .toLocaleLowerCase()
-                    .replace(/\-/g, "-")}`}
+                    .replace(/-/g, "-")}`}
                 >
                   {x.name}
                 </Link>
@@ -47,7 +47,7 @@ export default function SingleProfilePage() {
                 <Link
                   to={`/predmeti/${x.name
                     .toLocaleLowerCase()
-                    .replace(/\-/g, "-")}`}
+                    .replace(/-/g, "-")}`}
                 >
                   {x.name}
                 </Link>
