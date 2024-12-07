@@ -75,38 +75,6 @@
     }
   }
 
-  .search-button {
-    position: relative;
-
-    min-width: 5rem;
-    aspect-ratio: 1;
-    background-color: $accent-secondary;
-
-    &:hover,
-    &:focus-visible {
-      background-color: $accent-secondary-highlight;
-    }
-  }
-
-  .search-bar-container {
-    @include input-field-container;
-    font-size: 1.9rem;
-    width: 35rem;
-  }
-
-  .search-bar-filler {
-    position: absolute;
-    right: -1rem;
-
-    width: 2rem;
-    height: 100%;
-    background-color: $accent-secondary;
-  }
-
-  .search-bar-not-active .search-bar-container {
-    transform: translate(100%);
-  }
-
   @media screen and (max-width: 1075px) {
     grid-template-columns: max-content 1fr max-content;
 

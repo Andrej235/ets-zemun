@@ -40,12 +40,12 @@ export default function SearchBar() {
 
   return (
     <div
-      className={`search-bar-container-container${
+      className={`search-bar-container${
         !isSearchBarVisible ? " search-bar-not-active" : ""
       }`}
     >
-      <div>
-        <div className={`search-bar-container`} ref={containerRef}>
+      <div className="search-container">
+        <div className="search-bar-input-container" ref={containerRef}>
           <input
             type="text"
             className="search-bar"
@@ -63,8 +63,10 @@ export default function SearchBar() {
               setSearchAutoComplete(fuse.search(e.target.value));
             }}
           />
-          <div className="search-bar-filler"></div>
+
+          <div className="filler" />
         </div>
+
         <button
           className="search-button"
           onClick={isSearchBarVisible ? handleClose : handleOpen}
