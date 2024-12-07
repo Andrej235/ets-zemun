@@ -1,10 +1,12 @@
 #app-header {
   position: relative;
+  top: 0;
+  z-index: 10;
 
   width: 100%;
-  min-height: 8rem;
-  max-height: 8rem;
-  padding: 1rem 4rem;
+  min-height: 10rem;
+  max-height: 10rem;
+  padding: 1rem 5rem;
   background-color: $secondary-background;
   box-shadow: 0 2px 15px $shadow;
 
