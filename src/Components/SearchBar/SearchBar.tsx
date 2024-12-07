@@ -44,9 +44,25 @@ export default function SearchBar() {
   }
 
   function handleGlobalKeyDown(e: KeyboardEvent) {
+    if (/^[a-zA-Z0-9]$/.test(e.key) || e.key === "Backspace") {
+      inputRef.current!.focus();
+      inputRef.current?.onkeydown?.(e);
+      return;
+    }
+
     if (!autoCompleteContainerRef.current) return;
     const children = autoCompleteContainerRef.current.children;
     const activeElement = document.activeElement;
+
+    if (e.key === "Home") {
+      e.preventDefault();
+      children[0].querySelector("a")?.focus();
+      return;
+    } else if (e.key === "End") {
+      e.preventDefault();
+      children[children.length - 1].querySelector("a")?.focus();
+      return;
+    }
 
     let currentIndex =
       activeElement === inputRef.current || activeElement === buttonRef.current
