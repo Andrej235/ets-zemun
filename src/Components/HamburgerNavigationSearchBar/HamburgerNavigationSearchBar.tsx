@@ -163,18 +163,12 @@ export default function HamburgerNavigationSearchBar({
                   className="search-bar-auto-complete-item"
                   key={result.item.url}
                 >
-                  <div className="header">
-                    <Icon
-                      name={result.item.type === "page" ? "book" : "file"}
-                    />
-
-                    <Link
-                      to={result.item.url}
-                      onClick={onRequestCloseHamburgerNavigation}
-                    >
-                      <h1>{result.item.title}</h1>
-                    </Link>
-                  </div>
+                  <Link
+                    to={result.item.url}
+                    onClick={onRequestCloseHamburgerNavigation}
+                  >
+                    <h1>{result.item.title}</h1>
+                  </Link>
 
                   <p>{result.item.description}</p>
                 </div>
