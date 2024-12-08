@@ -4,7 +4,7 @@ import "./HamburgerNavigationSearchBar.scss";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -164,15 +164,18 @@ export default function HamburgerNavigationSearchBar({
             >
               {searchAutoComplete.length > 0 ? (
                 searchAutoComplete.slice(0, 15).map((result) => (
-                  <Link
-                    to={result.item.url}
-                    onClick={onRequestCloseHamburgerNavigation}
+                  <button
+                    role="link"
+                    onClick={() => {
+                      onRequestCloseHamburgerNavigation();
+                      navigate(result.item.url);
+                    }}
                     className="search-bar-auto-complete-item"
                     key={result.item.url}
                   >
                     <p className="title">{result.item.title}</p>
                     <p className="description">{result.item.description}</p>
-                  </Link>
+                  </button>
                 ))
               ) : (
                 <p className="no-results">Nema rezultata</p>
