@@ -88,8 +88,6 @@ export default function HamburgerNavigationSearchBar({
     }
   }
 
-  const guardAgainstReTrap = useRef(false);
-
   useEffect(() => {
     containerRef.current?.addEventListener("keydown", handleGlobalKeyDown);
     return () =>
@@ -103,11 +101,7 @@ export default function HamburgerNavigationSearchBar({
         allowOutsideClick: true,
         clickOutsideDeactivates: true,
         escapeDeactivates: true,
-        onDeactivate: () => {
-          console.log("a");
-          guardAgainstReTrap.current = true;
-          setIsAutoCompleteShown(false);
-        },
+        onDeactivate: () => setIsAutoCompleteShown(false),
       }}
     >
       <div className="search-bar-container" ref={containerRef}>
@@ -128,11 +122,6 @@ export default function HamburgerNavigationSearchBar({
               //TODO: Debounce this
               setIsAutoCompleteShown(true);
               setSearchAutoComplete(fuse.search(e.target.value));
-            }}
-            onFocus={(e) => {
-              if (guardAgainstReTrap.current)
-                guardAgainstReTrap.current = false;
-              else setIsAutoCompleteShown(e.target.value.length > 0);
             }}
           />
 
