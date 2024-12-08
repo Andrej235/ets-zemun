@@ -20,8 +20,9 @@ export default function AppHeader() {
     >
       <div id="app-header">
         <HamburgerMenu
-          onOpen={() => setIsHamburgerMenuOpen(true)}
-          onClose={() => setIsHamburgerMenuOpen(false)}
+          isHamburgerMenuOpen={isHamburgerMenuOpen}
+          onRequestOpen={() => setIsHamburgerMenuOpen(true)}
+          onRequestClose={() => setIsHamburgerMenuOpen(false)}
         />
 
         <Link

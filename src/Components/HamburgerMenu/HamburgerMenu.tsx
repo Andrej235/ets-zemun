@@ -1,22 +1,23 @@
 import "./HamburgerMenu.scss";
-import { useState } from "react";
 import HamburgerNavigation from "../HamburgerNavigation/HamburgerNavigation";
 
 type HamburgerMenuProps = {
-  onOpen?: () => void;
-  onClose?: () => void;
+  isHamburgerMenuOpen: boolean;
+  onRequestOpen: () => void;
+  onRequestClose: () => void;
 };
 
-function HamburgerMenu({ onOpen, onClose }: HamburgerMenuProps) {
-  const [isChecked, setisChecked] = useState(false);
-
+function HamburgerMenu({
+  isHamburgerMenuOpen,
+  onRequestOpen,
+  onRequestClose,
+}: HamburgerMenuProps) {
   return (
     <>
       <button
-        className={"hamburger-menu" + (isChecked ? " open" : "")}
+        className={"hamburger-menu" + (isHamburgerMenuOpen ? " open" : "")}
         onClick={(e) => {
-          isChecked ? onClose?.() : onOpen?.();
-          setisChecked((prevState) => !prevState);
+          isHamburgerMenuOpen ? onRequestClose?.() : onRequestOpen?.();
 
           e.stopPropagation();
           e.preventDefault();
@@ -33,11 +34,8 @@ function HamburgerMenu({ onOpen, onClose }: HamburgerMenuProps) {
       </button>
 
       <HamburgerNavigation
-        isMenuActive={isChecked}
-        onRequestClose={() => {
-          isChecked ? onClose?.() : onOpen?.();
-          setisChecked((prevState) => !prevState);
-        }}
+        isMenuActive={isHamburgerMenuOpen}
+        onRequestClose={isHamburgerMenuOpen ? onRequestClose : onRequestOpen}
       />
     </>
   );
