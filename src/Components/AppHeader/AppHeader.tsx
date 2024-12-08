@@ -1,9 +1,9 @@
 import "./AppHeader.scss";
 import { Link } from "react-router";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
-import HeaderSearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
 import FocusTrap from "focus-trap-react";
+import HeaderSearchBar from "../HeaderSearchBar/HeaderSearchBar";
 
 export default function AppHeader() {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);

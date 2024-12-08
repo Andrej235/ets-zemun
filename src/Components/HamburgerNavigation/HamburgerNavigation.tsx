@@ -6,10 +6,12 @@ import { AnimatePresence, motion } from "motion/react";
 
 type HamburgerNavigationProps = {
   isMenuActive: boolean;
+  onRequestClose: () => void;
 };
 
 export default function HamburgerNavigation({
   isMenuActive,
+  onRequestClose,
 }: HamburgerNavigationProps) {
   return (
     <AnimatePresence>
@@ -30,7 +32,7 @@ export default function HamburgerNavigation({
           className="hamburger-navigation"
           key="hamburger-navigation"
         >
-          <HamburgerNavigationSearchBar />
+          <HamburgerNavigationSearchBar onRequestCloseHamburgerNavigation={onRequestClose} />
 
           <div className="nav-bar">
             <div className="nav-bar-tab">

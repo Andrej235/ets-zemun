@@ -32,7 +32,13 @@ function HamburgerMenu({ onOpen, onClose }: HamburgerMenuProps) {
         </svg>
       </button>
 
-      <HamburgerNavigation isMenuActive={isChecked} />
+      <HamburgerNavigation
+        isMenuActive={isChecked}
+        onRequestClose={() => {
+          isChecked ? onClose?.() : onOpen?.();
+          setisChecked((prevState) => !prevState);
+        }}
+      />
     </>
   );
 }
