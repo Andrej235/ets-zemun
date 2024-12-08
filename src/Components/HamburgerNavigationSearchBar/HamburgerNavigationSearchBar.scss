@@ -67,11 +67,23 @@
       font-size: 1rem;
 
       .title {
+        max-width: 100%;
+        padding-right: 0.5rem;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         font-size: 2rem;
         font-weight: 400;
       }
 
       .description {
+        max-width: 100%;
+        padding-right: 1rem;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         font-size: 1.5rem;
         font-weight: 100;
       }
