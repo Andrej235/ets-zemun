@@ -120,7 +120,11 @@ export default function HamburgerNavigationSearchBar({
               }
             }}
             onChange={(e) => {
-              //TODO: Debounce this
+              if (e.target.value.length < 1) {
+                setIsAutoCompleteShown(false);
+                return;
+              }
+
               setIsAutoCompleteShown(true);
               setSearchAutoComplete(fuse.search(e.target.value));
             }}
@@ -158,17 +162,21 @@ export default function HamburgerNavigationSearchBar({
                 duration: 0.3,
               }}
             >
-              {searchAutoComplete.slice(0, 15).map((result) => (
-                <Link
-                  to={result.item.url}
-                  onClick={onRequestCloseHamburgerNavigation}
-                  className="search-bar-auto-complete-item"
-                  key={result.item.url}
-                >
-                  <p className="title">{result.item.title}</p>
-                  <p className="description">{result.item.description}</p>
-                </Link>
-              ))}
+              {searchAutoComplete.length > 0 ? (
+                searchAutoComplete.slice(0, 15).map((result) => (
+                  <Link
+                    to={result.item.url}
+                    onClick={onRequestCloseHamburgerNavigation}
+                    className="search-bar-auto-complete-item"
+                    key={result.item.url}
+                  >
+                    <p className="title">{result.item.title}</p>
+                    <p className="description">{result.item.description}</p>
+                  </Link>
+                ))
+              ) : (
+                <p className="no-results">Nema rezultata</p>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

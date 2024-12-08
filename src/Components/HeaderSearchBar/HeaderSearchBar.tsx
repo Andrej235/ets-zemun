@@ -134,7 +134,6 @@ export default function HeaderSearchBar() {
                 }
               }}
               onChange={(e) => {
-                //TODO: Debounce this
                 setSearchAutoComplete(fuse.search(e.target.value));
               }}
               onFocus={() => setIsAutoCompleteShown(true)}

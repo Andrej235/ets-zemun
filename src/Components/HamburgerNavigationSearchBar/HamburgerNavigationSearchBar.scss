@@ -48,6 +48,7 @@
     background: $background;
     overflow: auto;
     padding: 6.5rem 1rem 1rem 1rem; // 7rem for the search bar (5rem) + 1.5rem for padding
+    border-radius: 0 0 1rem 1rem;
 
     display: flex;
     flex-direction: column;
@@ -95,6 +96,13 @@
         background-color: $outline;
         opacity: 0.1;
       }
+    }
+
+    .no-results {
+      color: $text-secondary;
+      font-size: 2.5rem;
+      font-weight: 500;
+      margin: 1rem;
     }
   }
 }
