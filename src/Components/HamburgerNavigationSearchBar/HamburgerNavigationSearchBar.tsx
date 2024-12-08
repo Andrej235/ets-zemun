@@ -50,11 +50,11 @@ export default function HamburgerNavigationSearchBar({
 
     if (e.key === "Home") {
       e.preventDefault();
-      children[0].querySelector("a")?.focus();
+      (children[0] as HTMLAnchorElement).focus();
       return;
     } else if (e.key === "End") {
       e.preventDefault();
-      children[children.length - 1].querySelector("a")?.focus();
+      (children[children.length - 1] as HTMLAnchorElement).focus();
       return;
     }
 
@@ -79,13 +79,13 @@ export default function HamburgerNavigationSearchBar({
       e.preventDefault();
 
       const child = children[(currentIndex + 1) % children.length];
-      child?.querySelector("a")?.focus();
+      (child as HTMLAnchorElement).focus();
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
 
       const child =
         children[(currentIndex - 1 + children.length) % children.length];
-      child?.querySelector("a")?.focus();
+      (child as HTMLAnchorElement).focus();
     }
   }
 
@@ -159,19 +159,15 @@ export default function HamburgerNavigationSearchBar({
               }}
             >
               {searchAutoComplete.slice(0, 15).map((result) => (
-                <div
+                <Link
+                  to={result.item.url}
+                  onClick={onRequestCloseHamburgerNavigation}
                   className="search-bar-auto-complete-item"
                   key={result.item.url}
                 >
-                  <Link
-                    to={result.item.url}
-                    onClick={onRequestCloseHamburgerNavigation}
-                  >
-                    <h1>{result.item.title}</h1>
-                  </Link>
-
-                  <p>{result.item.description}</p>
-                </div>
+                  <p className="title">{result.item.title}</p>
+                  <p className="description">{result.item.description}</p>
+                </Link>
               ))}
             </motion.div>
           )}
