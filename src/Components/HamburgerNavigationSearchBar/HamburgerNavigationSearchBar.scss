@@ -1,17 +1,19 @@
 .hamburger-navigation .search-bar-container {
   position: relative;
-
+  overflow: hidden;
   min-width: 35rem;
   width: 80%;
   max-width: 60rem;
-  height: 5rem;
+  height: 50vh;
+  border-radius: 1rem;
 
   font-size: 1.9rem;
 
   .search-container {
     @include input-field-container;
+    z-index: 2;
     width: 100%;
-    height: 100%;
+    height: 5rem;
     padding-right: 0;
 
     .search-button {
@@ -37,7 +39,7 @@
 
   .search-bar-auto-complete-container {
     position: absolute;
-    z-index: 325490853489;
+    z-index: 1;
     width: 100%;
     max-height: 50vh;
     background-color: #00f;

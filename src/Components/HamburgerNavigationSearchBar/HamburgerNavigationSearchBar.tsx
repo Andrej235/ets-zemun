@@ -6,6 +6,7 @@ import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { Link, useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
+import { AnimatePresence, motion } from "motion/react";
 
 type HamburgerNavigationSearchBarProps = {
   onRequestCloseHamburgerNavigation: () => void;
@@ -138,31 +139,49 @@ export default function HamburgerNavigationSearchBar({
           </button>
         </div>
 
-        <div
-          className="search-bar-auto-complete-container"
-          ref={autoCompleteContainerRef}
-        >
-          {isAutoCompleteShown &&
-            searchAutoComplete.slice(0, 15).map((result) => (
-              <div
-                className="search-bar-auto-complete-item"
-                key={result.item.url}
-              >
-                <div className="header">
-                  <Icon name={result.item.type === "page" ? "book" : "file"} />
+        <AnimatePresence>
+          {isAutoCompleteShown && (
+            <motion.div
+              key="auto-complete"
+              className="search-bar-auto-complete-container"
+              ref={autoCompleteContainerRef}
+              initial={{
+                y: "-100%",
+              }}
+              animate={{
+                y: "0",
+              }}
+              exit={{
+                y: "-125%",
+              }}
+              transition={{
+                duration: 0.3,
+              }}
+            >
+              {searchAutoComplete.slice(0, 15).map((result) => (
+                <div
+                  className="search-bar-auto-complete-item"
+                  key={result.item.url}
+                >
+                  <div className="header">
+                    <Icon
+                      name={result.item.type === "page" ? "book" : "file"}
+                    />
 
-                  <Link
-                    to={result.item.url}
-                    onClick={onRequestCloseHamburgerNavigation}
-                  >
-                    <h1>{result.item.title}</h1>
-                  </Link>
+                    <Link
+                      to={result.item.url}
+                      onClick={onRequestCloseHamburgerNavigation}
+                    >
+                      <h1>{result.item.title}</h1>
+                    </Link>
+                  </div>
+
+                  <p>{result.item.description}</p>
                 </div>
-
-                <p>{result.item.description}</p>
-              </div>
-            ))}
-        </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </FocusTrap>
   );
