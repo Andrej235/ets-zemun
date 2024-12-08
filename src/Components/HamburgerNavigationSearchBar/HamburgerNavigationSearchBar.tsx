@@ -37,7 +37,7 @@ export default function HamburgerNavigationSearchBar({
   const navigate = useNavigate();
 
   function handleGlobalKeyDown(e: KeyboardEvent) {
-    if (/^[a-zA-Z0-9]$/.test(e.key) || e.key === "Backspace") {
+    if (/^[a-zA-Z0-9 ]$/.test(e.key) || e.key === "Backspace") {
       inputRef.current!.focus();
       inputRef.current?.onkeydown?.(e);
       return;
