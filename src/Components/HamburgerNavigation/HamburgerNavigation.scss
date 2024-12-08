@@ -1,7 +1,6 @@
 .hamburger-navigation {
   position: fixed;
   z-index: 1;
-  top: 10rem;
   left: 0;
 
   display: flex;
@@ -9,11 +8,10 @@
   align-items: center;
   gap: 4rem;
 
-  width: 100.5svw;
+  width: 100svw;
   height: calc(100svh - 8rem);
   background-color: $secondary-background;
   padding: 4rem 0;
-  transition: 0.25s ease-out;
 
   font-size: 2rem;
 
@@ -56,8 +54,4 @@
       }
     }
   }
-}
-
-.navigation-not-active {
-  top: -100%;
 }

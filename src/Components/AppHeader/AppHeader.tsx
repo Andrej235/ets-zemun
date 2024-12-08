@@ -6,17 +6,29 @@ import { useState } from "react";
 import FocusTrap from "focus-trap-react";
 
 export default function AppHeader() {
-  const [isFocusTrapActive, setIsFocusTrapActive] = useState(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
   return (
-    <FocusTrap active={isFocusTrapActive && false}>
+    <FocusTrap
+      active={isHamburgerMenuOpen}
+      focusTrapOptions={{
+        escapeDeactivates: true,
+        allowOutsideClick: false,
+        clickOutsideDeactivates: false,
+        onDeactivate: () => setIsHamburgerMenuOpen(false),
+      }}
+    >
       <div id="app-header">
         <HamburgerMenu
-          onOpen={() => setIsFocusTrapActive(true)}
-          onClose={() => setIsFocusTrapActive(false)}
+          onOpen={() => setIsHamburgerMenuOpen(true)}
+          onClose={() => setIsHamburgerMenuOpen(false)}
         />
 
-        <Link to="/" className="logo">
+        <Link
+          to="/"
+          className="logo"
+          tabIndex={isHamburgerMenuOpen ? -1 : undefined}
+        >
           <img src="./logo.png" alt="Logo" />
         </Link>
 
@@ -31,6 +43,8 @@ export default function AppHeader() {
 
           <HeaderSearchBar />
         </div>
+
+        <div className="background" />
       </div>
     </FocusTrap>
   );
