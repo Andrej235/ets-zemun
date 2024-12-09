@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Icon from "../Icon/Icon";
 import "./HamburgerNavigationSearchBar.scss";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
@@ -6,7 +6,7 @@ import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
-import { AnimatePresence, motion } from "motion/react";
+import AutoCompleteSuggestions from "../../AutoCompleteSuggestions/AutoCompleteSuggestions";
 
 type HamburgerNavigationSearchBarProps = {
   onRequestCloseHamburgerNavigation: () => void;
@@ -15,6 +15,12 @@ type HamburgerNavigationSearchBarProps = {
 export default function HamburgerNavigationSearchBar({
   onRequestCloseHamburgerNavigation,
 }: HamburgerNavigationSearchBarProps) {
+  const [isAutoCompleteShown, setIsAutoCompleteShown] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
+
   const fuse = useMemo(
     () =>
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
@@ -26,74 +32,6 @@ export default function HamburgerNavigationSearchBar({
   const [searchAutoComplete, setSearchAutoComplete] = useState<
     FuseResult<SearchMapSchema["entries"][number]>[]
   >([]);
-
-  const [isAutoCompleteShown, setIsAutoCompleteShown] = useState(false);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const autoCompleteContainerRef = useRef<HTMLDivElement>(null);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const navigate = useNavigate();
-
-  function handleGlobalKeyDown(e: KeyboardEvent) {
-    if (/^[a-zA-Z0-9 ]$/.test(e.key) || e.key === "Backspace") {
-      inputRef.current!.focus();
-      inputRef.current?.onkeydown?.(e);
-      return;
-    }
-
-    if (!autoCompleteContainerRef.current) return;
-    const children = autoCompleteContainerRef.current.children;
-    const activeElement = document.activeElement;
-
-    if (e.key === "Home") {
-      e.preventDefault();
-      (children[0] as HTMLAnchorElement).focus();
-      return;
-    } else if (e.key === "End") {
-      e.preventDefault();
-      (children[children.length - 1] as HTMLAnchorElement).focus();
-      return;
-    }
-
-    let currentIndex =
-      activeElement === inputRef.current || activeElement === buttonRef.current
-        ? -1
-        : null;
-
-    if (currentIndex === null) {
-      for (let i = 0; i < children.length; i++) {
-        const current = children[i];
-        if (current.contains(activeElement)) {
-          currentIndex = i;
-          break;
-        }
-      }
-    }
-
-    currentIndex ??= 0;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-
-      const child = children[(currentIndex + 1) % children.length];
-      (child as HTMLAnchorElement).focus();
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-
-      const child =
-        children[(currentIndex - 1 + children.length) % children.length];
-      (child as HTMLAnchorElement).focus();
-    }
-  }
-
-  useEffect(() => {
-    containerRef.current?.addEventListener("keydown", handleGlobalKeyDown);
-    return () =>
-      containerRef.current?.removeEventListener("keydown", handleGlobalKeyDown);
-  }, []);
 
   return (
     <FocusTrap
@@ -143,46 +81,14 @@ export default function HamburgerNavigationSearchBar({
           </button>
         </div>
 
-        <AnimatePresence>
-          {isAutoCompleteShown && (
-            <motion.div
-              key="auto-complete"
-              className="search-bar-auto-complete-container"
-              ref={autoCompleteContainerRef}
-              initial={{
-                y: "-100%",
-              }}
-              animate={{
-                y: "0",
-              }}
-              exit={{
-                y: "-125%",
-              }}
-              transition={{
-                duration: 0.3,
-              }}
-            >
-              {searchAutoComplete.length > 0 ? (
-                searchAutoComplete.slice(0, 15).map((result) => (
-                  <button
-                    role="link"
-                    onClick={() => {
-                      onRequestCloseHamburgerNavigation();
-                      navigate(result.item.url);
-                    }}
-                    className="search-bar-auto-complete-item"
-                    key={result.item.url}
-                  >
-                    <p className="title">{result.item.title}</p>
-                    <p className="description">{result.item.description}</p>
-                  </button>
-                ))
-              ) : (
-                <p className="no-results">Nema rezultata</p>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <AutoCompleteSuggestions
+          containerRef={containerRef}
+          inputRef={inputRef}
+          buttonRef={buttonRef}
+          isAutoCompleteShown={isAutoCompleteShown}
+          searchAutoComplete={searchAutoComplete}
+          onRequestCloseHamburgerNavigation={onRequestCloseHamburgerNavigation}
+        />
       </div>
     </FocusTrap>
   );
