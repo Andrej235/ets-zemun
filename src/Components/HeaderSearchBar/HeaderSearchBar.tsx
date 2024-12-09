@@ -4,8 +4,9 @@ import Icon from "../Icon/Icon";
 import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
+import AutoCompleteSuggestions from "../AutoCompleteSuggestions/AutoCompleteSuggestions";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -151,28 +152,14 @@ export default function HeaderSearchBar() {
           </button>
         </div>
 
-        <div
-          className="search-bar-auto-complete-container"
-          ref={autoCompleteContainerRef}
-        >
-          {isAutoCompleteShown &&
-            searchAutoComplete.slice(0, 15).map((result) => (
-              <div
-                className="search-bar-auto-complete-item"
-                key={result.item.url}
-              >
-                <div className="header">
-                  <Icon name={result.item.type === "page" ? "book" : "file"} />
-
-                  <Link to={result.item.url}>
-                    <h1>{result.item.title}</h1>
-                  </Link>
-                </div>
-
-                <p>{result.item.description}</p>
-              </div>
-            ))}
-        </div>
+        <AutoCompleteSuggestions
+          containerRef={containerRef}
+          buttonRef={buttonRef}
+          inputRef={inputRef}
+          isAutoCompleteShown={isAutoCompleteShown}
+          searchAutoComplete={searchAutoComplete}
+          onBeforeNavigate={() => setIsAutoCompleteShown(false)}
+        />
       </div>
     </FocusTrap>
   );

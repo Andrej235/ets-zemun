@@ -6,7 +6,7 @@ import * as searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
-import AutoCompleteSuggestions from "../../AutoCompleteSuggestions/AutoCompleteSuggestions";
+import AutoCompleteSuggestions from "../AutoCompleteSuggestions/AutoCompleteSuggestions";
 
 type HamburgerNavigationSearchBarProps = {
   onRequestCloseHamburgerNavigation: () => void;
@@ -87,7 +87,7 @@ export default function HamburgerNavigationSearchBar({
           buttonRef={buttonRef}
           isAutoCompleteShown={isAutoCompleteShown}
           searchAutoComplete={searchAutoComplete}
-          onRequestCloseHamburgerNavigation={onRequestCloseHamburgerNavigation}
+          onBeforeNavigate={onRequestCloseHamburgerNavigation}
         />
       </div>
     </FocusTrap>

@@ -11,7 +11,7 @@ type AutoCompleteSuggestions = {
   buttonRef: React.RefObject<HTMLButtonElement>;
   isAutoCompleteShown: boolean;
   searchAutoComplete: FuseResult<SearchMapSchema["entries"][number]>[];
-  onRequestCloseHamburgerNavigation: () => void;
+  onBeforeNavigate: () => void;
 };
 
 export default function AutoCompleteSuggestions({
@@ -20,7 +20,7 @@ export default function AutoCompleteSuggestions({
   inputRef,
   isAutoCompleteShown,
   searchAutoComplete,
-  onRequestCloseHamburgerNavigation,
+  onBeforeNavigate,
 }: AutoCompleteSuggestions) {
   const autoCompleteContainerRef = useRef<HTMLDivElement>(null);
 
@@ -109,7 +109,7 @@ export default function AutoCompleteSuggestions({
               <button
                 role="link"
                 onClick={() => {
-                  onRequestCloseHamburgerNavigation();
+                  onBeforeNavigate();
                   navigate(result.item.url);
                 }}
                 className="search-bar-auto-complete-item"

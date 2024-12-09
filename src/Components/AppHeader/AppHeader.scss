@@ -58,6 +58,7 @@
     position: relative;
     display: flex;
     border-radius: 1rem;
+    max-height: 5rem;
 
     .nav-bar {
       position: relative;
@@ -88,7 +89,7 @@
       }
 
       &:has(~ .search-bar-not-active) {
-        transform: translate(31rem);
+        transform: translate(30rem);
       }
     }
   }
