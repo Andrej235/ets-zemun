@@ -60,6 +60,9 @@
     border-radius: 1rem;
 
     .nav-bar {
+      position: relative;
+      right: 1rem;
+      z-index: 1;
       width: 100%;
       height: 100%;
 
@@ -85,7 +88,7 @@
       }
 
       &:has(~ .search-bar-not-active) {
-        transform: translate(25rem);
+        transform: translate(31rem);
       }
     }
   }
