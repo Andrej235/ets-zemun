@@ -132,6 +132,8 @@ export default function HeaderSearchBar() {
               className="search-bar"
               placeholder="Pretrazi..."
               ref={inputRef}
+              name="search"
+              autoComplete="off"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   navigate(searchAutoComplete[0].item.url);
