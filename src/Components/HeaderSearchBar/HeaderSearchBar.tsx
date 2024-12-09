@@ -33,8 +33,12 @@ export default function HeaderSearchBar() {
   const navigate = useNavigate();
 
   function handleClose() {
-    setIsSearchBarVisible(false);
-    setIsAutoCompleteShown(false);
+    if (isAutoCompleteShown) {
+      setIsAutoCompleteShown(false);
+      setTimeout(() => {
+        setIsSearchBarVisible(false);
+      }, 150);
+    } else setIsSearchBarVisible(false);
   }
 
   function handleOpen() {
@@ -106,12 +110,12 @@ export default function HeaderSearchBar() {
 
   return (
     <FocusTrap
-      active={isSearchBarVisible}
+      active={isAutoCompleteShown}
       focusTrapOptions={{
         allowOutsideClick: true,
-        clickOutsideDeactivates: false,
+        clickOutsideDeactivates: true,
         escapeDeactivates: true,
-        onDeactivate: handleClose,
+        onDeactivate: () => setIsAutoCompleteShown(false),
       }}
     >
       <div
