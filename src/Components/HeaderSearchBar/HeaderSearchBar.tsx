@@ -135,9 +135,14 @@ export default function HeaderSearchBar() {
                 }
               }}
               onChange={(e) => {
+                if (e.target.value.length < 1) {
+                  setIsAutoCompleteShown(false);
+                  return;
+                }
+
+                setIsAutoCompleteShown(true);
                 setSearchAutoComplete(fuse.search(e.target.value));
               }}
-              onFocus={() => setIsAutoCompleteShown(true)}
             />
 
             <div className="filler" />

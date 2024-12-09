@@ -6,7 +6,7 @@
     width: max-content;
     border-radius: 1rem;
     overflow: clip;
-    height: 60vh;
+    height: 50vh;
 
     display: flex;
     flex-direction: column;
@@ -57,14 +57,6 @@
 
     &.search-bar-not-active .search-bar-input-container {
       transform: translate(100%);
-    }
-
-    .search-bar-auto-complete-container {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      max-height: 50vh;
-      background-color: #00f;
     }
   }
 }
