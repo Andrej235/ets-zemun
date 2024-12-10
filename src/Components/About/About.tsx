@@ -19,23 +19,6 @@ export type ScrollAnimation = {
   };
 };
 
-const scrollAnimationFlyInTop: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    y: -100,
-  },
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
-};
-
 const scrollAnimationFlyInBottom: ScrollAnimation = {
   initial: {
     opacity: 0,
@@ -77,7 +60,7 @@ export default function About() {
         offset: ["start end", "end end", "start start", "end start"],
       });
     }
-  }, [infoCardsContainerRef.current]);
+  }, [infoCardsContainerRef]);
 
   return (
     <div id="about-page">
@@ -92,9 +75,7 @@ export default function About() {
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
             <h1>Elektrotehnička škola "Zemun"</h1>
 
-            <p>
-              Mi nečekamo budućnost, mi joj idemo u susret!
-            </p>
+            <p>Mi nečekamo budućnost, mi joj idemo u susret!</p>
           </motion.div>
         </div>
       </section>
