@@ -1,0 +1,28 @@
+.info-card {
+  min-width: 25rem;
+  max-width: 25rem;
+  // border: 1px solid $outline;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: $secondary-background;
+  box-shadow: 5px 5px 1rem 0rem color-mix(in srgb, #000, transparent 80%);
+
+  display: flex;
+  flex-direction: column;
+
+  i {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+    color: $text-primary;
+    font-size: 2rem;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 1.8rem;
+  }
+}

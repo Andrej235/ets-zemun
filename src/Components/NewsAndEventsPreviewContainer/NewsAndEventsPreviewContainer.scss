@@ -1,0 +1,33 @@
+.news-container {
+  margin-top: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .news-section-title {
+    font-size: 4rem;
+  }
+
+  .options-container {
+    display: flex;
+    gap: 2rem;
+
+    .option-button {
+      position: relative;
+      padding: 1rem 2rem;
+      background: none;
+
+      font-size: 2rem;
+
+      .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.2rem;
+        background-color: $outline;
+      }
+    }
+  }
+}

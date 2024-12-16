@@ -20,17 +20,20 @@ body {
   padding: 0;
   display: flex;
   place-items: center;
-  min-width: 100svw;
+  max-width: 100svw;
   min-height: 100svh;
+  max-height: 100svh;
 }
 
 #root {
-  min-width: 100svw;
+  position: absolute;
+  width: 100%;
   min-height: 100svh;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 button {
@@ -55,6 +58,13 @@ a {
   &:focus-visible {
     color: $accent;
   }
+}
+
+.os-theme-dark,
+.os-theme-light {
+  --os-handle-bg: #{$accent-secondary} !important;
+  --os-handle-bg-hover: #{$accent-secondary-highlight} !important;
+  --os-handle-bg-active: #{$accent-secondary-highlight} !important;
 }
 
 @media screen and (max-width: 999.98px) {

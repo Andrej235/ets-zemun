@@ -1,0 +1,41 @@
+.profile-overview {
+  display: flex;
+  gap: 2rem;
+
+  &.image-left {
+    flex-direction: row;
+    padding-right: 10rem;
+  }
+
+  &.image-right {
+    flex-direction: row-reverse;
+    padding-left: 10rem;
+    text-align: end;
+  }
+
+  .image-container {
+    flex: 2;
+
+    img {
+      max-width: 100%;
+      border-radius: 2rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    flex: 6;
+
+    .title {
+      margin-top: 1rem;
+      color: $text-primary;
+      font-size: 3rem;
+    }
+
+    .description {
+      color: $text-secondary;
+      font-size: 2rem;
+    }
+  }
+}
