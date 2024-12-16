@@ -1,5 +1,4 @@
 .hamburger-menu-wrapper {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +25,7 @@
 
 .line {
   fill: none;
-  stroke: white;
+  stroke: $text-primary;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 3;

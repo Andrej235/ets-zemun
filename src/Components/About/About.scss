@@ -1,27 +1,62 @@
 #about-page {
-  padding: 3rem 20rem;
+  justify-self: center;
+  max-width: 80svw;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(80svh - 10rem);
+  }
 
   .hero-space {
+    max-width: 100%;
+    height: calc(100svh - 10rem);
+
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
-    margin-bottom: 25rem;
+    padding-bottom: 10rem;
 
     .hero-image {
-      flex: 4;
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 10rem;
+
+      width: 100%;
+      height: calc(100svh - 10rem);
 
       img {
         width: 100%;
-        border-radius: 2rem;
+        height: 100%;        
+        object-fit: cover;
       }
     }
 
-    .hero-text {
-      flex: 6;
+    .hero-image-overlay {
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 10rem;
 
+      width: 100%;
+      height: calc(100svh - 10rem);
+      background: linear-gradient(rgb(0,0,0,0.5) 50%, $background 100%);
+    }
+
+    .hero-text {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      justify-content: flex-start;
+      align-items: center;
 
       h1 {
         font-size: 6rem;
@@ -29,7 +64,7 @@
       }
 
       p {
-        font-size: 3rem;
+        font-size: 6rem;
       }
 
       .hero-search-container {
@@ -71,6 +106,7 @@
   }
 
   .overview {
+    width: 50%;
     margin-top: 5rem;
 
     h1 {
@@ -86,8 +122,9 @@
   .info-cards-container {
     margin-top: 3rem;
     max-width: 100%;
-    padding: 2rem 0;
-    overflow: hidden;
+    padding: 5rem 0;
+
+    margin-bottom: 20rem;
 
     [data-overlayscrollbars-contents] {
       display: flex;
@@ -101,6 +138,7 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    margin-bottom: 20rem;
   }
 
   .footer {

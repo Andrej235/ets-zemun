@@ -9,9 +9,9 @@ import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import { animate, motion, scroll } from "motion/react";
 import { useEffect, useRef } from "react";
 import NewsAndEventsPreviewContainer from "../NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
-import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
 import * as data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
+import scrollAnimationFlyInBottom from "src/motion-animation-presets/scroll-animation-fly-in-bottom";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
@@ -36,138 +36,133 @@ export default function About() {
 
   return (
     <div id="about-page">
-      <div className="hero-space">
-        <motion.div className="hero-image" {...scrollAnimationFlyInTop}>
-          <img src="/hero-image.png" alt="Picture of a student" />
-        </motion.div>
+      <section>
+        <div className="hero-space">
+          <motion.div className="hero-image">
+            <img src="/hero-image.jpeg" alt="Picture of a student" />
+          </motion.div>
 
-        <motion.div className="hero-text" {...scrollAnimationFlyInTop}>
-          <h1>Dobrodošli u Elektrotehničku školu "Zemun"</h1>
+          <div className="hero-image-overlay"></div>
 
-          <p>
-            U srcu Zemuna, naša škola pruža vrhunsko obrazovanje u oblasti
-            elektrotehnike i računarstva. Sa modernim učionicama, vrhunskim
-            nastavnicima i inovativnim pristupom učenju, pripremamo naše učenike
-            za izazove budućnosti. Postanite deo naše zajednice i započnite
-            svoje putovanje ka uspehu u svetu tehnologije!
-          </p>
+          <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
+            <h1>Elektrotehnička škola "Zemun"</h1>
 
-          <div className="hero-search-container">
-            <Icon name="magnifying-glass" />
-            <input type="text" placeholder="Pretrazite nas" />
-            <button>Pretrazi</button>
-          </div>
-        </motion.div>
-      </div>
+            <p>Mi nečekamo budućnost, mi joj idemo u susret!</p>
+          </motion.div>
+        </div>
+      </section>
 
-      <div className="overview">
-        <motion.h1 {...scrollAnimationFlyInTop}>
-          Lorem ipsum dolor sit amet.
-        </motion.h1>
+      <section>
+        <div className="overview">
+          <motion.h1 {...scrollAnimationFlyInBottom}>
+            Lorem ipsum dolor sit amet.
+          </motion.h1>
 
-        <motion.p {...scrollAnimationFlyInTop}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-          possimus tempore accusantium facere earum ab eligendi repellendus
-          perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.
-          Distinctio doloribus, odio a ipsa corrupti neque officiis nulla
-          dignissimos! Quia non placeat animi eum labore rem! Ullam ab,
-          distinctio suscipit sequi, ut ipsum et incidunt blanditiis laboriosam
-          veniam vitae aliquid! Sequi ea obcaecati et asperiores tempora alias
-          rem rerum cumque laborum voluptas error nam, fuga temporibus a quod
-          atque animi incidunt fugiat magnam odio maxime blanditiis minus vero
-          nisi! Eligendi magni, odit quisquam neque a error, facilis qui minima
-          debitis est officiis quos ullam labore perferendis repellat sunt,
-          pariatur modi ipsum consectetur possimus rerum inventore saepe. Cum
-          consequuntur suscipit, iusto deserunt in eveniet dolore blanditiis
-          facilis sequi, soluta magnam numquam voluptatum corrupti, facere
-          possimus ratione autem. Culpa mollitia voluptate autem deleniti quos
-          quasi reiciendis veniam nisi numquam at alias, illum corrupti iste
-          similique debitis velit harum aspernatur nobis dolorem libero quia,
-          cupiditate iure fugiat necessitatibus. Et culpa ab sint eius magnam.
-          Nesciunt adipisci, eveniet qui, laborum eum incidunt distinctio
-          repellat officiis delectus voluptate omnis velit laboriosam
-          repudiandae totam et, deleniti dolor voluptatum culpa ab minus? Itaque
-          exercitationem tempore, odit eaque excepturi aliquid blanditiis.
-        </motion.p>
-      </div>
+          <motion.p {...scrollAnimationFlyInBottom}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+            possimus tempore accusantium facere earum ab eligendi repellendus
+            perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.
+            Distinctio doloribus, odio a ipsa corrupti neque officiis nulla
+            dignissimos! Quia non placeat animi eum labore rem! Ullam ab,
+            distinctio suscipit sequi, ut ipsum et incidunt blanditiis
+            laboriosam veniam vitae aliquid! Sequi ea obcaecati et asperiores
+            tempora alias rem rerum cumque laborum voluptas error nam, fuga
+            temporibus a quod atque animi incidunt fugiat magnam odio maxime
+            blanditiis minus vero nisi! Eligendi magni, odit quisquam neque a
+            error, facilis qui minima debitis est officiis quos ullam labore
+            perferendis repellat sunt, pariatur modi ipsum consectetur possimus
+            rerum inventore saepe. Cum consequuntur suscipit, iusto deserunt in
+            eveniet dolore blanditiis facilis sequi, soluta magnam numquam
+            voluptatum corrupti, facere possimus ratione autem. Culpa mollitia
+            voluptate autem deleniti quos quasi reiciendis veniam nisi numquam
+            at alias, illum corrupti iste similique debitis velit harum
+            aspernatur nobis dolorem libero quia, cupiditate iure fugiat
+            necessitatibus. Et culpa ab sint eius magnam. Nesciunt adipisci,
+            eveniet qui, laborum eum incidunt distinctio repellat officiis
+            delectus voluptate omnis velit laboriosam repudiandae totam et,
+            deleniti dolor voluptatum culpa ab minus? Itaque exercitationem
+            tempore, odit eaque excepturi aliquid blanditiis.
+          </motion.p>
+        </div>
 
-      <OverlayScrollbarsComponent
-        className="info-cards-container"
-        options={{
-          scrollbars: {
-            autoHide: "leave",
-            autoHideDelay: 150,
-          },
-          overflow: {
-            x: "scroll",
-            y: "hidden",
-          },
-        }}
-        ref={infoCardsContainerRef}
-      >
-        <InfoCard
-          icon="history"
-          title="Istorija škole"
-          link="/istorija"
-          text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
-        />
+        <OverlayScrollbarsComponent
+          className="info-cards-container"
+          options={{
+            scrollbars: {
+              autoHide: "leave",
+              autoHideDelay: 150,
+            },
+            overflow: {
+              x: "scroll",
+              y: "hidden",
+            },
+          }}
+          ref={infoCardsContainerRef}
+        >
+          <InfoCard
+            icon="history"
+            title="Istorija škole"
+            link="/istorija"
+            text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
+          />
 
-        <InfoCard
-          icon="graduation-cap"
-          title="Programi obrazovanja"
-          link="/programi"
-          text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
-        />
+          <InfoCard
+            icon="graduation-cap"
+            title="Programi obrazovanja"
+            link="/programi"
+            text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
+          />
 
-        <InfoCard
-          icon="building"
-          title="Infrastruktura i oprema"
-          link="/infrastruktura"
-          text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
-        />
+          <InfoCard
+            icon="building"
+            title="Infrastruktura i oprema"
+            link="/infrastruktura"
+            text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
+          />
 
-        <InfoCard
-          icon="chalkboard-teacher"
-          title="Nastavnici"
-          link="/nastavnici"
-          text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
-        />
+          <InfoCard
+            icon="chalkboard-teacher"
+            title="Nastavnici"
+            link="/nastavnici"
+            text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
+          />
 
-        <InfoCard
-          icon="trophy"
-          title="Takmičenja i nagrade"
-          link="/takmicenja"
-          text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
-        />
+          <InfoCard
+            icon="trophy"
+            title="Takmičenja i nagrade"
+            link="/takmicenja"
+            text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
+          />
 
-        <InfoCard
-          icon="lightbulb"
-          title="Mentorski programi"
-          link="/mentori"
-          text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
-        />
+          <InfoCard
+            icon="lightbulb"
+            title="Mentorski programi"
+            link="/mentori"
+            text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
+          />
 
-        <InfoCard
-          icon="pencil-alt"
-          title="Upis i prijem"
-          link="/upis"
-          text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
-        />
+          <InfoCard
+            icon="pencil-alt"
+            title="Upis i prijem"
+            link="/upis"
+            text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
+          />
 
-        <InfoCard
-          icon="headset"
-          title="Podrška učenicima"
-          link="/podrska"
-          text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
-        />
+          <InfoCard
+            icon="headset"
+            title="Podrška učenicima"
+            link="/podrska"
+            text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
+          />
 
-        <InfoCard
-          icon="gavel"
-          title="Pravni akte"
-          link="/pravni-akte"
-          text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
-        />
-      </OverlayScrollbarsComponent>
+          <InfoCard
+            icon="gavel"
+            title="Pravni akte"
+            link="/pravni-akte"
+            text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
+          />
+        </OverlayScrollbarsComponent>
+      </section>
 
       <div className="profiles-overview-container">
         {data.profiles.map((profile, i) => (
@@ -179,7 +174,9 @@ export default function About() {
         ))}
       </div>
 
-      <NewsAndEventsPreviewContainer />
+      <section>
+        <NewsAndEventsPreviewContainer />
+      </section>
 
       <div className="footer">
         <div className="social-media-icons-container">
