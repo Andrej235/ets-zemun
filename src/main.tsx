@@ -4,6 +4,10 @@ import App from "./Components/App/App.tsx";
 import "./index.scss";
 import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import Profiles from "./Components/Profiles/Profiles.tsx";
+import Students from "./Components/Students/Students.tsx";
+import News from "./Components/News/News.tsx";
+import Documents from "./Components/Documents/Documents.tsx";
 import About from "./Components/About/About.tsx";
 
 const router = createBrowserRouter([
@@ -14,6 +18,22 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "/profili",
+        element: <Profiles />,
+      },
+      {
+        path: "/ucenici",
+        element: <Students />,
+      },
+      {
+        path: "/novosti",
+        element: <News />,
+      },
+      {
+        path: "/dokumenta",
+        element: <Documents />,
       },
     ],
   },
