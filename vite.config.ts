@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@styles": path.resolve(__dirname, "public/sass"),
+      "@assets": path.resolve(__dirname, "src/assets"),
+      "@data": path.resolve(__dirname, "src/assets/json-data/data"),
     },
   },
   css: {

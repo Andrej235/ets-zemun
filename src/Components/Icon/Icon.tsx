@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { HTMLProps } from "../../Types/Utility/HTMLProps";
+import { HTMLProps } from "../../types/utility/html-props";
 
 type IconProps = {
   className?: string;

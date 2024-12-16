@@ -1,0 +1,9 @@
+{
+  "name": "Elektrotehničar računara",
+  "description": "Profil elektrotehničara računara obuhvata rad sa računarima, kako na hardverskom, tako i na softverskom nivou. Učenici se obučavaju za konfiguraciju računarskih sistema, programiranje na različitim jezicima, kao i za rad sa bazama podataka i računarima povezanim u mreže. Ovaj profil pruža znanja koja omogućavaju rad u industriji, nauci, medicini i drugim sektorima gde su računari ključni za obradnu i analizu podataka.",
+  "imagePath": "/images/profiles/elektrotehnicar-racunara.png",
+  "classes": {
+    "general": [],
+    "specific": []
+  }
+}

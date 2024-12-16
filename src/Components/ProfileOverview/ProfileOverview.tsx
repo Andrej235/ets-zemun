@@ -1,59 +1,27 @@
 import { motion } from "motion/react";
 import "./ProfileOverview.scss";
-import { ScrollAnimation } from "../About/About";
+import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
+import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
+import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
+import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
+import { Link } from "react-router";
 
 type ProfileOverviewProps = {
-  name: string;
-  briefDescription: string;
-  image: string;
-  layout: "image-left" | "image-right";
-};
-
-const scrollAnimationFlyInLeft: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    x: -100,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
-};
-
-const scrollAnimationFlyInRight: ScrollAnimation = {
-  initial: {
-    opacity: 0,
-    x: 100,
-  },
-  whileInView: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    duration: 0.5,
-  },
-  viewport: {
-    once: true,
-  },
+  profile: ProfileOverviewSchema;
+  layout: "image-left" | "image-right" | "vertical";
 };
 
 export default function ProfileOverview({
-  briefDescription,
-  image,
-  name,
+  profile,
   layout,
 }: ProfileOverviewProps) {
   return (
     <motion.div
-      {...(layout !== "image-left"
+      {...(layout === "image-left"
+        ? scrollAnimationFlyInLeft
+        : layout === "image-right"
         ? scrollAnimationFlyInRight
-        : scrollAnimationFlyInLeft)}
+        : scrollAnimationFlyInTop)}
       className={"profile-overview " + layout}
       viewport={{
         once: true,
@@ -61,12 +29,15 @@ export default function ProfileOverview({
       }}
     >
       <div className="image-container">
-        <img src={image} alt={name} />
+        <img src={profile.imagePath} alt={profile.name} />
       </div>
 
       <div className="info">
-        <h1 className="title">{name}</h1>
-        <p className="description">{briefDescription}</p>
+        <Link to={`/profili/${profile.profileURL[0]}`}>
+          <h1 className="title">{profile.name}</h1>
+        </Link>
+
+        <p className="description">{profile.description}</p>
       </div>
     </motion.div>
   );
