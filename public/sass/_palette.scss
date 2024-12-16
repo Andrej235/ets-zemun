@@ -1,4 +1,5 @@
 @use "./private/palette.private" as *;
+@use "sass:color";
 
 $background: light-dark($light-primary-background, $dark-primary-background);
 $secondary-background: light-dark(
@@ -9,20 +10,20 @@ $outline: light-dark(#24c9df, #fff);
 
 $accent: light-dark($light-accent, $dark-accent);
 $accent-highlight: light-dark(
-  lighten($light-accent, 10%),
-  lighten($dark-accent, 10%)
+  color.adjust($light-accent, $lightness: 10%),
+  color.adjust($dark-accent, $lightness: 10%)
 );
 
 $accent-secondary: light-dark($light-secondary-accent, $dark-secondary-accent);
 $accent-secondary-highlight: light-dark(
-  darken($light-secondary-accent, 7%),
-  darken($dark-secondary-accent, 7%)
+  color.adjust($light-secondary-accent, $lightness: -7%),
+  color.adjust($dark-secondary-accent, $lightness: -7%)
 );
 
 $text-primary: light-dark($light-primary-text-color, $dark-primary-text-color);
 $text-secondary: light-dark(
-  lighten($light-primary-text-color, 20%),
-  darken($dark-primary-text-color, 20%)
+  color.adjust($light-primary-text-color, $lightness: 20%),
+  color.adjust($dark-primary-text-color, $lightness: -20%)
 );
 $text-accent: light-dark(
   $light-text-on-accent-color,
