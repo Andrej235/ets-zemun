@@ -48,64 +48,65 @@ export default function HeaderSearchBar() {
     }, 300);
   }
 
-  function handleGlobalKeyDown(e: KeyboardEvent) {
-    if (/^[a-zA-Z0-9]$/.test(e.key) || e.key === "Backspace") {
-      inputRef.current!.focus();
-      inputRef.current?.onkeydown?.(e);
-      return;
-    }
+  useEffect(() => {
+    function handleGlobalKeyDown(e: KeyboardEvent) {
+      if (/^[a-zA-Z0-9]$/.test(e.key) || e.key === "Backspace") {
+        inputRef.current!.focus();
+        inputRef.current?.onkeydown?.(e);
+        return;
+      }
 
-    if (!autoCompleteContainerRef.current) return;
-    const children = autoCompleteContainerRef.current.children;
-    const activeElement = document.activeElement;
+      if (!autoCompleteContainerRef.current) return;
+      const children = autoCompleteContainerRef.current.children;
+      const activeElement = document.activeElement;
 
-    if (e.key === "Home") {
-      e.preventDefault();
-      children[0].querySelector("a")?.focus();
-      return;
-    } else if (e.key === "End") {
-      e.preventDefault();
-      children[children.length - 1].querySelector("a")?.focus();
-      return;
-    }
+      if (e.key === "Home") {
+        e.preventDefault();
+        children[0].querySelector("a")?.focus();
+        return;
+      } else if (e.key === "End") {
+        e.preventDefault();
+        children[children.length - 1].querySelector("a")?.focus();
+        return;
+      }
 
-    let currentIndex =
-      activeElement === inputRef.current || activeElement === buttonRef.current
-        ? -1
-        : null;
+      let currentIndex =
+        activeElement === inputRef.current ||
+        activeElement === buttonRef.current
+          ? -1
+          : null;
 
-    if (currentIndex === null) {
-      for (let i = 0; i < children.length; i++) {
-        const current = children[i];
-        if (current.contains(activeElement)) {
-          currentIndex = i;
-          break;
+      if (currentIndex === null) {
+        for (let i = 0; i < children.length; i++) {
+          const current = children[i];
+          if (current.contains(activeElement)) {
+            currentIndex = i;
+            break;
+          }
         }
+      }
+
+      currentIndex ??= 0;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+
+        const child = children[(currentIndex + 1) % children.length];
+        child?.querySelector("a")?.focus();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+
+        const child =
+          children[(currentIndex - 1 + children.length) % children.length];
+        child?.querySelector("a")?.focus();
       }
     }
 
-    currentIndex ??= 0;
+    if (!isSearchBarVisible || !containerRef.current) return;
+    const container = containerRef.current;
 
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-
-      const child = children[(currentIndex + 1) % children.length];
-      child?.querySelector("a")?.focus();
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-
-      const child =
-        children[(currentIndex - 1 + children.length) % children.length];
-      child?.querySelector("a")?.focus();
-    }
-  }
-
-  useEffect(() => {
-    if (!isSearchBarVisible) return;
-
-    containerRef.current?.addEventListener("keydown", handleGlobalKeyDown);
-    return () =>
-      containerRef.current?.removeEventListener("keydown", handleGlobalKeyDown);
+    container.addEventListener("keydown", handleGlobalKeyDown);
+    return () => container.removeEventListener("keydown", handleGlobalKeyDown);
   }, [isSearchBarVisible]);
 
   return (
