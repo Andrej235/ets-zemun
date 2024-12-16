@@ -1,47 +1,23 @@
 .hamburger-navigation {
   position: fixed;
   z-index: 1;
-  top: 10rem;
-  left: 50%;
-  transform: translate(-50%);
+  left: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4rem;
 
-  width: 100%;
+  width: 100svw;
   height: calc(100svh - 8rem);
   background-color: $secondary-background;
   padding: 4rem 0;
-  transition: 0.25s ease-out;
 
   font-size: 2rem;
 
-  .search-bar-container {
-    @include input-field-container;
-
-    position: relative;
-
-    min-width: 35rem;
-    width: 80%;
-    max-width: 60rem;
-    height: 5rem;
-
-    font-size: 1.9rem;
-
-    .search-button {
-        position: absolute;
-        right: 0;
-
-        height: 100%;
-        background-color: transparent;
-
-        cursor: pointer;
-    }
-  }
-
   .nav-bar {
+    position: absolute;
+    top: 10rem;
     width: 100%;
     height: auto;
 
@@ -51,8 +27,8 @@
     font-size: 2rem;
     font-weight: 600;
 
-    >:last-child {
-        border-bottom: none !important;
+    > :last-child {
+      border-bottom: none !important;
     }
 
     .nav-bar-tab {
@@ -67,7 +43,7 @@
       :focus {
         color: $accent-highlight;
         * {
-            color: $accent-highlight;
+          color: $accent-highlight;
         }
       }
 
@@ -80,8 +56,4 @@
       }
     }
   }
-}
-
-.navigation-not-active {
-  top: -100%;
 }

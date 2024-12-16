@@ -11,6 +11,10 @@
     {
       "fileMatch": ["classes.json"],
       "url": "/src/assets/json-data/schemas/class-definitions.schema.json"
+    },
+    {
+      "fileMatch": ["search-map.json"],
+      "url": "/src/assets/json-data/schemas/search-map.schema.json"
     }
   ],
   "emeraldwalk.runonsave": {

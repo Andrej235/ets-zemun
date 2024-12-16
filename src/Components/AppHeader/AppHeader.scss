@@ -5,6 +5,7 @@
 
   width: 100%;
   min-height: 10rem;
+  max-height: 10rem;
   padding: 1rem 5rem;
   background-color: $secondary-background;
   box-shadow: 0 2px 15px $shadow;
@@ -12,15 +13,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
 
   color: #fff;
   text-align: center;
   font-size: 2rem;
-  
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: $secondary-background;
+    box-shadow: 0 2px 15px $shadow;
+  }
+
+  > *:not(.background):not(.hamburger-navigation) {
+    z-index: 2;
+  }
+
   .logo {
     width: auto;
     height: 100%;
+    border-radius: 1rem;
 
     display: flex;
     justify-content: center;
@@ -35,85 +51,48 @@
       aspect-ratio: 1/1;
     }
 
-    p {
-      width: fit-content;
-      white-space: nowrap;
+    &:focus-visible {
+      outline: 1px solid $outline;
     }
   }
 
   .app-header-navigation {
     position: relative;
     display: flex;
-    overflow: hidden;
     border-radius: 1rem;
-  }
+    max-height: 5rem;
 
-  .nav-bar {
-    width: 100%;
-    height: 100%;
+    .nav-bar {
+      position: relative;
+      right: 1rem;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
 
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1rem;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 1rem;
 
-    transition: .25s ease-out;
+      transition: 0.25s ease-out;
 
-    a {
-      width: auto;
-      min-width: 10rem;
-      padding: 1rem 1rem;
-      border-radius: 1rem;
-      white-space: nowrap;
+      a {
+        width: auto;
+        min-width: 10rem;
+        padding: 1rem 1rem;
+        border-radius: 1rem;
+        white-space: nowrap;
 
-      &:hover,
-      &:focus-visible {
-        color: $text-accent;
-        background-color: $accent-secondary-highlight;
+        &:hover,
+        &:focus-visible {
+          color: $text-accent;
+          background-color: $accent-secondary-highlight;
+        }
       }
-    }
-  }
 
-  .search-bar-not-active-navbar {
-    transform: translate(22rem);
-  }
-
-  .search-button {
-    position: relative;
-    
-    min-width: 5rem;
-    aspect-ratio: 1;
-    background-color: $accent-secondary;
-  
-    &:hover,
-    &:focus-visible {
-      background-color: $accent-secondary-highlight;
-    }
-  }
-  
-
-  .search-bar-container {
-    @include input-field-container;
-    font-size: 1.9rem;
-    width: 35rem;
-  }
-
-  .search-bar-filler {
-    position: absolute;
-    right: -1rem;
-
-    width: 2rem;
-    height: 100%;
-    background-color: $accent-secondary;
-  }
-
-  .search-bar-not-active {
-    transform: translate(100%);
-  }
-
-  @media screen and (min-width: 1075px) {
-    .apply-link:has(~ .search-bar-container) {
-      display: none;
+      &:has(~ .search-bar-not-active) {
+        transform: translate(30rem);
+      }
     }
   }
 
@@ -130,24 +109,6 @@
 
     .app-header-navigation {
       display: none;
-    }
-
-    .nav-bar {
-      display: none;
-    }
-
-    .apply-link:has(~ .search-bar-container) {
-      display: none;
-    }
-  }
-}
-
-@media screen and (max-width: 1499.98px) {
-  #app-header {
-    .logo {
-      p {
-        display: none;
-      }
     }
   }
 }

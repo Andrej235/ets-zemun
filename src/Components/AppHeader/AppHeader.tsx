@@ -1,49 +1,52 @@
 import "./AppHeader.scss";
-import { useState } from "react";
 import { Link } from "react-router";
-import Icon from "../Icon/Icon";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import { useState } from "react";
+import FocusTrap from "focus-trap-react";
+import HeaderSearchBar from "../HeaderSearchBar/HeaderSearchBar";
 
 export default function AppHeader() {
-  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
   return (
-    <div id="app-header">
-      <HamburgerMenu />
+    <FocusTrap
+      active={isHamburgerMenuOpen}
+      focusTrapOptions={{
+        escapeDeactivates: true,
+        allowOutsideClick: false,
+        clickOutsideDeactivates: false,
+        onDeactivate: () => setIsHamburgerMenuOpen(false),
+      }}
+    >
+      <div id="app-header">
+        <HamburgerMenu
+          isHamburgerMenuOpen={isHamburgerMenuOpen}
+          onRequestOpen={() => setIsHamburgerMenuOpen(true)}
+          onRequestClose={() => setIsHamburgerMenuOpen(false)}
+        />
 
-      <Link to="/" className="logo">
-        <img src="./logo.png" alt="Logo" />
-      </Link>
-
-      <div className="app-header-navigation">
-        <div
-          className={`nav-bar${
-            !isSearchBarVisible ? " search-bar-not-active-navbar" : ""
-          }`}
+        <Link
+          to="/"
+          className="logo"
+          tabIndex={isHamburgerMenuOpen ? -1 : undefined}
         >
-          <Link to="/">O nama</Link>
-          <Link to="/profili">Obrazovni profili</Link>
-          <Link to="/ucenici">Ucenici</Link>
-          <Link to="/novosti">Novosti</Link>
-          <Link to="/dokumenta">Dokumenta</Link>
+          <img src="./logo.png" alt="Logo" />
+        </Link>
+
+        <div className="app-header-navigation">
+          <div className="nav-bar">
+            <Link to="/">O nama</Link>
+            <Link to="/profili">Obrazovni profili</Link>
+            <Link to="/ucenici">Ucenici</Link>
+            <Link to="/novosti">Novosti</Link>
+            <Link to="/dokumenta">Dokumenta</Link>
+          </div>
+
+          <HeaderSearchBar />
         </div>
 
-        <div
-          className={`search-bar-container${
-            !isSearchBarVisible ? " search-bar-not-active" : ""
-          }`}
-        >
-          <input type="text" className="search-bar" placeholder="Pretrazi..." />
-          <div className="search-bar-filler"></div>
-        </div>
-
-        <button
-          className="search-button"
-          onClick={() => setIsSearchBarVisible(!isSearchBarVisible)}
-        >
-          <Icon name="magnifying-glass" />
-        </button>
+        <div className="background" />
       </div>
-    </div>
+    </FocusTrap>
   );
 }

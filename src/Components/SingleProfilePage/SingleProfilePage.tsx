@@ -20,8 +20,15 @@ export default function SingleProfilePage() {
           {loaderData.classes.general.map((x) => (
             <tr key={x.name}>
               <td>
-                <Link to={`/predmeti/${x.name}`}>{x.name}</Link>
+                <Link
+                  to={`/predmeti/${x.name
+                    .toLocaleLowerCase()
+                    .replace(/-/g, "-")}`}
+                >
+                  {x.name}
+                </Link>
               </td>
+
               {x.perWeek.map((count, i) => (
                 <td key={i}>{count}</td>
               ))}
@@ -37,8 +44,15 @@ export default function SingleProfilePage() {
           {loaderData.classes.specific.map((x) => (
             <tr key={x.name}>
               <td>
-                <Link to={`/predmeti/${x.name}`}>{x.name}</Link>
+                <Link
+                  to={`/predmeti/${x.name
+                    .toLocaleLowerCase()
+                    .replace(/-/g, "-")}`}
+                >
+                  {x.name}
+                </Link>
               </td>
+
               {x.perWeek.map((count, i) => (
                 <td key={i}>{count}</td>
               ))}

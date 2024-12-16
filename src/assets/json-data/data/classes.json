@@ -155,13 +155,19 @@
       ]
     },
     {
-      "name": "Verska nastava / Građansko vaspitanje",
-      "description": "Predmet koji se bavi religijskim učenjima ili građanskim vrednostima i odgovornostima.",
+      "name": "Veronauka",
+      "description": "Predmet koji se bavi religijskim učenjima.",
       "skillsEarned": [
         {
           "name": "Razumevanje religijskih vrednosti",
           "description": "Razumevanje osnovnih religijskih principa i učenja."
-        },
+        }
+      ]
+    },
+    {
+      "name": "Građansko vaspitanje",
+      "description": "Predmet koji se bavi građanskim vrednostima i odgovornostima.",
+      "skillsEarned": [
         {
           "name": "Građanska etika",
           "description": "Razvijanje etičkog ponašanja i odgovornosti u društvu."

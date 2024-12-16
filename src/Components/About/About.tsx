@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
 import NewsAndEventsPreviewContainer from "../NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
 import * as data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
-import scrollAnimationFlyInBottom from "src/motion-animation-presets/scroll-animation-fly-in-bottom";
+import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
