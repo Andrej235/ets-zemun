@@ -9,29 +9,40 @@ export default function (babel) {
   return {
     name: "ast-transform", // not required
     post(file) {
-      if (!this.stringsArray) return;
+      if (!this.cyrillicArray) return;
 
-      const newArray = t.variableDeclaration("const", [
+      const newCyrillicArray = t.variableDeclaration("const", [
         t.variableDeclarator(
-          t.identifier("array"),
-          t.arrayExpression(this.stringsArray.map((x) => t.stringLiteral(x)))
+          t.identifier("cyrillicArray"),
+          t.arrayExpression(this.cyrillicArray.map((x) => t.stringLiteral(x)))
         ),
       ]);
 
-      file.ast.program.body = [newArray].concat(file.ast.program.body);
+      const newLatinArray = t.variableDeclaration("const", [
+        t.variableDeclarator(
+          t.identifier("latinArray"),
+          t.arrayExpression(this.latinArray.map((x) => t.stringLiteral(x)))
+        ),
+      ]);
+
+      file.ast.program.body = [newCyrillicArray, newLatinArray].concat(
+        file.ast.program.body
+      );
     },
     visitor: {
       JSXText(path) {
-        if (!this.stringsArray) this.stringsArray = [];
+        if (!this.cyrillicArray) this.cyrillicArray = [];
+        if (!this.latinArray) this.latinArray = [];
 
         const stringValue = customTrim(path.node.value);
         if (stringValue.length < 1) return;
 
-        this.stringsArray.push(latinToCyrillic(stringValue));
+        this.cyrillicArray.push(latinToCyrillic(stringValue));
+        this.latinArray.push(stringValue);
 
         const arrayAccessor = t.memberExpression(
-          t.identifier("array"),
-          t.numericLiteral(this.stringsArray.length - 1),
+          t.identifier("cyrillicArray"),
+          t.numericLiteral(this.cyrillicArray.length - 1),
           true
         );
         const jsxExpression = t.jsxExpressionContainer(arrayAccessor);
