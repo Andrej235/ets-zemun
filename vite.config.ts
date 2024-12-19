@@ -1,10 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import * as babel from "@babel/core";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ["./plugins/text-transformer.js"],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       "@styles": path.resolve(__dirname, "public/sass"),
