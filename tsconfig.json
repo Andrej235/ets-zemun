@@ -23,7 +23,8 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@data/*": ["src/assets/json-data/data/*"]
+      "@data/*": ["src/assets/json-data/data/*"],
+      "@contexts/*": ["src/contexts/*"]
     }
   },
   "include": ["src"],

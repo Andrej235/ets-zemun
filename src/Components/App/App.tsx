@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import AppHeader from "../AppHeader/AppHeader";
 import "./App.scss";
-import LanguageContext, { Language } from "src/contexts/language-context";
+import LanguageContext, { Language } from "@contexts/language-context";
 import { useState } from "react";
 
 function App() {
