@@ -41,7 +41,7 @@ export default function (babel) {
         this.latinArray.push(stringValue);
 
         const arrayAccessor = t.memberExpression(
-          t.identifier("cyrillicArray"),
+          t.identifier("languagePack"),
           t.numericLiteral(this.cyrillicArray.length - 1),
           true
         );
@@ -95,11 +95,51 @@ export default function (babel) {
             ),
           !foundLangContextImport &&
             t.ImportDeclaration(
-              [t.importDefaultSpecifier(t.identifier("languageContext"))],
+              [t.importDefaultSpecifier(t.identifier("LanguageContext"))],
               t.stringLiteral("@contexts/language-context")
             ),
           ...children,
         ];
+      },
+      FunctionDeclaration(path) {
+        const { node } = path;
+        const isPascalCase = /^[A-Z]/.test(node.id.name);
+
+        const hasJSXReturn = node.body.body.some(
+          (statement) =>
+            (t.isReturnStatement(statement) &&
+              t.isJSXElement(statement.argument)) ||
+            t.isJSXFragment(statement.argument)
+        );
+
+        if (!isPascalCase || !hasJSXReturn) return;
+
+        // if (
+        //   path.context.parentPath.container.comments.some(
+        //     (x) =>
+        //       x.loc.start.line === path.node.loc.start.line + 1 &&
+        //       x.value.trim() === "@text-transform:: ignore"
+        //   )
+        // )
+        //   return;
+
+        const langPackDeclaration = t.variableDeclaration("const", [
+          t.variableDeclarator(
+            t.identifier("languagePack"),
+            t.conditionalExpression(
+              t.binaryExpression(
+                "===",
+                t.callExpression(t.identifier("useContext"), [
+                  t.identifier("LanguageContext"),
+                ]),
+                t.stringLiteral("sr-cyr")
+              ),
+              t.identifier("cyrillicArray"),
+              t.identifier("latinArray")
+            )
+          ),
+        ]);
+        node.body.body = [langPackDeclaration, ...node.body.body];
       },
     },
   };

@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <Documents />,
       },
     ],
-    hydrateFallbackElement: <>Hydrate fallback</>,
+    hydrateFallbackElement: "Hydrate fallback",
   },
 ]);
 
