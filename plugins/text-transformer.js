@@ -39,6 +39,57 @@ export default function (babel) {
         path.replaceWith(jsxExpression);
         path.skip();
       },
+      Program(path) {
+        const children = path.node.body;
+        let foundReactImports = false;
+        let foundLangContextImport = false;
+
+        for (let i = 0; i < children.length; i++) {
+          if (children[i].type !== "ImportDeclaration") break;
+
+          if (children[i].source.value === "react") {
+            foundReactImports = true;
+
+            if (
+              !children[i].specifiers.some(
+                (x) =>
+                  x.type === "ImportSpecifier" &&
+                  x.imported.name === "useContext"
+              )
+            ) {
+              children[i].specifiers.push(
+                t.importSpecifier(
+                  t.identifier("useContext"),
+                  t.identifier("useContext")
+                )
+              );
+            }
+          } else if (
+            children[i].source.value === "@contexts/language-context"
+          ) {
+            foundLangContextImport = true;
+          }
+        }
+
+        path.node.body = [
+          !foundReactImports &&
+            t.ImportDeclaration(
+              [
+                t.importSpecifier(
+                  t.identifier("useContext"),
+                  t.identifier("useContext")
+                ),
+              ],
+              t.stringLiteral("react")
+            ),
+          !foundLangContextImport &&
+            t.ImportDeclaration(
+              [t.importDefaultSpecifier(t.identifier("languageContext"))],
+              t.stringLiteral("@contexts/language-context")
+            ),
+          ...children,
+        ];
+      },
     },
   };
 }
