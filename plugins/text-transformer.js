@@ -55,6 +55,15 @@ export default function (babel) {
         let foundReactImports = false;
         let foundLangContextImport = false;
 
+        if (
+          path.container.comments.some(
+            (x) =>
+              x.loc.start.line === 1 &&
+              x.value.trim() === "@text-transform-ignore"
+          )
+        )
+          path.skip();
+
         for (let i = 0; i < children.length; i++) {
           if (children[i].type !== "ImportDeclaration") break;
 
@@ -114,15 +123,16 @@ export default function (babel) {
 
         if (!isPascalCase || !hasJSXReturn) return;
 
-        // if (
-        //   path.context.parentPath.container.comments.some(
-        //     (x) =>
-        //       x.loc.start.line === path.node.loc.start.line + 1 &&
-        //       x.value.trim() === "@text-transform:: ignore"
-        //   )
-        // )
-        //   return;
+        if (
+          path.context.parentPath.hub.file.ast.comments.some(
+            (x) =>
+              x.loc.start.line === path.node.loc.start.line - 1 &&
+              x.value.trim() === "@text-transform-ignore"
+          )
+        )
+          return;
 
+        //TODO: Replace with useMemo
         const langPackDeclaration = t.variableDeclaration("const", [
           t.variableDeclarator(
             t.identifier("languagePack"),

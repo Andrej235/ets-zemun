@@ -1,3 +1,4 @@
+//@text-transform-ignore
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./Components/App/App.tsx";
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         element: <Documents />,
       },
     ],
-    hydrateFallbackElement: "Hydrate fallback",
+    hydrateFallbackElement: <>Hydrate fallback</>,
   },
 ]);
 
