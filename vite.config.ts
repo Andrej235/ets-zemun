@@ -4,6 +4,8 @@ import path from "path";
 import { createFilter } from "@rollup/pluginutils";
 import { transformAsync } from "@babel/core";
 import fs from "fs/promises";
+import { PathLike } from "fs";
+import micromatch from "micromatch";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,6 +30,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: "modern-compiler",
         additionalData: `
            @use "@styles/_palette.scss" as *;\n
            @use "@styles/_mixins.scss" as *;\n
@@ -40,17 +43,41 @@ export default defineConfig({
 function jsonPlugin() {
   const filter = createFilter(["**/*.json"]);
 
+  let schemaMap: {
+    fileMatch: string[];
+    url: string;
+    omitFromTranslation?: string[];
+  }[] = [];
+
   return {
-    name: "json-text-transformer",
-    async transform(code: string, id: unknown) {
+    name: "babel-json-plugin",
+    async transform(code: string, id: string) {
       if (!filter(id)) {
         return null;
       }
 
       try {
+        schemaMap = JSON.parse(
+          await fs.readFile(
+            path.resolve(
+              __dirname,
+              "src/assets/json-data/data-to-schema-map.json"
+            ),
+            "utf-8"
+          )
+        );
+
+        const omit = await getPropertyNamesToOmit(id);
+        if (!omit) {
+          console.error(`No schema found for JSON file: ${id}`);
+          return null;
+        }
+
         const result = await transformAsync(code, {
-          filename: id as string,
-          plugins: ["./plugins/json-text-transformer"],
+          filename: id,
+          plugins: [
+            ["./plugins/json-text-transformer", { omitProperties: omit }],
+          ],
         });
 
         if (result && result.code) {
@@ -60,24 +87,33 @@ function jsonPlugin() {
           };
         }
       } catch (err) {
-        console.error(err);
+        console.error(`Failed to transform JSON file: ${id}`, err);
       }
 
       return null;
     },
-    async load(id: unknown) {
+    async load(id: string) {
       if (!filter(id)) {
         return null;
       }
 
       try {
-        const content = await fs.readFile(id as string, "utf-8");
+        const content = await fs.readFile(id, "utf-8");
         return content;
       } catch (err) {
-        console.error(err);
+        console.error(`Failed to transform JSON file: ${id}`, err);
       }
 
       return null;
     },
   };
+
+  async function getPropertyNamesToOmit(jsonFilePath: string) {
+    for (const mapping of schemaMap) {
+      if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)) {
+        return mapping.omitFromTranslation ?? [];
+      }
+    }
+    return null;
+  }
 }

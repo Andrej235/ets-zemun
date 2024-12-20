@@ -4,6 +4,9 @@ export default function (babel) {
   return {
     name: "ast-transform", // not required
     visitor: {
+      Program(path, state) {
+        console.log(state.opts, state.file.opts.filename);
+      },
       StringLiteral(path) {
         const { node } = path;
         node.value = latinToCyrillic(node.value);
