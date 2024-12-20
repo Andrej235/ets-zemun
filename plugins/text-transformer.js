@@ -52,8 +52,6 @@ export default function (babel) {
       },
       Program(path) {
         const children = path.node.body;
-        let foundReactImports = false;
-        let foundLangContextImport = false;
 
         if (
           path.container.comments.some(
@@ -64,49 +62,11 @@ export default function (babel) {
         )
           path.skip();
 
-        for (let i = 0; i < children.length; i++) {
-          if (children[i].type !== "ImportDeclaration") break;
-
-          if (children[i].source.value === "react") {
-            foundReactImports = true;
-
-            if (
-              !children[i].specifiers.some(
-                (x) =>
-                  x.type === "ImportSpecifier" &&
-                  x.imported.name === "useContext"
-              )
-            ) {
-              children[i].specifiers.push(
-                t.importSpecifier(
-                  t.identifier("useContext"),
-                  t.identifier("useContext")
-                )
-              );
-            }
-          } else if (
-            children[i].source.value === "@contexts/language-context"
-          ) {
-            foundLangContextImport = true;
-          }
-        }
-
         path.node.body = [
-          !foundReactImports &&
-            t.ImportDeclaration(
-              [
-                t.importSpecifier(
-                  t.identifier("useContext"),
-                  t.identifier("useContext")
-                ),
-              ],
-              t.stringLiteral("react")
-            ),
-          !foundLangContextImport &&
-            t.ImportDeclaration(
-              [t.importDefaultSpecifier(t.identifier("LanguageContext"))],
-              t.stringLiteral("@contexts/language-context")
-            ),
+          t.ImportDeclaration(
+            [t.importDefaultSpecifier(t.identifier("useLang"))],
+            t.stringLiteral("@hooks/use-language-pack")
+          ),
           ...children,
         ];
       },
@@ -136,17 +96,10 @@ export default function (babel) {
         const langPackDeclaration = t.variableDeclaration("const", [
           t.variableDeclarator(
             t.identifier("languagePack"),
-            t.conditionalExpression(
-              t.binaryExpression(
-                "===",
-                t.callExpression(t.identifier("useContext"), [
-                  t.identifier("LanguageContext"),
-                ]),
-                t.stringLiteral("sr-cyr")
-              ),
+            t.callExpression(t.identifier("useLang"), [
               t.identifier("cyrillicArray"),
-              t.identifier("latinArray")
-            )
+              t.identifier("latinArray"),
+            ])
           ),
         ]);
         node.body.body = [langPackDeclaration, ...node.body.body];
