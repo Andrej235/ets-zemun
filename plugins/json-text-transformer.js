@@ -1,38 +1,11 @@
-function customTrim(str) {
-  const trimmed = str.replace(/^\s+/, " ").replace(/\s+$/, " ");
-  return trimmed.replace(/\s+/g, " ").trim();
-}
-
 export default function (babel) {
   const { types: t } = babel;
 
   return {
     name: "ast-transform", // not required
-    post(file) {
-      if (!this.cyrillicArray) return;
-
-      const newCyrillicArray = t.variableDeclaration("const", [
-        t.variableDeclarator(
-          t.identifier("cyrillicArray"),
-          t.arrayExpression(this.cyrillicArray.map((x) => t.stringLiteral(x)))
-        ),
-      ]);
-
-      const newLatinArray = t.variableDeclaration("const", [
-        t.variableDeclarator(
-          t.identifier("latinArray"),
-          t.arrayExpression(this.latinArray.map((x) => t.stringLiteral(x)))
-        ),
-      ]);
-
-      file.ast.program.body = [newCyrillicArray, newLatinArray].concat(
-        file.ast.program.body
-      );
-    },
     visitor: {
       StringLiteral(path) {
         const { node } = path;
-
         node.value = latinToCyrillic(node.value);
       },
     },
