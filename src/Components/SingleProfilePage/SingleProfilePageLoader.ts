@@ -8,7 +8,7 @@ export default async function SingleProfilePageLoader({
   if (!profileName) return redirect("/profili");
 
   const preview = profilePreviewData.profiles.find((x) =>
-    x.profileURL.includes(profileName)
+    x.profileURL.includes(profileName),
   );
 
   if (!preview) return redirect("/profili");
@@ -16,7 +16,7 @@ export default async function SingleProfilePageLoader({
   const profile = await import(
     `../../assets/json-data/data/profiles/${preview.fullProfileFileName.replace(
       ".json",
-      ""
+      "",
     )}.json`
   );
 

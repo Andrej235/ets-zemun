@@ -20,8 +20,8 @@ export default function ProfileOverview({
       {...(layout === "image-left"
         ? scrollAnimationFlyInLeft
         : layout === "image-right"
-        ? scrollAnimationFlyInRight
-        : scrollAnimationFlyInTop)}
+          ? scrollAnimationFlyInRight
+          : scrollAnimationFlyInTop)}
       className={"profile-overview " + layout}
       viewport={{
         once: true,

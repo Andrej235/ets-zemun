@@ -1,5 +1,5 @@
 import "./HamburgerMenu.scss";
-import HamburgerNavigation from "../HamburgerNavigation/HamburgerNavigation";
+import HamburgerNavigation from "@components/HamburgerNavigation/HamburgerNavigation";
 
 type HamburgerMenuProps = {
   isHamburgerMenuOpen: boolean;

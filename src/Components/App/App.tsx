@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import AppHeader from "../AppHeader/AppHeader";
+import AppHeader from "@components/AppHeader/AppHeader";
 import "./App.scss";
 import LanguageContext, { Language } from "@contexts/language-context";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ function App() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
         setLanguage((language) =>
-          language === "sr-cyr" ? "sr-lat" : "sr-cyr"
+          language === "sr-cyr" ? "sr-lat" : "sr-cyr",
         );
       }
     }

@@ -1,7 +1,7 @@
 import "./HamburgerNavigation.scss";
 import { Link } from "react-router";
-import Icon from "../Icon/Icon";
-import HamburgerNavigationSearchBar from "../HamburgerNavigationSearchBar/HamburgerNavigationSearchBar";
+import Icon from "@components/Icon/Icon";
+import HamburgerNavigationSearchBar from "@components/HamburgerNavigationSearchBar/HamburgerNavigationSearchBar";
 import { AnimatePresence, motion } from "motion/react";
 
 type HamburgerNavigationProps = {
@@ -32,7 +32,9 @@ export default function HamburgerNavigation({
           className="hamburger-navigation"
           key="hamburger-navigation"
         >
-          <HamburgerNavigationSearchBar onRequestCloseHamburgerNavigation={onRequestClose} />
+          <HamburgerNavigationSearchBar
+            onRequestCloseHamburgerNavigation={onRequestClose}
+          />
 
           <div className="nav-bar">
             <div className="nav-bar-tab">

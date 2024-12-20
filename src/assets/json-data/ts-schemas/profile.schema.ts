@@ -1,1 +1,18 @@
-export default interface ProfileSchema { classes: Classes; /** * Full description of the profile */ description: string; /** * Path to the image of the profile * MUST start with ''@images/profiles/'' * MUST end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp, * .tiff, .svg * The referenced image MUST exist in the '/public/images/profiles/' folder */ imagePath: string; /** * Name of the profile */ name: string; }  interface Classes { general:  General[]; specific: Specific[]; }  interface General { /** * Name of the class */ name: string; /** * Weekly count * First element cooresponds to first year, second element cooresponds to second year, third * element cooresponds to third year, fourth element cooresponds to fourth year */ perWeek: number[]; }  interface Specific { /** * Name of the class */ name: string; /** * Weekly count * First element cooresponds to first year, second element cooresponds to second year, third * element cooresponds to third year, fourth element cooresponds to fourth year */ perWeek: number[]; } 
+export default interface ProfileSchema {
+  classes: Classes;
+  /** * Full description of the profile */ description: string;
+  /** * Path to the image of the profile * MUST start with ''@images/profiles/'' * MUST end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp, * .tiff, .svg * The referenced image MUST exist in the '/public/images/profiles/' folder */ imagePath: string;
+  /** * Name of the profile */ name: string;
+}
+interface Classes {
+  general: General[];
+  specific: Specific[];
+}
+interface General {
+  /** * Name of the class */ name: string;
+  /** * Weekly count * First element cooresponds to first year, second element cooresponds to second year, third * element cooresponds to third year, fourth element cooresponds to fourth year */ perWeek: number[];
+}
+interface Specific {
+  /** * Name of the class */ name: string;
+  /** * Weekly count * First element cooresponds to first year, second element cooresponds to second year, third * element cooresponds to third year, fourth element cooresponds to fourth year */ perWeek: number[];
+}

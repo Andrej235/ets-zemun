@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import "./InfoCard.scss";
-import Icon from "../Icon/Icon";
+import Icon from "src/components/Icon/Icon";
 
 type InfoCardProps = {
   title: string;

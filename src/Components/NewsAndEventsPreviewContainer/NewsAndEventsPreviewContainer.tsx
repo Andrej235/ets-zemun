@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NewsPreview from "../NewsPreview/NewsPreview";
+import NewsPreview from "@components/NewsPreview/NewsPreview";
 import "./NewsAndEventsPreviewContainer.scss";
 import { motion } from "motion/react";
 

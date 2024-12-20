@@ -1,1 +1,11 @@
-export default interface SearchMapSchema { entries: Entry[]; }  interface Entry { /** * Description of the resource */ description: string; matchFor:    string[]; /** * Title of the resource */ title: string; type:  Type; /** * URL of the resource */ url: string; }  type Type = "page" | "resource"; 
+export default interface SearchMapSchema {
+  entries: Entry[];
+}
+interface Entry {
+  /** * Description of the resource */ description: string;
+  matchFor: string[];
+  /** * Title of the resource */ title: string;
+  type: Type;
+  /** * URL of the resource */ url: string;
+}
+type Type = "page" | "resource";
