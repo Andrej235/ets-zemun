@@ -4,12 +4,13 @@ export default function (babel) {
   return {
     name: "ast-transform", // not required
     visitor: {
-      Program(path, state) {
-        console.log(state.opts, state.file.opts.filename);
-      },
-      StringLiteral(path) {
+      ObjectProperty(path, state) {
         const { node } = path;
-        node.value = latinToCyrillic(node.value);
+
+        if (node.value.type !== "StringLiteral") return;
+        if (state.opts.omitProperties.includes(node.key.name)) return;
+
+        node.value.value = latinToCyrillic(node.value.value);
       },
     },
   };
