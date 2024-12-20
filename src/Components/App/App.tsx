@@ -11,7 +11,7 @@ function App() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
         setLanguage((language) =>
-          language === "sr-cyr" ? "sr-lat" : "sr-cyr"
+          language === "sr-cyr" ? "sr-lat" : "sr-cyr",
         );
       }
     }

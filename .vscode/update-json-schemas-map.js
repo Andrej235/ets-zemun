@@ -15,5 +15,5 @@ settingsJson["json.schemas"] = currentMap;
 
 await fs.writeFile(
   `${argv[2]}/.vscode/settings.json`,
-  JSON.stringify(settingsJson, null, 2)
+  JSON.stringify(settingsJson, null, 2),
 );
