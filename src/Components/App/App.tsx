@@ -11,7 +11,7 @@ function App() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
         setLanguage((language) =>
-          language === "sr-cyr" ? "sr-lat" : "sr-cyr",
+          language === "sr-cyr" ? "sr-lat" : "sr-cyr"
         );
       }
     }
@@ -21,15 +21,15 @@ function App() {
   }, [setLanguage]);
 
   return (
-    <div id="app">
-      <AppHeader />
+    <LanguageContext.Provider value={language}>
+      <div id="app">
+        <AppHeader />
 
-      <div id="page-content">
-        <LanguageContext.Provider value={language}>
+        <div id="page-content">
           <Outlet />
-        </LanguageContext.Provider>
+        </div>
       </div>
-    </div>
+    </LanguageContext.Provider>
   );
 }
 
