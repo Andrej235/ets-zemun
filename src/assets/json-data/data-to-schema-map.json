@@ -2,11 +2,12 @@
   {
     "fileMatch": ["profiles.json"],
     "url": "src/assets/json-data/schemas/profiles-overview-collection.schema.json",
-    "omitFromTranslation": ["imagePath"]
+    "omitFromTranslation": ["imagePath", "profileURL", "fullProfileFileName"]
   },
   {
     "fileMatch": ["profiles/*.json"],
-    "url": "src/assets/json-data/schemas/profile.schema.json"
+    "url": "src/assets/json-data/schemas/profile.schema.json",
+    "omitFromTranslation": ["imagePath"]
   },
   {
     "fileMatch": ["classes.json"],
@@ -14,6 +15,7 @@
   },
   {
     "fileMatch": ["search-map.json"],
-    "url": "src/assets/json-data/schemas/search-map.schema.json"
+    "url": "src/assets/json-data/schemas/search-map.schema.json",
+    "omitFromTranslation": ["url", "mathFor"]
   }
 ]

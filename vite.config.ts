@@ -108,6 +108,7 @@ function jsonPlugin() {
     },
   };
 
+  //Implement properties which works for arrays which will include values in all languages
   async function getPropertyNamesToOmit(jsonFilePath: string) {
     for (const mapping of schemaMap) {
       if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)) {
