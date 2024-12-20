@@ -1,0 +1,18 @@
+[
+  {
+    "fileMatch": ["profiles.json"],
+    "url": "/src/assets/json-data/schemas/profiles-overview-collection.schema.json"
+  },
+  {
+    "fileMatch": ["profiles/*.json"],
+    "url": "/src/assets/json-data/schemas/profile.schema.json"
+  },
+  {
+    "fileMatch": ["classes.json"],
+    "url": "/src/assets/json-data/schemas/class-definitions.schema.json"
+  },
+  {
+    "fileMatch": ["search-map.json"],
+    "url": "/src/assets/json-data/schemas/search-map.schema.json"
+  }
+]
