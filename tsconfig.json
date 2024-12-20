@@ -24,7 +24,8 @@
     "baseUrl": "./",
     "paths": {
       "@data/*": ["src/assets/json-data/data/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["src"],
