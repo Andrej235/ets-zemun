@@ -6,6 +6,7 @@ import { transformAsync } from "@babel/core";
 import fs from "fs/promises";
 import { PathLike } from "fs";
 import micromatch from "micromatch";
+import autoprefixer from "autoprefixer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
