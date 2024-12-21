@@ -1,21 +1,3 @@
-/* export default function (babel) {
-  const { types: t } = babel;
-
-  return {
-    name: "ast-transform", // not required
-    visitor: {
-      ObjectProperty(path, state) {
-        const { node } = path;
-
-        if (node.value.type !== "StringLiteral") return;
-        if (state.opts.omitProperties.includes(node.key.name)) return;
-
-        node.value.value = latinToCyrillic(node.value.value);
-      },
-    },
-  };
-} */
-
 export default function (babel) {
   const { types: t, traverse } = babel;
 
@@ -29,7 +11,12 @@ export default function (babel) {
         langOptions.forEach((currentLang) => {
           const clonedNode = t.cloneNode(path.node);
           clonedNode.declarations[0].id.name = currentLang;
-          path.insertAfter(clonedNode);
+          langPacks.properties.push(
+            t.ObjectProperty(
+              t.identifier(currentLang),
+              clonedNode.declarations[0].init
+            )
+          );
 
           traverse(
             clonedNode,
@@ -40,8 +27,7 @@ export default function (babel) {
                 if (node.value.type !== "StringLiteral") return;
                 if (omitProperties.includes(node.key.name)) return;
 
-                node.value.value = translators[currentLang](node.value.value);
-                console.log(node.value.value.slice(0, 50));
+                node.value.value = latinToCyrillic(node.value.value);
               },
             },
             path.scope,
@@ -50,10 +36,7 @@ export default function (babel) {
         });
 
         path.stop();
-        // path.remove();
-      },
-      StringLiteral(path) {
-        console.log(path);
+        path.node.declarations[0].init = langPacks;
       },
     },
   };
