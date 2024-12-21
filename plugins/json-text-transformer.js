@@ -1,4 +1,4 @@
-export default function (babel) {
+/* export default function (babel) {
   const { types: t } = babel;
 
   return {
@@ -11,6 +11,47 @@ export default function (babel) {
         if (state.opts.omitProperties.includes(node.key.name)) return;
 
         node.value.value = latinToCyrillic(node.value.value);
+      },
+    },
+  };
+} */
+const langOptions = ["sr-cyr", "sr-lat"].map((x) => x.replace(/-/g, ""));
+
+export default function (babel) {
+  const { types: t, traverse } = babel;
+
+  return {
+    visitor: {
+      VariableDeclaration(path, state) {
+        const omitProperties = state.opts.omitProperties || [];
+
+        langOptions.forEach((currentLang) => {
+          const clonedNode = t.cloneNode(path.node);
+          clonedNode.declarations[0].id.name = currentLang;
+          path.insertAfter(clonedNode);
+
+          traverse(
+            clonedNode,
+            {
+              ObjectProperty(path, state) {
+                const { node } = path;
+
+                if (node.value.type !== "StringLiteral") return;
+                if (omitProperties.includes(node.key.name)) return;
+
+                node.value.value = latinToCyrillic(node.value.value); //TODO: implement a function which takes a language as a parameter and value and returns a translated value (for sr-lat just return the original value)
+              },
+            },
+            path.scope,
+            path.parent
+          );
+        });
+
+        path.stop();
+        // path.remove();
+      },
+      StringLiteral(path) {
+        console.log(path);
       },
     },
   };
