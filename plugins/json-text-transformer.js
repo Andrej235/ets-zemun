@@ -7,13 +7,14 @@ export default function (babel) {
         const omitProperties = state.opts.omitProperties || [];
         const translators = state.opts.translators;
         const langOptions = Object.keys(translators);
+        const langPacks = t.objectExpression([]);
 
         langOptions.forEach((currentLang) => {
           const clonedNode = t.cloneNode(path.node);
           clonedNode.declarations[0].id.name = currentLang;
           langPacks.properties.push(
             t.ObjectProperty(
-              t.identifier(currentLang),
+              t.stringLiteral(currentLang),
               clonedNode.declarations[0].init
             )
           );
@@ -21,7 +22,7 @@ export default function (babel) {
           traverse(
             clonedNode,
             {
-              ObjectProperty(path, state) {
+              ObjectProperty(path) {
                 const { node } = path;
 
                 if (node.value.type !== "StringLiteral") return;
