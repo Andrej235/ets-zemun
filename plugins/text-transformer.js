@@ -14,19 +14,19 @@ export default function (babel) {
       const newCyrillicArray = t.variableDeclaration("const", [
         t.variableDeclarator(
           t.identifier("cyrillicArray"),
-          t.arrayExpression(this.cyrillicArray.map((x) => t.stringLiteral(x))),
+          t.arrayExpression(this.cyrillicArray.map((x) => t.stringLiteral(x)))
         ),
       ]);
 
       const newLatinArray = t.variableDeclaration("const", [
         t.variableDeclarator(
           t.identifier("latinArray"),
-          t.arrayExpression(this.latinArray.map((x) => t.stringLiteral(x))),
+          t.arrayExpression(this.latinArray.map((x) => t.stringLiteral(x)))
         ),
       ]);
 
       file.ast.program.body = [newCyrillicArray, newLatinArray].concat(
-        file.ast.program.body,
+        file.ast.program.body
       );
     },
     visitor: {
@@ -43,7 +43,7 @@ export default function (babel) {
         const arrayAccessor = t.memberExpression(
           t.identifier("languagePack"),
           t.numericLiteral(this.cyrillicArray.length - 1),
-          true,
+          true
         );
         const jsxExpression = t.jsxExpressionContainer(arrayAccessor);
 
@@ -57,15 +57,15 @@ export default function (babel) {
           path.container.comments.some(
             (x) =>
               x.loc.start.line === 1 &&
-              x.value.trim() === "@text-transform-ignore",
+              x.value.trim() === "@text-transform-ignore"
           )
         )
           path.skip();
 
         path.node.body = [
-          t.ImportDeclaration(
+          t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("useLang"))],
-            t.stringLiteral("@hooks/use-language-pack"),
+            t.stringLiteral("@hooks/use-language-pack")
           ),
           ...children,
         ];
@@ -78,7 +78,7 @@ export default function (babel) {
           (statement) =>
             (t.isReturnStatement(statement) &&
               t.isJSXElement(statement.argument)) ||
-            t.isJSXFragment(statement.argument),
+            t.isJSXFragment(statement.argument)
         );
 
         if (!isPascalCase || !hasJSXReturn) return;
@@ -87,19 +87,18 @@ export default function (babel) {
           path.context.parentPath.hub.file.ast.comments.some(
             (x) =>
               x.loc.start.line === path.node.loc.start.line - 1 &&
-              x.value.trim() === "@text-transform-ignore",
+              x.value.trim() === "@text-transform-ignore"
           )
         )
           return;
 
-        //TODO: Replace with useMemo
         const langPackDeclaration = t.variableDeclaration("const", [
           t.variableDeclarator(
             t.identifier("languagePack"),
             t.callExpression(t.identifier("useLang"), [
               t.identifier("cyrillicArray"),
               t.identifier("latinArray"),
-            ]),
+            ])
           ),
         ]);
         node.body.body = [langPackDeclaration, ...node.body.body];

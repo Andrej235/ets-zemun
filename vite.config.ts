@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createFilter } from "@rollup/pluginutils";
-import { transformAsync } from "@babel/core";
+import { transformAsync, traverse, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
 
@@ -11,7 +11,80 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: ["./plugins/text-transformer.js"],
+        plugins: [
+          "./plugins/text-transformer.js",
+          {
+            visitor: {
+              Program(path) {
+                const children = path.node.body;
+                if (
+                  !children.some(
+                    (x) =>
+                      types.isImportDeclaration(x) &&
+                      (x as types.ImportDeclaration).source.value.endsWith(
+                        ".json"
+                      )
+                  )
+                )
+                  return;
+
+                path.node.body = [
+                  types.importDeclaration(
+                    [types.importDefaultSpecifier(types.identifier("useLang"))],
+                    types.stringLiteral("@hooks/use-language") //TODO: Create this hook
+                  ),
+                  ...children,
+                ];
+
+                path.traverse({
+                  FunctionDeclaration(path) {
+                    const langPackDeclaration = types.variableDeclaration(
+                      "const",
+                      [
+                        types.variableDeclarator(
+                          types.identifier("lang"),
+                          types.callExpression(types.identifier("useLang"), [])
+                        ),
+                      ]
+                    );
+
+                    path.node.body.body = [
+                      langPackDeclaration,
+                      ...path.node.body.body,
+                    ];
+                  },
+                });
+              },
+              ImportNamespaceSpecifier(path, state) {
+                const importDeclaration =
+                  path.parent as types.ImportDeclaration;
+
+                if (importDeclaration.source.value.endsWith(".json")) {
+                  const jsonDataName = path.node.local.name;
+
+                  traverse(state.file.ast.program, {
+                    MemberExpression(path) {
+                      const node = path.node;
+
+                      if (
+                        types.isIdentifier(node.object) &&
+                        node.object.name === jsonDataName
+                      ) {
+                        node.object = types.memberExpression(
+                          types.identifier(jsonDataName),
+                          types.identifier("lang"),
+                          true
+                        );
+
+                        path.skip();
+                      }
+                    },
+                  });
+                }
+              },
+            },
+          },
+        ],
       },
     }),
     jsonPlugin(),
@@ -81,6 +154,11 @@ function jsonPlugin() {
             ],
           ],
         });
+
+        if (id.includes("search-map")) {
+          console.log(code);
+          console.log(result?.code);
+        }
 
         if (result && result.code) {
           return {
