@@ -39,7 +39,7 @@ export default function (babel) {
         clonedNode,
         {
           ObjectProperty({ node }) {
-            if (!t.isStringLiteral(node.value.type)) return;
+            if (!t.isStringLiteral(node.value)) return;
             if (omitProperties.includes(node.key.name)) return;
 
             node.value.value = translators[currentLang](node.value.value);
