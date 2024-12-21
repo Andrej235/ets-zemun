@@ -1,4 +1,4 @@
-import * as classes from "@data/classes.json";
+import classes from "@data/classes.json";
 import { redirect } from "react-router";
 import { LoaderArgs } from "src/types/utility/react-router-loader-args";
 

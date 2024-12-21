@@ -1,7 +1,7 @@
 import "./HeaderSearchBar.scss";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@components/Icon/Icon";
-import * as searchMap from "@data/search-map.json";
+import searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import { useNavigate } from "react-router";
@@ -15,7 +15,7 @@ export default function HeaderSearchBar() {
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
         keys: ["title", "matchFor"],
       }),
-    [],
+    []
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<

@@ -9,7 +9,7 @@ import ProfileOverview from "@components/ProfileOverview/ProfileOverview";
 import { animate, motion, scroll } from "motion/react";
 import { useEffect, useRef } from "react";
 import NewsAndEventsPreviewContainer from "@components/NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
-import * as data from "@data/profiles.json";
+import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 

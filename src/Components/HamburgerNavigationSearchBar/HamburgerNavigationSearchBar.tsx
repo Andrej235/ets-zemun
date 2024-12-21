@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import Icon from "@components/Icon/Icon";
 import "./HamburgerNavigationSearchBar.scss";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
-import * as searchMap from "@data/search-map.json";
+import searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
@@ -26,7 +26,7 @@ export default function HamburgerNavigationSearchBar({
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
         keys: ["title", "matchFor"],
       }),
-    [],
+    []
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<

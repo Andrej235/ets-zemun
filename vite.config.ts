@@ -14,75 +14,68 @@ export default defineConfig({
         plugins: [
           "./plugins/text-transformer.js",
           {
-            visitor: {
-              Program(path) {
-                const children = path.node.body;
-                if (
-                  !children.some(
-                    (x) =>
-                      types.isImportDeclaration(x) &&
-                      (x as types.ImportDeclaration).source.value.endsWith(
-                        ".json"
-                      )
-                  )
-                )
-                  return;
-
-                path.node.body = [
-                  types.importDeclaration(
-                    [types.importDefaultSpecifier(types.identifier("useLang"))],
-                    types.stringLiteral("@hooks/use-language") //TODO: Create this hook
-                  ),
-                  ...children,
-                ];
-
-                path.traverse({
-                  FunctionDeclaration(path) {
-                    const langPackDeclaration = types.variableDeclaration(
-                      "const",
-                      [
-                        types.variableDeclarator(
-                          types.identifier("lang"),
-                          types.callExpression(types.identifier("useLang"), [])
-                        ),
-                      ]
-                    );
-
-                    path.node.body.body = [
-                      langPackDeclaration,
-                      ...path.node.body.body,
-                    ];
-                  },
-                });
-              },
-              ImportNamespaceSpecifier(path, state) {
-                const importDeclaration =
-                  path.parent as types.ImportDeclaration;
-
-                if (importDeclaration.source.value.endsWith(".json")) {
-                  const jsonDataName = path.node.local.name;
-
-                  traverse(state.file.ast.program, {
-                    MemberExpression(path) {
-                      const node = path.node;
-
-                      if (
-                        types.isIdentifier(node.object) &&
-                        node.object.name === jsonDataName
-                      ) {
-                        node.object = types.memberExpression(
-                          types.identifier(jsonDataName),
-                          types.identifier("lang"),
-                          true
-                        );
-
-                        path.skip();
-                      }
-                    },
-                  });
-                }
-              },
-            },
+            // visitor: {
+            //   Program(path) {
+            //     const children = path.node.body;
+            //     if (
+            //       !children.some(
+            //         (x) =>
+            //           types.isImportDeclaration(x) &&
+            //           (x as types.ImportDeclaration).source.value.endsWith(
+            //             ".json"
+            //           )
+            //       )
+            //     )
+            //       return;
+            //     path.node.body = [
+            //       types.importDeclaration(
+            //         [types.importDefaultSpecifier(types.identifier("useLang"))],
+            //         types.stringLiteral("@hooks/use-language") //TODO: Create this hook
+            //       ),
+            //       ...children,
+            //     ];
+            //     path.traverse({
+            //       FunctionDeclaration(path) {
+            //         const langPackDeclaration = types.variableDeclaration(
+            //           "const",
+            //           [
+            //             types.variableDeclarator(
+            //               types.identifier("lang"),
+            //               types.callExpression(types.identifier("useLang"), [])
+            //             ),
+            //           ]
+            //         );
+            //         path.node.body.body = [
+            //           langPackDeclaration,
+            //           ...path.node.body.body,
+            //         ];
+            //       },
+            //     });
+            //   },
+            //   ImportDefaultSpecifier(path, state) {
+            //     const importDeclaration =
+            //       path.parent as types.ImportDeclaration;
+            //     if (importDeclaration.source.value.endsWith(".json")) {
+            //       const jsonDataName = path.node.local.name;
+            //       traverse(state.file.ast.program, {
+            //         MemberExpression(path) {
+            //           const node = path.node;
+            //           if (
+            //             types.isIdentifier(node.object) &&
+            //             node.object.name === jsonDataName
+            //           ) {
+            //             node.object = types.memberExpression(
+            //               types.identifier(jsonDataName),
+            //               types.identifier("lang"),
+            //               true
+            //             );
+            //             path.skip();
+            //           }
+            //         },
+            //       });
+            //     }
+            //   },
+            // },
           },
         ],
       },
@@ -154,11 +147,6 @@ function jsonPlugin() {
             ],
           ],
         });
-
-        if (id.includes("search-map")) {
-          console.log(code);
-          console.log(result?.code);
-        }
 
         if (result && result.code) {
           return {
