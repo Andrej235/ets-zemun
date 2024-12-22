@@ -76,9 +76,9 @@ export default function (babel) {
 
         const hasJSXReturn = node.body.body.some(
           (statement) =>
-            (t.isReturnStatement(statement) &&
-              t.isJSXElement(statement.argument)) ||
-            t.isJSXFragment(statement.argument)
+            t.isReturnStatement(statement) &&
+            (t.isJSXElement(statement.argument) ||
+              t.isJSXFragment(statement.argument))
         );
 
         if (!isPascalCase || !hasJSXReturn) return;

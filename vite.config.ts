@@ -27,6 +27,7 @@ export default defineConfig({
                   )
                 )
                   return;
+
                 path.node.body = [
                   types.importDeclaration(
                     [types.importDefaultSpecifier(types.identifier("useLang"))],
@@ -34,14 +35,36 @@ export default defineConfig({
                   ),
                   ...children,
                 ];
+
                 path.traverse({
                   FunctionDeclaration(path) {
+                    const { node } = path;
+                    const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
+
+                    const hasJSXReturn = node.body.body.some(
+                      (statement) =>
+                        types.isReturnStatement(statement) &&
+                        (types.isJSXElement(statement.argument) ||
+                          types.isJSXFragment(statement.argument))
+                    );
+
                     const langPackDeclaration = types.variableDeclaration(
                       "const",
                       [
                         types.variableDeclarator(
                           types.identifier("lang"),
-                          types.callExpression(types.identifier("useLang"), [])
+                          isPascalCase && hasJSXReturn
+                            ? types.callExpression(
+                                types.identifier("useLang"),
+                                []
+                              )
+                            : types.callExpression(
+                                types.memberExpression(
+                                  types.identifier("localStorage"),
+                                  types.identifier("getItem")
+                                ),
+                                [types.stringLiteral("language")]
+                              )
                         ),
                       ]
                     );
@@ -54,8 +77,10 @@ export default defineConfig({
                 });
               },
               ImportDefaultSpecifier(path, state) {
+                //TODO: Optimize, move it to program's visitor and first find ALL json imports and save their identifiers in an array before moving one through all member expressions
                 const importDeclaration =
                   path.parent as types.ImportDeclaration;
+
                 if (importDeclaration.source.value.endsWith(".json")) {
                   const jsonDataName = path.node.local.name;
                   traverse(state.file.ast.program, {
@@ -148,6 +173,9 @@ function jsonPlugin() {
             ],
           ],
         });
+
+        if (id.includes("elektrotehničar-informacionih-tehnologija"))
+          console.log(code);
 
         if (result && result.code) {
           return {
