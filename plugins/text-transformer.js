@@ -64,7 +64,7 @@ export default function (babel) {
 
         path.node.body = [
           t.importDeclaration(
-            [t.importDefaultSpecifier(t.identifier("useLang"))],
+            [t.importDefaultSpecifier(t.identifier("useLangPack"))],
             t.stringLiteral("@hooks/use-language-pack")
           ),
           ...children,
@@ -95,7 +95,7 @@ export default function (babel) {
         const langPackDeclaration = t.variableDeclaration("const", [
           t.variableDeclarator(
             t.identifier("languagePack"),
-            t.callExpression(t.identifier("useLang"), [
+            t.callExpression(t.identifier("useLangPack"), [
               t.identifier("cyrillicArray"),
               t.identifier("latinArray"),
             ])
