@@ -6,19 +6,24 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [language, setLanguage] = useState<Language>("sr-cyr");
+  function changeLanguage(newLang: Language) {
+    localStorage.setItem("language", newLang);
+    setLanguage(newLang);
+  }
 
   useEffect(() => {
+    const storedLanguage = localStorage.getItem("language") as Language;
+    if (storedLanguage) setLanguage(storedLanguage);
+
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
-        setLanguage((language) =>
-          language === "sr-cyr" ? "sr-lat" : "sr-cyr",
-        );
+        changeLanguage(language === "sr-cyr" ? "sr-lat" : "sr-cyr");
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [setLanguage]);
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={language}>
