@@ -1,3 +1,4 @@
+//@text-transform-ignore
 import { Outlet } from "react-router";
 import AppHeader from "@components/AppHeader/AppHeader";
 import "./App.scss";

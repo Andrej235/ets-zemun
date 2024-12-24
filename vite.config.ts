@@ -12,7 +12,6 @@ export default defineConfig({
     react({
       babel: {
         plugins: [
-          "./plugins/text-transformer.js",
           {
             name: "text-transformer",
             manipulateOptions(options: object) {
@@ -28,7 +27,11 @@ export default defineConfig({
               };
             },
             visitor: {
-              Program(path) {
+              Program(path, state) {
+                const translators = state.opts.translators;
+                const languageOptions = Object.keys(translators);
+                const comments = state.file.ast.comments;
+
                 const children = path.node.body;
                 const jsonImports = children
                   .filter(
@@ -44,16 +47,58 @@ export default defineConfig({
 
                 const hasJSONData = jsonImports.length > 0;
 
+                const ignoreFile = comments.some(
+                  (x: types.Comment) =>
+                    x.loc?.start.line === 1 &&
+                    x.value.trim() === "@text-transform-ignore"
+                );
+
+                //useMemo hook
+                const hasUseMemo =
+                  ignoreFile || //This will ensure that useMemo is not imported if the file is ignored
+                  children.some(
+                    (x) =>
+                      types.isImportDeclaration(x) &&
+                      x.source.value === "react" &&
+                      x.specifiers.some(
+                        (x) =>
+                          types.isImportSpecifier(x) &&
+                          (x.local as types.Identifier).name === "useMemo"
+                      )
+                  );
+
+                const useMemoImport = hasUseMemo
+                  ? types.emptyStatement()
+                  : types.importDeclaration(
+                      [
+                        types.importSpecifier(
+                          types.identifier("useMemo"),
+                          types.identifier("useMemo")
+                        ),
+                      ],
+                      types.stringLiteral("react")
+                    );
+
                 path.node.body = [
                   types.importDeclaration(
                     [types.importDefaultSpecifier(types.identifier("useLang"))],
                     types.stringLiteral("@hooks/use-language")
                   ),
+                  useMemoImport,
                   ...children,
                 ];
 
                 path.traverse({
                   FunctionDeclaration(path) {
+                    const isIgnored =
+                      ignoreFile ||
+                      comments.some(
+                        (x: types.Comment) =>
+                          path.node.loc &&
+                          x.loc?.start.line === path.node.loc.start.line - 1 &&
+                          x.value.trim() === "@text-transform-ignore"
+                      );
+
                     const { node } = path;
                     const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
 
@@ -66,9 +111,11 @@ export default defineConfig({
 
                     const isReactComponent = isPascalCase && hasJSXReturn;
 
-                    const langPackDeclaration =
-                      (isReactComponent || hasJSONData) &&
-                      types.variableDeclaration("const", [
+                    if (!isReactComponent && !hasJSONData) return;
+
+                    const langPackDeclaration = types.variableDeclaration(
+                      "const",
+                      [
                         types.variableDeclarator(
                           types.identifier("lang"),
                           isReactComponent
@@ -84,10 +131,106 @@ export default defineConfig({
                                 [types.stringLiteral("language")]
                               )
                         ),
-                      ]);
+                      ]
+                    );
+
+                    const extractedTextTranslationsObject =
+                      isReactComponent &&
+                      !isIgnored &&
+                      types.objectExpression([]);
+
+                    const extractedTextTranslations =
+                      !isReactComponent || isIgnored
+                        ? types.emptyStatement()
+                        : types.variableDeclaration("const", [
+                            types.variableDeclarator(
+                              types.identifier("extractedTextTranslations"),
+                              types.callExpression(
+                                types.identifier("useMemo"),
+                                [
+                                  types.arrowFunctionExpression(
+                                    [],
+                                    types.blockStatement([
+                                      types.returnStatement(
+                                        extractedTextTranslationsObject || null
+                                      ),
+                                    ])
+                                  ),
+                                  types.arrayExpression([]),
+                                ]
+                              )
+                            ),
+                          ]);
+
+                    const selectedTextTranslations =
+                      !isReactComponent || isIgnored
+                        ? types.emptyStatement()
+                        : types.variableDeclaration("const", [
+                            types.variableDeclarator(
+                              types.identifier("selectedTextTranslations"),
+                              types.memberExpression(
+                                types.identifier("extractedTextTranslations"),
+                                types.identifier("lang"),
+                                true
+                              )
+                            ),
+                          ]);
+
+                    //extractedTextTranslationsObject is false if isReactComponent is false
+                    if (extractedTextTranslationsObject) {
+                      languageOptions.forEach((language) => {
+                        extractedTextTranslationsObject.properties.push(
+                          types.objectProperty(
+                            types.stringLiteral(language),
+                            types.arrayExpression([])
+                          )
+                        );
+                      });
+
+                      path.traverse({
+                        JSXText(path) {
+                          const text = path.node.value.trim();
+                          if (!text) return;
+
+                          for (let i = 0; i < languageOptions.length; i++) {
+                            const translator = translators[languageOptions[i]];
+
+                            const prop = (
+                              extractedTextTranslationsObject.properties[
+                                i
+                              ] as types.ObjectProperty
+                            ).value as types.ArrayExpression;
+
+                            prop.elements.push(
+                              types.stringLiteral(translator(text))
+                            );
+                          }
+
+                          path.replaceWith(
+                            types.jsxExpressionContainer(
+                              types.memberExpression(
+                                types.identifier("selectedTextTranslations"),
+                                types.numericLiteral(
+                                  (
+                                    (
+                                      extractedTextTranslationsObject
+                                        .properties[0] as types.ObjectProperty
+                                    ).value as types.ArrayExpression
+                                  ).elements.length - 1
+                                ),
+                                true
+                              )
+                            )
+                          );
+                          path.skip();
+                        },
+                      });
+                    }
 
                     path.node.body.body = [
-                      langPackDeclaration || types.emptyStatement(),
+                      langPackDeclaration,
+                      extractedTextTranslations,
+                      selectedTextTranslations,
                       ...path.node.body.body,
                     ];
                   },
