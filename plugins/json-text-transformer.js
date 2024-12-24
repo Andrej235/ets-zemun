@@ -57,7 +57,9 @@ export default function (babel) {
                 defaultDeclaration.properties[i].value.properties[
                   defaultDeclaration.properties[i].value.properties.length - 1
                 ].value;
-              translate(currentVal, translator, omitProperties);
+
+              if (!omitProperties.includes(id.name))
+                translate(currentVal, translator, omitProperties);
             });
 
             path.remove();

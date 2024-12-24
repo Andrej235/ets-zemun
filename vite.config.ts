@@ -173,9 +173,6 @@ function jsonPlugin() {
           ],
         });
 
-        if (id.includes("elektrotehničar-informacionih-tehnologija"))
-          console.log(code);
-
         if (result && result.code) {
           return {
             code: result.code,
