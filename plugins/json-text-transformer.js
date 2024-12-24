@@ -26,9 +26,6 @@ export default function (babel) {
   return {
     visitor: {
       ExportDefaultDeclaration(path, state) {
-        const defaultDeclaration = path.node.declaration;
-        const parentPath = path;
-
         const omitProperties = state.opts.omitProperties || [];
         const translators = {
           "sr-lat": (x) => x,
@@ -36,6 +33,7 @@ export default function (babel) {
         };
         const langOptions = Object.keys(translators);
 
+        const defaultDeclaration = path.node.declaration;
         defaultDeclaration.properties = [];
         langOptions.forEach((lang) => {
           defaultDeclaration.properties.push(
