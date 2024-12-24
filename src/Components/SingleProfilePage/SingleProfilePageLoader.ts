@@ -17,7 +17,6 @@ export default function SingleProfilePageLoader({
   );
 
   if (!preview) return redirect("/profili");
-  console.log(preview.abbreviation);
 
   switch (preview.abbreviation) {
     case "it":
