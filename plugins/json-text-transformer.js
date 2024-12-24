@@ -1,9 +1,9 @@
 export default function (babel) {
   const { types: t, traverse } = babel;
 
-  function translate(node, translator) {
-    if (t.isObjectProperty(node)) {
-      translate(node.value, translator);
+  function translate(node, translator, omitProperties = []) {
+    if (t.isObjectProperty(node) && !omitProperties.includes(node.key.value)) {
+      translate(node.value, translator, omitProperties);
       return;
     }
 
@@ -13,12 +13,12 @@ export default function (babel) {
     }
 
     if (t.isObjectExpression(node)) {
-      node.properties.forEach((x) => translate(x, translator));
+      node.properties.forEach((x) => translate(x, translator, omitProperties));
       return;
     }
 
     if (t.isArrayExpression(node)) {
-      node.elements.forEach((x) => translate(x, translator));
+      node.elements.forEach((x) => translate(x, translator, omitProperties));
       return;
     }
   }
@@ -59,7 +59,7 @@ export default function (babel) {
                 defaultDeclaration.properties[i].value.properties[
                   defaultDeclaration.properties[i].value.properties.length - 1
                 ].value;
-              translate(currentVal, translator);
+              translate(currentVal, translator, omitProperties);
             });
 
             path.remove();

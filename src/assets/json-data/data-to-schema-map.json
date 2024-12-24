@@ -16,6 +16,6 @@
   {
     "fileMatch": ["search-map.json"],
     "url": "src/assets/json-data/schemas/search-map.schema.json",
-    "omitFromTranslation": ["url", "mathFor"]
+    "omitFromTranslation": ["url", "matchFor"]
   }
 ]
