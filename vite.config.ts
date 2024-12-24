@@ -42,7 +42,7 @@ export default defineConfig({
                     )
                   );
 
-                if (jsonImports.length === 0) return;
+                const hasJSONData = jsonImports.length > 0;
 
                 path.node.body = [
                   types.importDeclaration(
@@ -64,12 +64,14 @@ export default defineConfig({
                           types.isJSXFragment(statement.argument))
                     );
 
-                    const langPackDeclaration = types.variableDeclaration(
-                      "const",
-                      [
+                    const isReactComponent = isPascalCase && hasJSXReturn;
+
+                    const langPackDeclaration =
+                      (isReactComponent || hasJSONData) &&
+                      types.variableDeclaration("const", [
                         types.variableDeclarator(
                           types.identifier("lang"),
-                          isPascalCase && hasJSXReturn
+                          isReactComponent
                             ? types.callExpression(
                                 types.identifier("useLang"),
                                 []
@@ -82,31 +84,34 @@ export default defineConfig({
                                 [types.stringLiteral("language")]
                               )
                         ),
-                      ]
-                    );
+                      ]);
 
                     path.node.body.body = [
-                      langPackDeclaration,
+                      langPackDeclaration || types.emptyStatement(),
                       ...path.node.body.body,
                     ];
                   },
-                  Identifier(path) {
-                    if (
-                      !jsonImports.includes(path.node.name) ||
-                      types.isImportDefaultSpecifier(path.parent) ||
-                      types.isImportSpecifier(path.parent)
-                    )
-                      return;
 
-                    path.replaceWith(
-                      types.memberExpression(
-                        path.node,
-                        types.identifier("lang"),
-                        true
+                  //Use lang in place of every identifier that is imported from a JSON file
+                  ...(hasJSONData && {
+                    Identifier(path) {
+                      if (
+                        !jsonImports.includes(path.node.name) ||
+                        types.isImportDefaultSpecifier(path.parent) ||
+                        types.isImportSpecifier(path.parent)
                       )
-                    );
-                    path.skip();
-                  },
+                        return;
+
+                      path.replaceWith(
+                        types.memberExpression(
+                          path.node,
+                          types.identifier("lang"),
+                          true
+                        )
+                      );
+                      path.skip();
+                    },
+                  }),
                 });
               },
             },
