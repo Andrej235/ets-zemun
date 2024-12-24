@@ -84,16 +84,15 @@ export default defineConfig({
                 if (importDeclaration.source.value.endsWith(".json")) {
                   const jsonDataName = path.node.local.name;
                   traverse(state.file.ast.program, {
-                    MemberExpression(path) {
-                      const node = path.node;
-                      if (
-                        types.isIdentifier(node.object) &&
-                        node.object.name === jsonDataName
-                      ) {
-                        node.object = types.memberExpression(
-                          types.identifier(jsonDataName),
-                          types.identifier("lang"),
-                          true
+                    Identifier(path) {
+                      if (types.isImportDefaultSpecifier(path.parent)) return;
+                      if (path.node.name === jsonDataName) {
+                        path.replaceWith(
+                          types.memberExpression(
+                            path.node,
+                            types.identifier("lang"),
+                            true
+                          )
                         );
                         path.skip();
                       }

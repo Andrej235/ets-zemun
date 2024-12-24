@@ -1,11 +1,11 @@
 import { redirect } from "react-router";
 import { LoaderArgs } from "src/types/utility/react-router-loader-args";
 import profilePreviewData from "@data/profiles.json";
-import it from "@data/profiles/elektrotehničar-informacionih-tehnologija.json";
-import arm from "@data/profiles/administrator-računarskih-mreža.json";
-import er from "@data/profiles/elektrotehničar-računara.json";
-import eu from "@data/profiles/elektrotehničar-automatike.json";
-import klime from "@data/profiles/elektromehaničar-za-rashladne-i-termičke-uredjaje.json";
+import itData from "@data/profiles/elektrotehničar-informacionih-tehnologija.json";
+import armData from "@data/profiles/administrator-računarskih-mreža.json";
+import erData from "@data/profiles/elektrotehničar-računara.json";
+import euData from "@data/profiles/elektrotehničar-automatike.json";
+import klimeData from "@data/profiles/elektromehaničar-za-rashladne-i-termičke-uredjaje.json";
 
 export default function SingleProfilePageLoader({
   params: { profileName },
@@ -17,18 +17,19 @@ export default function SingleProfilePageLoader({
   );
 
   if (!preview) return redirect("/profili");
+  console.log(preview.abbreviation);
 
   switch (preview.abbreviation) {
     case "it":
-      return it;
+      return itData;
     case "arm":
-      return arm;
+      return armData;
     case "er":
-      return er;
+      return erData;
     case "eu":
-      return eu;
+      return euData;
     case "klime":
-      return klime;
+      return klimeData;
     default:
       return null;
   }

@@ -2,7 +2,7 @@
   {
     "fileMatch": ["profiles.json"],
     "url": "src/assets/json-data/schemas/profiles-overview-collection.schema.json",
-    "omitFromTranslation": ["imagePath", "profileURL"]
+    "omitFromTranslation": ["imagePath", "profileURL", "abbreviation"]
   },
   {
     "fileMatch": ["profiles/*.json"],
