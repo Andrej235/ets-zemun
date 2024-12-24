@@ -17,16 +17,19 @@ export default defineConfig({
             visitor: {
               Program(path) {
                 const children = path.node.body;
-                if (
-                  !children.some(
+                const jsonImports = children
+                  .filter(
                     (x) =>
                       types.isImportDeclaration(x) &&
-                      (x as types.ImportDeclaration).source.value.endsWith(
-                        ".json"
-                      )
+                      x.source.value.endsWith(".json")
                   )
-                )
-                  return;
+                  .flatMap((x) =>
+                    (x as types.ImportDeclaration).specifiers.map(
+                      (x) => x.local.name
+                    )
+                  );
+
+                if (jsonImports.length === 0) return;
 
                 path.node.body = [
                   types.importDeclaration(
@@ -74,31 +77,24 @@ export default defineConfig({
                       ...path.node.body.body,
                     ];
                   },
-                });
-              },
-              ImportDefaultSpecifier(path, state) {
-                //TODO: Optimize, move it to program's visitor and first find ALL json imports and save their identifiers in an array before moving one through all member expressions
-                const importDeclaration =
-                  path.parent as types.ImportDeclaration;
+                  Identifier(path) {
+                    if (
+                      !jsonImports.includes(path.node.name) ||
+                      types.isImportDefaultSpecifier(path.parent) ||
+                      types.isImportSpecifier(path.parent)
+                    )
+                      return;
 
-                if (importDeclaration.source.value.endsWith(".json")) {
-                  const jsonDataName = path.node.local.name;
-                  traverse(state.file.ast.program, {
-                    Identifier(path) {
-                      if (types.isImportDefaultSpecifier(path.parent)) return;
-                      if (path.node.name === jsonDataName) {
-                        path.replaceWith(
-                          types.memberExpression(
-                            path.node,
-                            types.identifier("lang"),
-                            true
-                          )
-                        );
-                        path.skip();
-                      }
-                    },
-                  });
-                }
+                    path.replaceWith(
+                      types.memberExpression(
+                        path.node,
+                        types.identifier("lang"),
+                        true
+                      )
+                    );
+                    path.skip();
+                  },
+                });
               },
             },
           },
