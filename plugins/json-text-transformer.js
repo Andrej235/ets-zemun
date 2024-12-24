@@ -1,72 +1,73 @@
 export default function (babel) {
   const { types: t, traverse } = babel;
 
+  function translate(node, translator) {
+    if (t.isObjectProperty(node)) {
+      translate(node.value, translator);
+      return;
+    }
+
+    if (t.isStringLiteral(node)) {
+      node.value = translator(node.value);
+      return;
+    }
+
+    if (t.isObjectExpression(node)) {
+      node.properties.forEach((x) => translate(x, translator));
+      return;
+    }
+
+    if (t.isArrayExpression(node)) {
+      node.elements.forEach((x) => translate(x, translator));
+      return;
+    }
+  }
+
   return {
     visitor: {
-      ExportDefaultDeclaration(exportPath, state) {
-        const mainPropertyName =
-          exportPath.node.declaration.properties[0].key.name;
+      ExportDefaultDeclaration(path, state) {
+        const defaultDeclaration = path.node.declaration;
+        const parentPath = path;
+
+        const omitProperties = state.opts.omitProperties || [];
+        const translators = {
+          "sr-lat": (x) => x,
+          "sr-cyr": latinToCyrillic,
+        };
+        const langOptions = Object.keys(translators);
+
+        defaultDeclaration.properties = [];
+        langOptions.forEach((lang) => {
+          defaultDeclaration.properties.push(
+            t.objectProperty(t.stringLiteral(lang), t.objectExpression([]))
+          );
+        });
 
         traverse(state.file.ast.program, {
-          VariableDeclaration(path) {
-            const langPacks = traverseObject(
-              path,
-              path.node.declarations[0].init,
-              state
-            );
+          ExportNamedDeclaration(path) {
+            const declaration = path.node.declaration.declarations[0];
+            const id = declaration.id;
+            const value = declaration.init;
 
-            for (let i = 0; i < langPacks.properties.length; i++) {
-              const key = langPacks.properties[i].key.value;
-              const value = langPacks.properties[i].value;
+            langOptions.forEach((lang, i) => {
+              defaultDeclaration.properties[i].value.properties.push(
+                t.objectProperty(t.cloneNode(id), t.cloneNode(value))
+              );
+              const translator = translators[lang];
 
-              langPacks.properties[i].value = t.objectExpression([
-                t.objectProperty(t.identifier(mainPropertyName), value),
-              ]);
-            }
+              const currentVal =
+                defaultDeclaration.properties[i].value.properties[
+                  defaultDeclaration.properties[i].value.properties.length - 1
+                ].value;
+              translate(currentVal, translator);
+            });
 
-            exportPath.node.declaration = langPacks;
             path.remove();
           },
         });
       },
     },
   };
-
-  function traverseObject(parentPath, objectNode, state) {
-    const omitProperties = state.opts.omitProperties || [];
-    const translators = {
-      "sr-cyr": latinToCyrillic,
-      "sr-lat": (x) => x,
-    };
-    const langOptions = ["sr-cyr", "sr-lat"];
-    const langPacks = t.objectExpression([]);
-
-    langOptions.forEach((currentLang) => {
-      const clonedNode = t.cloneNode(objectNode);
-      langPacks.properties.push(
-        t.ObjectProperty(t.stringLiteral(currentLang), clonedNode)
-      );
-
-      traverse(
-        clonedNode,
-        {
-          ObjectProperty(path) {
-            const { node } = path;
-
-            if (node.value.type !== "StringLiteral") return;
-            if (omitProperties.includes(node.key.name)) return;
-
-            node.value.value = translators[currentLang](node.value.value);
-          },
-        },
-        parentPath.scope,
-        parentPath.parent
-      );
-    });
-
-    parentPath.stop();
-    return langPacks;
-  }
 }
 
 function latinToCyrillic(text) {
