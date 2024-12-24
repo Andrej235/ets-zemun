@@ -24,6 +24,7 @@ export default function (babel) {
   }
 
   return {
+    name: "json-text-transformer",
     visitor: {
       ExportDefaultDeclaration(path, state) {
         const omitProperties = state.opts.omitProperties || [];

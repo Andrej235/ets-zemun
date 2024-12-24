@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createFilter } from "@rollup/pluginutils";
-import { transformAsync, traverse, types } from "@babel/core";
+import { transformAsync, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
 
@@ -14,6 +14,19 @@ export default defineConfig({
         plugins: [
           "./plugins/text-transformer.js",
           {
+            name: "text-transformer",
+            manipulateOptions(options: object) {
+              if (!("plugins" in options) || !Array.isArray(options.plugins))
+                return;
+
+              const mainPlugin = options.plugins.find(
+                (x: object) => "key" in x && x.key === "text-transformer"
+              );
+
+              mainPlugin.options = {
+                translators,
+              };
+            },
             visitor: {
               Program(path) {
                 const children = path.node.body;
