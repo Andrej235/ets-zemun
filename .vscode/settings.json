@@ -22,6 +22,10 @@
       {
         "match": "\\.schema.json$",
         "cmd": "cmd /c ${workspaceFolder}\\.vscode\\tranform-json-schema-to-ts ${fileBasenameNoExt}"
+      },
+      {
+        "match": "data-to-schema-map.json$",
+        "cmd": "@node ${workspaceFolder}/.vscode/update-json-schemas-map.js ${workspaceFolder} && npx prettier --write ${workspaceFolder}/.vscode/settings.json"
       }
     ],
     "cwd": "/src/assets/json-data/schemas"

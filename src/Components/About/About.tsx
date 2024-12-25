@@ -2,14 +2,14 @@ import {
   OverlayScrollbarsComponent,
   OverlayScrollbarsComponentRef,
 } from "overlayscrollbars-react";
-import Icon from "../Icon/Icon";
-import InfoCard from "../InfoCard/InfoCard";
+import Icon from "@components/Icon/Icon";
+import InfoCard from "@components/InfoCard/InfoCard";
 import "./About.scss";
-import ProfileOverview from "../ProfileOverview/ProfileOverview";
+import ProfileOverview from "@components/ProfileOverview/ProfileOverview";
 import { animate, motion, scroll } from "motion/react";
 import { useEffect, useRef } from "react";
-import NewsAndEventsPreviewContainer from "../NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
-import * as data from "@data/profiles.json";
+import NewsAndEventsPreviewContainer from "@components/NewsAndEventsPreviewContainer/NewsAndEventsPreviewContainer";
+import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 

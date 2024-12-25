@@ -16,7 +16,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
         {...attributes}
       />
     );
-  }
+  },
 );
 
 export default Icon;

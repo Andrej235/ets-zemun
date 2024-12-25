@@ -1,12 +1,12 @@
 import { useMemo, useRef, useState } from "react";
-import Icon from "../Icon/Icon";
+import Icon from "@components/Icon/Icon";
 import "./HamburgerNavigationSearchBar.scss";
 import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
-import * as searchMap from "@data/search-map.json";
+import searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
-import AutoCompleteSuggestions from "../AutoCompleteSuggestions/AutoCompleteSuggestions";
+import AutoCompleteSuggestions from "@components/AutoCompleteSuggestions/AutoCompleteSuggestions";
 
 type HamburgerNavigationSearchBarProps = {
   onRequestCloseHamburgerNavigation: () => void;

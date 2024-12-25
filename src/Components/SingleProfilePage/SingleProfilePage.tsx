@@ -18,14 +18,14 @@ export default function SingleProfilePage() {
           </tr>
 
           {loaderData.classes.general.map((x) => (
-            <tr key={x.name}>
+            <tr key={x.className}>
               <td>
                 <Link
-                  to={`/predmeti/${x.name
+                  to={`/predmeti/${x.className
                     .toLocaleLowerCase()
                     .replace(/-/g, "-")}`}
                 >
-                  {x.name}
+                  {x.className}
                 </Link>
               </td>
 
@@ -42,14 +42,14 @@ export default function SingleProfilePage() {
           </tr>
 
           {loaderData.classes.specific.map((x) => (
-            <tr key={x.name}>
+            <tr key={x.className}>
               <td>
                 <Link
-                  to={`/predmeti/${x.name
+                  to={`/predmeti/${x.className
                     .toLocaleLowerCase()
                     .replace(/-/g, "-")}`}
                 >
-                  {x.name}
+                  {x.className}
                 </Link>
               </td>
 

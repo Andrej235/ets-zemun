@@ -31,10 +31,10 @@
       "minItems": 1,
       "uniqueItems": true
     },
-    "fullProfileFileName": {
+    "abbreviation": {
       "type": "string",
-      "minLength": 6,
-      "pattern": "^[a-zčćžšđ-]+\\.json$"
+      "maxLength": 10,
+      "pattern": "^[a-zčćžšđ-]+$"
     }
   },
   "required": [
@@ -42,7 +42,7 @@
     "description",
     "imagePath",
     "profileURL",
-    "fullProfileFileName"
+    "abbreviation"
   ],
   "additionalProperties": false
 }

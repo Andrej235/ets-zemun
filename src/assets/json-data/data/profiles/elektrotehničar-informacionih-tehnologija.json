@@ -5,125 +5,125 @@
   "classes": {
     "general": [
       {
-        "name": "Srpski jezik i književnost",
+        "className": "Srpski jezik i književnost",
         "perWeek": [3, 3, 3, 3]
       },
       {
-        "name": "Engleski jezik",
+        "className": "Engleski jezik",
         "perWeek": [2, 2, 2, 2]
       },
       {
-        "name": "Fizičko vaspitanje",
+        "className": "Fizičko vaspitanje",
         "perWeek": [2, 2, 2, 2]
       },
       {
-        "name": "Matematika",
+        "className": "Matematika",
         "perWeek": [3, 3, 3, 3]
       },
       {
-        "name": "Računarstvo i informatika",
+        "className": "Računarstvo i informatika",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Istorija",
+        "className": "Istorija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Geografija",
+        "className": "Geografija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Hemija",
+        "className": "Hemija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Likovna kultura",
+        "className": "Likovna kultura",
         "perWeek": [1, 0, 0, 0]
       },
       {
-        "name": "Biologija",
+        "className": "Biologija",
         "perWeek": [0, 2, 0, 0]
       },
       {
-        "name": "Sociologija sa pravima građana",
+        "className": "Sociologija sa pravima građana",
         "perWeek": [0, 0, 2, 0]
       },
       {
-        "name": "Veronauka",
+        "className": "Veronauka",
         "perWeek": [1, 1, 1, 1]
       },
       {
-        "name": "Građansko vaspitanje",
+        "className": "Građansko vaspitanje",
         "perWeek": [1, 1, 1, 1]
       }
     ],
     "specific": [
       {
-        "name": "Fizika",
+        "className": "Fizika",
         "perWeek": [2, 2, 0, 0]
       },
       {
-        "name": "Osnove elektrotehnike",
+        "className": "Osnove elektrotehnike",
         "perWeek": [4, 4, 0, 0]
       },
       {
-        "name": "Programiranje",
+        "className": "Programiranje",
         "perWeek": [2, 4, 3, 3]
       },
       {
-        "name": "Računarska grafika i multimedija",
+        "className": "Računarska grafika i multimedija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Elektronika",
+        "className": "Elektronika",
         "perWeek": [0, 4, 0, 0]
       },
       {
-        "name": "Veb dizajn",
+        "className": "Veb dizajn",
         "perWeek": [0, 2, 0, 0]
       },
       {
-        "name": "Baze podataka",
+        "className": "Baze podataka",
         "perWeek": [0, 3, 2, 0]
       },
       {
-        "name": "Računarski sistemi",
+        "className": "Računarski sistemi",
         "perWeek": [0, 0, 3, 0]
       },
       {
-        "name": "Veb programiranje",
+        "className": "Veb programiranje",
         "perWeek": [0, 0, 3, 3]
       },
       {
-        "name": "Računari u sistemima upravljanja",
+        "className": "Računari u sistemima upravljanja",
         "perWeek": [0, 0, 2, 0]
       },
       {
-        "name": "Računarske mreže i internet servisi",
+        "className": "Računarske mreže i internet servisi",
         "perWeek": [0, 0, 0, 3]
       },
       {
-        "name": "Zaštita informacionih sistema",
+        "className": "Zaštita informacionih sistema",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "name": "Primenjene informacione tehnologije",
+        "className": "Primenjene informacione tehnologije",
         "perWeek": [0, 0, 6, 6]
       },
       {
-        "name": "Preduzetništvo",
+        "className": "Preduzetništvo",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "name": "Elektronsko poslovanje",
+        "className": "Elektronsko poslovanje",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "name": "Praktična nastava",
+        "className": "Praktična nastava",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "name": "Izborni predmeti",
+        "className": "Izborni predmeti",
         "perWeek": [0, 0, 2, 2]
       }
     ]

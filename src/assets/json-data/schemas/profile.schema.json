@@ -27,7 +27,7 @@
           "items": {
             "type": "object",
             "properties": {
-              "name": {
+              "className": {
                 "type": "string",
                 "default": "default-class",
                 "minLength": 1,
@@ -45,7 +45,7 @@
               }
             },
             "minLength": 1,
-            "required": ["name", "perWeek"],
+            "required": ["className", "perWeek"],
             "additionalProperties": false
           }
         },
@@ -54,7 +54,7 @@
           "items": {
             "type": "object",
             "properties": {
-              "name": {
+              "className": {
                 "type": "string",
                 "default": "default-class",
                 "minLength": 1,
@@ -72,7 +72,7 @@
               }
             },
             "minLength": 1,
-            "required": ["name", "perWeek"],
+            "required": ["className", "perWeek"],
             "additionalProperties": false
           }
         }
