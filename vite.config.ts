@@ -30,10 +30,13 @@ export default defineConfig({
       async buildStart() {
         //TODO:
         ////1st step: Use babel to search through all files as asts and gather all strings which need to be translated. Put them all inside a file (json?)
-        //2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
+        ////2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
         //3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
         return new Promise(async (resolve) => {
-          const strings: string[] = [];
+          const strings: Set<string> = new Set();
+          const translations: {
+            [key: string]: { [key: string]: string }; //{original-value: {language: translation}}
+          } = {};
 
           async function collectStrings(filePath: string) {
             const code = await fs.readFile(filePath, "utf-8");
@@ -76,7 +79,7 @@ export default defineConfig({
                 path.traverse({
                   JSXText(path) {
                     const text = path.node.value.trim();
-                    if (text) strings.push(text);
+                    if (text) strings.add(text);
                   },
                   JSXAttribute(path) {
                     if (
@@ -91,7 +94,7 @@ export default defineConfig({
                       return;
 
                     const text = path.node.value.value.trim();
-                    if (text) strings.push(text);
+                    if (text) strings.add(text);
                   },
                 });
               },
@@ -115,7 +118,18 @@ export default defineConfig({
           }
 
           await processDirectory(path.resolve(__dirname, "src"));
-          console.log(strings);
+
+          //TODO: Make all of this multi-threaded, will be important for heavier translators
+          strings.forEach((originalValue) => {
+            translations[originalValue] = {};
+
+            for (const key in translators) {
+              const translator = translators[key];
+              translations[originalValue][key] = translator(originalValue);
+            }
+          });
+
+          console.log(translations);
           resolve();
         });
       },
