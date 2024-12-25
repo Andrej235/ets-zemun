@@ -34,89 +34,162 @@ export default defineConfig({
         ////2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
         ////3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
         return new Promise(async (resolve) => {
-          const strings: Set<string> = new Set();
+          const stringsFromJSX: Set<string> = new Set();
+          const stringsFromJSON: Set<string> = new Set();
           translations = new Map();
 
-          async function collectStrings(filePath: string) {
-            const code = await fs.readFile(filePath, "utf-8");
-            const ast = parser.parse(code, {
-              sourceType: "module",
-              plugins: ["jsx", "typescript"],
-            });
+          async function processJSX() {
+            async function collectStringsFromJSX(filePath: string) {
+              const code = await fs.readFile(filePath, "utf-8");
+              const ast = parser.parse(code, {
+                sourceType: "module",
+                plugins: ["jsx", "typescript"],
+              });
 
-            const comments = ast.comments ?? [];
-            const ignoreFile = comments.some(
-              (x: types.Comment) =>
-                x.loc?.start.line === 1 &&
-                x.value.trim() === "@text-transform-ignore"
-            );
+              const comments = ast.comments ?? [];
+              const ignoreFile = comments.some(
+                (x: types.Comment) =>
+                  x.loc?.start.line === 1 &&
+                  x.value.trim() === "@text-transform-ignore"
+              );
 
-            traverse(ast, {
-              FunctionDeclaration(path) {
-                const isIgnored =
-                  ignoreFile ||
-                  comments.some(
-                    (x: types.Comment) =>
-                      path.node.loc &&
-                      x.loc?.start.line === path.node.loc.start.line - 1 &&
-                      x.value.trim() === "@text-transform-ignore"
+              traverse(ast, {
+                FunctionDeclaration(path) {
+                  const isIgnored =
+                    ignoreFile ||
+                    comments.some(
+                      (x: types.Comment) =>
+                        path.node.loc &&
+                        x.loc?.start.line === path.node.loc.start.line - 1 &&
+                        x.value.trim() === "@text-transform-ignore"
+                    );
+
+                  const { node } = path;
+                  const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
+
+                  const hasJSXReturn = node.body.body.some(
+                    (statement) =>
+                      types.isReturnStatement(statement) &&
+                      (types.isJSXElement(statement.argument) ||
+                        types.isJSXFragment(statement.argument))
                   );
 
-                const { node } = path;
-                const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
+                  const isReactComponent = isPascalCase && hasJSXReturn;
+                  if (!isReactComponent) return;
 
-                const hasJSXReturn = node.body.body.some(
-                  (statement) =>
-                    types.isReturnStatement(statement) &&
-                    (types.isJSXElement(statement.argument) ||
-                      types.isJSXFragment(statement.argument))
-                );
-
-                const isReactComponent = isPascalCase && hasJSXReturn;
-                if (!isReactComponent) return;
-
-                path.traverse({
-                  JSXText(path) {
-                    const text = path.node.value.trim();
-                    if (text) strings.add(text);
-                  },
-                  JSXAttribute(path) {
-                    if (
-                      isIgnored ||
-                      !types.isStringLiteral(path.node.value) ||
-                      omitJSXProps.includes(
-                        typeof path.node.name.name === "string"
-                          ? path.node.name.name
-                          : path.node.name.name.name
+                  path.traverse({
+                    JSXText(path) {
+                      const text = path.node.value.trim();
+                      if (text) stringsFromJSX.add(text);
+                    },
+                    JSXAttribute(path) {
+                      if (
+                        isIgnored ||
+                        !types.isStringLiteral(path.node.value) ||
+                        omitJSXProps.includes(
+                          typeof path.node.name.name === "string"
+                            ? path.node.name.name
+                            : path.node.name.name.name
+                        )
                       )
-                    )
-                      return;
+                        return;
 
-                    const text = path.node.value.value.trim();
-                    if (text) strings.add(text);
-                  },
-                });
-              },
-            });
+                      const text = path.node.value.value.trim();
+                      if (text) stringsFromJSX.add(text);
+                    },
+                  });
+                },
+              });
+            }
+
+            async function processDirectoryForJSX(dir: string) {
+              const files = await fs.readdir(dir);
+              for (const file of files) {
+                const fullPath = path.join(dir, file);
+
+                if ((await fs.stat(fullPath)).isDirectory()) {
+                  await processDirectoryForJSX(fullPath);
+                } else if (file.endsWith(".tsx")) {
+                  await collectStringsFromJSX(fullPath);
+                }
+              }
+            }
+
+            await processDirectoryForJSX(
+              path.resolve(__dirname, "src/components")
+            );
           }
 
-          async function processDirectory(dir: string) {
-            const files = await fs.readdir(dir);
-            for (const file of files) {
-              const fullPath = path.join(dir, file);
+          async function processJSON() {
+            const schemaMap = JSON.parse(
+              await fs.readFile(
+                path.resolve(
+                  __dirname,
+                  "src/assets/json-data/data-to-schema-map.json"
+                ),
+                "utf-8"
+              )
+            );
 
-              if ((await fs.stat(fullPath)).isDirectory()) {
-                await processDirectory(fullPath);
-              } else if (file.endsWith(".tsx")) {
-                await collectStrings(fullPath);
+            await processDirectoryForJSON(
+              path.resolve(__dirname, "src/assets/json-data/data")
+            );
+
+            async function processDirectoryForJSON(dir: string) {
+              const files = await fs.readdir(dir);
+              for (const file of files) {
+                const fullPath = path.join(dir, file);
+
+                if ((await fs.stat(fullPath)).isDirectory()) {
+                  await processDirectoryForJSON(fullPath);
+                } else if (file.endsWith(".json")) {
+                  await collectStringsFromJSON(fullPath);
+                }
               }
+            }
+
+            async function collectStringsFromJSON(filePath: string) {
+              const omit = await getPropertyNamesToOmit(filePath);
+
+              const code = await fs.readFile(filePath, "utf-8");
+              const json = JSON.parse(code);
+              traverseJSON(json);
+
+              function traverseJSON(node: any) {
+                if (typeof node === "string") {
+                  stringsFromJSON.add(node);
+                } else if (Array.isArray(node)) {
+                  node.forEach(traverseJSON);
+                } else if (typeof node === "object") {
+                  for (const key in node) {
+                    if (omit.includes(key)) continue;
+
+                    traverseJSON(node[key]);
+                  }
+                }
+              }
+            }
+
+            async function getPropertyNamesToOmit(
+              jsonFilePath: string
+            ): Promise<string[]> {
+              for (const mapping of schemaMap) {
+                if (
+                  micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)
+                ) {
+                  return mapping.omitFromTranslation ?? [];
+                }
+              }
+
+              return [];
             }
           }
 
-          await processDirectory(path.resolve(__dirname, "src"));
+          await processJSX();
+          await processJSON();
 
           //TODO: Make all of this multi-threaded, will be important for heavier translators
-          strings.forEach((originalValue) => {
+          stringsFromJSX.forEach((originalValue) => {
             const newTranslations: { [key: string]: string } = {};
 
             for (const key in translators) {
