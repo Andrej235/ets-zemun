@@ -22,21 +22,20 @@ const omitJSXProps = [
   "viewBox",
 ];
 
+let translations: Map<string, { [key: string]: string }> = new Map();
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     {
       name: "vite-plugin-translate",
       async buildStart() {
-        //TODO:
         ////1st step: Use babel to search through all files as asts and gather all strings which need to be translated. Put them all inside a file (json?)
         ////2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
-        //3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
+        ////3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
         return new Promise(async (resolve) => {
           const strings: Set<string> = new Set();
-          const translations: {
-            [key: string]: { [key: string]: string }; //{original-value: {language: translation}}
-          } = {};
+          translations = new Map();
 
           async function collectStrings(filePath: string) {
             const code = await fs.readFile(filePath, "utf-8");
@@ -52,16 +51,16 @@ export default defineConfig({
                 x.value.trim() === "@text-transform-ignore"
             );
 
-            if (ignoreFile) return;
-
             traverse(ast, {
               FunctionDeclaration(path) {
-                const isIgnored = comments.some(
-                  (x: types.Comment) =>
-                    path.node.loc &&
-                    x.loc?.start.line === path.node.loc.start.line - 1 &&
-                    x.value.trim() === "@text-transform-ignore"
-                );
+                const isIgnored =
+                  ignoreFile ||
+                  comments.some(
+                    (x: types.Comment) =>
+                      path.node.loc &&
+                      x.loc?.start.line === path.node.loc.start.line - 1 &&
+                      x.value.trim() === "@text-transform-ignore"
+                  );
 
                 const { node } = path;
                 const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
@@ -107,11 +106,8 @@ export default defineConfig({
               const fullPath = path.join(dir, file);
 
               if ((await fs.stat(fullPath)).isDirectory()) {
-                processDirectory(fullPath);
-              } else if (
-                fullPath.endsWith(".ts") ||
-                fullPath.endsWith(".tsx")
-              ) {
+                await processDirectory(fullPath);
+              } else if (file.endsWith(".tsx")) {
                 await collectStrings(fullPath);
               }
             }
@@ -121,15 +117,16 @@ export default defineConfig({
 
           //TODO: Make all of this multi-threaded, will be important for heavier translators
           strings.forEach((originalValue) => {
-            translations[originalValue] = {};
+            const newTranslations: { [key: string]: string } = {};
 
             for (const key in translators) {
               const translator = translators[key];
-              translations[originalValue][key] = translator(originalValue);
+              newTranslations[key] = translator(originalValue);
             }
+
+            translations.set(originalValue, newTranslations);
           });
 
-          console.log(translations);
           resolve();
         });
       },
@@ -149,15 +146,18 @@ export default defineConfig({
               );
 
               mainPlugin.options = {
-                translators,
+                translations,
+                languageOptions: Object.keys(translators),
                 omitJSXProps,
               };
             },
             visitor: {
               Program(path, state) {
-                const translators = state.opts.translators;
-                const omitJSXProps = state.opts.omitJSXProps;
-                const languageOptions = Object.keys(translators);
+                const languageOptions: string[] = state.opts.languageOptions;
+                const allTranslations: typeof translations =
+                  state.opts.translations;
+
+                const omitJSXProps: string[] = state.opts.omitJSXProps;
                 const comments = state.file.ast.comments;
 
                 const children = path.node.body;
@@ -319,10 +319,9 @@ export default defineConfig({
                         JSXText(path) {
                           const text = path.node.value.trim();
                           if (!text) return;
+                          const currentTranslations = allTranslations.get(text);
 
                           for (let i = 0; i < languageOptions.length; i++) {
-                            const translator = translators[languageOptions[i]];
-
                             const prop = (
                               extractedTextTranslationsObject.properties[
                                 i
@@ -330,7 +329,10 @@ export default defineConfig({
                             ).value as types.ArrayExpression;
 
                             prop.elements.push(
-                              types.stringLiteral(translator(text))
+                              types.stringLiteral(
+                                currentTranslations?.[languageOptions[i]] ??
+                                  "error"
+                              )
                             );
                           }
 
@@ -356,16 +358,19 @@ export default defineConfig({
                           if (
                             isIgnored ||
                             !types.isStringLiteral(path.node.value) ||
-                            omitJSXProps.includes(path.node.name.name)
+                            omitJSXProps.includes(
+                              typeof path.node.name.name === "string"
+                                ? path.node.name.name
+                                : path.node.name.name.name
+                            )
                           )
                             return;
 
                           const text = path.node.value.value.trim();
                           if (!text) return;
+                          const currentTranslations = allTranslations.get(text);
 
                           for (let i = 0; i < languageOptions.length; i++) {
-                            const translator = translators[languageOptions[i]];
-
                             const prop = (
                               extractedTextTranslationsObject.properties[
                                 i
@@ -373,7 +378,10 @@ export default defineConfig({
                             ).value as types.ArrayExpression;
 
                             prop.elements.push(
-                              types.stringLiteral(translator(text))
+                              types.stringLiteral(
+                                currentTranslations?.[languageOptions[i]] ??
+                                  "error"
+                              )
                             );
                           }
 
