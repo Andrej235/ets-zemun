@@ -2,7 +2,7 @@ export default function (babel) {
   const { types: t, traverse } = babel;
 
   function translate(node, translator, omitProperties = []) {
-    if (t.isObjectProperty(node) && !omitProperties.includes(node.key.value)) {
+    if (t.isObjectProperty(node) && !omitProperties.includes(node.key.name || node.key.value)) {
       translate(node.value, translator, omitProperties);
       return;
     }
