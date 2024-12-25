@@ -1,19 +1,19 @@
 //@text-transform-ignore
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./components/App/App.tsx";
+import App from "./components/app/app.tsx";
 import "./index.scss";
 import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ProfilesPage from "./components/ProfilesPage/ProfilesPage.tsx";
-import Students from "./components/Students/Students.tsx";
-import News from "./components/News/News.tsx";
-import Documents from "./components/Documents/Documents.tsx";
-import About from "./components/About/About.tsx";
-import SingleProfilePage from "./components/SingleProfilePage/SingleProfilePage.tsx";
-import SingleProfilePageLoader from "./components/SingleProfilePage/SingleProfilePageLoader.ts";
-import ClassPage from "./components/ClassPage/ClassPage.tsx";
-import classPageLoader from "./components/ClassPage/ClassPageLoader.ts";
+import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
+import Students from "./components/students/students.tsx";
+import News from "./components/news/news.tsx";
+import Documents from "./components/documents/documents.tsx";
+import About from "./components/about/about.tsx";
+import SingleProfilePage from "./components/single-profile-page/single-profile-page.tsx";
+import SingleProfilePageLoader from "./components/single-profile-page/single-profile-page-loader.ts";
+import ClassPage from "./components/class-page/class-page.tsx";
+import classPageLoader from "./components/class-page/class-page-loader.ts";
 
 const router = createBrowserRouter([
   {

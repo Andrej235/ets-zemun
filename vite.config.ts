@@ -5,10 +5,12 @@ import { createFilter } from "@rollup/pluginutils";
 import { transformAsync, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    tsconfigPaths(),
     react({
       babel: {
         plugins: [
