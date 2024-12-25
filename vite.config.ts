@@ -22,7 +22,8 @@ const omitJSXProps = [
   "viewBox",
 ];
 
-let translations: Map<string, { [key: string]: string }> = new Map();
+let jsxTranslations: Map<string, { [key: string]: string }> = new Map();
+let jsonTranslations: Map<string, { [key: string]: string }> = new Map();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +37,7 @@ export default defineConfig({
         return new Promise(async (resolve) => {
           const stringsFromJSX: Set<string> = new Set();
           const stringsFromJSON: Set<string> = new Set();
-          translations = new Map();
+          jsxTranslations = new Map();
 
           async function processJSX() {
             async function collectStringsFromJSX(filePath: string) {
@@ -197,7 +198,18 @@ export default defineConfig({
               newTranslations[key] = translator(originalValue);
             }
 
-            translations.set(originalValue, newTranslations);
+            jsxTranslations.set(originalValue, newTranslations);
+          });
+
+          stringsFromJSON.forEach((originalValue) => {
+            const newTranslations: { [key: string]: string } = {};
+
+            for (const key in translators) {
+              const translator = translators[key];
+              newTranslations[key] = translator(originalValue);
+            }
+
+            jsonTranslations.set(originalValue, newTranslations);
           });
 
           resolve();
@@ -219,7 +231,7 @@ export default defineConfig({
               );
 
               mainPlugin.options = {
-                translations,
+                translations: jsxTranslations,
                 languageOptions: Object.keys(translators),
                 omitJSXProps,
               };
@@ -227,7 +239,7 @@ export default defineConfig({
             visitor: {
               Program(path, state) {
                 const languageOptions: string[] = state.opts.languageOptions;
-                const allTranslations: typeof translations =
+                const allTranslations: typeof jsxTranslations =
                   state.opts.translations;
 
                 const omitJSXProps: string[] = state.opts.omitJSXProps;
