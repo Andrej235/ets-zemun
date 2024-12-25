@@ -26,7 +26,7 @@ export default function HamburgerNavigationSearchBar({
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
         keys: ["title", "matchFor"],
       }),
-    [],
+    [searchMap.entries]
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
