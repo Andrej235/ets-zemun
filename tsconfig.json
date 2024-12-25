@@ -23,10 +23,12 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@data/*": ["src/assets/json-data/data/*"],
-      "@contexts/*": ["src/contexts/*"],
+      "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@components/*": ["src/components/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@assets/*": ["src/assets/*"],
+      "@data/*": ["src/assets/json-data/data"],
+      "@styles/*": ["public/sass/*"]
     }
   },
   "include": ["src"],
