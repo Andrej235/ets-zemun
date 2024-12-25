@@ -24,11 +24,24 @@ export default defineConfig({
 
               mainPlugin.options = {
                 translators,
+                omitJSXProps: [
+                  "className",
+                  "id",
+                  "key",
+                  "name",
+                  "src",
+                  "d",
+                  "icon",
+                  "image",
+                  "to",
+                  "layout",
+                ],
               };
             },
             visitor: {
               Program(path, state) {
                 const translators = state.opts.translators;
+                const omitJSXProps = state.opts.omitJSXProps;
                 const languageOptions = Object.keys(translators);
                 const comments = state.file.ast.comments;
 
@@ -223,6 +236,46 @@ export default defineConfig({
                             )
                           );
                           path.skip();
+                        },
+                        JSXAttribute(path) {
+                          if (
+                            isIgnored ||
+                            !types.isStringLiteral(path.node.value) ||
+                            omitJSXProps.includes(path.node.name.name)
+                          )
+                            return;
+
+                          const text = path.node.value.value.trim();
+                          if (!text) return;
+
+                          for (let i = 0; i < languageOptions.length; i++) {
+                            const translator = translators[languageOptions[i]];
+
+                            const prop = (
+                              extractedTextTranslationsObject.properties[
+                                i
+                              ] as types.ObjectProperty
+                            ).value as types.ArrayExpression;
+
+                            prop.elements.push(
+                              types.stringLiteral(translator(text))
+                            );
+                          }
+
+                          path.node.value = types.jsxExpressionContainer(
+                            types.memberExpression(
+                              types.identifier("selectedTextTranslations"),
+                              types.numericLiteral(
+                                (
+                                  (
+                                    extractedTextTranslationsObject
+                                      .properties[0] as types.ObjectProperty
+                                  ).value as types.ArrayExpression
+                                ).elements.length - 1
+                              ),
+                              true
+                            )
+                          );
                         },
                       });
                     }
