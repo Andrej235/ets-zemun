@@ -27,7 +27,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
-      "@data/*": ["src/assets/json-data/data"],
+      "@data/*": ["src/assets/json-data/data/*"],
       "@styles/*": ["public/sass/*"]
     }
   },
