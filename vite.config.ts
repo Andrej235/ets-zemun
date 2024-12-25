@@ -578,7 +578,11 @@ function jsonPlugin() {
           plugins: [
             [
               "./plugins/json-text-transformer",
-              { omitProperties: await getPropertyNamesToOmit(id), translators },
+              {
+                omitProperties: await getPropertyNamesToOmit(id),
+                translations: jsonTranslations,
+                langOptions: Object.keys(translators),
+              },
             ],
           ],
         });
