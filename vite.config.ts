@@ -342,7 +342,7 @@ export default defineConfig({
 });
 
 function jsonPlugin() {
-  const filter = createFilter(["**/*.json"]);
+  const filter = createFilter("**/*.json");
 
   let schemaMap: {
     fileMatch: string[];
@@ -353,9 +353,7 @@ function jsonPlugin() {
   return {
     name: "babel-json-plugin",
     async transform(code: string, id: string) {
-      if (!filter(id)) {
-        return null;
-      }
+      if (!filter(id)) return null;
 
       try {
         schemaMap = JSON.parse(
@@ -368,18 +366,12 @@ function jsonPlugin() {
           )
         );
 
-        const omit = await getPropertyNamesToOmit(id);
-        if (!omit) {
-          console.error(`No schema found for JSON file: ${id}`);
-          return null;
-        }
-
         const result = await transformAsync(code, {
           filename: id,
           plugins: [
             [
               "./plugins/json-text-transformer",
-              { omitProperties: omit, translators },
+              { omitProperties: await getPropertyNamesToOmit(id), translators },
             ],
           ],
         });
@@ -397,13 +389,10 @@ function jsonPlugin() {
       return null;
     },
     async load(id: string) {
-      if (!filter(id)) {
-        return null;
-      }
+      if (!filter(id)) return null;
 
       try {
-        const content = await fs.readFile(id, "utf-8");
-        return content;
+        return await fs.readFile(id, "utf-8");
       } catch (err) {
         console.error(`Failed to transform JSON file: ${id}`, err);
       }
@@ -412,14 +401,14 @@ function jsonPlugin() {
     },
   };
 
-  //Implement properties which works for arrays which will include values in all languages
   async function getPropertyNamesToOmit(jsonFilePath: string) {
     for (const mapping of schemaMap) {
       if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)) {
         return mapping.omitFromTranslation ?? [];
       }
     }
-    return null;
+
+    return [];
   }
 }
 
