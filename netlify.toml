@@ -1,7 +1,3 @@
-[alias]
-    "@styles" = "public/sass"
-    "@assets" = "src/assets"
-    "@data" = "src/assets/json-data/data"
-    "@contexts" = "src/contexts"
-    "@hooks" = "src/hooks"
-    "@components" = "src/components"
+[build]
+  command = "npm run build"
+  publish = "dist"
