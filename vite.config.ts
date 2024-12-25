@@ -22,8 +22,15 @@ const omitJSXProps = [
   "viewBox",
 ];
 
-let jsxTranslations: Map<string, { [key: string]: string }> = new Map();
-let jsonTranslations: Map<string, { [key: string]: string }> = new Map();
+type TranslationResult = Map<string, { [key: string]: string }>;
+type SchemaMap = {
+  fileMatch: string[];
+  url: string;
+  omitFromTranslation?: string[];
+}[];
+
+let jsxTranslations: TranslationResult = new Map();
+let jsonTranslations: TranslationResult = new Map();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,13 +38,25 @@ export default defineConfig({
     {
       name: "vite-plugin-translate",
       async buildStart() {
-        ////1st step: Use babel to search through all files as asts and gather all strings which need to be translated. Put them all inside a file (json?)
-        ////2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
-        ////3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
         return new Promise(async (resolve) => {
           const stringsFromJSX: Set<string> = new Set();
           const stringsFromJSON: Set<string> = new Set();
           jsxTranslations = new Map();
+
+          async function processDirectory(
+            dir: string,
+            filter: (filePath: string) => boolean,
+            foundCallback: (filePath: string) => Promise<void>
+          ) {
+            const files = await fs.readdir(dir);
+            for (const file of files) {
+              const fullPath = path.join(dir, file);
+
+              if ((await fs.stat(fullPath)).isDirectory())
+                await processDirectory(fullPath, filter, foundCallback);
+              else if (filter(fullPath)) await foundCallback(fullPath);
+            }
+          }
 
           async function processJSX() {
             async function collectStringsFromJSX(filePath: string) {
@@ -103,54 +122,16 @@ export default defineConfig({
               });
             }
 
-            async function processDirectoryForJSX(dir: string) {
-              const files = await fs.readdir(dir);
-              for (const file of files) {
-                const fullPath = path.join(dir, file);
-
-                if ((await fs.stat(fullPath)).isDirectory()) {
-                  await processDirectoryForJSX(fullPath);
-                } else if (file.endsWith(".tsx")) {
-                  await collectStringsFromJSX(fullPath);
-                }
-              }
-            }
-
-            await processDirectoryForJSX(
-              path.resolve(__dirname, "src/components")
+            await processDirectory(
+              path.resolve(__dirname, "src/components"),
+              (x) => x.endsWith(".tsx"),
+              collectStringsFromJSX
             );
           }
 
           async function processJSON() {
-            const schemaMap = JSON.parse(
-              await fs.readFile(
-                path.resolve(
-                  __dirname,
-                  "src/assets/json-data/data-to-schema-map.json"
-                ),
-                "utf-8"
-              )
-            );
-
-            await processDirectoryForJSON(
-              path.resolve(__dirname, "src/assets/json-data/data")
-            );
-
-            async function processDirectoryForJSON(dir: string) {
-              const files = await fs.readdir(dir);
-              for (const file of files) {
-                const fullPath = path.join(dir, file);
-
-                if ((await fs.stat(fullPath)).isDirectory()) {
-                  await processDirectoryForJSON(fullPath);
-                } else if (file.endsWith(".json")) {
-                  await collectStringsFromJSON(fullPath);
-                }
-              }
-            }
-
             async function collectStringsFromJSON(filePath: string) {
-              const omit = await getPropertyNamesToOmit(filePath);
+              const omit = await getPropertyNamesToOmit(filePath, schemaMap);
 
               const code = await fs.readFile(filePath, "utf-8");
               const json = JSON.parse(code);
@@ -171,52 +152,45 @@ export default defineConfig({
               }
             }
 
-            async function getPropertyNamesToOmit(
-              jsonFilePath: string
-            ): Promise<string[]> {
-              for (const mapping of schemaMap) {
-                if (
-                  micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)
-                ) {
-                  return mapping.omitFromTranslation ?? [];
-                }
-              }
+            const schemaMap: SchemaMap = await getSchemaMap();
 
-              return [];
-            }
+            await processDirectory(
+              path.resolve(__dirname, "src/assets/json-data/data"),
+              (x) => x.endsWith(".json"),
+              collectStringsFromJSON
+            );
           }
 
           await processJSX();
           await processJSON();
+          jsxTranslations = await translate(stringsFromJSX);
+          jsonTranslations = await translate(stringsFromJSON);
 
           //TODO: Make all of this multi-threaded, will be important for heavier translators
-          stringsFromJSX.forEach((originalValue) => {
-            const newTranslations: { [key: string]: string } = {};
+          async function translate(
+            toTranslate: Set<string>
+          ): Promise<TranslationResult> {
+            const translations: TranslationResult = new Map();
 
-            for (const key in translators) {
-              const translator = translators[key];
-              newTranslations[key] = translator(originalValue);
-            }
+            toTranslate.forEach((originalValue) => {
+              const newTranslations: { [key: string]: string } = {};
 
-            jsxTranslations.set(originalValue, newTranslations);
-          });
+              for (const key in translators) {
+                const translator = translators[key];
+                newTranslations[key] = translator(originalValue);
+              }
 
-          stringsFromJSON.forEach((originalValue) => {
-            const newTranslations: { [key: string]: string } = {};
+              translations.set(originalValue, newTranslations);
+            });
 
-            for (const key in translators) {
-              const translator = translators[key];
-              newTranslations[key] = translator(originalValue);
-            }
-
-            jsonTranslations.set(originalValue, newTranslations);
-          });
+            return translations;
+          }
 
           resolve();
         });
       },
     },
-    tsconfigPaths(),
+    tsconfigPaths(), //TODO: Check if this is needed, while fixing netlify I added this as one of the potential solutions
     react({
       babel: {
         plugins: [
@@ -550,12 +524,7 @@ export default defineConfig({
 
 function jsonPlugin() {
   const filter = createFilter("**/*.json");
-
-  let schemaMap: {
-    fileMatch: string[];
-    url: string;
-    omitFromTranslation?: string[];
-  }[] = [];
+  let schemaMap: SchemaMap = [];
 
   return {
     name: "babel-json-plugin",
@@ -563,15 +532,7 @@ function jsonPlugin() {
       if (!filter(id)) return null;
 
       try {
-        schemaMap = JSON.parse(
-          await fs.readFile(
-            path.resolve(
-              __dirname,
-              "src/assets/json-data/data-to-schema-map.json"
-            ),
-            "utf-8"
-          )
-        );
+        schemaMap = await getSchemaMap();
 
         const result = await transformAsync(code, {
           filename: id,
@@ -713,3 +674,23 @@ const translators: {
       .join("");
   },
 };
+
+async function getPropertyNamesToOmit(
+  jsonFilePath: string,
+  schemaMap: SchemaMap
+): Promise<string[]> {
+  for (const mapping of schemaMap)
+    if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch))
+      return mapping.omitFromTranslation ?? [];
+
+  return [];
+}
+
+async function getSchemaMap(): Promise<SchemaMap> {
+  return JSON.parse(
+    await fs.readFile(
+      path.resolve(__dirname, "src/assets/json-data/data-to-schema-map.json"),
+      "utf-8"
+    )
+  );
+}
