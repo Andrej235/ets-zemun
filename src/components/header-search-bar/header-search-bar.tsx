@@ -15,7 +15,7 @@ export default function HeaderSearchBar() {
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
         keys: ["title", "matchFor"],
       }),
-    []
+    [],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<

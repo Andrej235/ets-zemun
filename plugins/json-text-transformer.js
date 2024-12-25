@@ -2,7 +2,10 @@ export default function (babel) {
   const { types: t, traverse } = babel;
 
   function translate(node, translator, omitProperties = []) {
-    if (t.isObjectProperty(node) && !omitProperties.includes(node.key.name || node.key.value)) {
+    if (
+      t.isObjectProperty(node) &&
+      !omitProperties.includes(node.key.name || node.key.value)
+    ) {
       translate(node.value, translator, omitProperties);
       return;
     }
@@ -36,7 +39,7 @@ export default function (babel) {
         defaultDeclaration.properties = [];
         langOptions.forEach((lang) => {
           defaultDeclaration.properties.push(
-            t.objectProperty(t.stringLiteral(lang), t.objectExpression([]))
+            t.objectProperty(t.stringLiteral(lang), t.objectExpression([])),
           );
         });
 
@@ -48,7 +51,7 @@ export default function (babel) {
 
             langOptions.forEach((lang, i) => {
               defaultDeclaration.properties[i].value.properties.push(
-                t.objectProperty(t.cloneNode(id), t.cloneNode(value))
+                t.objectProperty(t.cloneNode(id), t.cloneNode(value)),
               );
               const translator = translators[lang];
 

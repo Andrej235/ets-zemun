@@ -13,7 +13,7 @@ export default function SingleProfilePageLoader({
   if (!profileName) return redirect("/profili");
 
   const preview = profilePreviewData.profiles.find((x) =>
-    x.profileURL.includes(profileName)
+    x.profileURL.includes(profileName),
   );
 
   if (!preview) return redirect("/profili");

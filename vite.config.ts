@@ -2,14 +2,60 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createFilter } from "@rollup/pluginutils";
-import { transformAsync, types } from "@babel/core";
+import { transformAsync, traverse, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
 import tsconfigPaths from "vite-tsconfig-paths";
+import parser from "@babel/parser";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    {
+      name: "vite-plugin-translate",
+      async buildStart() {
+        //TODO:
+        //1st step: Use babel to search through all files as asts and gather all strings which need to be translated. Put them all inside a file (json?)
+        //2nd step: Use an asynchronous method to go through that file and translate every string into every language and put them all inside a new file (or overwrite the old one?)
+        //3rd step: Run the babel plugin which will replace the strings with the translated ones in a similar way that it does now (using context, etc.)
+        return new Promise(async (resolve) => {
+          const strings = new Set<string>();
+
+          async function collectStrings(filePath: string) {
+            const code = await fs.readFile(filePath, "utf-8");
+            const ast = parser.parse(code, {
+              sourceType: "module",
+              plugins: ["jsx", "typescript"],
+            });
+
+            traverse(ast, {
+              StringLiteral(path) {
+                strings.add(path.node.value);
+              },
+            });
+          }
+
+          async function processDirectory(dir: string) {
+            const files = await fs.readdir(dir);
+            for (const file of files) {
+              const fullPath = path.join(dir, file);
+
+              if ((await fs.stat(fullPath)).isDirectory()) {
+                processDirectory(fullPath);
+              } else if (
+                fullPath.endsWith(".ts") ||
+                fullPath.endsWith(".tsx")
+              ) {
+                await collectStrings(fullPath);
+              }
+            }
+          }
+
+          await processDirectory(path.resolve(__dirname, "src"));
+          resolve();
+        });
+      },
+    },
     tsconfigPaths(),
     react({
       babel: {
