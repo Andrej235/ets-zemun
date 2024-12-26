@@ -465,20 +465,35 @@ export default defineConfig({
                             )
                           );
                         },
-                        CallExpression(path) {
-                          if (
-                            types.isIdentifier(path.node.callee) &&
-                            reactHooksWithDependencies.includes(
-                              path.node.callee.name
-                            ) &&
-                            path.node.arguments.length === 2 &&
-                            types.isArrayExpression(path.node.arguments[1])
-                          ) {
-                            path.node.arguments[1].elements.push(
-                              types.identifier("lang")
-                            );
-                          }
-                        },
+                        ...(hasJSONData && {
+                          CallExpression(path) {
+                            if (
+                              types.isIdentifier(path.node.callee) &&
+                              reactHooksWithDependencies.includes(
+                                path.node.callee.name
+                              ) &&
+                              path.node.arguments.length === 2 &&
+                              types.isArrowFunctionExpression(
+                                path.node.arguments[0]
+                              ) &&
+                              types.isArrayExpression(path.node.arguments[1])
+                            ) {
+                              let hookUsesJSONData = false;
+
+                              path.traverse({
+                                Identifier(path) {
+                                  if (jsonImports.includes(path.node.name))
+                                    hookUsesJSONData = true;
+                                },
+                              });
+
+                              if (hookUsesJSONData)
+                                path.node.arguments[1].elements.push(
+                                  types.identifier("lang")
+                                );
+                            }
+                          },
+                        }),
                       });
                     }
 
