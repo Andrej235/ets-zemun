@@ -38,7 +38,7 @@ export default defineConfig({
     {
       name: "vite-plugin-translate",
       async buildStart() {
-        return new Promise(async (resolve) => {
+        return new Promise((resolve) => {
           const stringsFromJSX: Set<string> = new Set();
           const stringsFromJSON: Set<string> = new Set();
           jsxTranslations = new Map();
@@ -137,7 +137,7 @@ export default defineConfig({
               const json = JSON.parse(code);
               traverseJSON(json);
 
-              function traverseJSON(node: any) {
+              function traverseJSON(node: unknown) {
                 if (typeof node === "string") {
                   stringsFromJSON.add(node);
                 } else if (Array.isArray(node)) {
@@ -145,8 +145,7 @@ export default defineConfig({
                 } else if (typeof node === "object") {
                   for (const key in node) {
                     if (omit.includes(key)) continue;
-
-                    traverseJSON(node[key]);
+                    traverseJSON(node[key as keyof typeof node]);
                   }
                 }
               }
@@ -160,11 +159,6 @@ export default defineConfig({
               collectStringsFromJSON
             );
           }
-
-          await processJSX();
-          await processJSON();
-          jsxTranslations = await translate(stringsFromJSX);
-          jsonTranslations = await translate(stringsFromJSON);
 
           //TODO: Make all of this multi-threaded, will be important for heavier translators
           async function translate(
@@ -186,7 +180,14 @@ export default defineConfig({
             return translations;
           }
 
-          resolve();
+          resolve(
+            (async () => {
+              await processJSX();
+              await processJSON();
+              jsxTranslations = await translate(stringsFromJSX);
+              jsonTranslations = await translate(stringsFromJSON);
+            })()
+          );
         });
       },
     },
