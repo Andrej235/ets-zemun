@@ -216,6 +216,11 @@ export default defineConfig({
                 const languageOptions: string[] = state.opts.languageOptions;
                 const allTranslations: typeof jsxTranslations =
                   state.opts.translations;
+                const reactHooksWithDependencies = [
+                  "useMemo",
+                  "useCallback",
+                  "useEffect",
+                ];
 
                 const omitJSXProps: string[] = state.opts.omitJSXProps;
                 const comments = state.file.ast.comments;
@@ -459,6 +464,20 @@ export default defineConfig({
                               true
                             )
                           );
+                        },
+                        CallExpression(path) {
+                          if (
+                            types.isIdentifier(path.node.callee) &&
+                            reactHooksWithDependencies.includes(
+                              path.node.callee.name
+                            ) &&
+                            path.node.arguments.length === 2 &&
+                            types.isArrayExpression(path.node.arguments[1])
+                          ) {
+                            path.node.arguments[1].elements.push(
+                              types.identifier("lang")
+                            );
+                          }
                         },
                       });
                     }
