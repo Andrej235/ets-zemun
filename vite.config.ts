@@ -160,30 +160,33 @@ export default defineConfig({
             );
           }
 
-          //TODO: Make all of this multi-threaded, will be important for heavier translators
           async function translate(
             toTranslate: Set<string>
           ): Promise<TranslationResult> {
             const translations: TranslationResult = new Map();
 
-            toTranslate.forEach((originalValue) => {
-              const newTranslations: { [key: string]: string } = {};
+            const translationPromises = Array.from(toTranslate).map(
+              async (originalValue) => {
+                const newTranslations: { [key: string]: string } = {};
 
-              for (const key in translators) {
-                const translator = translators[key];
-                newTranslations[key] = translator(originalValue);
+                await Promise.all(
+                  Object.keys(translators).map(async (key) => {
+                    const translator = translators[key];
+                    newTranslations[key] = await translator(originalValue);
+                  })
+                );
+
+                translations.set(originalValue, newTranslations);
               }
+            );
 
-              translations.set(originalValue, newTranslations);
-            });
-
+            await Promise.all(translationPromises);
             return translations;
           }
 
           resolve(
             (async () => {
-              await processJSX();
-              await processJSON();
+              await Promise.all([processJSX(), processJSON()]);
               jsxTranslations = await translate(stringsFromJSX);
               jsonTranslations = await translate(stringsFromJSON);
             })()
@@ -620,94 +623,98 @@ function jsonPlugin() {
 }
 
 const translators: {
-  [key: string]: (value: string) => string;
+  [key: string]: (value: string) => Promise<string>;
 } = {
-  "sr-lat": (value) => value,
-  "sr-cyr": (value) => {
-    const latinToCyrillicMap = {
-      A: "А",
-      B: "Б",
-      V: "В",
-      G: "Г",
-      D: "Д",
-      Đ: "Ђ",
-      E: "Е",
-      Ž: "Ж",
-      Z: "З",
-      I: "И",
-      J: "Ј",
-      K: "К",
-      L: "Л",
-      Lj: "Љ",
-      M: "М",
-      N: "Н",
-      Nj: "Њ",
-      O: "О",
-      P: "П",
-      R: "Р",
-      S: "С",
-      T: "Т",
-      Ć: "Ћ",
-      U: "У",
-      F: "Ф",
-      H: "Х",
-      C: "Ц",
-      Č: "Ч",
-      Dž: "Џ",
-      Š: "Ш",
-      a: "а",
-      b: "б",
-      v: "в",
-      g: "г",
-      d: "д",
-      đ: "ђ",
-      e: "е",
-      ž: "ж",
-      z: "з",
-      i: "и",
-      j: "ј",
-      k: "к",
-      l: "л",
-      lj: "љ",
-      m: "м",
-      n: "н",
-      nj: "њ",
-      o: "о",
-      p: "п",
-      r: "р",
-      s: "с",
-      t: "т",
-      ć: "ћ",
-      u: "у",
-      f: "ф",
-      h: "х",
-      c: "ц",
-      č: "ч",
-      dž: "џ",
-      š: "ш",
-      LJ: "Љ",
-      NJ: "Њ",
-      DŽ: "Џ",
-    };
+  "sr-lat": (value) => Promise.resolve(value),
+  "sr-cyr": (value) =>
+    new Promise((resolve) => {
+      const latinToCyrillicMap = {
+        A: "А",
+        B: "Б",
+        V: "В",
+        G: "Г",
+        D: "Д",
+        Đ: "Ђ",
+        E: "Е",
+        Ž: "Ж",
+        Z: "З",
+        I: "И",
+        J: "Ј",
+        K: "К",
+        L: "Л",
+        Lj: "Љ",
+        M: "М",
+        N: "Н",
+        Nj: "Њ",
+        O: "О",
+        P: "П",
+        R: "Р",
+        S: "С",
+        T: "Т",
+        Ć: "Ћ",
+        U: "У",
+        F: "Ф",
+        H: "Х",
+        C: "Ц",
+        Č: "Ч",
+        Dž: "Џ",
+        Š: "Ш",
+        a: "а",
+        b: "б",
+        v: "в",
+        g: "г",
+        d: "д",
+        đ: "ђ",
+        e: "е",
+        ž: "ж",
+        z: "з",
+        i: "и",
+        j: "ј",
+        k: "к",
+        l: "л",
+        lj: "љ",
+        m: "м",
+        n: "н",
+        nj: "њ",
+        o: "о",
+        p: "п",
+        r: "р",
+        s: "с",
+        t: "т",
+        ć: "ћ",
+        u: "у",
+        f: "ф",
+        h: "х",
+        c: "ц",
+        č: "ч",
+        dž: "џ",
+        š: "ш",
+        LJ: "Љ",
+        NJ: "Њ",
+        DŽ: "Џ",
+      };
 
-    // Handle special cases for digraphs first
-    const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
-    digraphs.forEach((digraph) => {
-      const cyrillic =
-        latinToCyrillicMap[digraph as keyof typeof latinToCyrillicMap];
-      const regex = new RegExp(digraph, "g");
-      value = value.replace(regex, cyrillic);
-    });
+      // Handle special cases for digraphs first
+      const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
+      digraphs.forEach((digraph) => {
+        const cyrillic =
+          latinToCyrillicMap[digraph as keyof typeof latinToCyrillicMap];
+        const regex = new RegExp(digraph, "g");
+        value = value.replace(regex, cyrillic);
+      });
 
-    // Convert the rest of the characters
-    return value
-      .split("")
-      .map(
-        (char) =>
-          latinToCyrillicMap[char as keyof typeof latinToCyrillicMap] || char
-      )
-      .join("");
-  },
+      // Convert the rest of the characters
+      resolve(
+        value
+          .split("")
+          .map(
+            (char) =>
+              latinToCyrillicMap[char as keyof typeof latinToCyrillicMap] ||
+              char
+          )
+          .join("")
+      );
+    }),
 };
 
 async function getPropertyNamesToOmit(
