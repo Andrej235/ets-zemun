@@ -23,7 +23,7 @@ function App() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
         changeLanguage(
-          languages[(languages.indexOf(language) + 1) % languages.length]
+          languages[(languages.indexOf(language) + 1) % languages.length],
         );
       }
     }

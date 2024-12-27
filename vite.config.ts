@@ -2,15 +2,199 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createFilter } from "@rollup/pluginutils";
-import { transformAsync, types } from "@babel/core";
+import { transformAsync, traverse, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
 import tsconfigPaths from "vite-tsconfig-paths";
+import parser from "@babel/parser";
+
+const omitJSXProps = [
+  "className",
+  "id",
+  "key",
+  "name",
+  "src",
+  "d",
+  "icon",
+  "image",
+  "to",
+  "layout",
+  "viewBox",
+];
+
+type TranslationResult = Map<string, { [key: string]: string }>;
+type SchemaMap = {
+  fileMatch: string[];
+  url: string;
+  omitFromTranslation?: string[];
+}[];
+
+let jsxTranslations: TranslationResult = new Map();
+let jsonTranslations: TranslationResult = new Map();
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    tsconfigPaths(),
+    {
+      name: "vite-plugin-translate",
+      async buildStart() {
+        return new Promise((resolve) => {
+          const stringsFromJSX: Set<string> = new Set();
+          const stringsFromJSON: Set<string> = new Set();
+          jsxTranslations = new Map();
+
+          async function processDirectory(
+            dir: string,
+            filter: (filePath: string) => boolean,
+            foundCallback: (filePath: string) => Promise<void>
+          ) {
+            const files = await fs.readdir(dir);
+            for (const file of files) {
+              const fullPath = path.join(dir, file);
+
+              if ((await fs.stat(fullPath)).isDirectory())
+                await processDirectory(fullPath, filter, foundCallback);
+              else if (filter(fullPath)) await foundCallback(fullPath);
+            }
+          }
+
+          async function processJSX() {
+            async function collectStringsFromJSX(filePath: string) {
+              const code = await fs.readFile(filePath, "utf-8");
+              const ast = parser.parse(code, {
+                sourceType: "module",
+                plugins: ["jsx", "typescript"],
+              });
+
+              const comments = ast.comments ?? [];
+              const ignoreFile = comments.some(
+                (x: types.Comment) =>
+                  x.loc?.start.line === 1 &&
+                  x.value.trim() === "@text-transform-ignore"
+              );
+
+              traverse(ast, {
+                FunctionDeclaration(path) {
+                  const isIgnored =
+                    ignoreFile ||
+                    comments.some(
+                      (x: types.Comment) =>
+                        path.node.loc &&
+                        x.loc?.start.line === path.node.loc.start.line - 1 &&
+                        x.value.trim() === "@text-transform-ignore"
+                    );
+
+                  const { node } = path;
+                  const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
+
+                  const hasJSXReturn = node.body.body.some(
+                    (statement) =>
+                      types.isReturnStatement(statement) &&
+                      (types.isJSXElement(statement.argument) ||
+                        types.isJSXFragment(statement.argument))
+                  );
+
+                  const isReactComponent = isPascalCase && hasJSXReturn;
+                  if (!isReactComponent) return;
+
+                  path.traverse({
+                    JSXText(path) {
+                      const text = path.node.value.trim();
+                      if (text) stringsFromJSX.add(text);
+                    },
+                    JSXAttribute(path) {
+                      if (
+                        isIgnored ||
+                        !types.isStringLiteral(path.node.value) ||
+                        omitJSXProps.includes(
+                          typeof path.node.name.name === "string"
+                            ? path.node.name.name
+                            : path.node.name.name.name
+                        )
+                      )
+                        return;
+
+                      const text = path.node.value.value.trim();
+                      if (text) stringsFromJSX.add(text);
+                    },
+                  });
+                },
+              });
+            }
+
+            await processDirectory(
+              path.resolve(__dirname, "src/components"),
+              (x) => x.endsWith(".tsx"),
+              collectStringsFromJSX
+            );
+          }
+
+          async function processJSON() {
+            async function collectStringsFromJSON(filePath: string) {
+              const omit = await getPropertyNamesToOmit(filePath, schemaMap);
+
+              const code = await fs.readFile(filePath, "utf-8");
+              const json = JSON.parse(code);
+              traverseJSON(json);
+
+              function traverseJSON(node: unknown) {
+                if (typeof node === "string") {
+                  stringsFromJSON.add(node);
+                } else if (Array.isArray(node)) {
+                  node.forEach(traverseJSON);
+                } else if (typeof node === "object") {
+                  for (const key in node) {
+                    if (omit.includes(key)) continue;
+                    traverseJSON(node[key as keyof typeof node]);
+                  }
+                }
+              }
+            }
+
+            const schemaMap: SchemaMap = await getSchemaMap();
+
+            await processDirectory(
+              path.resolve(__dirname, "src/assets/json-data/data"),
+              (x) => x.endsWith(".json"),
+              collectStringsFromJSON
+            );
+          }
+
+          async function translate(
+            toTranslate: Set<string>
+          ): Promise<TranslationResult> {
+            const translations: TranslationResult = new Map();
+
+            const translationPromises = Array.from(toTranslate).map(
+              async (originalValue) => {
+                const newTranslations: { [key: string]: string } = {};
+
+                await Promise.all(
+                  Object.keys(translators).map(async (key) => {
+                    const translator = translators[key];
+                    newTranslations[key] = await translator(originalValue);
+                  })
+                );
+
+                translations.set(originalValue, newTranslations);
+              }
+            );
+
+            await Promise.all(translationPromises);
+            return translations;
+          }
+
+          resolve(
+            (async () => {
+              await Promise.all([processJSX(), processJSON()]);
+              jsxTranslations = await translate(stringsFromJSX);
+              jsonTranslations = await translate(stringsFromJSON);
+            })()
+          );
+        });
+      },
+    },
+    tsconfigPaths(), //TODO: Check if this is needed, while fixing netlify I added this as one of the potential solutions
     react({
       babel: {
         plugins: [
@@ -25,27 +209,23 @@ export default defineConfig({
               );
 
               mainPlugin.options = {
-                translators,
-                omitJSXProps: [
-                  "className",
-                  "id",
-                  "key",
-                  "name",
-                  "src",
-                  "d",
-                  "icon",
-                  "image",
-                  "to",
-                  "layout",
-                  "viewBox",
-                ],
+                translations: jsxTranslations,
+                languageOptions: Object.keys(translators),
+                omitJSXProps,
               };
             },
             visitor: {
               Program(path, state) {
-                const translators = state.opts.translators;
-                const omitJSXProps = state.opts.omitJSXProps;
-                const languageOptions = Object.keys(translators);
+                const languageOptions: string[] = state.opts.languageOptions;
+                const allTranslations: typeof jsxTranslations =
+                  state.opts.translations;
+                const reactHooksWithDependencies = [
+                  "useMemo",
+                  "useCallback",
+                  "useEffect",
+                ];
+
+                const omitJSXProps: string[] = state.opts.omitJSXProps;
                 const comments = state.file.ast.comments;
 
                 const children = path.node.body;
@@ -207,10 +387,9 @@ export default defineConfig({
                         JSXText(path) {
                           const text = path.node.value.trim();
                           if (!text) return;
+                          const currentTranslations = allTranslations.get(text);
 
                           for (let i = 0; i < languageOptions.length; i++) {
-                            const translator = translators[languageOptions[i]];
-
                             const prop = (
                               extractedTextTranslationsObject.properties[
                                 i
@@ -218,7 +397,10 @@ export default defineConfig({
                             ).value as types.ArrayExpression;
 
                             prop.elements.push(
-                              types.stringLiteral(translator(text))
+                              types.stringLiteral(
+                                currentTranslations?.[languageOptions[i]] ??
+                                  "error"
+                              )
                             );
                           }
 
@@ -244,16 +426,19 @@ export default defineConfig({
                           if (
                             isIgnored ||
                             !types.isStringLiteral(path.node.value) ||
-                            omitJSXProps.includes(path.node.name.name)
+                            omitJSXProps.includes(
+                              typeof path.node.name.name === "string"
+                                ? path.node.name.name
+                                : path.node.name.name.name
+                            )
                           )
                             return;
 
                           const text = path.node.value.value.trim();
                           if (!text) return;
+                          const currentTranslations = allTranslations.get(text);
 
                           for (let i = 0; i < languageOptions.length; i++) {
-                            const translator = translators[languageOptions[i]];
-
                             const prop = (
                               extractedTextTranslationsObject.properties[
                                 i
@@ -261,7 +446,10 @@ export default defineConfig({
                             ).value as types.ArrayExpression;
 
                             prop.elements.push(
-                              types.stringLiteral(translator(text))
+                              types.stringLiteral(
+                                currentTranslations?.[languageOptions[i]] ??
+                                  "error"
+                              )
                             );
                           }
 
@@ -280,6 +468,35 @@ export default defineConfig({
                             )
                           );
                         },
+                        ...(hasJSONData && {
+                          CallExpression(path) {
+                            if (
+                              types.isIdentifier(path.node.callee) &&
+                              reactHooksWithDependencies.includes(
+                                path.node.callee.name
+                              ) &&
+                              path.node.arguments.length === 2 &&
+                              types.isArrowFunctionExpression(
+                                path.node.arguments[0]
+                              ) &&
+                              types.isArrayExpression(path.node.arguments[1])
+                            ) {
+                              let hookUsesJSONData = false;
+
+                              path.traverse({
+                                Identifier(path) {
+                                  if (jsonImports.includes(path.node.name))
+                                    hookUsesJSONData = true;
+                                },
+                              });
+
+                              if (hookUsesJSONData)
+                                path.node.arguments[1].elements.push(
+                                  types.identifier("lang")
+                                );
+                            }
+                          },
+                        }),
                       });
                     }
 
@@ -345,12 +562,7 @@ export default defineConfig({
 
 function jsonPlugin() {
   const filter = createFilter("**/*.json");
-
-  let schemaMap: {
-    fileMatch: string[];
-    url: string;
-    omitFromTranslation?: string[];
-  }[] = [];
+  let schemaMap: SchemaMap = [];
 
   return {
     name: "babel-json-plugin",
@@ -358,22 +570,18 @@ function jsonPlugin() {
       if (!filter(id)) return null;
 
       try {
-        schemaMap = JSON.parse(
-          await fs.readFile(
-            path.resolve(
-              __dirname,
-              "src/assets/json-data/data-to-schema-map.json"
-            ),
-            "utf-8"
-          )
-        );
+        schemaMap = await getSchemaMap();
 
         const result = await transformAsync(code, {
           filename: id,
           plugins: [
             [
               "./plugins/json-text-transformer",
-              { omitProperties: await getPropertyNamesToOmit(id), translators },
+              {
+                omitProperties: await getPropertyNamesToOmit(id),
+                translations: jsonTranslations,
+                langOptions: Object.keys(translators),
+              },
             ],
           ],
         });
@@ -415,92 +623,116 @@ function jsonPlugin() {
 }
 
 const translators: {
-  [key: string]: (value: string) => string;
+  [key: string]: (value: string) => Promise<string>;
 } = {
-  "sr-lat": (value) => value,
-  "sr-cyr": (value) => {
-    const latinToCyrillicMap = {
-      A: "А",
-      B: "Б",
-      V: "В",
-      G: "Г",
-      D: "Д",
-      Đ: "Ђ",
-      E: "Е",
-      Ž: "Ж",
-      Z: "З",
-      I: "И",
-      J: "Ј",
-      K: "К",
-      L: "Л",
-      Lj: "Љ",
-      M: "М",
-      N: "Н",
-      Nj: "Њ",
-      O: "О",
-      P: "П",
-      R: "Р",
-      S: "С",
-      T: "Т",
-      Ć: "Ћ",
-      U: "У",
-      F: "Ф",
-      H: "Х",
-      C: "Ц",
-      Č: "Ч",
-      Dž: "Џ",
-      Š: "Ш",
-      a: "а",
-      b: "б",
-      v: "в",
-      g: "г",
-      d: "д",
-      đ: "ђ",
-      e: "е",
-      ž: "ж",
-      z: "з",
-      i: "и",
-      j: "ј",
-      k: "к",
-      l: "л",
-      lj: "љ",
-      m: "м",
-      n: "н",
-      nj: "њ",
-      o: "о",
-      p: "п",
-      r: "р",
-      s: "с",
-      t: "т",
-      ć: "ћ",
-      u: "у",
-      f: "ф",
-      h: "х",
-      c: "ц",
-      č: "ч",
-      dž: "џ",
-      š: "ш",
-      LJ: "Љ",
-      NJ: "Њ",
-      DŽ: "Џ",
-    };
+  "sr-lat": (value) => Promise.resolve(value),
+  "sr-cyr": (value) =>
+    new Promise((resolve) => {
+      const latinToCyrillicMap = {
+        A: "А",
+        B: "Б",
+        V: "В",
+        G: "Г",
+        D: "Д",
+        Đ: "Ђ",
+        E: "Е",
+        Ž: "Ж",
+        Z: "З",
+        I: "И",
+        J: "Ј",
+        K: "К",
+        L: "Л",
+        Lj: "Љ",
+        M: "М",
+        N: "Н",
+        Nj: "Њ",
+        O: "О",
+        P: "П",
+        R: "Р",
+        S: "С",
+        T: "Т",
+        Ć: "Ћ",
+        U: "У",
+        F: "Ф",
+        H: "Х",
+        C: "Ц",
+        Č: "Ч",
+        Dž: "Џ",
+        Š: "Ш",
+        a: "а",
+        b: "б",
+        v: "в",
+        g: "г",
+        d: "д",
+        đ: "ђ",
+        e: "е",
+        ž: "ж",
+        z: "з",
+        i: "и",
+        j: "ј",
+        k: "к",
+        l: "л",
+        lj: "љ",
+        m: "м",
+        n: "н",
+        nj: "њ",
+        o: "о",
+        p: "п",
+        r: "р",
+        s: "с",
+        t: "т",
+        ć: "ћ",
+        u: "у",
+        f: "ф",
+        h: "х",
+        c: "ц",
+        č: "ч",
+        dž: "џ",
+        š: "ш",
+        LJ: "Љ",
+        NJ: "Њ",
+        DŽ: "Џ",
+      };
 
-    // Handle special cases for digraphs first
-    const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
-    digraphs.forEach((digraph) => {
-      const cyrillic =
-        latinToCyrillicMap[digraph as keyof typeof latinToCyrillicMap];
-      const regex = new RegExp(digraph, "g");
-      value = value.replace(regex, cyrillic);
-    });
+      // Handle special cases for digraphs first
+      const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
+      digraphs.forEach((digraph) => {
+        const cyrillic =
+          latinToCyrillicMap[digraph as keyof typeof latinToCyrillicMap];
+        const regex = new RegExp(digraph, "g");
+        value = value.replace(regex, cyrillic);
+      });
 
-    // Convert the rest of the characters
-    return value
-      .split("")
-      .map(
-        (char) =>
-          latinToCyrillicMap[char as keyof typeof latinToCyrillicMap] || char
-      )
-      .join("");
-  },
+      // Convert the rest of the characters
+      resolve(
+        value
+          .split("")
+          .map(
+            (char) =>
+              latinToCyrillicMap[char as keyof typeof latinToCyrillicMap] ||
+              char
+          )
+          .join("")
+      );
+    }),
 };
+
+async function getPropertyNamesToOmit(
+  jsonFilePath: string,
+  schemaMap: SchemaMap
+): Promise<string[]> {
+  for (const mapping of schemaMap)
+    if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch))
+      return mapping.omitFromTranslation ?? [];
+
+  return [];
+}
+
+async function getSchemaMap(): Promise<SchemaMap> {
+  return JSON.parse(
+    await fs.readFile(
+      path.resolve(__dirname, "src/assets/json-data/data-to-schema-map.json"),
+      "utf-8"
+    )
+  );
+}
