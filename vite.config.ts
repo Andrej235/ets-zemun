@@ -189,6 +189,7 @@ export default defineConfig({
               await Promise.all([processJSX(), processJSON()]);
               jsxTranslations = await translate(stringsFromJSX);
               jsonTranslations = await translate(stringsFromJSON);
+              console.log(jsonTranslations);
             })()
           );
         });
@@ -715,6 +716,22 @@ const translators: {
           .join("")
       );
     }),
+  en: async (value) => {
+    const response = await fetch("http://127.0.0.1:5000/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        q: value,
+        source: "sr",
+        target: "en",
+      }),
+    });
+
+    const data = await response.json();
+    return data.translatedText;
+  },
 };
 
 async function getPropertyNamesToOmit(
