@@ -189,7 +189,6 @@ export default defineConfig({
               await Promise.all([processJSX(), processJSON()]);
               jsxTranslations = await translate(stringsFromJSX);
               jsonTranslations = await translate(stringsFromJSON);
-              console.log(jsonTranslations);
             })()
           );
         });
@@ -716,23 +715,32 @@ const translators: {
           .join("")
       );
     }),
-  en: async (value) => {
-    const response = await fetch("http://127.0.0.1:5000/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        q: value,
-        source: "sr",
-        target: "en",
-      }),
-    });
-
-    const data = await response.json();
-    return data.translatedText;
-  },
+  en: (x) => getLibreTranslation(x, "sr", "en"),
+  it: (x) => getLibreTranslation(x, "sr", "it"),
+  et: (x) => getLibreTranslation(x, "sr", "et"),
+  zt: (x) => getLibreTranslation(x, "sr", "zt"),
 };
+
+async function getLibreTranslation(
+  value: string | string[],
+  source: string,
+  target: string
+) {
+  const response = await fetch("http://127.0.0.1:5000/translate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      q: value,
+      source,
+      target,
+    }),
+  });
+
+  const data = await response.json();
+  return data.translatedText;
+}
 
 async function getPropertyNamesToOmit(
   jsonFilePath: string,
