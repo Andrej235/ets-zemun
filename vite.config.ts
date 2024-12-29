@@ -31,6 +31,92 @@ type SchemaMap = {
 
 let jsxTranslations: TranslationResult = new Map();
 let jsonTranslations: TranslationResult = new Map();
+let schemaMap: SchemaMap | null = null;
+
+async function collectStringsFromJSX(filePath: string, set: Set<string>) {
+  const code = await fs.readFile(filePath, "utf-8");
+  const ast = parser.parse(code, {
+    sourceType: "module",
+    plugins: ["jsx", "typescript"],
+  });
+
+  const comments = ast.comments ?? [];
+  const ignoreFile = comments.some(
+    (x: types.Comment) =>
+      x.loc?.start.line === 1 && x.value.trim() === "@text-transform-ignore"
+  );
+
+  traverse(ast, {
+    FunctionDeclaration(path) {
+      const isIgnored =
+        ignoreFile ||
+        comments.some(
+          (x: types.Comment) =>
+            path.node.loc &&
+            x.loc?.start.line === path.node.loc.start.line - 1 &&
+            x.value.trim() === "@text-transform-ignore"
+        );
+
+      const { node } = path;
+      const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
+
+      const hasJSXReturn = node.body.body.some(
+        (statement) =>
+          types.isReturnStatement(statement) &&
+          (types.isJSXElement(statement.argument) ||
+            types.isJSXFragment(statement.argument))
+      );
+
+      const isReactComponent = isPascalCase && hasJSXReturn;
+      if (!isReactComponent) return;
+
+      path.traverse({
+        JSXText(path) {
+          const text = path.node.value.trim();
+          if (text) set.add(text);
+        },
+        JSXAttribute(path) {
+          if (
+            isIgnored ||
+            !types.isStringLiteral(path.node.value) ||
+            omitJSXProps.includes(
+              typeof path.node.name.name === "string"
+                ? path.node.name.name
+                : path.node.name.name.name
+            )
+          )
+            return;
+
+          const text = path.node.value.value.trim();
+          if (text) set.add(text);
+        },
+      });
+    },
+  });
+}
+
+async function collectStringsFromJSON(filePath: string, set: Set<string>) {
+  if (!schemaMap) throw new Error("SchemaMap is not initialized");
+
+  const omit = await getPropertyNamesToOmit(filePath, schemaMap);
+
+  const code = await fs.readFile(filePath, "utf-8");
+  const json = JSON.parse(code);
+  traverseJSON(json);
+
+  function traverseJSON(node: unknown) {
+    if (typeof node === "string") {
+      set.add(node);
+    } else if (Array.isArray(node)) {
+      node.forEach(traverseJSON);
+    } else if (typeof node === "object") {
+      for (const key in node) {
+        if (omit.includes(key)) continue;
+        traverseJSON(node[key as keyof typeof node]);
+      }
+    }
+  }
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -38,160 +124,74 @@ export default defineConfig({
     {
       name: "vite-plugin-translate",
       async buildStart() {
-        return new Promise((resolve) => {
-          const stringsFromJSX: Set<string> = new Set();
-          const stringsFromJSON: Set<string> = new Set();
-          jsxTranslations = new Map();
+        schemaMap = await getSchemaMap();
 
-          async function processDirectory(
-            dir: string,
-            filter: (filePath: string) => boolean,
-            foundCallback: (filePath: string) => Promise<void>
-          ) {
-            const files = await fs.readdir(dir);
-            for (const file of files) {
-              const fullPath = path.join(dir, file);
+        const stringsFromJSX: Set<string> = new Set();
+        const stringsFromJSON: Set<string> = new Set();
+        jsxTranslations = new Map();
 
-              if ((await fs.stat(fullPath)).isDirectory())
-                await processDirectory(fullPath, filter, foundCallback);
-              else if (filter(fullPath)) await foundCallback(fullPath);
-            }
+        async function processDirectory(
+          dir: string,
+          filter: (filePath: string) => boolean,
+          foundCallback: (filePath: string) => Promise<void>
+        ) {
+          const files = await fs.readdir(dir);
+          for (const file of files) {
+            const fullPath = path.join(dir, file);
+
+            if ((await fs.stat(fullPath)).isDirectory())
+              await processDirectory(fullPath, filter, foundCallback);
+            else if (filter(fullPath)) await foundCallback(fullPath);
           }
+        }
 
-          async function processJSX() {
-            async function collectStringsFromJSX(filePath: string) {
-              const code = await fs.readFile(filePath, "utf-8");
-              const ast = parser.parse(code, {
-                sourceType: "module",
-                plugins: ["jsx", "typescript"],
-              });
+        async function translate(
+          toTranslate: Set<string>
+        ): Promise<TranslationResult> {
+          const translations: TranslationResult = new Map();
 
-              const comments = ast.comments ?? [];
-              const ignoreFile = comments.some(
-                (x: types.Comment) =>
-                  x.loc?.start.line === 1 &&
-                  x.value.trim() === "@text-transform-ignore"
+          const translationPromises = Array.from(toTranslate).map(
+            async (originalValue) => {
+              const newTranslations: { [key: string]: string } = {};
+
+              await Promise.all(
+                Object.keys(translators).map(async (key) => {
+                  const translator = translators[key];
+                  newTranslations[key] = await translator(originalValue);
+                })
               );
 
-              traverse(ast, {
-                FunctionDeclaration(path) {
-                  const isIgnored =
-                    ignoreFile ||
-                    comments.some(
-                      (x: types.Comment) =>
-                        path.node.loc &&
-                        x.loc?.start.line === path.node.loc.start.line - 1 &&
-                        x.value.trim() === "@text-transform-ignore"
-                    );
-
-                  const { node } = path;
-                  const isPascalCase = /^[A-Z]/.test(node.id?.name ?? "");
-
-                  const hasJSXReturn = node.body.body.some(
-                    (statement) =>
-                      types.isReturnStatement(statement) &&
-                      (types.isJSXElement(statement.argument) ||
-                        types.isJSXFragment(statement.argument))
-                  );
-
-                  const isReactComponent = isPascalCase && hasJSXReturn;
-                  if (!isReactComponent) return;
-
-                  path.traverse({
-                    JSXText(path) {
-                      const text = path.node.value.trim();
-                      if (text) stringsFromJSX.add(text);
-                    },
-                    JSXAttribute(path) {
-                      if (
-                        isIgnored ||
-                        !types.isStringLiteral(path.node.value) ||
-                        omitJSXProps.includes(
-                          typeof path.node.name.name === "string"
-                            ? path.node.name.name
-                            : path.node.name.name.name
-                        )
-                      )
-                        return;
-
-                      const text = path.node.value.value.trim();
-                      if (text) stringsFromJSX.add(text);
-                    },
-                  });
-                },
-              });
+              translations.set(originalValue, newTranslations);
             }
-
-            await processDirectory(
-              path.resolve(__dirname, "src/components"),
-              (x) => x.endsWith(".tsx"),
-              collectStringsFromJSX
-            );
-          }
-
-          async function processJSON() {
-            async function collectStringsFromJSON(filePath: string) {
-              const omit = await getPropertyNamesToOmit(filePath, schemaMap);
-
-              const code = await fs.readFile(filePath, "utf-8");
-              const json = JSON.parse(code);
-              traverseJSON(json);
-
-              function traverseJSON(node: unknown) {
-                if (typeof node === "string") {
-                  stringsFromJSON.add(node);
-                } else if (Array.isArray(node)) {
-                  node.forEach(traverseJSON);
-                } else if (typeof node === "object") {
-                  for (const key in node) {
-                    if (omit.includes(key)) continue;
-                    traverseJSON(node[key as keyof typeof node]);
-                  }
-                }
-              }
-            }
-
-            const schemaMap: SchemaMap = await getSchemaMap();
-
-            await processDirectory(
-              path.resolve(__dirname, "src/assets/json-data/data"),
-              (x) => x.endsWith(".json"),
-              collectStringsFromJSON
-            );
-          }
-
-          async function translate(
-            toTranslate: Set<string>
-          ): Promise<TranslationResult> {
-            const translations: TranslationResult = new Map();
-
-            const translationPromises = Array.from(toTranslate).map(
-              async (originalValue) => {
-                const newTranslations: { [key: string]: string } = {};
-
-                await Promise.all(
-                  Object.keys(translators).map(async (key) => {
-                    const translator = translators[key];
-                    newTranslations[key] = await translator(originalValue);
-                  })
-                );
-
-                translations.set(originalValue, newTranslations);
-              }
-            );
-
-            await Promise.all(translationPromises);
-            return translations;
-          }
-
-          resolve(
-            (async () => {
-              await Promise.all([processJSX(), processJSON()]);
-              jsxTranslations = await translate(stringsFromJSX);
-              jsonTranslations = await translate(stringsFromJSON);
-            })()
           );
-        });
+
+          await Promise.all(translationPromises);
+          return translations;
+        }
+
+        await Promise.all([
+          processDirectory(
+            path.resolve(__dirname, "src/components"),
+            (x) => x.endsWith(".tsx"),
+            (x) => collectStringsFromJSX(x, stringsFromJSX)
+          ),
+          processDirectory(
+            path.resolve(__dirname, "src/assets/json-data/data"),
+            (x) => x.endsWith(".json"),
+            (x) => collectStringsFromJSON(x, stringsFromJSON)
+          ),
+        ]);
+
+        jsxTranslations = await translate(stringsFromJSX);
+        jsonTranslations = await translate(stringsFromJSON);
+      },
+      async handleHotUpdate(context) {
+        const updatedCode = await context.read();
+        if (context.file.endsWith(".json")) {
+        } else if (context.file.endsWith(".tsx")) {
+        }
+
+        console.log(updatedCode);
       },
     },
     tsconfigPaths(), //TODO: Check if this is needed, while fixing netlify I added this as one of the potential solutions
@@ -562,7 +562,6 @@ export default defineConfig({
 
 function jsonPlugin() {
   const filter = createFilter("**/*.json");
-  let schemaMap: SchemaMap = [];
 
   return {
     name: "babel-json-plugin",
@@ -570,8 +569,6 @@ function jsonPlugin() {
       if (!filter(id)) return null;
 
       try {
-        schemaMap = await getSchemaMap();
-
         const result = await transformAsync(code, {
           filename: id,
           plugins: [
@@ -612,6 +609,8 @@ function jsonPlugin() {
   };
 
   async function getPropertyNamesToOmit(jsonFilePath: string) {
+    if (!schemaMap) throw new Error("SchemaMap is not initialized");
+
     for (const mapping of schemaMap) {
       if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)) {
         return mapping.omitFromTranslation ?? [];
@@ -715,10 +714,10 @@ const translators: {
           .join("")
       );
     }),
-  en: (x) => getLibreTranslation(x, "sr", "en"),
-  it: (x) => getLibreTranslation(x, "sr", "it"),
-  et: (x) => getLibreTranslation(x, "sr", "et"),
-  zt: (x) => getLibreTranslation(x, "sr", "zt"),
+  // en: (x) => getLibreTranslation(x, "sr", "en"),
+  // it: (x) => getLibreTranslation(x, "sr", "it"),
+  // et: (x) => getLibreTranslation(x, "sr", "et"),
+  // zt: (x) => getLibreTranslation(x, "sr", "zt"),
 };
 
 async function getLibreTranslation(
