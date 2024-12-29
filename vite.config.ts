@@ -164,7 +164,6 @@ async function translateUsingLibre(
   }
 }
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
     {
@@ -241,9 +240,6 @@ export default defineConfig(({ mode }) => ({
         for (const lang of libreTranslatorLanguageOptions) {
           await translateUsingLibre(allValues, lang, stringsFromJSX.size);
         }
-
-        console.log(stringsFromJSX.size, stringsFromJSON.size);
-        console.log(jsxTranslations.size, jsonTranslations.size);
       },
       async handleHotUpdate(context) {
         if (context.file.endsWith(".tsx")) {
@@ -642,7 +638,7 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
-      "@styles": path.resolve(__dirname, "public/sass"),
+      "@styles": path.resolve(__dirname, "src/assets/sass"),
       "@assets": path.resolve(__dirname, "src/assets"),
       "@data": path.resolve(__dirname, "src/assets/json-data/data"),
       "@contexts": path.resolve(__dirname, "src/contexts"),

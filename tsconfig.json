@@ -29,7 +29,7 @@
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@data/*": ["src/assets/json-data/data/*"],
-      "@styles/*": ["public/sass/*"]
+      "@styles/*": ["src/assets/sass/*"]
     }
   },
   "include": ["src"],

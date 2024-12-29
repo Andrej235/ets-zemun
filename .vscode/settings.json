@@ -29,5 +29,13 @@
       }
     ],
     "cwd": "/src/assets/json-data/schemas"
-  }
+  },
+  "scss.scannerExclude": [
+    "**/.git",
+    "**/node_modules",
+    "**/bower_components",
+    "**/src",
+    "**/private",
+    "**/dist"
+  ]
 }
