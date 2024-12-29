@@ -1,0 +1,21 @@
+.scroller {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  width: 7rem;
+  height: 7rem;
+  background-color: $accent-secondary;
+  border-radius: 50%;
+  fill: transparent;
+  cursor: pointer;
+  padding: 0.2rem;
+  transition: 100ms;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: $accent-secondary-highlight;
+  }
+}

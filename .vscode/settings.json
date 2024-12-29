@@ -34,7 +34,7 @@
     "**/.git",
     "**/node_modules",
     "**/bower_components",
-    "**/src",
+    "**/components",
     "**/private",
     "**/dist"
   ]
