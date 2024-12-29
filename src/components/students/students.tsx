@@ -1,5 +1,11 @@
-import "./students.scss";
-
 export default function Students() {
-  return <div>Ucenici</div>;
+  return (
+    <div>
+      <br />
+      <br />
+      <br />
+
+      <h1>Ucenici i roditelji</h1>
+    </div>
+  );
 }
