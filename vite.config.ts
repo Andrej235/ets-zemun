@@ -33,7 +33,7 @@ let jsxTranslations: TranslationResult = new Map();
 let jsonTranslations: TranslationResult = new Map();
 let schemaMap: SchemaMap | null = null;
 
-async function collectStringsFromJSX(filePath: string, set: Set<string>) {
+async function collectStringsFromJSXFile(filePath: string, set: Set<string>) {
   const code = await fs.readFile(filePath, "utf-8");
   const ast = parser.parse(code, {
     sourceType: "module",
@@ -95,7 +95,7 @@ async function collectStringsFromJSX(filePath: string, set: Set<string>) {
   });
 }
 
-async function collectStringsFromJSON(filePath: string, set: Set<string>) {
+async function collectStringsFromJSONFile(filePath: string, set: Set<string>) {
   if (!schemaMap) throw new Error("SchemaMap is not initialized");
 
   const omit = await getPropertyNamesToOmit(filePath, schemaMap);
@@ -116,6 +116,19 @@ async function collectStringsFromJSON(filePath: string, set: Set<string>) {
       }
     }
   }
+}
+
+async function translateSingeValue(originalValue: string) {
+  const newTranslations: { [key: string]: string } = {};
+
+  await Promise.all(
+    Object.keys(translators).map(async (key) => {
+      const translator = translators[key];
+      newTranslations[key] = await translator(originalValue);
+    })
+  );
+
+  return newTranslations;
 }
 
 // https://vitejs.dev/config/
@@ -152,16 +165,10 @@ export default defineConfig({
 
           const translationPromises = Array.from(toTranslate).map(
             async (originalValue) => {
-              const newTranslations: { [key: string]: string } = {};
-
-              await Promise.all(
-                Object.keys(translators).map(async (key) => {
-                  const translator = translators[key];
-                  newTranslations[key] = await translator(originalValue);
-                })
+              translations.set(
+                originalValue,
+                await translateSingeValue(originalValue)
               );
-
-              translations.set(originalValue, newTranslations);
             }
           );
 
@@ -173,25 +180,55 @@ export default defineConfig({
           processDirectory(
             path.resolve(__dirname, "src/components"),
             (x) => x.endsWith(".tsx"),
-            (x) => collectStringsFromJSX(x, stringsFromJSX)
+            (x) => collectStringsFromJSXFile(x, stringsFromJSX)
           ),
           processDirectory(
             path.resolve(__dirname, "src/assets/json-data/data"),
             (x) => x.endsWith(".json"),
-            (x) => collectStringsFromJSON(x, stringsFromJSON)
+            (x) => collectStringsFromJSONFile(x, stringsFromJSON)
           ),
         ]);
 
-        jsxTranslations = await translate(stringsFromJSX);
-        jsonTranslations = await translate(stringsFromJSON);
+        await Promise.all([
+          translate(stringsFromJSX).then((x) => (jsxTranslations = x)),
+          translate(stringsFromJSON).then((x) => (jsonTranslations = x)),
+        ]);
       },
       async handleHotUpdate(context) {
         const updatedCode = await context.read();
-        if (context.file.endsWith(".json")) {
-        } else if (context.file.endsWith(".tsx")) {
-        }
+        const set: Set<string> = new Set();
 
-        console.log(updatedCode);
+        if (context.file.endsWith(".json")) {
+          await collectStringsFromJSONFile(context.file, set);
+
+          const translationPromises = Array.from(set).map(
+            async (originalValue) => {
+              const old = jsonTranslations.get(originalValue);
+              if (!old)
+                jsonTranslations.set(
+                  originalValue,
+                  await translateSingeValue(originalValue)
+                );
+            }
+          );
+
+          await Promise.all(translationPromises);
+        } else if (context.file.endsWith(".tsx")) {
+          await collectStringsFromJSXFile(context.file, set);
+
+          const translationPromises = Array.from(set).map(
+            async (originalValue) => {
+              const old = jsxTranslations.get(originalValue);
+              if (!old)
+                jsxTranslations.set(
+                  originalValue,
+                  await translateSingeValue(originalValue)
+                );
+            }
+          );
+
+          await Promise.all(translationPromises);
+        }
       },
     },
     tsconfigPaths(), //TODO: Check if this is needed, while fixing netlify I added this as one of the potential solutions
