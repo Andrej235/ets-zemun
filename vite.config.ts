@@ -9,7 +9,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import parser from "@babel/parser";
 
 const localTranslatorLanguageOptions = ["sr-lat", "sr-cyr"] as const;
-const libreTranslatorLanguageOptions = ["en"] as const;
+const libreTranslatorLanguageOptions = ["en", "ca", "bn", "bg", "zh"] as const;
 const languageOptions = [
   ...localTranslatorLanguageOptions,
   ...libreTranslatorLanguageOptions,
@@ -17,7 +17,6 @@ const languageOptions = [
 
 type LocalLanguage = (typeof localTranslatorLanguageOptions)[number];
 type LibreLanguage = (typeof libreTranslatorLanguageOptions)[number];
-type Language = LocalLanguage | LibreLanguage;
 
 const omitJSXProps = [
   "className",
@@ -235,16 +234,14 @@ export default defineConfig({
           ...Array.from(stringsFromJSON),
         ];
 
-        await Promise.all(
-          libreTranslatorLanguageOptions.map(async (lang) =>
-            translateUsingLibre(
-              allValues,
-              lang,
-              stringsFromJSX.size,
-              stringsFromJSON.size
-            )
-          )
-        );
+        for (const lang of libreTranslatorLanguageOptions) {
+          await translateUsingLibre(
+            allValues,
+            lang,
+            stringsFromJSX.size,
+            stringsFromJSON.size
+          );
+        }
       },
       async handleHotUpdate(context) {
         if (context.file.endsWith(".tsx")) {
@@ -268,11 +265,8 @@ export default defineConfig({
           if (set.size > 0) {
             const allValues = Array.from(set);
 
-            await Promise.all(
-              libreTranslatorLanguageOptions.map(async (lang) =>
-                translateUsingLibre(allValues, lang, allValues.length, 0)
-              )
-            );
+            for (const lang of libreTranslatorLanguageOptions)
+              await translateUsingLibre(allValues, lang, allValues.length, 0);
           }
         } else if (context.file.endsWith(".json")) {
           const set: Set<string> = new Set();
@@ -295,11 +289,8 @@ export default defineConfig({
           if (set.size > 0) {
             const allValues = Array.from(set);
 
-            await Promise.all(
-              libreTranslatorLanguageOptions.map(async (lang) =>
-                translateUsingLibre(allValues, lang, 0, allValues.length)
-              )
-            );
+            for (const lang of libreTranslatorLanguageOptions)
+              await translateUsingLibre(allValues, lang, 0, allValues.length);
           }
         }
       },
@@ -835,20 +826,25 @@ async function getLibreTranslation<T extends string | string[]>(
   source: string,
   target: string
 ): Promise<T> {
-  const response = await fetch("http://127.0.0.1:5000/translate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      q: value,
-      source,
-      target,
-    }),
-  });
+  try {
+    const response = await fetch("http://127.0.0.1:5000/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        q: value,
+        source,
+        target,
+      }),
+    });
 
-  const data = await response.json();
-  return data.translatedText;
+    const data = await response.json();
+    return data.translatedText;
+  } catch (error) {
+    console.error(`HTTP request failed for ${source}->${target}`, error);
+    return value;
+  }
 }
 
 async function getPropertyNamesToOmit(

@@ -5,7 +5,7 @@ export default function Students() {
       <br />
       <br />
 
-      <h1>Ucenici</h1>
+      <h1>Ucenici i roditelji</h1>
     </div>
   );
 }
