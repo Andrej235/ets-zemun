@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createFilter } from "@rollup/pluginutils";
@@ -9,14 +9,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import parser from "@babel/parser";
 
 const localTranslatorLanguageOptions = ["sr-lat", "sr-cyr"] as const;
-const libreTranslatorLanguageOptions = ["en", "ca", "bn", "bg", "zh"] as const;
-const languageOptions = [
-  ...localTranslatorLanguageOptions,
-  ...libreTranslatorLanguageOptions,
-];
+let libreTranslatorLanguageOptions = [] as const;
+function getLanguageOptions() {
+  return [...localTranslatorLanguageOptions, ...libreTranslatorLanguageOptions];
+}
 
 type LocalLanguage = (typeof localTranslatorLanguageOptions)[number];
-type LibreLanguage = (typeof libreTranslatorLanguageOptions)[number];
+type LibreLanguage = string;
 
 const omitJSXProps = [
   "className",
@@ -167,11 +166,16 @@ async function translateUsingLibre(
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     {
       name: "vite-plugin-translate",
       async buildStart() {
+        const env = loadEnv(mode, process.cwd(), "");
+        libreTranslatorLanguageOptions = JSON.parse(
+          env.VITE_AVAILABLE_LIBRE_LANGUAGES
+        );
+
         schemaMap = await getSchemaMap();
 
         const stringsFromJSX: Set<string> = new Set();
@@ -311,7 +315,7 @@ export default defineConfig({
 
               mainPlugin.options = {
                 translations: jsxTranslations,
-                languageOptions: languageOptions,
+                languageOptions: getLanguageOptions(),
                 omitJSXProps,
               };
             },
@@ -659,7 +663,7 @@ export default defineConfig({
       },
     },
   },
-});
+}));
 
 function jsonPlugin() {
   const filter = createFilter("**/*.json");
@@ -678,7 +682,7 @@ function jsonPlugin() {
               {
                 omitProperties: await getPropertyNamesToOmit(id),
                 translations: jsonTranslations,
-                langOptions: languageOptions,
+                langOptions: getLanguageOptions(),
               },
             ],
           ],

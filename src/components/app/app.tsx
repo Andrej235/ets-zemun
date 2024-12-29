@@ -2,7 +2,7 @@
 import { Outlet } from "react-router";
 import AppHeader from "@components/app-header/app-header";
 import "./app.scss";
-import LanguageContext, { languages } from "@contexts/language-context";
+import LanguageContext, { localLanguages } from "@contexts/language-context";
 import { useEffect, useState } from "react";
 import { Language } from "src/types/utility/language";
 
@@ -14,6 +14,13 @@ function App() {
   }
 
   useEffect(() => {
+    const languages = [
+      ...localLanguages,
+      ...(JSON.parse(
+        import.meta.env.VITE_AVAILABLE_LIBRE_LANGUAGES
+      ) as Language[]),
+    ];
+
     let storedLanguage = (localStorage.getItem("language") ??
       "sr-cyr") as Language;
 
@@ -23,7 +30,7 @@ function App() {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
         changeLanguage(
-          languages[(languages.indexOf(language) + 1) % languages.length],
+          languages[(languages.indexOf(language) + 1) % languages.length]
         );
       }
     }
