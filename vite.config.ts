@@ -193,9 +193,35 @@ export default defineConfig({
           translate(stringsFromJSX).then((x) => (jsxTranslations = x)),
           translate(stringsFromJSON).then((x) => (jsonTranslations = x)),
         ]);
+
+        //*Testing, for 'en'
+        //?Potential optimization - multi-thread sending requests for all languages as all values at once. after getting all responses go through them in a normal for loop where i is going towards the count of initial values, for each of the values add translated values to the resulting map at once, this will only have n iterations. do this for jsx and json data separately as sending it all at once may be confusing
+        //?#Or send both jsx and json at once and go through the results in 2 for loops, first goes up to jsx.length and second from jsx.length to json.length + jsx.length - 1 (for size offset)
+
+        const allValues = [
+          ...Array.from(stringsFromJSX),
+          ...Array.from(stringsFromJSON),
+        ];
+
+        const en = await getLibreTranslation(allValues, "sr", "en");
+
+        for (let i = 0; i < stringsFromJSX.size; i++) {
+          const value = allValues[i];
+          const translation = en[i];
+
+          const current = jsxTranslations.get(value);
+          jsxTranslations.set(value, { ...current, en: translation });
+        }
+
+        for (let i = stringsFromJSX.size; i < allValues.length; i++) {
+          const value = allValues[i];
+          const translation = en[i];
+
+          const current = jsonTranslations.get(value);
+          jsonTranslations.set(value, { ...current, en: translation });
+        }
       },
       async handleHotUpdate(context) {
-        const updatedCode = await context.read();
         const set: Set<string> = new Set();
 
         if (context.file.endsWith(".json")) {
@@ -247,7 +273,7 @@ export default defineConfig({
 
               mainPlugin.options = {
                 translations: jsxTranslations,
-                languageOptions: Object.keys(translators),
+                languageOptions: [...Object.keys(translators), "en"],
                 omitJSXProps,
               };
             },
@@ -614,7 +640,7 @@ function jsonPlugin() {
               {
                 omitProperties: await getPropertyNamesToOmit(id),
                 translations: jsonTranslations,
-                langOptions: Object.keys(translators),
+                langOptions: [...Object.keys(translators), "en"],
               },
             ],
           ],
@@ -751,17 +777,17 @@ const translators: {
           .join("")
       );
     }),
-  en: (x) => getLibreTranslation(x, "sr", "en"),
+  // en: (x) => getLibreTranslation(x, "sr", "en"),
   // it: (x) => getLibreTranslation(x, "sr", "it"),
   // et: (x) => getLibreTranslation(x, "sr", "et"),
   // zt: (x) => getLibreTranslation(x, "sr", "zt"),
 };
 
-async function getLibreTranslation(
-  value: string | string[],
+async function getLibreTranslation<T extends string | string[]>(
+  value: T,
   source: string,
   target: string
-) {
+): Promise<T> {
   const response = await fetch("http://127.0.0.1:5000/translate", {
     method: "POST",
     headers: {
