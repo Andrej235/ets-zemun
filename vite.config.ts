@@ -751,7 +751,7 @@ const translators: {
           .join("")
       );
     }),
-  // en: (x) => getLibreTranslation(x, "sr", "en"),
+  en: (x) => getLibreTranslation(x, "sr", "en"),
   // it: (x) => getLibreTranslation(x, "sr", "it"),
   // et: (x) => getLibreTranslation(x, "sr", "et"),
   // zt: (x) => getLibreTranslation(x, "sr", "zt"),

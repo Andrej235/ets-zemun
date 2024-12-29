@@ -1,3 +1,11 @@
 export default function Students() {
-  return <div>Ova stranica je namenjena za ucenike</div>;
+  return (
+    <div>
+      <br />
+      <br />
+      <br />
+
+      <h1>Ucenici</h1>
+    </div>
+  );
 }
