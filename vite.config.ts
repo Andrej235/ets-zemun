@@ -8,6 +8,17 @@ import micromatch from "micromatch";
 import tsconfigPaths from "vite-tsconfig-paths";
 import parser from "@babel/parser";
 
+const localTranslatorLanguageOptions = ["sr-lat", "sr-cyr"] as const;
+const libreTranslatorLanguageOptions = ["en"] as const;
+const languageOptions = [
+  ...localTranslatorLanguageOptions,
+  ...libreTranslatorLanguageOptions,
+];
+
+type LocalLanguage = (typeof localTranslatorLanguageOptions)[number];
+type LibreLanguage = (typeof libreTranslatorLanguageOptions)[number];
+type Language = LocalLanguage | LibreLanguage;
+
 const omitJSXProps = [
   "className",
   "id",
@@ -118,11 +129,11 @@ async function collectStringsFromJSONFile(filePath: string, set: Set<string>) {
   }
 }
 
-async function translateSingeValue(originalValue: string) {
+async function translateSingeValueUsingLocal(originalValue: string) {
   const newTranslations: { [key: string]: string } = {};
 
   await Promise.all(
-    Object.keys(translators).map(async (key) => {
+    localTranslatorLanguageOptions.map(async (key) => {
       const translator = translators[key];
       newTranslations[key] = await translator(originalValue);
     })
@@ -167,7 +178,7 @@ export default defineConfig({
             async (originalValue) => {
               translations.set(
                 originalValue,
-                await translateSingeValue(originalValue)
+                await translateSingeValueUsingLocal(originalValue)
               );
             }
           );
@@ -203,23 +214,31 @@ export default defineConfig({
           ...Array.from(stringsFromJSON),
         ];
 
-        const en = await getLibreTranslation(allValues, "sr", "en");
+        await Promise.all(
+          libreTranslatorLanguageOptions.map(async (lang) => {
+            const translations = await getLibreTranslation(
+              allValues,
+              "sr",
+              lang
+            );
 
-        for (let i = 0; i < stringsFromJSX.size; i++) {
-          const value = allValues[i];
-          const translation = en[i];
+            for (let i = 0; i < stringsFromJSX.size; i++) {
+              const value = allValues[i];
+              const translation = translations[i];
 
-          const current = jsxTranslations.get(value);
-          jsxTranslations.set(value, { ...current, en: translation });
-        }
+              const current = jsxTranslations.get(value);
+              jsxTranslations.set(value, { ...current, [lang]: translation });
+            }
 
-        for (let i = stringsFromJSX.size; i < allValues.length; i++) {
-          const value = allValues[i];
-          const translation = en[i];
+            for (let i = stringsFromJSX.size; i < allValues.length; i++) {
+              const value = allValues[i];
+              const translation = translations[i];
 
-          const current = jsonTranslations.get(value);
-          jsonTranslations.set(value, { ...current, en: translation });
-        }
+              const current = jsonTranslations.get(value);
+              jsonTranslations.set(value, { ...current, [lang]: translation });
+            }
+          })
+        );
       },
       async handleHotUpdate(context) {
         const set: Set<string> = new Set();
@@ -233,7 +252,7 @@ export default defineConfig({
               if (!old)
                 jsonTranslations.set(
                   originalValue,
-                  await translateSingeValue(originalValue)
+                  await translateSingeValueUsingLocal(originalValue)
                 );
             }
           );
@@ -248,7 +267,7 @@ export default defineConfig({
               if (!old)
                 jsxTranslations.set(
                   originalValue,
-                  await translateSingeValue(originalValue)
+                  await translateSingeValueUsingLocal(originalValue)
                 );
             }
           );
@@ -273,7 +292,7 @@ export default defineConfig({
 
               mainPlugin.options = {
                 translations: jsxTranslations,
-                languageOptions: [...Object.keys(translators), "en"],
+                languageOptions: languageOptions,
                 omitJSXProps,
               };
             },
@@ -640,7 +659,7 @@ function jsonPlugin() {
               {
                 omitProperties: await getPropertyNamesToOmit(id),
                 translations: jsonTranslations,
-                langOptions: [...Object.keys(translators), "en"],
+                langOptions: languageOptions,
               },
             ],
           ],
@@ -685,7 +704,7 @@ function jsonPlugin() {
 }
 
 const translators: {
-  [key: string]: (value: string) => Promise<string>;
+  [key in LocalLanguage]: (value: string) => Promise<string>;
 } = {
   "sr-lat": (value) => Promise.resolve(value),
   "sr-cyr": (value) =>
