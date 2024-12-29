@@ -143,8 +143,7 @@ async function translateSingeValueUsingLocal(originalValue: string) {
 async function translateUsingLibre(
   values: string[],
   lang: LibreLanguage,
-  jsxCount: number,
-  jsonCount: number
+  jsxCount: number
 ) {
   const translations = await getLibreTranslation(values, "sr", lang);
 
@@ -156,7 +155,7 @@ async function translateUsingLibre(
     jsxTranslations.set(value, { ...current, [lang]: translation });
   }
 
-  for (let i = jsonCount; i < values.length; i++) {
+  for (let i = jsxCount; i < values.length; i++) {
     const value = values[i];
     const translation = translations[i];
 
@@ -181,6 +180,7 @@ export default defineConfig(({ mode }) => ({
         const stringsFromJSX: Set<string> = new Set();
         const stringsFromJSON: Set<string> = new Set();
         jsxTranslations = new Map();
+        jsonTranslations = new Map();
 
         async function processDirectory(
           dir: string,
@@ -239,13 +239,11 @@ export default defineConfig(({ mode }) => ({
         ];
 
         for (const lang of libreTranslatorLanguageOptions) {
-          await translateUsingLibre(
-            allValues,
-            lang,
-            stringsFromJSX.size,
-            stringsFromJSON.size
-          );
+          await translateUsingLibre(allValues, lang, stringsFromJSX.size);
         }
+
+        console.log(stringsFromJSX.size, stringsFromJSON.size);
+        console.log(jsxTranslations.size, jsonTranslations.size);
       },
       async handleHotUpdate(context) {
         if (context.file.endsWith(".tsx")) {
@@ -270,7 +268,7 @@ export default defineConfig(({ mode }) => ({
             const allValues = Array.from(set);
 
             for (const lang of libreTranslatorLanguageOptions)
-              await translateUsingLibre(allValues, lang, allValues.length, 0);
+              await translateUsingLibre(allValues, lang, allValues.length);
           }
         } else if (context.file.endsWith(".json")) {
           const set: Set<string> = new Set();
@@ -294,7 +292,7 @@ export default defineConfig(({ mode }) => ({
             const allValues = Array.from(set);
 
             for (const lang of libreTranslatorLanguageOptions)
-              await translateUsingLibre(allValues, lang, 0, allValues.length);
+              await translateUsingLibre(allValues, lang, 0);
           }
         }
       },
@@ -322,7 +320,7 @@ export default defineConfig(({ mode }) => ({
             visitor: {
               Program(path, state) {
                 const languageOptions: string[] = state.opts.languageOptions;
-                const allTranslations: typeof jsxTranslations =
+                const allTranslations: TranslationResult =
                   state.opts.translations;
                 const reactHooksWithDependencies = [
                   "useMemo",
