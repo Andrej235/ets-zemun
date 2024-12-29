@@ -142,6 +142,31 @@ async function translateSingeValueUsingLocal(originalValue: string) {
   return newTranslations;
 }
 
+async function translateUsingLibre(
+  values: string[],
+  lang: LibreLanguage,
+  jsxCount: number,
+  jsonCount: number
+) {
+  const translations = await getLibreTranslation(values, "sr", lang);
+
+  for (let i = 0; i < jsxCount; i++) {
+    const value = values[i];
+    const translation = translations[i];
+
+    const current = jsxTranslations.get(value);
+    jsxTranslations.set(value, { ...current, [lang]: translation });
+  }
+
+  for (let i = jsonCount; i < values.length; i++) {
+    const value = values[i];
+    const translation = translations[i];
+
+    const current = jsonTranslations.get(value);
+    jsonTranslations.set(value, { ...current, [lang]: translation });
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -205,63 +230,28 @@ export default defineConfig({
           translate(stringsFromJSON).then((x) => (jsonTranslations = x)),
         ]);
 
-        //*Testing, for 'en'
-        //?Potential optimization - multi-thread sending requests for all languages as all values at once. after getting all responses go through them in a normal for loop where i is going towards the count of initial values, for each of the values add translated values to the resulting map at once, this will only have n iterations. do this for jsx and json data separately as sending it all at once may be confusing
-        //?#Or send both jsx and json at once and go through the results in 2 for loops, first goes up to jsx.length and second from jsx.length to json.length + jsx.length - 1 (for size offset)
-
         const allValues = [
           ...Array.from(stringsFromJSX),
           ...Array.from(stringsFromJSON),
         ];
 
         await Promise.all(
-          libreTranslatorLanguageOptions.map(async (lang) => {
-            const translations = await getLibreTranslation(
+          libreTranslatorLanguageOptions.map(async (lang) =>
+            translateUsingLibre(
               allValues,
-              "sr",
-              lang
-            );
-
-            for (let i = 0; i < stringsFromJSX.size; i++) {
-              const value = allValues[i];
-              const translation = translations[i];
-
-              const current = jsxTranslations.get(value);
-              jsxTranslations.set(value, { ...current, [lang]: translation });
-            }
-
-            for (let i = stringsFromJSX.size; i < allValues.length; i++) {
-              const value = allValues[i];
-              const translation = translations[i];
-
-              const current = jsonTranslations.get(value);
-              jsonTranslations.set(value, { ...current, [lang]: translation });
-            }
-          })
+              lang,
+              stringsFromJSX.size,
+              stringsFromJSON.size
+            )
+          )
         );
       },
       async handleHotUpdate(context) {
-        const set: Set<string> = new Set();
-
-        if (context.file.endsWith(".json")) {
-          await collectStringsFromJSONFile(context.file, set);
-
-          const translationPromises = Array.from(set).map(
-            async (originalValue) => {
-              const old = jsonTranslations.get(originalValue);
-              if (!old)
-                jsonTranslations.set(
-                  originalValue,
-                  await translateSingeValueUsingLocal(originalValue)
-                );
-            }
-          );
-
-          await Promise.all(translationPromises);
-        } else if (context.file.endsWith(".tsx")) {
+        if (context.file.endsWith(".tsx")) {
+          const set: Set<string> = new Set();
           await collectStringsFromJSXFile(context.file, set);
 
-          const translationPromises = Array.from(set).map(
+          const localTranslationPromises = Array.from(set).map(
             async (originalValue) => {
               const old = jsxTranslations.get(originalValue);
               if (!old)
@@ -269,10 +259,48 @@ export default defineConfig({
                   originalValue,
                   await translateSingeValueUsingLocal(originalValue)
                 );
+              else set.delete(originalValue);
             }
           );
 
-          await Promise.all(translationPromises);
+          await Promise.all(localTranslationPromises);
+
+          if (set.size > 0) {
+            const allValues = Array.from(set);
+
+            await Promise.all(
+              libreTranslatorLanguageOptions.map(async (lang) =>
+                translateUsingLibre(allValues, lang, allValues.length, 0)
+              )
+            );
+          }
+        } else if (context.file.endsWith(".json")) {
+          const set: Set<string> = new Set();
+          await collectStringsFromJSONFile(context.file, set);
+
+          const localTranslationPromises = Array.from(set).map(
+            async (originalValue) => {
+              const old = jsonTranslations.get(originalValue);
+              if (!old)
+                jsonTranslations.set(
+                  originalValue,
+                  await translateSingeValueUsingLocal(originalValue)
+                );
+              else set.delete(originalValue);
+            }
+          );
+
+          await Promise.all(localTranslationPromises);
+
+          if (set.size > 0) {
+            const allValues = Array.from(set);
+
+            await Promise.all(
+              libreTranslatorLanguageOptions.map(async (lang) =>
+                translateUsingLibre(allValues, lang, 0, allValues.length)
+              )
+            );
+          }
         }
       },
     },
