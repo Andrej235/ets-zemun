@@ -9,13 +9,14 @@
   fill: transparent;
   cursor: pointer;
   padding: 0.2rem;
-  transition: 100ms;
+  transition: 0s;
+  opacity: 0;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    background-color: $accent-secondary-highlight;
+    background-color: $accent-secondary;
   }
 }
