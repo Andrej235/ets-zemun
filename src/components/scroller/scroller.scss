@@ -1,5 +1,6 @@
 .scroller {
   position: fixed;
+  z-index: 1;
   bottom: 5rem;
   right: 5rem;
   width: 7rem;
@@ -16,7 +17,20 @@
   justify-content: center;
   align-items: center;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background-color: $accent-secondary;
   }
+}
+
+.scroller-discard-area {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  width: 7rem;
+  height: 7rem;
+  transform: translate-x(-50%);
+  background-color: #f00;
+  border-radius: 50%;
+  scale: 1.3;
 }
