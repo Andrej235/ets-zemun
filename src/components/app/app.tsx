@@ -5,6 +5,7 @@ import "./app.scss";
 import LanguageContext, { localLanguages } from "@contexts/language-context";
 import { useEffect, useState } from "react";
 import { Language } from "src/types/utility/language";
+import Scroller from "@components/scroller/scroller";
 
 function App() {
   const [language, setLanguage] = useState<Language>("sr-cyr");
@@ -47,6 +48,8 @@ function App() {
         <div id="page-content">
           <Outlet />
         </div>
+
+        <Scroller />
       </div>
     </LanguageContext.Provider>
   );
