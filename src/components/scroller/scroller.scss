@@ -3,6 +3,35 @@
   z-index: 1;
   bottom: 5rem;
   right: 5rem;
+  opacity: 1;
+
+  button {
+    width: 7rem;
+    height: 7rem;
+    background-color: $accent-secondary;
+    border-radius: 50%;
+    fill: transparent;
+    cursor: pointer;
+    padding: 0.2rem;
+    transition: 0s;
+    touch-action: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $accent-secondary;
+    }
+
+    * {
+      pointer-events: none;
+    }
+  }
+}
+
+.scroller-drag-overlay {
   width: 7rem;
   height: 7rem;
   background-color: $accent-secondary;
@@ -11,16 +40,11 @@
   cursor: pointer;
   padding: 0.2rem;
   transition: 0s;
-  opacity: 0;
+  touch-action: none;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  &:hover,
-  &:focus-visible {
-    background-color: $accent-secondary;
-  }
 }
 
 .scroller-discard-area {
@@ -29,8 +53,24 @@
   left: 50%;
   width: 7rem;
   height: 7rem;
-  transform: translate-x(-50%);
-  background-color: #f00;
-  border-radius: 50%;
-  scale: 1.3;
+  scale: 1.25;
+
+  div {
+    pointer-events: none;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: #f003;
+    border: 2px solid $outline;
+    backdrop-filter: blur(2px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 2rem;
+      color: #f99 !important;
+    }
+  }
 }
