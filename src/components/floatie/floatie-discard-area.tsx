@@ -21,7 +21,7 @@ export default function FloatieDiscardArea({
   return createPortal(
     <motion.div
       ref={setNodeRef}
-      className={`${id}-discard-area`}
+      className={"floatie-discard-area"}
       animate={{
         opacity: isDragging ? 1 : 0,
         y: isDragging ? 0 : 100,
@@ -29,7 +29,7 @@ export default function FloatieDiscardArea({
       }}
     >
       <motion.div
-        className="scroller-discard-area-icon"
+        className={"floatie-discard-area-icon"}
         animate={{
           scale: isOver ? 0.85 : 1,
         }}

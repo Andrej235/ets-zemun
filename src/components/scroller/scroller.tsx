@@ -155,6 +155,12 @@ export default function Scroller() {
       onDiscardFloatie={() => setIsScrollerAvailable(false)}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
+      onClick={() =>
+        document.scrollingElement?.scrollTo({
+          behavior: "smooth",
+          top: 0,
+        })
+      }
       overlay={{
         children: (
           <svg viewBox="0 0 24 24">
@@ -177,6 +183,7 @@ export default function Scroller() {
             />
           </svg>
         ),
+        className: "scroller-drag-overlay",
         dropAnimation: {
           additionalDropAnimations: (animate, container) => {
             animate(

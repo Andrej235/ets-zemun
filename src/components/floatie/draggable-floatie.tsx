@@ -7,8 +7,9 @@ type DraggableFloatieProps = {
   children: React.ReactNode;
   isFloatieVisible: boolean;
   isDragging: boolean;
-  onMouseOver: () => void;
-  onMouseOut: () => void;
+  onMouseOver?: () => void;
+  onMouseOut?: () => void;
+  onClick?: () => void;
 };
 
 export default function DraggableFloatie({
@@ -19,6 +20,7 @@ export default function DraggableFloatie({
   isDragging,
   onMouseOver: handleMouseOver,
   onMouseOut: handleMouseOut,
+  onClick: handleClick,
 }: DraggableFloatieProps) {
   const { listeners, attributes, setNodeRef } = useDraggable({
     id,
@@ -35,13 +37,7 @@ export default function DraggableFloatie({
       }}
     >
       <motion.button
-        onClick={() =>
-          !isDragging &&
-          document.scrollingElement?.scrollTo({
-            behavior: "smooth",
-            top: 0,
-          })
-        }
+        onClick={handleClick}
         onMouseOver={handleMouseOver}
         onMouseLeave={handleMouseOut}
         ref={setNodeRef}

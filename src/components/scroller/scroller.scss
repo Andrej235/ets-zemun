@@ -31,7 +31,7 @@
   }
 }
 
-.scroller-drag-overlay {
+.drag-overlay.scroller-drag-overlay {
   width: 7rem;
   height: 7rem;
   background-color: $accent-secondary;
@@ -45,35 +45,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.scroller-discard-area {
-  position: fixed;
-  bottom: 5rem;
-  left: 50%;
-  width: 7rem;
-  height: 7rem;
-  scale: 1.25;
-
-  .scroller-discard-area-icon {
-    pointer-events: none;
-    width: 7rem;
-    height: 7rem;
-    border-radius: 50%;
-    background-color: #f003;
-    border: 2px solid $outline;
-    backdrop-filter: blur(2px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    i {
-      font-size: 2rem;
-      color: #f99 !important;
-    }
-  }
-
+  //This is useful only if the drag overlay gets reparented inside of the discard area and is visible
   .scroller {
     position: absolute;
     bottom: 0;

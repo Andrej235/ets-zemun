@@ -7,6 +7,7 @@ export type FloatieOverlayProps = {
   isDragging: boolean;
   endDrag: () => void;
   isOverDiscard: boolean;
+  className?: string;
   dropAnimation?: {
     duration?: number;
     additionalDropAnimations?: (
@@ -22,13 +23,14 @@ export default function FloatieOverlay({
   isDragging,
   isOverDiscard,
   dropAnimation,
+  className,
 }: FloatieOverlayProps) {
-  const scrollerContainer = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!scrollerContainer.current) return;
+    if (!containerRef.current) return;
 
-    animate(scrollerContainer.current, {
+    animate(containerRef.current, {
       scale: isOverDiscard ? 1 : 1.2,
     });
   }, [isOverDiscard]);
@@ -40,10 +42,10 @@ export default function FloatieOverlay({
       dropAnimation={{
         duration: dropAnimationDuration,
         sideEffects: ({ active }) => {
-          if (!scrollerContainer.current) return;
+          if (!containerRef.current) return;
 
           animate(
-            scrollerContainer.current,
+            containerRef.current,
             {
               scale: 1,
             },
@@ -55,7 +57,7 @@ export default function FloatieOverlay({
 
           dropAnimation?.additionalDropAnimations?.(
             animate,
-            scrollerContainer.current
+            containerRef.current
           );
 
           active.node.classList.remove("dragging");
@@ -65,9 +67,9 @@ export default function FloatieOverlay({
       <AnimatePresence>
         {isDragging && (
           <motion.div
-            key={"scroller-drag-overlay"}
-            className="scroller-drag-overlay"
-            ref={scrollerContainer}
+            key={"drag-overlay"}
+            className={"drag-overlay" + (className ? ` ${className}` : "")}
+            ref={containerRef}
             initial={{
               scale: 1,
             }}

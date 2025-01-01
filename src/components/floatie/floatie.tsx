@@ -1,3 +1,4 @@
+import "./floatie.scss";
 import FloatieDiscardArea from "@components/floatie/floatie-discard-area";
 import {
   DndContext,
@@ -13,15 +14,17 @@ import FloatieOverlay, { FloatieOverlayProps } from "./floatie-overlay";
 type FloatieProps = {
   id: string;
   children: React.ReactNode;
-  className?: string;
-  onDiscardFloatie?: () => void;
   isFloatieVisible: boolean;
-  onMouseOver: () => void;
-  onMouseOut: () => void;
   overlay: {
     children: FloatieOverlayProps["children"];
     dropAnimation?: FloatieOverlayProps["dropAnimation"];
+    className?: FloatieOverlayProps["className"];
   };
+  className?: string;
+  onDiscardFloatie: () => void;
+  onMouseOver?: () => void;
+  onMouseOut?: () => void;
+  onClick?: () => void;
 };
 
 export default function Floatie({
@@ -32,6 +35,7 @@ export default function Floatie({
   onDiscardFloatie,
   onMouseOver: handleMouseOver,
   onMouseOut: handleMouseOut,
+  onClick: handleClick,
   overlay,
 }: FloatieProps) {
   const touchSensor = useSensor(TouchSensor, {
@@ -74,6 +78,7 @@ export default function Floatie({
           isFloatieVisible={isFloatieVisible}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
+          onClick={handleClick}
           children={children}
         />
       )}
@@ -86,8 +91,6 @@ export default function Floatie({
             className={className}
             isDragging={isDragging}
             isFloatieVisible={isFloatieVisible}
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
             children={children}
           />
         )}
