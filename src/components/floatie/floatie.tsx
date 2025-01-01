@@ -40,8 +40,8 @@ export default function Floatie({
 }: FloatieProps) {
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 50,
-      tolerance: 15,
+      delay: 75,
+      tolerance: 20,
     },
   });
 

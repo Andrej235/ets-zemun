@@ -38,8 +38,8 @@ export default function DraggableFloatie({
     >
       <motion.button
         onClick={handleClick}
-        onMouseOver={handleMouseOver}
-        onMouseLeave={handleMouseOut}
+        onPointerOver={(e) => e.pointerType === "mouse" && handleMouseOver?.()}
+        onPointerLeave={(e) => e.pointerType === "mouse" && handleMouseOut?.()}
         ref={setNodeRef}
         {...attributes}
         {...listeners}
