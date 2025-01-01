@@ -58,7 +58,6 @@ export default function ScrollerOverlay({
       <AnimatePresence>
         {isDragging && (
           <motion.div
-            id="test"
             key={"scroller-drag-overlay"}
             className="scroller-drag-overlay"
             ref={scrollerContainer}

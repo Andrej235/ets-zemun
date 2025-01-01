@@ -30,7 +30,7 @@ export default function InnerScroller({
 
   function setLength(pathProgress: number) {
     animate(
-      "path",
+      pathRef.current!,
       {
         pathLength: pathProgress,
       },
@@ -42,6 +42,7 @@ export default function InnerScroller({
 
   const isDraggingRef = useRef(false);
   const hoverAnimationProgress = useRef(0);
+  const pathRef = useRef<SVGPathElement>(null);
 
   function handleMouseOver() {
     if (isDraggingRef.current) return;
@@ -150,6 +151,7 @@ export default function InnerScroller({
       >
         <svg viewBox="0 0 24 24">
           <motion.path
+            ref={pathRef}
             style={{
               stroke: "white",
               strokeWidth: 0.5,
