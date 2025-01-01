@@ -7,6 +7,8 @@
   overflow: auto;
   padding: 6.5rem 1rem 1rem 1rem; // 7rem for the search bar (5rem) + 1.5rem for padding
   border-radius: 0 0 1rem 1rem;
+  pointer-events: all;
+  touch-action: auto;
 
   display: flex;
   flex-direction: column;
