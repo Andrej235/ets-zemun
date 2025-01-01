@@ -38,33 +38,37 @@ export default function HamburgerNavigation({
 
           <div className="nav-bar">
             <div className="nav-bar-tab">
-              <Link to="/">
+              <Link to="/" onClick={onRequestClose}>
                 <Icon name="school" />
-                &nbsp;&nbsp;O nama
+                <p>O nama</p>
               </Link>
             </div>
+
             <div className="nav-bar-tab">
-              <Link to="/">
+              <Link to="/profili" onClick={onRequestClose}>
                 <Icon name="graduation-cap" />
-                &nbsp;&nbsp;Obrazovni profili
+                <p>Obrazovni profili</p>
               </Link>
             </div>
+
             <div className="nav-bar-tab">
-              <Link to="/">
+              <Link to="/ucenici" onClick={onRequestClose}>
                 <Icon name="user-graduate" />
-                &nbsp;&nbsp;Ucenici
+                <p>Ucenici</p>
               </Link>
             </div>
+
             <div className="nav-bar-tab">
-              <Link to="/">
+              <Link to="/novosti" onClick={onRequestClose}>
                 <Icon name="newspaper" />
-                &nbsp;&nbsp;Novosti
+                <p>Novosti</p>
               </Link>
             </div>
+
             <div className="nav-bar-tab">
-              <Link to="/">
+              <Link to="/dokumenta" onClick={onRequestClose}>
                 <Icon name="folder-open" className="regular" />
-                &nbsp;&nbsp;Dokumenta
+                <p>Dokumenta</p>
               </Link>
             </div>
           </div>

@@ -1,23 +1,26 @@
 import Icon from "@components/icon/icon";
 import { useDroppable } from "@dnd-kit/core";
 import { motion } from "motion/react";
-import { createPortal } from "react-dom";
 
-export default function DiscardArea({
-  isDragging,
-  children,
-}: {
+type FloatieDiscardAreaProps = {
+  id: string;
   isDragging: boolean;
   children: React.ReactNode;
-}) {
+};
+
+export default function FloatieDiscardArea({
+  id,
+  isDragging,
+  children,
+}: FloatieDiscardAreaProps) {
   const { setNodeRef, isOver } = useDroppable({
-    id: "scroller-discard-area",
+    id: `${id}-discard-area`,
   });
 
-  return createPortal(
+  return (
     <motion.div
       ref={setNodeRef}
-      className="scroller-discard-area"
+      className={"floatie-discard-area"}
       animate={{
         opacity: isDragging ? 1 : 0,
         y: isDragging ? 0 : 100,
@@ -25,7 +28,7 @@ export default function DiscardArea({
       }}
     >
       <motion.div
-        className="scroller-discard-area-icon"
+        className={"floatie-discard-area-icon"}
         animate={{
           scale: isOver ? 0.85 : 1,
         }}
@@ -34,7 +37,6 @@ export default function DiscardArea({
       </motion.div>
 
       {children}
-    </motion.div>,
-    document.body
+    </motion.div>
   );
 }

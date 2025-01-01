@@ -40,6 +40,13 @@
       display: flex;
       align-items: center;
 
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
       :focus {
         color: $accent-highlight;
         * {
@@ -51,7 +58,7 @@
         padding: 0 2.5rem;
       }
 
-      .regular {
+      .icon.regular {
         font-weight: 500;
       }
     }
