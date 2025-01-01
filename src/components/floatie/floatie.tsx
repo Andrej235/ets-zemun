@@ -67,7 +67,6 @@ export default function Floatie({
           setIsOverDiscard(false);
         }
       }}
-      onDragMove={({}) => {}}
     >
       {!isOverDiscard && (
         <DraggableFloatie
