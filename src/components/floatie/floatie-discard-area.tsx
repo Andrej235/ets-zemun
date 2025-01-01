@@ -1,7 +1,6 @@
 import Icon from "@components/icon/icon";
 import { useDroppable } from "@dnd-kit/core";
 import { motion } from "motion/react";
-import { createPortal } from "react-dom";
 
 type FloatieDiscardAreaProps = {
   id: string;
@@ -18,7 +17,7 @@ export default function FloatieDiscardArea({
     id: `${id}-discard-area`,
   });
 
-  return createPortal(
+  return (
     <motion.div
       ref={setNodeRef}
       className={"floatie-discard-area"}
@@ -38,7 +37,6 @@ export default function FloatieDiscardArea({
       </motion.div>
 
       {children}
-    </motion.div>,
-    document.body
+    </motion.div>
   );
 }

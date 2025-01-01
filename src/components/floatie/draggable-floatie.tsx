@@ -46,6 +46,7 @@ export default function DraggableFloatie({
         animate={{
           opacity: !isDragging && isFloatieVisible ? 1 : 0,
         }}
+        className={"draggable-floatie"}
       >
         {children}
       </motion.button>
