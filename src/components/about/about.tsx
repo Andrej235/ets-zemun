@@ -86,7 +86,7 @@ export default function About() {
           </motion.p>
         </div>
 
-        <AliceCarousel itemsPerSlide={5}>
+        <AliceCarousel itemsPerSlide={3}>
           <InfoCard
             icon="history"
             title="Istorija škole"
