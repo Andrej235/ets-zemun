@@ -11,49 +11,37 @@ export default function AliceCarousel({
   itemsPerSlide,
 }: AliceCarouselProps) {
   const childrenArray = React.Children.toArray(children);
-  const sections = [];
 
-  for (let i = 0; i < childrenArray.length; i += itemsPerSlide) {
-    sections.push(childrenArray.slice(i, i + itemsPerSlide));
-  }
+  const [startIndex, setStartIndex] = useState(0);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalItems = childrenArray.length;
 
   const goToNext = () => {
-    if (currentIndex < sections.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
+    setStartIndex((prevIndex) => (prevIndex + 1) % totalItems);
   };
 
   const goToPrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      setCurrentIndex(sections.length - 1);
-    }
+    setStartIndex(
+      (prevIndex) => (prevIndex - 1 + totalItems) % totalItems
+    );
   };
+
+  const visibleItems = Array.from({ length: itemsPerSlide }, (_, i) => {
+    const index = (startIndex + i) % totalItems;
+    return childrenArray[index];
+  });
 
   return (
     <div className="alice-carousel-container">
       <div className="carousel-content">
-        <div
-          className="carousel-wrapper"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            transition: "transform 0.5s ease-in-out",
-          }}
-        >
-          {sections.map((section, index) => (
-            <div className="carousel-section" key={index}>
-              {section.map((child, childIndex) => (
-                <div className="carousel-item" key={childIndex}>
-                  {child}
-                </div>
-              ))}
-            </div>
-          ))}
+        <div className="carousel-wrapper">
+          <div className="carousel-section">
+            {visibleItems.map((child, childIndex) => (
+              <div className="carousel-item" key={childIndex}>
+                {child}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
