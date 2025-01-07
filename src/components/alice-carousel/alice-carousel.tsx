@@ -20,6 +20,7 @@ export default function AliceCarousel({
     }
   });
   const [nextIndex, setNextIndex] = useState(1);
+  const [prevIndex, setPrevIndex] = useState(1);
 
   const goToNext = () => {
     setVisibleItemsArray((prevArray) => {
@@ -32,6 +33,14 @@ export default function AliceCarousel({
   };
 
   const goToPrev = () => {
+    setVisibleItemsArray((prevArray) => {
+      const updatedArray = [
+        childrenArray[prevIndex],
+        ...prevArray.slice(0, -1),
+      ];
+      prevIndex === 0 ? setPrevIndex(2) : setPrevIndex(prevIndex-1);
+      console.log(prevIndex);
+      return updatedArray;})
   };
 
   return (
