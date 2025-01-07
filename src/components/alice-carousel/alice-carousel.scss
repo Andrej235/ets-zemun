@@ -4,12 +4,15 @@
   align-items: center;
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 
 .carousel-content {
   width: 100%;
   display: flex;
   justify-content: center;
+  transition: .5s;
+  gap: 2rem;
 }
 
 .arrow-left,
@@ -31,4 +34,14 @@
 
 .arrow-right {
   right: 10px;
+}
+
+.next {
+  transition: 0s !important;
+  transform: translateX(270px);
+}
+
+.prev {
+  transition: 0s !important;
+  transform: translateX(-270px);
 }

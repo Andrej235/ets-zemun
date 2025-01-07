@@ -22,6 +22,7 @@ export default function AliceCarousel({
   });
   const [nextIndex, setNextIndex] = useState(1);
   const [prevIndex, setPrevIndex] = useState(childrenArray.length-2);
+  const [changePosition, setChangePosition] = useState<" prev" | " next" | "">("");
 
   const goToNext = () => {
     setVisibleItemsArray((prevArray) => {
@@ -31,6 +32,11 @@ export default function AliceCarousel({
       ];
       nextIndex!==childrenArray.length-1 ? setNextIndex(nextIndex+1):setNextIndex(0);
       return updatedArray;})
+
+      setChangePosition(" next");
+      setTimeout(() => {
+        setChangePosition("");
+      }, 1);
   };
 
   const goToPrev = () => {
@@ -41,11 +47,16 @@ export default function AliceCarousel({
       ];
       prevIndex === 0 ? setPrevIndex(childrenArray.length-1) : setPrevIndex(prevIndex-1);
       return updatedArray;})
+
+      setChangePosition(" prev");
+      setTimeout(() => {
+        setChangePosition("");
+      }, 1);
   };
 
   return (
     <div className="alice-carousel-container">
-      <div className="carousel-content">
+      <div className={`carousel-content${changePosition}`}>
             {visibleItemsArray.map((child, childIndex) => (
               <div className="carousel-item" key={childIndex}>
                 {child}
