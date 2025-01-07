@@ -23,11 +23,11 @@ export default function AliceCarousel({
 
   const goToNext = () => {
     setVisibleItemsArray((prevArray) => {
-      const newArray = prevArray.slice(1);
-      const updatedArray = [...newArray, childrenArray[nextIndex]];
-      console.log(updatedArray);
-      nextIndex!=childrenArray.length-1 ? setNextIndex(nextIndex+1):setNextIndex(0);
-      console.log(nextIndex);
+      const updatedArray = [
+        ...prevArray.slice(1),
+        childrenArray[nextIndex],
+      ];
+      nextIndex!==childrenArray.length-1 ? setNextIndex(nextIndex+1):setNextIndex(0);
       return updatedArray;})
   };
 
