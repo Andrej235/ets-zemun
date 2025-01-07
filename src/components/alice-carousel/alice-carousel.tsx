@@ -7,9 +7,8 @@ type AliceCarouselProps = {
 };
 
 export default function AliceCarousel({
-  children,
 }: AliceCarouselProps) {
-  const childrenArray = React.Children.toArray(children);
+  const childrenArray = [0, 1, 2];
 
   const [visibleItemsArray, setVisibleItemsArray] = useState(() => {
     if (childrenArray.length > 1) {
@@ -20,8 +19,16 @@ export default function AliceCarousel({
       return childrenArray;
     }
   });
+  const [nextIndex, setNextIndex] = useState(1);
 
   const goToNext = () => {
+    setVisibleItemsArray((prevArray) => {
+      const newArray = prevArray.slice(1);
+      const updatedArray = [...newArray, childrenArray[nextIndex]];
+      console.log(updatedArray);
+      nextIndex!=childrenArray.length-1 ? setNextIndex(nextIndex+1):setNextIndex(0);
+      console.log(nextIndex);
+      return updatedArray;})
   };
 
   const goToPrev = () => {
