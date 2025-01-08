@@ -40,7 +40,7 @@ export default function AliceCarousel({ children }: AliceCarouselProps) {
       setTimeout(() => {
         setChangePosition("");
       }, 1);
-      setTimeout(() => setIsButtonPressed(false), 500)
+      setTimeout(() => setIsButtonPressed(false), 500);
     }
   };
 
@@ -62,8 +62,18 @@ export default function AliceCarousel({ children }: AliceCarouselProps) {
       setTimeout(() => {
         setChangePosition("");
       }, 1);
-      setTimeout(() => setIsButtonPressed(false), 500)
+      setTimeout(() => setIsButtonPressed(false), 500);
     }
+  };
+
+  const getClassNameFromActiveIndex = (
+    index: number,
+    arrayLength: number,
+    itemsPerSlide: number
+  ) => {
+    const middleIndex = Math.floor(arrayLength / 2);
+    const startIndex = Math.max(0, middleIndex - Math.floor(itemsPerSlide / 2));
+    const endIndex = Math.min(arrayLength - 1, middleIndex + Math.floor(itemsPerSlide / 2));
   };
 
   return (
