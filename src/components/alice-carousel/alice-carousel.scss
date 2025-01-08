@@ -11,8 +11,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  transition: 0.5s ease;
+  transition: 0.5s linear;
   gap: 2rem;
+}
+
+.carousel-item {
+  min-width: 25rem;
+  max-width: 25rem;
+  height: 28rem;
+  border-radius: 1rem;
 }
 
 .arrow-left,
