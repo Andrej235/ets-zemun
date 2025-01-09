@@ -6,7 +6,10 @@ type AliceCarouselProps = {
   itemsPerSlide: number;
 };
 
-export default function AliceCarousel({ children }: AliceCarouselProps) {
+export default function AliceCarousel({
+  children,
+  itemsPerSlide,
+}: AliceCarouselProps) {
   const childrenArray = React.Children.toArray(children);
 
   const [visibleItemsArray, setVisibleItemsArray] = useState(() => {
@@ -40,7 +43,7 @@ export default function AliceCarousel({ children }: AliceCarouselProps) {
       setTimeout(() => {
         setChangePosition("");
       }, 1);
-      setTimeout(() => setIsButtonPressed(false), 500);
+      setTimeout(() => setIsButtonPressed(false), 400);
     }
   };
 
@@ -62,7 +65,7 @@ export default function AliceCarousel({ children }: AliceCarouselProps) {
       setTimeout(() => {
         setChangePosition("");
       }, 1);
-      setTimeout(() => setIsButtonPressed(false), 500);
+      setTimeout(() => setIsButtonPressed(false), 400);
     }
   };
 
@@ -73,14 +76,41 @@ export default function AliceCarousel({ children }: AliceCarouselProps) {
   ) => {
     const middleIndex = Math.floor(arrayLength / 2);
     const startIndex = Math.max(0, middleIndex - Math.floor(itemsPerSlide / 2));
-    const endIndex = Math.min(arrayLength - 1, middleIndex + Math.floor(itemsPerSlide / 2));
+    const endIndex = Math.min(
+      arrayLength - 1,
+      middleIndex + Math.floor(itemsPerSlide / 2)
+    );
+
+    const distanceFromMiddle = Math.abs(middleIndex - index);
+
+    const maxScale = 1.2;
+    const scale = Math.max(1, maxScale - distanceFromMiddle * 0.05);
+
+    const scaleClass = `scale_${scale.toFixed(2).replace(".", "_")}`;
+
+    if (index < startIndex || index > endIndex) {
+      return " outside";
+    } else if (index === middleIndex) {
+      return " middle";
+    } else if (index < middleIndex) {
+      return ` grow-left ${scaleClass}`;
+    } else {
+      return ` grow-right ${scaleClass}`;
+    }
   };
 
   return (
     <div className="alice-carousel-container">
       <div className={`carousel-content${changePosition}`}>
         {visibleItemsArray.map((child, childIndex) => (
-          <div className="carousel-item" key={childIndex}>
+          <div
+            className={`carousel-item${getClassNameFromActiveIndex(
+              childIndex,
+              visibleItemsArray.length,
+              itemsPerSlide
+            )}`}
+            key={childIndex}
+          >
             {child}
           </div>
         ))}
