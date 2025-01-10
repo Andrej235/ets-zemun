@@ -1,48 +1,62 @@
-import React from "react";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
-import "./alice-carousel.scss";
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import "./alice-carousel.scss"
 
-type AliceCarouselProps = {
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import Icon from '@components/icon/icon';
+
+type SwiperGalleryProps = {
   children: React.ReactNode;
-  itemsPerSlide: number;
 };
 
-export default function CustomAliceCarousel({ children }: AliceCarouselProps) {
+const SwiperGallery = ({ children }: SwiperGalleryProps) => {
   const childrenArray = React.Children.toArray(children);
 
-  const items = childrenArray.map((child, index) => (
-    <div key={index} className="carousel-item">
-      {child}
-    </div>
-  ));
-
-  const responsive = {
-    0: {
-      items: 1,
-    },
-    425: {
-      items: 2,
-    },
-    768: {
-      items: 3,
-    },
-    1440: {
-      items: 5,
-    },
-  };
-
   return (
-    <div className="alice-carousel-container">
-      <div className="alice-carousel-wrapper">
-        <AliceCarousel
-          mouseTracking
-          infinite
-          responsive={responsive}
-          items={items}
-        />
-      </div>
+    <div className="container">
+      <h1 className="heading">Swiper</h1>
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5,
+        }}
+        pagination={{ el: '.swiper-pagination', clickable: true }}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="swiper_container"
+      >
+        {childrenArray.map((child, index) => (
+          <SwiperSlide key={index}>
+            {child}
+          </SwiperSlide>
+        ))}
+
+        <div className="slider-controler">
+          <div className="swiper-button-prev slider-arrow">
+            <Icon name="arrow-back-outline" />
+          </div>
+          <div className="swiper-button-next slider-arrow">
+            <Icon name="arrow-forward-outline" />
+          </div>
+          <div className="swiper-pagination"></div>
+        </div>
+      </Swiper>
     </div>
   );
-}
+};
 
+export default SwiperGallery;
