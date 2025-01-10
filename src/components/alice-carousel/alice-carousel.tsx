@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import "./alice-carousel.scss";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import Icon from "@components/icon/icon";
 
 type SwiperGalleryProps = {
   children: React.ReactNode;

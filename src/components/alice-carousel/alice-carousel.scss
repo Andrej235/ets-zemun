@@ -60,8 +60,15 @@
 }
 
 .slider-controler .swiper-button-next {
+  top: 0;
   left: 58% !important;
   transform: translateX(-58%) !important;
+}
+
+.slider-controler .swiper-button-prev {
+  left: 42% !important;
+  top: 0;
+  transform: translateX(-42%) !important;
 }
 
 @media (max-width: 990px) {
