@@ -8,11 +8,11 @@ import "./custom-swiper.scss";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
-type SwiperGalleryProps = {
+type CustomSwiper = {
   children: React.ReactNode;
 };
 
-const CustomSwiper = ({ children }: SwiperGalleryProps) => {
+const CustomSwiper = ({ children }: CustomSwiper) => {
   const childrenArray = React.Children.toArray(children);
 
   return (
