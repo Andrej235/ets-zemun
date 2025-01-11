@@ -17,7 +17,6 @@ const SwiperGallery = ({ children }: SwiperGalleryProps) => {
 
   return (
     <div className="container">
-      <h1 className="heading">Swiper</h1>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

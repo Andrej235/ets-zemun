@@ -12,10 +12,12 @@
 }
 
 .swiper_container {
-  width: 125rem;
+  width: 100%;
+  max-width: 125rem;
   height: 52rem;
   padding: 2rem 0;
   position: relative;
+  justify-content: center;
 }
 
 .swiper-slide {
