@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "./alice-carousel.scss";
+import "./custom-swiper.scss";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
@@ -12,7 +12,7 @@ type SwiperGalleryProps = {
   children: React.ReactNode;
 };
 
-const SwiperGallery = ({ children }: SwiperGalleryProps) => {
+const CustomSwiper = ({ children }: SwiperGalleryProps) => {
   const childrenArray = React.Children.toArray(children);
 
   return (
@@ -55,5 +55,5 @@ const SwiperGallery = ({ children }: SwiperGalleryProps) => {
   );
 };
 
-export default SwiperGallery;
+export default CustomSwiper;
 

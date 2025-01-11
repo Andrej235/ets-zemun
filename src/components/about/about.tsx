@@ -2,7 +2,7 @@ import {
   OverlayScrollbarsComponent,
   OverlayScrollbarsComponentRef,
 } from "overlayscrollbars-react";
-import AliceCarousel from "../alice-carousel/alice-carousel";
+import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
 import "./about.scss";
@@ -86,7 +86,7 @@ export default function About() {
           </motion.p>
         </div>
 
-        <AliceCarousel itemsPerSlide={5}>
+        <CustomSwiper>
           <InfoCard
             icon="history"
             title="Istorija škole"
@@ -149,7 +149,7 @@ export default function About() {
             link="/pravni-akte"
             text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
           />
-        </AliceCarousel>
+        </CustomSwiper>
 
         <OverlayScrollbarsComponent
           className="info-cards-container"
