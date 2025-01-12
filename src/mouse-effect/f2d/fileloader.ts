@@ -41,16 +41,11 @@ export default class FileLoader {
       }
     };
 
-    const loadFile = function (file: File) {
-      const request = new XMLHttpRequest();
-      request.onload = function () {
-        if (request.status === 200) {
-          file.text = request.responseText;
-        }
-        fileLoaded(file);
-      };
-      request.open("GET", file.url, true);
-      request.send();
+    const loadFile = async function (file: File) {
+      const response = await fetch(file.url);
+      if (response.ok) file.text = await response.text();
+
+      fileLoaded(file);
     };
 
     for (let i = 0; i < this.queue.length; i++) {
@@ -59,3 +54,4 @@ export default class FileLoader {
     this.queue = [];
   }
 }
+
