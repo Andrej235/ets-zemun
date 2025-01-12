@@ -23,7 +23,7 @@ export default function About() {
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
             <h1>Elektrotehnička škola "Zemun"</h1>
 
-            <p>Mi nečekamo budućnost, mi joj idemo u susret!</p>
+            <p>Mi ne čekamo budućnost, mi joj idemo u susret!</p>
           </motion.div>
         </div>
       </section>
@@ -37,7 +37,6 @@ export default function About() {
             Nastojimo da kod učenika probudimo želju za usavršavanjem i
             sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
             informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
-            <br />
             <br />
             Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
             prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
