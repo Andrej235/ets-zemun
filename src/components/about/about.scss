@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    min-height: calc(80svh - 10rem);
+    min-height: calc(100svh - 10rem);
   }
 
   .hero-space {
@@ -108,14 +108,34 @@
   .overview {
     width: 50%;
     margin-top: 5rem;
+    margin-bottom: 10rem;
 
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
 
-    p {
-      font-size: 2rem;
+    .overview-element {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      h1 {
+        font-size: 3rem;
+        color: $background;
+        width: 80%;
+        border-radius: 0.5rem;
+        padding: 5px;
+        padding-left: 2rem;
+        background-color: $accent-secondary;
+
+        display: flex;
+        align-items: center;
+      }
+
+      p {
+        font-size: 2rem;
+        padding-left: 1rem;
+      }
     }
   }
 
@@ -164,3 +184,4 @@
     }
   }
 }
+
