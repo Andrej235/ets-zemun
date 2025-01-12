@@ -15,6 +15,8 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
+  const heroSpaceRef = useRef<HTMLDivElement>(null);
+  const initializedCanvas = useRef(false);
 
   useEffect(() => {
     if (!infoCardsContainerRef.current) return;
@@ -22,22 +24,27 @@ export default function About() {
       .getElement()!
       .querySelector("[data-overlayscrollbars-contents]")! as HTMLElement;
 
-      for (let i = 0; i < infoCardsContainer.children.length; i++) {
-        const card = infoCardsContainer.children[i];
-  
-        scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
-          axis: "x",
-          target: card,
-          container: infoCardsContainer,
-          offset: ["start end", "end end", "start start", "end start"],
-        });
-      }
-    }, []);
-  
-    return (
-      <div id="about-page">
+    for (let i = 0; i < infoCardsContainer.children.length; i++) {
+      const card = infoCardsContainer.children[i];
+
+      scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
+        axis: "x",
+        target: card,
+        container: infoCardsContainer,
+        offset: ["start end", "end end", "start start", "end start"],
+      });
+    }
+
+    if (initializedCanvas.current || !heroSpaceRef.current) return;
+    initializedCanvas.current = true;
+
+    // heroSpaceRef.current.appendChild(initializeFluidCanvas());
+  }, []);
+
+  return (
+    <div id="about-page">
       <section>
-        <div className="hero-space">
+        <div className="hero-space" ref={heroSpaceRef}>
           <motion.div className="hero-image">
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
@@ -47,7 +54,7 @@ export default function About() {
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
             <h1>Elektrotehnička škola "Zemun"</h1>
 
-            <p>Mi nečekamo budućnost, mi joj idemo u susret!</p>
+            <p>Mi ne čekamo budućnost, mi joj idemo u susret!</p>
           </motion.div>
         </div>
       </section>
@@ -208,3 +215,4 @@ export default function About() {
     </div>
   );
 }
+

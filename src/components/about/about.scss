@@ -1,6 +1,6 @@
 #about-page {
   justify-self: center;
-  max-width: 80svw;
+  max-width: 100svw;
 
   display: flex;
   flex-direction: column;
@@ -17,6 +17,8 @@
 
   .hero-space {
     max-width: 100%;
+    min-width: 100%;
+    width: 100%;
     height: calc(100svh - 10rem);
 
     display: flex;
