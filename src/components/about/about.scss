@@ -106,37 +106,59 @@
   }
 
   .overview {
-    width: 50%;
+    position: relative;
+    width: 100%;
+    height: 20rem;
+    height: max-content;
     margin-top: 5rem;
     margin-bottom: 10rem;
 
     display: flex;
-    flex-direction: column;
-    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
 
     .overview-element {
+      width: 30%;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
 
       h1 {
-        font-size: 3rem;
-        color: $background;
         width: 80%;
         border-radius: 0.5rem;
-        padding: 5px;
-        padding-left: 2rem;
-        background-color: $accent-secondary;
 
         display: flex;
         align-items: center;
+        font-size: 5rem;
       }
 
       p {
-        font-size: 2rem;
-        padding-left: 1rem;
+        font-size: 1.8rem;
       }
     }
+
+    .overview-image {
+      width: 30%;
+      img {
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 60rem;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+  }
   }
 
   .info-cards-container {

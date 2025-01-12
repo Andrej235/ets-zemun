@@ -28,70 +28,32 @@ export default function About() {
         </div>
       </section>
 
-      <CustomSwiper>
-          <InfoCard
-            icon="history"
-            title="Istorija škole"
-            link="/istorija"
-            text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
+      <motion.div {...scrollAnimationFlyInBottom} className="overview">
+        <div className="overview-element">
+          <h1>Misija i Vizija</h1>
+          <p>
+            Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake
+            i naučne radnike iz oblasti koje obuhvata naš školski program.
+            Nastojimo da kod učenika probudimo želju za usavršavanjem i
+            sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
+            informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
+            <br />
+            <br />
+            Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
+            prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
+            aktivnosti. Stvorili smo takvo okruženje da je učenik u centru
+            nastavnog procesa i učenja. Želimo da naša deca postanu
+            preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama
+            menjamo sadašnjost i stvaramo svetliju budućnost.
+          </p>
+        </div>
+        <div className="overview-image">
+          <img
+            src="../../../public/images/414bee0337a871bdd69bc69aadaf2c79.png"
+            alt=""
           />
-
-          <InfoCard
-            icon="graduation-cap"
-            title="Programi obrazovanja"
-            link="/programi"
-            text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
-          />
-
-          <InfoCard
-            icon="building"
-            title="Infrastruktura i oprema"
-            link="/infrastruktura"
-            text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
-          />
-
-          <InfoCard
-            icon="chalkboard-teacher"
-            title="Nastavnici"
-            link="/nastavnici"
-            text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
-          />
-
-          <InfoCard
-            icon="trophy"
-            title="Takmičenja i nagrade"
-            link="/takmicenja"
-            text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
-          />
-
-          <InfoCard
-            icon="lightbulb"
-            title="Mentorski programi"
-            link="/mentori"
-            text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
-          />
-
-          <InfoCard
-            icon="pencil-alt"
-            title="Upis i prijem"
-            link="/upis"
-            text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
-          />
-
-          <InfoCard
-            icon="headset"
-            title="Podrška učenicima"
-            link="/podrska"
-            text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
-          />
-
-          <InfoCard
-            icon="gavel"
-            title="Pravni akte"
-            link="/pravni-akte"
-            text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
-          />
-        </CustomSwiper>
+        </div>
+      </motion.div>
 
       <div className="profiles-overview-container">
         {data.profiles.map((profile, i) => (
@@ -106,6 +68,71 @@ export default function About() {
       <section>
         <NewsAndEventsPreviewContainer />
       </section>
+
+      <CustomSwiper>
+        <InfoCard
+          icon="history"
+          title="Istorija škole"
+          link="/istorija"
+          text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
+        />
+
+        <InfoCard
+          icon="graduation-cap"
+          title="Programi obrazovanja"
+          link="/programi"
+          text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
+        />
+
+        <InfoCard
+          icon="building"
+          title="Infrastruktura i oprema"
+          link="/infrastruktura"
+          text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
+        />
+
+        <InfoCard
+          icon="chalkboard-teacher"
+          title="Nastavnici"
+          link="/nastavnici"
+          text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
+        />
+
+        <InfoCard
+          icon="trophy"
+          title="Takmičenja i nagrade"
+          link="/takmicenja"
+          text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
+        />
+
+        <InfoCard
+          icon="lightbulb"
+          title="Mentorski programi"
+          link="/mentori"
+          text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
+        />
+
+        <InfoCard
+          icon="pencil-alt"
+          title="Upis i prijem"
+          link="/upis"
+          text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
+        />
+
+        <InfoCard
+          icon="headset"
+          title="Podrška učenicima"
+          link="/podrska"
+          text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
+        />
+
+        <InfoCard
+          icon="gavel"
+          title="Pravni akte"
+          link="/pravni-akte"
+          text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
+        />
+      </CustomSwiper>
 
       <div className="footer">
         <div className="social-media-icons-container">
