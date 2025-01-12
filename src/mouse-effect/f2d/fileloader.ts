@@ -16,9 +16,9 @@ export default class FileLoader {
     this.path = path;
     this.queue = [];
     for (let i = 0; i < names.length; i++) {
-      let name = names[i];
-      let url = path + "/" + name;
-      let file = {
+      const name = names[i];
+      const url = path + "/" + name;
+      const file = {
         name: name,
         url: url,
       };
@@ -28,10 +28,10 @@ export default class FileLoader {
   // Load all files currently in the queue, calls onDone when all files
   // has been downloaded.
   run(onDone: (files: Record<string, string>) => void) {
-    let files: Record<string, string> = {};
+    const files: Record<string, string> = {};
     let filesRemaining = this.queue.length;
 
-    let fileLoaded = function (file: File) {
+    const fileLoaded = function (file: File) {
       if (file.text === undefined) return;
 
       files[file.name] = file.text;
@@ -41,8 +41,8 @@ export default class FileLoader {
       }
     };
 
-    let loadFile = function (file: File) {
-      let request = new XMLHttpRequest();
+    const loadFile = function (file: File) {
+      const request = new XMLHttpRequest();
       request.onload = function () {
         if (request.status === 200) {
           file.text = request.responseText;

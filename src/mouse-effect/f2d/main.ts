@@ -7,9 +7,9 @@ import FileLoader from "./fileloader";
 import { Grid } from "../types/Grid";
 import { Time } from "../types/Time";
 
-let windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
+const windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
-let renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
 renderer.autoClear = false;
 renderer.sortObjects = false;
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -17,17 +17,17 @@ renderer.setSize(windowSize.x, windowSize.y);
 renderer.setClearColor(0x00ff00);
 document.body.appendChild(renderer.domElement);
 
-let grid: Grid = {
+const grid: Grid = {
   size: new THREE.Vector2(512, 256),
   scale: 1,
   applyBoundaries: true,
 };
-let time: Time = {
+const time: Time = {
   step: 1,
 };
 let displayScalar: Display;
 let displayVector: Display;
-let displaySettings: {
+const displaySettings: {
   slab: "density" | "velocity" | "divergence" | "pressure";
 } = {
   slab: "density",
@@ -35,7 +35,7 @@ let displaySettings: {
 
 let solver: Solver;
 let gui: dat.GUI;
-let mouse = new Mouse(grid);
+const mouse = new Mouse(grid);
 
 function init(shaders: Record<string, string>) {
   solver = Solver.make(grid, time, windowSize, shaders);
@@ -52,7 +52,7 @@ function init(shaders: Record<string, string>) {
   ]);
   gui.add(time, "step").min(0).step(0.01);
 
-  let advectFolder = gui.addFolder("Advect");
+  const advectFolder = gui.addFolder("Advect");
   advectFolder.add(solver.advect, "dissipation", {
     none: 1,
     slow: 0.998,
@@ -60,15 +60,15 @@ function init(shaders: Record<string, string>) {
     "very fast": 0.9,
   });
 
-  let viscosityFolder = gui.addFolder("Viscosity");
+  const viscosityFolder = gui.addFolder("Viscosity");
   viscosityFolder.add(solver, "applyViscosity");
   viscosityFolder.add(solver, "viscosity").min(0).step(0.01);
 
-  let vorticityFolder = gui.addFolder("Vorticity");
+  const vorticityFolder = gui.addFolder("Vorticity");
   vorticityFolder.add(solver, "applyVorticity");
   vorticityFolder.add(solver.vorticityConfinement, "curl").min(0).step(0.01);
 
-  let poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
+  const poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
   poissonPressureEqFolder.add(
     solver.poissonPressureEq,
     "iterations",
@@ -80,16 +80,16 @@ function init(shaders: Record<string, string>) {
   // we need a splat color "adapter" since we want values between 0 and
   // 1 but also since dat.GUI requires a JavaScript array over a Three.js
   // vector
-  let splatSettings = {
+  const splatSettings = {
     color: [solver.ink.x * 255, solver.ink.y * 255, solver.ink.z * 255],
   };
-  let splatFolder = gui.addFolder("Splat");
+  const splatFolder = gui.addFolder("Splat");
   splatFolder.add(solver.splat, "radius").min(0);
   splatFolder.addColor(splatSettings, "color").onChange(function (value) {
     solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
   });
 
-  let gridFolder = gui.addFolder("Grid");
+  const gridFolder = gui.addFolder("Grid");
   gridFolder.add(grid, "applyBoundaries");
   gridFolder.add(grid, "scale");
 
@@ -136,7 +136,7 @@ function resize() {
 }
 window.onresize = resize;
 
-let loader = new FileLoader("shaders", [
+const loader = new FileLoader("shaders", [
   "advect.fs",
   "basic.vs",
   "gradient.fs",
@@ -152,8 +152,8 @@ let loader = new FileLoader("shaders", [
 ]);
 loader.run((files) => {
   // remove file extension before passing shaders to init
-  let shaders: Record<string, string> = {};
-  for (let name in files) {
+  const shaders: Record<string, string> = {};
+  for (const name in files) {
     shaders[name.split(".")[0]] = files[name];
   }
   init(shaders);

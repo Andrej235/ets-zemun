@@ -13,7 +13,7 @@ export default class Slab {
     this.write = this.read.clone();
   }
   swap() {
-    let tmp = this.read;
+    const tmp = this.read;
     this.read = this.write;
     this.write = tmp;
   }
@@ -22,7 +22,7 @@ export default class Slab {
   }
 }
 
-let options = {
+const options = {
   wrapS: THREE.ClampToEdgeWrapping,
   wrapT: THREE.ClampToEdgeWrapping,
   magFilter: THREE.NearestFilter,

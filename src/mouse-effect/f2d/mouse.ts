@@ -47,21 +47,21 @@ export default class Mouse {
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
-    let r = this.grid.scale;
+    const r = this.grid.scale;
 
-    let x = event.clientX;
-    let y = event.clientY;
+    const x = event.clientX;
+    const y = event.clientY;
 
     if (this.left || this.right) {
-      let dx = x - this.position.x;
-      let dy = y - this.position.y;
+      const dx = x - this.position.x;
+      const dy = y - this.position.y;
 
-      let drag = {
+      const drag = {
         x: Math.min(Math.max(dx, -r), r),
         y: Math.min(Math.max(dy, -r), r),
       };
 
-      let position = {
+      const position = {
         x: x,
         y: y,
       };

@@ -22,20 +22,20 @@ export default function About() {
       .getElement()!
       .querySelector("[data-overlayscrollbars-contents]")! as HTMLElement;
 
-    for (let i = 0; i < infoCardsContainer.children.length; i++) {
-      const card = infoCardsContainer.children[i];
-
-      scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
-        axis: "x",
-        target: card,
-        container: infoCardsContainer,
-        offset: ["start end", "end end", "start start", "end start"],
-      });
-    }
-  }, []);
-
-  return (
-    <div id="about-page">
+      for (let i = 0; i < infoCardsContainer.children.length; i++) {
+        const card = infoCardsContainer.children[i];
+  
+        scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
+          axis: "x",
+          target: card,
+          container: infoCardsContainer,
+          offset: ["start end", "end end", "start start", "end start"],
+        });
+      }
+    }, []);
+  
+    return (
+      <div id="about-page">
       <section>
         <div className="hero-space">
           <motion.div className="hero-image">

@@ -83,7 +83,7 @@ class Solver {
   step(renderer: THREE.WebGLRenderer, mouse: Mouse) {
     // we only want the quantity carried by the velocity field to be
     // affected by the dissipation
-    let temp = this.advect.dissipation;
+    const temp = this.advect.dissipation;
     this.advect.dissipation = 1;
     this.advect.compute(renderer, this.velocity, this.velocity, this.velocity);
     this.boundary.compute(renderer, this.velocity, -1, this.velocity);
@@ -105,7 +105,7 @@ class Solver {
     }
 
     if (this.applyViscosity && this.viscosity > 0) {
-      let s = this.grid.scale;
+      const s = this.grid.scale;
 
       this.diffuse.alpha = (s * s) / (this.viscosity * this.time.step);
       this.diffuse.beta = 4 + this.diffuse.alpha;
