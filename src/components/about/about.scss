@@ -1,11 +1,19 @@
 #about-page {
   justify-self: center;
   max-width: 100svw;
+  padding: 0 10svw;
 
   display: flex;
   flex-direction: column;
 
   overflow: hidden;
+
+  canvas {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 
   section {
     display: flex;
@@ -166,3 +174,4 @@
     }
   }
 }
+

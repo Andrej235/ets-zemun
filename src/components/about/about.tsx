@@ -12,10 +12,11 @@ import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-c
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
+import initializeFluidCanvas from "src/mouse-effect/f2d/main";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
-  const heroSpaceRef = useRef<HTMLDivElement>(null);
+  const canvasParentRef = useRef<HTMLDivElement>(null);
   const initializedCanvas = useRef(false);
 
   useEffect(() => {
@@ -35,16 +36,16 @@ export default function About() {
       });
     }
 
-    if (initializedCanvas.current || !heroSpaceRef.current) return;
+    if (initializedCanvas.current || !canvasParentRef.current) return;
     initializedCanvas.current = true;
 
-    // heroSpaceRef.current.appendChild(initializeFluidCanvas());
+    canvasParentRef.current.appendChild(initializeFluidCanvas());
   }, []);
 
   return (
     <div id="about-page">
       <section>
-        <div className="hero-space" ref={heroSpaceRef}>
+        <div className="hero-space">
           <motion.div className="hero-image">
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
@@ -59,7 +60,7 @@ export default function About() {
         </div>
       </section>
 
-      <section>
+      <section ref={canvasParentRef}>
         <div className="overview">
           <motion.h1 {...scrollAnimationFlyInBottom}>
             Lorem ipsum dolor sit amet.
