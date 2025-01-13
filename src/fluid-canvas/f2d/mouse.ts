@@ -3,9 +3,7 @@ import * as THREE from "three";
 
 export default class Mouse {
   grid: Grid;
-  canvas: HTMLCanvasElement;
   canvasTopOffset: number;
-  canvasHeight: number;
 
   left: boolean;
   right: boolean;
@@ -23,26 +21,24 @@ export default class Mouse {
     };
   }[];
 
-  constructor(grid: Grid, canvas: HTMLCanvasElement) {
+  constructor(grid: Grid, canvasContainer: HTMLElement) {
     this.grid = grid;
-    this.canvas = canvas;
-    this.canvasTopOffset = 1;
-    this.canvasHeight = 1;
-
-    setTimeout(() => {
-      this.canvasTopOffset = this.canvas.offsetTop;
-      this.canvasHeight = this.canvas.height;
-    }, 10);
+    this.canvasTopOffset = canvasContainer.offsetTop;
 
     this.left = false;
     this.right = false;
     this.position = new THREE.Vector2();
     this.motions = [];
 
-    canvas.addEventListener("mousedown", this.mouseDown.bind(this));
-    canvas.addEventListener("mouseup", this.mouseUp.bind(this));
-    canvas.addEventListener("mousemove", this.mouseMove.bind(this));
-    canvas.addEventListener("contextmenu", this.contextMenu.bind(this));
+    console.log("mouse");
+
+    canvasContainer.addEventListener("mousedown", this.mouseDown.bind(this));
+    canvasContainer.addEventListener("mouseup", this.mouseUp.bind(this));
+    canvasContainer.addEventListener("mousemove", this.mouseMove.bind(this));
+    canvasContainer.addEventListener(
+      "contextmenu",
+      this.contextMenu.bind(this),
+    );
   }
 
   mouseDown(event: MouseEvent) {

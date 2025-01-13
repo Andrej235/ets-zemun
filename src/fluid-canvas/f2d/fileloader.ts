@@ -2,15 +2,18 @@
 // file has been loaded with its response text.
 // Construct a file loader with a suffix path that is prepended to all
 // names.
-type File = {
+export type File = {
   name: string;
   url: string;
   text?: string;
 };
 
+export type Files = Record<string, string>;
+
 export default class FileLoader {
   path: string;
   queue: File[];
+  currentRun: Promise<Files> | null = null;
 
   constructor(path: string, names: string[]) {
     this.path = path;
@@ -25,33 +28,31 @@ export default class FileLoader {
       this.queue.push(file);
     }
   }
+
   // Load all files currently in the queue, calls onDone when all files
   // has been downloaded.
-  run(onDone: (files: Record<string, string>) => void) {
-    const files: Record<string, string> = {};
-    let filesRemaining = this.queue.length;
+  run(): Promise<Files> {
+    this.currentRun ??= this.loadAllFromQueue();
+    return this.currentRun;
+  }
 
-    const fileLoaded = function (file: File) {
-      if (file.text === undefined) return;
+  private async loadAllFromQueue() {
+    const files: Files = {};
 
-      files[file.name] = file.text;
-      filesRemaining--;
-      if (filesRemaining === 0) {
-        onDone(files);
-      }
-    };
-
-    const loadFile = async function (file: File) {
+    async function loadFile(file: File) {
       const response = await fetch(file.url);
-      if (response.ok) file.text = await response.text();
+      if (!response.ok) return;
 
-      fileLoaded(file);
-    };
-
-    for (let i = 0; i < this.queue.length; i++) {
-      loadFile(this.queue[i]);
+      file.text = await response.text();
+      files[file.name] = file.text;
     }
+
+    const promises = [];
+    for (let i = 0; i < this.queue.length; i++)
+      promises.push(loadFile(this.queue[i]));
+
     this.queue = [];
+    await Promise.all(promises);
+    return files;
   }
 }
-
