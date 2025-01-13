@@ -32,8 +32,6 @@ export default class Mouse {
     this.position = new THREE.Vector2();
     this.motions = [];
 
-    console.log("mouse");
-
     canvasContainer.addEventListener("mousedown", this.mouseDown.bind(this));
     canvasContainer.addEventListener("mouseup", this.mouseUp.bind(this));
     canvasContainer.addEventListener("mousemove", this.mouseMove.bind(this));

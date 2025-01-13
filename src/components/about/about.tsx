@@ -54,9 +54,9 @@ export default function About() {
       </section>
 
       <section>
+        <FluidCanvas />
+        
         <div className="overview">
-          <FluidCanvas />
-
           <motion.h1 {...scrollAnimationFlyInBottom}>
             Lorem ipsum dolor sit amet.
           </motion.h1>

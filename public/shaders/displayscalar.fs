@@ -7,5 +7,5 @@ varying vec2 texCoord;
 
 void main()
 {
-    gl_FragColor = vec4(bias + scale * texture2D(read, texCoord).xxx, 1.0);
+    gl_FragColor = vec4(bias + scale * texture2D(read, texCoord).xxx, length(bias + scale * texture2D(read, texCoord).xxx));
 }
