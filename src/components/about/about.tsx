@@ -12,12 +12,10 @@ import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-c
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
-import initializeFluidCanvas from "src/mouse-effect/f2d/main";
+import FluidCanvas from "src/mouse-effect/f2d/fluid-canvas";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
-  const canvasParentRef = useRef<HTMLDivElement>(null);
-  const initializedCanvas = useRef(false);
 
   useEffect(() => {
     if (!infoCardsContainerRef.current) return;
@@ -35,11 +33,6 @@ export default function About() {
         offset: ["start end", "end end", "start start", "end start"],
       });
     }
-
-    if (initializedCanvas.current || !canvasParentRef.current) return;
-    initializedCanvas.current = true;
-
-    canvasParentRef.current.appendChild(initializeFluidCanvas());
   }, []);
 
   return (
@@ -60,8 +53,10 @@ export default function About() {
         </div>
       </section>
 
-      <section ref={canvasParentRef}>
+      <section>
         <div className="overview">
+          <FluidCanvas />
+
           <motion.h1 {...scrollAnimationFlyInBottom}>
             Lorem ipsum dolor sit amet.
           </motion.h1>

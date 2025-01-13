@@ -3,6 +3,10 @@ import * as THREE from "three";
 
 export default class Mouse {
   grid: Grid;
+  canvas: HTMLCanvasElement;
+  canvasTopOffset: number;
+  canvasHeight: number;
+
   left: boolean;
   right: boolean;
   position: THREE.Vector2;
@@ -19,18 +23,26 @@ export default class Mouse {
     };
   }[];
 
-  constructor(grid: Grid) {
+  constructor(grid: Grid, canvas: HTMLCanvasElement) {
     this.grid = grid;
+    this.canvas = canvas;
+    this.canvasTopOffset = 1;
+    this.canvasHeight = 1;
+
+    setTimeout(() => {
+      this.canvasTopOffset = this.canvas.offsetTop;
+      this.canvasHeight = this.canvas.height;
+    }, 10);
 
     this.left = false;
     this.right = false;
     this.position = new THREE.Vector2();
     this.motions = [];
 
-    document.addEventListener("mousedown", this.mouseDown.bind(this));
-    document.addEventListener("mouseup", this.mouseUp.bind(this));
-    document.addEventListener("mousemove", this.mouseMove.bind(this));
-    document.addEventListener("contextmenu", this.contextMenu.bind(this));
+    canvas.addEventListener("mousedown", this.mouseDown.bind(this));
+    canvas.addEventListener("mouseup", this.mouseUp.bind(this));
+    canvas.addEventListener("mousemove", this.mouseMove.bind(this));
+    canvas.addEventListener("contextmenu", this.contextMenu.bind(this));
   }
 
   mouseDown(event: MouseEvent) {
@@ -74,6 +86,8 @@ export default class Mouse {
       });
     }
 
+    console.log(this.canvasTopOffset, this.canvasHeight);
+
     this.position.set(x, y);
   }
 
@@ -81,3 +95,4 @@ export default class Mouse {
     event.preventDefault();
   }
 }
+
