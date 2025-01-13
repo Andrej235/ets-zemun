@@ -12,7 +12,13 @@ type DisplaySettings = {
   slab: "density" | "velocity" | "divergence" | "pressure";
 };
 
-export default function FluidCanvas() {
+type FluidCanvasProps = {
+  containerToApplyEventListenersTo: React.RefObject<HTMLElement>;
+};
+
+export default function FluidCanvas({
+  containerToApplyEventListenersTo,
+}: FluidCanvasProps) {
   const [shaders, setShaders] = useState<Files | null>(null);
   const [mouse, setMouse] = useState<Mouse | null>(null);
 
@@ -142,13 +148,13 @@ export default function FluidCanvas() {
   }, [fileLoader]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerToApplyEventListenersTo.current) return;
 
     setMouse((mouse) => {
       mouse?.dispose();
-      return new Mouse(grid, containerRef.current!);
+      return new Mouse(grid, containerToApplyEventListenersTo.current!);
     });
-  }, [containerRef, grid]);
+  }, [containerToApplyEventListenersTo, grid]);
 
   useEffect(() => void (update && requestAnimationFrame(update)), [update]);
 

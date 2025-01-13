@@ -16,6 +16,7 @@ import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
+  const overviewSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!infoCardsContainerRef.current) return;
@@ -53,9 +54,11 @@ export default function About() {
         </div>
       </section>
 
-      <section>
-        <FluidCanvas />
-        
+      <section ref={overviewSectionRef}>
+        <FluidCanvas
+          containerToApplyEventListenersTo={overviewSectionRef}
+        />
+
         <div className="overview">
           <motion.h1 {...scrollAnimationFlyInBottom}>
             Lorem ipsum dolor sit amet.
