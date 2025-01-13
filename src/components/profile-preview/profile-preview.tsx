@@ -20,8 +20,8 @@ export default function ProfileOverview({
       {...(layout === "image-left"
         ? scrollAnimationFlyInLeft
         : layout === "image-right"
-          ? scrollAnimationFlyInRight
-          : scrollAnimationFlyInTop)}
+        ? scrollAnimationFlyInRight
+        : scrollAnimationFlyInTop)}
       className={"profile-overview " + layout}
       viewport={{
         once: true,
@@ -32,7 +32,17 @@ export default function ProfileOverview({
         <img src={profile.imagePath} alt={profile.name} />
       </div>
 
-      <div className="info">
+      <div
+        className={`info ${
+          layout === "image-left"
+            ? "info-right"
+            : layout === "image-right"
+            ? "info-left"
+            : layout === "vertical"
+            ? "vertical"
+            : ""
+        }`}
+      >
         <Link to={`/profili/${profile.profileURL[0]}`}>
           <h1 className="title">{profile.name}</h1>
         </Link>
@@ -42,3 +52,4 @@ export default function ProfileOverview({
     </motion.div>
   );
 }
+
