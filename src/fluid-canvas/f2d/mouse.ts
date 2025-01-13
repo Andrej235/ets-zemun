@@ -5,7 +5,9 @@ export default class Mouse {
   grid: Grid;
   canvasContainer: HTMLElement;
   canvasTopStart: number;
-  canvasHeight: number;
+  canvasLeftStart: number;
+  canvasHeightToScreenRatio: number;
+  canvasWidthToScreenRatio: number;
 
   left: boolean;
   right: boolean;
@@ -30,8 +32,14 @@ export default class Mouse {
   ) {
     this.grid = grid;
     this.canvasContainer = canvasContainer;
+
     this.canvasTopStart = canvasContainer.offsetTop;
-    this.canvasHeight = canvasContainer.offsetHeight;
+    this.canvasLeftStart = canvasContainer.getBoundingClientRect().left;
+
+    this.canvasHeightToScreenRatio =
+      window.innerHeight / canvasContainer.clientHeight;
+    this.canvasWidthToScreenRatio =
+      window.innerWidth / canvasContainer.clientWidth;
 
     this.left = false;
     this.right = false;
@@ -72,13 +80,20 @@ export default class Mouse {
     event.preventDefault();
     const r = this.grid.scale;
 
-    const x = event.clientX;
+    let x = event.clientX;
     let y = event.clientY;
+
     const mouseVerticalOffset =
       this.canvasTopStart - document.scrollingElement!.scrollTop;
 
+    const mouseHorizontalOffset =
+      this.canvasLeftStart - document.scrollingElement!.scrollLeft;
+
+    x -= mouseHorizontalOffset;
+    x *= this.canvasWidthToScreenRatio;
+
     y -= mouseVerticalOffset;
-    y *= window.innerHeight / this.canvasHeight;
+    y *= this.canvasHeightToScreenRatio;
 
     if (this.left || this.right) {
       const dx = x - this.position.x;
