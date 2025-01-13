@@ -1,4 +1,4 @@
-import { Uniforms } from "./../../types/Uniforms";
+import { Uniforms } from "../../types/Uniforms";
 import { Grid } from "../../types/Grid";
 import { Time } from "../../types/Time";
 import SlabopBase from "./slabopbase";

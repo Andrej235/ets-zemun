@@ -1,4 +1,4 @@
-import { Uniforms } from "./../types/Uniforms";
+import { Uniforms } from "../types/Uniforms";
 import * as THREE from "three";
 
 export default class Display {

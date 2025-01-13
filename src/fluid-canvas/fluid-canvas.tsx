@@ -1,11 +1,11 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
-import Mouse from "./mouse";
-import Solver from "./solver";
-import Display from "./display";
-import FileLoader from "./fileloader";
-import { Grid } from "../types/Grid";
-import { Time } from "../types/Time";
+import Mouse from "./f2d/mouse";
+import Solver from "./f2d/solver";
+import Display from "./f2d/display";
+import FileLoader from "./f2d/fileloader";
+import { Grid } from "./types/Grid";
+import { Time } from "./types/Time";
 import { useEffect, useRef } from "react";
 
 export default function FluidCanvas() {

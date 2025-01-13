@@ -1,4 +1,4 @@
-import { Grid } from "./../types/Grid";
+import { Grid } from "../types/Grid";
 import * as THREE from "three";
 
 export default class Mouse {
@@ -73,9 +73,12 @@ export default class Mouse {
         y: Math.min(Math.max(dy, -r), r),
       };
 
+      const mouseVerticalOffset =
+        this.canvasTopOffset - document.scrollingElement!.scrollTop;
+
       const position = {
         x: x,
-        y: y,
+        y: y - mouseVerticalOffset,
       };
 
       this.motions.push({
@@ -85,8 +88,6 @@ export default class Mouse {
         position,
       });
     }
-
-    console.log(this.canvasTopOffset, this.canvasHeight);
 
     this.position.set(x, y);
   }

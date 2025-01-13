@@ -12,7 +12,7 @@ import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-c
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
-import FluidCanvas from "src/mouse-effect/f2d/fluid-canvas";
+import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
   const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
