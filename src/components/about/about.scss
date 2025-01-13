@@ -145,7 +145,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 2px;
       height: 70rem;
@@ -157,7 +157,7 @@
       border-top-right-radius: 50%;
       border-bottom-left-radius: 50%;
       border-bottom-right-radius: 50%;
-  }
+    }
   }
 
   .info-cards-container {
@@ -174,9 +174,11 @@
   }
 
   .profiles-overview-container {
+    width: 100%;
     margin-top: 5rem;
 
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 3rem;
     margin-bottom: 20rem;
