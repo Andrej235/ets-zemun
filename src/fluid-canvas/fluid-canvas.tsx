@@ -6,6 +6,7 @@ import FileLoader, { Files } from "./f2d/fileloader";
 import { Grid } from "./types/Grid";
 import { Time } from "./types/Time";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { GUI } from "dat.gui";
 
 type DisplaySettings = {
   slab: "density" | "velocity" | "divergence" | "pressure";
@@ -143,8 +144,10 @@ export default function FluidCanvas() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    mouse?.dispose();
-    setMouse(new Mouse(grid, containerRef.current));
+    setMouse((mouse) => {
+      mouse?.dispose();
+      return new Mouse(grid, containerRef.current!);
+    });
   }, [containerRef, grid]);
 
   useEffect(() => void (update && requestAnimationFrame(update)), [update]);
@@ -166,6 +169,66 @@ export default function FluidCanvas() {
       renderer.dispose();
     };
   }, [containerRef, renderer, windowSize]);
+
+  //#region gui for debugging
+  useEffect(() => {
+    if (!solver) return;
+    const gui: dat.GUI = new GUI();
+
+    gui.add(displaySettings, "slab", [
+      "density",
+      "velocity",
+      "divergence",
+      "pressure",
+    ]);
+    gui.add(time, "step").min(0).step(0.01);
+
+    const advectFolder = gui.addFolder("Advect");
+    advectFolder.add(solver.advect, "dissipation", {
+      none: 1,
+      slow: 0.998,
+      fast: 0.992,
+      "very fast": 0.9,
+    });
+
+    const viscosityFolder = gui.addFolder("Viscosity");
+    viscosityFolder.add(solver, "applyViscosity");
+    viscosityFolder.add(solver, "viscosity").min(0).step(0.01);
+
+    const vorticityFolder = gui.addFolder("Vorticity");
+    vorticityFolder.add(solver, "applyVorticity");
+    vorticityFolder.add(solver.vorticityConfinement, "curl").min(0).step(0.01);
+
+    const poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
+    poissonPressureEqFolder.add(
+      solver.poissonPressureEq,
+      "iterations",
+      0,
+      500,
+      1,
+    );
+
+    // we need a splat color "adapter" since we want values between 0 and
+    // 1 but also since dat.GUI requires a JavaScript array over a Three.js
+    // vector
+    const splatSettings = {
+      color: [solver.ink.x * 255, solver.ink.y * 255, solver.ink.z * 255],
+    };
+    const splatFolder = gui.addFolder("Splat");
+    splatFolder.add(solver.splat, "radius").min(0);
+    splatFolder.addColor(splatSettings, "color").onChange(function (value) {
+      solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
+    });
+
+    const gridFolder = gui.addFolder("Grid");
+    gridFolder.add(grid, "applyBoundaries");
+    gridFolder.add(grid, "scale");
+
+    return () => {
+      gui.destroy();
+    };
+  }, [solver, displaySettings, time, grid]);
+  //#endregion
 
   return <div className="fluid-canvas" ref={containerRef}></div>;
 }
