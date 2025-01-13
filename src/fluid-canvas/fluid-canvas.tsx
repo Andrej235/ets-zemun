@@ -148,13 +148,18 @@ export default function FluidCanvas({
   }, [fileLoader]);
 
   useEffect(() => {
-    if (!containerToApplyEventListenersTo.current) return;
+    if (!containerToApplyEventListenersTo.current || !containerRef.current)
+      return;
 
     setMouse((mouse) => {
       mouse?.dispose();
-      return new Mouse(grid, containerToApplyEventListenersTo.current!);
+      return new Mouse(
+        grid,
+        containerToApplyEventListenersTo.current!,
+        containerRef.current!,
+      );
     });
-  }, [containerToApplyEventListenersTo, grid]);
+  }, [containerToApplyEventListenersTo, containerRef, grid]);
 
   useEffect(() => void (update && requestAnimationFrame(update)), [update]);
 

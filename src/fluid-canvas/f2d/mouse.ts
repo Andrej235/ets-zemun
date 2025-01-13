@@ -4,7 +4,8 @@ import * as THREE from "three";
 export default class Mouse {
   grid: Grid;
   canvasContainer: HTMLElement;
-  canvasTopOffset: number;
+  canvasTopStart: number;
+  canvasHeight: number;
 
   left: boolean;
   right: boolean;
@@ -22,20 +23,37 @@ export default class Mouse {
     };
   }[];
 
-  constructor(grid: Grid, canvasContainer: HTMLElement) {
+  constructor(
+    grid: Grid,
+    mouseEventListenerContainer: HTMLElement,
+    canvasContainer: HTMLElement,
+  ) {
     this.grid = grid;
     this.canvasContainer = canvasContainer;
-    this.canvasTopOffset = canvasContainer.offsetTop;
+    this.canvasTopStart = canvasContainer.offsetTop;
+    this.canvasHeight = canvasContainer.offsetHeight;
 
     this.left = false;
     this.right = false;
     this.position = new THREE.Vector2();
     this.motions = [];
 
-    canvasContainer.addEventListener("mousedown", this.mouseDown.bind(this));
-    canvasContainer.addEventListener("mouseup", this.mouseUp.bind(this));
-    canvasContainer.addEventListener("mousemove", this.mouseMove.bind(this));
-    canvasContainer.addEventListener("contextmenu", this.contextMenu);
+    mouseEventListenerContainer.addEventListener(
+      "mousedown",
+      this.mouseDown.bind(this),
+    );
+    mouseEventListenerContainer.addEventListener(
+      "mouseup",
+      this.mouseUp.bind(this),
+    );
+    mouseEventListenerContainer.addEventListener(
+      "mousemove",
+      this.mouseMove.bind(this),
+    );
+    mouseEventListenerContainer.addEventListener(
+      "contextmenu",
+      this.contextMenu,
+    );
   }
 
   mouseDown(event: MouseEvent) {
@@ -55,7 +73,12 @@ export default class Mouse {
     const r = this.grid.scale;
 
     const x = event.clientX;
-    const y = event.clientY;
+    let y = event.clientY;
+    const mouseVerticalOffset =
+      this.canvasTopStart - document.scrollingElement!.scrollTop;
+
+    y -= mouseVerticalOffset;
+    y *= window.innerHeight / this.canvasHeight;
 
     if (this.left || this.right) {
       const dx = x - this.position.x;
@@ -66,12 +89,9 @@ export default class Mouse {
         y: Math.min(Math.max(dy, -r), r),
       };
 
-      const mouseVerticalOffset =
-        this.canvasTopOffset - document.scrollingElement!.scrollTop;
-
       const position = {
         x: x,
-        y: y - mouseVerticalOffset,
+        y: y,
       };
 
       this.motions.push({
