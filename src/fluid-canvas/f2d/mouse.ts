@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 export default class Mouse {
   grid: Grid;
+  canvasContainer: HTMLElement;
   canvasTopOffset: number;
 
   left: boolean;
@@ -23,6 +24,7 @@ export default class Mouse {
 
   constructor(grid: Grid, canvasContainer: HTMLElement) {
     this.grid = grid;
+    this.canvasContainer = canvasContainer;
     this.canvasTopOffset = canvasContainer.offsetTop;
 
     this.left = false;
@@ -35,10 +37,7 @@ export default class Mouse {
     canvasContainer.addEventListener("mousedown", this.mouseDown.bind(this));
     canvasContainer.addEventListener("mouseup", this.mouseUp.bind(this));
     canvasContainer.addEventListener("mousemove", this.mouseMove.bind(this));
-    canvasContainer.addEventListener(
-      "contextmenu",
-      this.contextMenu.bind(this),
-    );
+    canvasContainer.addEventListener("contextmenu", this.contextMenu);
   }
 
   mouseDown(event: MouseEvent) {
@@ -90,6 +89,16 @@ export default class Mouse {
 
   contextMenu(event: MouseEvent) {
     event.preventDefault();
+  }
+
+  dispose() {
+    this.canvasContainer.removeEventListener("mousedown", this.mouseDown);
+    this.canvasContainer.removeEventListener("mouseup", this.mouseUp);
+    this.canvasContainer.removeEventListener(
+      "mousemove",
+      this.mouseMove.bind(this),
+    );
+    this.canvasContainer.removeEventListener("contextmenu", this.contextMenu);
   }
 }
 

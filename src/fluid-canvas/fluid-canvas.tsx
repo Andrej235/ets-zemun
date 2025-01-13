@@ -12,6 +12,9 @@ type DisplaySettings = {
 };
 
 export default function FluidCanvas() {
+  const [shaders, setShaders] = useState<Files | null>(null);
+  const [mouse, setMouse] = useState<Mouse | null>(null);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const grid: Grid = useMemo(
@@ -22,14 +25,6 @@ export default function FluidCanvas() {
     }),
     [],
   );
-
-  const [mouse, setMouse] = useState<Mouse | null>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    setMouse(new Mouse(grid, containerRef.current));
-  }, [containerRef, grid]);
 
   const displaySettings: DisplaySettings = useMemo(
     () => ({
@@ -69,19 +64,6 @@ export default function FluidCanvas() {
     [],
   );
 
-  const [shaders, setShaders] = useState<Files | null>(null);
-
-  useEffect(() => {
-    fileLoader.run().then((files) => {
-      const shaders: Record<string, string> = {};
-      for (const name in files) {
-        shaders[name.split(".")[0]] = files[name];
-      }
-
-      setShaders(shaders);
-    });
-  }, [fileLoader]);
-
   const solver = useMemo(
     () => shaders && Solver.make(grid, time, windowSize, shaders),
     [grid, time, windowSize, shaders],
@@ -106,56 +88,6 @@ export default function FluidCanvas() {
     r.setClearColor(0x00ff00);
     return r;
   }, [windowSize]);
-
-  // gui = new dat.GUI();
-  // gui.add(displaySettings, "slab", [
-  //   "density",
-  //   "velocity",
-  //   "divergence",
-  //   "pressure",
-  // ]);
-  // gui.add(time, "step").min(0).step(0.01);
-
-  // const advectFolder = gui.addFolder("Advect");
-  // advectFolder.add(solver.advect, "dissipation", {
-  //   none: 1,
-  //   slow: 0.998,
-  //   fast: 0.992,
-  //   "very fast": 0.9,
-  // });
-
-  // const viscosityFolder = gui.addFolder("Viscosity");
-  // viscosityFolder.add(solver, "applyViscosity");
-  // viscosityFolder.add(solver, "viscosity").min(0).step(0.01);
-
-  // const vorticityFolder = gui.addFolder("Vorticity");
-  // vorticityFolder.add(solver, "applyVorticity");
-  // vorticityFolder.add(solver.vorticityConfinement, "curl").min(0).step(0.01);
-
-  // const poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
-  // poissonPressureEqFolder.add(
-  //   solver.poissonPressureEq,
-  //   "iterations",
-  //   0,
-  //   500,
-  //   1,
-  // );
-
-  // // we need a splat color "adapter" since we want values between 0 and
-  // // 1 but also since dat.GUI requires a JavaScript array over a Three.js
-  // // vector
-  // const splatSettings = {
-  //   color: [solver.ink.x * 255, solver.ink.y * 255, solver.ink.z * 255],
-  // };
-  // const splatFolder = gui.addFolder("Splat");
-  // splatFolder.add(solver.splat, "radius").min(0);
-  // splatFolder.addColor(splatSettings, "color").onChange(function (value) {
-  //   solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
-  // });
-
-  // const gridFolder = gui.addFolder("Grid");
-  // gridFolder.add(grid, "applyBoundaries");
-  // gridFolder.add(grid, "scale");
 
   const render = useCallback(() => {
     if (!solver || !displayScalar || !displayVector) return;
@@ -197,23 +129,41 @@ export default function FluidCanvas() {
     requestAnimationFrame(update);
   }, [solver, mouse, render, renderer]);
 
+  useEffect(() => {
+    fileLoader.run().then((files) => {
+      const shaders: Record<string, string> = {};
+      for (const name in files) {
+        shaders[name.split(".")[0]] = files[name];
+      }
+
+      setShaders(shaders);
+    });
+  }, [fileLoader]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    mouse?.dispose();
+    setMouse(new Mouse(grid, containerRef.current));
+  }, [containerRef, grid]);
+
   useEffect(() => void (update && requestAnimationFrame(update)), [update]);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
+    containerRef.current.appendChild(renderer.domElement);
+
     function resize() {
       windowSize.set(window.innerWidth, window.innerHeight);
       renderer.setSize(windowSize.x, windowSize.y);
     }
-
-    containerRef.current!.appendChild(renderer.domElement);
     window.addEventListener("resize", resize);
 
     return () => {
       window.removeEventListener("resize", resize);
-      // gui?.domElement.remove();
-      // gui?.destroy();
-      renderer?.domElement.remove();
-      renderer?.dispose();
+      renderer.domElement.remove();
+      renderer.dispose();
     };
   }, [containerRef, renderer, windowSize]);
 
