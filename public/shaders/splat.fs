@@ -11,11 +11,12 @@ float gauss(vec2 p, float r)
     return exp(-dot(p, p) / r);
 }
 
+//right click
 void main()
 {
     vec2 uv = gl_FragCoord.xy / gridSize.xy;
     vec3 base = texture2D(read, uv).xyz;
     vec2 coord = point.xy - gl_FragCoord.xy;
     vec3 splat = color * gauss(coord, gridSize.x * radius);
-    gl_FragColor = vec4(base + splat, 1.0);
+    gl_FragColor = vec4(base + splat, 0.0);
 }

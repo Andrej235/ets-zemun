@@ -4,6 +4,7 @@ uniform sampler2D w;
 uniform vec2 gridSize;
 uniform float gridScale;
 
+//left click
 void main()
 {
     vec2 uv = gl_FragCoord.xy / gridSize.xy;
@@ -21,5 +22,5 @@ void main()
 
     vec2 wc = texture2D(w, uv).xy;
 
-    gl_FragColor = vec4(wc - gradient, 0.0, 1.0);
+    gl_FragColor = vec4(wc - gradient, 0.0, 0.0);
 }

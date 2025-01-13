@@ -6,6 +6,7 @@ uniform vec2 gridSize;
 uniform float alpha;
 uniform float beta;
 
+//makes left click look good
 void main()
 {
     vec2 uv = gl_FragCoord.xy / gridSize.xy;
@@ -20,5 +21,5 @@ void main()
 
     float bc = texture2D(b, uv).x;
 
-    gl_FragColor = vec4((xl + xr + xb + xt + alpha * bc) / beta, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4((xl + xr + xb + xt + alpha * bc) / beta, 0.0, 0.0, 0.0);
 }

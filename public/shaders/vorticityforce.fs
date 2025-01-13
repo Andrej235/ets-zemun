@@ -28,5 +28,5 @@ void main()
     force.y *= -1.0;
 
     vec2 velc = texture2D(velocity, uv).xy;
-    gl_FragColor = vec4(velc + (timestep * force), 0.0, 1.0);
+    gl_FragColor = vec4(velc + (timestep * force), 0.0, 0.0);
 }

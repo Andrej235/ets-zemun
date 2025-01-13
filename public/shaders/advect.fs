@@ -24,6 +24,7 @@ vec2 bilerp(sampler2D d, vec2 p)
     return mix(mix(d11, d21, a.x), mix(d12, d22, a.x), a.y);
 }
 
+//right click
 void main()
 {
     vec2 uv = gl_FragCoord.xy / gridSize.xy;
@@ -32,5 +33,5 @@ void main()
     // trace point back in time
     vec2 p = gl_FragCoord.xy - timestep * scale * texture2D(velocity, uv).xy;
 
-    gl_FragColor = vec4(dissipation * bilerp(advected, p), 0.0, 1.0);
+    gl_FragColor = vec4(dissipation * bilerp(advected, p), 0.0, 0.0);
 }

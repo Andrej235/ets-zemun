@@ -3,6 +3,7 @@ uniform sampler2D velocity;
 uniform vec2 gridSize;
 uniform float gridScale;
 
+//makes left click look good
 void main()
 {
     vec2 uv = gl_FragCoord.xy / gridSize.xy;
@@ -18,5 +19,5 @@ void main()
     float scale = 0.5 / gridScale;
     float divergence = scale * (vr - vl + vt - vb);
 
-    gl_FragColor = vec4(divergence, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4(divergence, 0.0, 0.0, 0.0);
 }

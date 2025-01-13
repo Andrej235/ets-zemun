@@ -8,10 +8,6 @@ import { Time } from "./types/Time";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GUI } from "dat.gui";
 
-type DisplaySettings = {
-  slab: "density" | "velocity" | "divergence" | "pressure";
-};
-
 type FluidCanvasProps = {
   containerToApplyEventListenersTo: React.RefObject<HTMLElement>;
 };
@@ -33,13 +29,6 @@ export default function FluidCanvas({
     [],
   );
 
-  const displaySettings: DisplaySettings = useMemo(
-    () => ({
-      slab: "density",
-    }),
-    [],
-  );
-
   const fileLoader: FileLoader = useMemo(
     () =>
       new FileLoader("shaders", [
@@ -49,7 +38,6 @@ export default function FluidCanvas({
         "jacobiscalar.fs",
         "jacobivector.fs",
         "displayscalar.fs",
-        "displayvector.fs",
         "divergence.fs",
         "splat.fs",
         "vorticity.fs",
@@ -81,11 +69,6 @@ export default function FluidCanvas({
     [shaders],
   );
 
-  const displayVector = useMemo(
-    () => shaders && new Display(shaders.basic, shaders.displayvector),
-    [shaders],
-  );
-
   const renderer = useMemo(() => {
     const r = new THREE.WebGLRenderer();
     r.autoClear = false;
@@ -97,36 +80,11 @@ export default function FluidCanvas({
   }, [windowSize]);
 
   const render = useCallback(() => {
-    if (!solver || !displayScalar || !displayVector) return;
+    if (!solver || !displayScalar) return;
 
-    let display;
-    let read;
-
-    switch (displaySettings.slab) {
-      case "velocity":
-        display = displayVector;
-        display.scaleNegative();
-        read = solver.velocity.read;
-        break;
-      case "density":
-        display = displayScalar;
-        display.scale.copy(solver.ink);
-        display.bias.set(0, 0, 0);
-        read = solver.density.read;
-        break;
-      case "divergence":
-        display = displayScalar;
-        display.scaleNegative();
-        read = solver.velocityDivergence.read;
-        break;
-      case "pressure":
-        display = displayScalar;
-        display.scaleNegative();
-        read = solver.pressure.read;
-        break;
-    }
-    display.render(renderer, read);
-  }, [displaySettings, solver, displayScalar, displayVector, renderer]);
+    displayScalar.scale.copy(solver.ink);
+    displayScalar.render(renderer, solver.density.read);
+  }, [solver, displayScalar, renderer]);
 
   const update = useCallback(() => {
     if (!solver || !mouse) return null;
@@ -186,16 +144,9 @@ export default function FluidCanvas({
     if (!solver) return;
     const gui: dat.GUI = new GUI();
 
-    gui.add(displaySettings, "slab", [
-      "density",
-      "velocity",
-      "divergence",
-      "pressure",
-    ]);
-    gui.add(time, "step").min(0).step(0.01);
+    gui.add(time, "step").name("time speed").min(0).step(0.01);
 
-    const advectFolder = gui.addFolder("Advect");
-    advectFolder.add(solver.advect, "dissipation", {
+    gui.add(solver.advect, "dissipation", {
       none: 1,
       slow: 0.998,
       fast: 0.992,
@@ -235,10 +186,8 @@ export default function FluidCanvas({
     gridFolder.add(grid, "applyBoundaries");
     gridFolder.add(grid, "scale");
 
-    return () => {
-      gui.destroy();
-    };
-  }, [solver, displaySettings, time, grid]);
+    return () => gui.destroy();
+  }, [solver, time, grid]);
   //#endregion
 
   return <div className="fluid-canvas" ref={containerRef}></div>;
