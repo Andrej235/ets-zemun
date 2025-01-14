@@ -139,36 +139,70 @@ export default function FluidCanvas({
     };
   }, [containerRef, renderer, windowSize]);
 
+  const defaults = useMemo(
+    () => ({
+      timeSpeed: 0.5,
+      dissipation: 0.9,
+      applyViscosity: true,
+      viscosity: 0.3,
+      applyVorticity: true,
+      vorticityCurl: 0.2,
+      poissonPressureEquationIterations: 50,
+      radius: 0.045,
+      color: [15, 15, 30],
+      applyBoundaries: false,
+      gridScale: 3.5,
+    }),
+    [],
+  );
+
   //#region gui for debugging
   useEffect(() => {
     if (!solver) return;
     const gui: dat.GUI = new GUI();
 
-    gui.add(time, "step").name("time speed").min(0).step(0.01);
+    gui
+      .add(time, "step")
+      .name("time speed")
+      .min(0)
+      .step(0.01)
+      .setValue(defaults.timeSpeed);
 
-    gui.add(solver.advect, "dissipation", {
-      none: 1,
-      slow: 0.998,
-      fast: 0.992,
-      "very fast": 0.9,
-    });
+    gui
+      .add(solver.advect, "dissipation", {
+        none: 1,
+        slow: 0.998,
+        fast: 0.992,
+        "very fast": 0.9,
+        "faster": 0.8,
+        "very faster": 0.7,
+      })
+      .setValue(defaults.dissipation);
 
     const viscosityFolder = gui.addFolder("Viscosity");
-    viscosityFolder.add(solver, "applyViscosity");
-    viscosityFolder.add(solver, "viscosity").min(0).step(0.01);
+    viscosityFolder
+      .add(solver, "applyViscosity")
+      .setValue(defaults.applyViscosity);
+    viscosityFolder
+      .add(solver, "viscosity")
+      .min(0)
+      .step(0.01)
+      .setValue(defaults.viscosity);
 
     const vorticityFolder = gui.addFolder("Vorticity");
-    vorticityFolder.add(solver, "applyVorticity");
-    vorticityFolder.add(solver.vorticityConfinement, "curl").min(0).step(0.01);
+    vorticityFolder
+      .add(solver, "applyVorticity")
+      .setValue(defaults.applyVorticity);
+    vorticityFolder
+      .add(solver.vorticityConfinement, "curl")
+      .min(0)
+      .step(0.01)
+      .setValue(defaults.vorticityCurl);
 
     const poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
-    poissonPressureEqFolder.add(
-      solver.poissonPressureEq,
-      "iterations",
-      0,
-      500,
-      1,
-    );
+    poissonPressureEqFolder
+      .add(solver.poissonPressureEq, "iterations", 0, 500, 1)
+      .setValue(defaults.poissonPressureEquationIterations);
 
     // we need a splat color "adapter" since we want values between 0 and
     // 1 but also since dat.GUI requires a JavaScript array over a Three.js
@@ -177,14 +211,17 @@ export default function FluidCanvas({
       color: [solver.ink.x * 255, solver.ink.y * 255, solver.ink.z * 255],
     };
     const splatFolder = gui.addFolder("Splat");
-    splatFolder.add(solver.splat, "radius").min(0);
-    splatFolder.addColor(splatSettings, "color").onChange(function (value) {
-      solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
-    });
+    splatFolder.add(solver.splat, "radius").min(0).setValue(defaults.radius);
+    splatFolder
+      .addColor(splatSettings, "color")
+      .onChange(function (value) {
+        solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
+      })
+      .setValue(defaults.color);
 
     const gridFolder = gui.addFolder("Grid");
-    gridFolder.add(grid, "applyBoundaries");
-    gridFolder.add(grid, "scale");
+    gridFolder.add(grid, "applyBoundaries").setValue(defaults.applyBoundaries);
+    gridFolder.add(grid, "scale").setValue(defaults.gridScale);
 
     return () => gui.destroy();
   }, [solver, time, grid]);
