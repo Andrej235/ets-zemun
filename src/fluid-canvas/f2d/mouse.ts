@@ -11,6 +11,7 @@ export default class Mouse {
 
   isActive: boolean;
 
+  position: THREE.Vector2;
   screenPosition: THREE.Vector2;
   motions: {
     drag: {
@@ -44,6 +45,7 @@ export default class Mouse {
     this.canvasWidthToScreenRatio =
       window.innerWidth / canvasContainer.clientWidth;
 
+    this.position = new THREE.Vector2();
     this.screenPosition = new THREE.Vector2();
     this.motions = [];
 
@@ -79,10 +81,14 @@ export default class Mouse {
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
-    this.screenPosition.set(event.clientX, event.clientY);
+
+    // const oldX = this.position.x;
+    // const oldY = this.position.y;
 
     const oldX = this.screenXToCanvas(this.screenPosition.x);
     const oldY = this.screenYToCanvas(this.screenPosition.y);
+
+    this.screenPosition.set(event.clientX, event.clientY);
 
     const x = this.screenXToCanvas(event.clientX);
     const y = this.screenYToCanvas(event.clientY);
@@ -94,11 +100,9 @@ export default class Mouse {
 
     for (let i = 0; i < distance; i += step) {
       const t = i / distance;
-      const curX = oldX + dx * t;
-      const curY = oldY + dy * t;
-      this.addToTrail(curX, curY, curX - oldX, curY - oldY);
+      this.addToTrail(oldX + dx * t, oldY + dy * t);
     }
-    this.addToTrail(x, y, dx, dy);
+    this.addToTrail(x, y);
   }
 
   private screenXToCanvas(x: number) {
@@ -119,8 +123,11 @@ export default class Mouse {
     return y;
   }
 
-  private addToTrail(x: number, y: number, dx: number, dy: number) {
+  private addToTrail(x: number, y: number) {
     const r = this.grid.scale;
+
+    const dx = x - this.position.x;
+    const dy = y - this.position.y;
 
     const drag = {
       x: Math.min(Math.max(dx, -r), r),
@@ -136,6 +143,8 @@ export default class Mouse {
       drag,
       position,
     });
+
+    this.position.set(x, y);
   }
 
   dispose() {
