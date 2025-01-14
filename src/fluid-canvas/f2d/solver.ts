@@ -125,7 +125,9 @@ class Solver {
   addForces(renderer: THREE.WebGLRenderer, mouse: Mouse) {
     const point = new THREE.Vector2();
     const force = new THREE.Vector3();
-    console.log("add forces", mouse.motions.length);
+
+    if (mouse.motions.length === 0) mouse.getStaticPosition(1);
+
     for (let i = 0; i < mouse.motions.length; i++) {
       const motion = mouse.motions[i];
 

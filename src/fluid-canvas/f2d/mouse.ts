@@ -9,8 +9,6 @@ export default class Mouse {
   canvasHeightToScreenRatio: number;
   canvasWidthToScreenRatio: number;
 
-  isActive: boolean;
-
   position: THREE.Vector2;
   screenPosition: THREE.Vector2;
   motions: {
@@ -32,8 +30,6 @@ export default class Mouse {
     mouseEventListenerContainer: HTMLElement,
     canvasContainer: HTMLElement,
   ) {
-    this.isActive = true;
-
     this.grid = grid;
     this.canvasContainer = canvasContainer;
 
@@ -56,34 +52,10 @@ export default class Mouse {
       "pointermove",
       this.boundMouseMove,
     );
-
-    this.runBaseMotions();
-  }
-
-  runBaseMotions() {
-    setInterval(() => {
-      if (!this.isActive || this.motions.length !== 0) return;
-
-      this.motions = [
-        {
-          drag: {
-            x: (Math.random() - 0.5) * 2,
-            y: (Math.random() - 0.5) * 2,
-          },
-          position: {
-            x: this.screenXToCanvas(this.screenPosition.x),
-            y: this.screenYToCanvas(this.screenPosition.y),
-          },
-        },
-      ];
-    }, 10);
   }
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
-
-    // const oldX = this.position.x;
-    // const oldY = this.position.y;
 
     const oldX = this.screenXToCanvas(this.screenPosition.x);
     const oldY = this.screenYToCanvas(this.screenPosition.y);
@@ -123,6 +95,21 @@ export default class Mouse {
     return y;
   }
 
+  getStaticPosition(randomness: number = 2) {
+    this.motions = [
+      {
+        drag: {
+          x: (Math.random() - 0.5) * randomness,
+          y: (Math.random() - 0.5) * randomness,
+        },
+        position: {
+          x: this.screenXToCanvas(this.screenPosition.x),
+          y: this.screenYToCanvas(this.screenPosition.y),
+        },
+      },
+    ];
+  }
+
   private addToTrail(x: number, y: number) {
     const r = this.grid.scale;
 
@@ -148,8 +135,6 @@ export default class Mouse {
   }
 
   dispose() {
-    this.isActive = false;
-
     this.mouseEventListenerContainer.removeEventListener(
       "pointermove",
       this.boundMouseMove,
