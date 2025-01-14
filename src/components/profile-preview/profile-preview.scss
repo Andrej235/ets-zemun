@@ -3,7 +3,7 @@
 
   width: 60%;
   min-width: 100rem;
-  height: 42.5rem;
+  height: 40rem;
 
   display: flex;
 
@@ -26,8 +26,8 @@
   .image-container {
     position: absolute;
     z-index: 1;
-    width: 55%;
-    aspect-ratio: 16 / 9;
+    width: 54%;
+    height: 87%;
 
     img {
       width: 100%;
@@ -40,8 +40,8 @@
     position: absolute;
     bottom: 0;
 
-    width: 52.5%;
-    aspect-ratio: 16 / 9;
+    width: 54%;
+    height: 87%;
     padding: 4rem;
     background-color: $secondary-background;
 
@@ -70,3 +70,4 @@
     padding-right: 13rem;
   }
 }
+
