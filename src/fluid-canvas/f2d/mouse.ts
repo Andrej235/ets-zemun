@@ -9,6 +9,8 @@ export default class Mouse {
   canvasHeightToScreenRatio: number;
   canvasWidthToScreenRatio: number;
 
+  isActive: boolean;
+
   position: THREE.Vector2;
   motions: {
     drag: {
@@ -29,6 +31,8 @@ export default class Mouse {
     mouseEventListenerContainer: HTMLElement,
     canvasContainer: HTMLElement,
   ) {
+    this.isActive = true;
+
     this.grid = grid;
     this.canvasContainer = canvasContainer;
 
@@ -50,6 +54,27 @@ export default class Mouse {
       "pointermove",
       this.boundMouseMove,
     );
+
+    this.runBaseMotions();
+  }
+
+  runBaseMotions() {
+    setInterval(() => {
+      if (!this.isActive || this.motions.length !== 0) return;
+
+      this.motions = [
+        {
+          drag: {
+            x: (Math.random() - 0.5) * 2,
+            y: (Math.random() - 0.5) * 2,
+          },
+          position: {
+            x: this.position.x,
+            y: this.position.y,
+          },
+        },
+      ];
+    }, 10);
   }
 
   mouseMove(event: MouseEvent) {
@@ -110,6 +135,8 @@ export default class Mouse {
   }
 
   dispose() {
+    this.isActive = false;
+
     this.mouseEventListenerContainer.removeEventListener(
       "pointermove",
       this.boundMouseMove,
