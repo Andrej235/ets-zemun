@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
@@ -10,6 +11,15 @@ import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overv
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 
 export default function About() {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div id="about-page">
       <section>
@@ -55,13 +65,17 @@ export default function About() {
       </motion.div>
 
       <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
+        {data.profiles.map((profile, i) => {
+          const layout = screenWidth < 1024.98 ? "vertical" : i % 2 === 0 ? "image-left" : "image-right";
+
+          return (
+            <ProfileOverview
+              profile={profile as ProfileOverviewSchema}
+              layout={layout}
+              key={profile.name}
+            />
+          );
+        })}
       </div>
 
       <section>
