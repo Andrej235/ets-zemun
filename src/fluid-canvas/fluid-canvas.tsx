@@ -109,14 +109,14 @@ export default function FluidCanvas({
     if (!containerToApplyEventListenersTo.current || !containerRef.current)
       return;
 
-    setMouse((mouse) => {
-      mouse?.dispose();
-      return new Mouse(
-        grid,
-        containerToApplyEventListenersTo.current!,
-        containerRef.current!,
-      );
-    });
+    const mouse = new Mouse(
+      grid,
+      containerToApplyEventListenersTo.current!,
+      containerRef.current!,
+    );
+
+    setMouse(mouse);
+    return () => mouse.dispose();
   }, [containerToApplyEventListenersTo, containerRef, grid]);
 
   useEffect(() => void (update && requestAnimationFrame(update)), [update]);
@@ -174,7 +174,7 @@ export default function FluidCanvas({
         slow: 0.998,
         fast: 0.992,
         "very fast": 0.9,
-        "faster": 0.8,
+        faster: 0.8,
         "very faster": 0.7,
       })
       .setValue(defaults.dissipation);
@@ -224,7 +224,7 @@ export default function FluidCanvas({
     gridFolder.add(grid, "scale").setValue(defaults.gridScale);
 
     return () => gui.destroy();
-  }, [solver, time, grid]);
+  }, [solver, time, grid, defaults]);
   //#endregion
 
   return <div className="fluid-canvas" ref={containerRef}></div>;

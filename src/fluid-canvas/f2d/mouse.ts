@@ -21,6 +21,9 @@ export default class Mouse {
     };
   }[];
 
+  boundMouseMove: (event: MouseEvent) => void;
+  mouseEventListenerContainer: HTMLElement;
+
   constructor(
     grid: Grid,
     mouseEventListenerContainer: HTMLElement,
@@ -40,13 +43,12 @@ export default class Mouse {
     this.position = new THREE.Vector2();
     this.motions = [];
 
+    this.boundMouseMove = this.mouseMove.bind(this);
+    this.mouseEventListenerContainer = mouseEventListenerContainer;
+
     mouseEventListenerContainer.addEventListener(
       "mousemove",
-      this.mouseMove.bind(this),
-    );
-    mouseEventListenerContainer.addEventListener(
-      "contextmenu",
-      this.contextMenu,
+      this.boundMouseMove,
     );
   }
 
@@ -87,19 +89,18 @@ export default class Mouse {
       position,
     });
 
+    console.log("mouse move", this.motions.length);
+
     this.position.set(x, y);
   }
 
-  contextMenu(event: MouseEvent) {
-    event.preventDefault();
-  }
-
   dispose() {
-    this.canvasContainer.removeEventListener(
+    console.log("dispose mouse");
+
+    this.mouseEventListenerContainer.removeEventListener(
       "mousemove",
-      this.mouseMove.bind(this),
+      this.boundMouseMove,
     );
-    this.canvasContainer.removeEventListener("contextmenu", this.contextMenu);
   }
 }
 
