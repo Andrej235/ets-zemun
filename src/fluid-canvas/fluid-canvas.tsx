@@ -139,25 +139,44 @@ export default function FluidCanvas({
     };
   }, [containerRef, renderer, windowSize]);
 
+  // const defaults = useMemo(
+  //   () => ({
+  //     timeSpeed: 0.5,
+  //     dissipation: 0.9,
+  //     applyViscosity: true,
+  //     viscosity: 0.3,
+  //     applyVorticity: true,
+  //     vorticityCurl: 0.2,
+  //     poissonPressureEquationIterations: 50,
+  //     radius: 0.045,
+  //     color: [15, 15, 30],
+  //     applyBoundaries: false,
+  //     gridScale: 3.5,
+  //   }),
+  //   [],
+  // );
+
   const defaults = useMemo(
     () => ({
-      timeSpeed: 0.5,
-      dissipation: 0.9,
-      applyViscosity: true,
-      viscosity: 0.3,
-      applyVorticity: true,
-      vorticityCurl: 0.2,
-      poissonPressureEquationIterations: 50,
-      radius: 0.045,
-      color: [15, 15, 30],
+      timeSpeed: 0.01,
+      dissipation: 0.5,
+      applyViscosity: false,
+      viscosity: 0,
+      applyVorticity: false,
+      vorticityCurl: 0,
+      poissonPressureEquationIterations: 0,
+      radius: 0.01,
+      color: [255, 255, 255],
       applyBoundaries: false,
-      gridScale: 3.5,
+      gridScale: 1,
     }),
     [],
   );
 
   //#region gui for debugging
   useEffect(() => {
+    if(!import.meta.env.DEV) return;
+
     if (!solver) return;
     const gui: dat.GUI = new GUI();
 

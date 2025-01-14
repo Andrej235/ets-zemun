@@ -47,14 +47,16 @@ export default class Mouse {
     this.mouseEventListenerContainer = mouseEventListenerContainer;
 
     mouseEventListenerContainer.addEventListener(
-      "mousemove",
+      "pointermove",
       this.boundMouseMove,
     );
   }
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
-    const r = this.grid.scale;
+
+    const oldX = this.position.x;
+    const oldY = this.position.y;
 
     let x = event.clientX;
     let y = event.clientY;
@@ -70,6 +72,21 @@ export default class Mouse {
 
     y -= mouseVerticalOffset;
     y *= this.canvasHeightToScreenRatio;
+
+    const dx = x - oldX;
+    const dy = y - oldY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const step = 10; // Adjust this value for finer interpolation.
+
+    for (let i = 0; i < distance; i += step) {
+      const t = i / distance;
+      this.addToTrail(oldX + dx * t, oldY + dy * t);
+    }
+    this.addToTrail(x, y);
+  }
+
+  private addToTrail(x: number, y: number) {
+    const r = this.grid.scale;
 
     const dx = x - this.position.x;
     const dy = y - this.position.y;
@@ -89,16 +106,12 @@ export default class Mouse {
       position,
     });
 
-    console.log("mouse move", this.motions.length);
-
     this.position.set(x, y);
   }
 
   dispose() {
-    console.log("dispose mouse");
-
     this.mouseEventListenerContainer.removeEventListener(
-      "mousemove",
+      "pointermove",
       this.boundMouseMove,
     );
   }
