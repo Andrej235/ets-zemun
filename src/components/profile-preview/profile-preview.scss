@@ -1,11 +1,21 @@
 .profile-overview {
   position: relative;
 
-  width: 60%;
+  width: 80%;
   min-width: 100rem;
+  max-width: 120rem;
   height: 40rem;
 
   display: flex;
+
+  @media screen and (max-width: 1440px) {
+    min-width: 90rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+    min-width: 0;
+  }
 
   &.image-left {
     flex-direction: row;
@@ -48,13 +58,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-      box-shadow: 0 0px 15px $shadow;
 
     .title {
       margin-top: 1rem;
       color: $text-primary;
       font-size: 3.6rem;
       text-align: left;
+      color: $accent-secondary;
     }
 
     .description {
@@ -67,10 +77,11 @@
   .info-right {
     right: 0;
     padding-left: 13rem;
+    box-shadow: 5px 10px 15px $shadow;
   }
   .info-left {
     left: 0;
     padding-right: 13rem;
+    box-shadow: -5px 10px 15px $shadow;
   }
 }
-
