@@ -11,7 +11,7 @@ export default class Mouse {
 
   isActive: boolean;
 
-  position: THREE.Vector2;
+  screenPosition: THREE.Vector2;
   motions: {
     drag: {
       x: number;
@@ -44,7 +44,7 @@ export default class Mouse {
     this.canvasWidthToScreenRatio =
       window.innerWidth / canvasContainer.clientWidth;
 
-    this.position = new THREE.Vector2();
+    this.screenPosition = new THREE.Vector2();
     this.motions = [];
 
     this.boundMouseMove = this.mouseMove.bind(this);
@@ -69,8 +69,8 @@ export default class Mouse {
             y: (Math.random() - 0.5) * 2,
           },
           position: {
-            x: this.position.x,
-            y: this.position.y,
+            x: this.screenXToCanvas(this.screenPosition.x),
+            y: this.screenYToCanvas(this.screenPosition.y),
           },
         },
       ];
@@ -79,24 +79,13 @@ export default class Mouse {
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
+    this.screenPosition.set(event.clientX, event.clientY);
 
-    const oldX = this.position.x;
-    const oldY = this.position.y;
+    const oldX = this.screenXToCanvas(this.screenPosition.x);
+    const oldY = this.screenYToCanvas(this.screenPosition.y);
 
-    let x = event.clientX;
-    let y = event.clientY;
-
-    const mouseVerticalOffset =
-      this.canvasTopStart - document.scrollingElement!.scrollTop;
-
-    const mouseHorizontalOffset =
-      this.canvasLeftStart - document.scrollingElement!.scrollLeft;
-
-    x -= mouseHorizontalOffset;
-    x *= this.canvasWidthToScreenRatio;
-
-    y -= mouseVerticalOffset;
-    y *= this.canvasHeightToScreenRatio;
+    const x = this.screenXToCanvas(event.clientX);
+    const y = this.screenYToCanvas(event.clientY);
 
     const dx = x - oldX;
     const dy = y - oldY;
@@ -105,16 +94,33 @@ export default class Mouse {
 
     for (let i = 0; i < distance; i += step) {
       const t = i / distance;
-      this.addToTrail(oldX + dx * t, oldY + dy * t);
+      const curX = oldX + dx * t;
+      const curY = oldY + dy * t;
+      this.addToTrail(curX, curY, curX - oldX, curY - oldY);
     }
-    this.addToTrail(x, y);
+    this.addToTrail(x, y, dx, dy);
   }
 
-  private addToTrail(x: number, y: number) {
-    const r = this.grid.scale;
+  private screenXToCanvas(x: number) {
+    const mouseHorizontalOffset =
+      this.canvasLeftStart - document.scrollingElement!.scrollLeft;
 
-    const dx = x - this.position.x;
-    const dy = y - this.position.y;
+    x -= mouseHorizontalOffset;
+    x *= this.canvasWidthToScreenRatio;
+    return x;
+  }
+
+  private screenYToCanvas(y: number) {
+    const mouseVerticalOffset =
+      this.canvasTopStart - document.scrollingElement!.scrollTop;
+
+    y -= mouseVerticalOffset;
+    y *= this.canvasHeightToScreenRatio;
+    return y;
+  }
+
+  private addToTrail(x: number, y: number, dx: number, dy: number) {
+    const r = this.grid.scale;
 
     const drag = {
       x: Math.min(Math.max(dx, -r), r),
@@ -130,8 +136,6 @@ export default class Mouse {
       drag,
       position,
     });
-
-    this.position.set(x, y);
   }
 
   dispose() {
