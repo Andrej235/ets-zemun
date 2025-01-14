@@ -126,7 +126,8 @@ class Solver {
     const point = new THREE.Vector2();
     const force = new THREE.Vector3();
 
-    if (mouse.motions.length === 0) mouse.getStaticPosition(1);
+    if (mouse.isHoveringOverCanvas && mouse.motions.length === 0)
+      mouse.getStaticPosition(1);
 
     for (let i = 0; i < mouse.motions.length; i++) {
       const motion = mouse.motions[i];

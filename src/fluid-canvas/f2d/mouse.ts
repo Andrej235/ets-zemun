@@ -2,15 +2,14 @@ import { Grid } from "../types/Grid";
 import * as THREE from "three";
 
 export default class Mouse {
-  grid: Grid;
-  canvasContainer: HTMLElement;
-  canvasTopStart: number;
-  canvasLeftStart: number;
-  canvasHeightToScreenRatio: number;
-  canvasWidthToScreenRatio: number;
+  private grid: Grid;
+  private canvasTopStart: number;
+  private canvasLeftStart: number;
+  private canvasHeightToScreenRatio: number;
+  private canvasWidthToScreenRatio: number;
 
-  position: THREE.Vector2;
-  screenPosition: THREE.Vector2;
+  private position: THREE.Vector2;
+  private screenPosition: THREE.Vector2;
   motions: {
     drag: {
       x: number;
@@ -22,8 +21,12 @@ export default class Mouse {
     };
   }[];
 
-  boundMouseMove: (event: MouseEvent) => void;
-  mouseEventListenerContainer: HTMLElement;
+  isHoveringOverCanvas: boolean;
+  private mouseEnter: () => void;
+  private mouseLeave: () => void;
+
+  private boundMouseMove: (event: MouseEvent) => void;
+  private mouseEventListenerContainer: HTMLElement;
 
   constructor(
     grid: Grid,
@@ -31,7 +34,6 @@ export default class Mouse {
     canvasContainer: HTMLElement,
   ) {
     this.grid = grid;
-    this.canvasContainer = canvasContainer;
 
     this.canvasTopStart = canvasContainer.offsetTop;
     this.canvasLeftStart = canvasContainer.getBoundingClientRect().left;
@@ -41,8 +43,8 @@ export default class Mouse {
     this.canvasWidthToScreenRatio =
       window.innerWidth / canvasContainer.clientWidth;
 
-    this.position = new THREE.Vector2();
-    this.screenPosition = new THREE.Vector2();
+    this.position = new THREE.Vector2(0, 0);
+    this.screenPosition = new THREE.Vector2(0, 0);
     this.motions = [];
 
     this.boundMouseMove = this.mouseMove.bind(this);
@@ -52,18 +54,38 @@ export default class Mouse {
       "pointermove",
       this.boundMouseMove,
     );
+
+    this.isHoveringOverCanvas = false;
+
+    this.mouseEnter = (() => {
+      this.isHoveringOverCanvas = true;
+    }).bind(this);
+
+    this.mouseLeave = (() => {
+      this.isHoveringOverCanvas = false;
+      this.motions = [];
+      this.position.set(0, 0);
+      this.screenPosition.set(0, 0);
+    }).bind(this);
+
+    mouseEventListenerContainer.addEventListener("mouseenter", this.mouseEnter);
+    mouseEventListenerContainer.addEventListener("mouseleave", this.mouseLeave);
   }
 
   mouseMove(event: MouseEvent) {
     event.preventDefault();
+    const x = this.screenXToCanvas(event.clientX);
+    const y = this.screenYToCanvas(event.clientY);
+
+    if (this.screenPosition.x === 0) {
+      this.screenPosition.set(event.clientX, event.clientY);
+      return;
+    }
 
     const oldX = this.screenXToCanvas(this.screenPosition.x);
     const oldY = this.screenYToCanvas(this.screenPosition.y);
 
     this.screenPosition.set(event.clientX, event.clientY);
-
-    const x = this.screenXToCanvas(event.clientX);
-    const y = this.screenYToCanvas(event.clientY);
 
     const dx = x - oldX;
     const dy = y - oldY;
@@ -138,6 +160,14 @@ export default class Mouse {
     this.mouseEventListenerContainer.removeEventListener(
       "pointermove",
       this.boundMouseMove,
+    );
+    this.mouseEventListenerContainer.removeEventListener(
+      "mouseenter",
+      this.mouseEnter,
+    );
+    this.mouseEventListenerContainer.removeEventListener(
+      "mouseleave",
+      this.mouseLeave,
     );
   }
 }

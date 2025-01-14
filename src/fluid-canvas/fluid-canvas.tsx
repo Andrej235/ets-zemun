@@ -86,13 +86,16 @@ export default function FluidCanvas({
     displayScalar.render(renderer, solver.density.read);
   }, [solver, displayScalar, renderer]);
 
-  const update = useCallback(() => {
-    if (!solver || !mouse) return null;
-
-    solver.step(renderer, mouse);
-    render();
-    requestAnimationFrame(update);
-  }, [solver, mouse, render, renderer]);
+  const update = useCallback(
+    !solver || !mouse
+      ? () => void 0
+      : () => {
+          solver.step(renderer, mouse);
+          render();
+          requestAnimationFrame(update);
+        },
+    [solver, mouse, render, renderer],
+  );
 
   useEffect(() => {
     fileLoader.run().then((files) => {
