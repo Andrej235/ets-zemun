@@ -9,12 +9,8 @@ export default class Mouse {
   canvasHeightToScreenRatio: number;
   canvasWidthToScreenRatio: number;
 
-  left: boolean;
-  right: boolean;
   position: THREE.Vector2;
   motions: {
-    left: boolean;
-    right: boolean;
     drag: {
       x: number;
       y: number;
@@ -41,19 +37,9 @@ export default class Mouse {
     this.canvasWidthToScreenRatio =
       window.innerWidth / canvasContainer.clientWidth;
 
-    this.left = false;
-    this.right = false;
     this.position = new THREE.Vector2();
     this.motions = [];
 
-    mouseEventListenerContainer.addEventListener(
-      "mousedown",
-      this.mouseDown.bind(this),
-    );
-    mouseEventListenerContainer.addEventListener(
-      "mouseup",
-      this.mouseUp.bind(this),
-    );
     mouseEventListenerContainer.addEventListener(
       "mousemove",
       this.mouseMove.bind(this),
@@ -62,18 +48,6 @@ export default class Mouse {
       "contextmenu",
       this.contextMenu,
     );
-  }
-
-  mouseDown(event: MouseEvent) {
-    this.position.set(event.clientX, event.clientY);
-    this.left = event.button === 0 ? true : this.left;
-    this.right = event.button === 2 ? true : this.right;
-  }
-
-  mouseUp(event: MouseEvent) {
-    event.preventDefault();
-    this.left = event.button === 0 ? false : this.left;
-    this.right = event.button === 2 ? false : this.right;
   }
 
   mouseMove(event: MouseEvent) {
@@ -95,27 +69,23 @@ export default class Mouse {
     y -= mouseVerticalOffset;
     y *= this.canvasHeightToScreenRatio;
 
-    if (this.left || this.right) {
-      const dx = x - this.position.x;
-      const dy = y - this.position.y;
+    const dx = x - this.position.x;
+    const dy = y - this.position.y;
 
-      const drag = {
-        x: Math.min(Math.max(dx, -r), r),
-        y: Math.min(Math.max(dy, -r), r),
-      };
+    const drag = {
+      x: Math.min(Math.max(dx, -r), r),
+      y: Math.min(Math.max(dy, -r), r),
+    };
 
-      const position = {
-        x: x,
-        y: y,
-      };
+    const position = {
+      x: x,
+      y: y,
+    };
 
-      this.motions.push({
-        left: this.left,
-        right: this.right,
-        drag,
-        position,
-      });
-    }
+    this.motions.push({
+      drag,
+      position,
+    });
 
     this.position.set(x, y);
   }
@@ -125,8 +95,6 @@ export default class Mouse {
   }
 
   dispose() {
-    this.canvasContainer.removeEventListener("mousedown", this.mouseDown);
-    this.canvasContainer.removeEventListener("mouseup", this.mouseUp);
     this.canvasContainer.removeEventListener(
       "mousemove",
       this.mouseMove.bind(this),

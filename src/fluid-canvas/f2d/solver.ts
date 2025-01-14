@@ -47,7 +47,7 @@ class Solver {
     time: Time,
     windowSize: THREE.Vector2,
     slabs: Slabs,
-    slabop: Slabop
+    slabop: Slabop,
   ) {
     this.grid = grid;
     this.time = time;
@@ -99,7 +99,7 @@ class Solver {
         renderer,
         this.velocity,
         this.velocityVorticity,
-        this.velocity
+        this.velocity,
       );
       this.boundary.compute(renderer, this.velocity, -1, this.velocity);
     }
@@ -115,7 +115,7 @@ class Solver {
         this.velocity,
         this.velocity,
         this.boundary,
-        -1
+        -1,
       );
     }
 
@@ -133,27 +133,17 @@ class Solver {
       point.x = (point.x / this.windowSize.x) * this.grid.size.x;
       point.y = (point.y / this.windowSize.y) * this.grid.size.y;
 
-      if (motion.left) {
-        force.set(motion.drag.x, -motion.drag.y, 0);
-        this.splat.compute(
-          renderer,
-          this.velocity,
-          force,
-          point,
-          this.velocity
-        );
-        this.boundary.compute(renderer, this.velocity, -1, this.velocity);
-      }
+      force.set(motion.drag.x, -motion.drag.y, 0);
+      this.splat.compute(renderer, this.velocity, force, point, this.velocity);
+      this.boundary.compute(renderer, this.velocity, -1, this.velocity);
 
-      if (motion.right) {
-        this.splat.compute(
-          renderer,
-          this.density,
-          this.source,
-          point,
-          this.density
-        );
-      }
+      this.splat.compute(
+        renderer,
+        this.density,
+        this.source,
+        point,
+        this.density,
+      );
     }
     mouse.motions = [];
   }
@@ -172,14 +162,14 @@ class Solver {
       this.velocityDivergence,
       this.pressure,
       this.boundary,
-      1
+      1,
     );
 
     this.gradient.compute(
       renderer,
       this.pressure,
       this.velocity,
-      this.velocity
+      this.velocity,
     );
     this.boundary.compute(renderer, this.velocity, -1, this.velocity);
   }
@@ -194,7 +184,7 @@ class Solver {
     grid: Grid,
     time: Time,
     windowSize: THREE.Vector2,
-    shaders: Record<string, string>
+    shaders: Record<string, string>,
   ) {
     const w = grid.size.x,
       h = grid.size.y;
@@ -220,7 +210,7 @@ class Solver {
       vorticityConfinement: new VorticityConfinement(
         shaders.vorticityforce,
         grid,
-        time
+        time,
       ),
       boundary: new Boundary(shaders.boundary, grid),
     };
@@ -230,3 +220,4 @@ class Solver {
 }
 
 export default Solver;
+
