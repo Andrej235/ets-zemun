@@ -57,6 +57,7 @@ export default function About() {
       <section ref={overviewSectionRef}>
         <FluidCanvas
           containerToApplyEventListenersTo={overviewSectionRef}
+          gridSize={[512, 512]}
         />
 
         <div className="overview">

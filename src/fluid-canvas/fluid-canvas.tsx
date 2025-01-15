@@ -10,10 +10,12 @@ import { GUI } from "dat.gui";
 
 type FluidCanvasProps = {
   containerToApplyEventListenersTo: React.RefObject<HTMLElement>;
+  gridSize: [x: number, y: number];
 };
 
 export default function FluidCanvas({
   containerToApplyEventListenersTo,
+  gridSize,
 }: FluidCanvasProps) {
   const [shaders, setShaders] = useState<Files | null>(null);
   const [mouse, setMouse] = useState<Mouse | null>(null);
@@ -22,11 +24,11 @@ export default function FluidCanvas({
 
   const grid: Grid = useMemo(
     () => ({
-      size: new THREE.Vector2(512, 256),
+      size: new THREE.Vector2(gridSize[0], gridSize[1]),
       scale: 1,
       applyBoundaries: true,
     }),
-    [],
+    [gridSize],
   );
 
   const fileLoader: FileLoader = useMemo(
