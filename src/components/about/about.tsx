@@ -22,7 +22,12 @@ export default function About() {
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
-          <div className="hero-image-overlay"></div>
+          <div className="hero-block">
+          <div className="hero-block-element"></div>
+          <div className="hero-block-element"></div>
+          <div className="hero-block-element"></div>
+          <div className="hero-block-element"></div>
+          </div>
 
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
             <h1>Elektrotehnička škola "Zemun"</h1>
@@ -55,15 +60,17 @@ export default function About() {
         </div>
       </motion.div>
 
-      <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
-      </div>
+      <section>
+        <div className="profiles-overview-container">
+          {data.profiles.map((profile, i) => (
+            <ProfileOverview
+              profile={profile as ProfileOverviewSchema}
+              layout={i % 2 === 0 ? "image-left" : "image-right"}
+              key={profile.name}
+            />
+          ))}
+        </div>
+      </section>
 
       <section ref={overviewSectionRef}>
         <FluidCanvas
