@@ -1,6 +1,7 @@
 #about-page {
   justify-self: center;
-  max-width: 90svw;
+  max-width: 100svw;
+  padding: 0 5svw;
 
   display: flex;
   flex-direction: column;
@@ -8,8 +9,25 @@
   overflow: hidden;
 
   @media screen and (max-width: 1440px){
-    max-width: 100%;
+  padding: 0;
   }
+
+
+  .fluid-canvas {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 0;
+    height: 200vh;
+    width: 100vw;
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+
 
   section {
     display: flex;
@@ -21,6 +39,8 @@
 
   .hero-space {
     max-width: 100%;
+    min-width: 100%;
+    width: 100%;
     height: calc(100svh - 10rem);
 
     display: flex;
@@ -211,4 +231,5 @@
     }
   }
 }
+
 

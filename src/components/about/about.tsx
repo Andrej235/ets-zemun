@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
@@ -9,9 +9,11 @@ import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-c
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
+import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const overviewSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -78,7 +80,12 @@ export default function About() {
         })}
       </div>
 
-      <section>
+      <section ref={overviewSectionRef}>
+        <FluidCanvas
+          containerToApplyEventListenersTo={overviewSectionRef}
+          gridSize={[512, 512]}
+        />
+
         <NewsAndEventsPreviewContainer />
       </section>
 
