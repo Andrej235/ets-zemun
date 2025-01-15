@@ -41,7 +41,7 @@ export default class Advect extends SlabopBase {
   ) {
     this.uniforms.velocity.value = velocity.read.texture;
     this.uniforms.advected.value = advected.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
     this.uniforms.timestep.value = this.time;
     this.uniforms.dissipation.value = this.dissipation;

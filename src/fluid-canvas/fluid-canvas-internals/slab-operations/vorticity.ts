@@ -23,7 +23,7 @@ export default class Vorticity extends SlabopBase {
 
   compute(renderer: WebGLRenderer, velocity: Slab, output: Slab) {
     this.uniforms.velocity.value = velocity.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
 
     renderer.setRenderTarget(output.write);

@@ -65,7 +65,7 @@ export default class Solver {
 
     this.timeSpeed = config.timeSpeed;
     this.grid.scale = config.gridScale;
-    this.grid.size.set(...config.gridResolution);
+    this.grid.resolution.set(...config.gridResolution);
     this.windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
     this.applyViscosity = config.applyViscosity;
     this.viscosity = config.viscosity;
@@ -82,6 +82,28 @@ export default class Solver {
     );
   }
 
+  resetAllSlabs() {
+    const gridWidth = this.grid.resolution.x;
+    const gridHeight = this.grid.resolution.y;
+
+    //?slabs
+    this.velocity = Slab.make(gridWidth, gridHeight); //?vec2
+    this.density = Slab.make(gridWidth, gridHeight);
+    this.velocityDivergence = Slab.make(gridWidth, gridHeight);
+    this.velocityVorticity = Slab.make(gridWidth, gridHeight);
+    this.pressure = Slab.make(gridWidth, gridHeight);
+
+    //?slab operations
+    this.advect.grid = this.grid;
+    this.diffuse.grid = this.grid;
+    this.divergence.grid = this.grid;
+    this.poissonPressureEq.grid = this.grid;
+    this.gradient.grid = this.grid;
+    this.splat.grid = this.grid;
+    this.vorticity.grid = this.grid;
+    this.vorticityConfinement.grid = this.grid;
+  }
+
   constructor(
     config: SolverConfig,
     windowSize: THREE.Vector2,
@@ -92,7 +114,7 @@ export default class Solver {
     this.innerConfig = config;
 
     const grid: Grid = {
-      size: new THREE.Vector2(
+      resolution: new THREE.Vector2(
         config.gridResolution[0],
         config.gridResolution[1],
       ),
@@ -112,8 +134,8 @@ export default class Solver {
     this.mouse = mouse;
     this.windowSize = windowSize;
 
-    const gridWidth = grid.size.x;
-    const gridHeight = grid.size.y;
+    const gridWidth = grid.resolution.x;
+    const gridHeight = grid.resolution.y;
 
     //?slabs
     this.velocity = Slab.make(gridWidth, gridHeight); //?vec2
@@ -205,8 +227,8 @@ export default class Solver {
 
       point.set(motion.position.x, this.windowSize.y - motion.position.y);
       // normalize to [0, 1] and scale to grid size
-      point.x = (point.x / this.windowSize.x) * this.grid.size.x;
-      point.y = (point.y / this.windowSize.y) * this.grid.size.y;
+      point.x = (point.x / this.windowSize.x) * this.grid.resolution.x;
+      point.y = (point.y / this.windowSize.y) * this.grid.resolution.y;
 
       force.set(motion.drag.x, -motion.drag.y, 0);
       this.splat.compute(renderer, this.velocity, force, point, this.velocity);

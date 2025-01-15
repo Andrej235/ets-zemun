@@ -25,7 +25,7 @@ export default class Gradient extends SlabopBase {
   compute(renderer: WebGLRenderer, p: Slab, w: Slab, output: Slab) {
     this.uniforms.p.value = p.read.texture;
     this.uniforms.w.value = w.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
 
     renderer.setRenderTarget(output.write);

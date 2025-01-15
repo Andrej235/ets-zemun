@@ -14,6 +14,35 @@ export default function useSolverDebugGui(solver: Solver | null) {
 
     const gridFolder = gui.addFolder("Grid");
     add(gridFolder, solver, "gridScale").name("Grid Scale").min(0).step(0.01);
+    gridFolder
+      .add(solver.config.gridResolution, "0")
+      .name("Grid Resolution X")
+      .min(32)
+      .max(2048)
+      .step(32)
+      .onChange((x) => {
+        solver.config = {
+          ...solver.config,
+          gridResolution: [x, solver.config.gridResolution[1]],
+        };
+
+        solver.resetAllSlabs();
+      });
+
+    gridFolder
+      .add(solver.config.gridResolution, "1")
+      .name("Grid Resolution Y")
+      .min(32)
+      .max(2048)
+      .step(32)
+      .onChange((y) => {
+        solver.config = {
+          ...solver.config,
+          gridResolution: [solver.config.gridResolution[0], y],
+        };
+
+        solver.resetAllSlabs();
+      });
 
     const viscosityFolder = gui.addFolder("Viscosity");
     add(viscosityFolder, solver, "applyViscosity").name("Apply Viscosity");

@@ -23,7 +23,7 @@ export default class Divergence extends SlabopBase {
 
   compute(renderer: WebGLRenderer, velocity: Slab, divergence: Slab) {
     this.uniforms.velocity.value = velocity.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
 
     renderer.setRenderTarget(divergence.write);

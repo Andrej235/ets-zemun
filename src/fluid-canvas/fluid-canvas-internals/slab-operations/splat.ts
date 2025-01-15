@@ -32,7 +32,7 @@ export default class Splat extends SlabopBase {
     point: Vector2,
     output: Slab,
   ) {
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.read.value = input.read.texture;
     this.uniforms.color.value = color;
     this.uniforms.point.value = point;

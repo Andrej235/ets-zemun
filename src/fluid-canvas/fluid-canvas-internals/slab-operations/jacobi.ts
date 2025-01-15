@@ -49,7 +49,7 @@ export default class Jacobi extends SlabopBase {
   step(renderer: WebGLRenderer, x: Slab, b: Slab, output: Slab) {
     this.uniforms.x.value = x.read.texture;
     this.uniforms.b.value = b.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.alpha.value = this.alpha;
     this.uniforms.beta.value = this.beta;
 
