@@ -1,13 +1,10 @@
-import {
-  OverlayScrollbarsComponent,
-  OverlayScrollbarsComponentRef,
-} from "overlayscrollbars-react";
+import { useState, useEffect, useRef } from "react";
+import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
 import "./about.scss";
 import ProfileOverview from "@components/profile-preview/profile-preview";
-import { animate, motion, scroll } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
@@ -15,25 +12,14 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
-  const infoCardsContainerRef = useRef<OverlayScrollbarsComponentRef>(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const overviewSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!infoCardsContainerRef.current) return;
-    const infoCardsContainer = infoCardsContainerRef.current
-      .getElement()!
-      .querySelector("[data-overlayscrollbars-contents]")! as HTMLElement;
+    const handleResize = () => setScreenWidth(window.innerWidth);
 
-    for (let i = 0; i < infoCardsContainer.children.length; i++) {
-      const card = infoCardsContainer.children[i];
-
-      scroll(animate(card, { opacity: [0, 1, 1, 0] }, { ease: "linear" }), {
-        axis: "x",
-        target: card,
-        container: infoCardsContainer,
-        offset: ["start end", "end end", "start start", "end start"],
-      });
-    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -54,136 +40,119 @@ export default function About() {
         </div>
       </section>
 
+      <motion.div {...scrollAnimationFlyInBottom} className="overview">
+        <div className="overview-element">
+          <h1>Misija i Vizija</h1>
+          <p>
+            Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake
+            i naučne radnike iz oblasti koje obuhvata naš školski program.
+            Nastojimo da kod učenika probudimo želju za usavršavanjem i
+            sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
+            informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
+            <br />
+            Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
+            prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
+            aktivnosti. Stvorili smo takvo okruženje da je učenik u centru
+            nastavnog procesa i učenja. Želimo da naša deca postanu
+            preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama
+            menjamo sadašnjost i stvaramo svetliju budućnost.
+          </p>
+        </div>
+        <div className="overview-image">
+          <img
+            src="../../../public/images/414bee0337a871bdd69bc69aadaf2c79.png"
+            alt=""
+          />
+        </div>
+      </motion.div>
+
+      <div className="profiles-overview-container">
+        {data.profiles.map((profile, i) => {
+          const layout = screenWidth < 1024.98 ? "vertical" : i % 2 === 0 ? "image-left" : "image-right";
+
+          return (
+            <ProfileOverview
+              profile={profile as ProfileOverviewSchema}
+              layout={layout}
+              key={profile.name}
+            />
+          );
+        })}
+      </div>
+
       <section ref={overviewSectionRef}>
         <FluidCanvas
           containerToApplyEventListenersTo={overviewSectionRef}
           gridSize={[512, 512]}
         />
 
-        <div className="overview">
-          <motion.h1 {...scrollAnimationFlyInBottom}>
-            Lorem ipsum dolor sit amet.
-          </motion.h1>
-
-          <motion.p {...scrollAnimationFlyInBottom}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            possimus tempore accusantium facere earum ab eligendi repellendus
-            perspiciatis vero, iste obcaecati sed. Inventore atque beatae ipsum.
-            Distinctio doloribus, odio a ipsa corrupti neque officiis nulla
-            dignissimos! Quia non placeat animi eum labore rem! Ullam ab,
-            distinctio suscipit sequi, ut ipsum et incidunt blanditiis
-            laboriosam veniam vitae aliquid! Sequi ea obcaecati et asperiores
-            tempora alias rem rerum cumque laborum voluptas error nam, fuga
-            temporibus a quod atque animi incidunt fugiat magnam odio maxime
-            blanditiis minus vero nisi! Eligendi magni, odit quisquam neque a
-            error, facilis qui minima debitis est officiis quos ullam labore
-            perferendis repellat sunt, pariatur modi ipsum consectetur possimus
-            rerum inventore saepe. Cum consequuntur suscipit, iusto deserunt in
-            eveniet dolore blanditiis facilis sequi, soluta magnam numquam
-            voluptatum corrupti, facere possimus ratione autem. Culpa mollitia
-            voluptate autem deleniti quos quasi reiciendis veniam nisi numquam
-            at alias, illum corrupti iste similique debitis velit harum
-            aspernatur nobis dolorem libero quia, cupiditate iure fugiat
-            necessitatibus. Et culpa ab sint eius magnam. Nesciunt adipisci,
-            eveniet qui, laborum eum incidunt distinctio repellat officiis
-            delectus voluptate omnis velit laboriosam repudiandae totam et,
-            deleniti dolor voluptatum culpa ab minus? Itaque exercitationem
-            tempore, odit eaque excepturi aliquid blanditiis.
-          </motion.p>
-        </div>
-
-        <OverlayScrollbarsComponent
-          className="info-cards-container"
-          options={{
-            scrollbars: {
-              autoHide: "leave",
-              autoHideDelay: 150,
-            },
-            overflow: {
-              x: "scroll",
-              y: "hidden",
-            },
-          }}
-          ref={infoCardsContainerRef}
-        >
-          <InfoCard
-            icon="history"
-            title="Istorija škole"
-            link="/istorija"
-            text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
-          />
-
-          <InfoCard
-            icon="graduation-cap"
-            title="Programi obrazovanja"
-            link="/programi"
-            text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
-          />
-
-          <InfoCard
-            icon="building"
-            title="Infrastruktura i oprema"
-            link="/infrastruktura"
-            text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
-          />
-
-          <InfoCard
-            icon="chalkboard-teacher"
-            title="Nastavnici"
-            link="/nastavnici"
-            text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
-          />
-
-          <InfoCard
-            icon="trophy"
-            title="Takmičenja i nagrade"
-            link="/takmicenja"
-            text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
-          />
-
-          <InfoCard
-            icon="lightbulb"
-            title="Mentorski programi"
-            link="/mentori"
-            text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
-          />
-
-          <InfoCard
-            icon="pencil-alt"
-            title="Upis i prijem"
-            link="/upis"
-            text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
-          />
-
-          <InfoCard
-            icon="headset"
-            title="Podrška učenicima"
-            link="/podrska"
-            text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
-          />
-
-          <InfoCard
-            icon="gavel"
-            title="Pravni akte"
-            link="/pravni-akte"
-            text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
-          />
-        </OverlayScrollbarsComponent>
-      </section>
-
-      <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
-      </div>
-
-      <section>
         <NewsAndEventsPreviewContainer />
       </section>
+
+      <CustomSwiper>
+        <InfoCard
+          icon="history"
+          title="Istorija škole"
+          link="/istorija"
+          text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
+        />
+
+        <InfoCard
+          icon="graduation-cap"
+          title="Programi obrazovanja"
+          link="/programi"
+          text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
+        />
+
+        <InfoCard
+          icon="building"
+          title="Infrastruktura i oprema"
+          link="/infrastruktura"
+          text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
+        />
+
+        <InfoCard
+          icon="chalkboard-teacher"
+          title="Nastavnici"
+          link="/nastavnici"
+          text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
+        />
+
+        <InfoCard
+          icon="trophy"
+          title="Takmičenja i nagrade"
+          link="/takmicenja"
+          text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
+        />
+
+        <InfoCard
+          icon="lightbulb"
+          title="Mentorski programi"
+          link="/mentori"
+          text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
+        />
+
+        <InfoCard
+          icon="pencil-alt"
+          title="Upis i prijem"
+          link="/upis"
+          text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
+        />
+
+        <InfoCard
+          icon="headset"
+          title="Podrška učenicima"
+          link="/podrska"
+          text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
+        />
+
+        <InfoCard
+          icon="gavel"
+          title="Pravni akte"
+          link="/pravni-akte"
+          text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
+        />
+      </CustomSwiper>
 
       <div className="footer">
         <div className="social-media-icons-container">
