@@ -3,7 +3,7 @@ import { ScrollAnimation } from "./scroll-animation-type";
 const scrollAnimationFlyInBottom: ScrollAnimation = {
   initial: {
     opacity: 0,
-    y: 30,
+    y: 100,
   },
   whileInView: {
     opacity: 1,
