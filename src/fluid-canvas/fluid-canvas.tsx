@@ -3,6 +3,7 @@ import Solver, { SolverConfig } from "./f2d/solver";
 import Display from "./f2d/display";
 import FileLoader, { Files } from "./f2d/fileloader";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import useSolverDebugGui from "./use-solver-debug-gui";
 
 type FluidCanvasProps = {
   containerToApplyEventListenersTo: React.RefObject<HTMLElement>;
@@ -58,6 +59,7 @@ export default function FluidCanvas({
   );
 
   const [solver, setSolver] = useState<Solver | null>(null);
+  useSolverDebugGui(solver);
 
   useEffect(() => {
     if (
@@ -74,6 +76,7 @@ export default function FluidCanvas({
       containerToApplyEventListenersTo.current,
       containerRef.current,
     );
+
     setSolver(solver);
     return () => solver.dispose();
   }, [
@@ -142,79 +145,6 @@ export default function FluidCanvas({
       renderer.dispose();
     };
   }, [containerRef, renderer, windowSize]);
-
-  //#region gui for debugging
-  // useEffect(() => {
-  // if (!import.meta.env.DEV) return;
-
-  // if (!solver) return;
-  // if (!false) return;
-  // const gui: dat.GUI = new GUI();
-
-  // gui
-  //   .add(time, "step")
-  //   .name("time speed")
-  //   .min(0)
-  //   .step(0.01)
-  //   .setValue(defaults.timeSpeed);
-
-  // gui
-  //   .add(solver.advect, "dissipation", {
-  //     none: 1,
-  //     slow: 0.998,
-  //     fast: 0.992,
-  //     "very fast": 0.9,
-  //     faster: 0.85,
-  //     "very faster": 0.7,
-  //   })
-  //   .setValue(defaults.dissipation);
-
-  // const viscosityFolder = gui.addFolder("Viscosity");
-  // viscosityFolder
-  //   .add(solver, "applyViscosity")
-  //   .setValue(defaults.applyViscosity);
-  // viscosityFolder
-  //   .add(solver, "viscosity")
-  //   .min(0)
-  //   .step(0.01)
-  //   .setValue(defaults.viscosity);
-
-  // const vorticityFolder = gui.addFolder("Vorticity");
-  // vorticityFolder
-  //   .add(solver, "applyVorticity")
-  //   .setValue(defaults.applyVorticity);
-  // vorticityFolder
-  //   .add(solver.vorticityConfinement, "curl")
-  //   .min(0)
-  //   .step(0.01)
-  //   .setValue(defaults.vorticityCurl);
-
-  // const poissonPressureEqFolder = gui.addFolder("Poisson Pressure Equation");
-  // poissonPressureEqFolder
-  //   .add(solver.poissonPressureEq, "iterations", 0, 500, 1)
-  //   .setValue(defaults.poissonPressureEquationIterations);
-
-  // const splatSettings = {
-  //   color: [solver.ink.x * 255, solver.ink.y * 255, solver.ink.z * 255],
-  // };
-  // const splatFolder = gui.addFolder("Splat");
-  // splatFolder.add(solver.splat, "radius").min(0).setValue(defaults.radius);
-  // splatFolder
-  //   .addColor(splatSettings, "color")
-  //   .onChange(function (value) {
-  //     solver.ink.set(value[0] / 255, value[1] / 255, value[2] / 255);
-  //   })
-  //   .setValue(defaults.color);
-
-  // const gridFolder = gui.addFolder("Grid");
-  // gridFolder
-  //   .add(grid, "applyBoundaries")
-  //   .setValue(defaults.applyGridBoundaries);
-  // gridFolder.add(grid, "scale").setValue(defaults.gridScale);
-
-  // return () => gui.destroy();
-  // }, [solver, time, grid, defaults]);
-  //#endregion
 
   return <div className="fluid-canvas" ref={containerRef}></div>;
 }

@@ -1,0 +1,81 @@
+import { useEffect } from "react";
+import Solver, { SolverConfig } from "./f2d/solver";
+import { GUI, GUIController } from "dat.gui";
+
+export default function useSolverDebugGui(solver: Solver | null) {
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    if (!solver) return;
+
+    const gui: dat.GUI = new GUI();
+    gui.close();
+
+    add(gui, solver, "timeSpeed").name("Time Speed").min(0).max(10).step(0.01);
+
+    const gridFolder = gui.addFolder("Grid");
+    add(gridFolder, solver, "applyGridBoundaries").name(
+      "Apply Grid Boundaries",
+    );
+    add(gridFolder, solver, "gridScale").name("Grid Scale").min(0).step(0.01);
+
+    const viscosityFolder = gui.addFolder("Viscosity");
+    add(viscosityFolder, solver, "applyViscosity").name("Apply Viscosity");
+    add(viscosityFolder, solver, "viscosity")
+      .name("Viscosity")
+      .min(0)
+      .step(0.01);
+
+    const vorticityFolder = gui.addFolder("Vorticity");
+    add(vorticityFolder, solver, "applyVorticity").name("Apply Vorticity");
+    add(vorticityFolder, solver, "vorticityCurl")
+      .name("Vorticity Curl")
+      .min(0)
+      .step(0.01);
+
+    add(gui, solver, "dissipation").name("Lingering").min(0).max(1).step(0.01);
+    add(gui, solver, "poissonPressureEquationIterations")
+      .name("Poisson Pressure Equation Iterations")
+      .min(0)
+      .max(500)
+      .step(1);
+
+    const splatFolder = gui.addFolder("Splat");
+    add(splatFolder, solver, "radius").name("Radius").min(0).step(0.01);
+    splatFolder
+      .addColor(solver.config, "color")
+      .name("Color")
+      .onChange(getOnChangeCallback(solver, "color"));
+
+    return () => gui.destroy();
+  }, [solver]);
+
+  function add(
+    gui: GUI,
+    solver: Solver,
+    key: keyof SolverConfig,
+  ): GUIController {
+    return gui
+      .add(wrap(solver.config[key]), "value")
+      .onChange(getOnChangeCallback(solver, key));
+  }
+
+  function getOnChangeCallback<T extends keyof SolverConfig>(
+    solver: Solver,
+    key: T,
+  ): (value: SolverConfig[T]) => void {
+    return (value) => (solver.config = { ...solver.config, [key]: value });
+  }
+
+  function wrap<T>(value: T): { value: T };
+  function wrap<T extends object, K extends keyof T>(
+    value: T,
+    key: K,
+  ): { value: T[K] };
+
+  function wrap<T, K extends keyof T>(value: T, key?: K): { value: T[K] | T } {
+    return {
+      value: key ? value[key] : value,
+    };
+  }
+}
+

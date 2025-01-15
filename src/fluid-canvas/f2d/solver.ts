@@ -13,20 +13,24 @@ import Mouse from "./mouse";
 
 export type SolverConfig = {
   timeSpeed: number;
-  dissipation: number;
+  applyGridBoundaries: boolean;
+  gridScale: number;
+  gridResolution: [x: number, y: number];
+
   applyViscosity: boolean;
   viscosity: number;
   applyVorticity: boolean;
   vorticityCurl: number;
+
+  dissipation: number;
   poissonPressureEquationIterations: number;
   radius: number;
   color: [number, number, number];
-  applyGridBoundaries: boolean;
-  gridScale: number;
-  gridResolution: [x: number, y: number];
 };
 
 export default class Solver {
+  private innerConfig: SolverConfig;
+
   private grid: Grid;
   private mouse: Mouse;
   private timeSpeed: number;
@@ -55,6 +59,33 @@ export default class Solver {
   private source: THREE.Vector3;
   ink: THREE.Vector3;
 
+  public get config(): SolverConfig {
+    return this.innerConfig;
+  }
+
+  public set config(config: SolverConfig) {
+    this.innerConfig = config;
+
+    this.timeSpeed = config.timeSpeed;
+    this.grid.applyBoundaries = config.applyGridBoundaries;
+    this.grid.scale = config.gridScale;
+    this.grid.size.set(...config.gridResolution);
+    this.windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
+    this.applyViscosity = config.applyViscosity;
+    this.viscosity = config.viscosity;
+    this.applyVorticity = config.applyVorticity;
+    this.vorticityConfinement.curl = config.vorticityCurl;
+    this.advect.dissipation = config.dissipation;
+    this.poissonPressureEq.iterations =
+      config.poissonPressureEquationIterations;
+    this.splat.radius = config.radius;
+    this.ink = new THREE.Vector3(
+      config.color[0] / 255,
+      config.color[1] / 255,
+      config.color[2] / 255,
+    );
+  }
+
   constructor(
     config: SolverConfig,
     windowSize: THREE.Vector2,
@@ -62,6 +93,8 @@ export default class Solver {
     containerToApplyEventListenersTo: HTMLElement,
     containerRef: HTMLElement,
   ) {
+    this.innerConfig = config;
+
     const grid = {
       size: new THREE.Vector2(
         config.gridResolution[0],
@@ -118,14 +151,14 @@ export default class Solver {
     this.poissonPressureEq.iterations =
       config.poissonPressureEquationIterations;
     this.splat.radius = config.radius;
-
-    //?density attributes
-    this.source = new THREE.Vector3(0.8, 0.0, 0.0);
     this.ink = new THREE.Vector3(
       config.color[0] / 255,
       config.color[1] / 255,
       config.color[2] / 255,
     );
+
+    //?density attributes
+    this.source = new THREE.Vector3(0.8, 0.0, 0.0);
   }
 
   step(renderer: THREE.WebGLRenderer) {
@@ -170,7 +203,7 @@ export default class Solver {
     this.project(renderer);
   }
 
-  addForces(renderer: THREE.WebGLRenderer, mouse: Mouse) {
+  private addForces(renderer: THREE.WebGLRenderer, mouse: Mouse) {
     const point = new THREE.Vector2();
     const force = new THREE.Vector3();
 
@@ -201,7 +234,7 @@ export default class Solver {
   }
 
   // solve poisson equation and subtract pressure gradient
-  project(renderer: THREE.WebGLRenderer) {
+  private project(renderer: THREE.WebGLRenderer) {
     this.divergence.compute(renderer, this.velocity, this.velocityDivergence);
 
     // 0 is our initial guess for the poisson equation solver
@@ -226,7 +259,7 @@ export default class Solver {
     this.boundary.compute(renderer, this.velocity, -1, this.velocity);
   }
 
-  clearSlab(renderer: THREE.WebGLRenderer, slab: Slab) {
+  private clearSlab(renderer: THREE.WebGLRenderer, slab: Slab) {
     renderer.setRenderTarget(slab.write);
     renderer.clear(true, false, false);
     slab.swap();
