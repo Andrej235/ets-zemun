@@ -122,13 +122,13 @@
   .info-right {
     right: 0;
     padding-left: 13rem;
-    box-shadow: 5px 10px 15px $shadow;
+    box-shadow: 5px 5px 15px $shadow;
   }
 
   .info-left {
     left: 0;
     padding-right: 13rem;
-    box-shadow: -5px 10px 15px $shadow;
+    box-shadow: -5px 5px 15px $shadow;
   }
 
   @media screen and (min-width: 1025px) {
