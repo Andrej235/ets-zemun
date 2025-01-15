@@ -12,21 +12,25 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
-  const overviewSectionRef = useRef<HTMLDivElement>(null);
+  const heroSpaceRef = useRef<HTMLDivElement>(null);
 
   return (
     <div id="about-page">
-      <section>
+      <section ref={heroSpaceRef}>
+        <FluidCanvas
+          containerToApplyEventListenersTo={heroSpaceRef}
+          gridSize={[512, 512]}
+        />
         <div className="hero-space">
           <motion.div className="hero-image">
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
           <div className="hero-block">
-          <div className="hero-block-element"></div>
-          <div className="hero-block-element"></div>
-          <div className="hero-block-element"></div>
-          <div className="hero-block-element"></div>
+            <div className="hero-block-element"></div>
+            <div className="hero-block-element"></div>
+            <div className="hero-block-element"></div>
+            <div className="hero-block-element"></div>
           </div>
 
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
@@ -72,12 +76,7 @@ export default function About() {
         </div>
       </section>
 
-      <section ref={overviewSectionRef}>
-        <FluidCanvas
-          containerToApplyEventListenersTo={overviewSectionRef}
-          gridSize={[512, 512]}
-        />
-
+      <section>
         <NewsAndEventsPreviewContainer />
       </section>
 
