@@ -147,13 +147,13 @@ export default function FluidCanvas({
   const defaults = useMemo(
     () => ({
       timeSpeed: 0.5,
-      dissipation: 0.85,
+      dissipation: 0.7,
       applyViscosity: true,
       viscosity: 0.3,
       applyVorticity: true,
       vorticityCurl: 0.2,
       poissonPressureEquationIterations: 50,
-      radius: 0.045,
+      radius: 0.05,
       color: [15, 15, 30],
       applyBoundaries: false,
       gridScale: 3.5,
