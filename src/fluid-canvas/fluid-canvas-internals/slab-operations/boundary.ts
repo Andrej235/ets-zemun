@@ -1,9 +1,9 @@
 import * as THREE from "three";
-import type { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import type { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 
-class Boundary {
+export default class Boundary {
   grid: Grid;
   material: THREE.ShaderMaterial;
   uniforms: Uniforms;
@@ -80,7 +80,7 @@ class Boundary {
     renderer: THREE.WebGLRenderer,
     input: Slab,
     scale: number,
-    output: Slab
+    output: Slab,
   ) {
     if (!this.grid.applyBoundaries) return;
 
@@ -98,7 +98,7 @@ class Boundary {
     renderer: THREE.WebGLRenderer,
     line: THREE.Line,
     offset: [number, number],
-    output: Slab
+    output: Slab,
   ) {
     this.scene.add(line);
     this.gridOffset.set(offset[0], offset[1]);
@@ -111,4 +111,3 @@ class Boundary {
   }
 }
 
-export default Boundary;

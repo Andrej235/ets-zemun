@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import SlabopBase from "./slabopbase";
-import { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 
-class VorticityConfinement extends SlabopBase {
+export default class VorticityConfinement extends SlabopBase {
   grid: Grid;
   time: number;
   epsilon: number;
@@ -60,6 +60,4 @@ class VorticityConfinement extends SlabopBase {
     output.swap();
   }
 }
-
-export default VorticityConfinement;
 

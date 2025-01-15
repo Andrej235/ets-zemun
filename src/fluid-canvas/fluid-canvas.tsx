@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import Solver, { SolverConfig } from "./f2d/solver";
-import Display from "./f2d/display";
-import FileLoader, { Files } from "./f2d/fileloader";
+import Solver, { SolverConfig } from "./fluid-canvas-internals/solver";
+import Display from "./fluid-canvas-internals/display";
+import FileLoader, { Files } from "./fluid-canvas-internals/fileloader";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSolverDebugGui from "./use-solver-debug-gui";
 

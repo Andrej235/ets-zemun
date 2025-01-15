@@ -1,4 +1,4 @@
-import { Grid } from "../types/Grid";
+import { Grid } from "../types/grid";
 import * as THREE from "three";
 
 export default class Mouse {

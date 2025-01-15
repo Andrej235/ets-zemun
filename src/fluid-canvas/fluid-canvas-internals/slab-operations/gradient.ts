@@ -1,10 +1,10 @@
 import { Vector2, WebGLRenderer } from "three";
-import { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 import SlabopBase from "./slabopbase";
 
-class Gradient extends SlabopBase {
+export default class Gradient extends SlabopBase {
   grid: Grid;
   uniforms: Uniforms;
 
@@ -35,4 +35,3 @@ class Gradient extends SlabopBase {
   }
 }
 
-export default Gradient;

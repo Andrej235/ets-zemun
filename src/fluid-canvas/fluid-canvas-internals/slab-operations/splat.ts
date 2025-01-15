@@ -1,10 +1,10 @@
 import { Vector2, Vector3, WebGLRenderer } from "three";
-import { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 import SlabopBase from "./slabopbase";
 
-class Splat extends SlabopBase {
+export default class Splat extends SlabopBase {
   grid: Grid;
   radius: number;
   uniforms: Uniforms;
@@ -30,7 +30,7 @@ class Splat extends SlabopBase {
     input: Slab,
     color: Vector3,
     point: Vector2,
-    output: Slab
+    output: Slab,
   ) {
     this.uniforms.gridSize.value = this.grid.size;
     this.uniforms.read.value = input.read.texture;
@@ -45,4 +45,3 @@ class Splat extends SlabopBase {
   }
 }
 
-export default Splat;

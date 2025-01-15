@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Solver, { SolverConfig } from "./f2d/solver";
+import Solver, { SolverConfig } from "./fluid-canvas-internals/solver";
 import { GUI, GUIController } from "dat.gui";
 
 export default function useSolverDebugGui(solver: Solver | null) {

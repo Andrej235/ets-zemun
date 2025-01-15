@@ -1,14 +1,14 @@
 import * as THREE from "three";
 import Slab from "./slab";
-import Boundary from "./slabop/boundary";
-import Advect from "./slabop/advect";
-import Divergence from "./slabop/divergence";
-import Gradient from "./slabop/gradient";
-import Splat from "./slabop/splat";
-import Vorticity from "./slabop/vorticity";
-import VorticityConfinement from "./slabop/vorticityconfinement";
-import Jacobi from "./slabop/jacobi";
-import { Grid } from "../types/Grid";
+import Boundary from "./slab-operations/boundary";
+import Advect from "./slab-operations/advect";
+import Divergence from "./slab-operations/divergence";
+import Gradient from "./slab-operations/gradient";
+import Splat from "./slab-operations/splat";
+import Vorticity from "./slab-operations/vorticity";
+import VorticityConfinement from "./slab-operations/vorticityconfinement";
+import Jacobi from "./slab-operations/jacobi";
+import { Grid } from "../types/grid";
 import Mouse from "./mouse";
 
 export type SolverConfig = {

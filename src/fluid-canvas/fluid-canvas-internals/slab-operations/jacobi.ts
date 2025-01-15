@@ -1,11 +1,11 @@
 import { Vector2, WebGLRenderer } from "three";
-import { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 import Boundary from "./boundary";
 import SlabopBase from "./slabopbase";
 
-class Jacobi extends SlabopBase {
+export default class Jacobi extends SlabopBase {
   grid: Grid;
   iterations: number;
   alpha: number;
@@ -17,7 +17,7 @@ class Jacobi extends SlabopBase {
     grid: Grid,
     iterations: number = 50,
     alpha: number = -1,
-    beta: number = 4
+    beta: number = 4,
   ) {
     const uniforms = {
       x: { value: null },
@@ -42,7 +42,7 @@ class Jacobi extends SlabopBase {
     b: Slab,
     output: Slab,
     boundary: Boundary,
-    scale: number
+    scale: number,
   ) {
     for (let i = 0; i < this.iterations; i++) {
       this.step(renderer, x, b, output);
@@ -64,4 +64,3 @@ class Jacobi extends SlabopBase {
   }
 }
 
-export default Jacobi;

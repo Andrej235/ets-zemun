@@ -1,10 +1,10 @@
-import { Uniforms } from "../../types/Uniforms";
-import { Grid } from "../../types/Grid";
+import { Uniforms } from "../../types/uniforms";
+import { Grid } from "../../types/grid";
 import SlabopBase from "./slabopbase";
 import Slab from "../slab";
 import { Vector2, WebGLRenderer } from "three";
 
-class Advect extends SlabopBase {
+export default class Advect extends SlabopBase {
   uniforms: Uniforms;
   grid: Grid;
   time: number;
@@ -14,7 +14,7 @@ class Advect extends SlabopBase {
     fragmentShader: string,
     grid: Grid,
     time: number,
-    dissipation: number = 0.998
+    dissipation: number = 0.998,
   ) {
     const uniforms = {
       velocity: { value: null }, // assuming you'll set this later with a texture
@@ -37,7 +37,7 @@ class Advect extends SlabopBase {
     renderer: WebGLRenderer,
     velocity: Slab,
     advected: Slab,
-    output: Slab
+    output: Slab,
   ) {
     this.uniforms.velocity.value = velocity.read.texture;
     this.uniforms.advected.value = advected.read.texture;
@@ -53,4 +53,3 @@ class Advect extends SlabopBase {
   }
 }
 
-export default Advect;
