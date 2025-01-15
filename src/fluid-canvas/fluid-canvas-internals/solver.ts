@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import Slab from "./slab";
-import Boundary from "./slab-operations/boundary";
 import Advect from "./slab-operations/advect";
 import Divergence from "./slab-operations/divergence";
 import Gradient from "./slab-operations/gradient";
@@ -13,7 +12,6 @@ import Mouse from "./mouse";
 
 export type SolverConfig = {
   timeSpeed: number;
-  applyGridBoundaries: boolean;
   gridScale: number;
   gridResolution: [x: number, y: number];
 
@@ -50,7 +48,6 @@ export default class Solver {
   private splat: Splat;
   private vorticity: Vorticity;
   private vorticityConfinement: VorticityConfinement;
-  private boundary: Boundary;
 
   private viscosity: number;
   private applyViscosity: boolean;
@@ -67,7 +64,6 @@ export default class Solver {
     this.innerConfig = config;
 
     this.timeSpeed = config.timeSpeed;
-    this.grid.applyBoundaries = config.applyGridBoundaries;
     this.grid.scale = config.gridScale;
     this.grid.size.set(...config.gridResolution);
     this.windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
@@ -95,13 +91,12 @@ export default class Solver {
   ) {
     this.innerConfig = config;
 
-    const grid = {
+    const grid: Grid = {
       size: new THREE.Vector2(
         config.gridResolution[0],
         config.gridResolution[1],
       ),
       scale: config.gridScale,
-      applyBoundaries: config.applyGridBoundaries,
     };
 
     const mouse = new Mouse(
@@ -140,7 +135,6 @@ export default class Solver {
       grid,
       timeSpeed,
     );
-    this.boundary = new Boundary(shaders.boundary, grid);
 
     //?config
     this.applyViscosity = config.applyViscosity;
@@ -167,7 +161,6 @@ export default class Solver {
     const temp = this.advect.dissipation;
     this.advect.dissipation = 1;
     this.advect.compute(renderer, this.velocity, this.velocity, this.velocity);
-    this.boundary.compute(renderer, this.velocity, -1, this.velocity);
 
     this.advect.dissipation = temp;
     this.advect.compute(renderer, this.velocity, this.density, this.density);
@@ -182,7 +175,6 @@ export default class Solver {
         this.velocityVorticity,
         this.velocity,
       );
-      this.boundary.compute(renderer, this.velocity, -1, this.velocity);
     }
 
     if (this.applyViscosity && this.viscosity > 0) {
@@ -195,8 +187,6 @@ export default class Solver {
         this.velocity,
         this.velocity,
         this.velocity,
-        this.boundary,
-        -1,
       );
     }
 
@@ -220,7 +210,6 @@ export default class Solver {
 
       force.set(motion.drag.x, -motion.drag.y, 0);
       this.splat.compute(renderer, this.velocity, force, point, this.velocity);
-      this.boundary.compute(renderer, this.velocity, -1, this.velocity);
 
       this.splat.compute(
         renderer,
@@ -246,8 +235,6 @@ export default class Solver {
       this.pressure,
       this.velocityDivergence,
       this.pressure,
-      this.boundary,
-      1,
     );
 
     this.gradient.compute(
@@ -256,7 +243,6 @@ export default class Solver {
       this.velocity,
       this.velocity,
     );
-    this.boundary.compute(renderer, this.velocity, -1, this.velocity);
   }
 
   private clearSlab(renderer: THREE.WebGLRenderer, slab: Slab) {

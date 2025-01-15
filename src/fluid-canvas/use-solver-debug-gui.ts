@@ -13,9 +13,6 @@ export default function useSolverDebugGui(solver: Solver | null) {
     add(gui, solver, "timeSpeed").name("Time Speed").min(0).max(10).step(0.01);
 
     const gridFolder = gui.addFolder("Grid");
-    add(gridFolder, solver, "applyGridBoundaries").name(
-      "Apply Grid Boundaries",
-    );
     add(gridFolder, solver, "gridScale").name("Grid Scale").min(0).step(0.01);
 
     const viscosityFolder = gui.addFolder("Viscosity");

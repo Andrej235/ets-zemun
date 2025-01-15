@@ -2,7 +2,6 @@ import { Vector2, WebGLRenderer } from "three";
 import { Grid } from "../../types/grid";
 import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
-import Boundary from "./boundary";
 import SlabopBase from "./slabopbase";
 
 export default class Jacobi extends SlabopBase {
@@ -41,12 +40,9 @@ export default class Jacobi extends SlabopBase {
     x: Slab,
     b: Slab,
     output: Slab,
-    boundary: Boundary,
-    scale: number,
   ) {
     for (let i = 0; i < this.iterations; i++) {
       this.step(renderer, x, b, output);
-      boundary.compute(renderer, output, scale, output);
     }
   }
 

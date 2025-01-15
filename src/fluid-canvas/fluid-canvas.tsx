@@ -25,7 +25,6 @@ export default function FluidCanvas({
       poissonPressureEquationIterations: 50,
       radius: 0.045,
       color: [15, 15, 30],
-      applyGridBoundaries: false,
       gridScale: 3.5,
       gridResolution: gridSize,
     }),
@@ -53,7 +52,6 @@ export default function FluidCanvas({
         "splat.fs",
         "vorticity.fs",
         "vorticityforce.fs",
-        "boundary.fs",
       ]),
     [],
   );
