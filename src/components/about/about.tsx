@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
@@ -12,15 +12,7 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const overviewSectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <div id="about-page">
@@ -59,25 +51,18 @@ export default function About() {
           </p>
         </div>
         <div className="overview-image">
-          <img
-            src="../../../public/images/414bee0337a871bdd69bc69aadaf2c79.png"
-            alt=""
-          />
+          <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
         </div>
       </motion.div>
 
       <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => {
-          const layout = screenWidth < 1024.98 ? "vertical" : i % 2 === 0 ? "image-left" : "image-right";
-
-          return (
-            <ProfileOverview
-              profile={profile as ProfileOverviewSchema}
-              layout={layout}
-              key={profile.name}
-            />
-          );
-        })}
+        {data.profiles.map((profile, i) => (
+          <ProfileOverview
+            profile={profile as ProfileOverviewSchema}
+            layout={i % 2 === 0 ? "image-left" : "image-right"}
+            key={profile.name}
+          />
+        ))}
       </div>
 
       <section ref={overviewSectionRef}>
