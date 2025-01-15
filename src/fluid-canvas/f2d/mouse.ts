@@ -139,8 +139,8 @@ export default class Mouse {
     const dy = y - this.position.y;
 
     const drag = {
-      x: Math.min(Math.max(dx, -r), r),
-      y: Math.min(Math.max(dy, -r), r),
+      x: -Math.min(Math.max(dx, -r), r),
+      y: -Math.min(Math.max(dy, -r), r),
     };
 
     const position = {
