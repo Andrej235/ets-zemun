@@ -27,10 +27,22 @@ export default function About() {
           </motion.div>
 
           <div className="hero-block">
-            <div className="hero-block-element"></div>
-            <div className="hero-block-element"></div>
-            <div className="hero-block-element"></div>
-            <div className="hero-block-element"></div>
+            <div className="hero-block-element">
+              <Icon name="brain" className="hero-block-icon" />
+              <div className="hero-block-info"></div>
+            </div>
+            <div className="hero-block-element">
+              <Icon name="school" className="hero-block-icon" />
+              <div className="hero-block-info"></div>
+            </div>
+            <div className="hero-block-element">
+              <Icon name="book" className="hero-block-icon" />
+              <div className="hero-block-info"></div>
+            </div>
+            <div className="hero-block-element">
+              <Icon name="scroll" className="hero-block-icon" />
+              <div className="hero-block-info"></div>
+            </div>
           </div>
 
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>

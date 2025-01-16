@@ -82,6 +82,15 @@
       .hero-block-element {
         width: 30rem;
         height: 25rem;
+
+        .hero-block-icon {
+          width: 100%;
+          height: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          font-size: 5rem;
+        }
       }
     }
 
