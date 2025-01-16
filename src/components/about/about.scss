@@ -86,10 +86,45 @@
         .hero-block-icon {
           width: 100%;
           height: 50%;
+
           display: flex;
           justify-content: center;
           align-items: flex-end;
+
           font-size: 5rem;
+        }
+
+        .hero-block-info {
+          width: 100%;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .hero-block-header {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 3rem 0;
+          }
+
+          .hero-block-description {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              font-size: 1.6rem;
+            }
+
+            .hero-block-button {
+              width: 18rem;
+              height: 4.5rem;
+              margin-top: 1rem;
+
+              text-transform: uppercase;
+              font-size: 1.6rem;
+            }
+          }
         }
       }
     }

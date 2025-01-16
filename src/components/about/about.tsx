@@ -29,19 +29,43 @@ export default function About() {
           <div className="hero-block">
             <div className="hero-block-element">
               <Icon name="brain" className="hero-block-icon" />
-              <div className="hero-block-info"></div>
+              <div className="hero-block-info">
+                <div className="hero-block-header">Naslov</div>
+                <div className="hero-block-description">
+                  <p>Ovo je deskripcija!</p>
+                  <button className="hero-block-button">Saznaj vise</button>
+                </div>
+              </div>
             </div>
             <div className="hero-block-element">
               <Icon name="school" className="hero-block-icon" />
-              <div className="hero-block-info"></div>
+              <div className="hero-block-info">
+                <div className="hero-block-header">Naslov</div>
+                <div className="hero-block-description">
+                  <p>Ovo je deskripcija!</p>
+                  <button className="hero-block-button">Saznaj vise</button>
+                </div>
+              </div>
             </div>
             <div className="hero-block-element">
               <Icon name="book" className="hero-block-icon" />
-              <div className="hero-block-info"></div>
+              <div className="hero-block-info">
+                <div className="hero-block-header">Naslov</div>
+                <div className="hero-block-description">
+                  <p>Ovo je deskripcija!</p>
+                  <button className="hero-block-button">Saznaj vise</button>
+                </div>
+              </div>
             </div>
             <div className="hero-block-element">
               <Icon name="scroll" className="hero-block-icon" />
-              <div className="hero-block-info"></div>
+              <div className="hero-block-info">
+                <div className="hero-block-header">Naslov</div>
+                <div className="hero-block-description">
+                  <p>Ovo je deskripcija!</p>
+                  <button className="hero-block-button">Saznaj vise</button>
+                </div>
+              </div>
             </div>
           </div>
 
