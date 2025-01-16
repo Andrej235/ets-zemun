@@ -1,13 +1,12 @@
 import * as THREE from "three";
 import SlabopBase from "./slabopbase";
-import { Grid } from "../../types/Grid";
-import { Time } from "../../types/Time";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 
-class VorticityConfinement extends SlabopBase {
+export default class VorticityConfinement extends SlabopBase {
   grid: Grid;
-  time: Time;
+  time: number;
   epsilon: number;
   curl: number;
   uniforms: Uniforms;
@@ -15,9 +14,9 @@ class VorticityConfinement extends SlabopBase {
   constructor(
     fragmentShader: string,
     grid: Grid,
-    time: Time,
+    time: number,
     epsilon?: number,
-    curl?: number
+    curl?: number,
   ) {
     const uniforms = {
       velocity: { value: null },
@@ -42,17 +41,17 @@ class VorticityConfinement extends SlabopBase {
     renderer: THREE.WebGLRenderer,
     velocity: Slab,
     vorticity: Slab,
-    output: Slab
+    output: Slab,
   ) {
     this.uniforms.velocity.value = velocity.read.texture;
     this.uniforms.vorticity.value = vorticity.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
-    this.uniforms.timestep.value = this.time.step;
+    this.uniforms.timestep.value = this.time;
     this.uniforms.epsilon.value = this.epsilon;
     this.uniforms.curl.value.set(
       this.curl * this.grid.scale,
-      this.curl * this.grid.scale
+      this.curl * this.grid.scale,
     );
 
     renderer.setRenderTarget(output.write);
@@ -62,4 +61,3 @@ class VorticityConfinement extends SlabopBase {
   }
 }
 
-export default VorticityConfinement;

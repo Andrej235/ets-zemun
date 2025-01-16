@@ -1,10 +1,10 @@
 import { Vector2, WebGLRenderer } from "three";
-import { Grid } from "../../types/Grid";
-import { Uniforms } from "../../types/Uniforms";
+import { Grid } from "../../types/grid";
+import { Uniforms } from "../../types/uniforms";
 import Slab from "../slab";
 import SlabopBase from "./slabopbase";
 
-class Divergence extends SlabopBase {
+export default class Vorticity extends SlabopBase {
   grid: Grid;
   uniforms: Uniforms;
 
@@ -21,16 +21,15 @@ class Divergence extends SlabopBase {
     this.uniforms = uniforms;
   }
 
-  compute(renderer: WebGLRenderer, velocity: Slab, divergence: Slab) {
+  compute(renderer: WebGLRenderer, velocity: Slab, output: Slab) {
     this.uniforms.velocity.value = velocity.read.texture;
-    this.uniforms.gridSize.value = this.grid.size;
+    this.uniforms.gridSize.value = this.grid.resolution;
     this.uniforms.gridScale.value = this.grid.scale;
 
-    renderer.setRenderTarget(divergence.write);
+    renderer.setRenderTarget(output.write);
     renderer.render(this.scene, this.camera);
     renderer.setRenderTarget(null);
-    divergence.swap();
+    output.swap();
   }
 }
 
-export default Divergence;

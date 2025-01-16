@@ -1,3 +1,68 @@
+@mixin vertical {
+  height: 80rem;
+  flex-direction: column;
+  place-items: center;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    min-width: 0;
+    max-width: 100rem;
+    height: fit-content;
+
+    .image-container {
+      max-height: 40rem;
+
+      img {
+        height: 100%;
+        aspect-ratio: 16/9;
+      }
+    }
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+  }
+
+  .info {
+    position: relative;
+
+    width: 100%;
+    height: 50%;
+    padding: 5rem;
+    
+    justify-content: flex-start;
+
+    @media screen and (max-width: 768px) {
+      padding: 4rem;
+    }
+
+    @media screen and (max-width: 425px) {
+      padding: 2rem;
+
+      .title {
+        font-size: 3rem;
+      }
+
+      .description {
+        font-size: 1.6rem;
+      }
+    }
+
+    .title {
+      font-size: 3.6rem;
+    }
+
+    .description {
+      font-size: 1.8rem;
+    }
+  }
+}
+
 .profile-overview {
   position: relative;
 
@@ -8,90 +73,8 @@
 
   display: flex;
 
-  @media screen and (max-width: 1440px) {
-    min-width: 100rem;
-  }
-
-  @media screen and (max-width: 1024.98px) {
-    width: 80%;
-    min-width: 0;
-    max-width: 100rem;
-  }
-
-  &.image-left {
-    flex-direction: row;
-    padding-right: 10rem;
-  }
-
-  &.image-right {
-    flex-direction: row-reverse;
-    padding-left: 10rem;
-    text-align: end;
-  }
-
   &.vertical {
-    height: 80rem;
-    flex-direction: column;
-    place-items: center;
-    border-radius: 1rem;
-    overflow: hidden;
-
-    @media screen and (max-width: 768px) {
-      width: 80%;
-      min-width: 0;
-      max-width: 100rem;
-      height: fit-content;
-
-      .image-container {
-        max-height: 40rem;
-
-        img {
-          height: 100%;
-          aspect-ratio: 16/9;
-        }
-      }
-    }
-
-    .image-container {
-      position: relative;
-      width: 100%;
-      height: 50%;
-      overflow: hidden;
-    }
-
-    .info {
-      position: relative;
-
-      width: 100%;
-      height: 50%;
-      padding: 5rem;
-
-      @media screen and (max-width:768px) {
-        padding: 4rem;
-      }
-
-      @media screen and (max-width:425px) {
-        padding: 2rem;
-
-        .title {
-          font-size: 3rem;
-        }
-  
-        .description {
-          font-size: 1.6rem;
-        }
-      }
-
-      justify-content: flex-start;
-
-      .title {
-        font-size: 3.6rem;
-      }
-
-      .description {
-        font-size: 1.8rem;
-      }
-    }
+    @include vertical;
   }
 
   .image-container {
@@ -141,9 +124,35 @@
     padding-left: 13rem;
     box-shadow: 5px 10px 15px $shadow;
   }
+
   .info-left {
     left: 0;
     padding-right: 13rem;
     box-shadow: -5px 10px 15px $shadow;
   }
+
+  @media screen and (min-width: 1025px) {
+    &.image-left {
+      flex-direction: row;
+      padding-right: 10rem;
+    }
+
+    &.image-right {
+      flex-direction: row-reverse;
+      padding-left: 10rem;
+      text-align: end;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    min-width: 100rem;
+  }
+
+  @media screen and (max-width: 1024.98px) {
+    width: 80%;
+    min-width: 0;
+    max-width: 100rem;
+    @include vertical;
+  }
 }
+

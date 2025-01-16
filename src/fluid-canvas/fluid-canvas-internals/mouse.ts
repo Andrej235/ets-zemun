@@ -1,4 +1,4 @@
-import { Grid } from "../types/Grid";
+import { Grid } from "../types/grid";
 import * as THREE from "three";
 
 export default class Mouse {
@@ -32,6 +32,8 @@ export default class Mouse {
     grid: Grid,
     mouseEventListenerContainer: HTMLElement,
     canvasContainer: HTMLElement,
+    onMouseEnter: () => void,
+    onMouseLeave: () => void,
   ) {
     this.grid = grid;
 
@@ -59,6 +61,7 @@ export default class Mouse {
 
     this.mouseEnter = (() => {
       this.isHoveringOverCanvas = true;
+      onMouseEnter();
     }).bind(this);
 
     this.mouseLeave = (() => {
@@ -66,6 +69,7 @@ export default class Mouse {
       this.motions = [];
       this.position.set(0, 0);
       this.screenPosition.set(0, 0);
+      onMouseLeave();
     }).bind(this);
 
     mouseEventListenerContainer.addEventListener("mouseenter", this.mouseEnter);
