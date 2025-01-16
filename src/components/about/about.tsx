@@ -33,7 +33,7 @@ export default function About() {
                 <div className="hero-block-header">Naslov</div>
                 <div className="hero-block-description">
                   <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">Saznaj vise</button>
+                  <button className="hero-block-button"><span>Saznaj vise</span></button>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@ export default function About() {
                 <div className="hero-block-header">Naslov</div>
                 <div className="hero-block-description">
                   <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">Saznaj vise</button>
+                  <button className="hero-block-button"><span>Saznaj vise</span></button>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ export default function About() {
                 <div className="hero-block-header">Naslov</div>
                 <div className="hero-block-description">
                   <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">Saznaj vise</button>
+                  <button className="hero-block-button"><span>Saznaj vise</span></button>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function About() {
                 <div className="hero-block-header">Naslov</div>
                 <div className="hero-block-description">
                   <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">Saznaj vise</button>
+                  <button className="hero-block-button"><span>Saznaj vise</span></button>
                 </div>
               </div>
             </div>
