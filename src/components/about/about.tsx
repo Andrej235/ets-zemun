@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
@@ -12,7 +12,19 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 import FluidCanvas from "src/fluid-canvas/fluid-canvas";
 
 export default function About() {
-  const overviewSectionRef = useRef<HTMLDivElement>(null);
+  const heroSpaceRef = useRef<HTMLDivElement>(null);
+
+  const [hoveredElement, setHoveredElement] = useState<number | null>(null);
+
+  const fluidCanvas = useMemo(
+    () => (
+      <FluidCanvas
+        containerToApplyEventListenersTo={heroSpaceRef}
+        gridSize={[256, 256]}
+      />
+    ),
+    [],
+  );
 
   return (
     <div id="about-page">
@@ -22,7 +34,79 @@ export default function About() {
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
-          <div className="hero-image-overlay"></div>
+          <div className="hero-block" ref={heroSpaceRef}>
+            {fluidCanvas}
+
+            <div className="hero-cards">
+              <div
+                className={`hero-block-element${hoveredElement === 1 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(1)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="brain" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`hero-block-element${hoveredElement === 2 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(2)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="school" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`hero-block-element${hoveredElement === 3 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(3)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="book" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`hero-block-element${hoveredElement === 4 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(4)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="scroll" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
             <h1>Elektrotehnička škola "Zemun"</h1>
@@ -55,22 +139,19 @@ export default function About() {
         </div>
       </motion.div>
 
-      <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
-      </div>
+      <section>
+        <div className="profiles-overview-container">
+          {data.profiles.map((profile, i) => (
+            <ProfileOverview
+              profile={profile as ProfileOverviewSchema}
+              layout={i % 2 === 0 ? "image-left" : "image-right"}
+              key={profile.name}
+            />
+          ))}
+        </div>
+      </section>
 
-      <section ref={overviewSectionRef}>
-        <FluidCanvas
-          containerToApplyEventListenersTo={overviewSectionRef}
-          gridSize={[512, 512]}
-        />
-
+      <section>
         <NewsAndEventsPreviewContainer />
       </section>
 

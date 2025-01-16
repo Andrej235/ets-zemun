@@ -226,8 +226,6 @@ export default class Solver {
   private update() {
     if (this.updateLoopSuspended) return;
 
-    console.log("update");
-
     this.step();
     this.render();
     requestAnimationFrame(this.boundUpdate);
