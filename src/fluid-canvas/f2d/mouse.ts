@@ -35,7 +35,16 @@ export default class Mouse {
   ) {
     this.grid = grid;
 
-    this.canvasTopStart = canvasContainer.offsetTop;
+    this.canvasTopStart = getOffsetTop(canvasContainer);
+
+    function getOffsetTop(element: HTMLElement | null): number {
+      console.log("bad");
+
+      return element
+        ? element.offsetTop + getOffsetTop(element.offsetParent as HTMLElement)
+        : 0;
+    }
+
     this.canvasLeftStart = canvasContainer.getBoundingClientRect().left;
 
     this.canvasHeightToScreenRatio =

@@ -11,21 +11,6 @@
     padding: 0;
   }
 
-  .fluid-canvas {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 0;
-    height: 200vh;
-    width: 100vw;
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
-  }
-
   section {
     display: flex;
     flex-direction: column;
@@ -39,11 +24,12 @@
     min-width: 100%;
     width: 100%;
 
+    height: 150svh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
     padding-bottom: 10rem;
 
     .hero-image {
@@ -61,123 +47,142 @@
     }
 
     .hero-block {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
 
-      box-shadow: 0px 5px 15px $shadow;
+      .hero-cards {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
-      display: flex;
-      justify-content: center;
+        box-shadow: 0px 5px 15px $shadow;
 
-      & > :nth-child(even) {
-        background-color: $secondary-background;
+        display: flex;
+        justify-content: center;
 
-        .hero-block-button::before {
+        & > :nth-child(even) {
           background-color: $secondary-background;
+
+          .hero-block-button::before {
+            background-color: $secondary-background;
+          }
         }
-      }
 
-      & > :nth-child(odd) {
-        background-color: $background;
-
-        .hero-block-button::before {
+        & > :nth-child(odd) {
           background-color: $background;
-        }
-      }
 
-      .hero-block-element {
-        width: 30rem;
-        height: 25rem;
-        overflow: hidden;
-
-        .hero-block-icon {
-          width: 100%;
-          height: 50%;
-
-          display: flex;
-          justify-content: center;
-          align-items: flex-end;
-
-          font-size: 5rem;
+          .hero-block-button::before {
+            background-color: $background;
+          }
         }
 
-        .hero-block-info {
-          width: 100%;
+        .hero-block-element {
+          width: 30rem;
+          height: 25rem;
+          overflow: hidden;
 
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          .hero-block-icon {
+            width: 100%;
+            height: 50%;
 
-          .hero-block-header {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin: 3rem 0;
-            transition: 200ms linear;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            font-size: 5rem;
           }
 
-          .hero-block-description {
+          .hero-block-info {
+            width: 100%;
+
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            opacity: 0;
-            transition: 200ms ease-out;
-
-            p {
-              font-size: 1.6rem;
+            .hero-block-header {
+              font-size: 2.5rem;
+              font-weight: 600;
+              margin: 3rem 0;
+              transition: 200ms linear;
             }
 
-            .hero-block-button {
-              position: relative;
-              width: 18rem;
-              height: 5rem;
-              margin-top: 1rem;
-              border-radius: 0.5rem;
-              background-color: $accent;
-              border: 2px solid $accent;
-              transition: 250ms;
-              overflow: hidden;
+            .hero-block-description {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
 
-              text-transform: uppercase;
-              font-size: 1.6rem;
-              font-weight: 700;
-              letter-spacing: 0.05rem;
-              color: $accent;
+              opacity: 0;
+              transition: 200ms ease-out;
 
-              span {
+              p {
+                font-size: 1.6rem;
+              }
+
+              .hero-block-button {
                 position: relative;
-                mix-blend-mode: difference;
-              }
+                width: 18rem;
+                height: 5rem;
+                margin-top: 1rem;
+                border-radius: 0.5rem;
+                background-color: $accent;
+                border: 2px solid $accent;
+                transition: 250ms;
+                overflow: hidden;
 
-              &::before {
-                position: absolute;
-                content: '';
-                width: 120%;
-                height: 100%;
-                left: -10%;
-                transform: skew(30deg);
-                transition: transform 500ms cubic-bezier(0.3, 1, 0.8, 1);
-              }
+                text-transform: uppercase;
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: 0.05rem;
+                color: $accent;
 
-              &:hover::before {
-                transform: translate3d(100%,0,0);
+                span {
+                  position: relative;
+                  mix-blend-mode: difference;
+                }
+
+                &::before {
+                  position: absolute;
+                  content: "";
+                  width: 120%;
+                  height: 100%;
+                  left: -10%;
+                  transform: skew(30deg);
+                  transition: transform 500ms cubic-bezier(0.3, 1, 0.8, 1);
+                }
+
+                &:hover::before {
+                  transform: translate3d(100%, 0, 0);
+                }
               }
             }
           }
         }
+
+        .block-element-hovered {
+          .hero-block-header {
+            opacity: 0;
+            transform: translateY(-100%);
+          }
+
+          .hero-block-description {
+            opacity: 1 !important;
+            transform: translateY(-100%);
+          }
+        }
       }
 
-      .block-element-hovered {
-        .hero-block-header {
-          opacity: 0;
-          transform: translateY(-100%);
-        }
+      .fluid-canvas {
+        position: absolute;
+        z-index: 0;
+        height: 100%;
+        width: 100%;
 
-        .hero-block-description {
-          opacity: 1 !important;
-          transform: translateY(-100%);
+        canvas {
+          width: 100% !important;
+          height: 100% !important;
         }
       }
     }

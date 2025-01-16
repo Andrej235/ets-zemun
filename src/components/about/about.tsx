@@ -18,74 +18,84 @@ export default function About() {
 
   return (
     <div id="about-page">
-      <section ref={heroSpaceRef}>
+      <section>
         <div className="hero-space">
           <motion.div className="hero-image">
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
-          <div className="hero-block">
-            <div
-              className={`hero-block-element${ hoveredElement === 1 ? ' block-element-hovered': "" }`}
-              onMouseEnter={() => setHoveredElement(1)}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-              <Icon name="brain" className="hero-block-icon" />
-              <div className="hero-block-info">
-                <div className="hero-block-header">Naslov</div>
-                <div className="hero-block-description">
-                  <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">
-                    <span>Saznaj vise</span>
-                  </button>
+          <div className="hero-block" ref={heroSpaceRef}>
+            <FluidCanvas
+              containerToApplyEventListenersTo={heroSpaceRef}
+              gridSize={[256, 256]}
+            />
+
+            <div className="hero-cards">
+              <div
+                className={`hero-block-element${hoveredElement === 1 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(1)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="brain" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-            className={`hero-block-element${ hoveredElement === 2 ? ' block-element-hovered': "" }`}
-              onMouseEnter={() => setHoveredElement(2)}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-              <Icon name="school" className="hero-block-icon" />
-              <div className="hero-block-info">
-                <div className="hero-block-header">Naslov</div>
-                <div className="hero-block-description">
-                  <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">
-                    <span>Saznaj vise</span>
-                  </button>
+
+              <div
+                className={`hero-block-element${hoveredElement === 2 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(2)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="school" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-            className={`hero-block-element${ hoveredElement === 3 ? ' block-element-hovered': "" }`}
-              onMouseEnter={() => setHoveredElement(3)}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-              <Icon name="book" className="hero-block-icon" />
-              <div className="hero-block-info">
-                <div className="hero-block-header">Naslov</div>
-                <div className="hero-block-description">
-                  <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">
-                    <span>Saznaj vise</span>
-                  </button>
+
+              <div
+                className={`hero-block-element${hoveredElement === 3 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(3)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="book" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-            className={`hero-block-element${ hoveredElement === 4 ? ' block-element-hovered': "" }`}
-              onMouseEnter={() => setHoveredElement(4)}
-              onMouseLeave={() => setHoveredElement(null)}
-            >
-              <Icon name="scroll" className="hero-block-icon" />
-              <div className="hero-block-info">
-                <div className="hero-block-header">Naslov</div>
-                <div className="hero-block-description">
-                  <p>Ovo je deskripcija!</p>
-                  <button className="hero-block-button">
-                    <span>Saznaj vise</span>
-                  </button>
+
+              <div
+                className={`hero-block-element${hoveredElement === 4 ? " block-element-hovered" : ""}`}
+                onMouseEnter={() => setHoveredElement(4)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="scroll" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
