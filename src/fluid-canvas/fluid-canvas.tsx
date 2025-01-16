@@ -1,8 +1,7 @@
 import * as THREE from "three";
 import Solver, { SolverConfig } from "./fluid-canvas-internals/solver";
-import Display from "./fluid-canvas-internals/display";
 import FileLoader, { Files } from "./fluid-canvas-internals/fileloader";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useSolverDebugGui from "./use-solver-debug-gui";
 
 type FluidCanvasProps = {
@@ -85,34 +84,6 @@ export default function FluidCanvas({
     defaults,
   ]);
 
-  const display = useMemo(
-    () => shaders && new Display(shaders.basic, shaders.displayscalar),
-    [shaders],
-  );
-
-  const renderer = useMemo(() => {
-    const r = new THREE.WebGLRenderer();
-    r.autoClear = false;
-    r.sortObjects = false;
-    r.setPixelRatio(window.devicePixelRatio);
-    r.setSize(windowSize.x, windowSize.y);
-    r.setClearColor(0x00ff00);
-    return r;
-  }, [windowSize]);
-
-  const render = useCallback(() => {
-    if (!solver || !display) return;
-
-    display.scale.copy(solver.ink);
-    display.render(renderer, solver.density.read);
-  }, [solver, display, renderer]);
-
-  const update = useCallback(() => {
-    solver?.step(renderer);
-    render();
-    requestAnimationFrame(update);
-  }, [solver, render, renderer]);
-
   useEffect(() => {
     fileLoader.run().then((files) => {
       const shaders: Record<string, string> = {};
@@ -124,25 +95,11 @@ export default function FluidCanvas({
     });
   }, [fileLoader]);
 
-  useEffect(() => void requestAnimationFrame(update), [update]);
-
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !solver) return;
 
-    containerRef.current.appendChild(renderer.domElement);
-
-    function resize() {
-      windowSize.set(window.innerWidth, window.innerHeight);
-      renderer.setSize(windowSize.x, windowSize.y);
-    }
-    window.addEventListener("resize", resize);
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      renderer.domElement.remove();
-      renderer.dispose();
-    };
-  }, [containerRef, renderer, windowSize]);
+    containerRef.current.appendChild(solver.canvas);
+  }, [solver, containerRef]);
 
   return <div className="fluid-canvas" ref={containerRef}></div>;
 }

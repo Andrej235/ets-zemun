@@ -9,6 +9,7 @@ import VorticityConfinement from "./slab-operations/vorticityconfinement";
 import Jacobi from "./slab-operations/jacobi";
 import { Grid } from "../types/grid";
 import Mouse from "./mouse";
+import Display from "./display";
 
 export type SolverConfig = {
   timeSpeed: number;
@@ -34,8 +35,15 @@ export default class Solver {
   private timeSpeed: number;
   private windowSize: THREE.Vector2;
 
+  private display: Display;
+  private renderer: THREE.WebGLRenderer;
+  private boundUpdate: () => void;
+  private boundResizeListener: () => void;
+  private updateLoopSuspended: boolean;
+  private shouldSuspendUpdateLoop: boolean;
+
   private velocity: Slab;
-  density: Slab;
+  private density: Slab;
   private velocityDivergence: Slab;
   private velocityVorticity: Slab;
   private pressure: Slab;
@@ -54,7 +62,7 @@ export default class Solver {
   private applyVorticity: boolean;
 
   private source: THREE.Vector3;
-  ink: THREE.Vector3;
+  private ink: THREE.Vector3;
 
   public get config(): SolverConfig {
     return this.innerConfig;
@@ -66,7 +74,6 @@ export default class Solver {
     this.timeSpeed = config.timeSpeed;
     this.grid.scale = config.gridScale;
     this.grid.resolution.set(...config.gridResolution);
-    this.windowSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
     this.applyViscosity = config.applyViscosity;
     this.viscosity = config.viscosity;
     this.applyVorticity = config.applyVorticity;
@@ -112,6 +119,8 @@ export default class Solver {
     containerRef: HTMLElement,
   ) {
     this.innerConfig = config;
+    this.updateLoopSuspended = true;
+    this.shouldSuspendUpdateLoop = false;
 
     const grid: Grid = {
       resolution: new THREE.Vector2(
@@ -125,6 +134,20 @@ export default class Solver {
       grid,
       containerToApplyEventListenersTo,
       containerRef,
+      () => {
+        requestAnimationFrame(this.boundUpdate);
+        this.updateLoopSuspended = false;
+        this.shouldSuspendUpdateLoop = false;
+      },
+      () => {
+        this.shouldSuspendUpdateLoop = true;
+        setTimeout(() => {
+          if (!this.shouldSuspendUpdateLoop) return;
+
+          this.updateLoopSuspended = true;
+          this.shouldSuspendUpdateLoop = false;
+        }, 1000);
+      },
     );
 
     const timeSpeed = config.timeSpeed;
@@ -175,24 +198,71 @@ export default class Solver {
 
     //?density attributes
     this.source = new THREE.Vector3(0.8, 0.0, 0.0);
+
+    this.display = new Display(shaders.basic, shaders.displayscalar);
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.autoClear = false;
+    this.renderer.sortObjects = false;
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(windowSize.x, windowSize.y);
+    this.renderer.setClearColor(0x00ff00);
+
+    this.boundUpdate = this.update.bind(this);
+    this.boundResizeListener = this.handleWindowResize.bind(this);
+
+    window.addEventListener("resize", this.boundResizeListener);
   }
 
-  step(renderer: THREE.WebGLRenderer) {
+  private handleWindowResize() {
+    this.windowSize.set(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(this.windowSize.x, this.windowSize.y);
+  }
+
+  private render() {
+    this.display.scale.copy(this.ink);
+    this.display.render(this.renderer, this.density.read);
+  }
+
+  private update() {
+    if (this.updateLoopSuspended) return;
+
+    console.log("update");
+
+    this.step();
+    this.render();
+    requestAnimationFrame(this.boundUpdate);
+  }
+
+  private step() {
     // we only want the quantity carried by the velocity field to be
     // affected by the dissipation
     const temp = this.advect.dissipation;
     this.advect.dissipation = 1;
-    this.advect.compute(renderer, this.velocity, this.velocity, this.velocity);
+    this.advect.compute(
+      this.renderer,
+      this.velocity,
+      this.velocity,
+      this.velocity,
+    );
 
     this.advect.dissipation = temp;
-    this.advect.compute(renderer, this.velocity, this.density, this.density);
+    this.advect.compute(
+      this.renderer,
+      this.velocity,
+      this.density,
+      this.density,
+    );
 
-    this.addForces(renderer, this.mouse);
+    this.addForces(this.renderer, this.mouse);
 
     if (this.applyVorticity) {
-      this.vorticity.compute(renderer, this.velocity, this.velocityVorticity);
+      this.vorticity.compute(
+        this.renderer,
+        this.velocity,
+        this.velocityVorticity,
+      );
       this.vorticityConfinement.compute(
-        renderer,
+        this.renderer,
         this.velocity,
         this.velocityVorticity,
         this.velocity,
@@ -205,14 +275,14 @@ export default class Solver {
       this.diffuse.alpha = (s * s) / (this.viscosity * this.timeSpeed);
       this.diffuse.beta = 4 + this.diffuse.alpha;
       this.diffuse.compute(
-        renderer,
+        this.renderer,
         this.velocity,
         this.velocity,
         this.velocity,
       );
     }
 
-    this.project(renderer);
+    this.project();
   }
 
   private addForces(renderer: THREE.WebGLRenderer, mouse: Mouse) {
@@ -245,22 +315,26 @@ export default class Solver {
   }
 
   // solve poisson equation and subtract pressure gradient
-  private project(renderer: THREE.WebGLRenderer) {
-    this.divergence.compute(renderer, this.velocity, this.velocityDivergence);
+  private project() {
+    this.divergence.compute(
+      this.renderer,
+      this.velocity,
+      this.velocityDivergence,
+    );
 
     // 0 is our initial guess for the poisson equation solver
-    this.clearSlab(renderer, this.pressure);
+    this.clearSlab(this.renderer, this.pressure);
 
     this.poissonPressureEq.alpha = -this.grid.scale * this.grid.scale;
     this.poissonPressureEq.compute(
-      renderer,
+      this.renderer,
       this.pressure,
       this.velocityDivergence,
       this.pressure,
     );
 
     this.gradient.compute(
-      renderer,
+      this.renderer,
       this.pressure,
       this.velocity,
       this.velocity,
@@ -273,8 +347,15 @@ export default class Solver {
     slab.swap();
   }
 
+  public get canvas(): HTMLCanvasElement {
+    return this.renderer.domElement;
+  }
+
   dispose() {
     this.mouse.dispose();
+    this.renderer.domElement.remove();
+    this.renderer.dispose();
+    window.removeEventListener("resize", this.boundResizeListener);
   }
 }
 
