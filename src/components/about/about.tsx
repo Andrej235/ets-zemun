@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
 import InfoCard from "@components/info-card/info-card";
@@ -16,6 +16,16 @@ export default function About() {
 
   const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
+  const fluidCanvas = useMemo(
+    () => (
+      <FluidCanvas
+        containerToApplyEventListenersTo={heroSpaceRef}
+        gridSize={[256, 256]}
+      />
+    ),
+    [],
+  );
+
   return (
     <div id="about-page">
       <section>
@@ -25,10 +35,7 @@ export default function About() {
           </motion.div>
 
           <div className="hero-block" ref={heroSpaceRef}>
-            <FluidCanvas
-              containerToApplyEventListenersTo={heroSpaceRef}
-              gridSize={[256, 256]}
-            />
+            {fluidCanvas}
 
             <div className="hero-cards">
               <div
