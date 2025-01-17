@@ -42,7 +42,7 @@ export default function NewsAndEventsPreviewContainer() {
       </div>
 
       {selectedTab === "news" ? (
-        <>
+        <div className="news-events-wrapper">
           <NewsPreview
             date={new Date()}
             title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
@@ -63,7 +63,7 @@ export default function NewsAndEventsPreviewContainer() {
             description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
             image="/mock-news-preview/3.png"
           />
-        </>
+        </div>
       ) : (
         <>Events</>
       )}
