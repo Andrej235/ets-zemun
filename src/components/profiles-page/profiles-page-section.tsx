@@ -1,6 +1,28 @@
 import Icon from "@components/icon/icon";
+import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ProfilesPageSection() {
+  const [selectedClassIdx, setSelectedClassIdx] = useState<number | null>(null);
+  const classesContainerRef = useRef<HTMLUListElement>(null);
+
+  function handleSelectClass(idx: number) {
+    setSelectedClassIdx((prev) => (prev === idx ? null : idx));
+  }
+
+  useEffect(() => {
+    if (!classesContainerRef.current || selectedClassIdx === null) return;
+
+    const placeholder = document.createElement("li");
+    placeholder.classList.add("placeholder");
+
+    classesContainerRef.current.children[
+      selectedClassIdx
+    ].insertAdjacentElement("afterend", placeholder);
+
+    return () => placeholder.remove();
+  }, [classesContainerRef, selectedClassIdx]);
+
   return (
     <div className="profiles-page-section">
       <div className="header">
@@ -59,9 +81,14 @@ export default function ProfilesPageSection() {
           predstavljaju:
         </h3>
 
-        <ul className="classes">
-          <li>
-            <button>
+        <ul className="classes" ref={classesContainerRef}>
+          <motion.li
+            layout
+            style={{
+              position: selectedClassIdx === 0 ? "absolute" : "relative",
+            }}
+          >
+            <button onClick={() => handleSelectClass(0)} key={"it-class-0"}>
               <Icon name="square-binary" />
               <span className="title">Programiranje</span>
             </button>
@@ -70,10 +97,15 @@ export default function ProfilesPageSection() {
               Programiranje ukljucuje razvoj konzolnih i desktop aplikacija
               koristeci jezike <a href="#c">C</a> i <a href="#c#">C#</a>
             </span>
-          </li>
+          </motion.li>
 
-          <li>
-            <button>
+          <motion.li
+            layout
+            style={{
+              position: selectedClassIdx === 1 ? "absolute" : "relative",
+            }}
+          >
+            <button onClick={() => handleSelectClass(1)} key={"it-class-$1"}>
               <Icon name="code" />
               <span className="title">Web programiranje</span>
             </button>
@@ -87,10 +119,15 @@ export default function ProfilesPageSection() {
               full stack web aplikacija koristeci <a href="#asp">ASP.NET</a> sa{" "}
               <a href="#c#">C#</a> i <a href="#sql">SQL</a>
             </span>
-          </li>
+          </motion.li>
 
-          <li>
-            <button>
+          <motion.li
+            layout
+            style={{
+              position: selectedClassIdx === 2 ? "absolute" : "relative",
+            }}
+          >
+            <button onClick={() => handleSelectClass(2)} key={"it-class-2"}>
               <Icon name="database" />
               <span className="title">Baze podataka</span>
             </button>
@@ -100,10 +137,15 @@ export default function ProfilesPageSection() {
               i upravljanja realisticnim bazama podataka koristeci{" "}
               <a href="#sql">SQL</a>
             </span>
-          </li>
+          </motion.li>
 
-          <li>
-            <button>
+          <motion.li
+            layout
+            style={{
+              position: selectedClassIdx === 3 ? "absolute" : "relative",
+            }}
+          >
+            <button onClick={() => handleSelectClass(3)} key={"it-class-3"}>
               <Icon name="shield-halved" />
               <span className="title">ZIS</span>
             </button>
@@ -112,10 +154,15 @@ export default function ProfilesPageSection() {
               Zastita informacionih tehnologija uce djake kako da zastite sebe i
               svoje buduce projekte od napada i neovlašćenog pristupa
             </span>
-          </li>
+          </motion.li>
 
-          <li>
-            <button>
+          <motion.li
+            layout
+            style={{
+              position: selectedClassIdx === 4 ? "absolute" : "relative",
+            }}
+          >
+            <button onClick={() => handleSelectClass(4)} key={"it-class-4"}>
               <Icon name="cubes-stacked" />
               <span className="title">PIT</span>
             </button>
@@ -126,7 +173,7 @@ export default function ProfilesPageSection() {
               kreiranje full stack desktop i web aplikacija kroz izradu
               zajednickih projekata
             </span>
-          </li>
+          </motion.li>
         </ul>
 
         <p>

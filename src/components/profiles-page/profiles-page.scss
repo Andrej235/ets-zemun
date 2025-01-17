@@ -100,8 +100,15 @@
       ul.classes {
         display: flex;
         justify-content: flex-start;
-        gap: 3rem;
         padding: 0;
+        position: relative;
+        gap: 3rem;
+
+        .placeholder {
+          min-width: 15rem;
+          width: 15%;
+          aspect-ratio: 1;
+        }
 
         li {
           min-width: 15rem;
@@ -123,6 +130,7 @@
           background-color: $background;
           box-shadow: 0 0 15px 0.5px $secondary-background;
           border-radius: 2rem;
+          transition: 250ms;
 
           display: flex;
           flex-direction: column;
@@ -139,10 +147,15 @@
           .title {
             max-width: 100%;
             width: 100%;
-            
+
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
+          }
+
+          &:hover {
+            background-color: $secondary-background;
+            box-shadow: 0 0 10px 0.5px $accent-secondary-highlight;
           }
         }
 
