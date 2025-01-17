@@ -15,15 +15,15 @@ export default function NewsPreview({
 }: NewsPreviewProps) {
   return (
     <div className="news-article-preview">
-      <div className="info">
-        <p className="date">{date.toLocaleDateString()}</p>
-        <h1 className="title">{title}</h1>
-        <p className="description">{description}</p>
-      </div>
-
       <div className="image-container">
         <img src={image} alt={title} />
+      </div>
+      <div className="info">
+        <h1 className="title">{title}</h1><br />
+        <p className="description">{description}</p>
+        <p className="date">{date.toLocaleDateString()}</p>
       </div>
     </div>
   );
 }
+
