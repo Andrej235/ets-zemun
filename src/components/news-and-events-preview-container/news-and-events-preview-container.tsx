@@ -42,31 +42,58 @@ export default function NewsAndEventsPreviewContainer() {
       </div>
 
       {selectedTab === "news" ? (
-        <div className="news-events-wrapper">
-          <NewsPreview
-            date={new Date()}
-            title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
-            description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quasi cumque enim dolores molestiae dolorum dolore accusamus! In, praesentium quibusdam."
-            image="/mock-news-preview/1.png"
-          />
+        <section className="news-and-events-section">
+          <div className="news-events-wrapper">
+            <NewsPreview
+              date={new Date()}
+              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
+              description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quasi cumque enim dolores molestiae dolorum dolore accusamus! In, praesentium quibusdam."
+              image="/mock-news-preview/1.png"
+            />
 
-          <NewsPreview
-            date={new Date("2024-05-15")}
-            title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
-            image="/mock-news-preview/2.png"
-          />
+            <NewsPreview
+              date={new Date("2024-05-15")}
+              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              image="/mock-news-preview/2.png"
+            />
 
-          <NewsPreview
-            date={new Date("2024-01-23")}
-            title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
-            description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
-            image="/mock-news-preview/3.png"
-          />
-        </div>
+            <NewsPreview
+              date={new Date("2024-01-23")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              image="/mock-news-preview/3.png"
+            />
+          </div>
+
+          <button className="news-events-button">Sve novosti</button>
+        </section>
       ) : (
-        <>Events</>
+        <section className="news-and-events-section">
+          <div className="news-events-wrapper">
+            <NewsPreview
+              date={new Date()}
+              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
+              description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quasi cumque enim dolores molestiae dolorum dolore accusamus! In, praesentium quibusdam."
+              image="/mock-news-preview/1.png"
+            />
+            <NewsPreview
+              date={new Date("2024-05-15")}
+              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              image="/mock-news-preview/2.png"
+            />
+            <NewsPreview
+              date={new Date("2024-01-23")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              image="/mock-news-preview/3.png"
+            />
+          </div>
+          <button className="news-events-button">Sva dogadjanja</button>
+        </section>
       )}
     </div>
   );
 }
+

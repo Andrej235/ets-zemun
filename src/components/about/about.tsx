@@ -116,7 +116,7 @@ export default function About() {
         </div>
       </section>
 
-      <motion.div {...scrollAnimationFlyInBottom} className="overview">
+      {/*<motion.div {...scrollAnimationFlyInBottom} className="overview">
         <div className="overview-element">
           <h1>Misija i Vizija</h1>
           <p>
@@ -137,7 +137,7 @@ export default function About() {
         <div className="overview-image">
           <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
         </div>
-      </motion.div>
+      </motion.div>*/}
 
       <section>
         <div className="profiles-overview-container">
