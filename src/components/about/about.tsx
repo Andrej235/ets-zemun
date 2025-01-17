@@ -20,7 +20,7 @@ export default function About() {
     () => (
       <FluidCanvas
         containerToApplyEventListenersTo={heroSpaceRef}
-        gridSize={[256, 256]}
+        gridSize={[512, 256]}
       />
     ),
     [],
