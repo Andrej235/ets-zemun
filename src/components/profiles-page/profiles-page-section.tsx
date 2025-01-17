@@ -87,16 +87,26 @@ export default function ProfilesPageSection() {
             style={{
               position: selectedClassIdx === 0 ? "absolute" : "relative",
             }}
+            animate={{
+              zIndex: selectedClassIdx === 0 ? 10 : 0,
+              transition: {
+                delay: selectedClassIdx === 0 ? 0 : 0.5,
+                duration: 0.5,
+              },
+            }}
+            className={selectedClassIdx === 0 ? "selected" : undefined}
           >
             <button onClick={() => handleSelectClass(0)} key={"it-class-0"}>
               <Icon name="square-binary" />
               <span className="title">Programiranje</span>
             </button>
 
-            <span className="description">
-              Programiranje ukljucuje razvoj konzolnih i desktop aplikacija
-              koristeci jezike <a href="#c">C</a> i <a href="#c#">C#</a>
-            </span>
+            <div className="description-container">
+              <span className="description">
+                Programiranje ukljucuje razvoj konzolnih i desktop aplikacija
+                koristeci jezike <a href="#c">C</a> i <a href="#c#">C#</a>
+              </span>
+            </div>
           </motion.li>
 
           <motion.li
@@ -104,21 +114,32 @@ export default function ProfilesPageSection() {
             style={{
               position: selectedClassIdx === 1 ? "absolute" : "relative",
             }}
+            className={selectedClassIdx === 1 ? "selected" : undefined}
+            animate={{
+              zIndex: selectedClassIdx === 1 ? 10 : 0,
+              transition: {
+                delay: selectedClassIdx === 1 ? 0 : 0.5,
+                duration: 0.5,
+              },
+            }}
           >
             <button onClick={() => handleSelectClass(1)} key={"it-class-$1"}>
               <Icon name="code" />
               <span className="title">Web programiranje</span>
             </button>
 
-            <span className="description">
-              Web dizajn i web programiranje zajedno obuhvataju razne
-              tehnologije i alate potrebne za kreiranje web stranica koristeci{" "}
-              <a href="#html">HTML</a>, <a href="#css">CSS</a> i{" "}
-              <a href="#javascript">JavaScript</a> kao i{" "}
-              <a href="#jquery">jquery</a>, a u kasnijem skolovanju i pravljenje
-              full stack web aplikacija koristeci <a href="#asp">ASP.NET</a> sa{" "}
-              <a href="#c#">C#</a> i <a href="#sql">SQL</a>
-            </span>
+            <div className="description-container">
+              <span className="description">
+                Web dizajn i web programiranje zajedno obuhvataju razne
+                tehnologije i alate potrebne za kreiranje web stranica koristeci{" "}
+                <a href="#html">HTML</a>, <a href="#css">CSS</a> i{" "}
+                <a href="#javascript">JavaScript</a> kao i{" "}
+                <a href="#jquery">jquery</a>, a u kasnijem skolovanju i
+                pravljenje full stack web aplikacija koristeci{" "}
+                <a href="#asp">ASP.NET</a> sa <a href="#c#">C#</a> i{" "}
+                <a href="#sql">SQL</a>
+              </span>
+            </div>
           </motion.li>
 
           <motion.li
@@ -126,17 +147,27 @@ export default function ProfilesPageSection() {
             style={{
               position: selectedClassIdx === 2 ? "absolute" : "relative",
             }}
+            className={selectedClassIdx === 2 ? "selected" : undefined}
+            animate={{
+              zIndex: selectedClassIdx === 2 ? 10 : 0,
+              transition: {
+                delay: selectedClassIdx === 2 ? 0 : 0.5,
+                duration: 0.5,
+              },
+            }}
           >
             <button onClick={() => handleSelectClass(2)} key={"it-class-2"}>
               <Icon name="database" />
               <span className="title">Baze podataka</span>
             </button>
 
-            <span className="description">
-              Baze podataka pruzaju ucenicima mogucnost dizajniranja, kreiranja
-              i upravljanja realisticnim bazama podataka koristeci{" "}
-              <a href="#sql">SQL</a>
-            </span>
+            <div className="description-container">
+              <span className="description">
+                Baze podataka pruzaju ucenicima mogucnost dizajniranja,
+                kreiranja i upravljanja realisticnim bazama podataka koristeci{" "}
+                <a href="#sql">SQL</a>
+              </span>
+            </div>
           </motion.li>
 
           <motion.li
@@ -144,16 +175,26 @@ export default function ProfilesPageSection() {
             style={{
               position: selectedClassIdx === 3 ? "absolute" : "relative",
             }}
+            className={selectedClassIdx === 3 ? "selected" : undefined}
+            animate={{
+              zIndex: selectedClassIdx === 3 ? 10 : 0,
+              transition: {
+                delay: selectedClassIdx === 3 ? 0 : 0.5,
+                duration: 0.5,
+              },
+            }}
           >
             <button onClick={() => handleSelectClass(3)} key={"it-class-3"}>
               <Icon name="shield-halved" />
               <span className="title">ZIS</span>
             </button>
 
-            <span className="description">
-              Zastita informacionih tehnologija uce djake kako da zastite sebe i
-              svoje buduce projekte od napada i neovlašćenog pristupa
-            </span>
+            <div className="description-container">
+              <span className="description">
+                Zastita informacionih tehnologija uce djake kako da zastite sebe
+                i svoje buduce projekte od napada i neovlašćenog pristupa
+              </span>
+            </div>
           </motion.li>
 
           <motion.li
@@ -161,18 +202,28 @@ export default function ProfilesPageSection() {
             style={{
               position: selectedClassIdx === 4 ? "absolute" : "relative",
             }}
+            className={selectedClassIdx === 4 ? "selected" : undefined}
+            animate={{
+              zIndex: selectedClassIdx === 4 ? 10 : 0,
+              transition: {
+                delay: selectedClassIdx === 4 ? 0 : 0.5,
+                duration: 0.5,
+              },
+            }}
           >
             <button onClick={() => handleSelectClass(4)} key={"it-class-4"}>
               <Icon name="cubes-stacked" />
               <span className="title">PIT</span>
             </button>
 
-            <span className="description">
-              Primenjene informacione tehnologije su namenjene da kombinuju svo
-              znanje steceno u ostalim strucnim predmetima i da ga iskoriste za
-              kreiranje full stack desktop i web aplikacija kroz izradu
-              zajednickih projekata
-            </span>
+            <div className="description-container">
+              <span className="description">
+                Primenjene informacione tehnologije su namenjene da kombinuju
+                svo znanje steceno u ostalim strucnim predmetima i da ga
+                iskoriste za kreiranje full stack desktop i web aplikacija kroz
+                izradu zajednickih projekata
+              </span>
+            </div>
           </motion.li>
         </ul>
 
