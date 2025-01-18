@@ -1,6 +1,7 @@
 import Icon from "@components/icon/icon";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 
 export default function ProfilesPageSection() {
   const [selectedClassIdx, setSelectedClassIdx] = useState<number | null>(null);
@@ -19,6 +20,10 @@ export default function ProfilesPageSection() {
     classesContainerRef.current.children[
       selectedClassIdx
     ].insertAdjacentElement("afterend", placeholder);
+
+    (
+      classesContainerRef.current.children[selectedClassIdx] as HTMLElement
+    ).style.top = placeholder.offsetTop + "px";
 
     return () => placeholder.remove();
   }, [classesContainerRef, selectedClassIdx]);
@@ -50,12 +55,12 @@ export default function ProfilesPageSection() {
       </div>
 
       <div className="body">
-        <h2>
+        <h3>
           Tokom četvorogodišnjeg školovanja, učenici se upoznavaju sa širokim
           spektrom znanja i veština iz oblasti programiranja, mrežnih
           tehnologija, baza podataka i računarskog hardvera. Ova znanja
           uključuju:
-        </h2>
+        </h3>
 
         <ul className="skills">
           <li>Rad sa savremenim programskim jezicima</li>
@@ -86,6 +91,7 @@ export default function ProfilesPageSection() {
             layout
             style={{
               position: selectedClassIdx === 0 ? "absolute" : "relative",
+              top: selectedClassIdx !== 0 ? 0 : undefined,
             }}
             animate={{
               zIndex: selectedClassIdx === 0 ? 10 : 0,
@@ -116,6 +122,7 @@ export default function ProfilesPageSection() {
             layout
             style={{
               position: selectedClassIdx === 1 ? "absolute" : "relative",
+              top: selectedClassIdx !== 1 ? 0 : undefined,
             }}
             className={selectedClassIdx === 1 ? "selected" : undefined}
             animate={{
@@ -145,6 +152,7 @@ export default function ProfilesPageSection() {
             layout
             style={{
               position: selectedClassIdx === 2 ? "absolute" : "relative",
+              top: selectedClassIdx !== 2 ? 0 : undefined,
             }}
             className={selectedClassIdx === 2 ? "selected" : undefined}
             animate={{
@@ -175,6 +183,7 @@ export default function ProfilesPageSection() {
             layout
             style={{
               position: selectedClassIdx === 3 ? "absolute" : "relative",
+              top: selectedClassIdx !== 3 ? 0 : undefined,
             }}
             className={selectedClassIdx === 3 ? "selected" : undefined}
             animate={{
@@ -204,6 +213,7 @@ export default function ProfilesPageSection() {
             layout
             style={{
               position: selectedClassIdx === 4 ? "absolute" : "relative",
+              top: selectedClassIdx !== 4 ? 0 : undefined,
             }}
             className={selectedClassIdx === 4 ? "selected" : undefined}
             animate={{
@@ -230,13 +240,18 @@ export default function ProfilesPageSection() {
           </motion.li>
         </ul>
 
-        <p>
+        <h3>
           Elektrotehničar informacionih tehnologija je idealan izbor za sve koji
           žele da budu deo dinamičnog i perspektivnog sveta informacionih
           tehnologija.
-        </p>
+        </h3>
 
-        {/* TODO: Add a 'learn more' button */}
+        <Link
+          to={"/profili/elektrotehnicar-informacionih-tehnologija"}
+          className="learn-more"
+        >
+          Saznaj vise
+        </Link>
       </div>
     </div>
   );

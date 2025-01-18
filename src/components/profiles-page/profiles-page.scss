@@ -59,13 +59,6 @@
     }
 
     .body {
-      h2 {
-        font-size: 2rem;
-        color: $text-primary;
-        font-weight: 400;
-        margin-bottom: 2rem;
-      }
-
       h3 {
         font-size: 1.7rem;
         color: $text-primary;
@@ -82,7 +75,7 @@
         grid-template-columns: 1fr 1fr;
         padding-left: 0;
         gap: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 4rem;
 
         li {
           padding: 2rem;
@@ -100,21 +93,20 @@
       ul.classes {
         display: flex;
         justify-content: flex-start;
+        flex-wrap: wrap;
         padding: 0;
         position: relative;
         gap: 3rem;
+        margin-bottom: 4rem;
 
+        li,
         .placeholder {
-          min-width: 15rem;
+          min-width: 25rem;
           width: 15%;
           aspect-ratio: 1;
         }
 
         li {
-          min-width: 15rem;
-          width: 15%;
-          aspect-ratio: 1;
-
           font-size: 1.6rem;
 
           &::marker {
@@ -212,6 +204,73 @@
               }
             }
           }
+        }
+      }
+
+      .learn-more {
+        @include button;
+        width: fit-content;
+        padding: 1.5rem 3rem;
+        font-size: 2rem;
+        margin-bottom: 4rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024.98px) {
+    padding: 0;
+
+    .profiles-page-section {
+      .header {
+        flex-direction: column;
+
+        .image-container {
+          flex: unset;
+
+          &::after {
+            background: linear-gradient(
+              180deg,
+              #00000000 0%,
+              #00000055 50%,
+              $background 95%
+            );
+          }
+        }
+
+        .info {
+          flex: unset;
+          padding: 0 2rem;
+          margin-top: 1rem;
+
+          h1 {
+            font-size: 3rem;
+          }
+
+          p {
+            font-size: 1.6rem;
+          }
+        }
+      }
+
+      .body {
+        padding: 0 2rem;
+
+        h2,
+        h3,
+        p {
+          font-size: 1.6rem;
+        }
+
+        ul.skills {
+          grid-template-columns: 1fr;
+        }
+
+        ul.classes {
+          max-width: 100vw;
+
+          // li.selected {
+          // left: -15rem;
+          // }
         }
       }
     }
