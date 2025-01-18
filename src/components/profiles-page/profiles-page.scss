@@ -126,7 +126,7 @@
             z-index: 1;
             width: 100%;
             height: 100%;
-            border: none;
+            border: 2px solid transparent;
             box-shadow: 0 0 15px 0.5px $secondary-background;
             background-color: $background;
             border-radius: 2rem;
@@ -154,9 +154,19 @@
             }
           }
 
-          & button:hover,
-          & button:focus-visible,
           &.selected button {
+            border: 2px solid $accent-secondary-highlight;
+            background-color: $secondary-background;
+            box-shadow: 0 0 10px 0.5px $accent-secondary-highlight;
+
+            &:focus-visible {
+              border: 2px solid $accent;
+              box-shadow: 0 0 10px 0.5px $accent;
+            }
+          }
+
+          & button:hover,
+          & button:focus-visible {
             background-color: $secondary-background;
             box-shadow: 0 0 10px 0.5px $accent-secondary-highlight;
           }
@@ -178,9 +188,18 @@
               z-index: -1;
               height: 100%;
               width: 50rem;
+              max-width: 100vw;
+              padding: 2rem 2rem 2rem 5rem;
               background-color: $secondary-background;
+              border-radius: 0 2rem 2rem 0;
+              border: 2px solid $accent-secondary-highlight;
               transition: 250ms;
               pointer-events: all;
+
+              a,
+              span {
+                display: inline;
+              }
             }
           }
 

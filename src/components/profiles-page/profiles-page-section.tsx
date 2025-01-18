@@ -103,8 +103,11 @@ export default function ProfilesPageSection() {
 
             <div className="description-container">
               <span className="description">
-                Programiranje ukljucuje razvoj konzolnih i desktop aplikacija
-                koristeci jezike <a href="#c">C</a> i <a href="#c#">C#</a>
+                U prve dve godine skolovanja programiranje obuhvata uvod u
+                algoritme i sablone programiranja, kao i osnove jezika C. Nakon
+                naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju
+                konzolne i desktop aplikacije ostatak skolovanja u .NET
+                okruzenju
               </span>
             </div>
           </motion.li>
@@ -131,13 +134,9 @@ export default function ProfilesPageSection() {
             <div className="description-container">
               <span className="description">
                 Web dizajn i web programiranje zajedno obuhvataju razne
-                tehnologije i alate potrebne za kreiranje web stranica koristeci{" "}
-                <a href="#html">HTML</a>, <a href="#css">CSS</a> i{" "}
-                <a href="#javascript">JavaScript</a> kao i{" "}
-                <a href="#jquery">jquery</a>, a u kasnijem skolovanju i
-                pravljenje full stack web aplikacija koristeci{" "}
-                <a href="#asp">ASP.NET</a> sa <a href="#c#">C#</a> i{" "}
-                <a href="#sql">SQL</a>
+                tehnologije i alate potrebne za kreiranje web stranica. Ovde
+                djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i
+                biblioteku jquery
               </span>
             </div>
           </motion.li>
@@ -164,8 +163,10 @@ export default function ProfilesPageSection() {
             <div className="description-container">
               <span className="description">
                 Baze podataka pruzaju ucenicima mogucnost dizajniranja,
-                kreiranja i upravljanja realisticnim bazama podataka koristeci{" "}
-                <a href="#sql">SQL</a>
+                kreiranja i upravljanja realisticnim bazama podataka koristeci
+                SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da
+                se prate prilikom rada sa bazama podataka radi najboljih
+                rezultata
               </span>
             </div>
           </motion.li>
@@ -191,8 +192,10 @@ export default function ProfilesPageSection() {
 
             <div className="description-container">
               <span className="description">
-                Zastita informacionih tehnologija uce djake kako da zastite sebe
-                i svoje buduce projekte od napada i neovlašćenog pristupa
+                Zastita informacionih tehnologija pokazuje kako zastiti sebe,
+                ali i svoje projekte od napada i neovlašćenog pristupa. Pored
+                teorije, djaci imaju priliku da se upoznaju za alatima kao sto
+                je CryptTool i Linux operativnim sistemom
               </span>
             </div>
           </motion.li>
@@ -218,10 +221,10 @@ export default function ProfilesPageSection() {
 
             <div className="description-container">
               <span className="description">
-                Primenjene informacione tehnologije su namenjene da kombinuju
-                svo znanje steceno u ostalim strucnim predmetima i da ga
-                iskoriste za kreiranje full stack desktop i web aplikacija kroz
-                izradu zajednickih projekata
+                Primenjene informacione tehnologije kombinuju svo znanje steceno
+                u ostalim strucnim predmetima i da ga iskoriste za kreiranje
+                full stack desktop i web aplikacija kroz izradu zajednickih
+                projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL
               </span>
             </div>
           </motion.li>
@@ -232,6 +235,8 @@ export default function ProfilesPageSection() {
           žele da budu deo dinamičnog i perspektivnog sveta informacionih
           tehnologija.
         </p>
+
+        {/* TODO: Add a 'learn more' button */}
       </div>
     </div>
   );
