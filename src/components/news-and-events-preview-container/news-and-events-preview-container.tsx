@@ -60,8 +60,8 @@ export default function NewsAndEventsPreviewContainer() {
 
             <NewsPreview
               date={new Date("2024-01-23")}
-              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus minima!"
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
               image="/mock-news-preview/3.png"
             />
           </div>
