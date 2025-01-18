@@ -54,7 +54,7 @@ export default function NewsAndEventsPreviewContainer() {
             <NewsPreview
               date={new Date("2024-05-15")}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos."
               image="/mock-news-preview/2.png"
             />
 
@@ -80,7 +80,7 @@ export default function NewsAndEventsPreviewContainer() {
             <NewsPreview
               date={new Date("2024-05-15")}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
+              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam ."
               image="/mock-news-preview/2.png"
             />
             <NewsPreview
