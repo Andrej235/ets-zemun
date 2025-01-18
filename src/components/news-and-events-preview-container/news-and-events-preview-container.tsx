@@ -11,7 +11,9 @@ export default function NewsAndEventsPreviewContainer() {
       <h1 className="news-section-title">Novosti i dogadjanja</h1>
       <div className="options-container">
         <button
-          className="option-button"
+          className={`option-button${
+            selectedTab === "news" ? " selected-tab" : ""
+          }`}
           onClick={() => setSelectedTab("news")}
         >
           <p>Novosti</p>
@@ -26,7 +28,9 @@ export default function NewsAndEventsPreviewContainer() {
         </button>
 
         <button
-          className="option-button"
+          className={`option-button${
+            selectedTab === "events" ? " selected-tab" : ""
+          }`}
           onClick={() => setSelectedTab("events")}
         >
           <p>Dogadjanja</p>
