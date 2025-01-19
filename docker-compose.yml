@@ -10,6 +10,10 @@ services:
       dockerfile: apps/asp-backend/Dockerfile
     ports:
       - 5080:5212
+    develop:
+      watch:
+        - action: rebuild
+          path: .
   website:
     image: website
     build:
