@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
     ports:
-      - 5212:5212
+      - 5080:5212
   website:
     image: website
     build:
@@ -22,4 +22,11 @@ services:
       - "5173:5173" # Map Vite's default dev server port
     environment:
       - CHOKIDAR_USEPOLLING=true # Enable polling for file changes (required for some environments)
-
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ets-zemun
+      POSTGRES_PASSWORD: jfcm09iu43f85fjdskcnxmn
+      POSTGRES_DB: ets-zemun
+    ports:
+      - "5000:5432"
