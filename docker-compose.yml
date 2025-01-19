@@ -3,14 +3,15 @@
 version: "3.4"
 
 services:
-  etszemun:
-    image: etszemun
+  asp-backend:
+    image: asp-backend
     build:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
     ports:
       - 5212:5212
   website:
+    image: website
     build:
       context: .
       dockerfile: apps/website/Dockerfile
