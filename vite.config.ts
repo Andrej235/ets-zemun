@@ -165,6 +165,17 @@ async function translateUsingLibre(
 }
 
 export default defineConfig(({ mode }) => ({
+  base: "/",
+  preview: {
+    port: 5173,
+    strictPort: true,
+  },
+  server: {
+    host: true,
+    watch: {
+      usePolling: true,
+    },
+  },
   plugins: [
     {
       name: "vite-plugin-translate",
@@ -864,3 +875,4 @@ async function getSchemaMap(): Promise<SchemaMap> {
     )
   );
 }
+
