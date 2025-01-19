@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Docker .NET App",
+      "name": ".NET Core Launch (web)",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "Build .NET Backend",
+      "preLaunchTask": "build",
       "program": "${workspaceFolder}/apps/asp-backend/bin/Debug/net8.0/EtsZemun.dll",
       "args": [],
       "cwd": "${workspaceFolder}/apps/asp-backend",
@@ -18,14 +18,22 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "sourceFileMap": {
-        "/app": "${workspaceFolder}/apps/asp-backend"
+        "/Views": "${workspaceFolder}/Views"
       }
     },
     {
-      "name": "Stop Docker Containers",
-      "type": "node-terminal",
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "Docker .NET Launch",
+      "type": "docker",
       "request": "launch",
-      "command": "docker-compose down"
+      "preLaunchTask": "docker-run: debug",
+      "netCore": {
+        "appProject": "${workspaceFolder}/apps/asp-backend/EtsZemun.csproj"
+      }
     }
   ]
 }

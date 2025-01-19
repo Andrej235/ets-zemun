@@ -2,18 +2,39 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build .NET Backend",
+      "label": "build",
       "command": "dotnet",
       "type": "process",
-      "args": ["build", "${workspaceFolder}/apps/asp-backend"],
+      "args": [
+        "build",
+        "${workspaceFolder}/EtsZemun.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Docker Compose Up",
-      "type": "shell",
-      "command": "docker-compose",
-      "args": ["up", "--build", "-d"],
-      "problemMatcher": []
+      "type": "docker-run",
+      "label": "docker-run: debug",
+      "dependsOn": ["docker-build: debug"],
+      "dockerRun": {},
+      "netCore": {
+        "appProject": "${workspaceFolder}/apps/asp-backend/EtsZemun.csproj",
+        "enableDebugging": true
+      }
+    },
+    {
+      "type": "docker-compose",
+      "label": "docker-build: debug",
+      "dependsOn": ["build"],
+      "dockerCompose": {
+        "up": {
+          "detached": true,
+          "build": true
+        },
+        "files": ["${workspaceFolder}/docker-compose.yml"],
+        "projectName": ""
+      }
     }
   ]
 }
