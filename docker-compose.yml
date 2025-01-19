@@ -1,8 +1,19 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: "3.4"
+
 services:
+  etszemun:
+    image: etszemun
+    build:
+      context: .
+      dockerfile: apps/asp-backend/Dockerfile
+    ports:
+      - 5212:5212
   website:
     build:
       context: .
-      dockerfile: ./apps/website/Dockerfile
+      dockerfile: apps/website/Dockerfile
     volumes:
       - ./apps/website:/app # Sync project files with the container
       - /app/node_modules # Prevent node_modules syncing with host

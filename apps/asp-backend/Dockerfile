@@ -1,0 +1,24 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 5212
+
+ENV ASPNETCORE_URLS=http://+:5212
+
+USER app
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG configuration=Release
+WORKDIR /src
+COPY ["apps/asp-backend/EtsZemun.csproj", "apps/asp-backend/"]
+RUN dotnet restore "apps/asp-backend/EtsZemun.csproj"
+COPY . .
+WORKDIR "/src/apps/asp-backend"
+RUN dotnet build "EtsZemun.csproj" -c $configuration -o /app/build
+
+FROM build AS publish
+ARG configuration=Release
+RUN dotnet publish "EtsZemun.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "EtsZemun.dll"]
