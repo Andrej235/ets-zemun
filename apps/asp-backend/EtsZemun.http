@@ -1,6 +1,0 @@
-@EtsZemun_HostAddress = http://localhost:5212
-
-GET {{EtsZemun_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
