@@ -3,6 +3,8 @@
 services:
   asp-backend:
     image: asp-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     build:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
