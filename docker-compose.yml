@@ -1,7 +1,5 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
 
-version: "3.4"
-
 services:
   asp-backend:
     image: asp-backend
@@ -9,7 +7,7 @@ services:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
     ports:
-      - 5080:5212
+      - 5212
     develop:
       watch:
         - action: rebuild
@@ -23,7 +21,7 @@ services:
       - ./apps/website:/app # Sync project files with the container
       - /app/node_modules # Prevent node_modules syncing with host
     ports:
-      - "5173:5173" # Map Vite's default dev server port
+      - 5173 # Map Vite's default dev server port
     environment:
       - CHOKIDAR_USEPOLLING=true # Enable polling for file changes (required for some environments)
   postgres:
@@ -34,3 +32,12 @@ services:
       POSTGRES_DB: ets-zemun
     ports:
       - "5000:5432"
+  reverse-proxy:
+    image: nginx:latest
+    volumes:
+      - ./apps/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:8080"
+    depends_on:
+      - website
+      - asp-backend
