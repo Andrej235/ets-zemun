@@ -63,6 +63,10 @@
         display: flex;
         justify-content: center;
 
+        max-width: 120rem;
+        width: 90%;
+        min-width: fit-content;
+
         & > :nth-child(even) {
           background-color: $secondary-background;
 
@@ -80,8 +84,7 @@
         }
 
         .hero-block-element {
-          width: 30rem;
-          height: 25rem;
+          width: 25%;
           overflow: hidden;
 
           .hero-block-icon {
