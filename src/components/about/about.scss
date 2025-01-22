@@ -51,21 +51,23 @@
       position: relative;
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .hero-cards {
-        position: absolute;
+        position: relative;
+        z-index: 2;
         top: 0%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        box-shadow: 0px 5px 15px $shadow;
-
-        display: flex;
-        justify-content: center;
+        transform: translate(0, -50%);
 
         max-width: 120rem;
         width: 90%;
         min-width: fit-content;
+        box-shadow: 0px 5px 15px $shadow;
+
+        display: flex;
+        justify-content: center;
 
         & > :nth-child(even) {
           background-color: $secondary-background;
@@ -180,7 +182,7 @@
               opacity: 1 !important;
               transform: translateY(0%);
             }
-  
+
             .hero-block-description {
               opacity: 1 !important;
               transform: translateY(0%);
@@ -201,66 +203,17 @@
         }
       }
     }
-
-    .hero-text {
-      display: none;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-
-      h1 {
-        font-size: 6rem;
-        font-weight: 900;
-      }
-
-      p {
-        font-size: 6rem;
-      }
-
-      .hero-search-container {
-        @include input-field-container;
-        grid-template-columns: max-content 1fr max-content;
-        gap: 1rem;
-        height: 7rem;
-        font-size: 2rem;
-
-        i {
-          color: $text-secondary;
-          transition: color 0.1s ease-out;
-        }
-
-        &:has(:focus-within) i {
-          color: $text-primary;
-        }
-
-        button {
-          padding: 1.5rem 2rem;
-        }
-      }
-
-      .hero-apply-container {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        p {
-          font-size: 3rem;
-        }
-
-        button {
-          font-size: 2.5rem;
-          padding: 1.25rem 2rem;
-        }
-      }
-    }
   }
 
   .overview {
     position: relative;
-    width: 100%;
+    z-index: 1;
+    transform: translateY(calc(-231.5px / 2));
+
+    width: 130rem;
     height: 20rem;
     height: max-content;
-    margin-bottom: 10rem;
+    background-color: red;
 
     display: flex;
     align-items: center;
@@ -377,7 +330,7 @@
       width: 100% !important;
       height: 25%;
       padding: 3rem;
-      
+
       .hero-block-icon {
         max-height: 30% !important;
       }

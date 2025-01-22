@@ -23,7 +23,7 @@ export default function About() {
         gridSize={[512, 256]}
       />
     ),
-    [],
+    []
   );
 
   return (
@@ -39,7 +39,9 @@ export default function About() {
 
             <div className="hero-cards">
               <div
-                className={`hero-block-element${hoveredElement === 1 ? " block-element-hovered" : ""}`}
+                className={`hero-block-element${
+                  hoveredElement === 1 ? " block-element-hovered" : ""
+                }`}
                 onMouseEnter={() => setHoveredElement(1)}
                 onMouseLeave={() => setHoveredElement(null)}
               >
@@ -56,7 +58,9 @@ export default function About() {
               </div>
 
               <div
-                className={`hero-block-element${hoveredElement === 2 ? " block-element-hovered" : ""}`}
+                className={`hero-block-element${
+                  hoveredElement === 2 ? " block-element-hovered" : ""
+                }`}
                 onMouseEnter={() => setHoveredElement(2)}
                 onMouseLeave={() => setHoveredElement(null)}
               >
@@ -73,7 +77,9 @@ export default function About() {
               </div>
 
               <div
-                className={`hero-block-element${hoveredElement === 3 ? " block-element-hovered" : ""}`}
+                className={`hero-block-element${
+                  hoveredElement === 3 ? " block-element-hovered" : ""
+                }`}
                 onMouseEnter={() => setHoveredElement(3)}
                 onMouseLeave={() => setHoveredElement(null)}
               >
@@ -90,7 +96,9 @@ export default function About() {
               </div>
 
               <div
-                className={`hero-block-element${hoveredElement === 4 ? " block-element-hovered" : ""}`}
+                className={`hero-block-element${
+                  hoveredElement === 4 ? " block-element-hovered" : ""
+                }`}
                 onMouseEnter={() => setHoveredElement(4)}
                 onMouseLeave={() => setHoveredElement(null)}
               >
@@ -106,32 +114,37 @@ export default function About() {
                 </div>
               </div>
             </div>
+
+            <div {...scrollAnimationFlyInBottom} className="overview">
+              <div className="overview-element">
+                <h1>Misija i Vizija</h1>
+                <p>
+                  Naša misija je da omogućimo obrazovanje i stvorimo buduće
+                  stručnjake i naučne radnike iz oblasti koje obuhvata naš
+                  školski program. Nastojimo da kod učenika probudimo želju za
+                  usavršavanjem i sticanjem znanja, da su u stanju da samostalno
+                  istražuju i obrađuju informacije do kojih dolaze uz korišćenje
+                  svih dostupnih izvora.
+                  <br />
+                  Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam
+                  najveći prioriteti. Podstičemo kreativnost učenika kroz razne
+                  vannastavne aktivnosti. Stvorili smo takvo okruženje da je
+                  učenik u centru nastavnog procesa i učenja. Želimo da naša
+                  deca postanu preduzimljive i savesne ličnosti. Pozivamo Vas da
+                  zajedno sa nama menjamo sadašnjost i stvaramo svetliju
+                  budućnost.
+                </p>
+              </div>
+              <div className="overview-image">
+                <img
+                  src="/images/414bee0337a871bdd69bc69aadaf2c79.png"
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      <motion.div {...scrollAnimationFlyInBottom} className="overview">
-        <div className="overview-element">
-          <h1>Misija i Vizija</h1>
-          <p>
-            Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake
-            i naučne radnike iz oblasti koje obuhvata naš školski program.
-            Nastojimo da kod učenika probudimo želju za usavršavanjem i
-            sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
-            informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
-            <br />
-            Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
-            prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
-            aktivnosti. Stvorili smo takvo okruženje da je učenik u centru
-            nastavnog procesa i učenja. Želimo da naša deca postanu
-            preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama
-            menjamo sadašnjost i stvaramo svetliju budućnost.
-          </p>
-        </div>
-        <div className="overview-image">
-          <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
-        </div>
-      </motion.div>
 
       <section>
         <div className="profiles-overview-container">
