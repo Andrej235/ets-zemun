@@ -5,47 +5,43 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers
 {
-    [Route("auth")]
     public class AuthController : Controller
     {
-        [HttpGet("login")]
+        [HttpGet("auth/login")]
         public IActionResult Login()
         {
-            // Redirect to Google's login page
-            var redirectUrl = Url.Action("GoogleCallback", "Auth");
-            return Challenge(
-                new AuthenticationProperties { RedirectUri = redirectUrl },
-                GoogleDefaults.AuthenticationScheme
-            );
+            var redirectUrl = Url.Action("GoogleResponse");
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
-        [HttpGet("google-callback")]
-        public async Task<IActionResult> GoogleCallback()
+        [HttpGet("signin-google")]
+        public async Task<IActionResult> GoogleResponse()
         {
-            // Retrieve user information from Google
-            var authenticateResult = await HttpContext.AuthenticateAsync(
+            // Authenticate the user
+            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+
+            if (!result.Succeeded)
+                return RedirectToAction("Login"); // Handle failure
+
+            // Sign the user in with the cookie scheme
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                result.Principal,
+                result.Properties
+            );
+
+            return Ok("Login successful");
+        }
+
+        [HttpGet("auth")]
+        public async Task<IActionResult> GetUsername()
+        {
+            var result = await HttpContext.AuthenticateAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme
             );
 
-            if (!authenticateResult.Succeeded)
-                return BadRequest(); // Handle failed authentication
-
-            var claims = authenticateResult.Principal.Identities.FirstOrDefault()?.Claims;
-
-            var email = claims?.FirstOrDefault(c => c.Type == "email")?.Value;
-            var name = claims?.FirstOrDefault(c => c.Type == "name")?.Value;
-
-            // Handle your user logic here (e.g., create or fetch user from the database)
-            // ...
-
-            return Ok(new { email, name });
-        }
-
-        [HttpGet("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/");
+            return Ok(result.Principal?.Claims.Select(x => x.Value));
         }
     }
 }

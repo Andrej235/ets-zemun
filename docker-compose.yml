@@ -3,6 +3,8 @@
 services:
   asp-backend:
     image: asp-backend
+    secrets:
+      - google-auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=ets-zemun;Username=ets-zemun;Password=jfcm09iu43f85fjdskcnxmn
@@ -44,3 +46,7 @@ services:
     depends_on:
       - website
       - asp-backend
+
+secrets:
+  google-auth:
+    file: secrets.json

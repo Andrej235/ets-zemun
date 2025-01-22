@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("/run/secrets/google-auth");
 var configuration = builder.Configuration;
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -19,20 +21,19 @@ builder.Services.AddControllers();
 builder
     .Services.AddAuthentication(options =>
     {
-        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
     })
-    .AddCookie()
-    .AddGoogle(googleOptions =>
+    .AddCookie(options =>
     {
-        googleOptions.ClientId =
-            builder.Configuration["Authentication__Google__ClientId"]
-            ?? throw new Exception("Google ClientId is missing");
-        googleOptions.ClientSecret =
-            builder.Configuration["Authentication__Google__ClientSecret"]
-            ?? throw new Exception("Google ClientSecret is missing");
-        googleOptions.CallbackPath = "/signin-google";
+        options.Cookie.SameSite = SameSiteMode.Lax; // Critical for OAuth redirects
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Ensure HTTPS-only cookies
+        options.LoginPath = "/auth/login";
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
     });
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -53,7 +54,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseForwardedHeaders();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseCors("WebsitePolicy");
+app.MapControllers();
 
 if (app.Environment.IsDevelopment())
 {
@@ -61,5 +65,4 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapControllers();
 app.Run();
