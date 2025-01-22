@@ -107,12 +107,6 @@ export default function About() {
               </div>
             </div>
           </div>
-
-          <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
-            <h1>Elektrotehnička škola "Zemun"</h1>
-
-            <p>Mi ne čekamo budućnost, mi joj idemo u susret!</p>
-          </motion.div>
         </div>
       </section>
 
