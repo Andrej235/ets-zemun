@@ -9,7 +9,7 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          window.location.href = "http://api.localhost.com:8080/auth/login";
+          window.location.href = "http://localhost:5212/auth/login";
         }}
       >
         Login
@@ -17,10 +17,11 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          const response = await fetch("http://api.localhost.com:8080/auth", {
+          const response = await fetch("http://localhost:5212/test/user", {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: "include", // Send cookies with the request
           });
           if (!response.ok) console.log(response);
 

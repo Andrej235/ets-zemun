@@ -10,28 +10,8 @@ namespace EtsZemun.Controllers
         [HttpGet("auth/login")]
         public IActionResult Login()
         {
-            var redirectUrl = Url.Action("GoogleResponse");
-            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            var properties = new AuthenticationProperties { RedirectUri = "/test/redirect" };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
-
-        [HttpGet("signin-google")]
-        public async Task<IActionResult> GoogleResponse()
-        {
-            // Authenticate the user
-            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
-
-            if (!result.Succeeded)
-                return RedirectToAction("Login"); // Handle failure
-
-            // Sign the user in with the cookie scheme
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                result.Principal,
-                result.Properties
-            );
-
-            return Ok("Login successful");
         }
 
         [HttpGet("auth")]

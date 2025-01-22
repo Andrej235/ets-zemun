@@ -32,5 +32,21 @@ namespace EtsZemun.Controllers
         {
             return Ok(await context.Tests.ToListAsync());
         }
+
+        [HttpGet("user")]
+        public IActionResult GetUser()
+        {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                return Ok(new { User.Identity.Name });
+            }
+            return Unauthorized();
+        }
+
+        [HttpGet("redirect")]
+        public IActionResult Redirect()
+        {
+            return Redirect("http://localhost:5173/ucenici");
+        }
     }
 }
