@@ -12,8 +12,8 @@ var configuration = builder.Configuration;
 
 builder
     .Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    // .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
+    // .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
+    .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
     .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
@@ -31,8 +31,6 @@ builder
     {
         options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
         options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
-        options.SignInScheme = IdentityConstants.ExternalScheme;
-        options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
     });
 
 builder.Services.AddDbContext<DataContext>(options =>
