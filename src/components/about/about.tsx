@@ -135,12 +135,6 @@ export default function About() {
                   budućnost.
                 </p>
               </div>
-              <div className="overview-image">
-                <img
-                  src="/images/414bee0337a871bdd69bc69aadaf2c79.png"
-                  alt=""
-                />
-              </div>
             </div>
           </div>
         </div>
