@@ -138,7 +138,7 @@ export default function About() {
               </div>
               <div className="overview-image">
                 <img
-                  src="/public/images/414bee0337a871bdd69bc69aadaf2c79.png"
+                  src="/images/414bee0337a871bdd69bc69aadaf2c79.png"
                   alt=""
                 />
               </div>
