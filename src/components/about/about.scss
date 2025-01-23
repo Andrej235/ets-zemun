@@ -209,7 +209,8 @@
     z-index: 1;
     transform: translateY(calc(-231.5px / 2));
 
-    width: 120rem;
+    max-width: 120rem;
+    width: 90%;
     height: 20rem;
     height: max-content;
     padding: 4rem;
