@@ -46,7 +46,7 @@ namespace EtsZemun.Controllers
         [HttpGet("redirect")]
         public IActionResult Redirect()
         {
-            return Redirect("http://localhost:5173/ucenici");
+            return Redirect("http://localhost/ucenici");
         }
     }
 }

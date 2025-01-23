@@ -9,7 +9,7 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          window.location.href = "http://localhost:5212/auth/login";
+          window.location.href = "http://api.localhost.com/auth/login";
         }}
       >
         Login
@@ -17,7 +17,7 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          const response = await fetch("http://localhost:5212/test/user", {
+          const response = await fetch("http://api.localhost.com/test/user", {
             headers: {
               "Content-Type": "application/json",
             },

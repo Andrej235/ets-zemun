@@ -2,7 +2,7 @@ using EtsZemun.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,19 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Configuration.AddJsonFile("/run/secrets/google-auth");
 var configuration = builder.Configuration;
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
+builder
+    .Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
+    // .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
+    .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
-builder
-    .Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(@"./keys")) // e.g., "./keys"
-    .SetApplicationName("EtsZemun");
 
 builder
     .Services.AddAuthentication(options =>
@@ -30,24 +26,13 @@ builder
         options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
     })
-    .AddCookie(options =>
-    {
-        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS only
-        options.Cookie.Domain = "localhost"; // Critical for localhost subdomains/ports
-        options.Events = new CookieAuthenticationEvents
-        {
-            // Optional: Customize redirect behavior after auth
-            OnRedirectToLogin = ctx =>
-            {
-                ctx.Response.Redirect("http://localhost:5173/ucenici"); // React login page
-                return Task.CompletedTask;
-            },
-        };
-    })
+    .AddCookie()
     .AddGoogle(options =>
     {
         options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
         options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+        options.SignInScheme = IdentityConstants.ExternalScheme;
+        options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
     });
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -62,6 +47,12 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
+                .WithOrigins("http://localhost")
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+
+            builder
                 .WithOrigins("http://localhost:5173")
                 .AllowCredentials()
                 .AllowAnyMethod()
@@ -71,10 +62,10 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseForwardedHeaders();
+app.UseCors("WebsitePolicy");
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("WebsitePolicy");
 app.MapControllers();
 
 if (app.Environment.IsDevelopment())
