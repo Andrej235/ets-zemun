@@ -97,9 +97,6 @@ Generated_Code/
 .nuget/
 
 # Docker
-**/Dockerfile*
-**/docker-compose.*
-!**/docker-compose.override.* # Don't ignore override files
 docker-compose.*.dcproj
 
 # Secrets

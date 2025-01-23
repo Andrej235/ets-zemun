@@ -22,7 +22,7 @@ export default function Students() {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "https://localhost:5000",
             },
-            credentials: "include", // Send cookies with the request
+            credentials: "include",
           });
           if (!response.ok) console.log(response);
 

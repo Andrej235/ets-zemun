@@ -1,22 +1,12 @@
 services:
-  asp-backend:
-    image: asp-backend
-    volumes:
-      - aspnet-data:/app/keys
-    secrets:
-      - google-auth
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=ets-zemun;Username=ets-zemun;Password=jfcm09iu43f85fjdskcnxmn
+  nginx:
+    image: nginx
     build:
       context: .
-      dockerfile: apps/asp-backend/Dockerfile
+      dockerfile: apps/nginx/Dockerfile
     ports:
-      - 5212
-    develop:
-      watch:
-        - action: rebuild
-          path: .
+      - "80:80"
+      - "443:443"
   website:
     image: website
     build:
@@ -29,27 +19,37 @@ services:
       - 5173 # Map Vite's default dev server port
     environment:
       - CHOKIDAR_USEPOLLING=true # Enable polling for file changes (required for some environments)
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: ets-zemun
-      POSTGRES_PASSWORD: jfcm09iu43f85fjdskcnxmn
-      POSTGRES_DB: ets-zemun
-    ports:
-      - "5000:5432"
-  reverse-proxy:
-    image: nginx:latest
-    volumes:
-      - ./apps/nginx/nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - "80:80"
-    depends_on:
-      - website
-      - asp-backend
 
-secrets:
-  google-auth:
-    file: secrets.json
+#   asp-backend:
+#     image: asp-backend
+#     volumes:
+#       - aspnet-data:/app/keys
+#     secrets:
+#       - google-auth
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
+#       - ConnectionStrings__DefaultConnection=Host=postgres;Database=ets-zemun;Username=ets-zemun;Password=jfcm09iu43f85fjdskcnxmn
+#     build:
+#       context: .
+#       dockerfile: apps/asp-backend/Dockerfile
+#     ports:
+#       - 5212
+#     develop:
+#       watch:
+#         - action: rebuild
+#           path: .
+#   postgres:
+#     image: postgres:latest
+#     environment:
+#       POSTGRES_USER: ets-zemun
+#       POSTGRES_PASSWORD: jfcm09iu43f85fjdskcnxmn
+#       POSTGRES_DB: ets-zemun
+#     ports:
+#       - "5000:5432"
 
-volumes:
-  aspnet-data:
+# secrets:
+#   google-auth:
+#     file: secrets.json
+
+# volumes:
+#   aspnet-data:
