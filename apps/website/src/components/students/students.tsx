@@ -9,7 +9,7 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          window.location.href = "https://localhost:5000/auth/login";
+          window.location.href = "https://api.localhost.com/auth/login";
         }}
       >
         Login
@@ -17,10 +17,10 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          const response = await fetch("https://localhost:5000/test/user", {
+          const response = await fetch("https://api.localhost.com/test/user", {
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "https://localhost:5000",
+              "Access-Control-Allow-Origin": "https://api.localhost.com",
             },
             credentials: "include",
           });
@@ -30,6 +30,23 @@ export default function Students() {
         }}
       >
         Get Username
+      </button>
+
+      <button
+        onClick={async () => {
+          const response = await fetch(
+            "https://api.localhost.com/test/check-connection",
+            {
+              method: "GET",
+            }
+          );
+
+          if (!response.ok) console.log(response);
+
+          console.log(await response.text());
+        }}
+      >
+        Check connection
       </button>
     </div>
   );
