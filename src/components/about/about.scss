@@ -214,13 +214,14 @@
     height: 20rem;
     height: max-content;
     padding: 4rem;
-    background-color: red;
+    background-color: $secondary-background;
+    border-radius: 0 0 2.5rem 2.5rem;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 5rem;
 
-    .overview-element {
+    .overview-info {
       width: 90%;
       display: flex;
       flex-direction: column;
@@ -241,7 +242,7 @@
     }
 
     .overview-image {
-      width: 30%;
+      width: 50%;
       img {
         width: 100%;
         border-radius: 0.5rem;

@@ -116,7 +116,7 @@ export default function About() {
             </div>
 
             <div {...scrollAnimationFlyInBottom} className="overview">
-              <div className="overview-element">
+              <div className="overview-info">
                 <h1>Misija i Vizija</h1>
                 <p>
                   Naša misija je da omogućimo obrazovanje i stvorimo buduće
@@ -125,7 +125,8 @@ export default function About() {
                   usavršavanjem i sticanjem znanja, da su u stanju da samostalno
                   istražuju i obrađuju informacije do kojih dolaze uz korišćenje
                   svih dostupnih izvora.
-                  <br />
+                </p>
+                <p>
                   Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam
                   najveći prioriteti. Podstičemo kreativnost učenika kroz razne
                   vannastavne aktivnosti. Stvorili smo takvo okruženje da je
@@ -134,6 +135,12 @@ export default function About() {
                   zajedno sa nama menjamo sadašnjost i stvaramo svetliju
                   budućnost.
                 </p>
+              </div>
+              <div className="overview-image">
+                <img
+                  src="/public/images/414bee0337a871bdd69bc69aadaf2c79.png"
+                  alt=""
+                />
               </div>
             </div>
           </div>
