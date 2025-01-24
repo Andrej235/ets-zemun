@@ -1,7 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import CustomSwiper from "../custom-swiper/custom-swiper";
 import Icon from "@components/icon/icon";
-import InfoCard from "@components/info-card/info-card";
 import "./about.scss";
 import ProfileOverview from "@components/profile-preview/profile-preview";
 import { motion } from "motion/react";
@@ -10,6 +8,8 @@ import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 import FluidCanvas from "src/fluid-canvas/fluid-canvas";
+{/*import CustomSwiper from "../custom-swiper/custom-swiper";
+import InfoCard from "@components/info-card/info-card";*/}
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
@@ -163,7 +163,7 @@ export default function About() {
         <NewsAndEventsPreviewContainer />
       </section>
 
-      <CustomSwiper>
+      {/*<CustomSwiper>
         <InfoCard
           icon="history"
           title="Istorija škole"
@@ -226,7 +226,7 @@ export default function About() {
           link="/pravni-akte"
           text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
         />
-      </CustomSwiper>
+      </CustomSwiper>*/}
 
       <div className="footer">
         <div className="social-media-icons-container">
