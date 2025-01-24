@@ -27,7 +27,7 @@ builder
     })
     .AddCookie(options =>
     {
-        options.Cookie.SameSite = SameSiteMode.None;
+        options.Cookie.SameSite = SameSiteMode.Strict;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         options.Cookie.Domain = ".localhost.com";
     })

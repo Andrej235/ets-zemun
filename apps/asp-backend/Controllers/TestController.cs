@@ -59,7 +59,7 @@ namespace EtsZemun.Controllers
                 {
                     Domain = ".localhost.com",
                     Secure = true,
-                    SameSite = SameSiteMode.None,
+                    SameSite = SameSiteMode.Strict,
                 }
             );
             return Ok("Cookie set!");
