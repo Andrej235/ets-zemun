@@ -8,15 +8,16 @@ import micromatch from "micromatch";
 import tsconfigPaths from "vite-tsconfig-paths";
 import parser from "@babel/parser";
 import babelTextTransformer from "./plugins/babel-text-transformer";
+import translate, {
+  translateSingeValueUsingLocal as translateSingleValueUsingLocal,
+  translateUsingLibre,
+} from "./plugins/translator";
 
 const localTranslatorLanguageOptions = ["sr-lat", "sr-cyr"] as const;
 let libreTranslatorLanguageOptions = [] as const;
 function getLanguageOptions() {
   return [...localTranslatorLanguageOptions, ...libreTranslatorLanguageOptions];
 }
-
-type LocalLanguage = (typeof localTranslatorLanguageOptions)[number];
-type LibreLanguage = string;
 
 const omitJSXProps = [
   "className",
@@ -128,43 +129,6 @@ async function collectStringsFromJSONFile(filePath: string, set: Set<string>) {
   }
 }
 
-async function translateSingeValueUsingLocal(originalValue: string) {
-  const newTranslations: { [key: string]: string } = {};
-
-  await Promise.all(
-    localTranslatorLanguageOptions.map(async (key) => {
-      const translator = translators[key];
-      newTranslations[key] = await translator(originalValue);
-    })
-  );
-
-  return newTranslations;
-}
-
-async function translateUsingLibre(
-  values: string[],
-  lang: LibreLanguage,
-  jsxCount: number
-) {
-  const translations = await getLibreTranslation(values, "sr", lang);
-
-  for (let i = 0; i < jsxCount; i++) {
-    const value = values[i];
-    const translation = translations[i];
-
-    const current = jsxTranslations.get(value);
-    jsxTranslations.set(value, { ...current, [lang]: translation });
-  }
-
-  for (let i = jsxCount; i < values.length; i++) {
-    const value = values[i];
-    const translation = translations[i];
-
-    const current = jsonTranslations.get(value);
-    jsonTranslations.set(value, { ...current, [lang]: translation });
-  }
-}
-
 export default defineConfig(({ mode }) => ({
   base: "/",
   preview: {
@@ -209,24 +173,6 @@ export default defineConfig(({ mode }) => ({
           }
         }
 
-        async function translate(
-          toTranslate: Set<string>
-        ): Promise<TranslationResult> {
-          const translations: TranslationResult = new Map();
-
-          const translationPromises = Array.from(toTranslate).map(
-            async (originalValue) => {
-              translations.set(
-                originalValue,
-                await translateSingeValueUsingLocal(originalValue)
-              );
-            }
-          );
-
-          await Promise.all(translationPromises);
-          return translations;
-        }
-
         await Promise.all([
           processDirectory(
             path.resolve(__dirname, "src/components"),
@@ -251,7 +197,13 @@ export default defineConfig(({ mode }) => ({
         ];
 
         for (const lang of libreTranslatorLanguageOptions) {
-          await translateUsingLibre(allValues, lang, stringsFromJSX.size);
+          await translateUsingLibre(
+            allValues,
+            lang,
+            stringsFromJSX.size,
+            jsxTranslations,
+            jsonTranslations
+          );
         }
       },
       async handleHotUpdate(context) {
@@ -265,7 +217,7 @@ export default defineConfig(({ mode }) => ({
               if (!old)
                 jsxTranslations.set(
                   originalValue,
-                  await translateSingeValueUsingLocal(originalValue)
+                  await translateSingleValueUsingLocal(originalValue)
                 );
               else set.delete(originalValue);
             }
@@ -277,7 +229,13 @@ export default defineConfig(({ mode }) => ({
             const allValues = Array.from(set);
 
             for (const lang of libreTranslatorLanguageOptions)
-              await translateUsingLibre(allValues, lang, allValues.length);
+              await translateUsingLibre(
+                allValues,
+                lang,
+                allValues.length,
+                jsxTranslations,
+                jsonTranslations
+              );
           }
         } else if (context.file.endsWith(".json")) {
           const set: Set<string> = new Set();
@@ -289,7 +247,7 @@ export default defineConfig(({ mode }) => ({
               if (!old)
                 jsonTranslations.set(
                   originalValue,
-                  await translateSingeValueUsingLocal(originalValue)
+                  await translateSingleValueUsingLocal(originalValue)
                 );
               else set.delete(originalValue);
             }
@@ -301,7 +259,13 @@ export default defineConfig(({ mode }) => ({
             const allValues = Array.from(set);
 
             for (const lang of libreTranslatorLanguageOptions)
-              await translateUsingLibre(allValues, lang, 0);
+              await translateUsingLibre(
+                allValues,
+                lang,
+                0,
+                jsxTranslations,
+                jsonTranslations
+              );
           }
         }
       },
@@ -379,7 +343,7 @@ function jsonPlugin() {
           ],
         });
 
-        if (result && result.code) {
+        if (result?.code) {
           return {
             code: result.code,
             map: result.map || null,
@@ -414,131 +378,6 @@ function jsonPlugin() {
     }
 
     return [];
-  }
-}
-
-const translators: {
-  [key in LocalLanguage]: (value: string) => Promise<string>;
-} = {
-  "sr-lat": (value) => Promise.resolve(value),
-  "sr-cyr": (value) =>
-    new Promise((resolve) => {
-      const latinToCyrillicMap = {
-        A: "А",
-        B: "Б",
-        V: "В",
-        G: "Г",
-        D: "Д",
-        Đ: "Ђ",
-        E: "Е",
-        Ž: "Ж",
-        Z: "З",
-        I: "И",
-        J: "Ј",
-        K: "К",
-        L: "Л",
-        Lj: "Љ",
-        M: "М",
-        N: "Н",
-        Nj: "Њ",
-        O: "О",
-        P: "П",
-        R: "Р",
-        S: "С",
-        T: "Т",
-        Ć: "Ћ",
-        U: "У",
-        F: "Ф",
-        H: "Х",
-        C: "Ц",
-        Č: "Ч",
-        Dž: "Џ",
-        Š: "Ш",
-        a: "а",
-        b: "б",
-        v: "в",
-        g: "г",
-        d: "д",
-        đ: "ђ",
-        e: "е",
-        ž: "ж",
-        z: "з",
-        i: "и",
-        j: "ј",
-        k: "к",
-        l: "л",
-        lj: "љ",
-        m: "м",
-        n: "н",
-        nj: "њ",
-        o: "о",
-        p: "п",
-        r: "р",
-        s: "с",
-        t: "т",
-        ć: "ћ",
-        u: "у",
-        f: "ф",
-        h: "х",
-        c: "ц",
-        č: "ч",
-        dž: "џ",
-        š: "ш",
-        LJ: "Љ",
-        NJ: "Њ",
-        DŽ: "Џ",
-      };
-
-      // Handle special cases for digraphs first
-      const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
-      digraphs.forEach((digraph) => {
-        const cyrillic =
-          latinToCyrillicMap[digraph as keyof typeof latinToCyrillicMap];
-        const regex = new RegExp(digraph, "g");
-        value = value.replace(regex, cyrillic);
-      });
-
-      // Convert the rest of the characters
-      resolve(
-        value
-          .split("")
-          .map(
-            (char) =>
-              latinToCyrillicMap[char as keyof typeof latinToCyrillicMap] ||
-              char
-          )
-          .join("")
-      );
-    }),
-  // en: (x) => getLibreTranslation(x, "sr", "en"),
-  // it: (x) => getLibreTranslation(x, "sr", "it"),
-  // et: (x) => getLibreTranslation(x, "sr", "et"),
-  // zt: (x) => getLibreTranslation(x, "sr", "zt"),
-};
-
-async function getLibreTranslation<T extends string | string[]>(
-  value: T,
-  source: string,
-  target: string
-): Promise<T> {
-  try {
-    const response = await fetch("http://127.0.0.1:5000/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        q: value,
-        source,
-        target,
-      }),
-    });
-
-    const data = await response.json();
-    return data.translatedText;
-  } catch (error) {
-    console.error(`HTTP request failed for ${source}->${target}`, error);
-    return value;
   }
 }
 
