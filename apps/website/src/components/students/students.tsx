@@ -57,7 +57,7 @@ export default function Students() {
       <button
         onClick={async () => {
           const response = await fetch(
-            "https://api.localhost.com/test/cookie",
+            "https://api.localhost.com/auth/logout",
             {
               method: "GET",
               credentials: "include",
@@ -67,7 +67,7 @@ export default function Students() {
           console.log(await response.text());
         }}
       >
-        Get test cookie
+        Logout
       </button>
     </div>
   );
