@@ -24,8 +24,6 @@
     min-width: 100%;
     width: 100%;
 
-    min-height: 100svh;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,8 +45,8 @@
     .hero-block {
       position: relative;
       width: 100%;
-      height: 100%;
-      
+      min-height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -306,29 +304,29 @@
       top: 0%;
       left: 50%;
       transform: translate(-50%, 0%) !important;
-  
+
       width: 90%;
       max-width: 60rem !important;
       height: 130rem;
       box-shadow: none !important;
-  
+
       flex-direction: column;
       align-items: center;
-  
+
       .hero-block-element {
         width: 100% !important;
         height: 25%;
         padding: 3rem;
-  
+
         .hero-block-icon {
           max-height: 30% !important;
         }
-  
+
         .hero-block-icon {
           height: 50% !important;
           align-items: flex-start !important;
         }
-  
+
         .hero-block-description {
           opacity: 1 !important;
         }
@@ -342,3 +340,9 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .overview {
+    flex-direction: column;
+    padding: 1rem !important;
+  }
+}
