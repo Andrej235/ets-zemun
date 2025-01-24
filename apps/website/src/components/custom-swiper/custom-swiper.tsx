@@ -1,8 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+//@ts-expect-error dependency is installed in the top level
 import "swiper/css";
+//@ts-expect-error dependency is installed in the top level
 import "swiper/css/effect-coverflow";
+//@ts-expect-error dependency is installed in the top level
 import "swiper/css/pagination";
+//@ts-expect-error dependency is installed in the top level
 import "swiper/css/navigation";
 import "./custom-swiper.scss";
 

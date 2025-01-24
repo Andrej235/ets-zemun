@@ -11,6 +11,7 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
 
@@ -20,6 +21,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
+    "noUncheckedSideEffectImports": true,
 
     /* Paths */
     "baseUrl": "./",
@@ -35,3 +37,4 @@
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
