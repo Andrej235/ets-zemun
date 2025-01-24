@@ -2,7 +2,6 @@ using EtsZemun.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +11,8 @@ var configuration = builder.Configuration;
 
 builder
     .Services.AddDataProtection()
-    // .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
+    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
+    // .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
     .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +25,12 @@ builder
         options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
     })
-    .AddCookie()
+    .AddCookie(options =>
+    {
+        options.Cookie.SameSite = SameSiteMode.None;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.Domain = ".localhost.com";
+    })
     .AddGoogle(options =>
     {
         options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
@@ -45,7 +49,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
-                .WithOrigins("https://localhost")
+                .WithOrigins("https://localhost.com")
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
@@ -55,7 +59,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseCors("WebsitePolicy");
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

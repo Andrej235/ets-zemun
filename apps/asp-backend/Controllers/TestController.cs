@@ -46,7 +46,23 @@ namespace EtsZemun.Controllers
         [HttpGet("redirect")]
         public IActionResult Redirect()
         {
-            return Redirect("http://localhost/ucenici");
+            return Redirect("https://localhost.com/ucenici");
+        }
+
+        [HttpGet("cookie")]
+        public IActionResult TestCookie()
+        {
+            Response.Cookies.Append(
+                "TestCookie",
+                "HelloWorld",
+                new CookieOptions
+                {
+                    Domain = ".localhost.com",
+                    Secure = true,
+                    SameSite = SameSiteMode.None,
+                }
+            );
+            return Ok("Cookie set!");
         }
     }
 }

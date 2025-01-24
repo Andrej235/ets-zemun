@@ -15,12 +15,13 @@ export default function Students() {
         Login
       </button>
 
+      <br />
+
       <button
         onClick={async () => {
           const response = await fetch("https://api.localhost.com/test/user", {
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "https://api.localhost.com",
             },
             credentials: "include",
           });
@@ -31,6 +32,8 @@ export default function Students() {
       >
         Get Username
       </button>
+
+      <br />
 
       <button
         onClick={async () => {
@@ -47,6 +50,24 @@ export default function Students() {
         }}
       >
         Check connection
+      </button>
+
+      <br />
+
+      <button
+        onClick={async () => {
+          const response = await fetch(
+            "https://api.localhost.com/test/cookie",
+            {
+              method: "GET",
+              credentials: "include",
+            }
+          );
+          if (!response.ok) console.log(response);
+          console.log(await response.text());
+        }}
+      >
+        Get test cookie
       </button>
     </div>
   );
