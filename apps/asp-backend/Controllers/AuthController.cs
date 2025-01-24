@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers
@@ -31,6 +32,16 @@ namespace EtsZemun.Controllers
             );
 
             return Ok(result.Principal?.Claims.Select(x => x.Value));
+        }
+
+        [HttpGet("admin")]
+        public async Task<IActionResult> Admin()
+        {
+            var result = await HttpContext.AuthenticateAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
+
+            return result.Principal?.Claims.Any() ?? false ? Ok() : Unauthorized();
         }
     }
 }
