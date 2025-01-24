@@ -19,7 +19,7 @@ export default function Students() {
 
       <button
         onClick={async () => {
-          const response = await fetch("https://api.localhost.com/test/user", {
+          const response = await fetch("https://api.localhost.com/auth", {
             headers: {
               "Content-Type": "application/json",
             },
@@ -31,25 +31,6 @@ export default function Students() {
         }}
       >
         Get Username
-      </button>
-
-      <br />
-
-      <button
-        onClick={async () => {
-          const response = await fetch(
-            "https://api.localhost.com/test/check-connection",
-            {
-              method: "GET",
-            }
-          );
-
-          if (!response.ok) console.log(response);
-
-          console.log(await response.text());
-        }}
-      >
-        Check connection
       </button>
 
       <br />
