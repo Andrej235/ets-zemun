@@ -12,8 +12,17 @@ namespace EtsZemun.Controllers
         [HttpGet("login")]
         public IActionResult Login()
         {
-            var properties = new AuthenticationProperties { RedirectUri = "/test/redirect" };
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action(nameof(RedirectToMainPage), "Auth"),
+            };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet("redirect")]
+        public IActionResult RedirectToMainPage()
+        {
+            return Redirect("https://localhost.com/ucenici");
         }
 
         [HttpGet("logout")]
