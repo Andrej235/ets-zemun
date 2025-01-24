@@ -1,26 +1,22 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, PluginOption } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { createFilter } from "@rollup/pluginutils";
-import { transformAsync } from "@babel/core";
 import fs from "fs/promises";
-import micromatch from "micromatch";
 import babelTextTransformer from "./plugins/babel-text-transformer";
 import translate, {
   translateSingeValueUsingLocal as translateSingleValueUsingLocal,
   translateUsingLibre,
+  TranslationResult,
 } from "./plugins/translator";
 import {
   collectStringsFromJSONFile,
   collectStringsFromJSXFile,
 } from "./plugins/collect-strings-from-files";
 import { getSchemaMap, SchemaMap } from "./plugins/schema-map";
+import getLanguageOptions from "./plugins/languages";
+import jsonPlugin, { jsonPluginTransform } from "./plugins/json-plugin";
 
-const localTranslatorLanguageOptions = ["sr-lat", "sr-cyr"] as const;
-let libreTranslatorLanguageOptions = [] as const;
-function getLanguageOptions() {
-  return [...localTranslatorLanguageOptions, ...libreTranslatorLanguageOptions];
-}
+let libreTranslatorLanguageOptions: string[] = [];
 
 const omitJSXProps = [
   "className",
@@ -35,8 +31,6 @@ const omitJSXProps = [
   "layout",
   "viewBox",
 ];
-
-export type TranslationResult = Map<string, { [key: string]: string }>;
 
 let jsxTranslations: TranslationResult = new Map();
 let jsonTranslations: TranslationResult = new Map();
@@ -183,6 +177,7 @@ export default defineConfig(({ mode }) => ({
         }
       },
     },
+    viteJsonPlugin(),
     react({
       babel: {
         plugins: [
@@ -198,7 +193,9 @@ export default defineConfig(({ mode }) => ({
 
               mainPlugin.options = {
                 translations: jsxTranslations,
-                languageOptions: getLanguageOptions(),
+                languageOptions: getLanguageOptions(
+                  libreTranslatorLanguageOptions
+                ),
                 omitJSXProps,
               };
             },
@@ -207,7 +204,6 @@ export default defineConfig(({ mode }) => ({
         ],
       },
     }),
-    jsonPlugin(),
   ],
   resolve: {
     alias: {
@@ -232,64 +228,15 @@ export default defineConfig(({ mode }) => ({
   },
 }));
 
-function jsonPlugin() {
-  const filter = createFilter("**/*.json");
+function viteJsonPlugin(): PluginOption {
+  const { load, name } = jsonPlugin()!;
 
   return {
-    name: "babel-json-plugin",
+    name,
     async transform(code: string, id: string) {
-      if (!filter(id)) return null;
-
-      try {
-        const result = await transformAsync(code, {
-          filename: id,
-          plugins: [
-            [
-              "./plugins/json-text-transformer",
-              {
-                omitProperties: await getPropertyNamesToOmit(id),
-                translations: jsonTranslations,
-                langOptions: getLanguageOptions(),
-              },
-            ],
-          ],
-        });
-
-        if (result?.code) {
-          return {
-            code: result.code,
-            map: result.map || null,
-          };
-        }
-      } catch (err) {
-        console.error(`Failed to transform JSON file: ${id}`, err);
-      }
-
-      return null;
+      return jsonPluginTransform(code, id, jsonTranslations, schemaMap);
     },
-    async load(id: string) {
-      if (!filter(id)) return null;
-
-      try {
-        return await fs.readFile(id, "utf-8");
-      } catch (err) {
-        console.error(`Failed to transform JSON file: ${id}`, err);
-      }
-
-      return null;
-    },
+    load,
   };
-
-  async function getPropertyNamesToOmit(jsonFilePath: string) {
-    if (!schemaMap) throw new Error("SchemaMap is not initialized");
-
-    for (const mapping of schemaMap) {
-      if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch)) {
-        return mapping.omitFromTranslation ?? [];
-      }
-    }
-
-    return [];
-  }
 }
 

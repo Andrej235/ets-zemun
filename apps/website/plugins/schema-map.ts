@@ -10,8 +10,10 @@ export type SchemaMap = {
 
 export async function getPropertyNamesToOmit(
   jsonFilePath: string,
-  schemaMap: SchemaMap
+  schemaMap: SchemaMap | null
 ): Promise<string[]> {
+  if (!schemaMap) return [];
+
   for (const mapping of schemaMap)
     if (micromatch.isMatch(jsonFilePath, "**/" + mapping.fileMatch))
       return mapping.omitFromTranslation ?? [];
@@ -22,7 +24,10 @@ export async function getPropertyNamesToOmit(
 export async function getSchemaMap(): Promise<SchemaMap> {
   return JSON.parse(
     await fs.readFile(
-      path.resolve(__dirname, "../src/assets/json-data/data-to-schema-map.json"),
+      path.resolve(
+        __dirname,
+        "../src/assets/json-data/data-to-schema-map.json"
+      ),
       "utf-8"
     )
   );

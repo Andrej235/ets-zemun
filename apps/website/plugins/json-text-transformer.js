@@ -62,10 +62,10 @@ export default function (babel) {
 
           if (t.isArrayExpression(node)) {
             node.elements.forEach((x) => translate(x, omitProperties, lang));
-            return;
           }
         }
       },
     },
   };
 }
+

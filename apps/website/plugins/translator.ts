@@ -1,6 +1,4 @@
-import { TranslationResult } from "../vite.config";
-
-type LibreLanguage = string;
+export type TranslationResult = Map<string, { [key: string]: string }>;
 
 export default async function translate(
   toTranslate: Set<string>
@@ -35,8 +33,6 @@ export async function translateSingeValueUsingLocal(originalValue: string) {
   return newTranslations;
 }
 
-type LocalLanguage = (typeof localTranslatorLanguageOptions)[number];
-
 async function getLibreTranslation<T extends string | string[]>(
   value: T,
   source: string,
@@ -65,7 +61,7 @@ async function getLibreTranslation<T extends string | string[]>(
 
 export async function translateUsingLibre(
   values: string[],
-  lang: LibreLanguage,
+  lang: string,
   jsxCount: number,
   jsxTranslations: TranslationResult,
   jsonTranslations: TranslationResult
@@ -90,7 +86,7 @@ export async function translateUsingLibre(
 }
 
 const translators: {
-  [key in LocalLanguage]: (value: string) => Promise<string>;
+  [key: string]: (value: string) => Promise<string>;
 } = {
   "sr-lat": (value) => Promise.resolve(value),
   "sr-cyr": (value) =>

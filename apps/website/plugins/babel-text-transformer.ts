@@ -1,5 +1,5 @@
-import { TranslationResult } from "../vite.config";
 import { types, Visitor } from "@babel/core";
+import { TranslationResult } from "./translator";
 
 export default function babelTextTransformer(): Visitor<any> {
   return {
@@ -40,9 +40,7 @@ export default function babelTextTransformer(): Visitor<any> {
             types.isImportDeclaration(x) &&
             x.source.value === "react" &&
             x.specifiers.some(
-              (x) =>
-                types.isImportSpecifier(x) &&
-                (x.local as types.Identifier).name === "useMemo"
+              (x) => types.isImportSpecifier(x) && x.local.name === "useMemo"
             )
         );
 
