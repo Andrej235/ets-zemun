@@ -6,13 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Configuration.AddJsonFile("/run/secrets/google-auth");
+builder.Configuration.AddJsonFile("/run/secrets/google-auth");
 var configuration = builder.Configuration;
 
 builder
     .Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    // .PersistKeysToFileSystem(new DirectoryInfo(Path.Join(Environment.CurrentDirectory, "keys")))
     .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
