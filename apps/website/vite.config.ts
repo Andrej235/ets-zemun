@@ -5,7 +5,6 @@ import { createFilter } from "@rollup/pluginutils";
 import { transformAsync, traverse, types } from "@babel/core";
 import fs from "fs/promises";
 import micromatch from "micromatch";
-import tsconfigPaths from "vite-tsconfig-paths";
 import parser from "@babel/parser";
 import babelTextTransformer from "./plugins/babel-text-transformer";
 import translate, {
@@ -270,7 +269,6 @@ export default defineConfig(({ mode }) => ({
         }
       },
     },
-    tsconfigPaths(), //TODO: Check if this is needed, while fixing netlify I added this as one of the potential solutions
     react({
       babel: {
         plugins: [
