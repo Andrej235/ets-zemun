@@ -176,6 +176,7 @@ export default defineConfig(({ mode }) => ({
     watch: {
       usePolling: true,
     },
+    allowedHosts: ["localhost.com"],
   },
   plugins: [
     {
