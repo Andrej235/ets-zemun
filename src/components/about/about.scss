@@ -344,5 +344,15 @@
   .overview {
     flex-direction: column;
     padding: 1rem !important;
+    padding-bottom: 5rem !important;
+
+    .overview-image {
+      width: 90% !important;
+      
+      img {
+        max-height: 40rem;
+        object-fit: cover;
+      }
+    }
   }
 }
