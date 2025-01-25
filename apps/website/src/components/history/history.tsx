@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
+import { motion, useScroll } from "motion/react";
 
 type HistoryProps = {
   readonly children: React.ReactNode;
@@ -18,12 +19,13 @@ type Segment = {
 
 export default function History({ children }: HistoryProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     if (!historyContainerRef.current) return;
 
     const padding = 100;
-    const pointRadius = 10;
+    const pointRadius = 25;
 
     const container = historyContainerRef.current;
     const svg = container.children[0] as SVGElement;
@@ -72,14 +74,13 @@ export default function History({ children }: HistoryProps) {
 
       const nextPoint: Vector2 = getPointForSegment(nextSegment, !even);
 
-      path += `M${pointPosition.x} ${
-        pointPosition.y + pointRadius
-      } V ${middleToNextPointY} H ${nextPoint.x} V ${
+      path += ` V ${middleToNextPointY} H ${nextPoint.x} V ${
         nextPoint.y - pointRadius
       }`;
     }
 
     line.setAttribute("d", path);
+    //// line.style.strokeDasharray = `500px ${line.getTotalLength()}`;
 
     function getPointForSegment(segment: Segment, even: boolean): Vector2 {
       return {
@@ -94,7 +95,7 @@ export default function History({ children }: HistoryProps) {
   return (
     <div className="history-container" ref={historyContainerRef}>
       <svg className="history-line" stroke="#fff" fill="none">
-        <path></path>
+        <motion.path style={{ pathLength: scrollYProgress }} />
       </svg>
 
       {children}

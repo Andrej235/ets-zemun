@@ -22,32 +22,39 @@ export default function createCirclePath(
     centerX = centerX.x;
   }
 
-  // Magic number for cubic Bézier circle approximation
-  const k = radius * 0.5522847;
-
-  // Format numbers to 4 decimal places and trim trailing zeros
+  const k = radius * 0.5522847; // Bézier curvature factor
   const format = (n: number) => n.toFixed(4).replace(/\.?0+$/, "");
 
   return [
-    // Move to starting point (rightmost position)
-    `M ${format(centerX + radius)} ${format(centerY)}`,
-    // Top-right quadrant
-    `C ${format(centerX + radius)} ${format(centerY - k)}`,
-    `${format(centerX + k)} ${format(centerY - radius)}`,
-    `${format(centerX)} ${format(centerY - radius)}`,
-    // Top-left quadrant
-    `C ${format(centerX - k)} ${format(centerY - radius)}`,
-    `${format(centerX - radius)} ${format(centerY - k)}`,
-    `${format(centerX - radius)} ${format(centerY)}`,
-    // Bottom-left quadrant
-    `C ${format(centerX - radius)} ${format(centerY + k)}`,
-    `${format(centerX - k)} ${format(centerY + radius)}`,
-    `${format(centerX)} ${format(centerY + radius)}`,
-    // Bottom-right quadrant
-    `C ${format(centerX + k)} ${format(centerY + radius)}`,
-    `${format(centerX + radius)} ${format(centerY + k)}`,
+    // Top-right quadrant (drawing clockwise to 3 o'clock)
+    `C ${format(centerX + k)} ${format(centerY - radius)}`,
+    `${format(centerX + radius)} ${format(centerY - k)}`,
     `${format(centerX + radius)} ${format(centerY)}`,
-    "Z", // Close path
+
+    // Bottom-right quadrant (drawing clockwise to 6 o'clock)
+    `C ${format(centerX + radius)} ${format(centerY + k)}`,
+    `${format(centerX + k)} ${format(centerY + radius)}`,
+    `${format(centerX)} ${format(centerY + radius)}`,
+
+    // Bottom-left quadrant (drawing clockwise to 9 o'clock)
+    `C ${format(centerX - k)} ${format(centerY + radius)}`,
+    `${format(centerX - radius)} ${format(centerY + k)}`,
+    `${format(centerX - radius)} ${format(centerY)}`,
+
+    // Top-left quadrant (drawing clockwise back to 12 o'clock)
+    `C ${format(centerX - radius)} ${format(centerY - k)}`,
+    `${format(centerX - k)} ${format(centerY - radius)}`,
+    `${format(centerX)} ${format(centerY - radius)}`,
+
+    // Top-right quadrant (drawing clockwise to 3 o'clock)
+    `C ${format(centerX + k)} ${format(centerY - radius)}`,
+    `${format(centerX + radius)} ${format(centerY - k)}`,
+    `${format(centerX + radius)} ${format(centerY)}`,
+
+    // Bottom-right quadrant (drawing clockwise to 6 o'clock)
+    `C ${format(centerX + radius)} ${format(centerY + k)}`,
+    `${format(centerX + k)} ${format(centerY + radius)}`,
+    `${format(centerX)} ${format(centerY + radius)}`,
   ].join(" ");
 }
 
