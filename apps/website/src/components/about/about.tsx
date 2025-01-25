@@ -1,7 +1,5 @@
-import { useRef } from "react";
-import CustomSwiper from "../custom-swiper/custom-swiper";
+import { useMemo, useRef, useState } from "react";
 import Icon from "@components/icon/icon";
-import InfoCard from "@components/info-card/info-card";
 import "./about.scss";
 import ProfileOverview from "@components/profile-preview/profile-preview";
 import { motion } from "motion/react";
@@ -12,7 +10,19 @@ import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-an
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 
 export default function About() {
-  const overviewSectionRef = useRef<HTMLDivElement>(null);
+  const heroSpaceRef = useRef<HTMLDivElement>(null);
+
+  const [hoveredElement, setHoveredElement] = useState<number | null>(null);
+
+  const fluidCanvas = useMemo(
+    () => (
+      <FluidCanvas
+        containerToApplyEventListenersTo={heroSpaceRef}
+        gridSize={[512, 256]}
+      />
+    ),
+    []
+  );
 
   return (
     <div id="about-page">
@@ -22,59 +32,136 @@ export default function About() {
             <img src="/hero-image.jpeg" alt="Picture of a student" />
           </motion.div>
 
-          <div className="hero-image-overlay"></div>
+          <div className="hero-block" ref={heroSpaceRef}>
+            {fluidCanvas}
 
-          <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
-            <h1>Elektrotehnička škola "Zemun"</h1>
+            <div className="hero-cards">
+              <div
+                className={`hero-block-element${
+                  hoveredElement === 1 ? " block-element-hovered" : ""
+                }`}
+                onMouseEnter={() => setHoveredElement(1)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="brain" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-            <p>Mi ne čekamo budućnost, mi joj idemo u susret!</p>
-          </motion.div>
+              <div
+                className={`hero-block-element${
+                  hoveredElement === 2 ? " block-element-hovered" : ""
+                }`}
+                onMouseEnter={() => setHoveredElement(2)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="school" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`hero-block-element${
+                  hoveredElement === 3 ? " block-element-hovered" : ""
+                }`}
+                onMouseEnter={() => setHoveredElement(3)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="book" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`hero-block-element${
+                  hoveredElement === 4 ? " block-element-hovered" : ""
+                }`}
+                onMouseEnter={() => setHoveredElement(4)}
+                onMouseLeave={() => setHoveredElement(null)}
+              >
+                <Icon name="scroll" className="hero-block-icon" />
+                <div className="hero-block-info">
+                  <div className="hero-block-header">Naslov</div>
+                  <div className="hero-block-description">
+                    <p>Ovo je deskripcija!</p>
+                    <button className="hero-block-button">
+                      <span>Saznaj vise</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div {...scrollAnimationFlyInBottom} className="overview">
+              <div className="overview-info">
+                <h1>Misija i Vizija</h1>
+                <p>
+                  Naša misija je da omogućimo obrazovanje i stvorimo buduće
+                  stručnjake i naučne radnike iz oblasti koje obuhvata naš
+                  školski program. Nastojimo da kod učenika probudimo želju za
+                  usavršavanjem i sticanjem znanja, da su u stanju da samostalno
+                  istražuju i obrađuju informacije do kojih dolaze uz korišćenje
+                  svih dostupnih izvora.
+                </p>
+                <p>
+                  Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam
+                  najveći prioriteti. Podstičemo kreativnost učenika kroz razne
+                  vannastavne aktivnosti. Stvorili smo takvo okruženje da je
+                  učenik u centru nastavnog procesa i učenja. Želimo da naša
+                  deca postanu preduzimljive i savesne ličnosti. Pozivamo Vas da
+                  zajedno sa nama menjamo sadašnjost i stvaramo svetliju
+                  budućnost.
+                </p>
+              </div>
+              <div className="overview-image">
+                <img
+                  src="/images/414bee0337a871bdd69bc69aadaf2c79.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <motion.div {...scrollAnimationFlyInBottom} className="overview">
-        <div className="overview-element">
-          <h1>Misija i Vizija</h1>
-          <p>
-            Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake
-            i naučne radnike iz oblasti koje obuhvata naš školski program.
-            Nastojimo da kod učenika probudimo želju za usavršavanjem i
-            sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
-            informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
-            <br />
-            Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
-            prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
-            aktivnosti. Stvorili smo takvo okruženje da je učenik u centru
-            nastavnog procesa i učenja. Želimo da naša deca postanu
-            preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama
-            menjamo sadašnjost i stvaramo svetliju budućnost.
-          </p>
+      <section>
+        <div className="profiles-overview-container">
+          {data.profiles.map((profile, i) => (
+            <ProfileOverview
+              profile={profile as ProfileOverviewSchema}
+              layout={i % 2 === 0 ? "image-left" : "image-right"}
+              key={profile.name}
+            />
+          ))}
         </div>
-        <div className="overview-image">
-          <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
-        </div>
-      </motion.div>
+      </section>
 
-      <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
-      </div>
-
-      <section ref={overviewSectionRef}>
-        <FluidCanvas
-          containerToApplyEventListenersTo={overviewSectionRef}
-          gridSize={[512, 512]}
-        />
-
+      <section>
         <NewsAndEventsPreviewContainer />
       </section>
 
-      <CustomSwiper>
+      {/*<CustomSwiper>
         <InfoCard
           icon="history"
           title="Istorija škole"
@@ -137,7 +224,7 @@ export default function About() {
           link="/pravni-akte"
           text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
         />
-      </CustomSwiper>
+      </CustomSwiper>*/}
 
       <div className="footer">
         <div className="social-media-icons-container">

@@ -26,7 +26,7 @@
     height: 100%;
     z-index: 1;
     background-color: $secondary-background;
-    box-shadow: 0 2px 15px $shadow;
+    box-shadow: 0 2px 15px black;
   }
 
   > *:not(.background):not(.hamburger-navigation) {
