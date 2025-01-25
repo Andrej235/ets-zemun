@@ -2,7 +2,7 @@ import {
   omitJSXProps,
   libreTranslatorLanguageOptions,
   schemaMap,
-} from "../vite.config";
+} from "./translator-plugin";
 import fs from "fs/promises";
 import path from "path";
 import {

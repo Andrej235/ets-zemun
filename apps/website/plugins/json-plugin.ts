@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import { createFilter, Plugin } from "vite";
 import { getPropertyNamesToOmit } from "./schema-map";
 import getLanguageOptions from "./languages";
-import { jsonTranslations, schemaMap } from "../vite.config";
+import { jsonTranslations, schemaMap } from "./translator-plugin";
 
 export default function jsonTranslatorPlugin(): Plugin | null {
   const filter = createFilter("**/*.json");

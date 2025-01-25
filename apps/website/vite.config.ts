@@ -1,32 +1,9 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { TranslationResult } from "./plugins/translator";
-import { getSchemaMap, SchemaMap } from "./plugins/schema-map";
-import buildStartTranslationPlugin from "./plugins/build-start";
 import babelTextTransformerWrapper from "./plugins/babel-text-transformer-wrapper";
 import jsonTranslatorPlugin from "./plugins/json-plugin";
-import handleTranslatorHMR from "./plugins/vite-plugin-hmr";
-
-export let libreTranslatorLanguageOptions: string[] = [];
-
-export const omitJSXProps = [
-  "className",
-  "id",
-  "key",
-  "name",
-  "src",
-  "d",
-  "icon",
-  "image",
-  "to",
-  "layout",
-  "viewBox",
-];
-
-export let jsxTranslations: TranslationResult = new Map();
-export let jsonTranslations: TranslationResult = new Map();
-export let schemaMap: SchemaMap | null = null;
+import translatorPlugin from "./plugins/translator-plugin";
 
 export default defineConfig(({ mode }) => ({
   base: "/",
@@ -42,22 +19,7 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: ["localhost.com"],
   },
   plugins: [
-    {
-      name: "vite-plugin-translate",
-      async buildStart() {
-        const env = loadEnv(mode, process.cwd(), "");
-        libreTranslatorLanguageOptions = JSON.parse(
-          env.VITE_AVAILABLE_LIBRE_LANGUAGES
-        );
-
-        schemaMap = await getSchemaMap();
-        [jsxTranslations, jsonTranslations] =
-          await buildStartTranslationPlugin();
-      },
-      async handleHotUpdate(context) {
-        handleTranslatorHMR(context);
-      },
-    },
+    translatorPlugin(mode),
     jsonTranslatorPlugin(),
     react({
       babel: {

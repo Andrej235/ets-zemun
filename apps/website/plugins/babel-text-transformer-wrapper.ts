@@ -1,10 +1,10 @@
+import babelTextTransformer from "./babel-text-transformer";
+import getLanguageOptions from "./languages";
 import {
   jsxTranslations,
   libreTranslatorLanguageOptions,
   omitJSXProps,
-} from "../vite.config";
-import babelTextTransformer from "./babel-text-transformer";
-import getLanguageOptions from "./languages";
+} from "./translator-plugin";
 
 export default function () {
   return {

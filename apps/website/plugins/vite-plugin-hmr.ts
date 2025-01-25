@@ -5,7 +5,7 @@ import {
   libreTranslatorLanguageOptions,
   jsonTranslations,
   schemaMap,
-} from "../vite.config";
+} from "./translator-plugin";
 import {
   collectStringsFromJSXFile,
   collectStringsFromJSONFile,
