@@ -15,6 +15,30 @@ export default function HistoryPage() {
       <HistorySegment date={new Date()}>
         <h1>History segment 3</h1>
       </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 4</h1>
+      </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 5</h1>
+      </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 6</h1>
+      </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 7</h1>
+      </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 8</h1>
+      </HistorySegment>
+
+      <HistorySegment date={new Date()}>
+        <h1>History segment 9</h1>
+      </HistorySegment>
     </History>
   );
 }

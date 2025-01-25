@@ -22,6 +22,9 @@ export default function History({ children }: HistoryProps) {
   useEffect(() => {
     if (!historyContainerRef.current) return;
 
+    const padding = 100;
+    const pointRadius = 10;
+
     const container = historyContainerRef.current;
     const svg = container.children[0] as SVGElement;
     const line = svg.children[0] as SVGPathElement;
@@ -48,14 +51,44 @@ export default function History({ children }: HistoryProps) {
       `0 0 ${container.scrollWidth} ${container.scrollHeight}`
     );
 
-    const start: Vector2 = {
-      x: segments[0].position.x,
-      y: segments[0].position.y + segments[0].size.y / 2,
-    };
+    let path = `M${segments[0].position.x - padding} 0 V ${
+      segments[0].position.y + segments[0].size.y / 2 - pointRadius
+    }`;
 
-    let path = createCirclePath(10, start);
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+      const even = i % 2 === 0;
+
+      const pointPosition: Vector2 = getPointForSegment(segment, even);
+      path += createCirclePath(pointRadius, pointPosition);
+
+      const nextSegment = segments[i + 1];
+      if (!nextSegment) continue;
+
+      const middleToNextPointY =
+        segment.position.y +
+        segment.size.y +
+        (nextSegment.position.y - (segment.position.y + segment.size.y)) / 2;
+
+      const nextPoint: Vector2 = getPointForSegment(nextSegment, !even);
+
+      path += `M${pointPosition.x} ${
+        pointPosition.y + pointRadius
+      } V ${middleToNextPointY} H ${nextPoint.x} V ${
+        nextPoint.y - pointRadius
+      }`;
+    }
 
     line.setAttribute("d", path);
+
+    function getPointForSegment(segment: Segment, even: boolean): Vector2 {
+      return {
+        x: even
+          ? segment.position.x - padding
+          : segment.position.x + segment.size.x + padding,
+        y: segment.position.y + segment.size.y / 2,
+      };
+    }
   }, [historyContainerRef]);
 
   return (
