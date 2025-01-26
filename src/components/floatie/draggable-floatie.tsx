@@ -2,14 +2,14 @@ import { useDraggable } from "@dnd-kit/core";
 import { motion } from "motion/react";
 
 type DraggableFloatieProps = {
-  id: string;
-  className?: string;
-  children: React.ReactNode;
-  isFloatieVisible: boolean;
-  isDragging: boolean;
-  onMouseOver?: () => void;
-  onMouseOut?: () => void;
-  onClick?: () => void;
+  readonly id: string;
+  readonly className?: string;
+  readonly children: React.ReactNode;
+  readonly isFloatieVisible: boolean;
+  readonly isDragging: boolean;
+  readonly onMouseOver?: () => void;
+  readonly onMouseOut?: () => void;
+  readonly onClick?: () => void;
 };
 
 export default function DraggableFloatie({
