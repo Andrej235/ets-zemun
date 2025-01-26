@@ -66,9 +66,24 @@ export default function History({ children }: HistoryProps) {
             );
 
             console.log(i, segment.dataset.date);
+
+            return () => {
+              animate(
+                segment,
+                {
+                  x: "even" in segment && segment.even ? -200 : 200,
+                  opacity: 0,
+                },
+                {
+                  duration: 0.4,
+                  type: "spring",
+                  bounce: 0.2,
+                }
+              );
+            };
           },
           {
-            amount: 0.35,
+            amount: 0.25,
           }
         )
       );
