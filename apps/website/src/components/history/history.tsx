@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
-import { animate, inView, motion, useScroll } from "motion/react";
+import {
+  animate,
+  inView,
+  motion,
+  useMotionValue,
+  useTransform,
+} from "motion/react";
+import getPathTotalLength from "@utility/svg/get-path-length";
 
 type HistoryProps = {
   readonly children: React.JSX.Element[];
@@ -19,7 +26,6 @@ type Segment = {
 
 export default function History({ children }: HistoryProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
   const processedChildren = useMemo(() => {
     return React.Children.map(children, (child, i) => {
       return React.cloneElement(child, {
@@ -27,6 +33,11 @@ export default function History({ children }: HistoryProps) {
       });
     });
   }, [children]);
+
+  const currentSegment = useMotionValue(-1);
+  useTransform(currentSegment, (_i) => {
+    //? console.log(i);
+  });
 
   useEffect(() => {
     if (!historyContainerRef.current) return;
@@ -40,7 +51,6 @@ export default function History({ children }: HistoryProps) {
     const segments: Segment[] = [];
 
     const scrollAnimationsAbortController = new AbortController();
-
     for (let i = 0; i < container.children.length; i++) {
       const child = container.children[i];
       if (child === svg) continue;
@@ -52,6 +62,8 @@ export default function History({ children }: HistoryProps) {
         inView(
           segment,
           () => {
+            currentSegment.set(Math.max(currentSegment.get(), i));
+
             animate(
               segment,
               {
@@ -65,9 +77,10 @@ export default function History({ children }: HistoryProps) {
               }
             );
 
-            console.log(i, segment.dataset.date);
-
             return () => {
+              const current = currentSegment.get();
+              if (current === i) currentSegment.set(current - 1);
+
               animate(
                 segment,
                 {
@@ -109,15 +122,26 @@ export default function History({ children }: HistoryProps) {
       segments[0].position.y + segments[0].size.y / 2 - pointRadius
     }`;
 
+    let testSum = getPathTotalLength(path);
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
+      let currentPath = "";
 
       const pointPosition: Vector2 = getPointForSegment(segment, even);
-      path += createCirclePath(pointRadius, pointPosition);
+      currentPath += createCirclePath(pointRadius, pointPosition);
+      const currentPathStartMoveCommand = `M ${pointPosition.x} ${
+        segment.position.y + segment.size.y / 2 - pointRadius
+      }`;
 
       const nextSegment = segments[i + 1];
-      if (!nextSegment) continue;
+      if (!nextSegment) {
+        path += currentPath;
+        testSum += getPathTotalLength(
+          currentPathStartMoveCommand + currentPath
+        );
+        break;
+      }
 
       const middleToNextPointY =
         segment.position.y +
@@ -126,13 +150,17 @@ export default function History({ children }: HistoryProps) {
 
       const nextPoint: Vector2 = getPointForSegment(nextSegment, !even);
 
-      path += ` V ${middleToNextPointY} H ${nextPoint.x} V ${
+      currentPath += ` V ${middleToNextPointY} H ${nextPoint.x} V ${
         nextPoint.y - pointRadius
       }`;
+
+      path += currentPath;
+      testSum += getPathTotalLength(currentPathStartMoveCommand + currentPath);
     }
+    console.log("sum:", testSum);
+    console.log("total:", getPathTotalLength(path));
 
     line.setAttribute("d", path);
-    //// line.style.strokeDasharray = `500px ${line.getTotalLength()}`;
 
     function getPointForSegment(segment: Segment, even: boolean): Vector2 {
       return {
@@ -151,7 +179,7 @@ export default function History({ children }: HistoryProps) {
   return (
     <div className="history-container" ref={historyContainerRef}>
       <svg className="history-line" stroke="#fff" fill="none">
-        <motion.path style={{ pathLength: scrollYProgress }} />
+        <motion.path />
       </svg>
 
       {processedChildren}
