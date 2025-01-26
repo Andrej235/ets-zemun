@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
 import { animate, inView, motion, useScroll } from "motion/react";
 
 type HistoryProps = {
-  readonly children: React.ReactNode;
+  readonly children: React.JSX.Element[];
 };
 
 type Vector2 = {
@@ -20,6 +20,13 @@ type Segment = {
 export default function History({ children }: HistoryProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
+  const processedChildren = useMemo(() => {
+    return React.Children.map(children, (child, i) => {
+      return React.cloneElement(child, {
+        even: i % 2 === 0,
+      });
+    });
+  }, [children]);
 
   useEffect(() => {
     if (!historyContainerRef.current) return;
@@ -34,8 +41,10 @@ export default function History({ children }: HistoryProps) {
 
     const scrollAnimationsAbortController = new AbortController();
 
-    for (const child of container.children) {
+    for (let i = 0; i < container.children.length; i++) {
+      const child = container.children[i];
       if (child === svg) continue;
+
       const segment = child as HTMLDivElement;
 
       scrollAnimationsAbortController.signal.addEventListener(
@@ -43,10 +52,20 @@ export default function History({ children }: HistoryProps) {
         inView(
           segment,
           () => {
-            animate(segment, {
-              x: 0,
-              opacity: 1,
-            });
+            animate(
+              segment,
+              {
+                x: 0,
+                opacity: 1,
+              },
+              {
+                duration: 0.4,
+                type: "spring",
+                bounce: 0.2,
+              }
+            );
+
+            console.log(i, segment.dataset.date);
           },
           {
             amount: 0.35,
@@ -120,7 +139,7 @@ export default function History({ children }: HistoryProps) {
         <motion.path style={{ pathLength: scrollYProgress }} />
       </svg>
 
-      {children}
+      {processedChildren}
     </div>
   );
 }
