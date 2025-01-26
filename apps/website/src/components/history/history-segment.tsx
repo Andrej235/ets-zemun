@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 type HistorySegmentProps = {
   readonly date: Date;
   readonly children: React.ReactNode;
@@ -8,9 +10,16 @@ export default function HistorySegment({
   children,
 }: HistorySegmentProps) {
   return (
-    <div data-date={date.toLocaleDateString()} className="history-segment">
+    <motion.div
+      data-date={date.toLocaleDateString()}
+      animate={{
+        opacity: 0,
+        x: 200,
+      }}
+      className="history-segment"
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

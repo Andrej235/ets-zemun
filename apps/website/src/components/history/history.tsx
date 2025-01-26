@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
-import { motion, useScroll } from "motion/react";
+import { animate, inView, motion, useScroll } from "motion/react";
 
 type HistoryProps = {
   readonly children: React.ReactNode;
@@ -32,9 +32,27 @@ export default function History({ children }: HistoryProps) {
     const line = svg.children[0] as SVGPathElement;
     const segments: Segment[] = [];
 
+    const scrollAnimationsAbortController = new AbortController();
+
     for (const child of container.children) {
       if (child === svg) continue;
       const segment = child as HTMLDivElement;
+
+      scrollAnimationsAbortController.signal.addEventListener(
+        "abort",
+        inView(
+          segment,
+          () => {
+            animate(segment, {
+              x: 0,
+              opacity: 1,
+            });
+          },
+          {
+            amount: 0.35,
+          }
+        )
+      );
 
       segments.push({
         position: {
@@ -90,6 +108,10 @@ export default function History({ children }: HistoryProps) {
         y: segment.position.y + segment.size.y / 2,
       };
     }
+
+    return () => {
+      scrollAnimationsAbortController.abort();
+    };
   }, [historyContainerRef]);
 
   return (

@@ -16,6 +16,8 @@
     width: 60vw;
     border: 1px solid $outline;
 
+    opacity: 0;
+
     &:nth-child(even) {
       align-self: flex-end;
     }
