@@ -56,9 +56,6 @@ export default function History({ children }: HistoryProps) {
       if (child === svg) continue;
 
       const segment = child as HTMLDivElement;
-      //? Set up initial animations
-      segment.style.opacity = "0";
-      segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
 
       scrollAnimationsAbortController.signal.addEventListener(
         "abort",
@@ -84,6 +81,10 @@ export default function History({ children }: HistoryProps) {
           y: segment.offsetHeight,
         },
       });
+
+      //? Set up initial animations
+      segment.style.opacity = "0";
+      segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
     }
 
     svg.setAttribute(
