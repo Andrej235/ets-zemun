@@ -43,7 +43,7 @@ export default function History({ children }: HistoryProps) {
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
-      individualSegmentPathLengths.current[currentSegment - 1] ?? 0
+      individualSegmentPathLengths.current[currentSegment] ?? 0
     );
   }, [currentSegment, individualSegmentPathLengths]);
 
@@ -96,46 +96,63 @@ export default function History({ children }: HistoryProps) {
       `0 0 ${container.scrollWidth} ${container.scrollHeight}`
     );
 
-    let path = `M${segments[0].position.x - padding} 0 V ${
-      segments[0].position.y + segments[0].size.y / 2 - pointRadius
-    }`;
+    let path = `M${segments[0].position.x - padding} 0`;
 
     const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
+    let startingPoint: Vector2 = {
+      x: segments[0].position.x - padding,
+      y: 0,
+    };
+
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
       let currentPath = "";
+      const currentPathStartMoveCommand = `M ${startingPoint.x} ${startingPoint.y}`;
 
       const pointPosition: Vector2 = getPointForSegment(segment, even);
-      currentPath += createCirclePath(pointRadius, pointPosition);
-      const currentPathStartMoveCommand = `M ${pointPosition.x} ${
-        segment.position.y + segment.size.y / 2 - pointRadius
-      }`;
 
-      const nextSegment = segments[i + 1];
-      if (!nextSegment) {
+      if (startingPoint.x === pointPosition.x) {
+        currentPath += `V ${pointPosition.y - startingPoint.y - pointRadius}`;
+        currentPath += createCirclePath(pointRadius, pointPosition);
         path += currentPath;
+
         pathLengths.push(
           getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
-        break;
+
+        startingPoint = {
+          x: pointPosition.x,
+          y: pointPosition.y + pointRadius,
+        };
+
+        continue;
       }
 
-      const middleToNextPointY =
-        segment.position.y +
-        segment.size.y +
-        (nextSegment.position.y - (segment.position.y + segment.size.y)) / 2;
+      const previousSegment = segments[i - 1];
+      if (!previousSegment) continue;
 
-      const nextPoint: Vector2 = getPointForSegment(nextSegment, !even);
+      const middleToPreviousPointY =
+        previousSegment.position.y +
+        previousSegment.size.y +
+        (segment.position.y -
+          (previousSegment.position.y + previousSegment.size.y)) /
+          2;
 
-      currentPath += ` V ${middleToNextPointY} H ${nextPoint.x} V ${
-        nextPoint.y - pointRadius
-      }`;
-
+      currentPath += ` V ${middleToPreviousPointY} h ${
+        pointPosition.x - startingPoint.x
+      } V ${pointPosition.y - pointRadius}`;
+      currentPath += createCirclePath(pointRadius, pointPosition);
       path += currentPath;
+
       pathLengths.push(
         getPathTotalLength(currentPathStartMoveCommand + currentPath)
       );
+
+      startingPoint = {
+        x: pointPosition.x,
+        y: pointPosition.y + pointRadius,
+      };
     }
 
     const cumulativePathLengths: number[] = [];
