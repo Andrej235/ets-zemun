@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
-import { animate, inView } from "motion/react";
+import { inView } from "motion/react";
 import getPathTotalLength from "@utility/svg/get-path-length";
 
 type HistoryProps = {
@@ -20,14 +20,6 @@ type Segment = {
 
 export default function History({ children }: HistoryProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
-  const processedChildren = useMemo(() => {
-    return React.Children.map(children, (child, i) => {
-      return React.cloneElement(child, {
-        even: i % 2 === 0,
-      });
-    });
-  }, [children]);
-
   const individualSegmentPathLengths = useRef<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
@@ -64,6 +56,9 @@ export default function History({ children }: HistoryProps) {
       if (child === svg) continue;
 
       const segment = child as HTMLDivElement;
+      //? Set up initial animations
+      segment.style.opacity = "0";
+      segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
 
       scrollAnimationsAbortController.signal.addEventListener(
         "abort",
@@ -74,7 +69,7 @@ export default function History({ children }: HistoryProps) {
             return () => handleLeaveView(segment, i);
           },
           {
-            amount: 0.25,
+            amount: 0.3,
           }
         )
       );
@@ -178,19 +173,8 @@ export default function History({ children }: HistoryProps) {
 
     function handleComeInView(segment: HTMLDivElement, i: number) {
       setCurrentSegment((currentSegment) => Math.max(currentSegment, i));
-
-      animate(
-        segment,
-        {
-          x: 0,
-          opacity: 1,
-        },
-        {
-          duration: 0.4,
-          type: "spring",
-          bounce: 0.2,
-        }
-      );
+      segment.style.opacity = "1";
+      segment.style.transform = "translateX(0)";
     }
 
     function handleLeaveView(segment: HTMLDivElement, i: number) {
@@ -198,18 +182,8 @@ export default function History({ children }: HistoryProps) {
         currentSegment === i ? currentSegment - 1 : currentSegment
       );
 
-      animate(
-        segment,
-        {
-          x: "even" in segment && segment.even ? -200 : 200,
-          opacity: 0,
-        },
-        {
-          duration: 0.4,
-          type: "spring",
-          bounce: 0.2,
-        }
-      );
+      segment.style.opacity = "0";
+      segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
     }
 
     return () => {
@@ -242,7 +216,7 @@ export default function History({ children }: HistoryProps) {
         <path />
       </svg>
 
-      {processedChildren}
+      {children}
     </div>
   );
 }

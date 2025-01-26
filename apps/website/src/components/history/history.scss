@@ -17,6 +17,7 @@
     border: 1px solid $outline;
 
     opacity: 0;
+    transition: 0.5s ease-in-out;
 
     &:nth-child(even) {
       align-self: flex-end;
