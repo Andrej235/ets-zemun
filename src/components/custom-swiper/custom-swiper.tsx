@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -37,8 +38,8 @@ const CustomSwiper = ({ children }: CustomSwiper) => {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="swiper_container"
       >
-        {childrenArray.map((child, index) => (
-          <SwiperSlide key={index}>{child}</SwiperSlide>
+        {childrenArray.map((child) => (
+          <SwiperSlide key={uuidv4()}>{child}</SwiperSlide>
         ))}
 
         <div className="slider-controler">
