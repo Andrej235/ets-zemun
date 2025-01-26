@@ -1,13 +1,7 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
-import {
-  animate,
-  inView,
-  motion,
-  useMotionValue,
-  useTransform,
-} from "motion/react";
+import { animate, inView } from "motion/react";
 import getPathTotalLength from "@utility/svg/get-path-length";
 
 type HistoryProps = {
@@ -34,10 +28,24 @@ export default function History({ children }: HistoryProps) {
     });
   }, [children]);
 
-  const currentSegment = useMotionValue(-1);
-  useTransform(currentSegment, (_i) => {
-    //? console.log(i);
-  });
+  const individualSegmentPathLengths = useRef<number[]>([]);
+  const [totalPathLength, setTotalPathLength] = useState<number>(0);
+  const [currentSegment, setCurrentSegment] = useState(-1);
+
+  useEffect(() => {
+    console.log(
+      `Current segment path length: ${
+        individualSegmentPathLengths.current[currentSegment] ?? 0
+      }`,
+      currentSegment
+    );
+
+    adjustPathLength(
+      historyContainerRef.current!.children[0].children[0] as SVGPathElement,
+      totalPathLength,
+      individualSegmentPathLengths.current[currentSegment - 1] ?? 0
+    );
+  }, [currentSegment, individualSegmentPathLengths]);
 
   useEffect(() => {
     if (!historyContainerRef.current) return;
@@ -62,38 +70,8 @@ export default function History({ children }: HistoryProps) {
         inView(
           segment,
           () => {
-            currentSegment.set(Math.max(currentSegment.get(), i));
-
-            animate(
-              segment,
-              {
-                x: 0,
-                opacity: 1,
-              },
-              {
-                duration: 0.4,
-                type: "spring",
-                bounce: 0.2,
-              }
-            );
-
-            return () => {
-              const current = currentSegment.get();
-              if (current === i) currentSegment.set(current - 1);
-
-              animate(
-                segment,
-                {
-                  x: "even" in segment && segment.even ? -200 : 200,
-                  opacity: 0,
-                },
-                {
-                  duration: 0.4,
-                  type: "spring",
-                  bounce: 0.2,
-                }
-              );
-            };
+            handleComeInView(segment, i);
+            return () => handleLeaveView(segment, i);
           },
           {
             amount: 0.25,
@@ -122,7 +100,7 @@ export default function History({ children }: HistoryProps) {
       segments[0].position.y + segments[0].size.y / 2 - pointRadius
     }`;
 
-    let testSum = getPathTotalLength(path);
+    const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
@@ -137,8 +115,8 @@ export default function History({ children }: HistoryProps) {
       const nextSegment = segments[i + 1];
       if (!nextSegment) {
         path += currentPath;
-        testSum += getPathTotalLength(
-          currentPathStartMoveCommand + currentPath
+        pathLengths.push(
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
         break;
       }
@@ -155,10 +133,20 @@ export default function History({ children }: HistoryProps) {
       }`;
 
       path += currentPath;
-      testSum += getPathTotalLength(currentPathStartMoveCommand + currentPath);
+      pathLengths.push(
+        getPathTotalLength(currentPathStartMoveCommand + currentPath)
+      );
     }
-    console.log("sum:", testSum);
-    console.log("total:", getPathTotalLength(path));
+
+    const cumulativePathLengths: number[] = [];
+    const totalPathLength = pathLengths.reduce((acc, length) => {
+      acc += length;
+      cumulativePathLengths.push(acc);
+      return acc;
+    }, 0);
+
+    individualSegmentPathLengths.current = cumulativePathLengths;
+    setTotalPathLength(totalPathLength);
 
     line.setAttribute("d", path);
 
@@ -171,15 +159,70 @@ export default function History({ children }: HistoryProps) {
       };
     }
 
+    function handleComeInView(segment: HTMLDivElement, i: number) {
+      setCurrentSegment((currentSegment) => Math.max(currentSegment, i));
+
+      animate(
+        segment,
+        {
+          x: 0,
+          opacity: 1,
+        },
+        {
+          duration: 0.4,
+          type: "spring",
+          bounce: 0.2,
+        }
+      );
+    }
+
+    function handleLeaveView(segment: HTMLDivElement, i: number) {
+      setCurrentSegment((currentSegment) =>
+        currentSegment === i ? currentSegment - 1 : currentSegment
+      );
+
+      animate(
+        segment,
+        {
+          x: "even" in segment && segment.even ? -200 : 200,
+          opacity: 0,
+        },
+        {
+          duration: 0.4,
+          type: "spring",
+          bounce: 0.2,
+        }
+      );
+    }
+
     return () => {
       scrollAnimationsAbortController.abort();
     };
   }, [historyContainerRef]);
 
+  function adjustPathLength(
+    element: SVGPathElement,
+    totalLength: number,
+    desiredLength: number
+  ): void {
+    let dashArray: string;
+
+    if (desiredLength <= 0) {
+      dashArray = `0 ${totalLength}`;
+    } else if (desiredLength >= totalLength) {
+      dashArray = `${totalLength} 0`;
+    } else {
+      dashArray = `${desiredLength} ${totalLength - desiredLength}`;
+    }
+
+    element.style.strokeDasharray = dashArray;
+    element.style.strokeDashoffset = "0";
+  }
+
   return (
     <div className="history-container" ref={historyContainerRef}>
       <svg className="history-line" stroke="#fff" fill="none">
-        <motion.path />
+        <path />
       </svg>
 
       {processedChildren}
