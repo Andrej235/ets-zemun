@@ -66,9 +66,23 @@ function RouteError({ error }: RouteErrorProps) {
 function AsyncError({ error }: AsyncErrorProps) {
   return (
     <div className="async-error">
-      <h1>Izgleda da je doslo do greske ({error.status})</h1>
+      <div className="async-error-info">
+        <div className="error-status-text">
+          <div className="error-status">{error.status}</div>
+          {error.statusText}
+        </div>
 
-      <Link to="0">Vrati se na pocetnu stranicu</Link>
+        <p>Nismo mogli da pronadjemo stranu koju ste trazili.</p>
+
+        <div className="error-buttons">
+          <Link to="/">
+            <button className="error-homepage">Pocetna strana</button>
+          </Link>
+          <Link to="/">
+            <button className="error-return">Prosla strana</button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
