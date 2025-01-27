@@ -35,3 +35,31 @@
   }
 }
 
+.history-date-headers-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .history-date-header {
+    position: absolute;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    &:nth-child(odd) {
+      transform: translate(-100%, -50%);
+      margin-left: -2rem;
+    }
+
+    &:nth-child(even) {
+      transform: translate(0%, -50%);
+      margin-left: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+

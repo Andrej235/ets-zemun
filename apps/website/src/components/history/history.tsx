@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
 import { inView } from "motion/react";
@@ -16,13 +16,22 @@ type Vector2 = {
 type Segment = {
   position: Vector2;
   size: Vector2;
+  date: string;
+};
+
+type SegmentHeader = {
+  position: Vector2;
+  dateString: string;
 };
 
 export default function History({ children }: HistoryProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
+  const dateHeadersContainerRef = useRef<HTMLDivElement>(null);
   const individualSegmentPathLengths = useRef<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
+  const [segmentHeaders, setSegmentHeaders] = useState<SegmentHeader[]>([]);
+  const segmentPointRadius = useMemo(() => 25, []);
 
   useEffect(() => {
     console.log(
@@ -40,10 +49,10 @@ export default function History({ children }: HistoryProps) {
   }, [currentSegment, individualSegmentPathLengths]);
 
   useEffect(() => {
-    if (!historyContainerRef.current) return;
+    if (!historyContainerRef.current || !dateHeadersContainerRef.current)
+      return;
 
     const padding = 100;
-    const pointRadius = 25;
 
     const container = historyContainerRef.current;
     const svg = container.children[0] as SVGElement;
@@ -80,6 +89,7 @@ export default function History({ children }: HistoryProps) {
           x: segment.offsetWidth,
           y: segment.offsetHeight,
         },
+        date: segment.dataset.date ?? "",
       });
 
       //? Set up initial animations
@@ -100,6 +110,7 @@ export default function History({ children }: HistoryProps) {
       y: 0,
     };
 
+    const segmentHeaderPositions: SegmentHeader[] = [];
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
@@ -107,10 +118,22 @@ export default function History({ children }: HistoryProps) {
       const currentPathStartMoveCommand = `M ${startingPoint.x} ${startingPoint.y}`;
 
       const pointPosition: Vector2 = getPointForSegment(segment, even);
+      segmentHeaderPositions.push({
+        position: {
+          x:
+            pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
+          y:
+            pointPosition.y -
+            (dateHeadersContainerRef.current.offsetTop - container.offsetTop),
+        },
+        dateString: segment.date,
+      });
 
       if (startingPoint.x === pointPosition.x) {
-        currentPath += `V ${pointPosition.y - startingPoint.y - pointRadius}`;
-        currentPath += createCirclePath(pointRadius, pointPosition);
+        currentPath += `V ${
+          pointPosition.y - startingPoint.y - segmentPointRadius
+        }`;
+        currentPath += createCirclePath(segmentPointRadius, pointPosition);
         path += currentPath;
 
         pathLengths.push(
@@ -119,7 +142,7 @@ export default function History({ children }: HistoryProps) {
 
         startingPoint = {
           x: pointPosition.x,
-          y: pointPosition.y + pointRadius,
+          y: pointPosition.y + segmentPointRadius,
         };
 
         continue;
@@ -137,8 +160,8 @@ export default function History({ children }: HistoryProps) {
 
       currentPath += ` V ${middleToPreviousPointY} h ${
         pointPosition.x - startingPoint.x
-      } V ${pointPosition.y - pointRadius}`;
-      currentPath += createCirclePath(pointRadius, pointPosition);
+      } V ${pointPosition.y - segmentPointRadius}`;
+      currentPath += createCirclePath(segmentPointRadius, pointPosition);
       path += currentPath;
 
       pathLengths.push(
@@ -147,7 +170,7 @@ export default function History({ children }: HistoryProps) {
 
       startingPoint = {
         x: pointPosition.x,
-        y: pointPosition.y + pointRadius,
+        y: pointPosition.y + segmentPointRadius,
       };
     }
 
@@ -160,6 +183,7 @@ export default function History({ children }: HistoryProps) {
 
     individualSegmentPathLengths.current = cumulativePathLengths;
     setTotalPathLength(totalPathLength);
+    setSegmentHeaders(segmentHeaderPositions);
 
     line.setAttribute("d", path);
 
@@ -190,7 +214,7 @@ export default function History({ children }: HistoryProps) {
     return () => {
       scrollAnimationsAbortController.abort();
     };
-  }, [historyContainerRef]);
+  }, [historyContainerRef, dateHeadersContainerRef]);
 
   function adjustPathLength(
     element: SVGPathElement,
@@ -212,26 +236,47 @@ export default function History({ children }: HistoryProps) {
   }
 
   return (
-    <div className="history-container" ref={historyContainerRef}>
-      <svg
-        className="history-line"
-        fill="none"
-        strokeWidth={3}
-        filter="url(#dropShadow)"
-      >
-        <path filter="url(#dropShadow)" />
-        <filter id="dropShadow">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-          <feOffset dx="0" dy="5" />
-          <feMerge>
-            <feMergeNode scale={2} />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </svg>
+    <>
+      <div className="history-container" ref={historyContainerRef}>
+        <svg
+          className="history-line"
+          fill="none"
+          strokeWidth={3}
+          filter="url(#dropShadow)"
+        >
+          <path filter="url(#dropShadow)" />
+          <filter id="dropShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+            <feOffset dx="0" dy="5" />
+            <feMerge>
+              <feMergeNode scale={2} />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </svg>
 
-      {children}
-    </div>
+        {children}
+      </div>
+
+      <div
+        className="history-date-headers-container"
+        ref={dateHeadersContainerRef}
+      >
+        {segmentHeaders.map((header) => (
+          <div
+            key={`history-segment-header-(${header.position.y}, ${header.position.y})`}
+            className="history-date-header"
+            style={{
+              left: `${header.position.x}px`,
+              top: `${header.position.y}px`,
+              height: `${segmentPointRadius * 2}px`,
+            }}
+          >
+            <h1>{header.dateString}</h1>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
