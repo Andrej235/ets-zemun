@@ -10,4 +10,67 @@
   justify-content: center;
   gap: 2rem;
   background-color: $background;
+
+  .route-error {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .route-error-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 20rem;
+
+    .error-status {
+      position: absolute;
+      top: -1rem;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .error-status-text {
+      position: relative;
+      font-size: 8rem;
+      font-weight: 500;
+    }
+
+    .error-buttons {
+      display: flex;
+      gap: 3rem;
+
+      button {
+        width: 18rem;
+        height: 5rem;
+        border-radius: 25rem;
+
+        font-size: 1.6rem;
+        font-weight: 500;
+      }
+
+      .error-homepage:hover {
+        background-color: white;
+        color: black;
+      }
+
+      .error-return {
+        background-color: transparent;
+        color: $accent;
+        border: 1px solid $accent;
+        transition: 0.2s linear;
+
+        &:hover {
+          background-color: #fff;
+          border: none;
+          color: black;
+        }
+      }
+    }
+  }
 }
+
