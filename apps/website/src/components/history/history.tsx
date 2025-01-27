@@ -35,7 +35,7 @@ export default function History({ children }: HistoryProps) {
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
-      individualSegmentPathLengths.current[currentSegment] ?? 0
+      (individualSegmentPathLengths.current[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
     );
   }, [currentSegment, individualSegmentPathLengths]);
 
@@ -213,8 +213,21 @@ export default function History({ children }: HistoryProps) {
 
   return (
     <div className="history-container" ref={historyContainerRef}>
-      <svg className="history-line" stroke="#fff" fill="none">
-        <path />
+      <svg
+        className="history-line"
+        fill="none"
+        strokeWidth={3}
+        filter="url(#dropShadow)"
+      >
+        <path filter="url(#dropShadow)" />
+        <filter id="dropShadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+          <feOffset dx="0" dy="5" />
+          <feMerge>
+            <feMergeNode scale={2} />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </svg>
 
       {children}
