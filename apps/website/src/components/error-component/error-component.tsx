@@ -1,5 +1,6 @@
 import { Link, useAsyncError, useRouteError } from "react-router";
 import "./error-component.scss";
+import AppHeader from "@components/app-header/app-header";
 
 type RouteError = {
   status: number;
@@ -31,6 +32,7 @@ export default function ErrorComponent() {
 
   return (
     <div className="error-component-container">
+      <AppHeader />
       {routeError && <RouteError error={routeError} />}
       {asyncError && <AsyncError error={asyncError} />}
     </div>
@@ -40,12 +42,20 @@ export default function ErrorComponent() {
 function RouteError({ error }: RouteErrorProps) {
   return (
     <div className="route-error">
-      <h1>
-        Izgleda da ste pokusali da pristupite ne postojecem linku (
-        {error.status})
-      </h1>
-
-      <Link to="/">Vrati se na pocetnu stranicu</Link>
+      <div className="route-error-info">
+        <div className="error-status-text">
+          <div className="error-status">{error.status}</div>
+          {error.statusText}
+        </div>
+        <div className="error-buttons">
+          <Link to="/">
+            <button className="error-homepage">Pocetna strana</button>
+          </Link>
+          <Link to="/">
+            <button className="error-return">Prosla strana</button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
