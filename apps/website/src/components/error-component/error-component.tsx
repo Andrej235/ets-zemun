@@ -47,6 +47,9 @@ function RouteError({ error }: RouteErrorProps) {
           <div className="error-status">{error.status}</div>
           {error.statusText}
         </div>
+
+        <p>Nismo mogli da pronadjemo stranu koju ste trazili.</p>
+
         <div className="error-buttons">
           <Link to="/">
             <button className="error-homepage">Pocetna strana</button>

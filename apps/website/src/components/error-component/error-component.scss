@@ -21,21 +21,31 @@
   }
   .route-error-info {
     position: relative;
+
+    width: 60%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 80%;
-    height: 20rem;
+
+    p {
+      margin-top: 1rem;
+      margin-bottom: 4rem;
+      font-size: 2rem;
+      color: #aaa;
+    }
 
     .error-status {
       position: absolute;
       top: -1rem;
       font-size: 2rem;
       font-weight: 400;
+      color: $accent;
     }
 
     .error-status-text {
       position: relative;
+
       font-size: 8rem;
       font-weight: 500;
     }
