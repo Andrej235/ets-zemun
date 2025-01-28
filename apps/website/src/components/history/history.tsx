@@ -238,21 +238,8 @@ export default function History({ children }: HistoryProps) {
   return (
     <>
       <div className="history-container" ref={historyContainerRef}>
-        <svg
-          className="history-line"
-          fill="none"
-          strokeWidth={3}
-          filter="url(#dropShadow)"
-        >
-          <path filter="url(#dropShadow)" />
-          <filter id="dropShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="0" dy="5" />
-            <feMerge>
-              <feMergeNode scale={2} />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+        <svg className="history-line" fill="none" strokeWidth={3}>
+          <path />
         </svg>
 
         {children}
@@ -262,7 +249,7 @@ export default function History({ children }: HistoryProps) {
         className="history-date-headers-container"
         ref={dateHeadersContainerRef}
       >
-        {segmentHeaders.map((header) => (
+        {segmentHeaders.map((header, i) => (
           <div
             key={`history-segment-header-(${header.position.y}, ${header.position.y})`}
             className="history-date-header"
@@ -270,6 +257,7 @@ export default function History({ children }: HistoryProps) {
               left: `${header.position.x}px`,
               top: `${header.position.y}px`,
               height: `${segmentPointRadius * 2}px`,
+              opacity: currentSegment > i ? 1 : 0,
             }}
           >
             <h1>{header.dateString}</h1>

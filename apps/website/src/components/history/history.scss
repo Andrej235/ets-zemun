@@ -31,6 +31,7 @@
   path {
     transition: 0.5s ease-in-out;
     stroke: $outline;
+    fill: none;
     filter: drop-shadow(0px 0px 10px $accent-highlight);
   }
 }
@@ -43,6 +44,8 @@
   .history-date-header {
     position: absolute;
     aspect-ratio: 1;
+    transition: 0.5s ease-in-out;
+    opacity: 0;
 
     display: grid;
     place-items: center;
