@@ -85,11 +85,13 @@ function AsyncError({ error }: AsyncErrorProps) {
           <Link to="/">
             <button className="error-homepage">
               <p>Pocetna strana</p>
+              <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
           <Link to="/">
             <button className="error-return">
               <p>Prosla strana</p>
+              <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
         </div>
