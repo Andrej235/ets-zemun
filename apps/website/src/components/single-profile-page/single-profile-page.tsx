@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router";
 import ProfileSchema from "src/assets/json-data/ts-schemas/profile.schema";
 
 export default function SingleProfilePage() {
-  const loaderData = useLoaderData() as ProfileSchema;
+  const loaderData = useLoaderData<ProfileSchema>();
 
   return (
     <div>
@@ -30,7 +30,7 @@ export default function SingleProfilePage() {
               </td>
 
               {x.perWeek.map((count, i) => (
-                <td key={i}>{count}</td>
+                <td key={`${x.className}-${i}`}>{count}</td>
               ))}
             </tr>
           ))}
@@ -54,7 +54,7 @@ export default function SingleProfilePage() {
               </td>
 
               {x.perWeek.map((count, i) => (
-                <td key={i}>{count}</td>
+                <td key={`${x.className}-${i}`}>{count}</td>
               ))}
             </tr>
           ))}
@@ -63,3 +63,4 @@ export default function SingleProfilePage() {
     </div>
   );
 }
+

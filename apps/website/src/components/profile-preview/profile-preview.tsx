@@ -6,22 +6,44 @@ import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-anima
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import { Link } from "react-router";
 
+type Layout = "image-left" | "image-right" | "vertical";
+
 type ProfileOverviewProps = {
-  profile: ProfileOverviewSchema;
-  layout: "image-left" | "image-right" | "vertical";
+  readonly profile: ProfileOverviewSchema;
+  readonly layout: Layout;
 };
 
 export default function ProfileOverview({
   profile,
   layout,
 }: ProfileOverviewProps) {
+  function getAnimation(layout: Layout) {
+    switch (layout) {
+      case "image-left":
+        return scrollAnimationFlyInLeft;
+      case "image-right":
+        return scrollAnimationFlyInRight;
+      case "vertical":
+      default:
+        return scrollAnimationFlyInTop;
+    }
+  }
+
+  function getInfoClassname(layout: Layout) {
+    switch (layout) {
+      case "image-left":
+        return "info-right";
+      case "image-right":
+        return "info-left";
+      case "vertical":
+      default:
+        return "vertical";
+    }
+  }
+
   return (
     <motion.div
-      {...(layout === "image-left"
-        ? scrollAnimationFlyInLeft
-        : layout === "image-right"
-        ? scrollAnimationFlyInRight
-        : scrollAnimationFlyInTop)}
+      {...getAnimation(layout)}
       className={"profile-overview " + layout}
       viewport={{
         once: true,
@@ -32,17 +54,7 @@ export default function ProfileOverview({
         <img src={profile.imagePath} alt={profile.name} />
       </div>
 
-      <div
-        className={`info ${
-          layout === "image-left"
-            ? "info-right"
-            : layout === "image-right"
-            ? "info-left"
-            : layout === "vertical"
-            ? "vertical"
-            : ""
-        }`}
-      >
+      <div className={`info ${getInfoClassname(layout)}`}>
         <Link to={`/profili/${profile.profileURL[0]}`}>
           <h1 className="title">{profile.name}</h1>
         </Link>

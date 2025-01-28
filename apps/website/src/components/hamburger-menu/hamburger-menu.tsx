@@ -2,9 +2,9 @@ import "./hamburger-menu.scss";
 import HamburgerNavigation from "@components/hamburger-navigation/hamburger-navigation";
 
 type HamburgerMenuProps = {
-  isHamburgerMenuOpen: boolean;
-  onRequestOpen: () => void;
-  onRequestClose: () => void;
+  readonly isHamburgerMenuOpen: boolean;
+  readonly onRequestOpen: () => void;
+  readonly onRequestClose: () => void;
 };
 
 function HamburgerMenu({
@@ -42,3 +42,4 @@ function HamburgerMenu({
 }
 
 export default HamburgerMenu;
+

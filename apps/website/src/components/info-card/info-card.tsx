@@ -3,10 +3,10 @@ import "./info-card.scss";
 import Icon from "@components/icon/icon";
 
 type InfoCardProps = {
-  title: string;
-  text: string;
-  icon: string;
-  link: string;
+  readonly title: string;
+  readonly text: string;
+  readonly icon: string;
+  readonly link: string;
 };
 
 export default function InfoCard({ icon, link, text, title }: InfoCardProps) {
@@ -20,3 +20,4 @@ export default function InfoCard({ icon, link, text, title }: InfoCardProps) {
     </div>
   );
 }
+

@@ -9,7 +9,7 @@ import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
 
 type HamburgerNavigationSearchBarProps = {
-  onRequestCloseHamburgerNavigation: () => void;
+  readonly onRequestCloseHamburgerNavigation: () => void;
 };
 
 export default function HamburgerNavigationSearchBar({
@@ -95,3 +95,4 @@ export default function HamburgerNavigationSearchBar({
     </FocusTrap>
   );
 }
+
