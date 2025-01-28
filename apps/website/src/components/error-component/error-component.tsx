@@ -1,6 +1,7 @@
+import AppHeader from "@components/app-header/app-header";
+import Icon from "@components/icon/icon";
 import { Link, useAsyncError, useRouteError } from "react-router";
 import "./error-component.scss";
-import AppHeader from "@components/app-header/app-header";
 
 type RouteError = {
   status: number;
@@ -52,10 +53,16 @@ function RouteError({ error }: RouteErrorProps) {
 
         <div className="error-buttons">
           <Link to="/">
-            <button className="error-homepage">Pocetna strana</button>
+            <button className="error-homepage">
+              <p>Pocetna strana</p>
+              <Icon name="arrow-right" className="error-icon" />
+            </button>
           </Link>
           <Link to="/">
-            <button className="error-return">Prosla strana</button>
+            <button className="error-return">
+              <p>Prosla strana</p>
+              <Icon name="arrow-right" className="error-icon" />
+            </button>
           </Link>
         </div>
       </div>
@@ -76,10 +83,14 @@ function AsyncError({ error }: AsyncErrorProps) {
 
         <div className="error-buttons">
           <Link to="/">
-            <button className="error-homepage">Pocetna strana</button>
+            <button className="error-homepage">
+              <p>Pocetna strana</p>
+            </button>
           </Link>
           <Link to="/">
-            <button className="error-return">Prosla strana</button>
+            <button className="error-return">
+              <p>Prosla strana</p>
+            </button>
           </Link>
         </div>
       </div>
