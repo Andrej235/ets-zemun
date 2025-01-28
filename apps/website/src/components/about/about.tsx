@@ -32,35 +32,35 @@ export default function About() {
           </motion.div>
 
           <div className="hero-block" ref={heroSpaceRef}>
-            {fluidCanvas}
+            {!fluidCanvas}
 
             <div className="hero-cards">
               <HeroInfoCard
-                icon="brain"
-                title="Naslov"
+                icon="trophy"
+                title="Takmičenja i nagrade"
                 description="Ovo je deskripcija!"
-                url="/"
+                url="/takmicenja"
               />
 
               <HeroInfoCard
-                icon="school"
-                title="Naslov"
+                icon="chalkboard-teacher"
+                title="Nastavnici"
                 description="Ovo je deskripcija!"
-                url="/"
+                url="/nastavnici"
               />
 
               <HeroInfoCard
-                icon="book"
-                title="Naslov"
+                icon="history"
+                title="Istorija"
                 description="Ovo je deskripcija!"
-                url="/"
+                url="/istorija"
               />
 
               <HeroInfoCard
-                icon="scroll"
-                title="Naslov"
+                icon="pencil-alt"
+                title="Upis i prijem"
                 description="Ovo je deskripcija!"
-                url="/"
+                url="/upis"
               />
             </div>
 
