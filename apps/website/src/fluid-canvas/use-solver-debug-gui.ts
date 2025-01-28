@@ -73,35 +73,38 @@ export default function useSolverDebugGui(solver: Solver | null) {
       .onChange(getOnChangeCallback(solver, "color"));
 
     return () => gui.destroy();
+
+    function add(
+      gui: GUI,
+      solver: Solver,
+      key: keyof SolverConfig
+    ): GUIController {
+      return gui
+        .add(wrap(solver.config[key]), "value")
+        .onChange(getOnChangeCallback(solver, key));
+    }
+
+    function getOnChangeCallback<T extends keyof SolverConfig>(
+      solver: Solver,
+      key: T
+    ): (value: SolverConfig[T]) => void {
+      return (value) => (solver.config = { ...solver.config, [key]: value });
+    }
+
+    function wrap<T>(value: T): { value: T };
+    function wrap<T extends object, K extends keyof T>(
+      value: T,
+      key: K
+    ): { value: T[K] };
+
+    function wrap<T, K extends keyof T>(
+      value: T,
+      key?: K
+    ): { value: T[K] | T } {
+      return {
+        value: key ? value[key] : value,
+      };
+    }
   }, [solver]);
-
-  function add(
-    gui: GUI,
-    solver: Solver,
-    key: keyof SolverConfig,
-  ): GUIController {
-    return gui
-      .add(wrap(solver.config[key]), "value")
-      .onChange(getOnChangeCallback(solver, key));
-  }
-
-  function getOnChangeCallback<T extends keyof SolverConfig>(
-    solver: Solver,
-    key: T,
-  ): (value: SolverConfig[T]) => void {
-    return (value) => (solver.config = { ...solver.config, [key]: value });
-  }
-
-  function wrap<T>(value: T): { value: T };
-  function wrap<T extends object, K extends keyof T>(
-    value: T,
-    key: K,
-  ): { value: T[K] };
-
-  function wrap<T, K extends keyof T>(value: T, key?: K): { value: T[K] | T } {
-    return {
-      value: key ? value[key] : value,
-    };
-  }
 }
 

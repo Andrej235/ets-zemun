@@ -17,7 +17,11 @@ function HamburgerMenu({
       <button
         className={"hamburger-menu" + (isHamburgerMenuOpen ? " open" : "")}
         onClick={(e) => {
-          isHamburgerMenuOpen ? onRequestClose?.() : onRequestOpen?.();
+          if (isHamburgerMenuOpen) {
+            onRequestClose?.();
+          } else {
+            onRequestOpen?.();
+          }
 
           e.stopPropagation();
           e.preventDefault();
