@@ -68,4 +68,4 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Run();
+await app.RunAsync();

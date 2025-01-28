@@ -21,7 +21,7 @@ namespace EtsZemun.Controllers
         [HttpGet("redirect")]
         public IActionResult RedirectToMainPage()
         {
-            return Redirect("https://localhost.com/ucenici");
+            return Redirect($"https://localhost.com/ucenici");
         }
 
         [HttpGet("logout")]
@@ -29,7 +29,7 @@ namespace EtsZemun.Controllers
         {
             // Sign the user out of the cookie authentication scheme
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("https://localhost.com");
+            return Redirect($"https://localhost.com");
         }
 
         [HttpGet]

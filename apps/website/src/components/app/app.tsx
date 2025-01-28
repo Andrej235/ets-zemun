@@ -4,12 +4,11 @@ import AppHeader from "@components/app-header/app-header";
 import "./app.scss";
 import LanguageContext, { localLanguages } from "@contexts/language-context";
 import { useEffect, useState } from "react";
-import { Language } from "src/types/utility/language";
 import Scroller from "@components/scroller/scroller";
 
 function App() {
-  const [language, setLanguage] = useState<Language>("sr-cyr");
-  function changeLanguage(newLang: Language) {
+  const [language, setLanguage] = useState<string>("sr-cyr");
+  function changeLanguage(newLang: string) {
     localStorage.setItem("language", newLang);
     setLanguage(newLang);
   }
@@ -19,11 +18,10 @@ function App() {
       ...localLanguages,
       ...(JSON.parse(
         import.meta.env.VITE_AVAILABLE_LIBRE_LANGUAGES
-      ) as Language[]),
+      ) as string[]),
     ];
 
-    let storedLanguage = (localStorage.getItem("language") ??
-      "sr-cyr") as Language;
+    let storedLanguage = localStorage.getItem("language") ?? "sr-cyr";
 
     if (!languages.includes(storedLanguage)) storedLanguage = "sr-cyr";
     setLanguage(storedLanguage);
@@ -56,3 +54,4 @@ function App() {
 }
 
 export default App;
+

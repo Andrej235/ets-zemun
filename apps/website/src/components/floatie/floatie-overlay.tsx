@@ -3,12 +3,12 @@ import { animate, AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef } from "react";
 
 export type FloatieOverlayProps = {
-  children: React.ReactNode;
-  isDragging: boolean;
-  endDrag: () => void;
-  isOverDiscard: boolean;
-  className?: string;
-  dropAnimation?: {
+  readonly children: React.ReactNode;
+  readonly isDragging: boolean;
+  readonly endDrag: () => void;
+  readonly isOverDiscard: boolean;
+  readonly className?: string;
+  readonly dropAnimation?: {
     duration?: number;
     additionalDropAnimations?: (
       animate: typeof import("motion/react").animate,

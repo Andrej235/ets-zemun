@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./news-preview.scss";
+import { Link } from "react-router";
 
 type NewsPreviewProps = {
-  date: Date;
-  title: string;
-  description: string;
-  image: string;
+  readonly date: Date;
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
 };
 
 export default function NewsPreview({
@@ -25,13 +26,16 @@ export default function NewsPreview({
   };
 
   return (
-    <div
+    <Link
+      to="/news/1"
       className="news-article-preview"
       onMouseMove={handleMouseMove}
-      style={{
-        "--mouse-x": `${mousePosition.x}px`,
-        "--mouse-y": `${mousePosition.y}px`,
-      } as React.CSSProperties}
+      style={
+        {
+          "--mouse-x": `${mousePosition.x}px`,
+          "--mouse-y": `${mousePosition.y}px`,
+        } as React.CSSProperties
+      }
     >
       <div className="image-container">
         <img src={image} alt={title} />
@@ -42,6 +46,7 @@ export default function NewsPreview({
         <p className="description">{description}</p>
         <p className="date">{date.toLocaleDateString()}</p>
       </div>
-    </div>
+    </Link>
   );
 }
+

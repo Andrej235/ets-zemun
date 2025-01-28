@@ -3,9 +3,9 @@ import { useDroppable } from "@dnd-kit/core";
 import { motion } from "motion/react";
 
 type FloatieDiscardAreaProps = {
-  id: string;
-  isDragging: boolean;
-  children: React.ReactNode;
+  readonly id: string;
+  readonly isDragging: boolean;
+  readonly children: React.ReactNode;
 };
 
 export default function FloatieDiscardArea({

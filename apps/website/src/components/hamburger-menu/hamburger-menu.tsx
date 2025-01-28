@@ -2,9 +2,9 @@ import "./hamburger-menu.scss";
 import HamburgerNavigation from "@components/hamburger-navigation/hamburger-navigation";
 
 type HamburgerMenuProps = {
-  isHamburgerMenuOpen: boolean;
-  onRequestOpen: () => void;
-  onRequestClose: () => void;
+  readonly isHamburgerMenuOpen: boolean;
+  readonly onRequestOpen: () => void;
+  readonly onRequestClose: () => void;
 };
 
 function HamburgerMenu({
@@ -17,7 +17,11 @@ function HamburgerMenu({
       <button
         className={"hamburger-menu" + (isHamburgerMenuOpen ? " open" : "")}
         onClick={(e) => {
-          isHamburgerMenuOpen ? onRequestClose?.() : onRequestOpen?.();
+          if (isHamburgerMenuOpen) {
+            onRequestClose?.();
+          } else {
+            onRequestOpen?.();
+          }
 
           e.stopPropagation();
           e.preventDefault();
@@ -42,3 +46,4 @@ function HamburgerMenu({
 }
 
 export default HamburgerMenu;
+

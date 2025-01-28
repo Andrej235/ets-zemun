@@ -6,12 +6,12 @@ import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 
 type AutoCompleteSuggestions = {
-  containerRef: React.RefObject<HTMLDivElement>;
-  inputRef: React.RefObject<HTMLInputElement>;
-  buttonRef: React.RefObject<HTMLButtonElement>;
-  isAutoCompleteShown: boolean;
-  searchAutoComplete: FuseResult<SearchMapSchema["entries"][number]>[];
-  onBeforeNavigate: () => void;
+  readonly containerRef: React.RefObject<HTMLDivElement>;
+  readonly inputRef: React.RefObject<HTMLInputElement>;
+  readonly buttonRef: React.RefObject<HTMLButtonElement>;
+  readonly isAutoCompleteShown: boolean;
+  readonly searchAutoComplete: FuseResult<SearchMapSchema["entries"][number]>[];
+  readonly onBeforeNavigate: () => void;
 };
 
 export default function AutoCompleteSuggestions({
@@ -109,9 +109,10 @@ export default function AutoCompleteSuggestions({
         >
           {searchAutoComplete.length > 0 ? (
             searchAutoComplete.slice(0, 15).map((result) => (
-              <button
-                role="link"
-                onClick={() => {
+              <a
+                href={result.item.url}
+                onClick={(e) => {
+                  e.preventDefault();
                   onBeforeNavigate();
                   navigate(result.item.url);
                 }}
@@ -120,7 +121,7 @@ export default function AutoCompleteSuggestions({
               >
                 <p className="title">{result.item.title}</p>
                 <p className="description">{result.item.description}</p>
-              </button>
+              </a>
             ))
           ) : (
             <p className="no-results">Nema rezultata</p>
@@ -130,3 +131,4 @@ export default function AutoCompleteSuggestions({
     </AnimatePresence>
   );
 }
+

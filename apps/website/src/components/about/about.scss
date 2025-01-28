@@ -84,6 +84,12 @@
         .hero-block-element {
           width: 25%;
           overflow: hidden;
+          border: none;
+          border-radius: 0;
+          padding: 0;
+          cursor: default;
+          display: block;
+          outline: none;
 
           .hero-block-icon {
             width: 100%;
@@ -320,9 +326,6 @@
 
         .hero-block-icon {
           max-height: 30% !important;
-        }
-
-        .hero-block-icon {
           height: 50% !important;
           align-items: flex-start !important;
         }
@@ -348,7 +351,7 @@
 
     .overview-image {
       width: 90% !important;
-      
+
       img {
         max-height: 40rem;
         object-fit: cover;
