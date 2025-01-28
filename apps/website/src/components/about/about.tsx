@@ -39,28 +39,28 @@ export default function About() {
                 icon="trophy"
                 title="Takmičenja i nagrade"
                 description="Ovo je deskripcija!"
-                url="/takmicenja"
+                url={"/takmicenja"}
               />
 
               <HeroInfoCard
                 icon="chalkboard-teacher"
                 title="Nastavnici"
                 description="Ovo je deskripcija!"
-                url="/nastavnici"
+                url={"/nastavnici"}
               />
 
               <HeroInfoCard
                 icon="history"
                 title="Istorija"
                 description="Ovo je deskripcija!"
-                url="/istorija"
+                url={"/istorija"}
               />
 
               <HeroInfoCard
                 icon="pencil-alt"
                 title="Upis i prijem"
                 description="Ovo je deskripcija!"
-                url="/upis"
+                url={"/upis"}
               />
             </div>
 
@@ -85,6 +85,7 @@ export default function About() {
                   budućnost.
                 </p>
               </div>
+
               <div className="overview-image">
                 <img
                   src="/images/414bee0337a871bdd69bc69aadaf2c79.png"

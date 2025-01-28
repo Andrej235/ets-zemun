@@ -53,7 +53,6 @@
 
       .hero-cards {
         position: relative;
-        z-index: 2;
         top: 0%;
         transform: translate(0, -50%);
 
@@ -291,44 +290,70 @@
 }
 
 @media screen and (max-width: 768px) {
-  .hero-block {
+  #about-page .hero-space .hero-block {
     justify-content: center;
 
     .hero-cards {
       position: relative;
-      margin-right: auto;
+      margin: 0;
+      width: 100%;
       top: 0%;
       left: 50%;
-      transform: translate(-50%, 0%) !important;
+      transform: translate(-50%, 0%);
 
-      width: 90%;
-      max-width: 60rem !important;
-      height: 130rem;
-      box-shadow: none !important;
+      box-shadow: none;
 
       flex-direction: column;
       align-items: center;
 
+      & > :nth-child(even) {
+        background-color: $background;
+
+        .hero-block-button::before {
+          background-color: $background;
+        }
+      }
+
+      & > :nth-child(odd) {
+        background-color: $secondary-background;
+
+        .hero-block-button::before {
+          background-color: $secondary-background;
+        }
+      }
+
       .hero-block-element {
-        width: 100% !important;
-        height: 25%;
-        padding: 3rem;
+        width: 100%;
+        padding: 5rem;
 
         .hero-block-icon {
-          max-height: 30% !important;
-          height: 50% !important;
-          align-items: flex-start !important;
+          height: fit-content;
         }
 
-        .hero-block-description {
-          opacity: 1 !important;
+        .hero-block-info {
+          .hero-block-header {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+          }
+
+          .hero-block-description {
+            opacity: 1;
+
+            .hero-block-button {
+              margin-top: 2.5rem;
+            }
+          }
         }
       }
     }
 
     .overview {
-      transform: translateY(0) !important;
-      max-width: 60rem !important;
+      transform: translateY(0);
+      border-radius: 2.5rem;
+
+      .overview-info {
+        padding-top: 2rem;
+      }
     }
   }
 }
