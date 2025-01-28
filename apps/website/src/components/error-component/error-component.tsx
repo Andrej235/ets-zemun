@@ -58,7 +58,7 @@ function RouteError({ error }: RouteErrorProps) {
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
-          <Link to="/">
+          <Link to={-1 as unknown as string}>
             <button className="error-return">
               <p>Prosla strana</p>
               <Icon name="arrow-right" className="error-icon" />
@@ -88,7 +88,7 @@ function AsyncError({ error }: AsyncErrorProps) {
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
-          <Link to="/">
+          <Link to={-1 as unknown as string}>
             <button className="error-return">
               <p>Prosla strana</p>
               <Icon name="arrow-right" className="error-icon" />
