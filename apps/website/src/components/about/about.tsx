@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import Icon from "@components/icon/icon";
 import "./about.scss";
 import ProfileOverview from "@components/profile-preview/profile-preview";
@@ -8,11 +8,10 @@ import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
+import HeroInfoCard from "./hero-info-card";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
-
-  const [hoveredElement, setHoveredElement] = useState<number | null>(null);
 
   const fluidCanvas = useMemo(
     () => (
@@ -36,81 +35,33 @@ export default function About() {
             {fluidCanvas}
 
             <div className="hero-cards">
-              <button
-                className={`hero-block-element${
-                  hoveredElement === 1 ? " block-element-hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredElement(1)}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <Icon name="brain" className="hero-block-icon" />
-                <div className="hero-block-info">
-                  <div className="hero-block-header">Naslov</div>
-                  <div className="hero-block-description">
-                    <p>Ovo je deskripcija!</p>
-                    <button className="hero-block-button">
-                      <span>Saznaj vise</span>
-                    </button>
-                  </div>
-                </div>
-              </button>
+              <HeroInfoCard
+                icon="brain"
+                title="Naslov"
+                description="Ovo je deskripcija!"
+                url="/"
+              />
 
-              <button
-                className={`hero-block-element${
-                  hoveredElement === 2 ? " block-element-hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredElement(2)}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <Icon name="school" className="hero-block-icon" />
-                <div className="hero-block-info">
-                  <div className="hero-block-header">Naslov</div>
-                  <div className="hero-block-description">
-                    <p>Ovo je deskripcija!</p>
-                    <button className="hero-block-button">
-                      <span>Saznaj vise</span>
-                    </button>
-                  </div>
-                </div>
-              </button>
+              <HeroInfoCard
+                icon="school"
+                title="Naslov"
+                description="Ovo je deskripcija!"
+                url="/"
+              />
 
-              <button
-                className={`hero-block-element${
-                  hoveredElement === 3 ? " block-element-hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredElement(3)}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <Icon name="book" className="hero-block-icon" />
-                <div className="hero-block-info">
-                  <div className="hero-block-header">Naslov</div>
-                  <div className="hero-block-description">
-                    <p>Ovo je deskripcija!</p>
-                    <button className="hero-block-button">
-                      <span>Saznaj vise</span>
-                    </button>
-                  </div>
-                </div>
-              </button>
+              <HeroInfoCard
+                icon="book"
+                title="Naslov"
+                description="Ovo je deskripcija!"
+                url="/"
+              />
 
-              <button
-                className={`hero-block-element${
-                  hoveredElement === 4 ? " block-element-hovered" : ""
-                }`}
-                onMouseEnter={() => setHoveredElement(4)}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <Icon name="scroll" className="hero-block-icon" />
-                <div className="hero-block-info">
-                  <div className="hero-block-header">Naslov</div>
-                  <div className="hero-block-description">
-                    <p>Ovo je deskripcija!</p>
-                    <button className="hero-block-button">
-                      <span>Saznaj vise</span>
-                    </button>
-                  </div>
-                </div>
-              </button>
+              <HeroInfoCard
+                icon="scroll"
+                title="Naslov"
+                description="Ovo je deskripcija!"
+                url="/"
+              />
             </div>
 
             <div {...scrollAnimationFlyInBottom} className="overview">
