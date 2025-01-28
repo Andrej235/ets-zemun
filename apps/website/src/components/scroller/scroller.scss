@@ -28,6 +28,16 @@
       pointer-events: none;
     }
   }
+
+  svg {
+    fill: none;
+    stroke: $text-primary;
+    stroke-width: 15;
+
+    path {
+      transition: 0.15s;
+    }
+  }
 }
 
 .drag-overlay.scroller-drag-overlay {
@@ -51,4 +61,15 @@
     bottom: 0;
     right: 0;
   }
+
+  svg {
+    fill: none;
+    stroke: $text-primary;
+    stroke-width: 15;
+
+    path {
+      transition: 0.15s;
+    }
+  }
 }
+
