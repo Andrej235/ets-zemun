@@ -14,11 +14,13 @@ import SingleProfilePage from "./components/single-profile-page/single-profile-p
 import SingleProfilePageLoader from "./components/single-profile-page/single-profile-page-loader.ts";
 import ClassPage from "./components/class-page/class-page.tsx";
 import classPageLoader from "./components/class-page/class-page-loader.ts";
+import ErrorComponent from "@components/error-component/error-component.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorComponent />,
     children: [
       {
         path: "/",
@@ -58,5 +60,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
+
