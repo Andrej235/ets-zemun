@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
 import { inView } from "motion/react";
@@ -24,7 +24,7 @@ type SegmentHeader = {
   dateString: string;
 };
 
-export default function History({ children }: HistoryProps) {
+const History = memo<HistoryProps>(({ children }) => {
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const dateHeadersContainerRef = useRef<HTMLDivElement>(null);
   const individualSegmentPathLengths = useRef<number[]>([]);
@@ -34,19 +34,12 @@ export default function History({ children }: HistoryProps) {
   const segmentPointRadius = useMemo(() => 25, []);
 
   useEffect(() => {
-    console.log(
-      `Current segment path length: ${
-        individualSegmentPathLengths.current[currentSegment] ?? 0
-      }`,
-      currentSegment
-    );
-
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
       (individualSegmentPathLengths.current[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
     );
-  }, [currentSegment, individualSegmentPathLengths]);
+  }, [currentSegment, individualSegmentPathLengths, totalPathLength]);
 
   useEffect(() => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
@@ -214,7 +207,7 @@ export default function History({ children }: HistoryProps) {
     return () => {
       scrollAnimationsAbortController.abort();
     };
-  }, [historyContainerRef, dateHeadersContainerRef]);
+  }, [segmentPointRadius, historyContainerRef, dateHeadersContainerRef]);
 
   function adjustPathLength(
     element: SVGPathElement,
@@ -266,5 +259,7 @@ export default function History({ children }: HistoryProps) {
       </div>
     </>
   );
-}
+});
+
+export default History;
 
