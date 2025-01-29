@@ -1,35 +1,20 @@
-import { motion } from "motion/react";
 import "./profile-preview.scss";
-import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
-import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
-import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
-import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import { Link } from "react-router";
-
-type Layout = "image-left" | "image-right" | "vertical";
+import PreviewCard, {
+  PreviewCardLayout,
+} from "@components/preview-card/preview-card";
+import ProfileOverviewSchema from "@assets/json-data/ts-schemas/profile-overview.schema";
 
 type ProfileOverviewProps = {
   readonly profile: ProfileOverviewSchema;
-  readonly layout: Layout;
+  readonly layout: PreviewCardLayout;
 };
 
 export default function ProfileOverview({
   profile,
   layout,
 }: ProfileOverviewProps) {
-  function getAnimation(layout: Layout) {
-    switch (layout) {
-      case "image-left":
-        return scrollAnimationFlyInLeft;
-      case "image-right":
-        return scrollAnimationFlyInRight;
-      case "vertical":
-      default:
-        return scrollAnimationFlyInTop;
-    }
-  }
-
-  function getInfoClassname(layout: Layout) {
+  function getInfoClassname(layout: PreviewCardLayout) {
     switch (layout) {
       case "image-left":
         return "info-right";
@@ -42,18 +27,11 @@ export default function ProfileOverview({
   }
 
   return (
-    <motion.div
-      {...getAnimation(layout)}
-      className={"profile-overview " + layout}
-      viewport={{
-        once: true,
-        amount: 0.3,
-      }}
+    <PreviewCard
+      layout={layout}
+      imagePath={profile.imagePath}
+      imageAlt={profile.name}
     >
-      <div className="image-container">
-        <img src={profile.imagePath} alt={profile.name} />
-      </div>
-
       <div className={`info ${getInfoClassname(layout)}`}>
         <Link to={`/profili/${profile.profileURL[0]}`}>
           <h1 className="title">{profile.name}</h1>
@@ -61,7 +39,7 @@ export default function ProfileOverview({
 
         <p className="description">{profile.description}</p>
       </div>
-    </motion.div>
+    </PreviewCard>
   );
 }
 
