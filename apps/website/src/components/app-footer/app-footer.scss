@@ -1,6 +1,6 @@
 #app-footer {
   margin-top: 5rem;
-  padding: 2rem 25rem;
+  padding: 3rem 25rem;
   background-color: $secondary-background;
 
   .info {
@@ -47,23 +47,32 @@
     }
   }
 
-  .social-media-icons-container {
+  .copyright {
+    margin-top: 3rem;
+    border-top: 1px solid $accent-secondary;
+    padding-top: 2rem;
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between;
 
-    a {
-      display: grid;
-      place-items: center;
+    .social-media-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
 
-      font-size: 3rem;
+      a {
+        place-items: center;
+        display: grid;
+
+        font-size: 2rem;
+      }
     }
-  }
 
-  .footer-title {
-    margin-top: 2rem;
+    .name {
+      display: flex;
+      gap: 10rem;
 
-    text-align: center;
+      font-size: 1.5rem;
+    }
   }
 }
 
