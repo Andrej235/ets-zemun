@@ -21,11 +21,21 @@ export default function ProfilesPageSection() {
       selectedClassIdx
     ].insertAdjacentElement("afterend", placeholder);
 
-    (
-      classesContainerRef.current.children[selectedClassIdx] as HTMLElement
-    ).style.top = placeholder.offsetTop + "px";
+    const selectedClass = classesContainerRef.current.children[
+      selectedClassIdx
+    ] as HTMLElement;
 
-    return () => placeholder.remove();
+    selectedClass.style.top = placeholder.offsetTop + "px";
+    selectedClass.style.height = placeholder.offsetHeight + "px";
+    selectedClass.style.width = placeholder.offsetWidth + "px";
+
+    return () => {
+      selectedClass.style.top = "";
+      selectedClass.style.height = "";
+      selectedClass.style.width = "";
+
+      placeholder.remove();
+    };
   }, [classesContainerRef, selectedClassIdx]);
 
   return (
@@ -179,7 +189,6 @@ function ClassItem({
       layout
       style={{
         position: selectedClassIdx === idx ? "absolute" : "relative",
-        top: selectedClassIdx !== idx ? 0 : undefined,
       }}
       className={selectedClassIdx === idx ? "selected" : undefined}
       animate={{

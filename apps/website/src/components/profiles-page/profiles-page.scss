@@ -308,7 +308,15 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
 
+      .placeholder {
+        width: 100%;
+      }
+
       li {
+        &:not(.selected) {
+          width: 100%;
+        }
+
         button {
           .icon {
             font-size: 3.5rem;
