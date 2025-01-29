@@ -129,6 +129,34 @@ export default function About() {
         </div>
       </section>
 
+      <section className="call-to-action">
+        <h1>Pridružite se našoj obrazovnoj porodici!</h1>
+
+        <p>
+          Otvorite vrata ka budućnosti gde se tradicija kombinuje sa
+          tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i
+          saznajte kako gradimo svet koji inspiriše!
+        </p>
+
+        <div className="call-to-action-buttons">
+          <button className="primary">Prijavite se</button>
+          <button className="secondary">Zakazite sastanak</button>
+        </div>
+
+        <div className="orientation-test">
+          <h2>I dalje niste sigurni?</h2>
+
+          <div>
+            <p>
+              Odratite kratak test da vidite da li bi vam bas nasa skola
+              odgovarala!
+            </p>
+
+            <button className="secondary">Probajte test</button>
+          </div>
+        </div>
+      </section>
+
       <section>
         <NewsAndEventsPreviewContainer />
       </section>
