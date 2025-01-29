@@ -33,10 +33,6 @@ function FourLeafCloverLeaf({ title, count }: LeafProps) {
           setCurrentCount(Math.floor(latest));
         },
       });
-
-      return () => {
-        setCurrentCount(0); //? Reset the count when the element is out of view, this ensures that the count will start from 0 when the element is in view again
-      };
     });
 
     return cleanup;
