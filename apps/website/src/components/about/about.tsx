@@ -8,6 +8,7 @@ import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
 import FourLeafClover from "../four-leaf-clover/four-leaf-clover";
 import ProfileOverviewSchema from "@assets/json-data/ts-schemas/profile-overview.schema";
+import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
@@ -102,6 +103,38 @@ export default function About() {
 
       <section>
         <div className="profiles-overview-container">
+          <SchoolPreviewCard
+            count={100}
+            image="/mock-news-preview/1.png"
+            title="Iskusnih nastavnika"
+            description="Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
+            layout="image-left"
+          />
+
+          <SchoolPreviewCard
+            count={750}
+            image="/mock-news-preview/2.png"
+            title="Učenika u dinamičnoj zajednici"
+            description="Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
+            layout="image-right"
+          />
+
+          <SchoolPreviewCard
+            count={40}
+            title="Moderno opremljenih kabineta"
+            image="/mock-news-preview/3.png"
+            description="Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
+            layout="image-left"
+          />
+
+          <SchoolPreviewCard
+            count={15}
+            title="Osvojenih nagrada"
+            image="/mock-news-preview/1.png"
+            description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
+            layout="image-right"
+          />
+
           {data.profiles.map((profile, i) => (
             <ProfileOverview
               profile={profile as ProfileOverviewSchema}
