@@ -87,157 +87,46 @@ export default function ProfilesPageSection() {
         </h3>
 
         <ul className="classes" ref={classesContainerRef}>
-          <motion.li
-            layout
-            style={{
-              position: selectedClassIdx === 0 ? "absolute" : "relative",
-              top: selectedClassIdx !== 0 ? 0 : undefined,
-            }}
-            animate={{
-              zIndex: selectedClassIdx === 0 ? 10 : 0,
-              transition: {
-                delay: selectedClassIdx === 0 ? 0 : 0.5,
-                duration: 0.5,
-              },
-            }}
-            className={selectedClassIdx === 0 ? "selected" : undefined}
-          >
-            <button onClick={() => handleSelectClass(0)} key={"it-class-0"}>
-              <Icon name="square-binary" />
-              <span className="title">Programiranje</span>
-            </button>
-
-            <div className="description-container">
-              <span className="description">
-                U prve dve godine skolovanja programiranje obuhvata uvod u
-                algoritme i sablone programiranja, kao i osnove jezika C. Nakon
-                naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju
-                konzolne i desktop aplikacije ostatak skolovanja u .NET
-                okruzenju
-              </span>
-            </div>
-          </motion.li>
-
-          <motion.li
-            layout
-            style={{
-              position: selectedClassIdx === 1 ? "absolute" : "relative",
-              top: selectedClassIdx !== 1 ? 0 : undefined,
-            }}
-            className={selectedClassIdx === 1 ? "selected" : undefined}
-            animate={{
-              zIndex: selectedClassIdx === 1 ? 10 : 0,
-              transition: {
-                delay: selectedClassIdx === 1 ? 0 : 0.5,
-                duration: 0.5,
-              },
-            }}
-          >
-            <button onClick={() => handleSelectClass(1)} key={"it-class-$1"}>
-              <Icon name="code" />
-              <span className="title">Web programiranje</span>
-            </button>
-
-            <div className="description-container">
-              <span className="description">
-                Web dizajn i web programiranje zajedno obuhvataju razne
-                tehnologije i alate potrebne za kreiranje web stranica. Ovde
-                djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i
-                biblioteku jquery
-              </span>
-            </div>
-          </motion.li>
-
-          <motion.li
-            layout
-            style={{
-              position: selectedClassIdx === 2 ? "absolute" : "relative",
-              top: selectedClassIdx !== 2 ? 0 : undefined,
-            }}
-            className={selectedClassIdx === 2 ? "selected" : undefined}
-            animate={{
-              zIndex: selectedClassIdx === 2 ? 10 : 0,
-              transition: {
-                delay: selectedClassIdx === 2 ? 0 : 0.5,
-                duration: 0.5,
-              },
-            }}
-          >
-            <button onClick={() => handleSelectClass(2)} key={"it-class-2"}>
-              <Icon name="database" />
-              <span className="title">Baze podataka</span>
-            </button>
-
-            <div className="description-container">
-              <span className="description">
-                Baze podataka pruzaju ucenicima mogucnost dizajniranja,
-                kreiranja i upravljanja realisticnim bazama podataka koristeci
-                SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da
-                se prate prilikom rada sa bazama podataka radi najboljih
-                rezultata
-              </span>
-            </div>
-          </motion.li>
-
-          <motion.li
-            layout
-            style={{
-              position: selectedClassIdx === 3 ? "absolute" : "relative",
-              top: selectedClassIdx !== 3 ? 0 : undefined,
-            }}
-            className={selectedClassIdx === 3 ? "selected" : undefined}
-            animate={{
-              zIndex: selectedClassIdx === 3 ? 10 : 0,
-              transition: {
-                delay: selectedClassIdx === 3 ? 0 : 0.5,
-                duration: 0.5,
-              },
-            }}
-          >
-            <button onClick={() => handleSelectClass(3)} key={"it-class-3"}>
-              <Icon name="shield-halved" />
-              <span className="title">ZIS</span>
-            </button>
-
-            <div className="description-container">
-              <span className="description">
-                Zastita informacionih tehnologija pokazuje kako zastiti sebe,
-                ali i svoje projekte od napada i neovlašćenog pristupa. Pored
-                teorije, djaci imaju priliku da se upoznaju za alatima kao sto
-                je CryptTool i Linux operativnim sistemom
-              </span>
-            </div>
-          </motion.li>
-
-          <motion.li
-            layout
-            style={{
-              position: selectedClassIdx === 4 ? "absolute" : "relative",
-              top: selectedClassIdx !== 4 ? 0 : undefined,
-            }}
-            className={selectedClassIdx === 4 ? "selected" : undefined}
-            animate={{
-              zIndex: selectedClassIdx === 4 ? 10 : 0,
-              transition: {
-                delay: selectedClassIdx === 4 ? 0 : 0.5,
-                duration: 0.5,
-              },
-            }}
-          >
-            <button onClick={() => handleSelectClass(4)} key={"it-class-4"}>
-              <Icon name="cubes-stacked" />
-              <span className="title">PIT</span>
-            </button>
-
-            <div className="description-container">
-              <span className="description">
-                Primenjene informacione tehnologije kombinuju svo znanje steceno
-                u ostalim strucnim predmetima i da ga iskoriste za kreiranje
-                full stack desktop i web aplikacija kroz izradu zajednickih
-                projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL
-              </span>
-            </div>
-          </motion.li>
+          <ClassItem
+            idx={0}
+            selectedClassIdx={selectedClassIdx}
+            handleSelectClass={handleSelectClass}
+            icon="square-binary"
+            title="Programiranje"
+            description="U prve dve godine skolovanja programiranje obuhvata uvod u algoritme i sablone programiranja, kao i osnove jezika C. Nakon naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju konzolne i desktop aplikacije ostatak skolovanja u .NET okruzenju"
+          />
+          <ClassItem
+            idx={1}
+            selectedClassIdx={selectedClassIdx}
+            handleSelectClass={handleSelectClass}
+            icon="code"
+            title="Web programiranje"
+            description="Web dizajn i web programiranje zajedno obuhvataju razne tehnologije i alate potrebne za kreiranje web stranica. Ovde djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i biblioteku jquery"
+          />
+          <ClassItem
+            idx={2}
+            selectedClassIdx={selectedClassIdx}
+            handleSelectClass={handleSelectClass}
+            icon="database"
+            title="Baze podataka"
+            description="Baze podataka pruzaju ucenicima mogucnost dizajniranja, kreiranja i upravljanja realisticnim bazama podataka koristeci SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da se prate prilikom rada sa bazama podataka radi najboljih rezultata"
+          />
+          <ClassItem
+            idx={3}
+            selectedClassIdx={selectedClassIdx}
+            handleSelectClass={handleSelectClass}
+            icon="shield-halved"
+            title="ZIS"
+            description="Zastita informacionih tehnologija pokazuje kako zastiti sebe, ali i svoje projekte od napada i neovlašćenog pristupa. Pored teorije, djaci imaju priliku da se upoznaju za alatima kao sto je CryptTool i Linux operativnim sistemom"
+          />
+          <ClassItem
+            idx={4}
+            selectedClassIdx={selectedClassIdx}
+            handleSelectClass={handleSelectClass}
+            icon="cubes-stacked"
+            title="PIT"
+            description="Primenjene informacione tehnologije kombinuju svo znanje steceno u ostalim strucnim predmetima i da ga iskoriste za kreiranje full stack desktop i web aplikacija kroz izradu zajednickih projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL"
+          />
         </ul>
 
         <h3>
@@ -254,6 +143,51 @@ export default function ProfilesPageSection() {
         </Link>
       </div>
     </div>
+  );
+}
+
+type ClassItemProps = {
+  readonly idx: number;
+  readonly selectedClassIdx: number | null;
+  readonly handleSelectClass: (idx: number) => void;
+  readonly icon: string;
+  readonly title: string;
+  readonly description: string;
+};
+
+function ClassItem({
+  idx,
+  selectedClassIdx,
+  handleSelectClass,
+  icon,
+  title,
+  description,
+}: ClassItemProps) {
+  return (
+    <motion.li
+      layout
+      style={{
+        position: selectedClassIdx === idx ? "absolute" : "relative",
+        top: selectedClassIdx !== idx ? 0 : undefined,
+      }}
+      className={selectedClassIdx === idx ? "selected" : undefined}
+      animate={{
+        zIndex: selectedClassIdx === idx ? 10 : 0,
+        transition: {
+          delay: selectedClassIdx === idx ? 0 : 0.5,
+          duration: 0.5,
+        },
+      }}
+    >
+      <button onClick={() => handleSelectClass(idx)} key={`it-class-${idx}`}>
+        <Icon name={icon} />
+        <span className="title">{title}</span>
+      </button>
+
+      <div className="description-container">
+        <span className="description">{description}</span>
+      </div>
+    </motion.li>
   );
 }
 
