@@ -93,39 +93,48 @@ export default function ProfilesPageSection() {
             handleSelectClass={handleSelectClass}
             icon="square-binary"
             title="Programiranje"
-            description="U prve dve godine skolovanja programiranje obuhvata uvod u algoritme i sablone programiranja, kao i osnove jezika C. Nakon naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju konzolne i desktop aplikacije ostatak skolovanja u .NET okruzenju"
+            longDescription="U prve dve godine skolovanja programiranje obuhvata uvod u algoritme i sablone programiranja, kao i osnove jezika C. Nakon naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju konzolne i desktop aplikacije ostatak skolovanja u .NET okruzenju"
+            shortDescription="Razvijanje konzolnih i desktop aplikacija u jeziku C# i .NET okruzenju"
           />
+
           <ClassItem
             idx={1}
             selectedClassIdx={selectedClassIdx}
             handleSelectClass={handleSelectClass}
             icon="code"
             title="Web programiranje"
-            description="Web dizajn i web programiranje zajedno obuhvataju razne tehnologije i alate potrebne za kreiranje web stranica. Ovde djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i biblioteku jquery"
+            longDescription="Web dizajn i web programiranje zajedno obuhvataju razne tehnologije i alate potrebne za kreiranje web stranica. Ovde djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i biblioteku jquery"
+            shortDescription="Kreiranje statičkih i dinamičkih web stranica koristeći HTML, CSS, JavaScript i jQuery"
           />
+
           <ClassItem
             idx={2}
             selectedClassIdx={selectedClassIdx}
             handleSelectClass={handleSelectClass}
             icon="database"
             title="Baze podataka"
-            description="Baze podataka pruzaju ucenicima mogucnost dizajniranja, kreiranja i upravljanja realisticnim bazama podataka koristeci SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da se prate prilikom rada sa bazama podataka radi najboljih rezultata"
+            longDescription="Baze podataka pruzaju ucenicima mogucnost dizajniranja, kreiranja i upravljanja realisticnim bazama podataka koristeci SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da se prate prilikom rada sa bazama podataka radi najboljih rezultata"
+            shortDescription="Dizajn i implementacija baza podataka koristeći SQL"
           />
+
           <ClassItem
             idx={3}
             selectedClassIdx={selectedClassIdx}
             handleSelectClass={handleSelectClass}
             icon="shield-halved"
             title="ZIS"
-            description="Zastita informacionih tehnologija pokazuje kako zastiti sebe, ali i svoje projekte od napada i neovlašćenog pristupa. Pored teorije, djaci imaju priliku da se upoznaju za alatima kao sto je CryptTool i Linux operativnim sistemom"
+            longDescription="Zastita informacionih tehnologija pokazuje kako zastiti sebe, ali i svoje projekte od napada i neovlašćenog pristupa. Pored teorije, djaci imaju priliku da se upoznaju za alatima kao sto je CryptTool i Linux operativnim sistemom"
+            shortDescription="Zastita informacionih tehnologija i upoznavanje sa alatima kao sto su CryptTool i Linux"
           />
+
           <ClassItem
             idx={4}
             selectedClassIdx={selectedClassIdx}
             handleSelectClass={handleSelectClass}
             icon="cubes-stacked"
             title="PIT"
-            description="Primenjene informacione tehnologije kombinuju svo znanje steceno u ostalim strucnim predmetima i da ga iskoriste za kreiranje full stack desktop i web aplikacija kroz izradu zajednickih projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL"
+            longDescription="Primenjene informacione tehnologije kombinuju svo znanje steceno u ostalim strucnim predmetima i da ga iskoriste za kreiranje full stack desktop i web aplikacija kroz izradu zajednickih projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL"
+            shortDescription="Kreiranje full stack desktop i web aplikacija koristeci C# ASP.NET Web Forme, C# WPF i SQL"
           />
         </ul>
 
@@ -152,7 +161,8 @@ type ClassItemProps = {
   readonly handleSelectClass: (idx: number) => void;
   readonly icon: string;
   readonly title: string;
-  readonly description: string;
+  readonly longDescription: string;
+  readonly shortDescription: string;
 };
 
 function ClassItem({
@@ -161,7 +171,8 @@ function ClassItem({
   handleSelectClass,
   icon,
   title,
-  description,
+  longDescription,
+  shortDescription,
 }: ClassItemProps) {
   return (
     <motion.li
@@ -185,7 +196,8 @@ function ClassItem({
       </button>
 
       <div className="description-container">
-        <span className="description">{description}</span>
+        <span className="description long">{longDescription}</span>
+        <span className="description short">{shortDescription}</span>
       </div>
     </motion.li>
   );
