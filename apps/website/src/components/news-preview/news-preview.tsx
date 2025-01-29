@@ -1,4 +1,4 @@
-import { PointerEvent, useEffect, useRef } from "react";
+import { PointerEvent } from "react";
 import { Link } from "react-router";
 import "./news-preview.scss";
 
@@ -15,25 +15,13 @@ export default function NewsPreview({
   description,
   image,
 }: NewsPreviewProps) {
-  const containerRef = useRef<HTMLAnchorElement>(null);
-  const containerPosition = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    containerPosition.current = {
-      x: rect.left,
-      y: rect.top,
-    };
-  }, [containerRef]);
-
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
 
     const target = e.currentTarget as HTMLAnchorElement;
-    const x = e.clientX - containerPosition.current.x;
-    const y = e.clientY - containerPosition.current.y;
+    const { top, left } = target.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
 
     target.style.setProperty("--mouse-x", `${x}px`);
     target.style.setProperty("--mouse-y", `${y}px`);
@@ -44,7 +32,6 @@ export default function NewsPreview({
       to="/news/1"
       className="news-article-preview"
       onPointerMove={handleMouseMove}
-      ref={containerRef}
     >
       <div className="image-container">
         <img src={image} alt={title} />
