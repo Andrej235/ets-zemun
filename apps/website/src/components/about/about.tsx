@@ -1,13 +1,9 @@
 import { useMemo, useRef } from "react";
 import "./about.scss";
-import ProfileOverview from "@components/profile-preview/profile-preview";
 import { motion } from "motion/react";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
-import data from "@data/profiles.json";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
-import FourLeafClover from "../four-leaf-clover/four-leaf-clover";
-import ProfileOverviewSchema from "@assets/json-data/ts-schemas/profile-overview.schema";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 
 export default function About() {
@@ -98,10 +94,6 @@ export default function About() {
       </section>
 
       <section>
-        <FourLeafClover />
-      </section>
-
-      <section>
         <div className="profiles-overview-container">
           <SchoolPreviewCard
             count={100}
@@ -134,14 +126,6 @@ export default function About() {
             description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
             layout="image-right"
           />
-
-          {data.profiles.map((profile, i) => (
-            <ProfileOverview
-              profile={profile as ProfileOverviewSchema}
-              layout={i % 2 === 0 ? "image-left" : "image-right"}
-              key={profile.name}
-            />
-          ))}
         </div>
       </section>
 
