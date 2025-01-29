@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker .NET Core Attach",
+      "type": "docker",
+      "containerName": "ets-zemun-asp-backend-1",
+      "request": "attach",
+      "netCore": {
+        "appProject": "${workspaceFolder}/apps/asp-backend/EtsZemun.csproj"
+      },
+      "sourceFileMap": {
+        "/src": "${workspaceFolder}"
+      }
+    }
+  ]
+}

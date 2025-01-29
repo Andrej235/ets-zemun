@@ -1,0 +1,109 @@
+.news-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .news-section-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 4rem;
+    }
+  }
+
+  .options-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 5rem;
+
+    .option-button {
+      position: relative;
+      padding: 1rem 2rem;
+      background: none;
+
+      font-size: 2rem;
+
+      .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.2rem;
+        background-color: $text-primary;
+      }
+    }
+  }
+
+  .news-and-events-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    max-height: fit-content;
+
+    .news-events-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 5rem;
+      }
+    }
+
+    .news-events-button {
+      position: relative;
+      background-color: transparent;
+      padding: 0;
+      height: 5rem;
+      overflow: hidden;
+      border-radius: 0;
+
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      color: $text-primary;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0.25rem;
+
+        width: 100%;
+        height: 1px;
+        background-color: $text-primary;
+        opacity: 0.5;
+
+        transition: 200ms;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0.75rem;
+
+        width: 100%;
+        height: 1px;
+        background-color: $text-primary;
+        opacity: 0.5;
+
+        transition: 200ms;
+        transform: translateX(-101%);
+      }
+
+      &:hover::after {
+        transform: translateX(101%);
+      }
+
+      &:hover::before {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
