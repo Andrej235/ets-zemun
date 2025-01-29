@@ -1,0 +1,23 @@
+#app-footer {
+  margin-top: 15rem;
+
+  .social-media-icons-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    a {
+      display: grid;
+      place-items: center;
+
+      font-size: 3rem;
+    }
+  }
+
+  .footer-title {
+    margin-top: 2rem;
+
+    text-align: center;
+  }
+}
+
