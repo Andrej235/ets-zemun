@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
 import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
-import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
 import FourLeafClover from "../../four-leaf-clover/four-leaf-clover";
@@ -65,7 +64,7 @@ export default function About() {
               />
             </div>
 
-            <div {...scrollAnimationFlyInBottom} className="overview">
+            <div className="overview">
               <div className="overview-info">
                 <h1>Misija i Vizija</h1>
                 <p>
