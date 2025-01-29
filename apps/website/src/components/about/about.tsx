@@ -8,7 +8,7 @@ import data from "@data/profiles.json";
 import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
-import FourLeafClover from "../../four-leaf-clover/four-leaf-clover";
+import FourLeafClover from "../four-leaf-clover/four-leaf-clover";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
