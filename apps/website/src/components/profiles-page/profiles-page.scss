@@ -1,8 +1,349 @@
 .profiles-page {
   overflow-x: hidden;
-  padding: 0 20vw;
+  padding: 0 10vw;
 
   display: flex;
   flex-direction: column;
   gap: 25rem;
+
+  .profiles-page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .header {
+      display: flex;
+
+      .image-container {
+        flex: 6;
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            #00000000 0%,
+            #00000055 50%,
+            $background 95%
+          );
+        }
+      }
+
+      .info {
+        flex: 4;
+        padding: 5rem 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        h1 {
+          font-size: 4rem;
+          color: $accent-secondary;
+        }
+
+        p {
+          font-size: 2.2rem;
+        }
+      }
+    }
+
+    .body {
+      h3 {
+        font-size: 1.7rem;
+        color: $text-primary;
+        font-weight: 400;
+        margin-bottom: 2rem;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
+
+      ul.skills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-left: 0;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+
+        li {
+          padding: 2rem;
+          border-radius: 1rem;
+          box-shadow: 0 0 10px 0.3px $secondary-background;
+
+          font-size: 1.6rem;
+
+          &::marker {
+            content: "";
+          }
+        }
+      }
+
+      ul.classes {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 0;
+        position: relative;
+        gap: 3rem;
+        margin-bottom: 4rem;
+
+        li,
+        .placeholder {
+          min-width: 25rem;
+          width: 15%;
+          aspect-ratio: 1;
+        }
+
+        li {
+          font-size: 1.6rem;
+
+          &::marker {
+            content: "";
+          }
+
+          button {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            box-shadow: 0 0 15px 0.5px $secondary-background;
+            background-color: $background;
+            border-radius: 2rem;
+            transition: 250ms;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+
+            overflow: hidden;
+
+            .icon {
+              font-size: 4rem;
+            }
+
+            .title {
+              max-width: 100%;
+              width: 100%;
+
+              font-size: 2rem;
+              font-weight: bold;
+              text-align: center;
+            }
+          }
+
+          &.selected button {
+            border: 2px solid $accent-secondary-highlight;
+            background-color: $secondary-background;
+            box-shadow: 0 0 10px 0.5px $accent-secondary-highlight;
+
+            &:focus-visible {
+              border: 2px solid $accent;
+              box-shadow: 0 0 10px 0.5px $accent;
+            }
+          }
+
+          & button:hover,
+          & button:focus-visible {
+            background-color: $secondary-background;
+            box-shadow: 0 0 10px 0.5px $accent-secondary-highlight;
+          }
+
+          .description-container {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 2rem;
+            bottom: 0;
+            right: 2rem;
+            clip-path: polygon(0 0, 500% 0, 500% 100%, 0% 100%);
+            pointer-events: none;
+
+            .description {
+              position: absolute;
+              right: 0;
+              top: 0;
+              z-index: -1;
+              height: 100%;
+              width: 50rem;
+              max-width: 100vw;
+              padding: 2rem 2rem 2rem 5rem;
+              background-color: $secondary-background;
+              border-radius: 0 2rem 2rem 0;
+              border: 2px solid $accent-secondary-highlight;
+              transition: 250ms;
+              pointer-events: all;
+
+              &.long {
+                display: block;
+              }
+
+              &.short {
+                display: none;
+              }
+            }
+          }
+
+          &.selected {
+            .description-container {
+              z-index: unset;
+
+              .description {
+                transform: translate(100%, 0);
+              }
+            }
+          }
+        }
+      }
+
+      .learn-more {
+        @include button;
+        width: fit-content;
+        padding: 1.5rem 3rem;
+        font-size: 2rem;
+        margin-bottom: 4rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024.98px) {
+    padding: 0;
+
+    .profiles-page-section {
+      .header {
+        flex-direction: column;
+
+        .image-container {
+          flex: unset;
+
+          &::after {
+            background: linear-gradient(
+              180deg,
+              #00000000 0%,
+              #00000055 50%,
+              $background 95%
+            );
+          }
+        }
+
+        .info {
+          flex: unset;
+          padding: 0 2rem;
+          margin-top: 1rem;
+
+          h1 {
+            font-size: 3rem;
+          }
+
+          p {
+            font-size: 1.6rem;
+          }
+        }
+      }
+
+      .body {
+        padding: 0 2rem;
+
+        h2,
+        h3,
+        p {
+          font-size: 1.6rem;
+        }
+
+        ul.skills {
+          grid-template-columns: 1fr;
+        }
+
+        ul.classes {
+          max-width: 100vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 625px) {
+    .profiles-page-section .body ul.classes {
+      li,
+      .placeholder {
+        min-width: 20rem;
+      }
+
+      li {
+        button {
+          .icon {
+            font-size: 3.5rem;
+          }
+
+          .title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-align: center;
+          }
+        }
+        .description-container {
+          .description {
+            width: 40rem;
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .profiles-page-section .body ul.classes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .placeholder {
+        width: 100%;
+      }
+
+      li {
+        &:not(.selected) {
+          width: 100%;
+        }
+
+        button {
+          .icon {
+            font-size: 3.5rem;
+          }
+
+          .title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-align: center;
+          }
+        }
+        .description-container {
+          .description {
+            width: 27rem;
+            font-size: 1.6rem;
+
+            &.long {
+              display: none;
+            }
+
+            &.short {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
 }
+
