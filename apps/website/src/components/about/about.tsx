@@ -9,6 +9,7 @@ import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overv
 import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
+import FourLeafClover from "../../four-leaf-clover/four-leaf-clover";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
@@ -95,6 +96,10 @@ export default function About() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section>
+        <FourLeafClover />
       </section>
 
       <section>
