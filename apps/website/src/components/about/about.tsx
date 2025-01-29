@@ -4,10 +4,10 @@ import ProfileOverview from "@components/profile-preview/profile-preview";
 import { motion } from "motion/react";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
 import data from "@data/profiles.json";
-import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
 import FourLeafClover from "../four-leaf-clover/four-leaf-clover";
+import ProfileOverviewSchema from "@assets/json-data/ts-schemas/profile-overview.schema";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);

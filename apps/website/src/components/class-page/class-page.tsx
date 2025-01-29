@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router";
 import "./class-page.scss";
-import ClassSchema from "src/assets/json-data/ts-schemas/class.schema";
+import ClassSchema from "@assets/json-data/ts-schemas/class.schema";
 
 export default function ClassPage() {
   const classData = useLoaderData<ClassSchema>();

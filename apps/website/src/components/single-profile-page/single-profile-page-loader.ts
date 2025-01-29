@@ -1,11 +1,11 @@
 import { redirect } from "react-router";
-import { LoaderArgs } from "src/types/utility/react-router-loader-args";
 import profilePreviewData from "@data/profiles.json";
 import itData from "@data/profiles/elektrotehničar-informacionih-tehnologija.json";
 import armData from "@data/profiles/administrator-računarskih-mreža.json";
 import erData from "@data/profiles/elektrotehničar-računara.json";
 import euData from "@data/profiles/elektrotehničar-automatike.json";
 import klimeData from "@data/profiles/elektromehaničar-za-rashladne-i-termičke-uredjaje.json";
+import { LoaderArgs } from "src/types/utility/react-router-loader-args";
 
 export default function SingleProfilePageLoader({
   params: { profileName },
@@ -13,7 +13,7 @@ export default function SingleProfilePageLoader({
   if (!profileName) return redirect("/profili");
 
   const preview = profilePreviewData.profiles.find((x) =>
-    x.profileURL.includes(profileName),
+    x.profileURL.includes(profileName)
   );
 
   if (!preview) return redirect("/profili");
@@ -33,3 +33,4 @@ export default function SingleProfilePageLoader({
       return null;
   }
 }
+
