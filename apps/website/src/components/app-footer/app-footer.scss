@@ -1,5 +1,51 @@
 #app-footer {
-  margin-top: 15rem;
+  margin-top: 5rem;
+  padding: 2rem 25rem;
+  background-color: $secondary-background;
+
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    .about h1 {
+      color: $accent-secondary;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-rows: max-content 1fr;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 5rem;
+
+      h1 {
+        grid-row: 1;
+        grid-column: 1;
+        grid-column-end: 3;
+      }
+
+      p {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        i {
+          font-size: 1.5rem;
+          width: 2em;
+          text-align: center;
+        }
+      }
+    }
+  }
 
   .social-media-icons-container {
     display: flex;
