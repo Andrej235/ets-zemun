@@ -1,6 +1,6 @@
 #app-footer {
   margin-top: 5rem;
-  padding: 3rem 25rem;
+  padding: 3rem min(25rem, 10vw);
   background-color: $secondary-background;
 
   .info {
@@ -42,6 +42,30 @@
           font-size: 1.5rem;
           width: 2em;
           text-align: center;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: max-content max-content;
+    }
+
+    @media screen and (max-width: 1075px) {
+      display: block;
+
+      .about {
+        display: none;
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, max-content);
+
+        h1 {
+          grid-row: 1;
+          grid-column: 1;
+          grid-column-end: 2;
         }
       }
     }

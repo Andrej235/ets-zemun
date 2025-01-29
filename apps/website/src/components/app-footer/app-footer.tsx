@@ -77,7 +77,7 @@ export default function AppFooter() {
           </a>
 
           <a href={"https://www.x.com"}>
-            <Icon name="x-twitter" />
+            <Icon name="twitter" />
           </a>
 
           <a href={"https://www.instagram.com"}>
