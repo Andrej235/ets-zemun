@@ -11,7 +11,7 @@ const settingsJson = await fs
 
 settingsJson["json.schemas"] = currentMap.map((x) => ({
   fileMatch: x.fileMatch,
-  url: "/" + x.url,
+  url: "/apps/website/" + x.url,
 }));
 
 await fs.writeFile(

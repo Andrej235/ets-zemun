@@ -1,26 +1,26 @@
 [
   {
     "fileMatch": ["profiles.json"],
-    "url": "apps/website/src/assets/json-data/schemas/profiles-overview-collection.schema.json",
+    "url": "src/assets/json-data/schemas/profiles-overview-collection.schema.json",
     "omitFromTranslation": ["imagePath", "profileURL", "abbreviation"]
   },
   {
     "fileMatch": ["profiles/*.json"],
-    "url": "apps/website/src/assets/json-data/schemas/profile.schema.json",
+    "url": "src/assets/json-data/schemas/profile.schema.json",
     "omitFromTranslation": ["imagePath"]
   },
   {
     "fileMatch": ["classes.json"],
-    "url": "apps/website/src/assets/json-data/schemas/class-definitions.schema.json"
+    "url": "src/assets/json-data/schemas/class-definitions.schema.json"
   },
   {
     "fileMatch": ["search-map.json"],
-    "url": "apps/website/src/assets/json-data/schemas/search-map.schema.json",
+    "url": "src/assets/json-data/schemas/search-map.schema.json",
     "omitFromTranslation": ["url", "matchFor"]
   },
   {
     "fileMatch": ["documents.json"],
-    "url": "apps/website/src/assets/json-data/schemas/document-group-collection.schema.json",
+    "url": "src/assets/json-data/schemas/document-group-collection.schema.json",
     "omitFromTranslation": ["url", "iconName", "accentColor"]
   }
 ]
