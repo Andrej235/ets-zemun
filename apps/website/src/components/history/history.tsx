@@ -21,14 +21,10 @@ type Vector2 = {
 };
 
 type Segment = {
+  domElement: HTMLDivElement;
   position: Vector2;
   size: Vector2;
   date: string;
-};
-
-type SegmentHeader = {
-  position: Vector2;
-  dateString: string;
 };
 
 const History = memo<HistoryProps>(({ children }) => {
@@ -38,7 +34,6 @@ const History = memo<HistoryProps>(({ children }) => {
     useState<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
-  const [segmentHeaders, setSegmentHeaders] = useState<SegmentHeader[]>([]);
   const segmentPointRadius = useMemo(() => 25, []);
   const [path, setPath] = useState<string>("");
 
@@ -59,14 +54,14 @@ const History = memo<HistoryProps>(({ children }) => {
     const svg = container.children[0] as SVGElement;
     const segments: Segment[] = [];
 
-    const scrollAnimationsAbortController = new AbortController();
+    const abortController = new AbortController();
     for (let i = 0; i < container.children.length; i++) {
       const child = container.children[i];
       if (child === svg) continue;
 
       const segment = child as HTMLDivElement;
 
-      scrollAnimationsAbortController.signal.addEventListener(
+      abortController.signal.addEventListener(
         "abort",
         inView(
           segment,
@@ -81,6 +76,7 @@ const History = memo<HistoryProps>(({ children }) => {
       );
 
       segments.push({
+        domElement: segment,
         position: {
           x: segment.offsetLeft,
           y: segment.offsetTop,
@@ -111,7 +107,6 @@ const History = memo<HistoryProps>(({ children }) => {
       y: 0,
     };
 
-    const segmentHeaders: SegmentHeader[] = [];
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
@@ -119,7 +114,12 @@ const History = memo<HistoryProps>(({ children }) => {
       const currentPathStartMoveCommand = `M ${startingPoint.x} ${startingPoint.y}`;
 
       const pointPosition: Vector2 = getPointPositionForSegment(segment, even);
-      segmentHeaders.push(getHeaderForSegment(segment, pointPosition, even));
+      const segmentHeaderCleanup = createHeaderForSegment(
+        segment,
+        pointPosition,
+        even
+      );
+      abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
       if (startingPoint.x === pointPosition.x) {
         currentPath += `V ${
@@ -188,12 +188,12 @@ const History = memo<HistoryProps>(({ children }) => {
       return padding;
     }
 
-    function getHeaderForSegment(
+    function createHeaderForSegment(
       segment: Segment,
       pointPosition: Vector2,
       even: boolean
-    ): SegmentHeader {
-      return {
+    ): () => void {
+      const position = {
         position: {
           x:
             pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
@@ -202,6 +202,39 @@ const History = memo<HistoryProps>(({ children }) => {
             (dateHeadersContainerRef.current!.offsetTop - container.offsetTop),
         },
         dateString: segment.date,
+      };
+
+      const header = document.createElement("div");
+      header.className = "history-date-header";
+      header.style.left = `${position.position.x}px`;
+      header.style.top = `${position.position.y}px`;
+      header.style.height = `${segmentPointRadius * 2}px`;
+
+      const headerText = document.createElement("h1");
+      headerText.textContent = position.dateString;
+      header.appendChild(headerText);
+
+      dateHeadersContainerRef.current!.appendChild(header);
+
+      const headerAnimationCleanup = inView(segment.domElement, () => {
+        onEnterViewport();
+        return onLeaveViewport;
+      });
+
+      function onEnterViewport() {
+        header.style.opacity = "1";
+      }
+
+      function onLeaveViewport() {
+        header.style.opacity = "0";
+      }
+
+      return () => {
+        console.log("cleanup");
+
+        headerText.remove();
+        header.remove();
+        headerAnimationCleanup();
       };
     }
 
@@ -237,9 +270,8 @@ const History = memo<HistoryProps>(({ children }) => {
     return {
       cumulativePathLengths,
       totalPathLength,
-      segmentHeaders,
       path,
-      cleanup: () => scrollAnimationsAbortController.abort(),
+      cleanup: () => abortController.abort(),
     };
   }, [segmentPointRadius]);
 
@@ -259,19 +291,17 @@ const History = memo<HistoryProps>(({ children }) => {
       return;
 
     const abortController = new AbortController();
+    let prevCleanup = () => {};
 
     function setupTimeline() {
-      const {
-        cumulativePathLengths,
-        totalPathLength,
-        segmentHeaders,
-        path,
-        cleanup,
-      } = calculateSegments()!;
+      prevCleanup();
+      const { cumulativePathLengths, totalPathLength, path, cleanup } =
+        calculateSegments()!;
+
+      prevCleanup = cleanup;
 
       setIndividualSegmentPathLengths(cumulativePathLengths);
       setTotalPathLength(totalPathLength);
-      setSegmentHeaders(segmentHeaders);
       setPath(path);
       abortController.signal.addEventListener("abort", cleanup);
     }
@@ -324,22 +354,7 @@ const History = memo<HistoryProps>(({ children }) => {
       <div
         className="history-date-headers-container"
         ref={dateHeadersContainerRef}
-      >
-        {segmentHeaders.map((header, i) => (
-          <div
-            key={`history-segment-header-(${header.position.y}, ${header.position.y})`}
-            className="history-date-header"
-            style={{
-              left: `${header.position.x}px`,
-              top: `${header.position.y}px`,
-              height: `${segmentPointRadius * 2}px`,
-              opacity: currentSegment > i ? 1 : 0,
-            }}
-          >
-            <h1>{header.dateString}</h1>
-          </div>
-        ))}
-      </div>
+      />
     </>
   );
 });
