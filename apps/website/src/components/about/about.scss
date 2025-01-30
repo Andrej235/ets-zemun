@@ -317,11 +317,21 @@
       height: 5rem;
       font-size: 1.6rem;
 
+      &.primary {
+        outline: 2px solid transparent;
+
+        &:hover,
+        &:focus-visible {
+          outline: 2px solid $outline;
+        }
+      }
+
       &.secondary {
         background-color: transparent;
         border: 2px solid $accent;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           background-color: $accent-secondary-highlight;
         }
       }
