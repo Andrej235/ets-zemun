@@ -21,14 +21,15 @@ export default function DocumentGroup({
       </div>
       <div className="documents-list">
         {documents.map((document) => (
-          <button
+          <a
+            href={document.url}
+            target="_blank"
             key={document.title}
             className="document-link"
-            rel="noopener noreferrer"
           >
             <p>{document.title}</p>
             <Icon name="download" className="download" />
-          </button>
+          </a>
         ))}
       </div>
     </div>
