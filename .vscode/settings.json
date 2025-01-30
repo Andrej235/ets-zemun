@@ -21,7 +21,7 @@
     "commands": [
       {
         "match": "\\.schema.json$",
-        "cmd": "cmd /c ${workspaceFolder}\\.vscode\\tranform-json-schema-to-ts ${fileBasenameNoExt}"
+        "cmd": "sh $(${workspaceFolder}/.vscode/tranform-json-schema-to-ts.sh ${fileBasenameNoExt})"
       },
       {
         "match": "data-to-schema-map.json$",
