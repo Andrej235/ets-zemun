@@ -10,6 +10,7 @@ import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
 import { inView } from "motion/react";
 import getPathTotalLength from "@utility/svg/get-path-length";
+import createRoundedCornerPath from "@utility/svg/create-rounded-path";
 
 type HistoryProps = {
   readonly children: React.JSX.Element[];
@@ -158,9 +159,26 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
           (previousSegment.position.y + previousSegment.size.y)) /
           2;
 
-      currentPath += ` V ${middleToPreviousPointY} h ${
-        pointPosition.x - startingPoint.x
-      } V ${pointPosition.y - segmentPointRadius}`;
+      currentPath += createRoundedCornerPath(
+        startingPoint.x,
+        startingPoint.y,
+        [
+          {
+            type: "vertical",
+            value: middleToPreviousPointY,
+          },
+          {
+            type: "horizontal",
+            value: pointPosition.x,
+          },
+          {
+            type: "vertical",
+            value: pointPosition.y - segmentPointRadius,
+          },
+        ],
+        15
+      );
+
       currentPath += createCirclePath(segmentPointRadius, pointPosition);
       path += currentPath;
 
@@ -367,7 +385,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
     historyContainerRef,
     dateHeadersContainerRef,
     calculateSegments,
-    debounce
+    debounce,
   ]);
 
   function adjustPathLength(
