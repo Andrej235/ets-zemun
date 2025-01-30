@@ -34,30 +34,7 @@ export default function Scroller() {
     []
   );
 
-  const enterBottomThreashold = useMemo(
-    () =>
-      document.scrollingElement!.scrollHeight -
-      document.scrollingElement!.clientHeight * 1.2,
-    []
-  );
-
   const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (x) => {
-    if (x > enterTopThreashold) {
-      console.log("x > enterTopThreashold");
-      if (x < enterBottomThreashold) {
-        setIsScrollerVisible(true);
-      } else {
-        setIsScrollerVisible(false);
-        console.log("x > enterBottomThreashold");
-      }
-    } else if (x < exitTopThreashold) {
-      console.log("x < exitTopThreashold");
-
-      setIsScrollerVisible(false);
-    }
-  });
 
   useMotionValueEvent(scrollY, "change", (currentY) => {
     if (!scrollerIconPathRef.current) return;
@@ -79,6 +56,14 @@ export default function Scroller() {
           document.scrollingElement!.clientHeight -
           topOffset -
           bottomOffset);
+    }
+
+    if (currentYProgress >= 1.05) {
+      setIsScrollerVisible(false);
+    } else if (currentY > enterTopThreashold) {
+      setIsScrollerVisible(true);
+    } else if (currentY < exitTopThreashold) {
+      setIsScrollerVisible(false);
     }
 
     const pathOffset = pathLength * currentYProgress;
