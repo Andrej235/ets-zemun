@@ -1,5 +1,5 @@
+import ProfileSchema from "@assets/json-data/ts-schemas/profile.schema";
 import { Link, useLoaderData } from "react-router";
-import ProfileSchema from "src/assets/json-data/ts-schemas/profile.schema";
 
 export default function SingleProfilePage() {
   const loaderData = useLoaderData<ProfileSchema>();

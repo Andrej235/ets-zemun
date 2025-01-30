@@ -1,0 +1,144 @@
+#app-footer {
+  margin-top: 5rem;
+  padding: 5rem min(25rem, 10vw);
+  background-color: $secondary-background;
+
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+    }
+
+    .about h1 {
+      color: $accent-secondary;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-rows: max-content 1fr;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 5rem;
+
+      h1 {
+        grid-row: 1;
+        grid-column: 1;
+        grid-column-end: 3;
+      }
+
+      p {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        i {
+          font-size: 1.5rem;
+          width: 2em;
+          text-align: center;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: max-content max-content;
+    }
+
+    @media screen and (max-width: 1075px) {
+      display: block;
+
+      .about {
+        display: none;
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, max-content);
+
+        h1 {
+          grid-row: 1;
+          grid-column: 1;
+          grid-column-end: 2;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    margin-top: 3rem;
+    border-top: 1px solid $accent-secondary;
+    padding-top: 2rem;
+
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-areas: "copy credits links";
+    justify-content: space-between;
+    font-size: 1.5rem;
+
+    .social-media-links {
+      grid-area: links;
+
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+
+      a {
+        place-items: center;
+        display: grid;
+
+        font-size: 2rem;
+
+        &:hover .icon,
+        &:focus-visible .icon {
+          color: $accent-secondary;
+        }
+      }
+    }
+
+    .copy {
+      grid-area: copy;
+
+      display: flex;
+      gap: 10rem;
+
+      font-size: 1.5rem;
+    }
+
+    .credits {
+      grid-area: credits;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        place-items: center;
+      }
+
+      .separator {
+        margin-inline: 1rem 0.5rem;
+        height: 100%;
+        width: 3px;
+        background-color: $accent-secondary;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      grid-template-rows: max-content max-content;
+      grid-template-columns: 1fr max-content;
+      grid-template-areas: "credits credits" "copy links";
+
+      .credits :first-child {
+        display: none;
+      }
+    }
+  }
+}
+

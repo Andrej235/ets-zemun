@@ -27,43 +27,9 @@
     height: 50%;
     overflow: hidden;
   }
-
-  .info {
-    position: relative;
-
-    width: 100%;
-    height: 50%;
-    padding: 2rem 5rem;
-    
-    justify-content: flex-start;
-
-    @media screen and (max-width: 768px) {
-      padding: 2rem 4rem;
-    }
-
-    @media screen and (max-width: 425px) {
-      padding: 2rem;
-
-      .title {
-        font-size: 3rem;
-      }
-
-      .description {
-        font-size: 1.6rem;
-      }
-    }
-
-    .title {
-      font-size: 3rem;
-    }
-
-    .description {
-      font-size: 1.8rem;
-    }
-  }
 }
 
-.profile-overview {
+.preview-card {
   position: relative;
 
   width: 80%;
@@ -89,44 +55,6 @@
       aspect-ratio: 1;
       object-fit: cover;
     }
-  }
-
-  .info {
-    position: absolute;
-    bottom: 0;
-
-    width: 54%;
-    height: 87%;
-    padding: 4rem;
-    background-color: $secondary-background;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    .title {
-      font-size: 3rem;
-      text-align: left;
-      color: $accent-secondary;
-    }
-
-    .description {
-      color: $text-secondary;
-      font-size: 1.6rem;
-      text-align: left;
-    }
-  }
-
-  .info-right {
-    right: 0;
-    padding-left: 13rem;
-    box-shadow: 5px 5px 15px $shadow;
-  }
-
-  .info-left {
-    left: 0;
-    padding-right: 13rem;
-    box-shadow: -5px 5px 15px $shadow;
   }
 
   @media screen and (min-width: 1025px) {

@@ -1,9 +1,9 @@
 import "./auto-complete-suggestions.scss";
 import { useEffect, useRef } from "react";
-import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
+import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
 
 type AutoCompleteSuggestions = {
   readonly containerRef: React.RefObject<HTMLDivElement>;
