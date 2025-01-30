@@ -118,7 +118,7 @@ export default function getPathTotalLength(pathString: string): number {
     const cx = cosPhi * cxp - sinPhi * cyp + (x0 + x) / 2;
     const cy = sinPhi * cxp + cosPhi * cyp + (y0 + y) / 2;
     const theta1 = Math.atan2((y0p - cyp) / ry, (x0p - cxp) / rx);
-    let theta2 = Math.atan2((-y0p - cyp) / ry, (-x0p - cxp) / rx);
+    const theta2 = Math.atan2((-y0p - cyp) / ry, (-x0p - cxp) / rx);
     let thetaDelta = theta2 - theta1;
 
     if (!sweepFlag && thetaDelta > 0) thetaDelta -= 2 * Math.PI;

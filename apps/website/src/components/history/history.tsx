@@ -13,6 +13,7 @@ import getPathTotalLength from "@utility/svg/get-path-length";
 
 type HistoryProps = {
   readonly children: React.JSX.Element[];
+  readonly animateOnlyOnce?: boolean;
 };
 
 type Vector2 = {
@@ -27,7 +28,7 @@ type Segment = {
   date: string;
 };
 
-const History = memo<HistoryProps>(({ children }) => {
+const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const dateHeadersContainerRef = useRef<HTMLDivElement>(null);
   const [individualSegmentPathLengths, setIndividualSegmentPathLengths] =
@@ -41,7 +42,8 @@ const History = memo<HistoryProps>(({ children }) => {
   useEffect(() => {
     if (!pathRef.current) return;
 
-    pathRef.current.style.transition = "0.5s ease-in-out";
+    if (pathRef.current.style.transition === "none")
+      pathRef.current.style.transition = "0.5s ease-in-out";
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
@@ -199,7 +201,7 @@ const History = memo<HistoryProps>(({ children }) => {
       pointPosition: Vector2,
       even: boolean
     ): () => void {
-      const minimunDistanceToPoint = 25;
+      const minimunDistanceToPoint = 15;
       const distanceToEdge = even
         ? pointPosition.x - segmentPointRadius
         : container.clientWidth - (pointPosition.x + segmentPointRadius);
@@ -263,6 +265,7 @@ const History = memo<HistoryProps>(({ children }) => {
       }
 
       function onLeaveViewport() {
+        if (animateOnlyOnce) return;
         header.style.opacity = "0";
       }
 
@@ -294,6 +297,8 @@ const History = memo<HistoryProps>(({ children }) => {
     }
 
     function handleLeaveView(segment: HTMLDivElement, i: number) {
+      if (animateOnlyOnce) return;
+
       setCurrentSegment((currentSegment) =>
         currentSegment === i ? currentSegment - 1 : currentSegment
       );
@@ -308,7 +313,7 @@ const History = memo<HistoryProps>(({ children }) => {
       path,
       cleanup: () => abortController.abort(),
     };
-  }, [segmentPointRadius]);
+  }, [segmentPointRadius, animateOnlyOnce]);
 
   const debounce = useCallback(
     (func: (...args: unknown[]) => void, time: number = 100) => {
@@ -362,6 +367,7 @@ const History = memo<HistoryProps>(({ children }) => {
     historyContainerRef,
     dateHeadersContainerRef,
     calculateSegments,
+    debounce
   ]);
 
   function adjustPathLength(
