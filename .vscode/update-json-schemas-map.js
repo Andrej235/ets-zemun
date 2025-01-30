@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import { argv } from "process";
 
 const currentMap = await fs
-  .readFile(`${argv[2]}/src/assets/json-data/data-to-schema-map.json`, "utf-8")
+  .readFile(`${argv[2]}/apps/website/src/assets/json-data/data-to-schema-map.json`, "utf-8")
   .then(JSON.parse);
 
 const settingsJson = await fs
