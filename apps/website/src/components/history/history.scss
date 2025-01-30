@@ -2,8 +2,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10rem;
+  gap: 15rem;
   padding: 10rem;
+
+  max-width: 100svw;
+  overflow-x: clip;
 
   .history-line {
     position: absolute;
@@ -35,12 +38,18 @@
     fill: none;
     filter: drop-shadow(0px 0px 10px $accent-highlight);
   }
+
+  @media screen and (max-width: 500px) {
+    padding-inline: 0;
+  }
 }
 
 .history-date-headers-container {
   position: absolute;
   top: 0;
   left: 0;
+  max-width: 100svw;
+  overflow-x: clip;
 
   .history-date-header {
     position: absolute;
