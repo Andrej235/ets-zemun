@@ -1,30 +1,60 @@
-# React + TypeScript + Vite
+# ETS Zemun
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+**ETS Zemun** is a web application designed for Elektrotehnička Škola Zemun, providing students and faculty with an intuitive platform to access important school-related resources, including schedules, announcements, school related news and more. The app aims to enhance communication and streamline administrative tasks for the school community.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Student Dashboard:** Students can view their schedules, and assignments in a user-friendly interface.
+- **Teacher Access:** Teachers can manage class schedules, grades, and communicate with students through the platform.
+- **Announcements:** Stay up-to-date with school-wide announcements from administration.
+- **Event And News:** View upcoming school events, news, exams, and deadlines.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend:**
+  - [React](https://reactjs.org/)
+  - [TypeScript](https://www.typescriptlang.org/)
+  - [SCSS](https://sass-lang.com/)
+  - [Vite](https://vitejs.dev/)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To set up the Fitness Tracker locally, follow these steps:
+
+1. **Prerequisites:**
+   - Ensure you have [Node.js](https://nodejs.org/) and npm installed.
+   - Clone the frontend repository:
+
+     ```bash
+     git clone https://github.com/your-username/ets-zemun.git
+     cd ets-zemun
+     ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+   ```
+   
+3. **Start the Development Server:**
+   
+   The project uses [Vite](https://vitejs.dev/) to run the development server:
+
+   ```bash
+   npm run dev
+   ```
+   
+## Usage:
+   - Navigate to the website and sign up or log in as a student or teacher.
+   - View your schedule, and assignments on the dashboard.
+   - Check out school announcements and event details.
+     
+## License:
+   This project is licensed under the MIT License.
+
+## Contributors:
+This project is developed and maintained by:
+   - [Andrej235](https://github.com/andrej235)
+   - [andjelic-a](https://github.com/andjelic-a)

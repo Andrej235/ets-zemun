@@ -15,11 +15,13 @@ import SingleProfilePageLoader from "./components/single-profile-page/single-pro
 import ClassPage from "./components/class-page/class-page.tsx";
 import classPageLoader from "./components/class-page/class-page-loader.ts";
 import HistoryPage from "@components/history/history-page.tsx";
+import ErrorComponent from "@components/error-component/error-component.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorComponent />,
     children: [
       {
         path: "/",

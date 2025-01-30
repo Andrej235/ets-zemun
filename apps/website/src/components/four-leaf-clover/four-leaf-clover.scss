@@ -1,0 +1,48 @@
+.four-leaf-clover {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  width: 50rem;
+  height: 50rem;
+
+  &-leaf {
+    background-color: $accent-secondary;
+    border-radius: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .count {
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: $text-accent;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: $text-accent;
+    }
+
+    &:nth-child(1) {
+      border-end-end-radius: 1rem;
+    }
+
+    &:nth-child(2) {
+      border-end-start-radius: 1rem;
+    }
+
+    &:nth-child(3) {
+      border-start-end-radius: 1rem;
+    }
+
+    &:nth-child(4) {
+      border-start-start-radius: 1rem;
+    }
+  }
+}
+

@@ -1,5 +1,5 @@
 @mixin vertical {
-  .info {
+  .school-preview-card {
     position: relative;
 
     width: 100%;
@@ -39,7 +39,7 @@
     @include vertical;
   }
 
-  .info {
+  .school-preview-card {
     position: absolute;
     bottom: 0;
 
@@ -58,6 +58,11 @@
       color: $accent-secondary;
     }
 
+    .count {
+      font-size: 5rem;
+      color: $accent-secondary;
+    }
+
     .description {
       color: $text-secondary;
       font-size: 1.6rem;
@@ -65,13 +70,13 @@
     }
   }
 
-  .info-right {
+  .image-left {
     right: 0;
     padding-left: 13rem;
     box-shadow: 5px 5px 15px $shadow;
   }
 
-  .info-left {
+  .image-right {
     left: 0;
     padding-right: 13rem;
     box-shadow: -5px 5px 15px $shadow;

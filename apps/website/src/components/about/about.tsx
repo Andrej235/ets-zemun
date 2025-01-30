@@ -1,171 +1,157 @@
-import { useRef } from "react";
-import CustomSwiper from "../custom-swiper/custom-swiper";
-import Icon from "@components/icon/icon";
-import InfoCard from "@components/info-card/info-card";
+import { useMemo, useRef } from "react";
 import "./about.scss";
-import ProfileOverview from "@components/profile-preview/profile-preview";
-import { motion } from "motion/react";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
-import data from "@data/profiles.json";
-import ProfileOverviewSchema from "src/assets/json-data/ts-schemas/profile-overview.schema";
-import scrollAnimationFlyInBottom from "../../motion-animation-presets/scroll-animation-fly-in-bottom";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
+import HeroInfoCard from "./hero-info-card";
+import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 
 export default function About() {
-  const overviewSectionRef = useRef<HTMLDivElement>(null);
+  const heroSpaceRef = useRef<HTMLDivElement>(null);
+
+  const fluidCanvas = useMemo(
+    () => (
+      <FluidCanvas
+        containerToApplyEventListenersTo={heroSpaceRef}
+        gridSize={[512, 256]}
+      />
+    ),
+    []
+  );
 
   return (
     <div id="about-page">
-      <section>
-        <div className="hero-space">
-          <motion.div className="hero-image">
-            <img src="/hero-image.jpeg" alt="Picture of a student" />
-          </motion.div>
+      <section className="hero-space">
+        <div className="hero-image">
+          <img src="/hero-image.jpeg" alt="student" />
+        </div>
 
-          <div className="hero-image-overlay"></div>
+        <div className="hero-block" ref={heroSpaceRef}>
+          {!fluidCanvas}
 
-          <motion.div className="hero-text" {...scrollAnimationFlyInBottom}>
-            <h1>Elektrotehnička škola "Zemun"</h1>
+          <div className="hero-cards">
+            <HeroInfoCard
+              icon="trophy"
+              title="Takmičenja i nagrade"
+              description="Ovo je deskripcija!"
+              url={"/takmicenja"}
+            />
 
-            <p>Mi ne čekamo budućnost, mi joj idemo u susret!</p>
-          </motion.div>
+            <HeroInfoCard
+              icon="chalkboard-teacher"
+              title="Nastavnici"
+              description="Ovo je deskripcija!"
+              url={"/nastavnici"}
+            />
+
+            <HeroInfoCard
+              icon="history"
+              title="Istorija"
+              description="Ovo je deskripcija!"
+              url={"/istorija"}
+            />
+
+            <HeroInfoCard
+              icon="pencil-alt"
+              title="Upis i prijem"
+              description="Ovo je deskripcija!"
+              url={"/upis"}
+            />
+          </div>
+
+          <div className="overview">
+            <div className="overview-info">
+              <h1>Misija i Vizija</h1>
+              <p>
+                Naša misija je da omogućimo obrazovanje i stvorimo buduće
+                stručnjake i naučne radnike iz oblasti koje obuhvata naš školski
+                program. Nastojimo da kod učenika probudimo želju za
+                usavršavanjem i sticanjem znanja, da su u stanju da samostalno
+                istražuju i obrađuju informacije do kojih dolaze uz korišćenje
+                svih dostupnih izvora.
+              </p>
+              <p>
+                Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam
+                najveći prioriteti. Podstičemo kreativnost učenika kroz razne
+                vannastavne aktivnosti. Stvorili smo takvo okruženje da je
+                učenik u centru nastavnog procesa i učenja. Želimo da naša deca
+                postanu preduzimljive i savesne ličnosti. Pozivamo Vas da
+                zajedno sa nama menjamo sadašnjost i stvaramo svetliju
+                budućnost.
+              </p>
+            </div>
+
+            <div className="overview-image">
+              <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
+            </div>
+          </div>
         </div>
       </section>
 
-      <motion.div {...scrollAnimationFlyInBottom} className="overview">
-        <div className="overview-element">
-          <h1>Misija i Vizija</h1>
-          <p>
-            Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake
-            i naučne radnike iz oblasti koje obuhvata naš školski program.
-            Nastojimo da kod učenika probudimo želju za usavršavanjem i
-            sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju
-            informacije do kojih dolaze uz korišćenje svih dostupnih izvora.
-            <br />
-            Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći
-            prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne
-            aktivnosti. Stvorili smo takvo okruženje da je učenik u centru
-            nastavnog procesa i učenja. Želimo da naša deca postanu
-            preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama
-            menjamo sadašnjost i stvaramo svetliju budućnost.
-          </p>
-        </div>
-        <div className="overview-image">
-          <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
-        </div>
-      </motion.div>
-
-      <div className="profiles-overview-container">
-        {data.profiles.map((profile, i) => (
-          <ProfileOverview
-            profile={profile as ProfileOverviewSchema}
-            layout={i % 2 === 0 ? "image-left" : "image-right"}
-            key={profile.name}
-          />
-        ))}
-      </div>
-
-      <section ref={overviewSectionRef}>
-        <FluidCanvas
-          containerToApplyEventListenersTo={overviewSectionRef}
-          gridSize={[512, 512]}
+      <section className="school-preview-cards-container">
+        <SchoolPreviewCard
+          count={100}
+          image="/mock-news-preview/1.png"
+          title="Iskusnih nastavnika"
+          description="Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
+          layout="image-left"
         />
 
+        <SchoolPreviewCard
+          count={750}
+          image="/mock-news-preview/2.png"
+          title="Učenika u dinamičnoj zajednici"
+          description="Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
+          layout="image-right"
+        />
+
+        <SchoolPreviewCard
+          count={40}
+          title="Moderno opremljenih kabineta"
+          image="/mock-news-preview/3.png"
+          description="Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
+          layout="image-left"
+        />
+
+        <SchoolPreviewCard
+          count={15}
+          title="Osvojenih nagrada"
+          image="/mock-news-preview/1.png"
+          description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
+          layout="image-right"
+        />
+      </section>
+
+      <section className="call-to-action">
+        <h1>Pridružite se našoj obrazovnoj porodici!</h1>
+
+        <p>
+          Otvorite vrata ka budućnosti gde se tradicija kombinuje sa
+          tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i
+          saznajte kako gradimo svet koji inspiriše!
+        </p>
+
+        <div className="call-to-action-buttons">
+          <button className="primary">Prijavite se</button>
+          <button className="secondary">Zakazite sastanak</button>
+        </div>
+
+        <div className="orientation-test">
+          <h2>I dalje niste sigurni?</h2>
+
+          <div>
+            <p>
+              Odratite kratak test da vidite da li bi vam bas nasa skola
+              odgovarala!
+            </p>
+
+            <button className="secondary">Probajte test</button>
+          </div>
+        </div>
+      </section>
+
+      <section>
         <NewsAndEventsPreviewContainer />
       </section>
-
-      <CustomSwiper>
-        <InfoCard
-          icon="history"
-          title="Istorija škole"
-          link="/istorija"
-          text="Sa tradicijom dugom više od 130 godina, škola nudi savremene programe u skladu sa potrebama 21. veka."
-        />
-
-        <InfoCard
-          icon="graduation-cap"
-          title="Programi obrazovanja"
-          link="/programi"
-          text="Nudimo širok spektar tehničkih i stručnih smerova koji pripremaju učenike za uspeh u industriji."
-        />
-
-        <InfoCard
-          icon="building"
-          title="Infrastruktura i oprema"
-          link="/infrastruktura"
-          text="Moderne učionice i specijalizovane laboratorije omogućavaju učenicima kvalitetno obrazovanje i praktičan rad."
-        />
-
-        <InfoCard
-          icon="chalkboard-teacher"
-          title="Nastavnici"
-          link="/nastavnici"
-          text="Naši nastavnici su iskusni profesionalci koji inspirišu i podržavaju razvoj učenika kroz inovativne metode nastave."
-        />
-
-        <InfoCard
-          icon="trophy"
-          title="Takmičenja i nagrade"
-          link="/takmicenja"
-          text="Škola je ponosna na brojne nagrade i priznanja koja su naši učenici osvojili na domaćim i međunarodnim takmičenjima."
-        />
-
-        <InfoCard
-          icon="lightbulb"
-          title="Mentorski programi"
-          link="/mentori"
-          text="Naši mentori pomažu učenicima da razvijaju veštine i planiraju svoj profesionalni put uz podršku kroz različite aktivnosti."
-        />
-
-        <InfoCard
-          icon="pencil-alt"
-          title="Upis i prijem"
-          link="/upis"
-          text="Jednostavan proces upisa i pomoć u odabiru smera omogućavaju lakše snalaženje budućim studentima."
-        />
-
-        <InfoCard
-          icon="headset"
-          title="Podrška učenicima"
-          link="/podrska"
-          text="Naša psihološko-pedagoška služba pruža podršku učenicima i roditeljima u svim izazovima, uključujući prevenciju nasilja i krizne intervencije."
-        />
-
-        <InfoCard
-          icon="gavel"
-          title="Pravni akte"
-          link="/pravni-akte"
-          text="Škola se pridržava svih zakonskih propisa i pravnih akata, garantujući pravo svakog učenika na sigurno i kvalitetno obrazovanje."
-        />
-      </CustomSwiper>
-
-      <div className="footer">
-        <div className="social-media-icons-container">
-          <a href="https://www.linkedin.com">
-            <Icon name="linkedin" />
-          </a>
-
-          <a href="https://www.youtube.com">
-            <Icon name="youtube" />
-          </a>
-
-          <a href="https://www.x.com">
-            <Icon name="twitter" />
-          </a>
-
-          <a href="https://www.facebook.com">
-            <Icon name="facebook" />
-          </a>
-
-          <a href="https://www.instagram.com">
-            <Icon name="instagram" />
-          </a>
-        </div>
-
-        <h1 className="footer-title">
-          &copy; 2024 Elektrotehnička škola "Zemun"
-        </h1>
-      </div>
     </div>
   );
 }
