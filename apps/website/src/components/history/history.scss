@@ -57,12 +57,13 @@
     aspect-ratio: 1;
     transition: 0.5s ease-in-out;
     opacity: 0;
+    background-color: $background;
 
     display: grid;
     place-items: center;
 
     &:nth-child(odd) {
-      transform: translate(-100%, -50%);
+      transform: translate(0%, -50%);
       margin-left: -2rem;
     }
 

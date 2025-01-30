@@ -179,10 +179,10 @@ const History = memo<HistoryProps>(({ children }) => {
       if (!even) {
         const maxPadding =
           container.clientWidth - (segment.position.x + segment.size.x);
-        padding = maxPadding < padding * 2 ? maxPadding / 2 : padding;
+        padding = maxPadding < padding * 2.5 ? maxPadding / 2 : padding;
       } else {
         const maxPadding = segment.position.x;
-        padding = maxPadding < padding * 2 ? maxPadding / 2 : padding;
+        padding = maxPadding < padding * 2.5 ? maxPadding / 2 : padding;
       }
 
       return padding;
@@ -193,28 +193,52 @@ const History = memo<HistoryProps>(({ children }) => {
       pointPosition: Vector2,
       even: boolean
     ): () => void {
-      const position = {
-        position: {
-          x:
-            pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
-          y:
-            pointPosition.y -
-            (dateHeadersContainerRef.current!.offsetTop - container.offsetTop),
-        },
-        dateString: segment.date,
-      };
+      const minimunDistanceToPoint = 25;
+      const distanceToEdge = even
+        ? pointPosition.x - segmentPointRadius
+        : container.clientWidth - (pointPosition.x + segmentPointRadius);
+
+      if (distanceToEdge < minimunDistanceToPoint) {
+        console.log("a", distanceToEdge);
+      }
 
       const header = document.createElement("div");
       header.className = "history-date-header";
-      header.style.left = `${position.position.x}px`;
-      header.style.top = `${position.position.y}px`;
       header.style.height = `${segmentPointRadius * 2}px`;
 
       const headerText = document.createElement("h1");
-      headerText.textContent = position.dateString;
+      headerText.textContent = segment.date;
       header.appendChild(headerText);
 
       dateHeadersContainerRef.current!.appendChild(header);
+
+      const headerWidth = header.offsetWidth;
+
+      let position;
+
+      if (distanceToEdge < headerWidth + minimunDistanceToPoint) {
+        position = {
+          x:
+            pointPosition.x +
+            (even ? -segmentPointRadius : segmentPointRadius - headerWidth),
+          y:
+            pointPosition.y -
+            (dateHeadersContainerRef.current!.offsetTop - container.offsetTop) -
+            segmentPointRadius * 2 - minimunDistanceToPoint,
+        };
+      } else {
+        position = {
+          x:
+            pointPosition.x +
+            (even ? -segmentPointRadius - headerWidth : segmentPointRadius),
+          y:
+            pointPosition.y -
+            (dateHeadersContainerRef.current!.offsetTop - container.offsetTop),
+        };
+      }
+
+      header.style.left = `${position.x}px`;
+      header.style.top = `${position.y}px`;
 
       const headerAnimationCleanup = inView(segment.domElement, () => {
         onEnterViewport();
@@ -230,8 +254,6 @@ const History = memo<HistoryProps>(({ children }) => {
       }
 
       return () => {
-        console.log("cleanup");
-
         headerText.remove();
         header.remove();
         headerAnimationCleanup();
