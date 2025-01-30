@@ -66,9 +66,21 @@ export default function AppFooter() {
       </div>
 
       <div className="copyright">
-        <p className="name">
+        <p className="copy">
           &copy; {" " + new Date().getFullYear() + " "} Elektrotehnička škola
           "Zemun"
+        </p>
+
+        <p className="credits">
+          <div className="separator" />
+          <span>{"Made by: "}</span>
+          <a href={"https://github.com/andrej235"} target="_blank">
+            {"Andrej Nenadić"}
+          </a>
+          <span>{"&"}</span>
+          <a href={"https://github.com/andjelic-a"} target="_blank">
+            {"Aleksa Andjelić"}
+          </a>
         </p>
 
         <div className="social-media-links">

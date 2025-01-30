@@ -1,6 +1,6 @@
 #app-footer {
   margin-top: 5rem;
-  padding: 3rem min(25rem, 10vw);
+  padding: 5rem min(25rem, 10vw);
   background-color: $secondary-background;
 
   .info {
@@ -75,10 +75,16 @@
     margin-top: 3rem;
     border-top: 1px solid $accent-secondary;
     padding-top: 2rem;
-    display: flex;
+
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-areas: "copy credits links";
     justify-content: space-between;
+    font-size: 1.5rem;
 
     .social-media-links {
+      grid-area: links;
+
       display: flex;
       justify-content: center;
       gap: 1.5rem;
@@ -91,11 +97,42 @@
       }
     }
 
-    .name {
+    .copy {
+      grid-area: copy;
+
       display: flex;
       gap: 10rem;
 
       font-size: 1.5rem;
+    }
+
+    .credits {
+      grid-area: credits;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        place-items: center;
+      }
+
+      .separator {
+        margin-inline: 1rem 0.5rem;
+        height: 100%;
+        width: 3px;
+        background-color: $accent-secondary;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      grid-template-rows: max-content max-content;
+      grid-template-columns: 1fr max-content;
+      grid-template-areas: "credits credits" "copy links";
+
+      .credits :first-child {
+        display: none;
+      }
     }
   }
 }
