@@ -224,7 +224,8 @@ const History = memo<HistoryProps>(({ children }) => {
           y:
             pointPosition.y -
             (dateHeadersContainerRef.current!.offsetTop - container.offsetTop) -
-            segmentPointRadius * 2 - minimunDistanceToPoint,
+            segmentPointRadius * 2 -
+            minimunDistanceToPoint,
         };
       } else {
         position = {
@@ -240,10 +241,16 @@ const History = memo<HistoryProps>(({ children }) => {
       header.style.left = `${position.x}px`;
       header.style.top = `${position.y}px`;
 
-      const headerAnimationCleanup = inView(segment.domElement, () => {
-        onEnterViewport();
-        return onLeaveViewport;
-      });
+      const headerAnimationCleanup = inView(
+        segment.domElement,
+        () => {
+          onEnterViewport();
+          return onLeaveViewport;
+        },
+        {
+          amount: 0.3,
+        }
+      );
 
       function onEnterViewport() {
         header.style.opacity = "1";
