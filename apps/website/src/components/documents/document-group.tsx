@@ -1,43 +1,37 @@
+import DocumentGroupSchema from "@assets/json-data/ts-schemas/document-group.schema";
 import Icon from "@components/icon/icon";
-import "./documents.scss";
-
-type Document = {
-  readonly title: string;
-  readonly url: string;
-};
-
-type DocumentGroup = {
-  readonly title: string;
-  readonly accentColor: string;
-  readonly iconName: string;
-  readonly documents: Document[];
-};
 
 type DocumentGroupProps = {
-  readonly group: DocumentGroup;
+  readonly group: DocumentGroupSchema;
 };
 
-export default function DocumentGroup({ group }: DocumentGroupProps) {
+export default function DocumentGroup({
+  group: { title, iconName, accentColor, documents },
+}: DocumentGroupProps) {
   return (
     <div className="document-group-container">
-      <div 
+      <div
         className="group-header"
+        style={{
+          backgroundColor: accentColor,
+        }}
       >
-        <h2 className="group-title">{group.title}</h2>
-        <Icon name="file" className="icon" />
+        <h2 className="group-title">{title}</h2>
+        <Icon name={iconName} className="icon" />
       </div>
       <div className="documents-list">
-        {group.documents.map((document) => (
+        {documents.map((document) => (
           <button
-            key={document.url}
+            key={document.title}
             className="document-link"
             rel="noopener noreferrer"
           >
             <p>{document.title}</p>
-            <Icon name="download" className="download"/>
+            <Icon name="download" className="download" />
           </button>
         ))}
       </div>
     </div>
   );
 }
+

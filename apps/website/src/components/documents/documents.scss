@@ -26,7 +26,6 @@
 
   .group-header {
     padding: 1.5rem;
-    background-color: $accent;
 
     display: flex;
     align-items: center;
@@ -66,7 +65,7 @@
       justify-content: space-between;
 
       font-size: 1.4rem;
-      color: $text-primary  ;
+      color: $text-primary;
       text-decoration: none;
 
       &:hover {
