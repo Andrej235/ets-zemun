@@ -25,7 +25,8 @@
     transition: width 200ms;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     &::after {
       width: 400%;
       transition: width 1s;
