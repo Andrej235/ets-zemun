@@ -49,6 +49,7 @@ export default function HamburgerNavigationSearchBar({
             type="text"
             className="search-bar"
             placeholder="Pretrazi..."
+            aria-label="Pretrazivanje"
             ref={inputRef}
             name="search"
             autoComplete="off"
@@ -78,6 +79,7 @@ export default function HamburgerNavigationSearchBar({
               setIsAutoCompleteShown(false);
               onRequestCloseHamburgerNavigation();
             }}
+            aria-label="Pretrazi"
           >
             <Icon name="magnifying-glass" />
           </button>
