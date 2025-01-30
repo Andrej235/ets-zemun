@@ -1,4 +1,11 @@
-import React, { memo, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./history.scss";
 import createCirclePath from "@utility/svg/create-circle-path";
 import { inView } from "motion/react";
@@ -27,21 +34,23 @@ type SegmentHeader = {
 const History = memo<HistoryProps>(({ children }) => {
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const dateHeadersContainerRef = useRef<HTMLDivElement>(null);
-  const individualSegmentPathLengths = useRef<number[]>([]);
+  const [individualSegmentPathLengths, setIndividualSegmentPathLengths] =
+    useState<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
   const [segmentHeaders, setSegmentHeaders] = useState<SegmentHeader[]>([]);
   const segmentPointRadius = useMemo(() => 25, []);
+  const [path, setPath] = useState<string>("");
 
   useEffect(() => {
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
-      (individualSegmentPathLengths.current[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
+      (individualSegmentPathLengths[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
     );
   }, [currentSegment, individualSegmentPathLengths, totalPathLength]);
 
-  useEffect(() => {
+  const calculateSegments = useCallback(() => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
       return;
 
@@ -49,7 +58,6 @@ const History = memo<HistoryProps>(({ children }) => {
 
     const container = historyContainerRef.current;
     const svg = container.children[0] as SVGElement;
-    const line = svg.children[0] as SVGPathElement;
     const segments: Segment[] = [];
 
     const scrollAnimationsAbortController = new AbortController();
@@ -92,7 +100,7 @@ const History = memo<HistoryProps>(({ children }) => {
 
     svg.setAttribute(
       "viewBox",
-      `0 0 ${container.scrollWidth} ${container.scrollHeight}`
+      `0 0 ${container.clientWidth} ${container.clientHeight}`
     );
 
     let path = `M${segments[0].position.x - padding} 0`;
@@ -103,15 +111,15 @@ const History = memo<HistoryProps>(({ children }) => {
       y: 0,
     };
 
-    const segmentHeaderPositions: SegmentHeader[] = [];
+    const segmentHeaders: SegmentHeader[] = [];
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
       const even = i % 2 === 0;
       let currentPath = "";
       const currentPathStartMoveCommand = `M ${startingPoint.x} ${startingPoint.y}`;
 
-      const pointPosition: Vector2 = getPointForSegment(segment, even);
-      segmentHeaderPositions.push({
+      const pointPosition: Vector2 = getPointPositionForSegment(segment, even);
+      segmentHeaders.push({
         position: {
           x:
             pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
@@ -174,13 +182,10 @@ const History = memo<HistoryProps>(({ children }) => {
       return acc;
     }, 0);
 
-    individualSegmentPathLengths.current = cumulativePathLengths;
-    setTotalPathLength(totalPathLength);
-    setSegmentHeaders(segmentHeaderPositions);
-
-    line.setAttribute("d", path);
-
-    function getPointForSegment(segment: Segment, even: boolean): Vector2 {
+    function getPointPositionForSegment(
+      segment: Segment,
+      even: boolean
+    ): Vector2 {
       return {
         x: even
           ? segment.position.x - padding
@@ -204,10 +209,63 @@ const History = memo<HistoryProps>(({ children }) => {
       segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
     }
 
-    return () => {
-      scrollAnimationsAbortController.abort();
+    return {
+      cumulativePathLengths,
+      totalPathLength,
+      segmentHeaders,
+      path,
+      cleanup: () => scrollAnimationsAbortController.abort(),
     };
-  }, [segmentPointRadius, historyContainerRef, dateHeadersContainerRef]);
+  }, [segmentPointRadius]);
+
+  const debounce = useCallback(
+    (func: (...args: unknown[]) => void, time: number = 100) => {
+      let timer: NodeJS.Timeout;
+      return (...args: unknown[]) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => func(...args), time);
+      };
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (!historyContainerRef.current || !dateHeadersContainerRef.current)
+      return;
+
+    const abortController = new AbortController();
+
+    function setupTimeline() {
+      const {
+        cumulativePathLengths,
+        totalPathLength,
+        segmentHeaders,
+        path,
+        cleanup,
+      } = calculateSegments()!;
+
+      setIndividualSegmentPathLengths(cumulativePathLengths);
+      setTotalPathLength(totalPathLength);
+      setSegmentHeaders(segmentHeaders);
+      setPath(path);
+      abortController.signal.addEventListener("abort", cleanup);
+    }
+
+    window.addEventListener("resize", debounce(setupTimeline, 500), {
+      signal: abortController.signal,
+    });
+
+    setupTimeline();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [
+    segmentPointRadius,
+    historyContainerRef,
+    dateHeadersContainerRef,
+    calculateSegments,
+  ]);
 
   function adjustPathLength(
     element: SVGPathElement,
@@ -232,7 +290,7 @@ const History = memo<HistoryProps>(({ children }) => {
     <>
       <div className="history-container" ref={historyContainerRef}>
         <svg className="history-line" fill="none" strokeWidth={3}>
-          <path />
+          <path d={path} />
         </svg>
 
         {children}
