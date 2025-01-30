@@ -36,21 +36,31 @@
       width: 100%;
       height: calc(70svh - 10rem);
 
-      h1 {
+      .text {
         position: absolute;
         top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-
         width: 100%;
-        font-size: 6rem;
-        font-weight: 600;
-        color: $text-primary;
-        text-align: center;
-        text-shadow: $accent-secondary 0px 0px 10px;
-      }
+        padding-inline: 2rem;
 
+        h1 {
+          font-size: 6rem;
+          font-weight: 600;
+          color: $text-primary;
+          text-align: center;
+          text-shadow: $accent-secondary 0px 0px 10px;
+        }
+
+        h2 {
+          font-size: 3rem;
+          font-weight: 400;
+          color: $text-primary;
+          text-align: center;
+          text-shadow: $accent-secondary 0px 0px 10px;
+        }
+      }
       img {
         position: absolute;
         width: 100%;
@@ -361,9 +371,12 @@
       height: 40svh;
 
       @media screen and (max-width: 550px) {
-        h1 {
+        .text {
           top: 50%;
-          font-size: 4rem;
+
+          h1 {
+            font-size: 3.7rem;
+          }
         }
       }
     }
@@ -438,6 +451,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+  #about-page .hero-space .hero-image .text h2 {
+    display: none;
+  }
+
   .overview {
     flex-direction: column;
     padding: 1rem !important;

@@ -22,7 +22,11 @@ export default function About() {
     <div id="about-page">
       <section className="hero-space">
         <div className="hero-image">
-          <h1>Elektrotehnička škola "Zemun"</h1>
+          <div className="text">
+            <h1>Elektrotehnička škola "Zemun"</h1>
+            <h2>Mi ne čekamo budućnost, mi joj idemo u susret!</h2>
+          </div>
+
           <img src="/hero-image.jpeg" alt="student" />
         </div>
 
