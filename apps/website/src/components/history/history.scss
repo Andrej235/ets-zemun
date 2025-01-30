@@ -48,8 +48,9 @@
   position: absolute;
   top: 0;
   left: 0;
+  width: 100svw;
   max-width: 100svw;
-  overflow-x: clip;
+  overflow: hidden;
 
   .history-date-header {
     position: absolute;

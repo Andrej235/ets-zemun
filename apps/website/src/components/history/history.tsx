@@ -55,6 +55,7 @@ const History = memo<HistoryProps>(({ children }) => {
       return;
 
     const container = historyContainerRef.current;
+    dateHeadersContainerRef.current.style.height = `${container.clientHeight}px`;
     const svg = container.children[0] as SVGElement;
     const segments: Segment[] = [];
 
@@ -118,16 +119,7 @@ const History = memo<HistoryProps>(({ children }) => {
       const currentPathStartMoveCommand = `M ${startingPoint.x} ${startingPoint.y}`;
 
       const pointPosition: Vector2 = getPointPositionForSegment(segment, even);
-      segmentHeaders.push({
-        position: {
-          x:
-            pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
-          y:
-            pointPosition.y -
-            (dateHeadersContainerRef.current.offsetTop - container.offsetTop),
-        },
-        dateString: segment.date,
-      });
+      segmentHeaders.push(getHeaderForSegment(segment, pointPosition, even));
 
       if (startingPoint.x === pointPosition.x) {
         currentPath += `V ${
@@ -194,6 +186,23 @@ const History = memo<HistoryProps>(({ children }) => {
       }
 
       return padding;
+    }
+
+    function getHeaderForSegment(
+      segment: Segment,
+      pointPosition: Vector2,
+      even: boolean
+    ): SegmentHeader {
+      return {
+        position: {
+          x:
+            pointPosition.x + (even ? -segmentPointRadius : segmentPointRadius),
+          y:
+            pointPosition.y -
+            (dateHeadersContainerRef.current!.offsetTop - container.offsetTop),
+        },
+        dateString: segment.date,
+      };
     }
 
     function getPointPositionForSegment(
