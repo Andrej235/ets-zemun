@@ -1,4 +1,103 @@
 {
-  "documentGroups": []
+  "documentGroups": [
+    {
+      "title": "Organi upravljanja",
+      "iconName": "users",
+      "accentColor": "#2A5DB0",
+      "documents": [
+        {
+          "title": "Poslovnik o radu nastavničkog veća",
+          "url": "/documents/poslovnik-o-radu-nastavnickog-veca.docx"
+        },
+        {
+          "title": "Poslovnik o radu školskog odbora",
+          "url": "/documents/poslovnik-o-radu-skolskog-odbora.docx"
+        },
+        {
+          "title": "Poslovnik o radu učeničkog parlamenta",
+          "url": "/documents/poslovnik-o-radu-ucenickog-parlamenta.docx"
+        },
+        {
+          "title": "Poslovnik o radu saveta roditelja",
+          "url": "/documents/poslovnik-o-radu-saveta-roditelja.docx"
+        }
+      ]
+    },
+    {
+      "title": "Ponašanje i etika",
+      "iconName": "balance-scale",
+      "accentColor": "#2E7D32",
+      "documents": [
+        {
+          "title": "Etički kodeks",
+          "url": "/documents/eticki-kodeks.docx"
+        },
+        {
+          "title": "Pravila ponašanja učenika, zaposlenih, roditelja",
+          "url": "/documents/pravila-ponasanja.docx"
+        }
+      ]
+    },
+    {
+      "title": "Bezbednosni protokoli",
+      "iconName": "shield-alt",
+      "accentColor": "#C62828",
+      "documents": [
+        {
+          "title": "Pravilnik bezbednosti I zdravlja na radu",
+          "url": "/documents/pravilnik-o-bezbednosti-i-zdravlja-na-radu.docx"
+        },
+        {
+          "title": "Pravilnik o merama, načinu I postupku zaštite I bezbednosti učenika za vreme boravka u školi I svih aktivnosti koje organizuje",
+          "url": "/documents/pravilnik-o-merama-zastite-ucenika"
+        }
+      ]
+    },
+    {
+      "title": "Finansijski i administrativni menadžment",
+      "iconName": "file-invoice-dollar",
+      "accentColor": "#6A1B9A",
+      "documents": [
+        {
+          "title": "Pravilnik o bankama",
+          "url": "/documents/pravilnik-o-bankama.docx"
+        },
+        {
+          "title": "Pravilnik o organizaciji budžetskog računovodstva",
+          "url": "/documents/pravilnik-o-organizaciji-budzeta.docx"
+        },
+        {
+          "title": "Pravilnik o organizaciji I sistematizaciji radnih mesta  u elektrotehničkoj školi \"Zemun\"",
+          "url": "/documents/pravilnik-o-organizaciji-radnih-mesta.docx"
+        }
+      ]
+    },
+    {
+      "title": "Politika zaposlenih",
+      "iconName": "briefcase",
+      "accentColor": "#EF6C00",
+      "documents": [
+        {
+          "title": "Pravilnik o pravima obavezama i odgovornostima zaposlenih",
+          "url": "/documents/pravilnik-o-pravima-i-obavezama-zaposlenih.docx"
+        },
+        {
+          "title": "Pravilnik o radu",
+          "url": "/documents/pravilnik-o-radu.docx"
+        }
+      ]
+    },
+    {
+      "title": "Institucionalna fondacija",
+      "iconName": "landmark",
+      "accentColor": "#9E9D24",
+      "documents": [
+        {
+          "title": "Statut",
+          "url": "/documents/statut.docx"
+        }
+      ]
+    }
+  ]
 }
 
