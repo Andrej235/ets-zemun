@@ -15,7 +15,7 @@ export default function HeroInfoCard({
   url,
 }: HeroInfoCardProps) {
   return (
-    <button className="hero-block-element">
+    <div className="hero-block-element">
       <Icon name={icon} className="hero-block-icon" />
       <div className="hero-block-info">
         <div className="hero-block-header">{title}</div>
@@ -27,7 +27,7 @@ export default function HeroInfoCard({
           </Link>
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 

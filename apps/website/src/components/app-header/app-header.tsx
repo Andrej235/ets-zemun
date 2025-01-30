@@ -29,6 +29,7 @@ export default function AppHeader() {
           to="/"
           className="logo"
           tabIndex={isHamburgerMenuOpen ? -1 : undefined}
+          aria-hidden={isHamburgerMenuOpen}
         >
           <img src="./logo.png" alt="Logo" />
         </Link>
@@ -50,3 +51,4 @@ export default function AppHeader() {
     </FocusTrap>
   );
 }
+

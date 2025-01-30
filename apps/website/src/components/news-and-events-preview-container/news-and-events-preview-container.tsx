@@ -49,7 +49,7 @@ export default function NewsAndEventsPreviewContainer() {
 
       {selectedTab === "news" ? (
         <section className="news-and-events-section">
-          <div className="news-events-wrapper">
+          <div className="news-events-container">
             <NewsPreview
               date={new Date()}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
@@ -79,7 +79,7 @@ export default function NewsAndEventsPreviewContainer() {
         </section>
       ) : (
         <section className="news-and-events-section">
-          <div className="news-events-wrapper">
+          <div className="news-events-container">
             <NewsPreview
               date={new Date()}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"

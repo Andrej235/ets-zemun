@@ -34,6 +34,19 @@
         height: 0.2rem;
         background-color: $text-primary;
       }
+
+      p {
+        transition: 200ms ease-out;
+      }
+
+      &:hover p {
+        transform: translate(0, -0.7rem);
+      }
+
+      &:focus-visible p {
+        transform: translate(0, -0.7rem);
+        color: $accent-secondary;
+      }
     }
   }
 
@@ -43,7 +56,7 @@
     gap: 5rem;
     max-height: fit-content;
 
-    .news-events-wrapper {
+    .news-events-container {
       width: 100%;
       display: flex;
       justify-content: center;

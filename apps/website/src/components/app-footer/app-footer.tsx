@@ -84,15 +84,21 @@ export default function AppFooter() {
         </p>
 
         <div className="social-media-links">
-          <a href={"https://www.linkedin.com"}>
+          <a
+            href={"https://www.linkedin.com"}
+            aria-label="Školski linkedin nalog"
+          >
             <Icon name="linkedin" />
           </a>
 
-          <a href={"https://www.x.com"}>
+          <a href={"https://www.x.com"} aria-label="Školski twitter nalog">
             <Icon name="twitter" />
           </a>
 
-          <a href={"https://www.instagram.com"}>
+          <a
+            href={"https://www.instagram.com"}
+            aria-label="Školski instagram nalog"
+          >
             <Icon name="instagram" />
           </a>
         </div>
