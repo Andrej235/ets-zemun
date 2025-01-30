@@ -32,11 +32,11 @@
     justify-content: space-between;
     gap: 1rem;
 
-    color: $secondary-background;
+    color: $text-accent;
 
     .icon {
       font-size: 3rem;
-      color: $secondary-background;
+      color: $text-accent;
     }
 
     .group-title {
@@ -65,10 +65,11 @@
       justify-content: space-between;
 
       font-size: 1.4rem;
-      color: $text-primary;
+      color: $text-secondary;
       text-decoration: none;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background: $accent-secondary;
         transform: translateX(4px);
       }
