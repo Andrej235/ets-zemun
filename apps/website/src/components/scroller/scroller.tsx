@@ -86,7 +86,10 @@ export default function Scroller() {
             className: "scroller-drag-overlay",
           }}
         >
-          <svg viewBox="0 0 540 540">
+          <svg
+            viewBox="0 0 540 540"
+            aria-label="Ikonica sijalice koja prikazuje koliko stranice ste već pregledali"
+          >
             <path
               ref={scrollerIconPathRef}
               style={{

@@ -159,6 +159,7 @@ export default function HeaderSearchBar() {
             className="search-button"
             onClick={isSearchBarVisible ? handleClose : handleOpen}
             ref={buttonRef}
+            aria-label="Pretrazivanje"
           >
             <Icon name="magnifying-glass" />
           </button>
@@ -176,3 +177,4 @@ export default function HeaderSearchBar() {
     </FocusTrap>
   );
 }
+
