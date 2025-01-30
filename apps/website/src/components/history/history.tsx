@@ -54,8 +54,6 @@ const History = memo<HistoryProps>(({ children }) => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
       return;
 
-    const padding = 100;
-
     const container = historyContainerRef.current;
     const svg = container.children[0] as SVGElement;
     const segments: Segment[] = [];
@@ -103,11 +101,12 @@ const History = memo<HistoryProps>(({ children }) => {
       `0 0 ${container.clientWidth} ${container.clientHeight}`
     );
 
-    let path = `M${segments[0].position.x - padding} 0`;
+    const firstSegmentPadding = getPaddingForSegment(segments[0], true);
+    let path = `M${segments[0].position.x - firstSegmentPadding} 0`;
 
     const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
     let startingPoint: Vector2 = {
-      x: segments[0].position.x - padding,
+      x: segments[0].position.x - firstSegmentPadding,
       y: 0,
     };
 
@@ -182,10 +181,27 @@ const History = memo<HistoryProps>(({ children }) => {
       return acc;
     }, 0);
 
+    function getPaddingForSegment(segment: Segment, even: boolean): number {
+      let padding = 100;
+
+      if (!even) {
+        const maxPadding =
+          container.clientWidth - (segment.position.x + segment.size.x);
+        padding = maxPadding < padding * 2 ? maxPadding / 2 : padding;
+      } else {
+        const maxPadding = segment.position.x;
+        padding = maxPadding < padding * 2 ? maxPadding / 2 : padding;
+      }
+
+      return padding;
+    }
+
     function getPointPositionForSegment(
       segment: Segment,
       even: boolean
     ): Vector2 {
+      const padding = getPaddingForSegment(segment, even);
+
       return {
         x: even
           ? segment.position.x - padding
