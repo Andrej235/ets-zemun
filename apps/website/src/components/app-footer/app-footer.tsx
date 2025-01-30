@@ -72,7 +72,7 @@ export default function AppFooter() {
         </p>
 
         <p className="credits">
-          <div className="separator" />
+          <span className="separator" />
           <span>{"Made by: "}</span>
           <a href={"https://github.com/andrej235"} target="_blank">
             {"Andrej Nenadić"}
