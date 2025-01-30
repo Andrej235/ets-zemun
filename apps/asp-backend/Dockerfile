@@ -14,11 +14,11 @@ COPY ["apps/asp-backend/EtsZemun.csproj", "apps/asp-backend/"]
 RUN dotnet restore "apps/asp-backend/EtsZemun.csproj"
 COPY . .
 WORKDIR "/src/apps/asp-backend"
-RUN dotnet build "EtsZemun.csproj" -c $configuration -o /app/build
+RUN dotnet build "EtsZemun.csproj" -c "$configuration" -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "EtsZemun.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "EtsZemun.csproj" -c "$configuration" -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { PointerEvent } from "react";
+import { Link } from "react-router";
 import "./news-preview.scss";
 
 type NewsPreviewProps = {
-  date: Date;
-  title: string;
-  description: string;
-  image: string;
+  readonly date: Date;
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
 };
 
 export default function NewsPreview({
@@ -14,24 +15,23 @@ export default function NewsPreview({
   description,
   image,
 }: NewsPreviewProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (e: PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { left, top } = e.currentTarget.getBoundingClientRect();
+    const target = e.currentTarget as HTMLAnchorElement;
+    const { top, left } = target.getBoundingClientRect();
     const x = e.clientX - left;
     const y = e.clientY - top;
 
-    setMousePosition({ x, y });
+    target.style.setProperty("--mouse-x", `${x}px`);
+    target.style.setProperty("--mouse-y", `${y}px`);
   };
 
   return (
-    <div
+    <Link
+      to="/news/1"
       className="news-article-preview"
-      onMouseMove={handleMouseMove}
-      style={{
-        "--mouse-x": `${mousePosition.x}px`,
-        "--mouse-y": `${mousePosition.y}px`,
-      } as React.CSSProperties}
+      onPointerMove={handleMouseMove}
     >
       <div className="image-container">
         <img src={image} alt={title} />
@@ -42,6 +42,7 @@ export default function NewsPreview({
         <p className="description">{description}</p>
         <p className="date">{date.toLocaleDateString()}</p>
       </div>
-    </div>
+    </Link>
   );
 }
+

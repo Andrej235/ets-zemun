@@ -5,8 +5,8 @@ import HamburgerNavigationSearchBar from "@components/hamburger-navigation-searc
 import { AnimatePresence, motion } from "motion/react";
 
 type HamburgerNavigationProps = {
-  isMenuActive: boolean;
-  onRequestClose: () => void;
+  readonly isMenuActive: boolean;
+  readonly onRequestClose: () => void;
 };
 
 export default function HamburgerNavigation({

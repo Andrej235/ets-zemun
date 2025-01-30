@@ -3,10 +3,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@components/icon/icon";
 import searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
-import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
+import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -159,6 +159,7 @@ export default function HeaderSearchBar() {
             className="search-button"
             onClick={isSearchBarVisible ? handleClose : handleOpen}
             ref={buttonRef}
+            aria-label="Pretrazivanje"
           >
             <Icon name="magnifying-glass" />
           </button>
@@ -176,3 +177,4 @@ export default function HeaderSearchBar() {
     </FocusTrap>
   );
 }
+

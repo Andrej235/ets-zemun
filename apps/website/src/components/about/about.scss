@@ -29,13 +29,40 @@
     align-items: center;
 
     .hero-image {
+      position: relative;
       left: 0;
-      top: 10rem;
+      top: 0;
 
       width: 100%;
-      height: calc(50svh - 10rem);
+      height: calc(70svh - 10rem);
 
+      .text {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 100%;
+        padding-inline: 2rem;
+
+        h1 {
+          font-size: 6rem;
+          font-weight: 600;
+          color: $text-primary;
+          text-align: center;
+          text-shadow: $accent-secondary 0px 0px 10px;
+        }
+
+        h2 {
+          font-size: 3rem;
+          font-weight: 400;
+          color: $text-primary;
+          text-align: center;
+          text-shadow: $accent-secondary 0px 0px 10px;
+        }
+      }
       img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -53,7 +80,6 @@
 
       .hero-cards {
         position: relative;
-        z-index: 2;
         top: 0%;
         transform: translate(0, -50%);
 
@@ -83,7 +109,7 @@
 
         .hero-block-element {
           width: 25%;
-          overflow: hidden;
+          overflow: clip;
 
           .hero-block-icon {
             width: 100%;
@@ -104,7 +130,7 @@
             align-items: center;
 
             .hero-block-header {
-              font-size: 2.5rem;
+              font-size: 2.2rem;
               font-weight: 600;
               margin: 3rem 0;
               transition: 200ms linear;
@@ -133,6 +159,9 @@
                 transition: 250ms;
                 overflow: hidden;
 
+                display: grid;
+                place-items: center;
+
                 text-transform: uppercase;
                 font-size: 1.6rem;
                 font-weight: 700;
@@ -154,34 +183,36 @@
                   transition: transform 500ms cubic-bezier(0.3, 1, 0.8, 1);
                 }
 
-                &:hover::before {
+                &:hover::before,
+                &:focus-visible::before {
                   transform: translate3d(100%, 0, 0);
                 }
               }
             }
           }
-        }
 
-        .block-element-hovered {
-          .hero-block-header {
-            opacity: 0;
-            transform: translateY(-100%);
-          }
-
-          .hero-block-description {
-            opacity: 1 !important;
-            transform: translateY(-100%);
-          }
-
-          @media screen and (max-width: 768px) {
+          &:hover,
+          &:focus-within {
             .hero-block-header {
-              opacity: 1 !important;
-              transform: translateY(0%);
+              opacity: 0;
+              transform: translateY(-100%);
             }
 
             .hero-block-description {
               opacity: 1 !important;
-              transform: translateY(0%);
+              transform: translateY(-100%);
+            }
+
+            @media screen and (max-width: 768px) {
+              .hero-block-header {
+                opacity: 1 !important;
+                transform: translateY(0%);
+              }
+
+              .hero-block-description {
+                opacity: 1 !important;
+                transform: translateY(0%);
+              }
             }
           }
         }
@@ -246,20 +277,7 @@
     }
   }
 
-  .info-cards-container {
-    margin-top: 3rem;
-    max-width: 100%;
-    padding: 5rem 0;
-
-    margin-bottom: 20rem;
-
-    [data-overlayscrollbars-contents] {
-      display: flex;
-      gap: 3rem;
-    }
-  }
-
-  .profiles-overview-container {
+  .school-preview-cards-container {
     width: 100%;
     margin-top: 5rem;
 
@@ -267,80 +285,182 @@
     align-items: center;
     flex-direction: column;
     gap: 10rem;
-    margin-bottom: 20rem;
+    margin-bottom: 10rem;
   }
 
-  .footer {
-    margin-top: 15rem;
+  .call-to-action {
+    align-self: center;
+    max-width: 120rem;
+    width: 90%;
+    min-height: max-content;
+    padding: 4rem;
+    background-color: $secondary-background;
+    box-shadow: 0px 5px 15px $shadow;
+    border-radius: 2.5rem;
+    margin-bottom: 15rem;
 
-    .social-media-icons-container {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 
-      a {
-        display: grid;
-        place-items: center;
+    h1 {
+      font-size: 3.2rem;
+    }
 
-        font-size: 3rem;
+    p {
+      font-size: 1.8rem;
+    }
+
+    button {
+      width: 100%;
+      height: 5rem;
+      font-size: 1.6rem;
+
+      &.primary {
+        outline: 2px solid transparent;
+
+        &:hover,
+        &:focus-visible {
+          outline: 2px solid $outline;
+        }
+      }
+
+      &.secondary {
+        background-color: transparent;
+        border: 2px solid $accent;
+
+        &:hover,
+        &:focus-visible {
+          background-color: $accent-secondary-highlight;
+        }
       }
     }
 
-    .footer-title {
-      margin-top: 2rem;
+    .call-to-action-buttons {
+      margin: 1rem 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10rem, 20rem));
+      gap: 2rem;
+      place-items: start;
+      width: 100%;
 
-      text-align: center;
+      @media screen and (max-width: 390px) {
+        grid-template-columns: minmax(10rem, 20rem);
+        grid-template-rows: 1fr 1fr;
+      }
+    }
+
+    .orientation-test {
+      div {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      p {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 15rem;
+        height: 4rem;
+        font-size: 1.4rem;
+      }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .hero-block {
-    justify-content: center;
+  #about-page .hero-space {
+    .hero-image {
+      height: 40svh;
 
-    .hero-cards {
-      position: relative;
-      margin-right: auto;
-      top: 0%;
-      left: 50%;
-      transform: translate(-50%, 0%) !important;
+      @media screen and (max-width: 550px) {
+        .text {
+          top: 50%;
 
-      width: 90%;
-      max-width: 60rem !important;
-      height: 130rem;
-      box-shadow: none !important;
-
-      flex-direction: column;
-      align-items: center;
-
-      .hero-block-element {
-        width: 100% !important;
-        height: 25%;
-        padding: 3rem;
-
-        .hero-block-icon {
-          max-height: 30% !important;
-        }
-
-        .hero-block-icon {
-          height: 50% !important;
-          align-items: flex-start !important;
-        }
-
-        .hero-block-description {
-          opacity: 1 !important;
+          h1 {
+            font-size: 3.7rem;
+          }
         }
       }
     }
 
-    .overview {
-      transform: translateY(0) !important;
-      max-width: 60rem !important;
+    .hero-block {
+      justify-content: center;
+
+      .hero-cards {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+
+        box-shadow: none;
+
+        flex-direction: column;
+        align-items: center;
+
+        & > :nth-child(even) {
+          background-color: $background;
+
+          .hero-block-button::before {
+            background-color: $background;
+          }
+        }
+
+        & > :nth-child(odd) {
+          background-color: $secondary-background;
+
+          .hero-block-button::before {
+            background-color: $secondary-background;
+          }
+        }
+
+        .hero-block-element {
+          width: 100%;
+          padding: 5rem;
+
+          .hero-block-icon {
+            height: fit-content;
+          }
+
+          .hero-block-info {
+            .hero-block-header {
+              font-size: 2.5rem;
+              margin-bottom: 1rem;
+            }
+
+            .hero-block-description {
+              opacity: 1;
+
+              .hero-block-button {
+                margin-top: 2.5rem;
+              }
+            }
+          }
+        }
+      }
+
+      .overview {
+        transform: translateY(0);
+        border-radius: 2.5rem;
+
+        .overview-info {
+          padding-top: 2rem;
+        }
+      }
     }
   }
 }
 
 @media screen and (max-width: 1024px) {
+  #about-page .hero-space .hero-image .text h2 {
+    display: none;
+  }
+
   .overview {
     flex-direction: column;
     padding: 1rem !important;
@@ -348,7 +468,7 @@
 
     .overview-image {
       width: 90% !important;
-      
+
       img {
         max-height: 40rem;
         object-fit: cover;
@@ -356,3 +476,4 @@
     }
   }
 }
+

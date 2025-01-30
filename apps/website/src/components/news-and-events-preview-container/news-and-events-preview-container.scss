@@ -34,6 +34,19 @@
         height: 0.2rem;
         background-color: $text-primary;
       }
+
+      p {
+        transition: 200ms ease-out;
+      }
+
+      &:hover p {
+        transform: translate(0, -0.7rem);
+      }
+
+      &:focus-visible p {
+        transform: translate(0, -0.7rem);
+        color: $accent-secondary;
+      }
     }
   }
 
@@ -43,7 +56,7 @@
     gap: 5rem;
     max-height: fit-content;
 
-    .news-events-wrapper {
+    .news-events-container {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -56,52 +69,50 @@
       }
     }
 
-    .news-events-button {
+    .view-all-link {
+      border: none;
+      color: #fff;
+      background: none;
       position: relative;
-      background-color: transparent;
-      padding: 0;
-      height: 5rem;
-      overflow: hidden;
-      border-radius: 0;
+      cursor: pointer;
 
-      font-size: 1.8rem;
-      font-weight: 600;
-      text-transform: capitalize;
-      color: $text-primary;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-      &::after {
+      p {
+        font-size: 2rem;
+      }
+
+      &:before {
         content: "";
         position: absolute;
-        bottom: 0.25rem;
-
+        height: 2px;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        height: 1px;
-        background-color: $text-primary;
-        opacity: 0.5;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        background: currentColor;
+        transition: transform 0.25s ease-out;
+      }
 
+      &:hover:before,
+      &:focus-visible::before {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      .icon {
         transition: 200ms;
+        font-size: 1.65rem;
+        width: max-content;
+        height: max-content;
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        bottom: 0.75rem;
-
-        width: 100%;
-        height: 1px;
-        background-color: $text-primary;
-        opacity: 0.5;
-
-        transition: 200ms;
-        transform: translateX(-101%);
-      }
-
-      &:hover::after {
-        transform: translateX(101%);
-      }
-
-      &:hover::before {
-        transform: translateX(0);
+      &:hover .icon,
+      &:focus-visible .icon {
+        transform: rotate(-90deg);
       }
     }
   }

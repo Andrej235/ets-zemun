@@ -2,6 +2,8 @@ import { useState } from "react";
 import NewsPreview from "@components/news-preview/news-preview";
 import "./news-and-events-preview-container.scss";
 import { motion } from "motion/react";
+import Icon from "@components/icon/icon";
+import { Link } from "react-router";
 
 export default function NewsAndEventsPreviewContainer() {
   const [selectedTab, setSelectedTab] = useState<"news" | "events">("news");
@@ -47,7 +49,7 @@ export default function NewsAndEventsPreviewContainer() {
 
       {selectedTab === "news" ? (
         <section className="news-and-events-section">
-          <div className="news-events-wrapper">
+          <div className="news-events-container">
             <NewsPreview
               date={new Date()}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
@@ -70,11 +72,14 @@ export default function NewsAndEventsPreviewContainer() {
             />
           </div>
 
-          <button className="news-events-button">Sve novosti</button>
+          <Link to="/novosti" className="view-all-link">
+            <p>Sve Novosti</p>
+            <Icon name="arrow-right" />
+          </Link>
         </section>
       ) : (
         <section className="news-and-events-section">
-          <div className="news-events-wrapper">
+          <div className="news-events-container">
             <NewsPreview
               date={new Date()}
               title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
@@ -94,7 +99,11 @@ export default function NewsAndEventsPreviewContainer() {
               image="/mock-news-preview/3.png"
             />
           </div>
-          <button className="news-events-button">Sva dogadjanja</button>
+
+          <Link to="/novosti" className="view-all-link">
+            <p>Sve Novosti</p>
+            <Icon name="arrow-right" />
+          </Link>
         </section>
       )}
     </div>

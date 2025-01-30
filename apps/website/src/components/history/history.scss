@@ -1,0 +1,82 @@
+.history-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15rem;
+  padding: 10rem;
+
+  max-width: 100svw;
+  overflow-x: clip;
+
+  .history-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .history-segment {
+    height: 30vh;
+    width: 60vw;
+    border: 1px solid $outline;
+
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+
+    &:nth-child(even) {
+      align-self: flex-end;
+    }
+
+    &:nth-child(5) {
+      height: 60vh;
+      width: 80vw;
+    }
+  }
+
+  path {
+    //! transition: 0.5s ease-in-out; This HAS to be set after the path is created through JS, otherwise the line animates as a bunch of smaller lines getting bigger on start
+    stroke: $outline;
+    fill: none;
+    filter: drop-shadow(0px 0px 10px $accent-highlight);
+    stroke-dasharray: 0 1px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding-inline: 0;
+  }
+}
+
+.history-date-headers-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100svw;
+  max-width: 100svw;
+  overflow: hidden;
+  pointer-events: none;
+
+  .history-date-header {
+    position: absolute;
+    aspect-ratio: 1;
+    transition: 0.5s ease-in-out;
+    opacity: 0;
+    background-color: $background;
+
+    display: grid;
+    place-items: center;
+
+    &:nth-child(odd) {
+      transform: translate(0%, -50%);
+      margin-left: -2rem;
+    }
+
+    &:nth-child(even) {
+      transform: translate(0%, -50%);
+      margin-left: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+

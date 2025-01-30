@@ -12,19 +12,19 @@ import DraggableFloatie from "./draggable-floatie";
 import FloatieOverlay, { FloatieOverlayProps } from "./floatie-overlay";
 
 type FloatieProps = {
-  id: string;
-  children: React.ReactNode;
-  isFloatieVisible: boolean;
-  overlay: {
-    children: FloatieOverlayProps["children"];
-    dropAnimation?: FloatieOverlayProps["dropAnimation"];
-    className?: FloatieOverlayProps["className"];
+  readonly id: string;
+  readonly children: React.ReactNode;
+  readonly isFloatieVisible: boolean;
+  readonly overlay: {
+    readonly children: FloatieOverlayProps["children"];
+    readonly dropAnimation?: FloatieOverlayProps["dropAnimation"];
+    readonly className?: FloatieOverlayProps["className"];
   };
-  className?: string;
-  onDiscardFloatie: () => void;
-  onMouseOver?: () => void;
-  onMouseOut?: () => void;
-  onClick?: () => void;
+  readonly className?: string;
+  readonly onDiscardFloatie: () => void;
+  readonly onMouseOver?: () => void;
+  readonly onMouseOut?: () => void;
+  readonly onClick?: () => void;
 };
 
 export default function Floatie({
@@ -78,8 +78,9 @@ export default function Floatie({
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
           onClick={handleClick}
-          children={children}
-        />
+        >
+          {children}
+        </DraggableFloatie>
       )}
 
       <FloatieDiscardArea isDragging={isDragging} id={id}>
@@ -90,8 +91,9 @@ export default function Floatie({
             className={className}
             isDragging={isDragging}
             isFloatieVisible={isFloatieVisible}
-            children={children}
-          />
+          >
+            {children}
+          </DraggableFloatie>
         )}
       </FloatieDiscardArea>
 
@@ -104,3 +106,4 @@ export default function Floatie({
     </DndContext>
   );
 }
+

@@ -2,9 +2,9 @@ import { forwardRef } from "react";
 import { HTMLProps } from "../../types/utility/html-props";
 
 type IconProps = {
-  className?: string;
-  id?: string;
-  name: string;
+  readonly className?: string;
+  readonly id?: string;
+  readonly name: string;
 } & HTMLProps<HTMLElement>;
 
 const Icon = forwardRef<HTMLElement, IconProps>(
@@ -16,7 +16,8 @@ const Icon = forwardRef<HTMLElement, IconProps>(
         {...attributes}
       />
     );
-  },
+  }
 );
 
 export default Icon;
+

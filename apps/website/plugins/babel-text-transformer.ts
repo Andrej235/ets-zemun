@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { types, Visitor } from "@babel/core";
 import { TranslationResult } from "./translator";
 

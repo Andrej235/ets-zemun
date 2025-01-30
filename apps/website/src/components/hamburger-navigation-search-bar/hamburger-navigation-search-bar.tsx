@@ -1,15 +1,15 @@
 import { useMemo, useRef, useState } from "react";
 import Icon from "@components/icon/icon";
 import "./hamburger-navigation-search-bar.scss";
-import SearchMapSchema from "src/assets/json-data/ts-schemas/search-map.schema";
 import searchMap from "@data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
+import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
 
 type HamburgerNavigationSearchBarProps = {
-  onRequestCloseHamburgerNavigation: () => void;
+  readonly onRequestCloseHamburgerNavigation: () => void;
 };
 
 export default function HamburgerNavigationSearchBar({
@@ -49,6 +49,7 @@ export default function HamburgerNavigationSearchBar({
             type="text"
             className="search-bar"
             placeholder="Pretrazi..."
+            aria-label="Pretrazivanje"
             ref={inputRef}
             name="search"
             autoComplete="off"
@@ -78,6 +79,7 @@ export default function HamburgerNavigationSearchBar({
               setIsAutoCompleteShown(false);
               onRequestCloseHamburgerNavigation();
             }}
+            aria-label="Pretrazi"
           >
             <Icon name="magnifying-glass" />
           </button>
@@ -95,3 +97,4 @@ export default function HamburgerNavigationSearchBar({
     </FocusTrap>
   );
 }
+

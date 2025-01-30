@@ -8,24 +8,39 @@
     width: 7rem;
     height: 7rem;
     background-color: $accent-secondary;
+    border: 2px solid transparent;
     border-radius: 50%;
     fill: transparent;
     cursor: pointer;
     padding: 0.2rem;
-    transition: 0s;
+    transition: background-color 150ms ease-out, border 150ms ease-out;
     touch-action: none;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &:hover,
+    &:hover {
+      background-color: $accent-secondary-highlight;
+    }
+
     &:focus-visible {
-      background-color: $accent-secondary;
+      background-color: $accent-secondary-highlight;
+      border: 1px solid $outline;
     }
 
     * {
       pointer-events: none;
+    }
+  }
+
+  svg {
+    fill: none;
+    stroke: $text-primary;
+    stroke-width: 15;
+
+    path {
+      transition: 0.15s;
     }
   }
 }
@@ -51,4 +66,15 @@
     bottom: 0;
     right: 0;
   }
+
+  svg {
+    fill: none;
+    stroke: $text-primary;
+    stroke-width: 15;
+
+    path {
+      transition: 0.15s;
+    }
+  }
 }
+
