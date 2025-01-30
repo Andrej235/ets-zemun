@@ -94,6 +94,11 @@
         display: grid;
 
         font-size: 2rem;
+
+        &:hover .icon,
+        &:focus-visible .icon {
+          color: $accent-secondary;
+        }
       }
     }
 
