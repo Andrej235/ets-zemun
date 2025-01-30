@@ -35,15 +35,19 @@ const History = memo<HistoryProps>(({ children }) => {
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
   const segmentPointRadius = useMemo(() => 25, []);
-  const [path, setPath] = useState<string>("");
+
+  const pathRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
+    if (!pathRef.current) return;
+
+    pathRef.current.style.transition = "0.5s ease-in-out";
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
       (individualSegmentPathLengths[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
     );
-  }, [currentSegment, individualSegmentPathLengths, totalPathLength]);
+  }, [pathRef, currentSegment, individualSegmentPathLengths, totalPathLength]);
 
   const calculateSegments = useCallback(() => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
@@ -51,7 +55,9 @@ const History = memo<HistoryProps>(({ children }) => {
 
     const container = historyContainerRef.current;
     dateHeadersContainerRef.current.style.height = `${container.clientHeight}px`;
-    const svg = container.children[0] as SVGElement;
+    const svg = container.children[0] as SVGElement | null;
+    if (!svg) return;
+
     const segments: Segment[] = [];
 
     const abortController = new AbortController();
@@ -323,6 +329,8 @@ const History = memo<HistoryProps>(({ children }) => {
     let prevCleanup = () => {};
 
     function setupTimeline() {
+      if (!pathRef.current) return;
+
       prevCleanup();
       const { cumulativePathLengths, totalPathLength, path, cleanup } =
         calculateSegments()!;
@@ -331,7 +339,11 @@ const History = memo<HistoryProps>(({ children }) => {
 
       setIndividualSegmentPathLengths(cumulativePathLengths);
       setTotalPathLength(totalPathLength);
-      setPath(path);
+
+      pathRef.current.setAttribute("d", path);
+      pathRef.current.style.transition = "none";
+      pathRef.current.style.strokeDasharray = `0 ${totalPathLength}`;
+
       abortController.signal.addEventListener("abort", cleanup);
     }
 
@@ -345,6 +357,7 @@ const History = memo<HistoryProps>(({ children }) => {
       abortController.abort();
     };
   }, [
+    pathRef,
     segmentPointRadius,
     historyContainerRef,
     dateHeadersContainerRef,
@@ -374,7 +387,7 @@ const History = memo<HistoryProps>(({ children }) => {
     <>
       <div className="history-container" ref={historyContainerRef}>
         <svg className="history-line" fill="none" strokeWidth={3}>
-          <path d={path} />
+          <path ref={pathRef} />
         </svg>
 
         {children}

@@ -33,10 +33,11 @@
   }
 
   path {
-    transition: 0.5s ease-in-out;
+    //! transition: 0.5s ease-in-out; This HAS to be set after the path is created through JS, otherwise the line animates as a bunch of smaller lines getting bigger on start
     stroke: $outline;
     fill: none;
     filter: drop-shadow(0px 0px 10px $accent-highlight);
+    stroke-dasharray: 0 1px;
   }
 
   @media screen and (max-width: 500px) {
@@ -51,6 +52,7 @@
   width: 100svw;
   max-width: 100svw;
   overflow: hidden;
+  pointer-events: none;
 
   .history-date-header {
     position: absolute;
