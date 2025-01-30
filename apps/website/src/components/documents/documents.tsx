@@ -3,13 +3,13 @@ import "./documents.scss";
 
 export default function Documents() {
   const sampleGroup = {
-    title: "Technical Documentation",
+    title: "Tehnička dokumentacija",
     accentColor: "#2196F3",
     iconName: "file",
     documents: [
-      { title: "User Guide", url: "/docs/user-guide.pdf" },
-      { title: "API Reference", url: "/docs/api-reference.pdf" },
-      { title: "Troubleshooting", url: "/docs/troubleshooting.pdf" },
+      { title: "Korisnički priručnik", url: "/docs/user-guide.pdf" },
+      { title: "API Referenca", url: "/docs/api-reference.pdf" },
+      { title: "Rešavanje problema", url: "/docs/troubleshooting.pdf" },
     ],
   };
 
@@ -24,3 +24,4 @@ export default function Documents() {
     </div>
   );
 }
+
