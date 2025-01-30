@@ -14,7 +14,13 @@ import createRoundedCornerPath from "@utility/svg/create-rounded-path";
 
 type HistoryProps = {
   readonly children: React.JSX.Element[];
-  readonly animateOnlyOnce?: boolean;
+  readonly timelineConfig?: {
+    readonly animateOnlyOnce?: boolean;
+    readonly pointRadius?: number;
+    readonly pointPadding?: number;
+    readonly minimumDistanceBetweenPointAndHeading?: number;
+    readonly corderArcRadius?: number;
+  };
 };
 
 type Vector2 = {
@@ -29,14 +35,17 @@ type Segment = {
   date: string;
 };
 
-const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
+const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const dateHeadersContainerRef = useRef<HTMLDivElement>(null);
   const [individualSegmentPathLengths, setIndividualSegmentPathLengths] =
     useState<number[]>([]);
   const [totalPathLength, setTotalPathLength] = useState<number>(0);
   const [currentSegment, setCurrentSegment] = useState(-1);
-  const segmentPointRadius = useMemo(() => 25, []);
+  const segmentPointRadius = useMemo(
+    () => timelineConfig?.pointRadius ?? 25,
+    [timelineConfig]
+  );
 
   const pathRef = useRef<SVGPathElement>(null);
 
@@ -176,7 +185,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
             value: pointPosition.y - segmentPointRadius,
           },
         ],
-        15
+        timelineConfig?.corderArcRadius ?? 15
       );
 
       currentPath += createCirclePath(segmentPointRadius, pointPosition);
@@ -200,7 +209,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
     }, 0);
 
     function getPaddingForSegment(segment: Segment, even: boolean): number {
-      let padding = 100;
+      let padding = timelineConfig?.pointPadding ?? 100;
 
       if (!even) {
         const maxPadding =
@@ -219,7 +228,8 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
       pointPosition: Vector2,
       even: boolean
     ): () => void {
-      const minimunDistanceToPoint = 15;
+      const minimunDistanceToPoint =
+        timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
       const distanceToEdge = even
         ? pointPosition.x - segmentPointRadius
         : container.clientWidth - (pointPosition.x + segmentPointRadius);
@@ -283,7 +293,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
       }
 
       function onLeaveViewport() {
-        if (animateOnlyOnce) return;
+        if (timelineConfig?.animateOnlyOnce) return;
         header.style.opacity = "0";
       }
 
@@ -315,7 +325,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
     }
 
     function handleLeaveView(segment: HTMLDivElement, i: number) {
-      if (animateOnlyOnce) return;
+      if (timelineConfig?.animateOnlyOnce) return;
 
       setCurrentSegment((currentSegment) =>
         currentSegment === i ? currentSegment - 1 : currentSegment
@@ -331,7 +341,7 @@ const History = memo<HistoryProps>(({ children, animateOnlyOnce }) => {
       path,
       cleanup: () => abortController.abort(),
     };
-  }, [segmentPointRadius, animateOnlyOnce]);
+  }, [segmentPointRadius, timelineConfig]);
 
   const debounce = useCallback(
     (func: (...args: unknown[]) => void, time: number = 100) => {

@@ -5,7 +5,11 @@ import HistorySegment from "./history-segment";
 export default function HistoryPage() {
   const history = useMemo(
     () => (
-      <History animateOnlyOnce>
+      <History
+        timelineConfig={{
+          animateOnlyOnce: true,
+        }}
+      >
         <HistorySegment date={new Date()}>
           <h1>History segment 1</h1>
         </HistorySegment>
