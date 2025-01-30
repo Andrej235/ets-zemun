@@ -1,6 +1,8 @@
 .documents-container {
   justify-self: center;
   width: 100svw;
+  padding-block: 5rem 0;
+  padding-inline: 1rem;
 
   display: flex;
   flex-direction: column;
@@ -8,13 +10,19 @@
   overflow: hidden;
 
   .document-group-wrapper {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    gap: 3.5rem 2rem;
+    place-items: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-inline: 7rem;
   }
 }
 
 .document-group-container {
-  width: 30rem;
+  width: 100%;
   min-height: 30rem;
   background: $secondary-background;
   border-radius: 8px;
