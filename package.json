@@ -5,7 +5,8 @@
     "dev": "docker-compose up --build",
     "deps": "./scripts/run-deps.sh",
     "update-db": "./scripts/run-update-db.sh",
-    "stop": "./scripts/run-stop.sh"
+    "stop": "./scripts/run-stop.sh",
+    "kill": "./scripts/run-kill.sh"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
