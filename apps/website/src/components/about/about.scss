@@ -29,13 +29,30 @@
     align-items: center;
 
     .hero-image {
+      position: relative;
       left: 0;
-      top: 10rem;
+      top: 0;
 
       width: 100%;
-      height: calc(50svh - 10rem);
+      height: calc(70svh - 10rem);
+
+      h1 {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+
+        width: 100%;
+        font-size: 6rem;
+        font-weight: 600;
+        color: $text-primary;
+        text-align: center;
+        text-shadow: $accent-secondary 0px 0px 10px;
+      }
 
       img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -339,69 +356,82 @@
 }
 
 @media screen and (max-width: 768px) {
-  #about-page .hero-space .hero-block {
-    justify-content: center;
+  #about-page .hero-space {
+    .hero-image {
+      height: 40svh;
 
-    .hero-cards {
-      position: relative;
-      margin: 0;
-      width: 100%;
-      top: 0%;
-      left: 50%;
-      transform: translate(-50%, 0%);
-
-      box-shadow: none;
-
-      flex-direction: column;
-      align-items: center;
-
-      & > :nth-child(even) {
-        background-color: $background;
-
-        .hero-block-button::before {
-          background-color: $background;
-        }
-      }
-
-      & > :nth-child(odd) {
-        background-color: $secondary-background;
-
-        .hero-block-button::before {
-          background-color: $secondary-background;
-        }
-      }
-
-      .hero-block-element {
-        width: 100%;
-        padding: 5rem;
-
-        .hero-block-icon {
-          height: fit-content;
-        }
-
-        .hero-block-info {
-          .hero-block-header {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-          }
-
-          .hero-block-description {
-            opacity: 1;
-
-            .hero-block-button {
-              margin-top: 2.5rem;
-            }
-          }
+      @media screen and (max-width: 550px) {
+        h1 {
+          top: 50%;
+          font-size: 4rem;
         }
       }
     }
 
-    .overview {
-      transform: translateY(0);
-      border-radius: 2.5rem;
+    .hero-block {
+      justify-content: center;
 
-      .overview-info {
-        padding-top: 2rem;
+      .hero-cards {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+
+        box-shadow: none;
+
+        flex-direction: column;
+        align-items: center;
+
+        & > :nth-child(even) {
+          background-color: $background;
+
+          .hero-block-button::before {
+            background-color: $background;
+          }
+        }
+
+        & > :nth-child(odd) {
+          background-color: $secondary-background;
+
+          .hero-block-button::before {
+            background-color: $secondary-background;
+          }
+        }
+
+        .hero-block-element {
+          width: 100%;
+          padding: 5rem;
+
+          .hero-block-icon {
+            height: fit-content;
+          }
+
+          .hero-block-info {
+            .hero-block-header {
+              font-size: 2.5rem;
+              margin-bottom: 1rem;
+            }
+
+            .hero-block-description {
+              opacity: 1;
+
+              .hero-block-button {
+                margin-top: 2.5rem;
+              }
+            }
+          }
+        }
+      }
+
+      .overview {
+        transform: translateY(0);
+        border-radius: 2.5rem;
+
+        .overview-info {
+          padding-top: 2rem;
+        }
       }
     }
   }
