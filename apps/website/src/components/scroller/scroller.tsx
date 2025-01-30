@@ -24,21 +24,39 @@ export default function Scroller() {
     setIsScrollerAvailable(showScroller);
   }, [location]);
 
-  const enterThreashold = useMemo(
+  const enterTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.7,
     []
   );
 
-  const exitThreashold = useMemo(
+  const exitTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.6,
+    []
+  );
+
+  const enterBottomThreashold = useMemo(
+    () =>
+      document.scrollingElement!.scrollHeight -
+      document.scrollingElement!.clientHeight * 1.2,
     []
   );
 
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (x) => {
-    if (x > enterThreashold) setIsScrollerVisible(true);
-    else if (x < exitThreashold) setIsScrollerVisible(false);
+    if (x > enterTopThreashold) {
+      console.log("x > enterTopThreashold");
+      if (x < enterBottomThreashold) {
+        setIsScrollerVisible(true);
+      } else {
+        setIsScrollerVisible(false);
+        console.log("x > enterBottomThreashold");
+      }
+    } else if (x < exitTopThreashold) {
+      console.log("x < exitTopThreashold");
+
+      setIsScrollerVisible(false);
+    }
   });
 
   useMotionValueEvent(scrollY, "change", (currentY) => {
@@ -51,7 +69,7 @@ export default function Scroller() {
     }
 
     let currentYProgress = 0;
-    const topOffset = enterThreashold + 100;
+    const topOffset = enterTopThreashold + 100;
     const bottomOffset = document.scrollingElement!.scrollHeight * 0.07;
 
     if (currentY > topOffset) {
