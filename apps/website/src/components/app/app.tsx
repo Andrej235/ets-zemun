@@ -6,6 +6,7 @@ import LanguageContext, { localLanguages } from "@contexts/language-context";
 import { useEffect, useState } from "react";
 import Scroller from "@components/scroller/scroller";
 import AppFooter from "@components/app-footer/app-footer";
+import SetLanguageContext from "@contexts/set-language-context";
 
 function App() {
   const [language, setLanguage] = useState<string>("sr-cyr");
@@ -41,17 +42,19 @@ function App() {
 
   return (
     <LanguageContext.Provider value={language}>
-      <div id="app">
-        <AppHeader />
+      <SetLanguageContext.Provider value={changeLanguage}>
+        <div id="app">
+          <AppHeader />
 
-        <div id="page-content">
-          <Outlet />
+          <div id="page-content">
+            <Outlet />
+          </div>
+
+          <Scroller />
+
+          <AppFooter />
         </div>
-
-        <Scroller />
-
-        <AppFooter />
-      </div>
+      </SetLanguageContext.Provider>
     </LanguageContext.Provider>
   );
 }
