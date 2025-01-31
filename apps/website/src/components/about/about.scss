@@ -85,7 +85,6 @@
 
         max-width: 120rem;
         width: 90%;
-        min-width: fit-content;
         box-shadow: 0px 5px 15px $shadow;
 
         display: flex;
@@ -489,6 +488,22 @@
       img {
         max-height: 40rem;
         object-fit: cover;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  #about-page .hero-space .hero-block .hero-cards {
+    .hero-block-element {
+      .icon {
+        font-size: 4rem;
+      }
+
+      .hero-block-info {
+        .hero-block-header {
+          font-size: 1.5rem;
+        }
       }
     }
   }
