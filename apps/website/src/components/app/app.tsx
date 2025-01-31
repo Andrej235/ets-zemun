@@ -3,17 +3,17 @@ import { Outlet } from "react-router";
 import AppHeader from "@components/app-header/app-header";
 import "./app.scss";
 import LanguageContext, { localLanguages } from "@contexts/language-context";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Scroller from "@components/scroller/scroller";
 import AppFooter from "@components/app-footer/app-footer";
 import SetLanguageContext from "@contexts/set-language-context";
 
 function App() {
   const [language, setLanguage] = useState<string>("sr-cyr");
-  function changeLanguage(newLang: string) {
+  const changeLanguage = useCallback((newLang: string) => {
     localStorage.setItem("language", newLang);
     setLanguage(newLang);
-  }
+  }, []);
 
   useEffect(() => {
     const languages = [
