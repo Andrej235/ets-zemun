@@ -95,7 +95,7 @@ export default function About() {
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
           count={100}
-          image="/mock-news-preview/1.jpg"
+          image="/images/info-cards/teachers.jpg"
           title="Iskusnih nastavnika"
           description="Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
           layout="image-left"
@@ -103,7 +103,7 @@ export default function About() {
 
         <SchoolPreviewCard
           count={750}
-          image="/mock-news-preview/2.jpg"
+          image="/images/info-cards/students.jpg"
           title="Učenika u dinamičnoj zajednici"
           description="Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
           layout="image-right"
@@ -112,7 +112,7 @@ export default function About() {
         <SchoolPreviewCard
           count={40}
           title="Moderno opremljenih kabineta"
-          image="/mock-news-preview/3.jpg"
+          image="/images/info-cards/samsung-classroom.jpg"
           description="Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
           layout="image-left"
         />
@@ -120,7 +120,7 @@ export default function About() {
         <SchoolPreviewCard
           count={15}
           title="Osvojenih nagrada"
-          image="/mock-news-preview/1.jpg"
+          image="/images/info-cards/trophy.jpg"
           description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
           layout="image-right"
         />
