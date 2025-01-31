@@ -49,5 +49,25 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            const match = /node_modules\/((?:@[^/]+\/)?[^/]+)/.exec(id);
+            const packageName = match?.[1];
+
+            if (!packageName) return;
+
+            if (packageName.includes("react")) return "vendor-react";
+
+            if (packageName.includes("three")) return "vendor-three";
+
+            return "vendor"; // Default vendor chunk
+          }
+        },
+      },
+    },
+  },
 }));
 
