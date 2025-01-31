@@ -50,7 +50,6 @@ function HamburgerMenu({
       <motion.button
         animate={{ opacity: isHamburgerMenuOpen ? 1 : 0 }}
         onClick={() => setLanguage(language === "sr-lat" ? "sr-cyr" : "sr-lat")}
-        key={"lang-btn"}
         className="hamburger-menu-language"
         aria-hidden={!isHamburgerMenuOpen}
         tabIndex={isHamburgerMenuOpen ? 0 : -1}

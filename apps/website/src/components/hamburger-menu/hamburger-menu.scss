@@ -52,6 +52,7 @@
   cursor: pointer;
   background: none !important;
   transition: none;
+  opacity: 0;
 
   &::after {
     content: "";
