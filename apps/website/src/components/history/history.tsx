@@ -358,6 +358,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
       return;
 
+    let previousWidth = window.innerWidth;
     const abortController = new AbortController();
     let prevCleanup = () => {};
 
@@ -380,9 +381,18 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       abortController.signal.addEventListener("abort", cleanup);
     }
 
-    window.addEventListener("resize", debounce(setupTimeline, 500), {
-      signal: abortController.signal,
-    });
+    window.addEventListener(
+      "resize",
+      () => {
+        if (previousWidth === window.innerWidth) return;
+        previousWidth = window.innerWidth;
+
+        debounce(setupTimeline, 500)();
+      },
+      {
+        signal: abortController.signal,
+      }
+    );
 
     setupTimeline();
 
