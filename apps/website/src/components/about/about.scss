@@ -493,7 +493,7 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1050px) and (min-width: 768px) {
   #about-page .hero-space .hero-block .hero-cards {
     .hero-block-element {
       .icon {
