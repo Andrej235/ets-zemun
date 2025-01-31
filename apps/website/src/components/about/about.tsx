@@ -118,10 +118,10 @@ export default function About() {
         />
 
         <SchoolPreviewCard
-          count={15}
+          count={25}
           title="Osvojenih nagrada"
           image="/images/info-cards/trophy.jpg"
-          description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
+          description="Naši učenici su osvojili preko 25 priznanja na regionalnim, nacionalnim i međunarodnim takmičenjima. Dominiraju u STEM projektima, umetničkim izazovima, sportu i debatama, pokazujući izuzetan kreativni potencijal. Kroz mentorstvo nastavnika i prilagođene programe, podstičemo ih da istražuju, razvijaju ideje i postanu ambasadori znanja. Svaka nagrada je priča o njihovoj posvećenosti i upornosti."
           layout="image-right"
         />
       </section>
