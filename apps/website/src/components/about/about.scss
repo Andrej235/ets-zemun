@@ -312,26 +312,56 @@
     }
 
     button {
-      width: 100%;
+      position: relative;
+      width: 18rem;
       height: 5rem;
-      font-size: 1.6rem;
+      border-radius: 25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s background-color;
 
-      &.primary {
-        outline: 2px solid transparent;
+      p {
+        transition: 0.3s;
+        font-size: 1.6rem;
+        font-weight: 500;
+      }
 
-        &:hover,
-        &:focus-visible {
-          outline: 2px solid $outline;
+      .button-icon {
+        position: absolute;
+        right: 2rem;
+        opacity: 0;
+        transition: 0.3s;
+        font-size: 1.8rem;
+        color: black;
+      }
+
+      &:hover {
+        p {
+          transform: translateX(-1rem);
         }
+
+        .button-icon {
+          right: 1rem;
+          opacity: 1;
+        }
+      }
+
+      &.primary:hover {
+        background-color: white;
+        color: black;
       }
 
       &.secondary {
         background-color: transparent;
-        border: 2px solid $accent;
+        color: $accent;
+        border: 1px solid $accent;
+        transition: 0.2s linear;
 
-        &:hover,
-        &:focus-visible {
-          background-color: $accent-secondary-highlight;
+        &:hover {
+          background-color: #fff;
+          border: none;
+          color: black;
         }
       }
     }
