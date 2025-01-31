@@ -48,7 +48,10 @@ function HamburgerMenu({
       </button>
 
       <motion.button
-        animate={{ opacity: isHamburgerMenuOpen ? 1 : 0 }}
+        animate={{
+          display: isHamburgerMenuOpen ? "block" : "none",
+          opacity: isHamburgerMenuOpen ? 1 : 0,
+        }}
         onClick={() => setLanguage(language === "sr-lat" ? "sr-cyr" : "sr-lat")}
         className="hamburger-menu-language"
         aria-hidden={!isHamburgerMenuOpen}

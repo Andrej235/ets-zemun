@@ -61,7 +61,7 @@ export default function NewsAndEventsPreviewContainer() {
               date={new Date("2024-10-15")}
               title="Dan škole 2024"
               description="Svečana sala škole pretvorila se 5. oktobra u pozornicu mladih umetnika. Učenici su kroz kombinovanu predstavu — od klasičnih pozorišnih scena do modernih koreografija i horskog pevanja — proslavili Dan škole. Nastup je uključivao i multimedijalne projekcije, oslikavajući istoriju škole i njene vrednosti. 'Ovo je dan kada škola sija kroz svoje učenike', istakla je direktorka."
-              image="/images/news/school-day2.jpg"
+              image="/images/news/school-day.jpg"
             />
 
             <NewsPreview
