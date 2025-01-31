@@ -1,5 +1,5 @@
 //@text-transform-ignore
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 import AppHeader from "@components/app-header/app-header";
 import "./app.scss";
 import LanguageContext, { localLanguages } from "@contexts/language-context";
@@ -44,6 +44,8 @@ function App() {
     <LanguageContext.Provider value={language}>
       <SetLanguageContext.Provider value={changeLanguage}>
         <div id="app">
+          <ScrollRestoration />
+
           <AppHeader />
 
           <div id="page-content">
