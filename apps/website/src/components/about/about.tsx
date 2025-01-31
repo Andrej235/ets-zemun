@@ -4,6 +4,7 @@ import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-c
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import Icon from "@components/icon/icon";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
@@ -136,8 +137,14 @@ export default function About() {
         </p>
 
         <div className="call-to-action-buttons">
-          <button className="primary">Prijavite se</button>
-          <button className="secondary">Zakazite sastanak</button>
+          <button className="primary">
+            <p>Prijavite se</p>
+            <Icon name="arrow-right" className="button-icon" />
+          </button>
+          <button className="secondary">
+            <p> Zakazite sastanak</p>
+            <Icon name="arrow-right" className="button-icon" />
+          </button>
         </div>
 
         <div className="orientation-test">
