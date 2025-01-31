@@ -38,7 +38,7 @@ function App() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [language]);
+  }, [language, changeLanguage]);
 
   return (
     <LanguageContext.Provider value={language}>
