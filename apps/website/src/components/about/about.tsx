@@ -127,36 +127,38 @@ export default function About() {
         />
       </section>
 
-      <section className="call-to-action">
-        <h1>Pridružite se našoj obrazovnoj porodici!</h1>
+      <section className="call-to-action-section">
+        <div className="call-to-action">
+          <h1>Pridružite se našoj obrazovnoj porodici!</h1>
 
-        <p>
-          Otvorite vrata ka budućnosti gde se tradicija kombinuje sa
-          tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i
-          saznajte kako gradimo svet koji inspiriše!
-        </p>
+          <p>
+            Otvorite vrata ka budućnosti gde se tradicija kombinuje sa
+            tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i
+            saznajte kako gradimo svet koji inspiriše!
+          </p>
 
-        <div className="call-to-action-buttons">
-          <button className="primary">
-            <p>Prijavite se</p>
-            <Icon name="arrow-right" className="button-icon" />
-          </button>
-          <button className="secondary">
-            <p> Zakazite sastanak</p>
-            <Icon name="arrow-right" className="button-icon" />
-          </button>
-        </div>
+          <div className="call-to-action-buttons">
+            <button className="primary">
+              <p>Prijavite se</p>
+              <Icon name="arrow-right" className="button-icon" />
+            </button>
+            <button className="secondary">
+              <p> Zakazite sastanak</p>
+              <Icon name="arrow-right" className="button-icon" />
+            </button>
+          </div>
 
-        <div className="orientation-test">
-          <h2>I dalje niste sigurni?</h2>
+          <div className="orientation-test">
+            <h2>I dalje niste sigurni?</h2>
 
-          <div>
-            <p>
-              Odratite kratak test da vidite da li bi vam bas nasa skola
-              odgovarala!
-            </p>
+            <div>
+              <p>
+                Odratite kratak test da vidite da li bi vam bas nasa skola
+                odgovarala!
+              </p>
 
-            <button className="secondary">Probajte test</button>
+              <button className="secondary">Probajte test</button>
+            </div>
           </div>
         </div>
       </section>
