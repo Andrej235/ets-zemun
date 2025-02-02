@@ -16,6 +16,9 @@ import ClassPage from "./components/class-page/class-page.tsx";
 import classPageLoader from "./components/class-page/class-page-loader.ts";
 import HistoryPage from "@components/history/history-page.tsx";
 import ErrorComponent from "@components/error-component/error-component.tsx";
+import Awards from "./components/awards/awards.tsx";
+import Teachers from "@components/teachers/teachers.tsx";
+import Enrollment from "@components/enrollment/enrollment.tsx";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +59,18 @@ const router = createBrowserRouter([
       {
         path: "/istorija",
         element: <HistoryPage />,
+      },
+      {
+        path: "/takmicenja",
+        element: <Awards />,
+      },
+      {
+        path: "nastavnici",
+        element: <Teachers />,
+      },
+      {
+        path: "upis",
+        element: <Enrollment />,
       },
     ],
     hydrateFallbackElement: <>Hydrate fallback</>,

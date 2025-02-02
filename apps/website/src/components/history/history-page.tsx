@@ -8,6 +8,7 @@ export default function HistoryPage() {
       <History
         timelineConfig={{
           animateOnlyOnce: true,
+          corderArcRadius: 15,
         }}
       >
         <HistorySegment date={new Date()}>

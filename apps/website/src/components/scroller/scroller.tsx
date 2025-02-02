@@ -24,30 +24,46 @@ export default function Scroller() {
     setIsScrollerAvailable(showScroller);
   }, [location]);
 
-  const enterThreashold = useMemo(
+  const enterTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.7,
     []
   );
 
-  const exitThreashold = useMemo(
+  const exitTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.6,
     []
   );
 
-  const { scrollY, scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (x) => {
-    if (x > enterThreashold) setIsScrollerVisible(true);
-    else if (x < exitThreashold) setIsScrollerVisible(false);
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (currentYProgress) => {
+  useMotionValueEvent(scrollY, "change", (currentY) => {
     if (!scrollerIconPathRef.current) return;
 
     let pathLength = scrollerIconPathLength;
     if (pathLength === 0) {
       pathLength = scrollerIconPathRef.current.getTotalLength();
       setScrollerIconPathLength(pathLength);
+    }
+
+    let currentYProgress = 0;
+    const topOffset = enterTopThreashold + 100;
+    const bottomOffset = document.scrollingElement!.scrollHeight * 0.07;
+
+    if (currentY > topOffset) {
+      currentYProgress =
+        (currentY - topOffset) /
+        (document.scrollingElement!.scrollHeight -
+          document.scrollingElement!.clientHeight -
+          topOffset -
+          bottomOffset);
+    }
+
+    if (currentYProgress >= 1.05) {
+      setIsScrollerVisible(false);
+    } else if (currentY > enterTopThreashold) {
+      setIsScrollerVisible(true);
+    } else if (currentY < exitTopThreashold) {
+      setIsScrollerVisible(false);
     }
 
     const pathOffset = pathLength * currentYProgress;

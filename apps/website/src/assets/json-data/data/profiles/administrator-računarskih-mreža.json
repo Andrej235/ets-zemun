@@ -1,9 +1,10 @@
 {
   "name": "Administrator računarskih mreža",
   "description": "Ovaj obrazovni profil omogućava učenicima da steknu veštine u oblasti administracije računarskih mreža. Uči ih kako da postavljaju, održavaju i nadgledaju mrežnu opremu, kao i kako da obezbede sigurnost mrežnih sistema. Takođe, učenici se osposobljavaju za rad sa različitim operativnim sistemima i dijagnostiku mrežnih problema, što je ključno za rad u firmama koje koriste računarske mreže i internet servise.",
-  "imagePath": "/images/profiles/administrator-racunarskih-mreza.png",
+  "imagePath": "/images/profiles/administrator-racunarskih-mreza.jpg",
   "classes": {
     "general": [],
     "specific": []
   }
 }
+

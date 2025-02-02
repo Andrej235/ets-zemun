@@ -49,5 +49,24 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+
+          const match = /node_modules\/((?:@[^/]+\/)?[^/]+)/.exec(id);
+          const packageName = match?.[1];
+          if (!packageName) return;
+
+          if (packageName.includes("motion")) return "vendor-motion";
+
+          if (packageName.includes("three")) return "vendor-three";
+
+          return "vendor";
+        },
+      },
+    },
+  },
 }));
 

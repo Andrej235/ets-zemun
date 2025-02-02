@@ -27,7 +27,7 @@ export default function About() {
             <h2>Mi ne čekamo budućnost, mi joj idemo u susret!</h2>
           </div>
 
-          <img src="/hero-image.jpeg" alt="student" />
+          <img src="/hero-image.jpg" alt="student" />
         </div>
 
         <div className="hero-block" ref={heroSpaceRef}>
@@ -86,7 +86,7 @@ export default function About() {
             </div>
 
             <div className="overview-image">
-              <img src="/images/414bee0337a871bdd69bc69aadaf2c79.png" alt="" />
+              <img src="/images/mission.jpg" alt="" />
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function About() {
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
           count={100}
-          image="/mock-news-preview/1.png"
+          image="/images/info-cards/teachers.jpg"
           title="Iskusnih nastavnika"
           description="Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
           layout="image-left"
@@ -103,7 +103,7 @@ export default function About() {
 
         <SchoolPreviewCard
           count={750}
-          image="/mock-news-preview/2.png"
+          image="/images/info-cards/students.jpg"
           title="Učenika u dinamičnoj zajednici"
           description="Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
           layout="image-right"
@@ -112,16 +112,16 @@ export default function About() {
         <SchoolPreviewCard
           count={40}
           title="Moderno opremljenih kabineta"
-          image="/mock-news-preview/3.png"
+          image="/images/info-cards/samsung-classroom.jpg"
           description="Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
           layout="image-left"
         />
 
         <SchoolPreviewCard
-          count={15}
+          count={25}
           title="Osvojenih nagrada"
-          image="/mock-news-preview/1.png"
-          description="Naš rad prepoznat je kroz brojne nagrade u oblastima digitalne obrazovanja, naučnih olimpijada i društveno korisnih projekata. Ova priznanja su rezultat posvećenosti celog tima da kroz napredak i etički pristup budimo najbolje u svakom učeniku."
+          image="/images/info-cards/trophy.jpg"
+          description="Naši učenici su osvojili preko 25 priznanja na regionalnim, nacionalnim i međunarodnim takmičenjima. Dominiraju u STEM projektima, umetničkim izazovima, sportu i debatama, pokazujući izuzetan kreativni potencijal. Kroz mentorstvo nastavnika i prilagođene programe, podstičemo ih da istražuju, razvijaju ideje i postanu ambasadori znanja. Svaka nagrada je priča o njihovoj posvećenosti i upornosti."
           layout="image-right"
         />
       </section>
