@@ -2,30 +2,34 @@
   "json.schemas": [
     {
       "fileMatch": ["profiles.json"],
-      "url": "/src/assets/json-data/schemas/profiles-overview-collection.schema.json"
+      "url": "/apps/website/src/assets/json-data/schemas/profiles-overview-collection.schema.json"
     },
     {
       "fileMatch": ["profiles/*.json"],
-      "url": "/src/assets/json-data/schemas/profile.schema.json"
+      "url": "/apps/website/src/assets/json-data/schemas/profile.schema.json"
     },
     {
       "fileMatch": ["classes.json"],
-      "url": "/src/assets/json-data/schemas/class-definitions.schema.json"
+      "url": "/apps/website/src/assets/json-data/schemas/class-definitions.schema.json"
     },
     {
       "fileMatch": ["search-map.json"],
-      "url": "/src/assets/json-data/schemas/search-map.schema.json"
+      "url": "/apps/website/src/assets/json-data/schemas/search-map.schema.json"
+    },
+    {
+      "fileMatch": ["documents.json"],
+      "url": "/apps/website/src/assets/json-data/schemas/document-group-collection.schema.json"
     }
   ],
   "emeraldwalk.runonsave": {
     "commands": [
       {
         "match": "\\.schema.json$",
-        "cmd": "cmd /c ${workspaceFolder}\\.vscode\\tranform-json-schema-to-ts ${fileBasenameNoExt}"
+        "cmd": "sh $(${workspaceFolder}/.vscode/tranform-json-schema-to-ts.sh ${fileBasenameNoExt})"
       },
       {
         "match": "data-to-schema-map.json$",
-        "cmd": "@node ${workspaceFolder}/.vscode/update-json-schemas-map.js ${workspaceFolder} && npx prettier --write ${workspaceFolder}/.vscode/settings.json"
+        "cmd": "node ${workspaceFolder}/.vscode/update-json-schemas-map.js ${workspaceFolder} && npx prettier --write ${workspaceFolder}/.vscode/settings.json"
       }
     ],
     "cwd": "/src/assets/json-data/schemas"

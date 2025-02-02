@@ -17,5 +17,11 @@
     "fileMatch": ["search-map.json"],
     "url": "src/assets/json-data/schemas/search-map.schema.json",
     "omitFromTranslation": ["url", "matchFor"]
+  },
+  {
+    "fileMatch": ["documents.json"],
+    "url": "src/assets/json-data/schemas/document-group-collection.schema.json",
+    "omitFromTranslation": ["url", "iconName", "accentColor"]
   }
 ]
+

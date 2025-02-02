@@ -32,9 +32,6 @@ obj
 *.userosscache
 *.sln.docstates
 
-# Visual Studio Code
-.vscode/
-
 # Rider
 .idea/
 .idea_modules/
