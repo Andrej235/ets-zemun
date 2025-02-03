@@ -1,13 +1,13 @@
 import "./app-header.scss";
 import { Link } from "react-router";
 import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import FocusTrap from "focus-trap-react";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
 
-export default function AppHeader() {
+const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-
+  
   return (
     <FocusTrap
       active={isHamburgerMenuOpen}
@@ -18,7 +18,7 @@ export default function AppHeader() {
         onDeactivate: () => setIsHamburgerMenuOpen(false),
       }}
     >
-      <div id="app-header">
+      <div id="app-header" ref={ref}>
         <HamburgerMenu
           isHamburgerMenuOpen={isHamburgerMenuOpen}
           onRequestOpen={() => setIsHamburgerMenuOpen(true)}
@@ -50,5 +50,7 @@ export default function AppHeader() {
       </div>
     </FocusTrap>
   );
-}
+});
+
+export default AppHeader;
 

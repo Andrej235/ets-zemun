@@ -45,7 +45,7 @@ export default function searchMapTransformer(): PluginObj {
             const divElement = types.jsxElement(
               types.jsxOpeningElement(types.jsxIdentifier("div"), [
                 types.jsxAttribute(
-                  types.jsxIdentifier("data-search-id"),
+                  types.jsxIdentifier("data-search-key"),
                   idProp.value
                 ),
                 types.jsxAttribute(
@@ -64,7 +64,7 @@ export default function searchMapTransformer(): PluginObj {
           }
         } else {
           //? HTML React component
-          searchKeyAttribute.name = types.jsxIdentifier("data-search-id");
+          searchKeyAttribute.name = types.jsxIdentifier("data-search-key");
           searchKeyAttribute.value = types.jsxExpressionContainer(idProp.value);
         }
       },
