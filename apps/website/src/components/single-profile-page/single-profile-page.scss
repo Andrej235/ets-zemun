@@ -1,5 +1,24 @@
 .single-profile-page {
-  padding: 2rem 5rem;
+  padding: 2rem 15rem;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $text-primary;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: $text-secondary;
+    margin-bottom: 1.5rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
 
   .classes-container {
     margin-top: 20px;
@@ -43,7 +62,7 @@
 
     .classes-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
       gap: 20px;
 
       .class-item {
@@ -53,9 +72,38 @@
         box-shadow: 0 2px 4px $shadow;
         box-sizing: border-box;
 
-        p {
+        .class-name {
+          position: relative;
           margin: 5px 0;
+          padding-left: 0.7rem;
           color: $text-primary;
+
+          &::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 0.35rem;
+            height: 100%;
+            transform: translate(-0.7rem, 0);
+            margin-right: 5px;
+          }
+        }
+
+        &.general {
+          .class-name::before {
+            background-color: $accent-secondary;
+          }
+        }
+
+        &.specific {
+          .class-name::before {
+            background-color: $accent;
+          }
+        }
+
+        .class-count {
+          color: $text-secondary;
+          font-size: 1.2rem;
         }
       }
     }

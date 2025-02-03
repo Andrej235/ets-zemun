@@ -61,10 +61,12 @@ export default function SingleProfilePage() {
 
         <div className="classes-list">
           {classes[selectedYear - 1]?.map((classItem) => (
-            <div key={classItem.className} className="class-item">
-              <p>{classItem.className}</p>
-              <p>{classItem.count}</p>
-              <p>{classItem.type}</p>
+            <div
+              key={classItem.className}
+              className={"class-item " + classItem.type}
+            >
+              <p className="class-name">{classItem.className}</p>
+              <p className="class-count">{classItem.count} x nedeljno</p>
             </div>
           ))}
         </div>
