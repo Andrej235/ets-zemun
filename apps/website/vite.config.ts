@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import babelTextTransformerWrapper from "./plugins/babel-text-transformer-wrapper";
-import jsonTranslatorPlugin from "./plugins/json-plugin";
-import translatorPlugin from "./plugins/translator-plugin";
+import translatorPlugin from "./plugins/text-transformer/translator-plugin";
+import jsonTranslatorPlugin from "./plugins/text-transformer/json-plugin";
+import babelTextTransformerWrapper from "./plugins/text-transformer/babel-text-transformer-wrapper";
 
 export default defineConfig(({ mode }) => ({
   base: "/",
