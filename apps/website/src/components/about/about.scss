@@ -90,6 +90,10 @@
         display: flex;
         justify-content: center;
 
+        & > * {
+          width: 25%;
+        }
+
         & > :nth-child(even) {
           background-color: $secondary-background;
 
@@ -107,7 +111,6 @@
         }
 
         .hero-block-element {
-          width: 25%;
           overflow: clip;
 
           .hero-block-icon {
@@ -460,6 +463,10 @@
 
         flex-direction: column;
         align-items: center;
+
+        & > * {
+          width: 100%;
+        }
 
         & > :nth-child(even) {
           background-color: $background;

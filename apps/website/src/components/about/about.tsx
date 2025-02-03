@@ -20,7 +20,15 @@ export default function About() {
   );
 
   return (
-    <div id="about-page">
+    <div
+      id="about-page"
+      searchKey={{
+        id: "o-nama",
+        title: "O Nama",
+        keywords: ["o nama", "o skoli"],
+        url: "/",
+      }}
+    >
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
@@ -64,7 +72,15 @@ export default function About() {
             />
           </div>
 
-          <div className="overview">
+          <div
+            className="overview"
+            searchKey={{
+              id: "misija-i-vizija",
+              keywords: ["misija", "vizija", "misija i vizija"],
+              title: "Misija i Vizija",
+              url: "/",
+            }}
+          >
             <div className="overview-info">
               <h1>Misija i Vizija</h1>
               <p>

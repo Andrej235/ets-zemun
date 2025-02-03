@@ -7,19 +7,20 @@ import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
 import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
+import SearchEntry from "src/types/search/search-entry";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
   const fuse = useMemo(
     () =>
       new Fuse(searchMap.entries as SearchMapSchema["entries"], {
-        keys: ["title", "matchFor"],
+        keys: ["title", "keywords"],
       }),
     []
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
-    FuseResult<SearchMapSchema["entries"][number]>[]
+    FuseResult<SearchEntry>[]
   >([]);
 
   const [isAutoCompleteShown, setIsAutoCompleteShown] = useState(false);

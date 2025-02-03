@@ -1,9 +1,9 @@
 //@text-transform-ignore
-import { Outlet, ScrollRestoration } from "react-router";
+import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
 import AppHeader from "@components/app-header/app-header";
 import "./app.scss";
 import LanguageContext, { localLanguages } from "@contexts/language-context";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Scroller from "@components/scroller/scroller";
 import AppFooter from "@components/app-footer/app-footer";
 import SetLanguageContext from "@contexts/set-language-context";
@@ -40,13 +40,31 @@ function App() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [language, changeLanguage]);
 
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const searchKey = searchParams.get("searchKey");
+    if (!searchKey) return;
+
+    const element = document.querySelector(
+      `[data-search-key="${searchKey}"]`
+    ) as HTMLElement;
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+    const offset = rect.top + window.scrollY - headerRef.current!.clientHeight;
+
+    window.scrollTo({ top: offset, behavior: "smooth" });
+  }, [searchParams]);
+
+  const headerRef = useRef<HTMLDivElement>(null);
+
   return (
     <LanguageContext.Provider value={language}>
       <SetLanguageContext.Provider value={changeLanguage}>
         <div id="app">
           <ScrollRestoration />
 
-          <AppHeader />
+          <AppHeader ref={headerRef} />
 
           <div id="page-content">
             <Outlet />
