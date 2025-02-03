@@ -1,0 +1,64 @@
+.single-profile-page {
+  padding: 2rem 5rem;
+
+  .classes-container {
+    margin-top: 20px;
+
+    .year-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+
+      button {
+        padding: 15px 30px;
+        border: none;
+        background-color: $accent;
+        color: $text-accent;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+          background-color: $accent-highlight;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px $accent;
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      @media (max-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .classes-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+      gap: 20px;
+
+      .class-item {
+        background-color: $secondary-background;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px $shadow;
+        box-sizing: border-box;
+
+        p {
+          margin: 5px 0;
+          color: $text-primary;
+        }
+      }
+    }
+  }
+}
+
