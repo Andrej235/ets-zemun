@@ -8,8 +8,8 @@ export default function SingleProfilePage() {
 
   const classes = useMemo(() => {
     return [
-      ...loaderData.classes.general,
       ...loaderData.classes.specific,
+      ...loaderData.classes.general,
     ].reduce(
       (
         acc: {
@@ -53,10 +53,33 @@ export default function SingleProfilePage() {
 
       <div className="classes-container">
         <div className="year-selector">
-          <button onClick={() => handleYearChange(1)}>Year 1</button>
-          <button onClick={() => handleYearChange(2)}>Year 2</button>
-          <button onClick={() => handleYearChange(3)}>Year 3</button>
-          <button onClick={() => handleYearChange(4)}>Year 4</button>
+          <button
+            className={selectedYear === 1 ? "selected" : ""}
+            onClick={() => handleYearChange(1)}
+          >
+            Godina 1
+          </button>
+
+          <button
+            className={selectedYear === 2 ? "selected" : ""}
+            onClick={() => handleYearChange(2)}
+          >
+            Godina 2
+          </button>
+
+          <button
+            className={selectedYear === 3 ? "selected" : ""}
+            onClick={() => handleYearChange(3)}
+          >
+            Godina 3
+          </button>
+
+          <button
+            className={selectedYear === 4 ? "selected" : ""}
+            onClick={() => handleYearChange(4)}
+          >
+            Godina 4
+          </button>
         </div>
 
         <div className="classes-list">

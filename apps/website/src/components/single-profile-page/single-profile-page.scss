@@ -1,5 +1,5 @@
 .single-profile-page {
-  padding: 2rem 15rem;
+  padding: 2rem min(15rem, 5vw);
 
   h1 {
     font-size: 2.5rem;
@@ -10,7 +10,6 @@
   p {
     font-size: 1.2rem;
     color: $text-secondary;
-    margin-bottom: 1.5rem;
   }
 
   img {
@@ -25,56 +24,79 @@
 
     .year-selector {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(5rem, 15rem));
       gap: 10px;
       margin-bottom: 20px;
+      font-size: 1.5rem;
 
       button {
-        padding: 15px 30px;
+        padding: 2.5rem;
         border: none;
-        background-color: $accent;
+        background-color: $accent-secondary;
         color: $text-accent;
         cursor: pointer;
         border-radius: 5px;
         transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 
         &:hover {
-          background-color: $accent-highlight;
+          background-color: $accent-secondary-highlight;
           transform: translateY(-2px);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        &:focus {
+        &:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 3px $accent;
+          box-shadow: 0 0 0 3px $accent-secondary;
         }
 
         &:active {
           transform: translateY(0);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
+        &.selected {
+          background-color: $accent;
+
+          &:hover {
+            background-color: $accent;
+            transform: translateY(0);
+          }
+
+          &:focus-visible {
+            box-shadow: 0 0 0 3px $accent;
+          }
+        }
       }
 
       @media (max-width: 600px) {
         grid-template-columns: repeat(2, 1fr);
+        font-size: 2rem;
+
+        button {
+          padding: 2rem;
+        }
       }
     }
 
     .classes-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-      gap: 20px;
+      gap: 2.5rem;
 
       .class-item {
         background-color: $secondary-background;
-        padding: 15px;
+        padding: 18px 15px 15px 15px;
         border-radius: 5px;
         box-shadow: 0 2px 4px $shadow;
         box-sizing: border-box;
 
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
         .class-name {
           position: relative;
-          margin: 5px 0;
+          font-size: 1.5rem;
           padding-left: 0.7rem;
           color: $text-primary;
 
@@ -85,7 +107,6 @@
             width: 0.35rem;
             height: 100%;
             transform: translate(-0.7rem, 0);
-            margin-right: 5px;
           }
         }
 
@@ -104,6 +125,22 @@
         .class-count {
           color: $text-secondary;
           font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 768px) {
+          .class-name {
+            padding-left: 1.3rem;
+            font-size: 2rem;
+
+            &::before {
+              width: 0.7rem;
+              transform: translate(-1.3rem, 0);
+            }
+          }
+
+          .class-count {
+            font-size: 1.8rem;
+          }
         }
       }
     }
