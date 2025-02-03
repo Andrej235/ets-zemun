@@ -4,6 +4,7 @@ import path from "path";
 import translatorPlugin from "./plugins/text-transformer/translator-plugin";
 import jsonTranslatorPlugin from "./plugins/text-transformer/json-plugin";
 import babelTextTransformerWrapper from "./plugins/text-transformer/babel-text-transformer-wrapper";
+import searchMapTransformer from "./plugins/search-map/search-map-transformer";
 
 export default defineConfig(({ mode }) => ({
   base: "/",
@@ -23,7 +24,7 @@ export default defineConfig(({ mode }) => ({
     jsonTranslatorPlugin(),
     react({
       babel: {
-        plugins: [babelTextTransformerWrapper()],
+        plugins: [babelTextTransformerWrapper(), searchMapTransformer()],
       },
     }),
   ],

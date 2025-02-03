@@ -1,16 +1,9 @@
-import { NodePath, PluginObj } from "@babel/core";
-import * as t from "@babel/types";
+import { NodePath, PluginObj, types } from "@babel/core";
 
-interface BabelPluginOptions {
-  types: typeof t;
-}
-
-export default function renameSearchKeyPlugin({
-  types,
-}: BabelPluginOptions): PluginObj {
+export default function searchMapTransformer(): PluginObj {
   return {
     visitor: {
-      JSXOpeningElement(path: NodePath<t.JSXOpeningElement>) {
+      JSXOpeningElement(path: NodePath<types.JSXOpeningElement>) {
         const attributes = path.node.attributes;
         const searchKeyAttribute = attributes.find(
           (attr) =>
@@ -33,7 +26,7 @@ export default function renameSearchKeyPlugin({
             types.isObjectProperty(x) &&
             types.isIdentifier(x.key) &&
             x.key.name === "id"
-        ) as t.ObjectProperty;
+        ) as types.ObjectProperty;
 
         if (!idProp) throw new Error("searchKey must have an id");
 
