@@ -38,28 +38,28 @@ export default function About() {
             <HeroInfoCard
               icon="trophy"
               title="Takmičenja i nagrade"
-              description="Ovo je deskripcija!"
+              description="Informacije o svim takmičenjima i osvojenim nagradama."
               url={"/takmicenja"}
             />
 
             <HeroInfoCard
               icon="chalkboard-teacher"
               title="Nastavnici"
-              description="Ovo je deskripcija!"
+              description="Saznajte više o našim nastavnicima i njihovim kvalifikacijama."
               url={"/nastavnici"}
             />
 
             <HeroInfoCard
               icon="history"
               title="Istorija"
-              description="Ovo je deskripcija!"
+              description="Pregled istorije naše škole i značajnih trenutaka."
               url={"/istorija"}
             />
 
             <HeroInfoCard
               icon="pencil-alt"
               title="Upis i prijem"
-              description="Ovo je deskripcija!"
+              description="Detalji o procesu upisa i prijemnom ispitu."
               url={"/upis"}
             />
           </div>
