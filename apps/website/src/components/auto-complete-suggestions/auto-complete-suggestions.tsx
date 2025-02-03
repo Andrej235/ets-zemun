@@ -120,7 +120,7 @@ export default function AutoCompleteSuggestions({
                 key={result.item.url}
               >
                 <p className="title">{result.item.title}</p>
-                <p className="description">{result.item.description}</p>
+                <p className="description">{result.item.title}</p>
               </a>
             ))
           ) : (

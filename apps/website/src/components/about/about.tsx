@@ -19,7 +19,15 @@ export default function About() {
   );
 
   return (
-    <div id="about-page">
+    <div
+      id="about-page"
+      searchKey={{
+        id: "o-nama",
+        title: "O Nama",
+        keywords: ["o nama", "o skoli"],
+        url: "/",
+      }}
+    >
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">

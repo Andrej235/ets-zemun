@@ -1,5 +1,6 @@
 declare global {
   type SearchKey = {
+    id: string;
     title: string;
     keywords: SearchKeyKeywords;
     url: string;
