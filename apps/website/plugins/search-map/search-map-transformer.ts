@@ -47,6 +47,10 @@ export default function searchMapTransformer(): PluginObj {
                   types.jsxIdentifier("data-search-id"),
                   idProp.value
                 ),
+                types.jsxAttribute(
+                  types.jsxIdentifier("className"),
+                  types.stringLiteral("search-target-container")
+                ),
               ]),
               types.jsxClosingElement(types.jsxIdentifier("div")),
               [jsxElement]
