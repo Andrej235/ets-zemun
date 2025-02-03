@@ -8,7 +8,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "enum": ["page", "resource"]
+            "type": "string",
+            "description": "Unique ID of the resource"
           },
           "url": {
             "type": "string",

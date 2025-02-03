@@ -2,6 +2,7 @@ import { NodePath, PluginObj, types } from "@babel/core";
 
 export default function searchMapTransformer(): PluginObj {
   return {
+    name: "search-map-transformer",
     visitor: {
       JSXOpeningElement(path: NodePath<types.JSXOpeningElement>) {
         const attributes = path.node.attributes;
