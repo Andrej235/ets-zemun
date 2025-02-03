@@ -26,7 +26,7 @@ export async function getSchemaMap(): Promise<SchemaMap> {
     await fs.readFile(
       path.resolve(
         __dirname,
-        "../src/assets/json-data/data-to-schema-map.json"
+        "../../src/assets/json-data/data-to-schema-map.json"
       ),
       "utf-8"
     )

@@ -19,7 +19,7 @@ export default function jsonTranslatorPlugin(): Plugin | null {
           filename: id,
           plugins: [
             [
-              "./plugins/json-text-transformer",
+              "./plugins/text-transformer/json-text-transformer",
               {
                 omitProperties: await getPropertyNamesToOmit(id, schemaMap),
                 translations: jsonTranslations,

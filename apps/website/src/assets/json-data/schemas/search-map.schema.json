@@ -27,7 +27,7 @@
             }
           }
         },
-        "required": ["url", "matchFor", "title", "id"],
+        "required": ["url", "keywords", "title", "id"],
         "additionalProperties": false
       }
     }
