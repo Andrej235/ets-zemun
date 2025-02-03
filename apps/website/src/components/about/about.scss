@@ -260,6 +260,8 @@
         display: flex;
         align-items: center;
         font-size: 3.2rem;
+
+        color: $accent-secondary;
       }
 
       p {
@@ -287,16 +289,25 @@
     margin-bottom: 10rem;
   }
 
+  .call-to-action-section {
+    padding: 10rem 0;
+    background-color: $secondary-background;
+    margin-bottom: 10rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .call-to-action {
     align-self: center;
     max-width: 120rem;
     width: 90%;
     min-height: max-content;
     padding: 4rem;
-    background-color: $secondary-background;
+    background-color: $background;
     box-shadow: 0px 5px 15px $shadow;
     border-radius: 2.5rem;
-    margin-bottom: 15rem;
 
     display: flex;
     flex-direction: column;
@@ -305,6 +316,7 @@
 
     h1 {
       font-size: 3.2rem;
+      color: $accent-secondary;
     }
 
     p {
@@ -312,26 +324,56 @@
     }
 
     button {
-      width: 100%;
+      position: relative;
+      width: 18rem;
       height: 5rem;
-      font-size: 1.6rem;
+      border-radius: 25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s background-color;
 
-      &.primary {
-        outline: 2px solid transparent;
+      p {
+        transition: 0.3s;
+        font-size: 1.6rem;
+        font-weight: 500;
+      }
 
-        &:hover,
-        &:focus-visible {
-          outline: 2px solid $outline;
+      .button-icon {
+        position: absolute;
+        right: 2rem;
+        opacity: 0;
+        transition: 0.3s;
+        font-size: 1.8rem;
+        color: black;
+      }
+
+      &:hover {
+        p {
+          transform: translateX(-1rem);
         }
+
+        .button-icon {
+          right: 1rem;
+          opacity: 1;
+        }
+      }
+
+      &.primary:hover {
+        background-color: white;
+        color: black;
       }
 
       &.secondary {
         background-color: transparent;
-        border: 2px solid $accent;
+        color: $accent;
+        border: 1px solid $accent;
+        transition: 0.2s linear;
 
-        &:hover,
-        &:focus-visible {
-          background-color: $accent-secondary-highlight;
+        &:hover {
+          background-color: #fff;
+          border: none;
+          color: black;
         }
       }
     }
