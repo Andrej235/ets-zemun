@@ -2,9 +2,10 @@ declare global {
   type SearchKey = {
     title: string;
     keywords: SearchKeyKeywords;
+    url: string;
   };
 
-  type SearchKeyKeywords = string | [string, ...string[]];
+  type SearchKeyKeywords = [string, ...string[]];
 
   namespace JSX {
     interface IntrinsicAttributes {
