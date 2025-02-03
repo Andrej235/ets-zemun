@@ -3,14 +3,14 @@ import { useEffect, useRef } from "react";
 import { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
-import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
+import SearchEntry from "src/types/search/search-entry";
 
 type AutoCompleteSuggestions = {
   readonly containerRef: React.RefObject<HTMLDivElement>;
   readonly inputRef: React.RefObject<HTMLInputElement>;
   readonly buttonRef: React.RefObject<HTMLButtonElement>;
   readonly isAutoCompleteShown: boolean;
-  readonly searchAutoComplete: FuseResult<SearchMapSchema["entries"][number]>[];
+  readonly searchAutoComplete: FuseResult<SearchEntry>[];
   readonly onBeforeNavigate: () => void;
 };
 
@@ -117,7 +117,7 @@ export default function AutoCompleteSuggestions({
                   navigate(result.item.url);
                 }}
                 className="search-bar-auto-complete-item"
-                key={result.item.url}
+                key={result.item.id}
               >
                 <p className="title">{result.item.title}</p>
                 <p className="description">{result.item.title}</p>
