@@ -10,17 +10,24 @@ export default function renameSearchKeyPlugin({
 }: BabelPluginOptions): PluginObj {
   return {
     visitor: {
-      JSXAttribute(path: NodePath<t.JSXAttribute>) {
-        if (!types.isJSXIdentifier(path.node.name, { name: "searchKey" }))
+      JSXOpeningElement(path: NodePath<t.JSXOpeningElement>) {
+        const attributes = path.node.attributes;
+        const searchKeyAttribute = attributes.find(
+          (attr) =>
+            types.isJSXAttribute(attr) &&
+            types.isJSXIdentifier(attr.name, { name: "searchKey" })
+        );
+
+        if (!searchKeyAttribute || !types.isJSXAttribute(searchKeyAttribute))
           return;
 
         if (
-          !types.isJSXExpressionContainer(path.node.value) ||
-          !types.isObjectExpression(path.node.value.expression)
+          !types.isJSXExpressionContainer(searchKeyAttribute.value) ||
+          !types.isObjectExpression(searchKeyAttribute.value.expression)
         )
           throw new Error("searchKey must be an object");
 
-        const props = path.node.value.expression.properties;
+        const props = searchKeyAttribute.value.expression.properties;
         const idProp = props.find(
           (x) =>
             types.isObjectProperty(x) &&
@@ -33,8 +40,35 @@ export default function renameSearchKeyPlugin({
         if (!types.isStringLiteral(idProp.value))
           throw new Error("id must be a string");
 
-        path.node.name = types.jsxIdentifier("data-search-id");
-        path.node.value = types.jsxExpressionContainer(idProp.value);
+        if (
+          types.isJSXIdentifier(path.node.name) &&
+          path.node.name.name.startsWith(path.node.name.name[0].toUpperCase())
+        ) {
+          //? Custom React component
+          const parentPath = path.parentPath;
+          if (types.isJSXElement(parentPath.node)) {
+            const jsxElement = parentPath.node;
+            const divElement = types.jsxElement(
+              types.jsxOpeningElement(types.jsxIdentifier("div"), [
+                types.jsxAttribute(
+                  types.jsxIdentifier("data-search-id"),
+                  idProp.value
+                ),
+              ]),
+              types.jsxClosingElement(types.jsxIdentifier("div")),
+              [jsxElement]
+            );
+            path.node.attributes = attributes.filter(
+              (attr) => attr !== searchKeyAttribute
+            );
+            parentPath.replaceWith(divElement);
+            parentPath.skip();
+          }
+        } else {
+          //? HTML React component
+          searchKeyAttribute.name = types.jsxIdentifier("data-search-id");
+          searchKeyAttribute.value = types.jsxExpressionContainer(idProp.value);
+        }
       },
     },
   };
