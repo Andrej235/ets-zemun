@@ -21,8 +21,8 @@ export default function useOutsideClick(
   );
 
   useEffect(() => {
-    document.body.addEventListener("pointerdown", handleClick);
-    return () => document.body.removeEventListener("pointerdown", handleClick);
+    document.body.addEventListener("mousedown", handleClick);
+    return () => document.body.removeEventListener("mousedown", handleClick);
   }, [ref, callback, handleClick]);
 }
 

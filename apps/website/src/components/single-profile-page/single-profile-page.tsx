@@ -45,7 +45,13 @@ export default function SingleProfilePage() {
   };
 
   const selectedClassRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(selectedClassRef, () => setSelectedClass(null));
+  const isInAnimation = useRef(false);
+  useOutsideClick(selectedClassRef, () => {
+    if (isInAnimation.current) return;
+
+    isInAnimation.current = true;
+    setSelectedClass(null);
+  });
 
   return (
     <div className="single-profile-page">
@@ -58,8 +64,8 @@ export default function SingleProfilePage() {
               "full-screen-class-container class-item " + selectedClass.type
             }
             ref={selectedClassRef}
-            animate={{
-              zIndex: 1000,
+            onLayoutAnimationComplete={() => {
+              isInAnimation.current = false;
             }}
           >
             <motion.p layout className="class-name">
@@ -235,10 +241,16 @@ export default function SingleProfilePage() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 layout
+                onLayoutAnimationComplete={() => {
+                  isInAnimation.current = false;
+                }}
                 layoutId={classItem.className}
                 key={classItem.className}
                 className={"class-item " + classItem.type}
                 onClick={() => {
+                  if (isInAnimation.current) return;
+
+                  isInAnimation.current = true;
                   setSelectedClass(classItem);
                 }}
               >
