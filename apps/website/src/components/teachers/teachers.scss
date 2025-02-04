@@ -1,0 +1,73 @@
+.teachers-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  .image-container {
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100svh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 70%, $background 100%);
+    }
+  }
+
+  .info {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 100%;
+
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 2rem;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+
+      .card {
+        background: $secondary-background;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        width: 20rem;
+        aspect-ratio: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+          font-size: 4rem;
+        }
+
+        p {
+          font-size: 2rem;
+          font-weight: 600;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}
+
