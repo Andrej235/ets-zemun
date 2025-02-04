@@ -201,28 +201,28 @@ export default function SingleProfilePage() {
             className={selectedYear === 1 ? "selected" : ""}
             onClick={() => handleYearChange(1)}
           >
-            Godina 1
+            <p>I</p>
           </button>
 
           <button
             className={selectedYear === 2 ? "selected" : ""}
             onClick={() => handleYearChange(2)}
           >
-            Godina 2
+            <p>II</p>
           </button>
 
           <button
             className={selectedYear === 3 ? "selected" : ""}
             onClick={() => handleYearChange(3)}
           >
-            Godina 3
+            <p>III</p>
           </button>
 
           <button
             className={selectedYear === 4 ? "selected" : ""}
             onClick={() => handleYearChange(4)}
           >
-            Godina 4
+            <p>IV</p>
           </button>
         </div>
 

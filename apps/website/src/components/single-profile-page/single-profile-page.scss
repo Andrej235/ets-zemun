@@ -141,27 +141,36 @@
   }
 
   .classes-container {
-    margin-top: 20px;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: 1fr;
+    gap: 3rem;
 
     .year-selector {
+      grid-column: 2;
+
       display: grid;
-      grid-template-columns: repeat(4, minmax(5rem, 15rem));
-      gap: 10px;
-      margin-bottom: 20px;
+      grid-template-rows: repeat(4, max-content);
+      gap: 1.5rem;
       font-size: 1.5rem;
 
       button {
-        padding: 2.5rem;
         border: none;
         background-color: $accent-secondary;
         color: $text-accent;
         cursor: pointer;
         border-radius: 5px;
         transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        aspect-ratio: 1;
+        width: 5rem;
+
+        p {
+          font-size: 2rem;
+        }
 
         &:hover {
           background-color: $accent-secondary-highlight;
-          transform: translateY(-2px);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
@@ -171,7 +180,6 @@
         }
 
         &:active {
-          transform: translateY(0);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
@@ -180,7 +188,6 @@
 
           &:hover {
             background-color: $accent;
-            transform: translateY(0);
           }
 
           &:focus-visible {
@@ -188,21 +195,42 @@
           }
         }
       }
-
-      @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 1fr);
-        font-size: 2rem;
-
-        button {
-          padding: 2rem;
-        }
-      }
     }
 
     .classes-list {
+      grid-column: 1;
+      grid-row: 1;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
       gap: 2.5rem;
+    }
+
+    @media (max-width: 600px) {
+      grid-template-rows: max-content 1fr;
+      grid-template-columns: 1fr;
+      gap: 0;
+
+      .year-selector {
+        grid-row: 1;
+        grid-column: 1;
+        height: max-content;
+        margin-bottom: 1.5rem;
+
+        grid-template-columns: repeat(4, max-content);
+        grid-template-rows: 1fr;
+        justify-content: center;
+
+        font-size: 2rem;
+
+        button {
+          width: 6rem;
+        }
+      }
+
+      .classes-list {
+        grid-row: 2;
+        grid-column: 1;
+      }
     }
   }
 
