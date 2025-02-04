@@ -1,7 +1,7 @@
 import useOutsideClick from "@hooks/use-outside-click";
 import "./single-profile-page.scss";
 import ProfileSchema from "@assets/json-data/ts-schemas/profile.schema";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 
@@ -171,22 +171,28 @@ export default function SingleProfilePage() {
         </div>
 
         <div className="classes-list">
-          {classes[selectedYear - 1]?.map((classItem) => (
-            <motion.div
-              layout
-              layoutId={classItem.className}
-              key={classItem.className}
-              className={"class-item " + classItem.type}
-              onClick={() => {
-                setSelectedClass(classItem);
-              }}
-            >
-              <motion.p layout className="class-name">
-                {classItem.className}
-              </motion.p>
-              <motion.p layout>{classItem.count}x nedeljno</motion.p>
-            </motion.div>
-          ))}
+          <AnimatePresence mode="popLayout">
+            {classes[selectedYear - 1]?.map((classItem) => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                layout
+                layoutId={classItem.className}
+                key={classItem.className}
+                className={"class-item " + classItem.type}
+                onClick={() => {
+                  setSelectedClass(classItem);
+                }}
+              >
+                <motion.p layout className="class-name">
+                  {classItem.className}
+                </motion.p>
+                <motion.p layout>{classItem.count}x nedeljno</motion.p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </div>
