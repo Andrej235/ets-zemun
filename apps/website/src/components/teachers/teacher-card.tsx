@@ -23,6 +23,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
         duration: 0.25,
       }}
       viewport={{
+        amount: 0.15,
         once: true,
       }}
     >
