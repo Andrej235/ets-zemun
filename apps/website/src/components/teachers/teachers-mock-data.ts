@@ -1,4 +1,4 @@
-type Faculty = {
+export type Faculty = {
   id: string;
   name: string;
   title: string;
@@ -8,10 +8,7 @@ type Faculty = {
   subjects: string[];
   department: string;
   officeHours: { day: string; time: string }[];
-  contact: {
-    email: string;
-    officeLocation: string;
-  };
+  email: string;
   achievements?: string[];
   socialLinks?: {
     linkedIn?: string;
@@ -25,7 +22,7 @@ export const teachersMockData: Faculty[] = [
     name: "Marko Petrović",
     title: "Profesor sistema automatizacije",
     bio: "Sa više od 15 godina iskustva u industrijskoj automatizaciji, prof. Petrović se specijalizovao za PLC programiranje i robotiku. Mentor je studentima za nacionalna takmičenja u robotici.",
-    imageUrl: "/images/faculty/marko-petrovic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/men/75.jpg",
     qualifications: [
       "Doktorat iz automatizacije (Univerzitet u Beogradu)",
       "Sertifikovani Siemens inženjer automatizacije",
@@ -36,10 +33,7 @@ export const teachersMockData: Faculty[] = [
       { day: "Ponedeljak", time: "10:00-12:00" },
       { day: "Sreda", time: "14:00-16:00" },
     ],
-    contact: {
-      email: "marko.petrovic@eskola.rs",
-      officeLocation: "Zgrada A, Soba 205",
-    },
+    email: "marko.petrovic@ets-zemun.edu.rs",
     achievements: [
       "Vodio studentski tim do prvog mesta na Balkanskom prvenstvu u robotici 2023.",
     ],
@@ -52,7 +46,7 @@ export const teachersMockData: Faculty[] = [
     name: "Ana Jovanović",
     title: "Viši predavač računarskih mreža",
     bio: "Stručnjak za sigurnost mreža i cloud infrastrukturu. Bivši mrežni administrator u Telekomu Srbija.",
-    imageUrl: "/images/faculty/ana-jovanovic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/women/75.jpg",
     qualifications: [
       "Master iz računarstva (Univerzitet u Novom Sadu)",
       "Cisco CCNP sertifikat",
@@ -63,10 +57,7 @@ export const teachersMockData: Faculty[] = [
       { day: "Utorak", time: "09:00-11:00" },
       { day: "Četvrtak", time: "13:00-15:00" },
     ],
-    contact: {
-      email: "ana.jovanovic@eskola.rs",
-      officeLocation: "Zgrada B, Soba 104",
-    },
+    email: "ana.jovanovic@ets-zemun.edu.rs",
     achievements: [
       "Dizajnirala laboratoriju za sajber bezbednost škole uz finansiranje EU grantom",
     ],
@@ -76,7 +67,7 @@ export const teachersMockData: Faculty[] = [
     name: "Nikola Ilić",
     title: "Šef odseka za elektrotehniku",
     bio: "Specijalizovan za sisteme obnovljive energije i pametne mreže. Strastven prema održivom inženjeringu.",
-    imageUrl: "/images/faculty/nikola-ilic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/men/7.jpg",
     qualifications: [
       "Doktorat iz elektrotehnike (Univerzitet u Nišu)",
       "Sertifikovani menadžer energije",
@@ -87,10 +78,7 @@ export const teachersMockData: Faculty[] = [
       { day: "Ponedeljak", time: "13:00-15:00" },
       { day: "Petak", time: "10:00-12:00" },
     ],
-    contact: {
-      email: "nikola.ilic@eskola.rs",
-      officeLocation: "Zgrada C, Soba 301",
-    },
+    email: "nikola.ilic@ets-zemun.edu.rs",
     achievements: ["Saradnja sa EPS-om na pilot projektu solarne energije"],
     socialLinks: {
       researchGate: "researchgate.net/profile/nikola-ilic",
@@ -101,7 +89,7 @@ export const teachersMockData: Faculty[] = [
     name: "Jelena Stanković",
     title: "Profesor ugrađenih sistema",
     bio: "Fokusira se na IoT i programiranje mikrokontrolera. Vodi inovacionu laboratoriju za IoT škole.",
-    imageUrl: "/images/faculty/jelena-stankovic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/women/69.jpg",
     qualifications: [
       "Master iz elektronike (Univerzitet u Beogradu)",
       "Sertifikovani ARM inženjer",
@@ -109,10 +97,7 @@ export const teachersMockData: Faculty[] = [
     subjects: ["Ugrađeni sistemi", "IoT aplikacije"],
     department: "Automatizacija i robotika",
     officeHours: [{ day: "Sreda", time: "09:00-11:00" }],
-    contact: {
-      email: "jelena.stankovic@eskola.rs",
-      officeLocation: "Zgrada A, Soba 210",
-    },
+    email: "jelena.stankovic@ets-zemun.edu.rs",
     achievements: ["Koautor udžbenika o Arduino programiranju"],
   },
   {
@@ -120,7 +105,7 @@ export const teachersMockData: Faculty[] = [
     name: "Dragan Milić",
     title: "Predavač digitalne elektronike",
     bio: "Stručnjak za dizajn FPGA i VHDL. Bivši inženjer za istraživanje i razvoj u RT-RK institutu.",
-    imageUrl: "/images/faculty/dragan-milic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/men/53.jpg",
     qualifications: [
       "Diplomirani inženjer elektronike (Univerzitet u Banja Luci)",
       "Sertifikat za Xilinx FPGA",
@@ -128,17 +113,14 @@ export const teachersMockData: Faculty[] = [
     subjects: ["Digitalna elektronika", "VHDL programiranje"],
     department: "Elektrotehnika",
     officeHours: [{ day: "Četvrtak", time: "14:00-16:00" }],
-    contact: {
-      email: "dragan.milic@eskola.rs",
-      officeLocation: "Zgrada C, Soba 305",
-    },
+    email: "dragan.milic@ets-zemun.edu.rs",
   },
   {
     id: "6",
     name: "Ivana Vasić",
     title: "Profesor programiranja",
     bio: "Predaje Python, C++ i web razvoj. Zagovornik za žene u tehnologiji.",
-    imageUrl: "/images/faculty/ivana-vasic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/women/23.jpg",
     qualifications: [
       "Master iz softverskog inženjeringa (Univerzitet u Novom Sadu)",
       "Microsoft sertifikovani trener",
@@ -149,10 +131,7 @@ export const teachersMockData: Faculty[] = [
       { day: "Utorak", time: "10:00-12:00" },
       { day: "Petak", time: "09:00-11:00" },
     ],
-    contact: {
-      email: "ivana.vasic@eskola.rs",
-      officeLocation: "Zgrada B, Soba 112",
-    },
+    email: "ivana.vasic@ets-zemun.edu.rs",
     achievements: ["Osnovala školski Girls Code Club"],
   },
   {
@@ -160,7 +139,7 @@ export const teachersMockData: Faculty[] = [
     name: "Miloš Đorđević",
     title: "Viši inženjer robotike",
     bio: "Specijalizovan za automatizaciju robotskih procesa (RPA) i integraciju AI.",
-    imageUrl: "/images/faculty/milos-djordjevic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/men/14.jpg",
     qualifications: [
       "Doktorat iz robotike (Univerzitet u Beogradu)",
       "ABB sertifikat za robotiku",
@@ -168,10 +147,7 @@ export const teachersMockData: Faculty[] = [
     subjects: ["Automatizacija robotskih procesa", "Osnovi AI"],
     department: "Automatizacija i robotika",
     officeHours: [{ day: "Sreda", time: "15:00-17:00" }],
-    contact: {
-      email: "milos.djordjevic@eskola.rs",
-      officeLocation: "Zgrada A, Soba 215",
-    },
+    email: "milos.djordjevic@ets-zemun.edu.rs",
     socialLinks: {
       linkedIn: "linkedin.com/in/milos-djordjevic-robotics",
     },
@@ -181,7 +157,7 @@ export const teachersMockData: Faculty[] = [
     name: "Sanja Popović",
     title: "Predavač električnih kola",
     bio: "Fokusira se na dizajn kola i rešavanje problema. Vodi praktične radionice za početnike.",
-    imageUrl: "/images/faculty/sanja-popovic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/women/85.jpg",
     qualifications: [
       "Diplomirani inženjer elektrotehnike (Univerzitet u Kragujevcu)",
     ],
@@ -191,17 +167,14 @@ export const teachersMockData: Faculty[] = [
       { day: "Ponedeljak", time: "08:00-10:00" },
       { day: "Četvrtak", time: "12:00-14:00" },
     ],
-    contact: {
-      email: "sanja.popovic@eskola.rs",
-      officeLocation: "Zgrada C, Soba 302",
-    },
+    email: "sanja.popovic@ets-zemun.edu.rs",
   },
   {
     id: "9",
     name: "Stefan Marković",
     title: "Specijalista za mrežnu infrastrukturu",
     bio: "Stručnjak za Cisco mreže i administraciju servera. Upravlja data centrom škole.",
-    imageUrl: "/images/faculty/stefan-markovic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/men/15.jpg",
     qualifications: [
       "CCNA sertifikat",
       "Master iz IT (Univerzitet u Beogradu)",
@@ -209,27 +182,21 @@ export const teachersMockData: Faculty[] = [
     subjects: ["Cisco mreže", "Administracija servera"],
     department: "Računarske mreže",
     officeHours: [{ day: "Petak", time: "13:00-15:00" }],
-    contact: {
-      email: "stefan.markovic@eskola.rs",
-      officeLocation: "Zgrada B, Soba 108",
-    },
+    email: "stefan.markovic@ets-zemun.edu.rs",
   },
   {
     id: "10",
     name: "Tamara Nikolić",
     title: "Profesor matematike za inženjere",
     bio: "Predaje primenjenu matematiku za elektrotehničke discipline.",
-    imageUrl: "/images/faculty/tamara-nikolic.jpg",
+    imageUrl: "https://randomuser.me/api/portraits/women/54.jpg",
     qualifications: [
       "Doktorat iz primenjene matematike (Univerzitet u Novom Sadu)",
     ],
     subjects: ["Inženjerska matematika", "Statistika"],
     department: "Elektrotehnika",
     officeHours: [{ day: "Utorak", time: "14:00-16:00" }],
-    contact: {
-      email: "tamara.nikolic@eskola.rs",
-      officeLocation: "Zgrada C, Soba 303",
-    },
+    email: "tamara.nikolic@ets-zemun.edu.rs",
     achievements: ["Razvila program obuke za matematičku olimpijadu škole"],
   },
 ];

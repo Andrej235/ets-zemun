@@ -1,71 +1,141 @@
 .teachers-page {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
 
-  .image-container {
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100svh;
-      object-fit: cover;
-      z-index: -1;
+  .hero {
+    position: relative;
+
+    .image-container {
+      img {
+        width: 100vw;
+        height: 100svh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent 70%,
+          $background 95%
+        );
+      }
     }
 
-    &::after {
-      content: "";
+    .info {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
       width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, transparent 70%, $background 100%);
+
+      h1 {
+        font-size: 5rem;
+        margin-bottom: 2rem;
+      }
+
+      .cards {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+
+        .card {
+          background: $secondary-background;
+          padding: 1rem 2rem;
+          border-radius: 1rem;
+          width: 20rem;
+          aspect-ratio: 1;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          h2 {
+            font-size: 4rem;
+          }
+
+          p {
+            font-size: 2rem;
+            font-weight: 600;
+            color: $text-secondary;
+          }
+        }
+      }
     }
   }
 
-  .info {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    width: 100%;
+  .teacher-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 5rem;
+    padding-inline: 2rem;
 
-    h1 {
-      font-size: 5rem;
-      margin-bottom: 2rem;
-    }
+    .teacher-card {
+      background: $secondary-background;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 100%;
 
-    .cards {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
 
-      .card {
-        background: $secondary-background;
-        padding: 1rem 2rem;
-        border-radius: 1rem;
-        width: 20rem;
+      img {
+        width: 70%;
         aspect-ratio: 1;
+        object-fit: fill;
+        border-radius: 1rem;
+      }
 
+      .basic-info {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
 
         h2 {
-          font-size: 4rem;
+          font-size: 2.5rem;
+          line-height: 1.1;
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          color: $text-secondary;
+          margin-bottom: 0.5rem;
         }
 
         p {
-          font-size: 2rem;
-          font-weight: 600;
-          color: $text-secondary;
+          font-size: 1.3rem;
         }
+      }
+
+      ul.subjects {
+        flex: 1;
+        align-self: flex-start;
+        padding-inline: 0;
+
+        li {
+          font-size: 1.3rem;
+          margin-bottom: 0.5rem;
+          line-height: 1.1;
+
+          &::marker {
+            content: "";
+          }
+        }
+      }
+
+      .email {
+        font-size: 1.5rem;
+        color: $text-secondary;
       }
     }
   }
