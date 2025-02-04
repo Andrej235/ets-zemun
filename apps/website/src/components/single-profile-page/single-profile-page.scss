@@ -1,6 +1,50 @@
 .single-profile-page {
   padding: 2rem min(15rem, 5vw);
 
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 999;
+    pointer-events: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.active {
+      background-color: rgba(0, 0, 0, 0.7) !important;
+      backdrop-filter: blur(5px);
+      pointer-events: all;
+    }
+
+    .full-screen-class-container {
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  &:has(.overlay.active) {
+    * {
+      pointer-events: none;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .overlay * {
+      pointer-events: auto;
+      touch-action: auto;
+      user-select: text;
+
+      &:is(button) {
+        user-select: none;
+      }
+    }
+  }
+
   h1 {
     font-size: 2.5rem;
     color: $text-primary;
@@ -82,66 +126,66 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
       gap: 2.5rem;
+    }
+  }
 
-      .class-item {
-        background-color: $secondary-background;
-        padding: 18px 15px 15px 15px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px $shadow;
-        box-sizing: border-box;
+  .class-item {
+    background-color: $secondary-background;
+    padding: 18px 15px 15px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px $shadow;
+    box-sizing: border-box;
 
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 
-        .class-name {
-          position: relative;
-          font-size: 1.5rem;
-          padding-left: 0.7rem;
-          color: $text-primary;
+    .class-name {
+      position: relative;
+      font-size: 1.5rem;
+      padding-left: 0.7rem;
+      color: $text-primary;
 
-          &::before {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            width: 0.35rem;
-            height: 100%;
-            transform: translate(-0.7rem, 0);
-          }
+      &::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 0.35rem;
+        height: 100%;
+        transform: translate(-0.7rem, 0);
+      }
+    }
+
+    &.general {
+      .class-name::before {
+        background-color: $accent-secondary;
+      }
+    }
+
+    &.specific {
+      .class-name::before {
+        background-color: $accent;
+      }
+    }
+
+    .class-count {
+      color: $text-secondary;
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .class-name {
+        padding-left: 1.3rem;
+        font-size: 2rem;
+
+        &::before {
+          width: 0.7rem;
+          transform: translate(-1.3rem, 0);
         }
+      }
 
-        &.general {
-          .class-name::before {
-            background-color: $accent-secondary;
-          }
-        }
-
-        &.specific {
-          .class-name::before {
-            background-color: $accent;
-          }
-        }
-
-        .class-count {
-          color: $text-secondary;
-          font-size: 1.2rem;
-        }
-
-        @media screen and (max-width: 768px) {
-          .class-name {
-            padding-left: 1.3rem;
-            font-size: 2rem;
-
-            &::before {
-              width: 0.7rem;
-              transform: translate(-1.3rem, 0);
-            }
-          }
-
-          .class-count {
-            font-size: 1.8rem;
-          }
-        }
+      .class-count {
+        font-size: 1.8rem;
       }
     }
   }
