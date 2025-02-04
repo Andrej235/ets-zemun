@@ -17,13 +17,13 @@ export default function HamburgerNavigation({
   
   useEffect(() => {
     if (isMenuActive) {
-      (document.scrollingElement as HTMLElement).style.overflow = "hidden";
+      (document.scrollingElement as HTMLElement).style.overflowY = "hidden";
     } else {
-      (document.scrollingElement as HTMLElement).style.overflow = "auto";
+      (document.scrollingElement as HTMLElement).style.overflowY = "auto";
     }
 
     return () => {
-      (document.scrollingElement as HTMLElement).style.overflow = "auto";
+      (document.scrollingElement as HTMLElement).style.overflowY = "auto";
     };
   }, [isMenuActive]);
 
