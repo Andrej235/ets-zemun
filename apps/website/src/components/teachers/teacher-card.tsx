@@ -1,5 +1,5 @@
-import React from "react";
 import { Faculty } from "./teachers-mock-data";
+import { motion } from "motion/react";
 
 type TeacherCardProps = {
   teacher: Faculty;
@@ -7,7 +7,25 @@ type TeacherCardProps = {
 
 const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
   return (
-    <div className="teacher-card">
+    <motion.div
+      layout
+      layoutId={teacher.id}
+      className="teacher-card"
+      initial={{
+        opacity: 0,
+        x: -100,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+      }}
+      transition={{
+        duration: 0.25,
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
       <img
         src={teacher.imageUrl}
         alt={teacher.name}
@@ -29,7 +47,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
       <a className="email" href={`mailto:${teacher.email}`}>
         {teacher.email}
       </a>
-    </div>
+    </motion.div>
   );
 };
 
