@@ -45,17 +45,6 @@
     }
   }
 
-  h1 {
-    font-size: 2.5rem;
-    color: $text-primary;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1.2rem;
-    color: $text-secondary;
-  }
-
   img {
     max-width: 100%;
     height: auto;
@@ -156,6 +145,17 @@
       }
     }
 
+    h1 {
+      font-size: 2.5rem;
+      color: $text-primary;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: $text-secondary;
+    }
+
     &.general {
       .class-name::before {
         background-color: $accent-secondary;
@@ -186,6 +186,134 @@
 
       .class-count {
         font-size: 1.8rem;
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+
+    .image-container {
+      flex: 6;
+      position: relative;
+
+      img {
+        width: 100%;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          #00000000 0%,
+          #00000055 50%,
+          $background 95%
+        );
+      }
+    }
+
+    .info {
+      flex: 4;
+      padding: 5rem 0;
+
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      h1 {
+        font-size: 4rem;
+        color: $accent-secondary;
+      }
+
+      p {
+        font-size: 2.2rem;
+      }
+    }
+  }
+
+  .body {
+    h3 {
+      font-size: 1.7rem;
+      color: $text-primary;
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+
+    ul.skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-left: 0;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+
+      li {
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 10px 0.3px $secondary-background;
+
+        font-size: 1.6rem;
+
+        &::marker {
+          content: "";
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024.98px) {
+    padding: 0;
+
+    .header {
+      flex-direction: column;
+
+      .image-container {
+        flex: unset;
+
+        &::after {
+          background: linear-gradient(
+            180deg,
+            #00000000 0%,
+            #00000055 50%,
+            $background 95%
+          );
+        }
+      }
+
+      .info {
+        flex: unset;
+        padding: 0 2rem;
+        margin-top: 1rem;
+
+        h1 {
+          font-size: 3rem;
+        }
+
+        p {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    .body {
+      padding: 0 2rem;
+
+      h2,
+      h3,
+      p {
+        font-size: 1.6rem;
+      }
+
+      ul.skills {
+        grid-template-columns: 1fr;
       }
     }
   }
