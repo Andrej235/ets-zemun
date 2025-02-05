@@ -22,8 +22,8 @@ $accent-secondary-highlight: light-dark(
 
 $text-primary: light-dark($light-primary-text-color, $dark-primary-text-color);
 $text-secondary: light-dark(
-  color.adjust($light-primary-text-color, $lightness: 20%),
-  color.adjust($dark-primary-text-color, $lightness: -20%)
+  color.adjust($light-secondary-text-color, $lightness: 20%),
+  color.adjust($dark-secondary-text-color, $lightness: -20%)
 );
 $text-accent: light-dark(
   $light-text-on-accent-color,
@@ -31,3 +31,4 @@ $text-accent: light-dark(
 );
 
 $shadow: light-dark(#b9b9b9, #0b0b0b);
+

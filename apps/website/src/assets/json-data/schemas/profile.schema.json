@@ -19,7 +19,7 @@
       "default": "/images/profiles/default.png",
       "minLength": 20
     },
-    "classes": {
+    "subjects": {
       "type": "object",
       "properties": {
         "general": {
@@ -27,11 +27,11 @@
           "items": {
             "type": "object",
             "properties": {
-              "className": {
+              "subjectName": {
                 "type": "string",
-                "default": "default-class",
+                "default": "default-subject",
                 "minLength": 1,
-                "description": "Name of the class"
+                "description": "Name of the subject"
               },
               "perWeek": {
                 "type": "array",
@@ -45,20 +45,20 @@
               }
             },
             "minLength": 1,
-            "required": ["className", "perWeek"],
+            "required": ["subjectName", "perWeek"],
             "additionalProperties": false
           }
         },
-        "specific": {
+        "vocational": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "className": {
+              "subjectName": {
                 "type": "string",
-                "default": "default-class",
+                "default": "default-subject",
                 "minLength": 1,
-                "description": "Name of the class"
+                "description": "Name of the subject"
               },
               "perWeek": {
                 "type": "array",
@@ -72,15 +72,16 @@
               }
             },
             "minLength": 1,
-            "required": ["className", "perWeek"],
+            "required": ["subjectName", "perWeek"],
             "additionalProperties": false
           }
         }
       },
-      "required": ["general", "specific"],
+      "required": ["general", "vocational"],
       "additionalProperties": false
     }
   },
-  "required": ["name", "description", "imagePath", "classes"],
+  "required": ["name", "description", "imagePath", "subjects"],
   "additionalProperties": false
 }
+
