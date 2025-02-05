@@ -5,31 +5,31 @@ import { useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import "./single-profile-page.scss";
 
-type ClassItem = {
-  className: string;
+type SubjectItem = {
+  name: string;
   count: number;
-  type: "general" | "specific";
+  type: "general" | "vocational";
 };
 
 export default function SingleProfilePage() {
   const loaderData = useLoaderData<ProfileSchema>();
 
-  const classes = useMemo(() => {
+  const subjects = useMemo(() => {
     return [
-      ...loaderData.classes.specific,
-      ...loaderData.classes.general,
-    ].reduce((acc: ClassItem[][], x) => {
+      ...loaderData.subjects.vocational,
+      ...loaderData.subjects.general,
+    ].reduce((acc: SubjectItem[][], x) => {
       x.perWeek.forEach((y, index) => {
         if (y !== 0) {
           if (!acc[index]) {
             acc[index] = [];
           }
           acc[index].push({
-            className: x.className,
+            name: x.subjectName,
             count: y,
-            type: loaderData.classes.general.includes(x)
+            type: loaderData.subjects.general.includes(x)
               ? "general"
-              : "specific",
+              : "vocational",
           });
         }
       });
@@ -38,40 +38,45 @@ export default function SingleProfilePage() {
   }, [loaderData]);
 
   const [selectedYear, setSelectedYear] = useState(1);
-  const [selectedClass, setSelectedClass] = useState<ClassItem | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<SubjectItem | null>(
+    null
+  );
 
   const handleYearChange = (year: number) => {
     setSelectedYear(year);
   };
 
-  const selectedClassRef = useRef<HTMLDivElement>(null);
+  const selectedSubjectRef = useRef<HTMLDivElement>(null);
   const isInAnimation = useRef(false);
-  useOutsideClick(selectedClassRef, () => {
+  useOutsideClick(selectedSubjectRef, () => {
     if (isInAnimation.current) return;
 
     isInAnimation.current = true;
-    setSelectedClass(null);
+    setSelectedSubject(null);
   });
 
   return (
     <div className="single-profile-page">
-      <div className={"overlay" + (selectedClass ? " active" : "")}>
-        {selectedClass && (
+      <div className={"overlay" + (selectedSubject ? " active" : "")}>
+        {selectedSubject && (
           <motion.div
             layout
-            layoutId={selectedClass.className}
+            layoutId={selectedSubject.name}
             className={
-              "full-screen-class-container class-item " + selectedClass.type
+              "full-screen-subject-container subject-item " +
+              selectedSubject.type
             }
-            ref={selectedClassRef}
+            ref={selectedSubjectRef}
             onLayoutAnimationComplete={() => {
               isInAnimation.current = false;
             }}
           >
-            <motion.p layout className="class-name">
-              {selectedClass.className}
+            <motion.p layout className="subject-name">
+              {selectedSubject.name}
             </motion.p>
-            <motion.p layout>{selectedClass.count}x nedeljno</motion.p>
+            <motion.p className="subject-count" layout>
+              {selectedSubject.count}x nedeljno
+            </motion.p>
 
             <button onClick={() => console.log("hi")}>Hi</button>
           </motion.div>
@@ -201,7 +206,7 @@ export default function SingleProfilePage() {
         </section>
       </div>
 
-      <div className="classes-container">
+      <div className="subjects-container">
         <div className="year-selector">
           <button
             className={selectedYear === 1 ? "selected" : ""}
@@ -232,9 +237,9 @@ export default function SingleProfilePage() {
           </button>
         </div>
 
-        <div className="classes-list">
+        <div className="subjects-list">
           <AnimatePresence mode="popLayout">
-            {classes[selectedYear - 1]?.map((classItem) => (
+            {subjects[selectedYear - 1]?.map((subjectItem) => (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -244,20 +249,22 @@ export default function SingleProfilePage() {
                 onLayoutAnimationComplete={() => {
                   isInAnimation.current = false;
                 }}
-                layoutId={classItem.className}
-                key={classItem.className}
-                className={"class-item " + classItem.type}
+                layoutId={subjectItem.name}
+                key={subjectItem.name}
+                className={"subject-item " + subjectItem.type}
                 onClick={() => {
                   if (isInAnimation.current) return;
 
                   isInAnimation.current = true;
-                  setSelectedClass(classItem);
+                  setSelectedSubject(subjectItem);
                 }}
               >
-                <motion.p layout className="class-name">
-                  {classItem.className}
+                <motion.p layout className="subject-name">
+                  {subjectItem.name}
                 </motion.p>
-                <motion.p layout>{classItem.count}x nedeljno</motion.p>
+                <motion.p layout className="subject-count">
+                  {subjectItem.count}x nedeljno
+                </motion.p>
               </motion.div>
             ))}
           </AnimatePresence>

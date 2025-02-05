@@ -10,8 +10,8 @@
     "omitFromTranslation": ["imagePath"]
   },
   {
-    "fileMatch": ["classes.json"],
-    "url": "src/assets/json-data/schemas/class-definitions.schema.json"
+    "fileMatch": ["subjects.json"],
+    "url": "src/assets/json-data/schemas/subject-definitions.schema.json"
   },
   {
     "fileMatch": ["search-map.json"],

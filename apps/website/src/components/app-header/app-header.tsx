@@ -31,7 +31,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           tabIndex={isHamburgerMenuOpen ? -1 : undefined}
           aria-hidden={isHamburgerMenuOpen}
         >
-          <img src="./logo.png" alt="Logo" />
+          <img src="/logo.png" alt="Logo" />
         </Link>
 
         <div className="app-header-navigation">

@@ -5,11 +5,11 @@
     "name": {
       "type": "string",
       "minLength": 1,
-      "description": "Name of the class"
+      "description": "Name of the subject"
     },
     "description": {
       "type": "string",
-      "description": "Description of the class"
+      "description": "Description of the subject"
     },
     "skillsEarned": {
       "type": "array",
