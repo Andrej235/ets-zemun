@@ -81,22 +81,22 @@ export default function NewsAndEventsPreviewContainer() {
         <section className="news-and-events-section">
           <div className="news-events-container">
             <NewsPreview
-              date={new Date()}
-              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, sapiente?"
-              description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quasi cumque enim dolores molestiae dolorum dolore accusamus! In, praesentium quibusdam."
-              image="/mock-news-preview/1.jpg"
+              date={new Date("2025-05-10")}
+              title="Dan škole 2025"
+              description="Svečana sala škole 5. oktobra pretvoriće se u scenu na kojoj će naši talentovani učenici pokazati svoje umetničke sposobnosti. Kroz kombinovanu predstavu, od klasičnih pozorišnih scena do savremenih koreografija i pesama u izvođenju školskog hora, učenici će proslaviti Dan škole. Program će uključiti i multimedijalne projekcije, kroz koje ćemo oživeti istoriju škole i njene vrednosti. 'Ovaj dan je prilika da pokažemo sve ono što čini našu školu posebnom, a naši učenici su njen ponos', ističe direktorka škole."
+              image="/images/news/school-day.jpg"
             />
             <NewsPreview
-              date={new Date("2024-05-15")}
-              title="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elitadipisicing elit. Minus amet ea saepe corporis, quam labore officia obcaecati necessitatibus itaque quo optio? Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam ."
-              image="/mock-news-preview/2.jpg"
+              date={new Date("2025-05-15")}
+              title="Takmičenje u fudbalu"
+              description="Na sportskom terenu naše škole 15. maja biće održano takmičenje u fudbalu, na kojem će se susresti najbolji fudbalski timovi naših učenika. Očekuju nas uzbudljive utakmice, timska borbenost i pokazivanje veština na terenu. Učestvovaće ekipe različitih uzrasta, a sve utakmice će biti prilika da se proslavi sportski duh i prijateljstvo među učenicima. 'Takmičenje u fudbalu je pravi način da pokažemo kako sport ujedinjuje i motiviše naše učenike na zajednički rad i istrajnost', naglašava direktorka škole."
+              image="/images/events/football-event.png"
             />
             <NewsPreview
-              date={new Date("2024-01-23")}
-              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptatibus beatae minima!"
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci asperiores pariatur rerum perspiciatis tempore odit rem, fugit dolorem quam doloremque voluptatum officiis magnam error dignissimos vitae excepturi temporibus maiores reiciendis veniam ipsam! Tempora nobis aliquid eligendi qui."
-              image="/mock-news-preview/3.jpg"
+              date={new Date("2025-04-22")}
+              title="Takmičenje iz programiranja"
+              description="Učenici naše škole 22. aprila imaju priliku da se takmiče u programiranju i pokažu svoje tehničke veštine. Takmičenje će obuhvatiti različite izazove u kodiranju i rešavanju algoritamskih problema, a učesnici će imati šansu da pokažu svoje kreativne pristupe i inovacije u svetu tehnologije. 'Ovo takmičenje je prilika da naši učenici pokažu svoje znanje i strast prema tehnologiji, koja je ključ za budućnost', ističe direktorka škole."
+              image="/images/events/programming-contests.png"
             />
           </div>
 
