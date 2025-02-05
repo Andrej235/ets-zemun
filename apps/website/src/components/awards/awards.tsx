@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./awards.scss";
 import { awards } from "./mock-awards-data";
 
@@ -14,21 +15,26 @@ export default function Awards() {
         {awards.map((award) => (
           <div key={award.id} className="award-card">
             <img src={award.image} alt={award.title} />
-            <h2>{award.title}</h2>
-            <p>
-              {award.competition} - {award.year}
-            </p>
-            <p>{award.category}</p>
-            <p>{award.description}</p>
-            {award.projectSummary && <p>{award.projectSummary}</p>}
+            <div className="award-card-header">
+              <h2>{award.title}</h2>
+              <p>
+                {award.competition} - {award.year}
+              </p>
+            </div>
+            <div className="content">
+              <p>Kategorija:{" " + award.category}</p>
+              {award.projectSummary && <p>{award.projectSummary}</p>}
+              <p>{award.description}</p>
+            </div>
             {award.externalLink && (
-              <a
-                href={award.externalLink}
+              <Link
+                className="external-link"
+                to={award.externalLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn more
-              </a>
+                Saznaj vise
+              </Link>
             )}
           </div>
         ))}
