@@ -12,8 +12,6 @@ import Documents from "./components/documents/documents.tsx";
 import About from "./components/about/about.tsx";
 import SingleProfilePage from "./components/single-profile-page/single-profile-page.tsx";
 import SingleProfilePageLoader from "./components/single-profile-page/single-profile-page-loader.ts";
-import ClassPage from "./components/class-page/class-page.tsx";
-import classPageLoader from "./components/class-page/class-page-loader.ts";
 import HistoryPage from "@components/history/history-page.tsx";
 import ErrorComponent from "@components/error-component/error-component.tsx";
 import Awards from "./components/awards/awards.tsx";
@@ -38,11 +36,6 @@ const router = createBrowserRouter([
         path: "profili/:profileName",
         element: <SingleProfilePage />,
         loader: SingleProfilePageLoader,
-      },
-      {
-        path: "/predmeti/:className",
-        element: <ClassPage />,
-        loader: classPageLoader,
       },
       {
         path: "/ucenici",
