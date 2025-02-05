@@ -2,7 +2,7 @@
   "name": "Elektrotehničar automatike",
   "description": "Elektrotehničar automatike je profil koji priprema učenike za rad sa automatizovanim sistemima u industriji. Učenici stiču znanje o projektovanju, održavanju i nadzoru industrijskih automatizovanih sistema, upravljanju mašinama i robotima, kao i kontroli proizvodnih procesa. Ovaj smer je ključan za industrije koje se bave proizvodnjom, energetikom i drugim oblastima gde je potrebna visoka preciznost i efikasnost u radu.",
   "imagePath": "/images/profiles/elektrotehnicar-automatike.jpg",
-  "classes": {
+  "subjects": {
     "general": [],
     "specific": []
   }

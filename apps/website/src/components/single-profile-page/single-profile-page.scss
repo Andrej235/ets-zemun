@@ -21,7 +21,7 @@
       pointer-events: all;
     }
 
-    .full-screen-class-container {
+    .full-screen-subject-container {
       width: 80%;
       height: 80%;
     }
@@ -140,7 +140,7 @@
     }
   }
 
-  .classes-container {
+  .subjects-container {
     margin-top: 3rem;
     display: grid;
     grid-template-columns: 1fr max-content;
@@ -197,7 +197,7 @@
       }
     }
 
-    .classes-list {
+    .subjects-list {
       grid-column: 1;
       grid-row: 1;
       display: grid;
@@ -227,14 +227,14 @@
         }
       }
 
-      .classes-list {
+      .subjects-list {
         grid-row: 2;
         grid-column: 1;
       }
     }
   }
 
-  .class-item {
+  .subject-item {
     background-color: $secondary-background;
     padding: 18px 15px 15px 15px;
     border-radius: 5px;
@@ -245,7 +245,7 @@
     flex-direction: column;
     gap: 0.3rem;
 
-    .class-name {
+    .subject-name {
       position: relative;
       font-size: 1.5rem;
       padding-left: 0.7rem;
@@ -273,24 +273,24 @@
     }
 
     &.general {
-      .class-name::before {
+      .subject-name::before {
         background-color: $accent-secondary;
       }
     }
 
     &.specific {
-      .class-name::before {
+      .subject-name::before {
         background-color: $accent;
       }
     }
 
-    .class-count {
+    .subject-count {
       color: $text-secondary;
       font-size: 1.2rem;
     }
 
     @media screen and (max-width: 768px) {
-      .class-name {
+      .subject-name {
         padding-left: 1.3rem;
         font-size: 2rem;
 
@@ -300,7 +300,7 @@
         }
       }
 
-      .class-count {
+      .subject-count {
         font-size: 1.8rem;
       }
     }

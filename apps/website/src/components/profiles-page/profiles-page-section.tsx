@@ -4,39 +4,39 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 export default function ProfilesPageSection() {
-  const [selectedClassIdx, setSelectedClassIdx] = useState<number | null>(null);
-  const classesContainerRef = useRef<HTMLUListElement>(null);
+  const [selectedSubjectIdx, setSelectedSubjectIdx] = useState<number | null>(null);
+  const subjectsContainerRef = useRef<HTMLUListElement>(null);
 
-  function handleSelectClass(idx: number) {
-    setSelectedClassIdx((prev) => (prev === idx ? null : idx));
+  function handleSelectSubject(idx: number) {
+    setSelectedSubjectIdx((prev) => (prev === idx ? null : idx));
   }
 
   useEffect(() => {
-    if (!classesContainerRef.current || selectedClassIdx === null) return;
+    if (!subjectsContainerRef.current || selectedSubjectIdx === null) return;
 
     const placeholder = document.createElement("li");
     placeholder.classList.add("placeholder");
 
-    classesContainerRef.current.children[
-      selectedClassIdx
+    subjectsContainerRef.current.children[
+      selectedSubjectIdx
     ].insertAdjacentElement("afterend", placeholder);
 
-    const selectedClass = classesContainerRef.current.children[
-      selectedClassIdx
+    const selectedSubject = subjectsContainerRef.current.children[
+      selectedSubjectIdx
     ] as HTMLElement;
 
-    selectedClass.style.top = placeholder.offsetTop + "px";
-    selectedClass.style.height = placeholder.offsetHeight + "px";
-    selectedClass.style.width = placeholder.offsetWidth + "px";
+    selectedSubject.style.top = placeholder.offsetTop + "px";
+    selectedSubject.style.height = placeholder.offsetHeight + "px";
+    selectedSubject.style.width = placeholder.offsetWidth + "px";
 
     return () => {
-      selectedClass.style.top = "";
-      selectedClass.style.height = "";
-      selectedClass.style.width = "";
+      selectedSubject.style.top = "";
+      selectedSubject.style.height = "";
+      selectedSubject.style.width = "";
 
       placeholder.remove();
     };
-  }, [classesContainerRef, selectedClassIdx]);
+  }, [subjectsContainerRef, selectedSubjectIdx]);
 
   return (
     <div className="profiles-page-section">
@@ -96,51 +96,51 @@ export default function ProfilesPageSection() {
           predstavljaju:
         </h3>
 
-        <ul className="classes" ref={classesContainerRef}>
-          <ClassItem
+        <ul className="subjects" ref={subjectsContainerRef}>
+          <SubjectItem
             idx={0}
-            selectedClassIdx={selectedClassIdx}
-            handleSelectClass={handleSelectClass}
+            selectedSubjectIdx={selectedSubjectIdx}
+            handleSelectSubject={handleSelectSubject}
             icon="square-binary"
             title="Programiranje"
             longDescription="U prve dve godine skolovanja programiranje obuhvata uvod u algoritme i sablone programiranja, kao i osnove jezika C. Nakon naucenih osnova, djacima se predstavlja jezik C# kojim razvijaju konzolne i desktop aplikacije ostatak skolovanja u .NET okruzenju"
             shortDescription="Razvijanje konzolnih i desktop aplikacija u jeziku C# i .NET okruzenju"
           />
 
-          <ClassItem
+          <SubjectItem
             idx={1}
-            selectedClassIdx={selectedClassIdx}
-            handleSelectClass={handleSelectClass}
+            selectedSubjectIdx={selectedSubjectIdx}
+            handleSelectSubject={handleSelectSubject}
             icon="code"
             title="Web programiranje"
             longDescription="Web dizajn i web programiranje zajedno obuhvataju razne tehnologije i alate potrebne za kreiranje web stranica. Ovde djaci uce da koriste HTML, CSS i JavaScript ukljucujuci i biblioteku jquery"
             shortDescription="Kreiranje statičkih i dinamičkih web stranica koristeći HTML, CSS, JavaScript i jQuery"
           />
 
-          <ClassItem
+          <SubjectItem
             idx={2}
-            selectedClassIdx={selectedClassIdx}
-            handleSelectClass={handleSelectClass}
+            selectedSubjectIdx={selectedSubjectIdx}
+            handleSelectSubject={handleSelectSubject}
             icon="database"
             title="Baze podataka"
             longDescription="Baze podataka pruzaju ucenicima mogucnost dizajniranja, kreiranja i upravljanja realisticnim bazama podataka koristeci SQL. Ovaj predmet takodje obuhvata najbolje prakse koje treba da se prate prilikom rada sa bazama podataka radi najboljih rezultata"
             shortDescription="Dizajn i implementacija baza podataka koristeći SQL"
           />
 
-          <ClassItem
+          <SubjectItem
             idx={3}
-            selectedClassIdx={selectedClassIdx}
-            handleSelectClass={handleSelectClass}
+            selectedSubjectIdx={selectedSubjectIdx}
+            handleSelectSubject={handleSelectSubject}
             icon="shield-halved"
             title="ZIS"
             longDescription="Zastita informacionih tehnologija pokazuje kako zastiti sebe, ali i svoje projekte od napada i neovlašćenog pristupa. Pored teorije, djaci imaju priliku da se upoznaju za alatima kao sto je CryptTool i Linux operativnim sistemom"
             shortDescription="Zastita informacionih tehnologija i upoznavanje sa alatima kao sto su CryptTool i Linux"
           />
 
-          <ClassItem
+          <SubjectItem
             idx={4}
-            selectedClassIdx={selectedClassIdx}
-            handleSelectClass={handleSelectClass}
+            selectedSubjectIdx={selectedSubjectIdx}
+            handleSelectSubject={handleSelectSubject}
             icon="cubes-stacked"
             title="PIT"
             longDescription="Primenjene informacione tehnologije kombinuju svo znanje steceno u ostalim strucnim predmetima i da ga iskoriste za kreiranje full stack desktop i web aplikacija kroz izradu zajednickih projekata koristeci C# ASP.NET Web Forme, C# WPF i SQL"
@@ -165,41 +165,41 @@ export default function ProfilesPageSection() {
   );
 }
 
-type ClassItemProps = {
+type SubjectItemProps = {
   readonly idx: number;
-  readonly selectedClassIdx: number | null;
-  readonly handleSelectClass: (idx: number) => void;
+  readonly selectedSubjectIdx: number | null;
+  readonly handleSelectSubject: (idx: number) => void;
   readonly icon: string;
   readonly title: string;
   readonly longDescription: string;
   readonly shortDescription: string;
 };
 
-function ClassItem({
+function SubjectItem({
   idx,
-  selectedClassIdx,
-  handleSelectClass,
+  selectedSubjectIdx,
+  handleSelectSubject,
   icon,
   title,
   longDescription,
   shortDescription,
-}: ClassItemProps) {
+}: SubjectItemProps) {
   return (
     <motion.li
       layout
       style={{
-        position: selectedClassIdx === idx ? "absolute" : "relative",
+        position: selectedSubjectIdx === idx ? "absolute" : "relative",
       }}
-      className={selectedClassIdx === idx ? "selected" : undefined}
+      className={selectedSubjectIdx === idx ? "selected" : undefined}
       animate={{
-        zIndex: selectedClassIdx === idx ? 10 : 0,
+        zIndex: selectedSubjectIdx === idx ? 10 : 0,
         transition: {
-          delay: selectedClassIdx === idx ? 0 : 0.5,
+          delay: selectedSubjectIdx === idx ? 0 : 0.5,
           duration: 0.5,
         },
       }}
     >
-      <button onClick={() => handleSelectClass(idx)} key={`it-class-${idx}`}>
+      <button onClick={() => handleSelectSubject(idx)} key={`it-subject-${idx}`}>
         <Icon name={icon} />
         <span className="title">{title}</span>
       </button>

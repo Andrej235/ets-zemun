@@ -2,130 +2,131 @@
   "name": "Elektrotehničar informacionih tehnologija",
   "description": "Elektrotehničar informacionih tehnologija je obrazovni profil koji priprema učenike za rad u oblasti IT industrije. Fokusira se na razvoj softverskih aplikacija, kreiranje baza podataka, kao i dizajn i implementaciju statičkih i dinamičkih web stranica. Učenici se takođe osposobljavaju za održavanje i zaštitu informacionih sistema, što ih čini konkurentnim na tržištu rada u sektoru tehnologije i digitalnih rešenja.",
   "imagePath": "/images/profiles/elektrotehnicar-informacionih-tehnologija.jpg",
-  "classes": {
+  "subjects": {
     "general": [
       {
-        "className": "Srpski jezik i književnost",
+        "subjectName": "Srpski jezik i književnost",
         "perWeek": [3, 3, 3, 3]
       },
       {
-        "className": "Engleski jezik",
+        "subjectName": "Engleski jezik",
         "perWeek": [2, 2, 2, 2]
       },
       {
-        "className": "Fizičko vaspitanje",
+        "subjectName": "Fizičko vaspitanje",
         "perWeek": [2, 2, 2, 2]
       },
       {
-        "className": "Matematika",
+        "subjectName": "Matematika",
         "perWeek": [3, 3, 3, 3]
       },
       {
-        "className": "Računarstvo i informatika",
+        "subjectName": "Računarstvo i informatika",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Istorija",
+        "subjectName": "Istorija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Geografija",
+        "subjectName": "Geografija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Hemija",
+        "subjectName": "Hemija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Likovna kultura",
+        "subjectName": "Likovna kultura",
         "perWeek": [1, 0, 0, 0]
       },
       {
-        "className": "Biologija",
+        "subjectName": "Biologija",
         "perWeek": [0, 2, 0, 0]
       },
       {
-        "className": "Sociologija sa pravima građana",
+        "subjectName": "Sociologija sa pravima građana",
         "perWeek": [0, 0, 2, 0]
       },
       {
-        "className": "Veronauka",
+        "subjectName": "Veronauka",
         "perWeek": [1, 1, 1, 1]
       },
       {
-        "className": "Građansko vaspitanje",
+        "subjectName": "Građansko vaspitanje",
         "perWeek": [1, 1, 1, 1]
       }
     ],
     "specific": [
       {
-        "className": "Fizika",
+        "subjectName": "Fizika",
         "perWeek": [2, 2, 0, 0]
       },
       {
-        "className": "Osnove elektrotehnike",
+        "subjectName": "Osnove elektrotehnike",
         "perWeek": [4, 4, 0, 0]
       },
       {
-        "className": "Programiranje",
+        "subjectName": "Programiranje",
         "perWeek": [2, 4, 3, 3]
       },
       {
-        "className": "Računarska grafika i multimedija",
+        "subjectName": "Računarska grafika i multimedija",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Elektronika",
+        "subjectName": "Elektronika",
         "perWeek": [0, 4, 0, 0]
       },
       {
-        "className": "Veb dizajn",
+        "subjectName": "Veb dizajn",
         "perWeek": [0, 2, 0, 0]
       },
       {
-        "className": "Baze podataka",
+        "subjectName": "Baze podataka",
         "perWeek": [0, 3, 2, 0]
       },
       {
-        "className": "Računarski sistemi",
+        "subjectName": "Računarski sistemi",
         "perWeek": [0, 0, 3, 0]
       },
       {
-        "className": "Veb programiranje",
+        "subjectName": "Veb programiranje",
         "perWeek": [0, 0, 3, 3]
       },
       {
-        "className": "Računari u sistemima upravljanja",
+        "subjectName": "Računari u sistemima upravljanja",
         "perWeek": [0, 0, 2, 0]
       },
       {
-        "className": "Računarske mreže i internet servisi",
+        "subjectName": "Računarske mreže i internet servisi",
         "perWeek": [0, 0, 0, 3]
       },
       {
-        "className": "Zaštita informacionih sistema",
+        "subjectName": "Zaštita informacionih sistema",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "className": "Primenjene informacione tehnologije",
+        "subjectName": "Primenjene informacione tehnologije",
         "perWeek": [0, 0, 6, 6]
       },
       {
-        "className": "Preduzetništvo",
+        "subjectName": "Preduzetništvo",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "className": "Elektronsko poslovanje",
+        "subjectName": "Elektronsko poslovanje",
         "perWeek": [0, 0, 0, 2]
       },
       {
-        "className": "Praktična nastava",
+        "subjectName": "Praktična nastava",
         "perWeek": [2, 0, 0, 0]
       },
       {
-        "className": "Izborni predmeti",
+        "subjectName": "Izborni predmeti",
         "perWeek": [0, 0, 2, 2]
       }
     ]
   }
 }
+
