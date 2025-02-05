@@ -34,12 +34,12 @@ export default async function buildStartTranslationPlugin() {
 
   await Promise.all([
     processDirectory(
-      path.resolve(__dirname, "../src/components"),
+      path.resolve(__dirname, "../../src/components"),
       (x) => x.endsWith(".tsx"),
       (x) => collectStringsFromJSXFile(x, stringsFromJSX, omitJSXProps)
     ),
     processDirectory(
-      path.resolve(__dirname, "../src/assets/json-data/data"),
+      path.resolve(__dirname, "../../src/assets/json-data/data"),
       (x) => x.endsWith(".json"),
       (x) => collectStringsFromJSONFile(x, stringsFromJSON, schemaMap)
     ),

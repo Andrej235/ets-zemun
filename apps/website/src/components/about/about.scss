@@ -90,6 +90,10 @@
         display: flex;
         justify-content: center;
 
+        & > * {
+          width: 25%;
+        }
+
         & > :nth-child(even) {
           background-color: $secondary-background;
 
@@ -478,6 +482,10 @@
 
         flex-direction: column;
         align-items: center;
+
+        & > * {
+          width: 100%;
+        }
 
         & > :nth-child(even) {
           background-color: $background;

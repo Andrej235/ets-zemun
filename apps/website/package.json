@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gen:search-map": "ts-node plugins/search-map/search-map-generator.ts"
   },
   "prettier": {
     "endOfLine": "crlf"
@@ -27,6 +28,8 @@
     "three": "^0.169.0"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@rollup/pluginutils": "^5.1.4",
     "@types/dat.gui": "^0.7.13",
     "@types/micromatch": "^4.0.9",
@@ -48,3 +51,4 @@
     "vite": "^5.2.0"
   }
 }
+

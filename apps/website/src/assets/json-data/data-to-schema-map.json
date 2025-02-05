@@ -16,7 +16,7 @@
   {
     "fileMatch": ["search-map.json"],
     "url": "src/assets/json-data/schemas/search-map.schema.json",
-    "omitFromTranslation": ["url", "matchFor"]
+    "omitFromTranslation": ["url", "keywords", "id"]
   },
   {
     "fileMatch": ["documents.json"],

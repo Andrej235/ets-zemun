@@ -11,7 +11,6 @@ export default function jsonTranslatorPlugin(): Plugin | null {
   return {
     name: "babel-json-plugin",
     async transform(code: string, id: string) {
-      const filter = createFilter("**/*.json");
       if (!filter(id)) return null;
 
       try {
@@ -19,7 +18,7 @@ export default function jsonTranslatorPlugin(): Plugin | null {
           filename: id,
           plugins: [
             [
-              "./plugins/json-text-transformer",
+              "./plugins/text-transformer/json-text-transformer",
               {
                 omitProperties: await getPropertyNamesToOmit(id, schemaMap),
                 translations: jsonTranslations,
