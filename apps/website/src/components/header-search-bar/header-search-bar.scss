@@ -44,6 +44,14 @@
         touch-action: auto;
         font-size: 1.9rem;
 
+        @media screen and (max-width: 1440px) {
+          width: 25rem;
+        }
+
+        @media screen and (max-width: 1120px) {
+          width: 20rem;
+        }
+
         .filler {
           position: absolute;
           top: 0;

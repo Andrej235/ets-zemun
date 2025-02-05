@@ -54,7 +54,7 @@ async function run() {
                 if (!types.isObjectExpression(expression))
                   throw new Error("searchKey must be an object");
 
-                const obj: { [key: string]: any } = {};
+                const obj: { [key: string]: unknown } = {};
 
                 expression.properties.forEach((prop) => {
                   if (
@@ -115,11 +115,15 @@ async function run() {
   );
 }
 
-function mapArrayElements(elements: any[]): (string | number)[] {
+function mapArrayElements(elements: unknown[]): (string | number)[] {
   return elements.map((el) => {
-    if (types.isStringLiteral(el) || types.isNumericLiteral(el)) {
+    if (
+      types.isNode(el) &&
+      (types.isStringLiteral(el) || types.isNumericLiteral(el))
+    ) {
       return el.value;
     }
+    
     throw new Error("Array elements must be string or number literals");
   });
 }

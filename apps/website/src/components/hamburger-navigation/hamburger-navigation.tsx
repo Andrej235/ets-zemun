@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import Icon from "@components/icon/icon";
 import HamburgerNavigationSearchBar from "@components/hamburger-navigation-search-bar/hamburger-navigation-search-bar";
 import { AnimatePresence, motion } from "motion/react";
+import { useEffect } from "react";
 
 type HamburgerNavigationProps = {
   readonly isMenuActive: boolean;
@@ -13,6 +14,19 @@ export default function HamburgerNavigation({
   isMenuActive,
   onRequestClose,
 }: HamburgerNavigationProps) {
+  
+  useEffect(() => {
+    if (isMenuActive) {
+      (document.scrollingElement as HTMLElement).style.overflowY = "hidden";
+    } else {
+      (document.scrollingElement as HTMLElement).style.overflowY = "auto";
+    }
+
+    return () => {
+      (document.scrollingElement as HTMLElement).style.overflowY = "auto";
+    };
+  }, [isMenuActive]);
+
   return (
     <AnimatePresence>
       {isMenuActive && (

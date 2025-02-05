@@ -2,13 +2,13 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "classes": {
+    "subjects": {
       "type": "array",
       "items": {
-        "$ref": "class.schema.json"
+        "$ref": "subject.schema.json"
       }
     }
   },
-  "required": ["classes"],
+  "required": ["subjects"],
   "additionalProperties": false
 }
