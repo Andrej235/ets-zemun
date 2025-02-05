@@ -9,8 +9,8 @@
       "url": "/apps/website/src/assets/json-data/schemas/profile.schema.json"
     },
     {
-      "fileMatch": ["classes.json"],
-      "url": "/apps/website/src/assets/json-data/schemas/class-definitions.schema.json"
+      "fileMatch": ["subjects.json"],
+      "url": "/apps/website/src/assets/json-data/schemas/subject-definitions.schema.json"
     },
     {
       "fileMatch": ["search-map.json"],
