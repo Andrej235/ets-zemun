@@ -49,7 +49,7 @@
             "additionalProperties": false
           }
         },
-        "specific": {
+        "vocational": {
           "type": "array",
           "items": {
             "type": "object",
@@ -77,10 +77,11 @@
           }
         }
       },
-      "required": ["general", "specific"],
+      "required": ["general", "vocational"],
       "additionalProperties": false
     }
   },
   "required": ["name", "description", "imagePath", "subjects"],
   "additionalProperties": false
 }
+

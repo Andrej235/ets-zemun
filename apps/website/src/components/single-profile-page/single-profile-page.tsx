@@ -8,7 +8,7 @@ import "./single-profile-page.scss";
 type SubjectItem = {
   name: string;
   count: number;
-  type: "general" | "specific";
+  type: "general" | "vocational";
 };
 
 export default function SingleProfilePage() {
@@ -16,7 +16,7 @@ export default function SingleProfilePage() {
 
   const subjects = useMemo(() => {
     return [
-      ...loaderData.subjects.specific,
+      ...loaderData.subjects.vocational,
       ...loaderData.subjects.general,
     ].reduce((acc: SubjectItem[][], x) => {
       x.perWeek.forEach((y, index) => {
@@ -29,7 +29,7 @@ export default function SingleProfilePage() {
             count: y,
             type: loaderData.subjects.general.includes(x)
               ? "general"
-              : "specific",
+              : "vocational",
           });
         }
       });
