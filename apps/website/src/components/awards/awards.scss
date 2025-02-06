@@ -65,6 +65,30 @@
     display: flex;
     flex-direction: column;
 
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: var(--mouse-y, 50%);
+      left: var(--mouse-x, 50%);
+      transform: translate(-50%, -50%);
+      width: 0%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: #292731;
+      transition: width 200ms;
+    }
+  
+    &:hover,
+    &:focus-within {
+      &::after {
+        width: 400%;
+        transition: width 1s;
+      }
+    }
+
     &:hover {
       transform: translateY(-5px);
     }
@@ -102,19 +126,6 @@
         color: $text-secondary;
         font-size: 1.6rem;
       }
-    }
-
-    .external-link {
-      padding: 2rem 0;
-      margin-top: auto;
-
-      display: block;
-      text-align: center;
-
-      text-decoration: none;
-      color: $text-primary;
-      font-size: 1.6rem;
-      font-weight: 600;
     }
   }
 }
