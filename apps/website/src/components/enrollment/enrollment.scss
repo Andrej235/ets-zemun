@@ -1,0 +1,54 @@
+.enrollment-page {
+  padding: 5vh 10vw;
+
+  h1 {
+    font-size: 5rem;
+    color: $text-primary;
+  }
+
+  h2 {
+    font-size: 3rem;
+    color: $text-primary;
+  }
+
+  .call-to-action {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    p {
+      font-size: 1.2rem;
+      color: $text-primary;
+    }
+
+    a {
+      @include button;
+    }
+  }
+
+  .timeline {
+    display: flex;
+    gap: 2rem;
+    margin-top: 30px;
+
+    .card {
+      border-radius: 0.5rem;
+      background-color: $secondary-background;
+      box-shadow: 0 2px 4px $shadow;
+      width: 30rem;
+      padding: 3rem;
+
+      h1 {
+        font-size: 2.5rem;
+        color: $text-primary;
+      }
+
+      p {
+        font-size: 1.7rem;
+        color: $text-secondary;
+      }
+    }
+  }
+}
+
