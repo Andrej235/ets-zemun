@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import "./awards.scss";
 import { awards } from "./mock-awards-data";
 
@@ -26,16 +25,6 @@ export default function Awards() {
               {award.projectSummary && <p>{award.projectSummary}</p>}
               <p>{award.description}</p>
             </div>
-            {award.externalLink && (
-              <Link
-                className="external-link"
-                to={award.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Saznaj vise
-              </Link>
-            )}
           </div>
         ))}
       </div>
