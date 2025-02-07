@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 15rem;
-  padding: 10rem;
+  padding: 12.5rem 10rem 10rem 10rem;
 
   max-width: 100svw;
   overflow-x: clip;
@@ -18,6 +18,7 @@
     height: auto;
     width: 60vw;
     padding: 5rem 2rem;
+    background-color: $background;
 
     display: flex;
     flex-direction: column;
@@ -27,22 +28,6 @@
     opacity: 0;
     transition: 0.5s ease-in-out;
 
-    &:nth-child(even) {
-      align-self: flex-end;
-    }
-
-    &:nth-child(odd) {
-      align-items: flex-end;
-
-      h1 {
-        text-align: right;
-      }
-
-      .history-segment-description {
-        text-align:   right;
-      }
-    }
-
     .history-segment-description {
       max-width: 80rem;
       min-width: 60rem;
@@ -50,7 +35,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      
+
       p {
         font-size: 2rem;
       }
@@ -63,6 +48,59 @@
       font-weight: 600;
       color: $accent-secondary;
     }
+  }
+
+  &.alternating .history-segment {
+    &:nth-child(even) {
+      align-self: flex-end;
+    }
+
+    &:nth-child(odd) {
+      align-items: flex-end;
+
+      h1 {
+        text-align: right;
+      }
+
+      .history-segment-description {
+        text-align: right;
+      }
+    }
+  }
+
+  &.left .history-segment {
+    align-self: flex-end;
+    align-items: flex-end;
+
+    h1 {
+      text-align: right;
+    }
+
+    .history-segment-description {
+      text-align: right;
+    }
+  }
+
+  &.right .history-segment {
+    align-self: flex-start;
+    align-items: flex-start;
+  }
+
+  &.center .history-segment {
+    align-self: center;
+    align-items: center;
+
+    h1 {
+      text-align: center;
+    }
+
+    .history-segment-description {
+      text-align: center;
+    }
+  }
+
+  svg {
+    pointer-events: none;
   }
 
   path {
@@ -96,19 +134,13 @@
 
     display: grid;
     place-items: center;
-
-    &:nth-child(odd) {
-      transform: translate(0%, -50%);
-      margin-left: -2rem;
-    }
-
-    &:nth-child(even) {
-      transform: translate(0%, -50%);
-      margin-left: 2rem;
-    }
+    transform: translate(-50%, -50%);
+    width: max-content;
 
     h1 {
       font-size: 2rem;
+      width: max-content;
+      text-align: center;
     }
   }
 }
@@ -118,7 +150,6 @@
     h1 {
       width: 100%;
       min-width: 0 !important;
-      
     }
 
     .history-segment-description {
@@ -127,3 +158,4 @@
     }
   }
 }
+
