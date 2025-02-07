@@ -67,6 +67,13 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   }, [pathRef, currentSegment, individualSegmentPathLengths, totalPathLength]);
 
   const calculateSegments = useCallback(() => {
+    type SegmentsResult = {
+      cumulativePathLengths: number[];
+      totalPathLength: number;
+      path: string;
+      cleanup: () => void;
+    };
+
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
       return;
 
@@ -124,9 +131,25 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     const style = getCurrentSyle();
     console.log(style);
 
-    return getForAlternating();
+    switch (style) {
+      case "alternating":
+        return getForAlternating();
 
-    function getForAlternating() {
+      case "left":
+        return getForLeft();
+
+      case "right":
+        return getForRight();
+
+      case "middle":
+        return getForMiddle();
+
+      default:
+        console.error(`Invalid timeline style: ${style}`);
+        return getForAlternating();
+    }
+
+    function getForAlternating(): SegmentsResult {
       const firstSegmentPadding = getPaddingForSegment(segments[0], true);
       let path = `M${segments[0].position.x - firstSegmentPadding} 0`;
 
@@ -339,6 +362,33 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         totalPathLength,
         path,
         cleanup: () => abortController.abort(),
+      };
+    }
+
+    function getForLeft(): SegmentsResult {
+      return {
+        path: "",
+        cumulativePathLengths: [],
+        totalPathLength: 0,
+        cleanup: () => {},
+      };
+    }
+
+    function getForRight(): SegmentsResult {
+      return {
+        path: "",
+        cumulativePathLengths: [],
+        totalPathLength: 0,
+        cleanup: () => {},
+      };
+    }
+
+    function getForMiddle(): SegmentsResult {
+      return {
+        path: "",
+        cumulativePathLengths: [],
+        totalPathLength: 0,
+        cleanup: () => {},
       };
     }
 
