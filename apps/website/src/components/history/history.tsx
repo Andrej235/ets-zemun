@@ -79,6 +79,10 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     if (!historyContainerRef.current || !dateHeadersContainerRef.current)
       return;
 
+    const style = getCurrentSyle();
+    console.log(style);
+    setTimelineStyle(style);
+
     const container = historyContainerRef.current;
     dateHeadersContainerRef.current.style.height = `${container.clientHeight}px`;
     const svg = container.children[0] as SVGElement | null;
@@ -120,19 +124,38 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         date: segment.dataset.date ?? "",
       });
 
-      //? Set up initial animations
       segment.style.opacity = "0";
-      segment.style.transform = `translateX(${i % 2 === 0 ? "-50%" : "50%"})`;
+      switch (style) {
+        case "alternating":
+        case "middle":
+          segment.style.transform = `translateX(${
+            i % 2 === 0 ? "-50%" : "50%"
+          })`;
+          break;
+
+        case "left":
+          segment.style.transform = `translateX(50%)`;
+          break;
+
+        case "right":
+          segment.style.transform = `translateX(-50%)`;
+          break;
+
+        default:
+          console.error(`Invalid timeline style: ${style}`);
+          segment.style.transform = `translateX(${
+            i % 2 === 0 ? "-50%" : "50%"
+          })`;
+          break;
+      }
+
+      //? Set up initial animations
     }
 
     svg.setAttribute(
       "viewBox",
       `0 0 ${container.clientWidth} ${container.clientHeight}`
     );
-
-    const style = getCurrentSyle();
-    console.log(style);
-    setTimelineStyle(style);
 
     switch (style) {
       case "alternating":
