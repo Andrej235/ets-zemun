@@ -392,11 +392,138 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     }
 
     function getForLeft(): SegmentsResult {
+      const universalX = segments.reduce((min, segment) => {
+        const padding = getPaddingForSegment(segment);
+        return Math.min(min, padding);
+      }, Infinity);
+
+      let path = `M${universalX} 0`;
+
+      const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
+      let startingPointY = 0;
+
+      for (const segment of segments) {
+        let currentPath = "";
+        const currentPathStartMoveCommand = `M ${universalX} ${startingPointY}`;
+
+        const pointPosition: Vector2 = {
+          x: universalX,
+          y: segment.position.y + segment.size.y / 2,
+        };
+
+        const segmentHeaderCleanup = createHeaderForSegment(
+          segment,
+          pointPosition
+        );
+        abortController.signal.addEventListener("abort", segmentHeaderCleanup);
+
+        currentPath += `v ${
+          pointPosition.y - startingPointY - segmentPointRadius
+        }`;
+        currentPath += createCirclePath(segmentPointRadius, pointPosition);
+        path += currentPath;
+
+        pathLengths.push(
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
+        );
+
+        startingPointY = pointPosition.y + segmentPointRadius;
+      }
+
+      const cumulativePathLengths: number[] = [];
+      const totalPathLength = pathLengths.reduce((acc, length) => {
+        acc += length;
+        cumulativePathLengths.push(acc);
+        return acc;
+      }, 0);
+
+      function getPaddingForSegment(segment: Segment): number {
+        let padding = timelineConfig?.pointPadding ?? 100;
+
+        const maxPadding = segment.position.x;
+        padding = maxPadding < padding * 2.5 ? maxPadding / 2 : padding;
+
+        console.log(padding, maxPadding);
+        return padding;
+      }
+
+      function createHeaderForSegment(
+        segment: Segment,
+        pointPosition: Vector2
+      ): () => void {
+        const minimunDistanceToPoint =
+          timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
+        const distanceToEdge = pointPosition.x - segmentPointRadius;
+
+        const header = document.createElement("div");
+        header.className = "history-date-header";
+        header.style.height = `${segmentPointRadius * 2}px`;
+
+        const headerText = document.createElement("h1");
+        headerText.textContent = segment.date;
+        header.appendChild(headerText);
+
+        dateHeadersContainerRef.current!.appendChild(header);
+
+        const headerWidth = header.offsetWidth;
+
+        let position;
+
+        if (distanceToEdge < headerWidth + minimunDistanceToPoint) {
+          position = {
+            x: pointPosition.x + -segmentPointRadius,
+            y:
+              pointPosition.y -
+              (dateHeadersContainerRef.current!.offsetTop -
+                container.offsetTop) -
+              segmentPointRadius * 2 -
+              minimunDistanceToPoint,
+          };
+        } else {
+          position = {
+            x: pointPosition.x + (-segmentPointRadius - headerWidth),
+            y:
+              pointPosition.y -
+              (dateHeadersContainerRef.current!.offsetTop -
+                container.offsetTop),
+          };
+        }
+
+        header.style.left = `${position.x}px`;
+        header.style.top = `${position.y}px`;
+
+        const headerAnimationCleanup = inView(
+          segment.domElement,
+          () => {
+            onEnterViewport();
+            return onLeaveViewport;
+          },
+          {
+            amount: 0.3,
+          }
+        );
+
+        function onEnterViewport() {
+          header.style.opacity = "1";
+        }
+
+        function onLeaveViewport() {
+          if (timelineConfig?.animateOnlyOnce) return;
+          header.style.opacity = "0";
+        }
+
+        return () => {
+          headerText.remove();
+          header.remove();
+          headerAnimationCleanup();
+        };
+      }
+
       return {
-        path: "",
-        cumulativePathLengths: [],
-        totalPathLength: 0,
-        cleanup: () => {},
+        cumulativePathLengths,
+        totalPathLength,
+        path,
+        cleanup: () => abortController.abort(),
       };
     }
 
