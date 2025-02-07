@@ -80,7 +80,6 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       return;
 
     const style = getCurrentSyle();
-    console.log(style);
     setTimelineStyle(style);
 
     const container = historyContainerRef.current;
@@ -303,10 +302,6 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           ? pointPosition.x - segmentPointRadius
           : container.clientWidth - (pointPosition.x + segmentPointRadius);
 
-        if (distanceToEdge < minimunDistanceToPoint) {
-          console.log("a", distanceToEdge);
-        }
-
         const header = document.createElement("div");
         header.className = "history-date-header";
         header.style.height = `${segmentPointRadius * 2}px`;
@@ -417,7 +412,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           y: segment.position.y + segment.size.y / 2,
         };
 
-        const segmentHeaderCleanup = createHeaderForSegment(
+        const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
           segment,
           pointPosition
         );
@@ -452,75 +447,68 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         return padding;
       }
 
-      function createHeaderForSegment(
-        segment: Segment,
-        pointPosition: Vector2
-      ): () => void {
-        const minimunDistanceToPoint =
-          timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
-        const distanceToEdge = pointPosition.x - segmentPointRadius;
+      return {
+        cumulativePathLengths,
+        totalPathLength,
+        path,
+        cleanup: () => abortController.abort(),
+      };
+    }
 
-        const header = document.createElement("div");
-        header.className = "history-date-header";
-        header.style.height = `${segmentPointRadius * 2}px`;
+    function getForRight(): SegmentsResult {
+      const universalX = segments.reduce((min, segment) => {
+        const padding = getPaddingForSegment(segment);
+        return Math.max(min, padding);
+      }, 0);
 
-        const headerText = document.createElement("h1");
-        headerText.textContent = segment.date;
-        header.appendChild(headerText);
+      let path = `M${universalX} 0`;
 
-        dateHeadersContainerRef.current!.appendChild(header);
+      const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
+      let startingPointY = 0;
 
-        const headerWidth = header.getBoundingClientRect().width;
+      for (const segment of segments) {
+        let currentPath = "";
+        const currentPathStartMoveCommand = `M ${universalX} ${startingPointY}`;
 
-        let position;
-        if (distanceToEdge < headerWidth + minimunDistanceToPoint) {
-          position = {
-            x: pointPosition.x,
-            y:
-              pointPosition.y -
-              (dateHeadersContainerRef.current!.offsetTop -
-                container.offsetTop) -
-              segmentPointRadius * 2 -
-              minimunDistanceToPoint,
-          };
-        } else {
-          position = {
-            x: pointPosition.x + (-segmentPointRadius - headerWidth),
-            y:
-              pointPosition.y -
-              (dateHeadersContainerRef.current!.offsetTop -
-                container.offsetTop),
-          };
-        }
+        const pointPosition: Vector2 = {
+          x: universalX,
+          y: segment.position.y + segment.size.y / 2,
+        };
 
-        header.style.left = `${position.x}px`;
-        header.style.top = `${position.y}px`;
+        const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
+          segment,
+          pointPosition
+        );
+        abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
-        const headerAnimationCleanup = inView(
-          segment.domElement,
-          () => {
-            onEnterViewport();
-            return onLeaveViewport;
-          },
-          {
-            amount: 0.3,
-          }
+        currentPath += `v ${
+          pointPosition.y - startingPointY - segmentPointRadius
+        }`;
+        currentPath += createCirclePath(segmentPointRadius, pointPosition);
+        path += currentPath;
+
+        pathLengths.push(
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
 
-        function onEnterViewport() {
-          header.style.opacity = "1";
-        }
+        startingPointY = pointPosition.y + segmentPointRadius;
+      }
 
-        function onLeaveViewport() {
-          if (timelineConfig?.animateOnlyOnce) return;
-          header.style.opacity = "0";
-        }
+      const cumulativePathLengths: number[] = [];
+      const totalPathLength = pathLengths.reduce((acc, length) => {
+        acc += length;
+        cumulativePathLengths.push(acc);
+        return acc;
+      }, 0);
 
-        return () => {
-          headerText.remove();
-          header.remove();
-          headerAnimationCleanup();
-        };
+      function getPaddingForSegment(segment: Segment): number {
+        let padding = timelineConfig?.pointPadding ?? 100;
+
+        const maxPadding =
+          container.clientWidth - (segment.position.x + segment.size.x);
+        padding = maxPadding < padding * 2.5 ? maxPadding / 2 : padding;
+
+        return segment.position.x + segment.size.x + padding;
       }
 
       return {
@@ -531,12 +519,59 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       };
     }
 
-    function getForRight(): SegmentsResult {
-      return {
-        path: " ",
-        cumulativePathLengths: [],
-        totalPathLength: 0,
-        cleanup: () => {},
+    function createHeaderAboveSegmentPoint(
+      segment: Segment,
+      pointPosition: Vector2
+    ): () => void {
+      const minimunDistanceToPoint =
+        timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
+
+      const header = document.createElement("div");
+      header.className = "history-date-header";
+      header.style.height = `${segmentPointRadius * 2}px`;
+
+      const headerText = document.createElement("h1");
+      headerText.textContent = segment.date;
+      header.appendChild(headerText);
+
+      dateHeadersContainerRef.current!.appendChild(header);
+
+      const position = {
+        x: pointPosition.x,
+        y:
+          pointPosition.y -
+          (dateHeadersContainerRef.current!.offsetTop - container.offsetTop) -
+          segmentPointRadius * 2 -
+          minimunDistanceToPoint,
+      };
+
+      header.style.left = `${position.x}px`;
+      header.style.top = `${position.y}px`;
+
+      const headerAnimationCleanup = inView(
+        segment.domElement,
+        () => {
+          onEnterViewport();
+          return onLeaveViewport;
+        },
+        {
+          amount: 0.3,
+        }
+      );
+
+      function onEnterViewport() {
+        header.style.opacity = "1";
+      }
+
+      function onLeaveViewport() {
+        if (timelineConfig?.animateOnlyOnce) return;
+        header.style.opacity = "0";
+      }
+
+      return () => {
+        headerText.remove();
+        header.remove();
+        headerAnimationCleanup();
       };
     }
 
