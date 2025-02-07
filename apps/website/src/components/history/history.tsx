@@ -318,9 +318,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         if (distanceToEdge < headerWidth + minimunDistanceToPoint) {
           position = {
-            x:
-              pointPosition.x +
-              (even ? -segmentPointRadius : segmentPointRadius - headerWidth),
+            x: pointPosition.x,
             y:
               pointPosition.y -
               (dateHeadersContainerRef.current!.offsetTop -
@@ -332,7 +330,11 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           position = {
             x:
               pointPosition.x +
-              (even ? -segmentPointRadius - headerWidth : segmentPointRadius),
+              (even
+                ? -headerWidth / 2 - segmentPointRadius - minimunDistanceToPoint
+                : +headerWidth / 2 +
+                  segmentPointRadius +
+                  minimunDistanceToPoint),
             y:
               pointPosition.y -
               (dateHeadersContainerRef.current!.offsetTop -
@@ -759,7 +761,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       </div>
 
       <div
-        className={`history-date-headers-container ${timelineStyle}`}
+        className="history-date-headers-container"
         ref={dateHeadersContainerRef}
       />
     </>

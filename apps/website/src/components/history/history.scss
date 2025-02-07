@@ -133,7 +133,7 @@
 
     display: grid;
     place-items: center;
-    transform: translate(0%, -50%);
+    transform: translate(-50%, -50%);
     width: max-content;
 
     h1 {
@@ -141,22 +141,6 @@
       width: max-content;
       text-align: center;
     }
-  }
-
-  &.alternating .history-date-header {
-    &:nth-child(odd) {
-      margin-left: -2rem;
-    }
-
-    &:nth-child(even) {
-      margin-left: 2rem;
-    }
-  }
-
-  &.center .history-date-header,
-  &.left .history-date-header,
-  &.right .history-date-header {
-    transform: translate(-50%, -50%);
   }
 }
 
