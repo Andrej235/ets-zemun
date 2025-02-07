@@ -11,7 +11,7 @@ export default function HistoryPage() {
           corderArcRadius: 15,
           timelineStyle: {
             "1000px": "alternating",
-            "800px": "alternating",
+            "800px": "left",
             "1020px": "center",
           },
         }}

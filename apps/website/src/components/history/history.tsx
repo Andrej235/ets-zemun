@@ -535,7 +535,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         const pointPosition: Vector2 = {
           x: universalX,
-          y: segment.position.y,
+          y: segment.position.y - segmentPointRadius - 1.5,
         };
 
         const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
