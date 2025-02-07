@@ -84,6 +84,12 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     setTimelineStyle(style);
 
     const container = historyContainerRef.current;
+    container.classList.remove("alternating");
+    container.classList.remove("left");
+    container.classList.remove("right");
+    container.classList.remove("middle");
+    container.classList.add(style);
+
     dateHeadersContainerRef.current.style.height = `${container.clientHeight}px`;
     const svg = container.children[0] as SVGElement | null;
     if (!svg) return;
