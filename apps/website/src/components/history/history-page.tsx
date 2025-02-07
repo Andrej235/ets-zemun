@@ -9,6 +9,11 @@ export default function HistoryPage() {
         timelineConfig={{
           animateOnlyOnce: true,
           corderArcRadius: 15,
+          timelineStyle: {
+            "1000px": "left",
+            "500px": "right",
+            "1020px": "middle",
+          },
         }}
       >
         <HistorySegment date={"1887. godina"}>
