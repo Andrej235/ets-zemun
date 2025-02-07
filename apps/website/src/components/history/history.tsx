@@ -53,6 +53,8 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   );
 
   const pathRef = useRef<SVGPathElement>(null);
+  const [timelineStyle, setTimelineStyle] =
+    useState<TimelineStyle>("alternating");
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -130,6 +132,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
     const style = getCurrentSyle();
     console.log(style);
+    setTimelineStyle(style);
 
     switch (style) {
       case "alternating":
@@ -376,7 +379,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
     function getForRight(): SegmentsResult {
       return {
-        path: "",
+        path: " ",
         cumulativePathLengths: [],
         totalPathLength: 0,
         cleanup: () => {},
@@ -385,7 +388,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
     function getForMiddle(): SegmentsResult {
       return {
-        path: "",
+        path: "  ",
         cumulativePathLengths: [],
         totalPathLength: 0,
         cleanup: () => {},
@@ -513,7 +516,10 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
   return (
     <>
-      <div className="history-container" ref={historyContainerRef}>
+      <div
+        className={`history-container ${timelineStyle}`}
+        ref={historyContainerRef}
+      >
         <svg className="history-line" fill="none" strokeWidth={3}>
           <path ref={pathRef} />
         </svg>
