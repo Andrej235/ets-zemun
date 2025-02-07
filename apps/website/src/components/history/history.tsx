@@ -12,7 +12,7 @@ import { inView } from "motion/react";
 import getPathTotalLength from "@utility/svg/get-path-length";
 import createRoundedCornerPath from "@utility/svg/create-rounded-path";
 
-type TimelineStyle = "alternating" | "left" | "right" | "middle";
+type TimelineStyle = "alternating" | "left" | "right" | "center";
 
 type HistoryProps = {
   readonly children: React.JSX.Element[];
@@ -86,7 +86,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     container.classList.remove("alternating");
     container.classList.remove("left");
     container.classList.remove("right");
-    container.classList.remove("middle");
+    container.classList.remove("center");
     container.classList.add(style);
 
     dateHeadersContainerRef.current.style.height = `${container.clientHeight}px`;
@@ -132,7 +132,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       segment.style.opacity = "0";
       switch (style) {
         case "alternating":
-        case "middle":
+        case "center":
           segment.style.transform = `translateX(${
             i % 2 === 0 ? "-50%" : "50%"
           })`;
@@ -172,8 +172,8 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       case "right":
         return getForRight();
 
-      case "middle":
-        return getForMiddle();
+      case "center":
+        return getForcenter();
 
       default:
         console.error(`Invalid timeline style: ${style}`);
@@ -229,7 +229,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         const previousSegment = segments[i - 1];
         if (!previousSegment) continue;
 
-        const middleToPreviousPointY =
+        const centerToPreviousPointY =
           previousSegment.position.y +
           previousSegment.size.y +
           (segment.position.y -
@@ -242,7 +242,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           [
             {
               type: "vertical",
-              value: middleToPreviousPointY,
+              value: centerToPreviousPointY,
             },
             {
               type: "horizontal",
@@ -519,6 +519,57 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       };
     }
 
+    function getForcenter(): SegmentsResult {
+      const universalX = window.innerWidth / 2;
+
+      let path = `M${universalX} 0`;
+
+      const pathLengths: number[] = [getPathTotalLength(path)]; //Get the initial path length
+      let startingPointY = 0;
+
+      for (const segment of segments) {
+        let currentPath = "";
+        const currentPathStartMoveCommand = `M ${universalX} ${startingPointY}`;
+
+        const pointPosition: Vector2 = {
+          x: universalX,
+          y: segment.position.y,
+        };
+
+        const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
+          segment,
+          pointPosition
+        );
+        abortController.signal.addEventListener("abort", segmentHeaderCleanup);
+
+        currentPath += `v ${
+          pointPosition.y - startingPointY - segmentPointRadius
+        }`;
+        currentPath += createCirclePath(segmentPointRadius, pointPosition);
+        path += currentPath;
+
+        pathLengths.push(
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
+        );
+
+        startingPointY = pointPosition.y + segmentPointRadius;
+      }
+
+      const cumulativePathLengths: number[] = [];
+      const totalPathLength = pathLengths.reduce((acc, length) => {
+        acc += length;
+        cumulativePathLengths.push(acc);
+        return acc;
+      }, 0);
+
+      return {
+        cumulativePathLengths,
+        totalPathLength,
+        path,
+        cleanup: () => abortController.abort(),
+      };
+    }
+
     function createHeaderAboveSegmentPoint(
       segment: Segment,
       pointPosition: Vector2
@@ -572,15 +623,6 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         headerText.remove();
         header.remove();
         headerAnimationCleanup();
-      };
-    }
-
-    function getForMiddle(): SegmentsResult {
-      return {
-        path: "  ",
-        cumulativePathLengths: [],
-        totalPathLength: 0,
-        cleanup: () => {},
       };
     }
 

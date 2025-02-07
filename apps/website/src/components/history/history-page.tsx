@@ -12,7 +12,7 @@ export default function HistoryPage() {
           timelineStyle: {
             "1000px": "right",
             "800px": "left",
-            "1020px": "middle",
+            "1020px": "center",
           },
         }}
       >

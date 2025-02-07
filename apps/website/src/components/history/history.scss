@@ -85,7 +85,7 @@
     align-items: flex-start;
   }
 
-  &.middle .history-segment {
+  &.center .history-segment {
     align-self: center;
     align-items: center;
 
@@ -153,6 +153,7 @@
     }
   }
 
+  &.center .history-date-header,
   &.left .history-date-header,
   &.right .history-date-header {
     transform: translate(-50%, -50%);
