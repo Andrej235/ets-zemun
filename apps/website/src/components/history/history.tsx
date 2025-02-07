@@ -449,7 +449,6 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         const maxPadding = segment.position.x;
         padding = maxPadding < padding * 2.5 ? maxPadding / 2 : padding;
 
-        console.log(padding, maxPadding);
         return padding;
       }
 
@@ -471,13 +470,12 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         dateHeadersContainerRef.current!.appendChild(header);
 
-        const headerWidth = header.offsetWidth;
+        const headerWidth = header.getBoundingClientRect().width;
 
         let position;
-
         if (distanceToEdge < headerWidth + minimunDistanceToPoint) {
           position = {
-            x: pointPosition.x + -segmentPointRadius,
+            x: pointPosition.x,
             y:
               pointPosition.y -
               (dateHeadersContainerRef.current!.offsetTop -
@@ -684,7 +682,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       </div>
 
       <div
-        className="history-date-headers-container"
+        className={`history-date-headers-container ${timelineStyle}`}
         ref={dateHeadersContainerRef}
       />
     </>

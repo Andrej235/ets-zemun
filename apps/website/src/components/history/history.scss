@@ -98,6 +98,10 @@
     }
   }
 
+  svg {
+    pointer-events: none;
+  }
+
   path {
     //! transition: 0.5s ease-in-out; This HAS to be set after the path is created through JS, otherwise the line animates as a bunch of smaller lines getting bigger on start
     stroke: $outline;
@@ -129,20 +133,28 @@
 
     display: grid;
     place-items: center;
+    transform: translate(0%, -50%);
+    width: max-content;
 
+    h1 {
+      font-size: 2rem;
+      width: max-content;
+      text-align: center;
+    }
+  }
+
+  &.alternating .history-date-header {
     &:nth-child(odd) {
-      transform: translate(0%, -50%);
       margin-left: -2rem;
     }
 
     &:nth-child(even) {
-      transform: translate(0%, -50%);
       margin-left: 2rem;
     }
+  }
 
-    h1 {
-      font-size: 2rem;
-    }
+  &.left .history-date-header {
+    transform: translate(-50%, -50%);
   }
 }
 
