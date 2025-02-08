@@ -61,8 +61,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
-app.UseExceptionHandler();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
@@ -72,5 +72,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add the test connection endpoint
+app.MapGet("/hello", () => Results.Ok("Hello, World!"));
 
 await app.RunAsync();

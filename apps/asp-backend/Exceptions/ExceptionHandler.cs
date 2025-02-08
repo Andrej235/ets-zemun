@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace EtsZemun.Exceptions
 {
-    public class ExceptionHandler(ILogger logger) : IExceptionHandler
+    public class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExceptionHandler
     {
         public async ValueTask<bool> TryHandleAsync(
             HttpContext httpContext,
