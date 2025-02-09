@@ -4,6 +4,7 @@ import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
 import StudentsPagePartTimeSection from "./students-page-part-time-section";
 import StudentsPagePPService from "./students-page-pp-service";
+import StudentsPageAntiBullying from "./students-page-anti-bullying";
 
 export default function Students() {
   return (
@@ -24,6 +25,10 @@ export default function Students() {
 
       <Expander title="Psihološko-pedagoška (PP) služba" initiallyOpen>
         <StudentsPagePPService />
+      </Expander>
+
+      <Expander title="Nasilje" initiallyOpen>
+        <StudentsPageAntiBullying />
       </Expander>
     </div>
   );
