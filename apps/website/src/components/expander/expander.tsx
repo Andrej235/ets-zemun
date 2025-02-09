@@ -3,12 +3,17 @@ import Icon from "@components/icon/icon";
 import { useState } from "react";
 
 type ExpanderProps = {
-  readonly title: string;
+  readonly title?: string;
   readonly children: React.ReactNode;
+  readonly initiallyOpen?: boolean;
 };
 
-function Expander({ title, children }: ExpanderProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Expander({
+  title = "Default Title",
+  children,
+  initiallyOpen = false,
+}: ExpanderProps) {
+  const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   function toggleExpander() {
     setIsOpen(!isOpen);
@@ -25,6 +30,4 @@ function Expander({ title, children }: ExpanderProps) {
     </div>
   );
 }
-
-export default Expander;
 
