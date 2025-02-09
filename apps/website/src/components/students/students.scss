@@ -1,0 +1,21 @@
+.students-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .parliament-container {
+    display: flex;
+    flex-direction: column;
+
+    .year-container {
+      display: flex;
+      flex-direction: column;
+
+      .class-container {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+}
+

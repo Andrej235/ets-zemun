@@ -1,0 +1,13 @@
+.expander {
+  display: flex;
+  font-size: 1.5rem;
+
+  button {
+    background: none;
+    border: none;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1em;
+  }
+}
+
