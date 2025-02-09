@@ -1,5 +1,4 @@
 import { Faculty } from "./teachers-mock-data";
-import { motion } from "motion/react";
 
 type TeacherCardProps = {
   teacher: Faculty;
@@ -7,48 +6,32 @@ type TeacherCardProps = {
 
 const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
   return (
-    <motion.div
-      layout
-      layoutId={teacher.id}
-      className="teacher-card"
-      initial={{
-        opacity: 0,
-        x: -100,
-      }}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-      }}
-      transition={{
-        duration: 0.25,
-      }}
-      viewport={{
-        amount: 0.15,
-        once: true,
-      }}
-    >
+    <div className="teacher-card">
       <img
         src={teacher.imageUrl}
         alt={teacher.name}
         className="teacher-image"
       />
 
-      <div className="basic-info">
+      <div className="teacher-card-header">
         <h2>{teacher.name}</h2>
-        <h3>{teacher.title}</h3>
-        <p>{teacher.bio}</p>
+        <p>{teacher.title}</p>
       </div>
 
-      <ul className="subjects">
-        {teacher.subjects.map((subject) => (
-          <li key={subject}>{subject}</li>
-        ))}
-      </ul>
+      <div className="basic-info">
+        <p>{teacher.bio}</p>
+        <ul className="subjects">
+          <p>Predmeti: </p>
+          {teacher.subjects.map((subject) => (
+            <li key={subject}>{subject}</li>
+          ))}
+        </ul>
+      </div>
 
       <a className="email" href={`mailto:${teacher.email}`}>
         {teacher.email}
       </a>
-    </motion.div>
+    </div>
   );
 };
 
