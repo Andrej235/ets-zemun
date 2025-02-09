@@ -2,6 +2,7 @@ import Expander from "@components/expander/expander";
 import StudentsPageParentParliament from "./students-page-parent-parliament";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
+import StudentsPagePartTimeSection from "./students-page-part-time-section";
 
 export default function Students() {
   return (
@@ -15,6 +16,10 @@ export default function Students() {
           <StudentsPageParentParliament />
         </Expander>
       </div>
+
+      <Expander title="Vanredni učenici">
+        <StudentsPagePartTimeSection />
+      </Expander>
     </div>
   );
 }
