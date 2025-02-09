@@ -44,10 +44,10 @@ export default function About() {
 
           <div className="hero-cards">
             <HeroInfoCard
-              icon="trophy"
-              title="Takmičenja i nagrade"
-              description="Informacije o svim takmičenjima i osvojenim nagradama."
-              url={"/takmicenja"}
+              icon="history"
+              title="Istorija"
+              description="Pregled istorije naše škole i značajnih trenutaka."
+              url={"/istorija"}
             />
 
             <HeroInfoCard
@@ -58,17 +58,17 @@ export default function About() {
             />
 
             <HeroInfoCard
-              icon="history"
-              title="Istorija"
-              description="Pregled istorije naše škole i značajnih trenutaka."
-              url={"/istorija"}
-            />
-
-            <HeroInfoCard
               icon="pencil-alt"
               title="Upis i prijem"
               description="Detalji o procesu upisa i prijemnom ispitu."
               url={"/upis"}
+            />
+
+            <HeroInfoCard
+              icon="trophy"
+              title="Takmičenja i nagrade"
+              description="Informacije o svim takmičenjima i osvojenim nagradama."
+              url={"/takmicenja"}
             />
           </div>
 

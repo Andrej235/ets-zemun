@@ -206,7 +206,7 @@
           &:hover,
           &:focus-within {
             .hero-block-icon {
-              transform: translateY(-3rem);
+              transform: translateY(-5rem);
             }
             .hero-block-header {
               opacity: 0;
@@ -267,7 +267,6 @@
 
     display: flex;
     align-items: center;
-    gap: 5rem;
 
     .overview-info {
       width: 90%;
@@ -537,6 +536,7 @@
       }
 
       .overview {
+        min-width: 0;
         transform: translateY(0);
         border-radius: 2.5rem;
 
