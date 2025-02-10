@@ -1,3 +1,4 @@
+import Icon from "@components/icon/icon";
 import "./enrollment.scss";
 
 export default function Enrollment() {
@@ -32,7 +33,10 @@ export default function Enrollment() {
         <p>Prijavite se online do 25. juna!</p>
 
         <a href="https://mojasrednjaskola.gov.rs/" target="_blank">
-          Prijavi se
+          <button>
+            <p>Prijavi se</p>
+            <Icon name="arrow-right" className="button-icon" />
+          </button>
         </a>
       </div>
     </div>
