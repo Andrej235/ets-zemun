@@ -169,24 +169,60 @@
   }
 }
 
-@media (max-width: 768px) {
-  .enrollment-tables {
-    width: 100% !important;
-  }
+@media (max-width: 425px) {
+  .enrollment-page {
+    & > h1 {
+      font-size: 3rem !important;
+    }
 
-  .card {
-    max-width: 100%;
-    padding: 1rem;
-  }
+    & > h2 {
+      font-size: 2rem !important;
+    }
 
-  table {
-    margin-top: 1rem;
-  }
+    .timeline {
+      .card {
+        h1 {
+          font-size: 1.8rem;
+        }
 
-  th,
-  td {
-    font-size: 1.4rem !important;
-    padding: 1rem !important;
+        p {
+          font-size: 1.4rem;
+        }
+      }
+    }
+    .enrollment-tables {
+      width: 100% !important;
+    }
+
+    .card {
+      max-width: 100%;
+      padding: 1rem;
+    }
+
+    table {
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      font-size: 1.4rem !important;
+      padding: 1rem !important;
+    }
+
+    .call-to-action {
+      flex-direction: column;
+      p {
+        font-size: 1.4rem;
+      }
+      button {
+        width: 12rem !important;
+        height: 4rem !important;
+
+        p {
+          font-size: 1.4rem !important;
+        }
+      }
+    }
   }
 }
 
