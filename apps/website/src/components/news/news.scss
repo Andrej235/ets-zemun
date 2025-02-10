@@ -1,9 +1,14 @@
 .news-page-container {
+  padding: 5rem 3rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(50rem, 90vw), 1fr));
   place-items: center;
   gap: 5rem 3rem;
 
-  padding: 5rem 3rem;
+  @media screen and (max-width: 1024px) {
+    gap: 3rem;
+    padding: 0;
+    padding-top: 3.5rem;
+  }
 }
 
