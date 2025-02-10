@@ -101,3 +101,20 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .awards-pages {
+    h1 {
+      font-size: 3rem;
+    }
+
+    .award-card-header {
+      h2 {
+        font-size: 2.4rem !important;
+      }
+
+      p {
+        font-size: 1.8rem !important;
+      }
+    }
+  }
+}
