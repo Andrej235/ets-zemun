@@ -57,7 +57,6 @@ export default function Enrollment() {
       </div>
 
       <div className="enrollment-table">
-        <div className="card">
           <table>
             <caption>Programi upisa</caption>
             <thead>
@@ -79,7 +78,6 @@ export default function Enrollment() {
               ))}
             </tbody>
           </table>
-        </div>
       </div>
 
       <div className="call-to-action">
