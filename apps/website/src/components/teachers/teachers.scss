@@ -10,7 +10,7 @@
 
   .teacher-cards-container {
     max-width: 140rem;
-    padding: 2rem;
+    padding: 0 2rem;
     margin: 0 auto;
 
     display: grid;
@@ -31,7 +31,7 @@
       &:hover {
         transform: translateY(-5px);
       }
-      
+
       img {
         align-self: center;
         width: 20rem;
@@ -115,3 +115,25 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .teachers-page {
+    h1 {
+      font-size: 3rem !important;
+      margin-bottom: 8rem !important;
+    }
+
+    .teacher-card-header {
+      h2 {
+        font-size: 2.4rem !important;
+      }
+
+      p {
+        font-size: 1.8rem !important;
+      }
+    }
+
+    .basic-info {
+      padding: 1rem !important;
+    }
+  }
+}
