@@ -3,26 +3,27 @@ export default function StudentsPageAntiBullying() {
     <div className="anti-bullying">
       <div>
         <h2>Nasilje</h2>
+
         <p>
           <strong>Kako prijaviti nasilje</strong> <br />
-          <a
-            href="https://ets-zemun.edu.rs/wp/wp-content/uploads/2023/10/prijava-nasilja.pdf"
-            target="_blank"
-          >
+          <a href="/documents/prijava-nasilja.pdf" target="_blank">
             Prijava nasilja PDF
           </a>
         </p>
+
         <p>
           Ukoliko ti trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi
           ga odeljenskom starešini, PP službi ili Timu za zaštitu učenika i,
           naravno, svojim roditeljima.
         </p>
+
         <p>
           U našoj školi postoji Tim za zaštitu učenika od diskriminacije,
           nasilja, zlostavljanja, zanemarivanja. Od nastavnika koji čine ovaj
           Tim u svakom trenutku u školi možete dobiti savet i uput šta da
           uradite ukoliko trpite nasilje ili ste svedok nasilja.
         </p>
+
         <h2>SOS telefoni</h2>
         <ul>
           <li>
@@ -43,6 +44,7 @@ export default function StudentsPageAntiBullying() {
             broj telefona: +381 63 610 590.
           </li>
         </ul>
+
         <h2>Šta je to školsko nasilje</h2>
         <p>
           Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se
@@ -77,6 +79,7 @@ export default function StudentsPageAntiBullying() {
           diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju
           mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)
         </p>
+
         <h2>Platforme</h2>
         <p>Postoje dva dobra veb-mesta koja se bave ovom tematikom:</p>
         <ul>
@@ -94,8 +97,8 @@ export default function StudentsPageAntiBullying() {
             </a>
           </li>
         </ul>
+
         <h2>PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA</h2>
-        <h1>Pogledajte PDF-ove podrške školama u kriznim intervencijama</h1>
         <ul>
           <li>
             <a href="/documents/support/1.pdf" target="_blank">

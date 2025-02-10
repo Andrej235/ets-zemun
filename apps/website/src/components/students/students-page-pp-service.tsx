@@ -8,6 +8,7 @@ export default function StudentsPagePPService() {
         roditeljima i nastavnicima. Pratimo i usmeravamo razvoj naših đaka i
         nudimo pomoć u sagledavanju problema i nalaženju rešenja.
       </p>
+
       <h2>Evo nekih situacija u kojima nam se možete obratiti:</h2>
       <ul>
         <li>
@@ -53,6 +54,7 @@ export default function StudentsPagePPService() {
         </li>
         <li>Pomoć u prevenciji zavisnosti i drugih rizičnih ponašanja</li>
       </ul>
+
       <p>
         Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo
         da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja,
@@ -62,11 +64,12 @@ export default function StudentsPagePPService() {
         za dalju podršku. Razgovore sa psihologom ili pedagogom možete zakazati
         uz posredovanje odeljenjskog starešine ili samostalno.
       </p>
-      <h2>
+
+      <h2>POMOĆ VAN ŠKOLE</h2>
+      <p>
         Ako vam je iz nekog razloga neprijatno da dolazite kod školskog
         psihologa ili pedagoga, evo gde još možete potražiti podršku:
-      </h2>
-      <h3>POMOĆ I PODRŠKU VAN ŠKOLE MOŽEŠ PRONAĆI:</h3>
+      </p>
       <ul>
         <li>
           Savetovalište za mlade, Dom zdravlja Zemun, Toplička 8,
@@ -94,3 +97,4 @@ export default function StudentsPagePPService() {
     </div>
   );
 }
+

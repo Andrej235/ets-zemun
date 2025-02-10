@@ -3,6 +3,7 @@ export default function StudentsPagePartTime() {
     <div className="part-time-container">
       <div className="deadlines">
         <h2>ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025.GODINI</h2>
+
         <table>
           <thead>
             <tr>
@@ -87,6 +88,7 @@ export default function StudentsPagePartTime() {
 
       <div className="graduation">
         <h2>MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO/JANUARSKOM ROKU</h2>
+        
         <table>
           <thead>
             <tr>

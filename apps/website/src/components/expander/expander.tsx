@@ -26,7 +26,7 @@ export default function Expander({
         {title}
       </button>
 
-      {isOpen && <div>{children}</div>}
+      {isOpen && <div className="expander-content">{children}</div>}
     </div>
   );
 }

@@ -1,12 +1,13 @@
 .students-page-container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  padding: 3rem 5vw;
+
+  .expander > button {
+    font-size: 2rem;
+  }
 
   .parliament-container {
-    display: flex;
-    flex-direction: column;
-
     .year-container {
       display: flex;
       flex-direction: column;
