@@ -1,14 +1,21 @@
 .enrollment-page {
   padding: 5vh 10vw;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     color: $text-primary;
+    text-align: center;
   }
 
   h2 {
     font-size: 3rem;
-    color: $text-primary;
+    font-weight: 500;
+    text-align: center;
+    color: $text-secondary;
   }
 
   .call-to-action {
@@ -28,16 +35,25 @@
   }
 
   .timeline {
-    display: flex;
+    margin-top: 5rem;
+    max-width: 140rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     gap: 2rem;
-    margin-top: 30px;
+    justify-items: center;
+    text-align: center;
 
     .card {
+      max-width: 35rem;
+      height: 15rem;
+      padding: 0 3rem;
       border-radius: 0.5rem;
       background-color: $secondary-background;
       box-shadow: 0 2px 4px $shadow;
-      width: 30rem;
-      padding: 3rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       h1 {
         font-size: 2.5rem;
