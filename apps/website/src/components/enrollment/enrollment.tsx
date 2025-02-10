@@ -3,16 +3,8 @@ import "./enrollment.scss";
 export default function Enrollment() {
   return (
     <div className="enrollment-page">
-      <h1>Upis i Prijemni ispit za školsku godinu 2025/2026</h1>
+      <h1>Upis i Prijemni ispit</h1>
       <h2>Postanite deo naše zajednice budućih elektrotehničara!</h2>
-
-      <div className="call-to-action">
-        <p>Prijavite se online do 25. juna!</p>
-
-        <a href="https://mojasrednjaskola.gov.rs/" target="_blank">
-          Prijavi se
-        </a>
-      </div>
 
       <div className="timeline">
         <div className="card">
@@ -34,6 +26,14 @@ export default function Enrollment() {
           <h1>28.06.2025.</h1>
           <p>Објављивање коначних резултата расподеле по средњим школама</p>
         </div>
+      </div>
+
+      <div className="call-to-action">
+        <p>Prijavite se online do 25. juna!</p>
+
+        <a href="https://mojasrednjaskola.gov.rs/" target="_blank">
+          Prijavi se
+        </a>
       </div>
     </div>
   );
