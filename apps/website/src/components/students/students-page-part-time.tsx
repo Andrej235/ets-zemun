@@ -1,4 +1,4 @@
-export default function StudentsPagePartTimeSection() {
+export default function StudentsPagePartTime() {
   return (
     <div className="part-time-container">
       <div className="deadlines">

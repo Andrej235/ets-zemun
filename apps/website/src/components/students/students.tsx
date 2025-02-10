@@ -2,9 +2,10 @@ import Expander from "@components/expander/expander";
 import StudentsPageParentParliament from "./students-page-parent-parliament";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
-import StudentsPagePartTimeSection from "./students-page-part-time-section";
+import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
+import StudentsPageMentalHealth from "./students-page-mental-health";
 
 export default function Students() {
   return (
@@ -20,7 +21,7 @@ export default function Students() {
       </div>
 
       <Expander title="Vanredni učenici">
-        <StudentsPagePartTimeSection />
+        <StudentsPagePartTime />
       </Expander>
 
       <Expander title="Psihološko-pedagoška (PP) služba" initiallyOpen>
@@ -29,6 +30,10 @@ export default function Students() {
 
       <Expander title="Nasilje" initiallyOpen>
         <StudentsPageAntiBullying />
+      </Expander>
+
+      <Expander title="Mentalno Zdravlje" initiallyOpen>
+        <StudentsPageMentalHealth />
       </Expander>
     </div>
   );
