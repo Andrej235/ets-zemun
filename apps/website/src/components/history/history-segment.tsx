@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 
 type HistorySegmentProps = {
-  readonly date: Date;
+  readonly date: Date | string;
   readonly children: React.ReactNode;
 };
 
@@ -11,7 +11,7 @@ export default function HistorySegment({
 }: HistorySegmentProps) {
   return (
     <motion.div
-      data-date={date.toLocaleDateString()}
+      data-date={typeof date === "string" ? date : date.toLocaleDateString()}
       className="history-segment"
     >
       {children}

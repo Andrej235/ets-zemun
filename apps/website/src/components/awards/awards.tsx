@@ -35,7 +35,10 @@ export default function Awards() {
                 </p>
               </div>
               <div className="content">
-                <p>Kategorija:{" " + award.category}</p>
+                <div className="content-category">
+                  <p>Kategorija:</p>&nbsp;
+                  <p>{award.category}</p>
+                </div>
                 {award.projectSummary && <p>{award.projectSummary}</p>}
                 <p>{award.description}</p>
               </div>
