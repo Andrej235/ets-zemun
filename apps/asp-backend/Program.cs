@@ -7,7 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("/run/secrets/google-auth");
+var googleAuthFile = "/run/secrets/google-auth";
+if (File.Exists(googleAuthFile))
+    builder.Configuration.AddJsonFile(googleAuthFile);
+else
+    builder.Configuration.AddJsonFile("secrets.json");
+
 var configuration = builder.Configuration;
 
 builder.Logging.ClearProviders().AddConsole();

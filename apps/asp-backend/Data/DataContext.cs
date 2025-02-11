@@ -153,8 +153,8 @@ namespace EtsZemun.Data
 
                 teacher
                     .HasMany(t => t.Qualifications)
-                    .WithOne()
-                    .HasForeignKey(t => t.TeacherId)
+                    .WithOne(q => q.Teacher)
+                    .HasForeignKey(q => q.TeacherId)
                     .OnDelete(DeleteBehavior.SetNull);
             });
 
