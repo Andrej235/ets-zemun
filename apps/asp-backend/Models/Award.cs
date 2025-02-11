@@ -8,6 +8,6 @@ public class Award
     public DateOnly DayOfAward { get; set; }
     public string? ExternalLink { get; set; }
 
-    public int MentorId { get; set; }
-    public Teacher Mentor { get; set; } = null!;
+    public int? TeacherId { get; set; }
+    public Teacher? Teacher { get; set; } = null!;
 }
