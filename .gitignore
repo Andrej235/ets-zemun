@@ -102,3 +102,6 @@ secrets.json
 # Application insights
 *.config
 *.runtimeconfig.dev.json
+
+# API documentation
+api-docs/

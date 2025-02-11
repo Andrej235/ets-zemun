@@ -11,7 +11,7 @@ var googleAuthFile = "/run/secrets/google-auth";
 if (File.Exists(googleAuthFile))
     builder.Configuration.AddJsonFile(googleAuthFile);
 else
-    builder.Configuration.AddJsonFile("secrets.json");
+    builder.Configuration.AddJsonFile("secrets.json", optional: true);
 
 var configuration = builder.Configuration;
 
