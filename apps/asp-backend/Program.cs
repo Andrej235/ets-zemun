@@ -78,7 +78,4 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Add the test connection endpoint
-app.MapGet("/hello", () => Results.Ok("Hello, World!"));
-
 await app.RunAsync();
