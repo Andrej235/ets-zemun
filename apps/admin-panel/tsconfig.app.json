@@ -27,9 +27,7 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["src", "css-module-definition.d.ts"]

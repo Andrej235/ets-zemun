@@ -12,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
   },
   css: {
