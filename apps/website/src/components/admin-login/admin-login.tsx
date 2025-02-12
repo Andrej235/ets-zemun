@@ -1,3 +1,5 @@
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
+
 export default function AdminLogin() {
   return (
     <div>
@@ -19,15 +21,12 @@ export default function AdminLogin() {
 
       <button
         onClick={async () => {
-          const response = await fetch("https://api.localhost.com/auth", {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
+          const response = await sendAPIRequest("/auth", {
+            method: "get",
           });
-          if (!response.ok) console.log(response);
 
-          console.log(await response.text());
+          if (response.code === "OK") console.log(response);
+          else console.error(response);
         }}
       >
         Get Username
@@ -37,15 +36,12 @@ export default function AdminLogin() {
 
       <button
         onClick={async () => {
-          const response = await fetch(
-            "https://api.localhost.com/auth/logout",
-            {
-              method: "GET",
-              credentials: "include",
-            }
-          );
-          if (!response.ok) console.log(response);
-          console.log(await response.text());
+          const response = await sendAPIRequest("/auth/logout", {
+            method: "get",
+          });
+
+          if (response.code === "OK") console.log(response);
+          else console.error(response);
         }}
       >
         Logout
