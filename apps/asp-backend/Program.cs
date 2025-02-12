@@ -7,7 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("/run/secrets/google-auth");
+var googleAuthFile = "/run/secrets/google-auth";
+if (File.Exists(googleAuthFile))
+    builder.Configuration.AddJsonFile(googleAuthFile);
+else
+    builder.Configuration.AddJsonFile("secrets.json", optional: true);
+
 var configuration = builder.Configuration;
 
 builder.Logging.ClearProviders().AddConsole();
@@ -72,8 +77,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-// Add the test connection endpoint
-app.MapGet("/hello", () => Results.Ok("Hello, World!"));
 
 await app.RunAsync();
