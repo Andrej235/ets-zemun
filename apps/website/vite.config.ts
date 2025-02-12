@@ -44,9 +44,9 @@ export default defineConfig(({ mode }) => ({
       scss: {
         api: "modern-compiler",
         additionalData: `
-           @use "@styles/_palette.scss" as *;\n
-           @use "@styles/_mixins.scss" as *;\n
-           `,
+          @use "@styles/_palette.scss" as *;\n
+          @use "@styles/_mixins.scss" as *;\n
+        `,
       },
     },
   },

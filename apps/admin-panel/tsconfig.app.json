@@ -30,8 +30,8 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@contexts/*": ["src/contexts/*"]
-      // "@styles/*": ["src/assets/sass/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "css-module-definition.d.ts"]
 }
+

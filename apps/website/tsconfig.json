@@ -31,7 +31,6 @@
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@data/*": ["src/assets/json-data/data/*"],
-      "@styles/*": ["src/assets/sass/*"],
       "@utility/*": ["src/utility/*"]
     }
   },
