@@ -17,6 +17,7 @@ import ErrorComponent from "@components/error-component/error-component.tsx";
 import Awards from "./components/awards/awards.tsx";
 import Teachers from "@components/teachers/teachers.tsx";
 import Enrollment from "@components/enrollment/enrollment.tsx";
+import AdminLogin from "@components/admin-login/admin-login.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "admin-login",
+        element: <AdminLogin />,
       },
       {
         path: "/profili",
