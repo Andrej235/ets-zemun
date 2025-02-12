@@ -1,4 +1,4 @@
-import Expander from "@components/expander/expander";
+import { useState } from "react";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
@@ -9,6 +9,16 @@ import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
 
 export default function Students() {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  const handleCardClick = (sectionName: string) => {
+    if (activeSection === sectionName) {
+      setActiveSection(null);
+    } else {
+      setActiveSection(sectionName);
+    }
+  };
+
   return (
     <div className="students-page-container">
       <section className="hero-space">
@@ -23,41 +33,54 @@ export default function Students() {
 
         <div className="hero-block">
           <div className="hero-cards">
-            <HeroInfoCard icon="history" title="" />
-
-            <HeroInfoCard icon="chalkboard-teacher" title="" />
-
-            <HeroInfoCard icon="pencil-alt" title="" />
-
-            <HeroInfoCard icon="trophy" title="" />
+            <HeroInfoCard
+              icon="graduation-cap"
+              title="Ucenicki parlament"
+              onClick={handleCardClick}
+              sectionName="ucenicki-parlament"
+            />
+            <HeroInfoCard
+              icon="people-roof"
+              title="Savet roditelja"
+              onClick={handleCardClick}
+              sectionName="savet-roditelja"
+            />
+            <HeroInfoCard
+              icon="house-user"
+              title="Vanredni učenici"
+              onClick={handleCardClick}
+              sectionName="vanredni-ucenici"
+            />
+            <HeroInfoCard
+              icon="pied-piper-pp"
+              title="PP služba"
+              onClick={handleCardClick}
+              sectionName="pp-sluzba"
+            />
+            <HeroInfoCard
+              icon="face-angry"
+              title="Nasilje"
+              onClick={handleCardClick}
+              sectionName="nasilje"
+            />
+            <HeroInfoCard
+              icon="brain"
+              title="Mentalno Zdravlje"
+              onClick={handleCardClick}
+              sectionName="mentalno-zdravlje"
+            />
           </div>
         </div>
       </section>
-      <div className="parliaments-container">
-        <Expander title="Ucenicki parlament">
-          <StudentsPageStudentParliament />
-        </Expander>
 
-        <Expander title="Savet roditelja">
-          <StudentsPageParentParliament />
-        </Expander>
+      <div className="content-container">
+        {activeSection === "ucenicki-parlament" && <StudentsPageStudentParliament />}
+        {activeSection === "savet-roditelja" && <StudentsPageParentParliament />}
+        {activeSection === "vanredni-ucenici" && <StudentsPagePartTime />}
+        {activeSection === "pp-sluzba" && <StudentsPagePPService />}
+        {activeSection === "nasilje" && <StudentsPageAntiBullying />}
+        {activeSection === "mentalno-zdravlje" && <StudentsPageMentalHealth />}
       </div>
-
-      <Expander title="Vanredni učenici">
-        <StudentsPagePartTime />
-      </Expander>
-
-      <Expander title="Psihološko-pedagoška (PP) služba" initiallyOpen>
-        <StudentsPagePPService />
-      </Expander>
-
-      <Expander title="Nasilje" initiallyOpen>
-        <StudentsPageAntiBullying />
-      </Expander>
-
-      <Expander title="Mentalno Zdravlje" initiallyOpen>
-        <StudentsPageMentalHealth />
-      </Expander>
     </div>
   );
 }

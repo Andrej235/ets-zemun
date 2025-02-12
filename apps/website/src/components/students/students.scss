@@ -1,6 +1,6 @@
 .students-page-container {
   justify-self: center;
-  max-width: 100svw;
+  width: 100vw;
 
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100svw;
+    width: 100vw;
   }
 
   .hero-space {
@@ -83,7 +83,7 @@
         top: 0%;
         transform: translate(0, -50%);
 
-        max-width: 120rem;
+        max-width: 160rem;
         width: 90%;
         box-shadow: 0px 5px 15px $shadow;
 
@@ -111,13 +111,13 @@
         }
 
         .hero-block-element {
-          width: 25%;
+          width: calc(100% / 6);
           min-width: 18rem;
           height: 20rem;
           overflow: clip;
 
           text-align: center;
-          
+
           cursor: pointer;
 
           .hero-block-icon {
@@ -141,8 +141,8 @@
             align-items: center;
 
             .hero-block-header {
-              font-size: 2.2rem;
-              font-weight: 600;
+              font-size: 2rem;
+              font-weight: 500;
               margin: 3rem 0;
               transition: 200ms ease-out;
             }
