@@ -208,11 +208,10 @@
           &:hover,
           &:focus-within {
             .hero-block-icon {
-              transform: translateY(-5rem);
+              transform: translateY(-2rem);
             }
             .hero-block-header {
-              opacity: 0;
-              transform: translateY(-6rem);
+              transform: translateY(-2rem);
             }
 
             .hero-block-description {
