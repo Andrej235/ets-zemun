@@ -4,6 +4,13 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace EtsZemun.Services.Update
 {
+    /// <summary>
+    /// Represents a generic interface for updating entities in the database without loading them into memory
+    /// If you want to update entities you already have a reference to, use:
+    /// <br /><see cref="IUpdateSingleService{T}.Update(T)"/> to update a single entity
+    /// <br /><see cref="IUpdateRangeService{T}.Update(IEnumerable{T})"/> to update a multiple entities
+    /// </summary>
+    /// <typeparam name="TEntity">Data model representing the database table</typeparam>
     public interface IExecuteUpdateService<TEntity>
         where TEntity : class
     {
@@ -12,7 +19,7 @@ namespace EtsZemun.Services.Update
         /// <br /> <br />
         /// If you want to update entities you have a reference to, use:
         /// <br /><see cref="IUpdateSingleService{T}.Update(T)"/> to update a single entity
-        /// <br /><see cref="IUpdateRangeService{T}.Update(IEnumerable{T})"/> to update a single entity
+        /// <br /><see cref="IUpdateRangeService{T}.Update(IEnumerable{T})"/> to update a multiple entities
         /// </summary>
         /// <param name="updateCriteria">The criteria to update</param>
         /// <param name="setPropertyCalls">The property calls to set in the database</param>

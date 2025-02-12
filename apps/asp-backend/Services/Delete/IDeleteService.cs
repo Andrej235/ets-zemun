@@ -3,8 +3,12 @@ using FluentResults;
 
 namespace EtsZemun.Services.Delete
 {
-    public interface IDeleteService<T>
-        where T : class
+    /// <summary>
+    /// Represents a generic interface for deleting entities from the database
+    /// </summary>
+    /// <typeparam name="TEntity">Data model representing the database table</typeparam>
+    public interface IDeleteService<TEntity>
+        where TEntity : class
     {
         /// <summary>
         /// Deletes all entities that match the delete criteria
@@ -20,6 +24,6 @@ namespace EtsZemun.Services.Delete
         /// - <see cref="Result.IsFailed"/> is `true` with one of the following errors: <br/>
         ///   - <see cref="Errors.NotFound"/> (HTTP 404): If the no entities were deleted and <paramref name="validate"/> is set to `true`
         /// </returns>
-        Task<Result> Delete(Expression<Func<T, bool>> deleteCriteria, bool validate = true);
+        Task<Result> Delete(Expression<Func<TEntity, bool>> deleteCriteria, bool validate = true);
     }
 }

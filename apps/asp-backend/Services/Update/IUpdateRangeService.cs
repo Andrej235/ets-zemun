@@ -2,6 +2,12 @@
 
 namespace EtsZemun.Services.Update
 {
+    /// <summary>
+    /// Represents a generic interface for updating multiple entities to which you have a reference to in the database
+    /// <br />To update a single entity, use <see cref="IUpdateSingleService{T}.Update(T)"/>
+    /// <br />To update entities without having references to them, use <see cref="IExecuteUpdateService{T}.Update"/>
+    /// </summary>
+    /// <typeparam name="TEntity">Data model representing the database table</typeparam>
     public interface IUpdateRangeService<in TEntity>
         where TEntity : class
     {

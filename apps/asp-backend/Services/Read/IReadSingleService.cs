@@ -3,6 +3,10 @@ using FluentResults;
 
 namespace EtsZemun.Services.Read
 {
+    /// <summary>
+    /// Represents a generic interface for getting a single entity from the database
+    /// </summary>
+    /// <typeparam name="TEntity">Data model representing the database table</typeparam>
     public interface IReadSingleService<TEntity>
         where TEntity : class
     {

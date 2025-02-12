@@ -2,6 +2,10 @@
 
 namespace EtsZemun.Services.Create
 {
+    /// <summary>
+    /// Represents a generic interface for adding multiple entities to the database at once
+    /// </summary>
+    /// <typeparam name="TEntity">Model representing the database table</typeparam>
     public interface ICreateRangeService<in TEntity>
         where TEntity : class
     {

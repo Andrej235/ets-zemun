@@ -2,6 +2,10 @@
 
 namespace EtsZemun.Services.Create
 {
+    /// <summary>
+    /// Represents a generic interface for adding a single entity to the database
+    /// </summary>
+    /// <typeparam name="TEntity">Model representing the database table</typeparam>
     public interface ICreateSingleService<TEntity>
         where TEntity : class
     {

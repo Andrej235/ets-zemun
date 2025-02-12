@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Represents a generic interface for mapping from a DTO to a domain model
-    /// <br/>Opposite of <see cref="DTO.IRequestMapper{TFrom, TTo}"/>
+    /// <br/>Opposite of <see cref="Response.IResponseMapper{TFrom, TTo}"/>
     /// </summary>
     /// <typeparam name="TFrom">The type of the DTO</typeparam>
     /// <typeparam name="TTo">The type of the domain model</typeparam>

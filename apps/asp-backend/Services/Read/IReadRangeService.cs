@@ -3,6 +3,10 @@ using FluentResults;
 
 namespace EtsZemun.Services.Read
 {
+    /// <summary>
+    /// Represents a generic interface for getting multiple entities from the database
+    /// </summary>
+    /// <typeparam name="TEntity">Data model representing the database table</typeparam>
     public interface IReadRangeService<TEntity>
         where TEntity : class
     {
