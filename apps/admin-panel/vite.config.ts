@@ -11,7 +11,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@shared": path.resolve(__dirname, "../shared-frontend"),
       "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
+      "@api": path.resolve(__dirname, "../shared-frontend/api-dsl"),
       "@components": path.resolve(__dirname, "src/components"),
     },
   },

@@ -27,9 +27,11 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
+      "@shared/*": ["../shared-frontend/*"],
+      "@api/*": ["../shared-frontend/api-dsl/*"],
       "@components/*": ["src/components/*"]
     }
   },
-  "include": ["src", "css-module-definition.d.ts"]
+  "include": ["src", "css-module-definition.d.ts", "../shared-frontend"]
 }
 
