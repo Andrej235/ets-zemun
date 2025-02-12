@@ -157,6 +157,16 @@
               transition: 200ms ease-out;
             }
           }
+
+          &:hover,
+          &:focus-within {
+            .hero-block-icon {
+              transform: translateY(-2rem);
+            }
+            .hero-block-header {
+              transform: translateY(-2rem);
+            }
+          }
         }
       }
     }
