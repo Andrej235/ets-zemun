@@ -30,8 +30,6 @@
 
     .hero-image {
       position: relative;
-      left: 0;
-      top: 0;
 
       width: 100%;
       height: calc(60svh - 10rem);
@@ -96,11 +94,10 @@
 
         @media screen and (max-width: 480px) {
           position: relative;
+
           width: 100%;
-          top: 0%;
-          left: 50%;
-          transform: translate(-50%, 0%);
           box-shadow: none;
+          transform: none;
 
           display: flex;
           flex-direction: column;
@@ -158,16 +155,6 @@
               font-weight: 500;
               margin: 3rem 0;
               transition: 200ms ease-out;
-            }
-          }
-
-          &:hover,
-          &:focus-within {
-            .hero-block-icon {
-              transform: translateY(-2rem);
-            }
-            .hero-block-header {
-              transform: translateY(-2rem);
             }
           }
         }
