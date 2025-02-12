@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
-      "@styles": path.resolve(__dirname, "src/assets/sass"),
+      "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
       "@assets": path.resolve(__dirname, "src/assets"),
       "@data": path.resolve(__dirname, "src/assets/json-data/data"),
       "@contexts": path.resolve(__dirname, "src/contexts"),
