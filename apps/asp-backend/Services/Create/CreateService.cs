@@ -1,5 +1,6 @@
 ﻿using EtsZemun.Data;
-using EtsZemun.Exceptions;
+using EtsZemun.Errors;
+using FluentResults;
 
 namespace EtsZemun.Services.Create
 {
@@ -10,8 +11,9 @@ namespace EtsZemun.Services.Create
     {
         private readonly DataContext context = context;
         private readonly ILogger<CreateService<T>> logger = logger;
+        const string FAILED_TO_CREATE_MESSAGE = "Failed to create entity";
 
-        public async Task<T> Add(T toAdd)
+        public async Task<Result<T>> Add(T toAdd)
         {
             try
             {
@@ -22,23 +24,24 @@ namespace EtsZemun.Services.Create
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to create entity");
-                throw new Exception("Failed to create entity", ex);
+                logger.LogError(ex, FAILED_TO_CREATE_MESSAGE);
+                return Result.Fail(new FailedToCreateEntity(FAILED_TO_CREATE_MESSAGE));
             }
         }
 
-        public async Task Add(IEnumerable<T> toAdd)
+        public async Task<Result> Add(IEnumerable<T> toAdd)
         {
             try
             {
                 List<T> toAddList = toAdd.ToList();
                 await context.Set<T>().AddRangeAsync(toAddList);
                 _ = await context.SaveChangesAsync();
+                return Result.Ok();
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to create entity");
-                throw new Exception("Failed to create entity", ex);
+                logger.LogError(ex, FAILED_TO_CREATE_MESSAGE);
+                return Result.Fail(new FailedToCreateEntity(FAILED_TO_CREATE_MESSAGE));
             }
         }
     }

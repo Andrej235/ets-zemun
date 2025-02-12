@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using FluentResults;
 
 namespace EtsZemun.Services.Read
 {
@@ -14,7 +15,7 @@ namespace EtsZemun.Services.Read
         /// Allows 5 methods: Include, ThenInclude, OrderBy, OrderByDescending and AsNoTracking
         /// </param>
         /// <returns>First entity that fits the <paramref name="criteria"/> or if such entity doesn't exist, null</returns>
-        Task<TEntity?> Get(
+        Task<Result<TEntity>> Get(
             Expression<Func<TEntity, bool>> criteria,
             Func<IWrappedQueryable<TEntity>, IWrappedResult<TEntity>>? queryBuilder = null
         );

@@ -1,4 +1,6 @@
-﻿namespace EtsZemun.Services.Create
+﻿using FluentResults;
+
+namespace EtsZemun.Services.Create
 {
     public interface ICreateSingleService<TEntity>
         where TEntity : class
@@ -9,6 +11,6 @@
         /// <returns>Added entity with its new primary key</returns>
         /// <param name="toAdd">Entity to save in the database</param>
         /// <exception cref="Exceptions.FailedToCreateEntityException"/>
-        Task<TEntity> Add(TEntity toAdd);
+        Task<Result<TEntity>> Add(TEntity toAdd);
     }
 }

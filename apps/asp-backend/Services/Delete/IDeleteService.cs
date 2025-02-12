@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using FluentResults;
 
 namespace EtsZemun.Services.Delete
 {
@@ -14,6 +15,6 @@ namespace EtsZemun.Services.Delete
         /// If set to true, throws <see cref="Exceptions.NotFoundException"/> if no entities were deleted
         /// </param>
         ///<exception cref="Exceptions.NotFoundException"/>
-        Task Delete(Expression<Func<T, bool>> deleteCriteria, bool validate = true);
+        Task<Result> Delete(Expression<Func<T, bool>> deleteCriteria, bool validate = true);
     }
 }

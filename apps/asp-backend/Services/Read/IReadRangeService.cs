@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using FluentResults;
 
 namespace EtsZemun.Services.Read
 {
@@ -27,7 +28,7 @@ namespace EtsZemun.Services.Read
         /// It allows 5 methods: Include, ThenInclude, OrderBy, OrderByDescending and AsNoTracking
         /// </param>
         /// <returns>All entities that fit the <paramref name="criteria"/> in form of an <see cref="IEnumerable{T}"/> whose generic type argument is <typeparamref name="TEntity"/></returns>
-        Task<IEnumerable<TEntity>> Get(
+        Task<Result<IEnumerable<TEntity>>> Get(
             Expression<Func<TEntity, bool>>? criteria,
             int? offset = 0,
             int? limit = -1,
