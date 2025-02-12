@@ -113,10 +113,12 @@
         .hero-block-element {
           width: 25%;
           min-width: 18rem;
-          max-height: 25rem;
+          height: 20rem;
           overflow: clip;
 
           text-align: center;
+          
+          cursor: pointer;
 
           .hero-block-icon {
             width: 100%;

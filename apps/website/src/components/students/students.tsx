@@ -1,12 +1,12 @@
 import Expander from "@components/expander/expander";
-import StudentsPageParentParliament from "./students-page-parent-parliament";
-import StudentsPageStudentParliament from "./students-page-student-parliament";
-import "./students.scss";
-import StudentsPagePartTime from "./students-page-part-time";
-import StudentsPagePPService from "./students-page-pp-service";
+import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
-import HeroInfoCard from "@components/about/hero-info-card";
+import StudentsPageParentParliament from "./students-page-parent-parliament";
+import StudentsPagePartTime from "./students-page-part-time";
+import StudentsPagePPService from "./students-page-pp-service";
+import StudentsPageStudentParliament from "./students-page-student-parliament";
+import "./students.scss";
 
 export default function Students() {
   return (
@@ -23,44 +23,14 @@ export default function Students() {
 
         <div className="hero-block">
           <div className="hero-cards">
-            <HeroInfoCard
-              icon="history"
-              title="Istorija"
-              description="Pregled istorije naše škole i značajnih trenutaka."
-              url={"/istorija"}
-            />
+            <HeroInfoCard icon="history" title="" />
 
-            <HeroInfoCard
-              icon="chalkboard-teacher"
-              title="Nastavnici"
-              description="Saznajte više o našim nastavnicima i njihovim kvalifikacijama."
-              url={"/nastavnici"}
-            />
+            <HeroInfoCard icon="chalkboard-teacher" title="" />
 
-            <HeroInfoCard
-              icon="pencil-alt"
-              title="Upis i prijem"
-              description="Detalji o procesu upisa i prijemnom ispitu."
-              url={"/upis"}
-            />
+            <HeroInfoCard icon="pencil-alt" title="" />
 
-            <HeroInfoCard
-              icon="trophy"
-              title="Takmičenja i nagrade"
-              description="Informacije o svim takmičenjima i osvojenim nagradama."
-              url={"/takmicenja"}
-            />
+            <HeroInfoCard icon="trophy" title="" />
           </div>
-
-          <div
-            className="overview"
-            searchKey={{
-              id: "misija-i-vizija",
-              keywords: ["misija", "vizija", "misija i vizija"],
-              title: "Misija i Vizija",
-              url: "/",
-            }}
-          ></div>
         </div>
       </section>
       <div className="parliaments-container">

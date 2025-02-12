@@ -1,0 +1,7 @@
+.hero-block-element {
+  all: unset;
+
+  &:hover {
+    background-color: $secondary-background;
+  }
+}
