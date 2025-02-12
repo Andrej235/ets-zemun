@@ -27,7 +27,12 @@ namespace EtsZemun.Services.Read
         /// Used to further modify the query
         /// It allows 5 methods: Include, ThenInclude, OrderBy, OrderByDescending and AsNoTracking
         /// </param>
-        /// <returns>All entities that fit the <paramref name="criteria"/> in form of an <see cref="IEnumerable{T}"/> whose generic type argument is <typeparamref name="TEntity"/></returns>
+        /// <returns>
+        /// A <see cref="Result{TValue}"/> where: <br/>
+        /// - <see cref="Result{TValue}.IsSuccess"/> is `true` and <see cref="Result{TValue}.Value"/> contains all entities that fit the <paramref name="criteria"/> in form of an <see cref="IEnumerable{T}"/> <br/>
+        /// - <see cref="Result{TValue}.IsFailed"/> is `true` with one of the following errors: <br/>
+        ///   - <see cref="Errors.InternalError"/> (HTTP 500): If the server fails to unwrap the query created by <paramref name="queryBuilder"/>
+        /// </returns>
         Task<Result<IEnumerable<TEntity>>> Get(
             Expression<Func<TEntity, bool>>? criteria,
             int? offset = 0,

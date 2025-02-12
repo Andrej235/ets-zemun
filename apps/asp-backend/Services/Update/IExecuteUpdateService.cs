@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using FluentResults;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace EtsZemun.Services.Update
@@ -15,9 +16,20 @@ namespace EtsZemun.Services.Update
         /// </summary>
         /// <param name="updateCriteria">The criteria to update</param>
         /// <param name="setPropertyCalls">The property calls to set in the database</param>
-        Task Update(
+        /// <param name="validate">
+        /// Whether to validate the result of the deletion
+        /// If set to true, can return an error if no entities were deleted
+        /// </param>
+        /// <returns>
+        /// A <see cref="Result"/> where: <br/>
+        /// - <see cref="Result.IsSuccess"/> is `true` <br/>
+        /// - <see cref="Result.IsFailed"/> is `true` with one of the following errors: <br/>
+        ///   - <see cref="Errors.NotFound"/> (HTTP 404): If the no entities were updated and <paramref name="validate"/> is set to `true`
+        /// </returns>
+        Task<Result> Update(
             Expression<Func<TEntity, bool>> updateCriteria,
-            Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setPropertyCalls
+            Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setPropertyCalls,
+            bool validate = true
         );
     }
 }

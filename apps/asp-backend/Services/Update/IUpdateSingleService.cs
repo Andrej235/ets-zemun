@@ -1,4 +1,6 @@
-﻿namespace EtsZemun.Services.Update
+﻿using FluentResults;
+
+namespace EtsZemun.Services.Update
 {
     public interface IUpdateSingleService<in TEntity>
         where TEntity : class
@@ -10,7 +12,12 @@
         /// If you want to update an entity without having a reference to it, use <see cref="IExecuteUpdateService{T}.Update"/>
         /// </summary>
         /// <param name="updatedEntity">Entity to update</param>
-        /// <exception cref="BadRequestException"/>
-        Task Update(TEntity updatedEntity);
+        /// <returns>
+        /// A <see cref="Result"/> where: <br/>
+        /// - <see cref="Result.IsSuccess"/> is `true` <br/>
+        /// - <see cref="Result.IsFailed"/> is `true` with one of the following errors: <br/>
+        ///   - <see cref="Errors.BadRequest"/> (HTTP 400): If the updated entity fails database validation (e.g., missing Name).
+        /// </returns>
+        Task<Result> Update(TEntity updatedEntity);
     }
 }

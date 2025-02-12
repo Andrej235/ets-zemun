@@ -1,4 +1,6 @@
-﻿namespace EtsZemun.Services.Update
+﻿using FluentResults;
+
+namespace EtsZemun.Services.Update
 {
     public interface IUpdateRangeService<in TEntity>
         where TEntity : class
@@ -11,6 +13,12 @@
         /// </summary>
         /// <param name="updatedEntities">Entities to update</param>
         /// <exception cref="BadRequestException"/>
-        Task Update(IEnumerable<TEntity> updatedEntities);
+        /// <returns>
+        /// A <see cref="Result"/> where: <br/>
+        /// - <see cref="Result.IsSuccess"/> is `true` <br/>
+        /// - <see cref="Result.IsFailed"/> is `true` with one of the following errors: <br/>
+        ///   - <see cref="Errors.BadRequest"/> (HTTP 400): If at least one of the updated entities fails database validation (e.g., missing Name).
+        /// </returns>
+        Task<Result> Update(IEnumerable<TEntity> updatedEntities);
     }
 }

@@ -14,6 +14,7 @@ namespace EtsZemun.Services.Read
             IReadRangeSelectedService<TEntity>
         where TEntity : class
     {
+        private const string FAILED_TO_UNWRAP_ERROR_MESSAGE = "Failed to unwrap query";
         private readonly DataContext context = context;
 
         public async Task<Result<TEntity>> Get(
@@ -21,14 +22,31 @@ namespace EtsZemun.Services.Read
             Func<IWrappedQueryable<TEntity>, IWrappedResult<TEntity>>? queryBuilder = null
         )
         {
-            var source = queryBuilder is null
+            IQueryable<TEntity>? source = queryBuilder is null
                 ? context.Set<TEntity>()
                 : Unwrap(queryBuilder.Invoke(context.Set<TEntity>().Wrap()));
 
-            var result = await (
-                source?.FirstOrDefaultAsync(criteria) ?? Task.FromResult<TEntity?>(null)
-            );
+            if (source is null)
+                return Result.Fail(new InternalError(FAILED_TO_UNWRAP_ERROR_MESSAGE));
 
+            var result = await source.FirstOrDefaultAsync(criteria);
+            return result is null ? Result.Fail(new NotFound("Entity not found")) : result;
+        }
+
+        public async Task<Result<T>> Get<T>(
+            Expression<Func<TEntity, T>> select,
+            Expression<Func<TEntity, bool>> criteria,
+            Func<IWrappedQueryable<TEntity>, IWrappedResult<TEntity>>? queryBuilder = null
+        )
+        {
+            IQueryable<TEntity>? source = queryBuilder is null
+                ? context.Set<TEntity>()
+                : Unwrap(queryBuilder.Invoke(context.Set<TEntity>().Wrap()));
+
+            if (source is null)
+                return Result.Fail(new InternalError(FAILED_TO_UNWRAP_ERROR_MESSAGE));
+
+            var result = await source.Where(criteria).Select(select).FirstOrDefaultAsync();
             return result is null ? Result.Fail(new NotFound("Entity not found")) : result;
         }
 
@@ -53,7 +71,7 @@ namespace EtsZemun.Services.Read
             IQueryable<TEntity>? source = Unwrap(includeResult);
 
             if (source is null)
-                return Result.Fail(new InternalError("Failed to unwrap query"));
+                return Result.Fail(new InternalError(FAILED_TO_UNWRAP_ERROR_MESSAGE));
 
             return criteria is null
                 ? await source.ApplyOffsetAndLimit(offset, limit)
@@ -81,28 +99,11 @@ namespace EtsZemun.Services.Read
             IQueryable<TEntity>? source = Unwrap(query);
 
             if (source is null)
-                return Result.Fail(new InternalError("Failed to unwrap query"));
+                return Result.Fail(new InternalError(FAILED_TO_UNWRAP_ERROR_MESSAGE));
 
             return criteria is null
                 ? await source.Select(select).ApplyOffsetAndLimit(offset, limit)
                 : await source.Where(criteria).Select(select).ApplyOffsetAndLimit(offset, limit);
-        }
-
-        public async Task<Result<T>> Get<T>(
-            Expression<Func<TEntity, T>> select,
-            Expression<Func<TEntity, bool>> criteria,
-            Func<IWrappedQueryable<TEntity>, IWrappedResult<TEntity>>? queryBuilder = null
-        )
-        {
-            IQueryable<TEntity>? source = queryBuilder is null
-                ? context.Set<TEntity>()
-                : Unwrap(queryBuilder.Invoke(context.Set<TEntity>().Wrap()));
-
-            if (source is null)
-                return Result.Fail(new InternalError("Failed to unwrap query"));
-
-            var result = await source.Where(criteria).Select(select).FirstOrDefaultAsync();
-            return result is null ? Result.Fail(new NotFound("Entity not found")) : result;
         }
 
         private static IQueryable<TEntity>? Unwrap(IWrappedResult<TEntity> source) =>

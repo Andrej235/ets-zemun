@@ -25,7 +25,7 @@ namespace EtsZemun.Services.Create
             catch (Exception ex)
             {
                 logger.LogError(ex, FAILED_TO_CREATE_MESSAGE);
-                return Result.Fail(new FailedToCreateEntity(FAILED_TO_CREATE_MESSAGE));
+                return Result.Fail(new BadRequest(FAILED_TO_CREATE_MESSAGE));
             }
         }
 
@@ -41,7 +41,7 @@ namespace EtsZemun.Services.Create
             catch (Exception ex)
             {
                 logger.LogError(ex, FAILED_TO_CREATE_MESSAGE);
-                return Result.Fail(new FailedToCreateEntity(FAILED_TO_CREATE_MESSAGE));
+                return Result.Fail(new BadRequest(FAILED_TO_CREATE_MESSAGE));
             }
         }
     }

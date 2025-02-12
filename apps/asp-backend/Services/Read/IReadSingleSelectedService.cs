@@ -16,7 +16,13 @@ namespace EtsZemun.Services.Read
         /// Used to further modify the query
         /// Allows 5 methods: Include, ThenInclude, OrderBy, OrderByDescending and AsNoTracking
         /// </param>
-        /// <returns>First entity that fits the <paramref name="criteria"/> mapped according to <paramref name="select"/>, or if such entity doesn't exist null</returns>
+        /// <returns>
+        /// A <see cref="Result{TValue}"/> where: <br/>
+        /// - <see cref="Result{TValue}.IsSuccess"/> is `true` and <see cref="Result{TValue}.Value"/> contains the first entity that fits the <paramref name="criteria"/> mapped according to <paramref name="select"/> <br/>
+        /// - <see cref="Result{TValue}.IsFailed"/> is `true` with one of the following errors: <br/>
+        ///   - <see cref="Errors.NotFound"/> (HTTP 404): If the requested entity was not found
+        ///   - <see cref="Errors.InternalError"/> (HTTP 500): If the server fails to unwrap the query created by <paramref name="queryBuilder"/>
+        /// </returns>
         Task<Result<T>> Get<T>(
             Expression<Func<TEntity, T>> select,
             Expression<Func<TEntity, bool>> criteria,
