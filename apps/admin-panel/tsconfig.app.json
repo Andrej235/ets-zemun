@@ -27,11 +27,11 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"]
-      // "@styles/*": ["src/assets/sass/*"]
+      "@shared/*": ["../shared-frontend/*"],
+      "@api/*": ["../shared-frontend/api-dsl/*"],
+      "@components/*": ["src/components/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "css-module-definition.d.ts", "../shared-frontend"]
 }
+

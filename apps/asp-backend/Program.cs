@@ -57,7 +57,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
-                .WithOrigins("https://localhost.com")
+                .WithOrigins("https://localhost.com", "https://admin.localhost.com")
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader();

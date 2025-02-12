@@ -1,0 +1,122 @@
+#app-header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+
+  width: 100%;
+  min-height: 10rem;
+  max-height: 10rem;
+  padding: 1rem 5rem;
+  background-color: $secondary-background;
+  box-shadow: 0 2px 15px $shadow;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #fff;
+  text-align: center;
+  font-size: 2rem;
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: $secondary-background;
+    box-shadow: 0 2px 15px black;
+  }
+
+  > *:not(.background):not(.hamburger-navigation) {
+    z-index: 2;
+  }
+
+  .logo {
+    width: auto;
+    height: 100%;
+    border-radius: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    font-weight: 700;
+    font-size: 1.2em;
+
+    img {
+      height: 100%;
+      aspect-ratio: 1/1;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $outline;
+    }
+  }
+
+  .app-header-navigation {
+    position: relative;
+    display: flex;
+    border-radius: 1rem;
+    max-height: 5rem;
+
+    .nav-bar {
+      position: relative;
+      right: 1rem;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 1rem;
+
+      transition: 0.25s ease-out;
+
+      a {
+        width: auto;
+        min-width: 10rem;
+        padding: 1rem 1rem;
+        border-radius: 1rem;
+        white-space: nowrap;
+
+        &:hover,
+        &:focus-visible {
+          color: $text-accent;
+          background-color: $accent-secondary-highlight;
+        }
+      }
+
+      &:has(~ .search-bar-not-active) {
+        transform: translate(30rem);
+
+        @media screen and (max-width: 1440px) {
+          transform: translate(25rem);
+        }
+
+        @media screen and (max-width: 1120px) {
+          transform: translate(20rem);
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1075px) {
+    grid-template-columns: max-content 1fr max-content;
+
+    .logo {
+      height: calc(100% - 2rem);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .app-header-navigation {
+      display: none;
+    }
+  }
+}
