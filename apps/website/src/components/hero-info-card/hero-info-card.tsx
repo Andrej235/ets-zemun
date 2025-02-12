@@ -9,6 +9,7 @@ type HeroInfoCardProps = {
   readonly onClick?: (sectionName: string) => void;
   readonly sectionName?: string;
   readonly url?: string;
+  readonly isActive: boolean;
 };
 
 export default function HeroInfoCard({
@@ -18,6 +19,7 @@ export default function HeroInfoCard({
   onClick,
   sectionName,
   url,
+  isActive,
 }: HeroInfoCardProps) {
   const handleClick = () => {
     if (onClick && sectionName) {
@@ -27,7 +29,7 @@ export default function HeroInfoCard({
 
   return (
       <button
-        className="hero-block-element"
+      className={`hero-block-element${isActive ? " active" : ""}`}
         onClick={url ? undefined : handleClick}
       >
         <Icon name={icon} className="hero-block-icon" />

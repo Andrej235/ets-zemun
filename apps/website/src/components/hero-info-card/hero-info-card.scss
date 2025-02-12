@@ -5,3 +5,12 @@
     background-color: $secondary-background;
   }
 }
+
+.active {
+  .hero-block-icon {
+    transform: translateY(-2rem) !important;
+  }
+  .hero-block-header {
+    transform: translateY(-2rem) !important;
+  }
+}

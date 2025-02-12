@@ -38,36 +38,42 @@ export default function Students() {
               title="Ucenicki parlament"
               onClick={handleCardClick}
               sectionName="ucenicki-parlament"
+              isActive={activeSection === "ucenicki-parlament"}
             />
             <HeroInfoCard
               icon="people-roof"
               title="Savet roditelja"
               onClick={handleCardClick}
               sectionName="savet-roditelja"
+              isActive={activeSection === "savet-roditelja"}
             />
             <HeroInfoCard
               icon="house-user"
               title="Vanredni učenici"
               onClick={handleCardClick}
               sectionName="vanredni-ucenici"
+              isActive={activeSection === "vanredni-ucenici"}
             />
             <HeroInfoCard
               icon="pied-piper-pp"
               title="PP služba"
               onClick={handleCardClick}
               sectionName="pp-sluzba"
+              isActive={activeSection === "pp-sluzba"}
             />
             <HeroInfoCard
               icon="face-angry"
               title="Nasilje"
               onClick={handleCardClick}
               sectionName="nasilje"
+              isActive={activeSection === "nasilje"}
             />
             <HeroInfoCard
               icon="brain"
               title="Mentalno Zdravlje"
               onClick={handleCardClick}
               sectionName="mentalno-zdravlje"
+              isActive={activeSection === "mentalno-zdravlje"}
             />
           </div>
         </div>
