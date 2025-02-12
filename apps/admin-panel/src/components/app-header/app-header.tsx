@@ -1,7 +1,7 @@
 import "./app-header.scss";
 import { Link } from "react-router";
 import { useState, forwardRef } from "react";
-import { FocusTrap } from "focus-trap-react";
+import FocusTrap from "focus-trap-react";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);

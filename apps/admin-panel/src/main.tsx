@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./app/app";
 import "../../shared-frontend/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ErrorComponent from "../../website/src/components/error-component/error-component.tsx";
+import ErrorComponent from "@components/error-component/error-component";
 
 const router = createBrowserRouter([
   {
