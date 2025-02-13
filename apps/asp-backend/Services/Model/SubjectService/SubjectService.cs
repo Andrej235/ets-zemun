@@ -10,6 +10,7 @@ using EtsZemun.Services.Mapping.Response;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using FluentResults;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace EtsZemun.Services.Model.SubjectService;
 
@@ -17,18 +18,22 @@ public class SubjectService(
     ICreateSingleService<Subject> createSingleService,
     ICreateSingleService<SubjectTranslation> createSingleTranslationService,
     IReadSingleService<Subject> readSingleService,
+    IReadSingleSelectedService<Subject> readSingleSelectedService,
     IReadRangeService<Subject> readRangeService,
     IExecuteUpdateService<SubjectTranslation> updateTranslationService,
     IDeleteService<Subject> deleteService,
     IDeleteService<SubjectTranslation> deleteTranslationService,
     IRequestMapper<CreateSubjectTranslationRequestDto, SubjectTranslation> createTranslationMapper,
-    IResponseMapper<Subject, SubjectResponseDto> responseMapper
+    IResponseMapper<Subject, SubjectResponseDto> responseMapper,
+    HybridCache hybridCache
 ) : ISubjectService
 {
     private readonly ICreateSingleService<Subject> createSingleService = createSingleService;
     private readonly ICreateSingleService<SubjectTranslation> createSingleTranslationService =
         createSingleTranslationService;
     private readonly IReadSingleService<Subject> readSingleService = readSingleService;
+    private readonly IReadSingleSelectedService<Subject> readSingleSelectedService =
+        readSingleSelectedService;
     private readonly IReadRangeService<Subject> readRangeService = readRangeService;
     private readonly IExecuteUpdateService<SubjectTranslation> updateTranslationService =
         updateTranslationService;
@@ -40,6 +45,7 @@ public class SubjectService(
         SubjectTranslation
     > createTranslationMapper = createTranslationMapper;
     private readonly IResponseMapper<Subject, SubjectResponseDto> responseMapper = responseMapper;
+    private readonly HybridCache hybridCache = hybridCache;
 
     public async Task<Result> Create(CreateSubjectRequestDto request)
     {
@@ -119,7 +125,25 @@ public class SubjectService(
             return Result.Fail<IEnumerable<SubjectResponseDto>>(result.Errors);
 
         var mapped = result.Value.Select(responseMapper.Map);
-        //todo deal with lazy loading meta data
+
+        foreach (var subject in mapped)
+        {
+            subject.Teachers.LoadedCount = subject.Teachers.Items.Count();
+            subject.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
+                $"subject-{subject.Id}-teachers-count",
+                async (_) =>
+                {
+                    var result = await readSingleSelectedService.Get(
+                        x => new { x.Teachers.Count },
+                        x => x.Id == subject.Id
+                    );
+
+                    return result.ValueOrDefault?.Count ?? 0;
+                },
+                new() { Expiration = TimeSpan.FromHours(6) }
+            );
+        }
+
         return Result.Ok(mapped);
     }
 
@@ -143,7 +167,22 @@ public class SubjectService(
             return Result.Fail<SubjectResponseDto>(result.Errors);
 
         var mapped = responseMapper.Map(result.Value);
-        //todo deal with lazy loading meta data
+
+        mapped.Teachers.LoadedCount = mapped.Teachers.Items.Count();
+        mapped.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
+            $"subject-{mapped.Id}-teachers-count",
+            async (_) =>
+            {
+                var result = await readSingleSelectedService.Get(
+                    x => new { x.Teachers.Count },
+                    x => x.Id == mapped.Id
+                );
+
+                return result.ValueOrDefault?.Count ?? 0;
+            },
+            new() { Expiration = TimeSpan.FromHours(6) }
+        );
+
         return Result.Ok(mapped);
     }
 
