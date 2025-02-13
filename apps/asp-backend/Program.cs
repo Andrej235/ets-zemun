@@ -1,4 +1,5 @@
 using EtsZemun.Data;
+using EtsZemun.Exceptions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.DataProtection;
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("/run/secrets/google-auth");
 var configuration = builder.Configuration;
+
+builder.Logging.ClearProviders().AddConsole();
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 
 builder
     .Services.AddDataProtection()
@@ -57,6 +61,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -67,5 +72,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add the test connection endpoint
+app.MapGet("/hello", () => Results.Ok("Hello, World!"));
 
 await app.RunAsync();
