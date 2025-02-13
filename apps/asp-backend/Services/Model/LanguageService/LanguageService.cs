@@ -1,4 +1,5 @@
 using EtsZemun.DTOs.Request.Language;
+using EtsZemun.DTOs.Response.Language;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
@@ -10,13 +11,13 @@ namespace EtsZemun.Services.Model.LanguageService;
 
 public partial class LanguageService(
     ICreateSingleService<Language> createSingleService,
-    IReadRangeService<Language> readRangeService,
+    IReadRangeSelectedService<Language> readRangeService,
     IDeleteService<Language> deleteService,
     IRequestMapper<CreateLanguageRequestDto, Language> createMapper
 ) : ILanguageService
 {
     private readonly ICreateSingleService<Language> createSingleService = createSingleService;
-    private readonly IReadRangeService<Language> readRangeService = readRangeService;
+    private readonly IReadRangeSelectedService<Language> readRangeService = readRangeService;
     private readonly IDeleteService<Language> deleteServic = deleteService;
     private readonly IRequestMapper<CreateLanguageRequestDto, Language> createMapper = createMapper;
 
@@ -25,5 +26,6 @@ public partial class LanguageService(
 
     public Task<Result> Delete(int id) => deleteServic.Delete(x => x.Id == id);
 
-    public Task<Result<IEnumerable<Language>>> GetAll() => readRangeService.Get(_ => true);
+    public Task<Result<IEnumerable<LanguageResponseDto>>> GetAll() =>
+        readRangeService.Get(x => new LanguageResponseDto { Id = x.Id, Code = x.Code }, _ => true);
 }

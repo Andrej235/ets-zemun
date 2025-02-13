@@ -79,7 +79,7 @@ builder.Services.AddCors(options =>
 #region Language
 builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
-builder.Services.AddScoped<IReadRangeService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Language>, ReadService<Language>>();
 builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
 builder.Services.AddScoped<
     IRequestMapper<CreateLanguageRequestDto, Language>,
