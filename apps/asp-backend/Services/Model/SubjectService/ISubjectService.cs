@@ -12,7 +12,7 @@ public interface ISubjectService
     Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(int languageId);
     Task<Result<SubjectResponseDto>> GetSingle(int id, int languageId);
 
-    Task<Result> UpdateTranslations(UpdateSubjectTranslationRequestDto request);
+    Task<Result> UpdateTranslation(UpdateSubjectTranslationRequestDto request);
 
     Task<Result> Delete(int id);
     Task<Result> DeleteTranslation(int subjectId, int languageId);

@@ -186,7 +186,7 @@ public class SubjectService(
         return Result.Ok(mapped);
     }
 
-    public Task<Result> UpdateTranslations(UpdateSubjectTranslationRequestDto request)
+    public Task<Result> UpdateTranslation(UpdateSubjectTranslationRequestDto request)
     {
         if (request.SubjectId < 1 || request.LanguageId < 1)
             return Task.FromResult(Result.Fail(new BadRequest("Invalid request")));
