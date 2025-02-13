@@ -1,5 +1,13 @@
 using EtsZemun.Data;
+using EtsZemun.DTOs.Request.Language;
 using EtsZemun.Exceptions;
+using EtsZemun.Models;
+using EtsZemun.Services.Create;
+using EtsZemun.Services.Delete;
+using EtsZemun.Services.Mapping.Request;
+using EtsZemun.Services.Mapping.Request.LanguageMappers;
+using EtsZemun.Services.Model.LanguageService;
+using EtsZemun.Services.Read;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.DataProtection;
@@ -65,6 +73,21 @@ builder.Services.AddCors(options =>
         }
     );
 });
+
+#region Model Services
+
+#region Language
+builder.Services.AddScoped<ILanguageService, LanguageService>();
+builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
+builder.Services.AddScoped<IReadRangeService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateLanguageRequestDto, Language>,
+    CreateLanguageRequestMapper
+>();
+#endregion
+
+#endregion
 
 var app = builder.Build();
 app.UseExceptionHandler("/error");
