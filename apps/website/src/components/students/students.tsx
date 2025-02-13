@@ -20,8 +20,8 @@ export default function Students() {
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
-            <h1>Elektrotehnička škola "Zemun"</h1>
-            <h2>Mi ne čekamo budućnost, mi joj idemo u susret!</h2>
+            <h1>Sve informacije za ucenike</h1>
+            <h2>Pronađite sve informacije i resurse za vaš uspeh.</h2>
           </div>
 
           <img src="/hero-image.jpg" alt="student" />
