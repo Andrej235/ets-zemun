@@ -14,9 +14,9 @@ namespace EtsZemun.Services.Model.TeacherService;
 public partial class TeacherService(
     ICreateSingleService<Teacher> createSingleService,
     ICreateSingleService<TeacherTranslation> createSingleTranslationService,
-    IReadRangeSelectedService<Teacher> readRangeSelectedService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
+    IReadRangeSelectedService<Teacher> readRangeSelectedService,
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
     IDeleteService<Teacher> deleteService,
@@ -33,10 +33,10 @@ public partial class TeacherService(
     private readonly ICreateSingleService<Teacher> createSingleService = createSingleService;
     private readonly ICreateSingleService<TeacherTranslation> createSingleTranslationService =
         createSingleTranslationService;
-    private readonly IReadRangeSelectedService<Teacher> readRangeSelectedService =
-        readRangeSelectedService;
     private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
     private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
+    private readonly IReadRangeSelectedService<Teacher> readRangeSelectedService =
+        readRangeSelectedService;
     private readonly IUpdateSingleService<Teacher> updateService = updateService;
     private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
         updateTranslationService;

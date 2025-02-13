@@ -1,6 +1,7 @@
 using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Language;
 using EtsZemun.DTOs.Request.Subject;
+using EtsZemun.DTOs.Request.Teacher;
 using EtsZemun.DTOs.Response.Qualification;
 using EtsZemun.DTOs.Response.Subject;
 using EtsZemun.DTOs.Response.Teacher;
@@ -11,12 +12,14 @@ using EtsZemun.Services.Delete;
 using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
 using EtsZemun.Services.Mapping.Request.SubjectMappers;
+using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
 using EtsZemun.Services.Model.LanguageService;
 using EtsZemun.Services.Model.SubjectService;
+using EtsZemun.Services.Model.TeacherService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -129,6 +132,30 @@ builder.Services.AddScoped<IResponseMapper<Subject, SubjectResponseDto>, Subject
 #endregion
 
 #region Teacher
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<ICreateSingleService<Teacher>, CreateService<Teacher>>();
+builder.Services.AddScoped<
+    ICreateSingleService<TeacherTranslation>,
+    CreateService<TeacherTranslation>
+>();
+builder.Services.AddScoped<IReadSingleService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IReadRangeService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IUpdateSingleService<Teacher>, UpdateService<Teacher>>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<TeacherTranslation>,
+    UpdateService<TeacherTranslation>
+>();
+builder.Services.AddScoped<IDeleteService<Teacher>, DeleteService<Teacher>>();
+builder.Services.AddScoped<IDeleteService<TeacherTranslation>, DeleteService<TeacherTranslation>>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateTeacherRequestDto, Teacher>,
+    CreateTeacherRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateTeacherTranslationRequestDto, TeacherTranslation>,
+    CreateTeacherTranslationRequestMapper
+>();
 builder.Services.AddScoped<IResponseMapper<Teacher, TeacherResponseDto>, TeacherResponseMapper>();
 #endregion
 
