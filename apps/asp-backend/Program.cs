@@ -68,6 +68,9 @@ builder
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+
+    if (builder.Environment.IsDevelopment())
+        options.EnableSensitiveDataLogging();
 });
 
 builder.Services.AddCors(options =>
