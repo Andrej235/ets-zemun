@@ -118,6 +118,9 @@ public class SubjectService(
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
                     .Include(x => x.Teachers)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .Include(x => x.Teachers)
+                    .ThenInclude(x => x.Qualifications)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
                     .Include(x => x.Translations.Where(t => t.LanguageId == languageId))
         );
 
@@ -159,6 +162,9 @@ public class SubjectService(
                     .ThenInclude(x => x.Subjects)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
                     .Include(x => x.Teachers)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .Include(x => x.Teachers)
+                    .ThenInclude(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
                     .Include(x => x.Translations.Where(t => t.LanguageId == languageId))
         );

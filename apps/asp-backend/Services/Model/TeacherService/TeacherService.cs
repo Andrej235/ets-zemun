@@ -1,0 +1,54 @@
+using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Models;
+using EtsZemun.Services.Create;
+using EtsZemun.Services.Delete;
+using EtsZemun.Services.Mapping.Request;
+using EtsZemun.Services.Mapping.Response;
+using EtsZemun.Services.Read;
+using EtsZemun.Services.Update;
+using Microsoft.Extensions.Caching.Hybrid;
+
+namespace EtsZemun.Services.Model.TeacherService;
+
+public partial class TeacherService(
+    ICreateSingleService<Teacher> createSingleService,
+    ICreateSingleService<TeacherTranslation> createSingleTranslationService,
+    IReadRangeSelectedService<Teacher> readRangeSelectedService,
+    IReadSingleService<Teacher> readSingleService,
+    IReadRangeService<Teacher> readRangeService,
+    IUpdateSingleService<Teacher> updateService,
+    IExecuteUpdateService<TeacherTranslation> updateTranslationService,
+    IDeleteService<Teacher> deleteService,
+    IDeleteService<TeacherTranslation> deleteTranslationService,
+    IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper,
+    IRequestMapper<
+        CreateTeacherTranslationRequestDto,
+        TeacherTranslation
+    > createTranslationRequestMapper,
+    IResponseMapper<Teacher, TeacherResponseDto> responseMapper,
+    HybridCache hybridCache
+) : ITeacherService
+{
+    private readonly ICreateSingleService<Teacher> createSingleService = createSingleService;
+    private readonly ICreateSingleService<TeacherTranslation> createSingleTranslationService =
+        createSingleTranslationService;
+    private readonly IReadRangeSelectedService<Teacher> readRangeSelectedService =
+        readRangeSelectedService;
+    private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
+    private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
+    private readonly IUpdateSingleService<Teacher> updateService = updateService;
+    private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
+        updateTranslationService;
+    private readonly IDeleteService<Teacher> deleteService = deleteService;
+    private readonly IDeleteService<TeacherTranslation> deleteTranslationService =
+        deleteTranslationService;
+    private readonly IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper =
+        createRequestMapper;
+    private readonly IRequestMapper<
+        CreateTeacherTranslationRequestDto,
+        TeacherTranslation
+    > createTranslationRequestMapper = createTranslationRequestMapper;
+    private readonly IResponseMapper<Teacher, TeacherResponseDto> responseMapper = responseMapper;
+    private readonly HybridCache hybridCache = hybridCache;
+}
