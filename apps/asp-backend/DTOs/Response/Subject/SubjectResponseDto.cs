@@ -8,5 +8,5 @@ public class SubjectResponseDto
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
 
-    public ICollection<TeacherResponseDto> Teachers { get; set; } = null!;
+    public LazyLoadResponse<TeacherResponseDto> Teachers { get; set; } = null!;
 }
