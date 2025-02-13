@@ -13,6 +13,6 @@ public class TeacherResponseDto
     public string Image { get; set; } = null!;
     public TimeOnly? StartOfOpenOfficeHoursFirstShift { get; set; }
     public TimeOnly? StartOfOpenOfficeHoursSecondShift { get; set; }
-    public ICollection<QualificationResponseDto> Qualifications { get; set; } = [];
-    public ICollection<SimpleSubjectResponseDto> Subjects { get; set; } = [];
+    public IEnumerable<QualificationResponseDto> Qualifications { get; set; } = [];
+    public IEnumerable<SimpleSubjectResponseDto> Subjects { get; set; } = [];
 }
