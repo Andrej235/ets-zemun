@@ -5,5 +5,6 @@ namespace EtsZemun.Services.Mapping.Request.LanguageMappers;
 
 public class CreateLanguageRequestMapper : IRequestMapper<CreateLanguageRequestDto, Language>
 {
-    public Language Map(CreateLanguageRequestDto from) => new() { Code = from.Code };
+    public Language Map(CreateLanguageRequestDto from) =>
+        new() { Code = from.Code, FullName = from.FullName };
 }

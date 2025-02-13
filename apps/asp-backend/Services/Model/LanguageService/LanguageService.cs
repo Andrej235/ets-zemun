@@ -27,5 +27,13 @@ public partial class LanguageService(
     public Task<Result> Delete(int id) => deleteServic.Delete(x => x.Id == id);
 
     public Task<Result<IEnumerable<LanguageResponseDto>>> GetAll() =>
-        readRangeService.Get(x => new LanguageResponseDto { Id = x.Id, Code = x.Code }, _ => true);
+        readRangeService.Get(
+            x => new LanguageResponseDto
+            {
+                Id = x.Id,
+                Code = x.Code,
+                FullName = x.FullName,
+            },
+            _ => true
+        );
 }
