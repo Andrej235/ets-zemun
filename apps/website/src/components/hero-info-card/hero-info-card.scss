@@ -1,5 +1,6 @@
 .hero-block-element {
   all: unset;
+  user-select: none;
 
   &:hover {
     background-color: $secondary-background;

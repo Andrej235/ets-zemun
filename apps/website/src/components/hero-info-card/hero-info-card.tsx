@@ -9,7 +9,7 @@ type HeroInfoCardProps = {
   readonly onClick?: (sectionName: string) => void;
   readonly sectionName?: string;
   readonly url?: string;
-  readonly isActive: boolean;
+  readonly isActive?: boolean;
 };
 
 export default function HeroInfoCard({

@@ -9,14 +9,10 @@ import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
 
 export default function Students() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("ucenicki-parlament");
 
   const handleCardClick = (sectionName: string) => {
-    if (activeSection === sectionName) {
-      setActiveSection(null);
-    } else {
       setActiveSection(sectionName);
-    }
   };
 
   return (
