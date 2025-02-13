@@ -6,9 +6,18 @@ namespace EtsZemun.Data
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
         public DbSet<Award> Awards { get; set; }
+        public DbSet<AwardTranslation> AwardTranslations { get; set; }
         public DbSet<EducationalProfile> EducationalProfiles { get; set; }
+        public DbSet<EducationalProfileGeneralSubject> EducationalProfileGeneralSubjects { get; set; }
+        public DbSet<EducationalProfileVocationalSubject> EducationalProfileVocationalSubjects { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Qualification> Qualifications { get; set; }
+        public DbSet<QualificationTranslation> QualificationTranslations { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectTranslation> SubjectTranslations { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
