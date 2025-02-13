@@ -1,154 +1,84 @@
-import { motion } from "motion/react";
-
 export default function StudentsPageParentParliament() {
+  const parentData = [
+    {
+      grade: "PRVI RAZRED",
+      classes: [
+        { className: "I1", parents: ["Ćosović Dragana"] },
+        { className: "I2", parents: ["Dalibor Samardžić"] },
+        { className: "I3", parents: ["Bajkić Dušan"] },
+        { className: "I4", parents: ["Zoran Branković"] },
+        { className: "I5", parents: ["Vladimir Rašović"] },
+        { className: "I6", parents: ["Vesna Vuković"] },
+        { className: "I7", parents: ["Neda Milanović"] },
+        { className: "I8", parents: ["Stefanović Zlatko"] },
+      ],
+    },
+    {
+      grade: "DRUGI RAZRED",
+      classes: [
+        { className: "II1", parents: ["Marunić Zorica"] },
+        { className: "II2", parents: ["Siniša Bazina"] },
+        { className: "II3", parents: ["Goran Radović"] },
+        { className: "II4", parents: ["Dejan Dragović"] },
+        { className: "II5", parents: ["Olja Lazarac"] },
+        { className: "II6", parents: ["Goran Živanović"] },
+        { className: "II7", parents: ["Mitrović Aleksandar"] },
+        { className: "II8", parents: ["Blagojević Dragi"] },
+      ],
+    },
+    {
+      grade: "TREĆI RAZRED",
+      classes: [
+        { className: "III1", parents: ["Bekrić Ljubica"] },
+        { className: "III2", parents: ["Milena Lužija"] },
+        { className: "III3", parents: ["Tatjana Ivanović"] },
+        { className: "III4", parents: ["Dinić Nenad"] },
+        { className: "III5", parents: ["Branko Ivošević"] },
+        { className: "III6", parents: ["Bajunović Ivana"] },
+        { className: "III7", parents: ["Jasmina Manigodić"] },
+        { className: "III8", parents: ["Spasić Dragan"] },
+      ],
+    },
+    {
+      grade: "ČETVRTI RAZRED",
+      classes: [
+        { className: "IV1", parents: ["Mihajlović Aleksandar"] },
+        { className: "IV2", parents: ["Jeina Mirjana"] },
+        { className: "IV3", parents: ["Dimitrijević Ljiljana"] },
+        { className: "IV4", parents: ["Galić Biljana"] },
+        { className: "IV5", parents: ["Andreja Crnogorac"] },
+        { className: "IV6", parents: ["Andrijana Perić Đurđević"] },
+        { className: "IV7", parents: ["Stuparušić Marija"] },
+      ],
+    },
+  ];
+
   return (
-    <motion.div
-      className="parliament-container"
-      layout
-      layoutId="parent-parliament"
-    >
-      <motion.h1>Savet roditelja</motion.h1>
+    <div className="parliament-container">
+      <h1>Savet roditelja</h1>
 
-      <div className="year-container">
-        <h2>PRVI RAZRED</h2>
-        <div className="class-container">
-          <p>I1</p>
-          <p>Ćosović Dragana</p>
+      {parentData.map((gradeData, index) => (
+        <div className="year-table" key={index + ""}>
+          <table>
+            <caption>{gradeData.grade}</caption>
+            <thead>
+              <tr>
+                <th>Razred</th>
+                <th>Roditelj</th>
+              </tr>
+            </thead>
+            <tbody>
+              {gradeData.classes.map((classData, classIndex) => (
+                <tr key={classIndex + ""}>
+                  <td>{classData.className}</td>
+                  <td>{classData.parents[0]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="class-container">
-          <p>I2</p>
-          <p>Dalibor Samardžić</p>
-        </div>
-        <div className="class-container">
-          <p>I3</p>
-          <p>Bajkić Dušan</p>
-        </div>
-        <div className="class-container">
-          <p>I4</p>
-          <p>Zoran Branković</p>
-        </div>
-        <div className="class-container">
-          <p>I5</p>
-          <p>Vladimir Rašović</p>
-        </div>
-        <div className="class-container">
-          <p>I6</p>
-          <p>Vesna Vuković</p>
-        </div>
-        <div className="class-container">
-          <p>I7</p>
-          <p>Neda Milanović</p>
-        </div>
-        <div className="class-container">
-          <p>I8</p>
-          <p>Stefanović Zlatko</p>
-        </div>
-      </div>
-
-      <div className="year-container">
-        <h2>DRUGI RAZRED</h2>
-        <div className="class-container">
-          <p>II1</p>
-          <p>Marunić Zorica</p>
-        </div>
-        <div className="class-container">
-          <p>II2</p>
-          <p>Siniša Bazina</p>
-        </div>
-        <div className="class-container">
-          <p>II3</p>
-          <p>Goran Radović</p>
-        </div>
-        <div className="class-container">
-          <p>II4</p>
-          <p>Dejan Dragović</p>
-        </div>
-        <div className="class-container">
-          <p>II5</p>
-          <p>Olja Lazarac</p>
-        </div>
-        <div className="class-container">
-          <p>II6</p>
-          <p>Goran Živanović</p>
-        </div>
-        <div className="class-container">
-          <p>II7</p>
-          <p>Mitrović Aleksandar</p>
-        </div>
-        <div className="class-container">
-          <p>II8</p>
-          <p>Blagojević Dragi</p>
-        </div>
-      </div>
-
-      <div className="year-container">
-        <h2>TREĆI RAZRED</h2>
-        <div className="class-container">
-          <p>III1</p>
-          <p>Bekrić Ljubica</p>
-        </div>
-        <div className="class-container">
-          <p>III2</p>
-          <p>Milena Lužija</p>
-        </div>
-        <div className="class-container">
-          <p>III3</p>
-          <p>Tatjana Ivanović</p>
-        </div>
-        <div className="class-container">
-          <p>III4</p>
-          <p>Dinić Nenad</p>
-        </div>
-        <div className="class-container">
-          <p>III5</p>
-          <p>Branko Ivošević</p>
-        </div>
-        <div className="class-container">
-          <p>III6</p>
-          <p>Bajunović Ivana</p>
-        </div>
-        <div className="class-container">
-          <p>III7</p>
-          <p>Jasmina Manigodić</p>
-        </div>
-        <div className="class-container">
-          <p>III8</p>
-          <p>Spasić Dragan</p>
-        </div>
-      </div>
-
-      <div className="year-container">
-        <h2>ČETVRTI RAZRED</h2>
-        <div className="class-container">
-          <p>IV1</p>
-          <p>Mihajlović Aleksandar</p>
-        </div>
-        <div className="class-container">
-          <p>IV2</p>
-          <p>Jeina Mirjana</p>
-        </div>
-        <div className="class-container">
-          <p>IV3</p>
-          <p>Dimitrijević Ljiljana</p>
-        </div>
-        <div className="class-container">
-          <p>IV4</p>
-          <p>Galić Biljana</p>
-        </div>
-        <div className="class-container">
-          <p>IV5</p>
-          <p>Andreja Crnogorac</p>
-        </div>
-        <div className="class-container">
-          <p>IV6</p>
-          <p>Andrijana Perić Đurđević</p>
-        </div>
-        <div className="class-container">
-          <p>IV7</p>
-          <p>Stuparušić Marija</p>
-        </div>
-      </div>
-    </motion.div>
+      ))}
+    </div>
   );
 }
 
