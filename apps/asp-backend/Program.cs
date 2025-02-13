@@ -26,6 +26,7 @@ builder
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddHybridCache();
 
 builder
     .Services.AddAuthentication(options =>
