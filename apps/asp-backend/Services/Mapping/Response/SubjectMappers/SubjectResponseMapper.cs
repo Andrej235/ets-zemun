@@ -11,13 +11,13 @@ public class SubjectResponseMapper(IResponseMapper<Teacher, TeacherResponseDto> 
 
     public SubjectResponseDto Map(Subject from)
     {
-        var translation = from.Translations.First();
+        var translation = from.Translations.FirstOrDefault();
 
         return new()
         {
             Id = from.Id,
-            Name = translation.Name,
-            Description = translation.Description,
+            Name = translation?.Name ?? "",
+            Description = translation?.Description ?? "",
             Teachers = new() { Items = from.Teachers.Select(teacherMapper.Map) },
         };
     }

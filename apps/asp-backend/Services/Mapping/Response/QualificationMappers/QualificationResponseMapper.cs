@@ -7,14 +7,14 @@ public class QualificationResponseMapper : IResponseMapper<Qualification, Qualif
 {
     public QualificationResponseDto Map(Qualification from)
     {
-        var translation = from.Translations.First();
+        var translation = from.Translations.FirstOrDefault();
 
         return new()
         {
             Id = from.Id,
             DateObtained = from.DateObtained,
-            Name = translation.Name,
-            Description = translation.Description,
+            Name = translation?.Name ?? "",
+            Description = translation?.Description ?? "",
         };
     }
 }

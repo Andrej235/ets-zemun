@@ -1,16 +1,17 @@
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
+using EtsZemun.Errors;
 using EtsZemun.Services.Model.SubjectService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.Subject;
 
-[Route("api/subject")]
+[Route("subject")]
 [ApiController]
 [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
-public partial class SubjectController(SubjectService subjectService) : ControllerBase
+public partial class SubjectController(ISubjectService subjectService) : ControllerBase
 {
-    private readonly SubjectService subjectService = subjectService;
+    private readonly ISubjectService subjectService = subjectService;
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -42,6 +43,7 @@ public partial class SubjectController(SubjectService subjectService) : Controll
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<SubjectResponseDto>>> GetAll(
         [FromQuery] int languageId
     )
@@ -49,13 +51,14 @@ public partial class SubjectController(SubjectService subjectService) : Controll
         var result = await subjectService.GetAll(languageId);
 
         if (result.IsFailed)
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return BadRequest();
 
         return Ok(result.Value);
     }
 
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<SubjectResponseDto>> GetSingle(
         int id,
@@ -65,7 +68,12 @@ public partial class SubjectController(SubjectService subjectService) : Controll
         var result = await subjectService.GetSingle(id, languageId);
 
         if (result.IsFailed)
-            return NotFound();
+        {
+            if (result.HasError<NotFound>())
+                return NotFound();
+
+            return BadRequest();
+        }
 
         return Ok(result.Value);
     }

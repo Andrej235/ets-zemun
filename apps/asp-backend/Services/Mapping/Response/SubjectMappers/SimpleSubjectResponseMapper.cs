@@ -7,8 +7,8 @@ public class SimpleSubjectResponseMapper : IResponseMapper<Subject, SimpleSubjec
 {
     public SimpleSubjectResponseDto Map(Subject from)
     {
-        var translation = from.Translations.First();
+        var translation = from.Translations.FirstOrDefault();
 
-        return new() { Id = from.Id, Name = translation.Name };
+        return new() { Id = from.Id, Name = translation?.Name ?? "" };
     }
 }

@@ -17,14 +17,14 @@ public class TeacherResponseMapper(
 
     public TeacherResponseDto Map(Teacher from)
     {
-        var translation = from.Translations.First();
+        var translation = from.Translations.FirstOrDefault();
 
         return new()
         {
             Id = from.Id,
-            Bio = translation.Bio,
-            Name = translation.Name,
-            Title = translation.Title,
+            Bio = translation?.Bio ?? "",
+            Name = translation?.Name ?? "",
+            Title = translation?.Title ?? "",
             Email = from.Email,
             Image = from.Image,
             StartOfOpenOfficeHoursFirstShift = from.StartOfOpenOfficeHoursFirstShift,
