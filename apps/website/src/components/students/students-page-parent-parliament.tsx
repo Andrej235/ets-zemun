@@ -58,7 +58,7 @@ export default function StudentsPageParentParliament() {
       <h1>Savet roditelja</h1>
 
       {parentData.map((gradeData, index) => (
-        <div className="year-table" key={index + ""}>
+        <div className="table-container" key={index + ""}>
           <table>
             <caption>{gradeData.grade}</caption>
             <thead>

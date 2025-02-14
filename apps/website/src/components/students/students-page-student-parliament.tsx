@@ -79,7 +79,7 @@ export default function StudentsPageStudentParliament() {
       <h1>Učenički parlament</h1>
 
       {studentsData.map((gradeData, index) => (
-        <div className="year-table" key={index + ""}>
+        <div className="table-container" key={index + ""}>
           <table>
           <caption>{gradeData.grade}</caption>
             <thead>

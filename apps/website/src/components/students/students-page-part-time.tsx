@@ -86,10 +86,11 @@ export default function StudentsPagePartTime() {
         <p>97 06601832040174231700</p>
       </div>
 
-      <div className="graduation">
-        <h2>MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO/JANUARSKOM ROKU</h2>
-        
-        <table>
+      <div className="table-container">
+        <table className="part-time-table">
+          <caption>
+            MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO/JANUARSKOM ROKU
+          </caption>
           <thead>
             <tr>
               <th>PREDMET</th>
@@ -186,3 +187,4 @@ export default function StudentsPagePartTime() {
     </div>
   );
 }
+
