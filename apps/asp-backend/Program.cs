@@ -1,5 +1,6 @@
 using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Language;
+using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
 using EtsZemun.DTOs.Response.Qualification;
@@ -11,6 +12,7 @@ using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
 using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
+using EtsZemun.Services.Mapping.Request.QualificationMappers;
 using EtsZemun.Services.Mapping.Request.SubjectMappers;
 using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
@@ -18,6 +20,7 @@ using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
 using EtsZemun.Services.Model.LanguageService;
+using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
 using EtsZemun.Services.Read;
@@ -165,6 +168,32 @@ builder.Services.AddScoped<IDeleteService<TeacherSubject>, DeleteService<Teacher
 #endregion
 
 #region Qualification
+builder.Services.AddScoped<IQualificationService, QualificationService>();
+builder.Services.AddScoped<ICreateSingleService<Qualification>, CreateService<Qualification>>();
+builder.Services.AddScoped<
+    ICreateSingleService<QualificationTranslation>,
+    CreateService<QualificationTranslation>
+>();
+builder.Services.AddScoped<IReadSingleService<Qualification>, ReadService<Qualification>>();
+builder.Services.AddScoped<IReadRangeService<Qualification>, ReadService<Qualification>>();
+builder.Services.AddScoped<ICountService<Qualification>, ReadService<Qualification>>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<QualificationTranslation>,
+    UpdateService<QualificationTranslation>
+>();
+builder.Services.AddScoped<IDeleteService<Qualification>, DeleteService<Qualification>>();
+builder.Services.AddScoped<
+    IDeleteService<QualificationTranslation>,
+    DeleteService<QualificationTranslation>
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateQualificationRequestDto, Qualification>,
+    CreateQualificationRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateQualificationTranslationRequestDto, QualificationTranslation>,
+    CreateQualificationTranslationRequestMapper
+>();
 builder.Services.AddScoped<
     IResponseMapper<Qualification, QualificationResponseDto>,
     QualificationResponseMapper

@@ -1,0 +1,25 @@
+using EtsZemun.DTOs.Request.Qualification;
+using EtsZemun.Models;
+
+namespace EtsZemun.Services.Mapping.Request.QualificationMappers;
+
+public class CreateQualificationRequestMapper(
+    IRequestMapper<
+        CreateQualificationTranslationRequestDto,
+        QualificationTranslation
+    > translationMapper
+) : IRequestMapper<CreateQualificationRequestDto, Qualification>
+{
+    private readonly IRequestMapper<
+        CreateQualificationTranslationRequestDto,
+        QualificationTranslation
+    > translationMapper = translationMapper;
+
+    public Qualification Map(CreateQualificationRequestDto from) =>
+        new()
+        {
+            DateObtained = from.DateObtained,
+            TeacherId = from.TeacherId,
+            Translations = [translationMapper.Map(from.Translation)],
+        };
+}
