@@ -1,9 +1,11 @@
 using EtsZemun.Data;
+using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Request.EducationalProfile;
 using EtsZemun.DTOs.Request.Language;
 using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.DTOs.Response.Award;
 using EtsZemun.DTOs.Response.EducationalProfile;
 using EtsZemun.DTOs.Response.Qualification;
 using EtsZemun.DTOs.Response.Subject;
@@ -13,16 +15,19 @@ using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
 using EtsZemun.Services.Mapping.Request;
+using EtsZemun.Services.Mapping.Request.AwardMappers;
 using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
 using EtsZemun.Services.Mapping.Request.QualificationMappers;
 using EtsZemun.Services.Mapping.Request.SubjectMappers;
 using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
+using EtsZemun.Services.Mapping.Response.AwardMappers;
 using EtsZemun.Services.Mapping.Response.EducationalProfileMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
+using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
 using EtsZemun.Services.Model.QualificationService;
@@ -260,6 +265,42 @@ builder.Services.AddScoped<
     IResponseMapper<EducationalProfileVocationalSubject, ProfileSubjectResponseDto>,
     ProfileVocationalSubjectResponseMapper
 >();
+#endregion
+
+#region Award
+builder.Services.AddScoped<IAwardService, AwardService>();
+builder.Services.AddScoped<ICreateSingleService<Award>, CreateService<Award>>();
+builder.Services.AddScoped<
+    ICreateSingleService<AwardTranslation>,
+    CreateService<AwardTranslation>
+>();
+builder.Services.AddScoped<IReadSingleService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IReadRangeService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<ICountService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IUpdateSingleService<Award>, UpdateService<Award>>();
+builder.Services.AddScoped<
+    IUpdateSingleService<AwardTranslation>,
+    UpdateService<AwardTranslation>
+>();
+builder.Services.AddScoped<IDeleteService<Award>, DeleteService<Award>>();
+builder.Services.AddScoped<IDeleteService<AwardTranslation>, DeleteService<AwardTranslation>>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateAwardRequestDto, Award>,
+    CreateAwardRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<UpdateAwardRequestDto, Award>,
+    UpdateAwardRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateAwardTranslationRequestDto, AwardTranslation>,
+    CreateAwardTranslationRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<UpdateAwardTranslationRequestDto, AwardTranslation>,
+    UpdateAwardTranslationRequestMapper
+>();
+builder.Services.AddScoped<IResponseMapper<Award, AwardResponseDto>, AwardResponseMapper>();
 #endregion
 
 #endregion
