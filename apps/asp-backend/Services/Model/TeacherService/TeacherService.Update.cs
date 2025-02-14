@@ -1,4 +1,5 @@
 using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.Errors;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.TeacherService;
@@ -7,6 +8,9 @@ public partial class TeacherService : ITeacherService
 {
     public async Task<Result> Update(UpdateTeacherRequestDto request)
     {
+        if (request.Id < 1)
+            return Result.Fail(new BadRequest("Invalid request"));
+
         var teacherResult = await readSingleService.Get(x => x.Id == request.Id);
 
         if (teacherResult.IsFailed)
@@ -27,6 +31,9 @@ public partial class TeacherService : ITeacherService
 
     public async Task<Result> UpdateTranslation(UpdateTeacherTranslationRequestDto request)
     {
+        if (request.TeacherId < 1 || request.LanguageId < 1)
+            return Result.Fail(new BadRequest("Invalid request"));
+
         var updateResult = await updateTranslationService.Update(
             x => x.LanguageId == request.LanguageId && x.TeacherId == request.TeacherId,
             x =>
