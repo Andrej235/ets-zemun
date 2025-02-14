@@ -1,8 +1,10 @@
 using EtsZemun.Data;
+using EtsZemun.DTOs.Request.EducationalProfile;
 using EtsZemun.DTOs.Request.Language;
 using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.DTOs.Response.EducationalProfile;
 using EtsZemun.DTOs.Response.Qualification;
 using EtsZemun.DTOs.Response.Subject;
 using EtsZemun.DTOs.Response.Teacher;
@@ -11,14 +13,17 @@ using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
 using EtsZemun.Services.Mapping.Request;
+using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
 using EtsZemun.Services.Mapping.Request.QualificationMappers;
 using EtsZemun.Services.Mapping.Request.SubjectMappers;
 using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
+using EtsZemun.Services.Mapping.Response.EducationalProfileMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
+using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
 using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
@@ -197,6 +202,55 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IResponseMapper<Qualification, QualificationResponseDto>,
     QualificationResponseMapper
+>();
+#endregion
+
+#region Educational Profiles
+builder.Services.AddScoped<IEducationalProfileService, EducationalProfileService>();
+builder.Services.AddScoped<
+    ICreateSingleService<EducationalProfile>,
+    CreateService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    IReadRangeService<EducationalProfile>,
+    ReadService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    IReadSingleService<EducationalProfile>,
+    ReadService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    IUpdateSingleService<EducationalProfile>,
+    UpdateService<EducationalProfile>
+>();
+builder.Services.AddScoped<IDeleteService<EducationalProfile>, DeleteService<EducationalProfile>>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile>,
+    CreateEducationalProfileRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile>,
+    UpdateEducationalProfileRequestMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<EducationalProfile, EducationalProfileResponseDto>,
+    EducationalProfileResponseMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
+    ProfileGeneralSubjectRequestMapper
+>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileVocationalSubject>,
+    ProfileVocationalSubjectRequestMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<EducationalProfileGeneralSubject, ProfileSubjectResponseDto>,
+    ProfileGeneralSubjectResponseMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<EducationalProfileVocationalSubject, ProfileSubjectResponseDto>,
+    ProfileVocationalSubjectResponseMapper
 >();
 #endregion
 
