@@ -127,12 +127,11 @@ public class SubjectService(
         if (result.IsFailed)
             return Result.Fail<IEnumerable<SubjectResponseDto>>(result.Errors);
 
-        var mapped = result.Value.Select(responseMapper.Map);
-
-        foreach (var subject in mapped)
+        var mapped = result.Value.Select(async subject =>
         {
-            subject.Teachers.LoadedCount = subject.Teachers.Items.Count();
-            subject.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
+            var mapped = responseMapper.Map(subject);
+            mapped.Teachers.LoadedCount = subject.Teachers.Count;
+            mapped.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
                 $"subject-{subject.Id}-teachers-count",
                 async (_) =>
                 {
@@ -141,13 +140,16 @@ public class SubjectService(
                         x => x.Id == subject.Id
                     );
 
-                    return result.ValueOrDefault?.Count ?? 0;
+                    var count = result.ValueOrDefault?.Count;
+                    return count ?? 0;
                 },
                 new() { Expiration = TimeSpan.FromHours(6) }
             );
-        }
 
-        return Result.Ok(mapped);
+            return mapped;
+        });
+
+        return Result.Ok((await Task.WhenAll(mapped)).AsEnumerable());
     }
 
     public async Task<Result<SubjectResponseDto>> GetSingle(int id, int languageId)
@@ -174,7 +176,7 @@ public class SubjectService(
 
         var mapped = responseMapper.Map(result.Value);
 
-        mapped.Teachers.LoadedCount = mapped.Teachers.Items.Count();
+        mapped.Teachers.LoadedCount = result.Value.Teachers.Count;
         mapped.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
             $"subject-{mapped.Id}-teachers-count",
             async (_) =>
