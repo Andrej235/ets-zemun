@@ -109,7 +109,7 @@ public class SubjectService(
             return Result.Fail<IEnumerable<SubjectResponseDto>>(new BadRequest("Invalid request"));
 
         var result = await readRangeService.Get(
-            _ => true,
+            null,
             null,
             null,
             q =>

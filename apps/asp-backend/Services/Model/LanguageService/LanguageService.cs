@@ -34,6 +34,6 @@ public partial class LanguageService(
                 Code = x.Code,
                 FullName = x.FullName,
             },
-            _ => true
+            null
         );
 }

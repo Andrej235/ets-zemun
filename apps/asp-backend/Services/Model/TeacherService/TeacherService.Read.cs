@@ -15,7 +15,7 @@ public partial class TeacherService : ITeacherService
     )
     {
         var teachersResult = await readRangeService.Get(
-            subjectId is null ? _ => true : x => x.Subjects.Any(s => s.Id == subjectId),
+            subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId),
             offset,
             limit ?? 10,
             q =>

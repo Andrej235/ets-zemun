@@ -12,6 +12,7 @@ public class QualificationResponseMapper : IResponseMapper<Qualification, Qualif
         return new()
         {
             Id = from.Id,
+            TeacherId = from.TeacherId,
             DateObtained = from.DateObtained,
             Name = translation?.Name ?? "",
             Description = translation?.Description ?? "",
