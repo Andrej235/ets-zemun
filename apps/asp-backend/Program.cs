@@ -225,6 +225,14 @@ builder.Services.AddScoped<
 >();
 builder.Services.AddScoped<IDeleteService<EducationalProfile>, DeleteService<EducationalProfile>>();
 builder.Services.AddScoped<
+    IDeleteService<EducationalProfileGeneralSubject>,
+    DeleteService<EducationalProfileGeneralSubject>
+>();
+builder.Services.AddScoped<
+    IDeleteService<EducationalProfileVocationalSubject>,
+    DeleteService<EducationalProfileVocationalSubject>
+>();
+builder.Services.AddScoped<
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile>,
     CreateEducationalProfileRequestMapper
 >();

@@ -16,7 +16,9 @@ public class EducationalProfileService(
     IReadRangeService<EducationalProfile> readRangeService,
     IReadSingleService<EducationalProfile> readSingleService,
     IUpdateSingleService<EducationalProfile> updateSingle,
-    IDeleteService<EducationalProfile> deleteSingle,
+    IDeleteService<EducationalProfile> deleteService,
+    IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService,
+    IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
@@ -26,7 +28,11 @@ public class EducationalProfileService(
     private readonly IReadRangeService<EducationalProfile> readRangeService = readRangeService;
     private readonly IReadSingleService<EducationalProfile> readSingleService = readSingleService;
     private readonly IUpdateSingleService<EducationalProfile> updateSingle = updateSingle;
-    private readonly IDeleteService<EducationalProfile> deleteSingle = deleteSingle;
+    private readonly IDeleteService<EducationalProfile> deleteService = deleteService;
+    private readonly IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService =
+        deleteGeneralSubjectService;
+    private readonly IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService =
+        deleteVocationalSubjectService;
     private readonly IRequestMapper<
         CreateEducationalProfileRequestDto,
         EducationalProfile
@@ -48,7 +54,7 @@ public class EducationalProfileService(
 
     public Task<Result> Delete(int id)
     {
-        return deleteSingle.Delete(x => x.Id == id);
+        return deleteService.Delete(x => x.Id == id);
     }
 
     public async Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll()
@@ -91,6 +97,18 @@ public class EducationalProfileService(
 
     public async Task<Result> Update(UpdateEducationalProfileRequestDto request)
     {
+        var deleteResult1 = await deleteGeneralSubjectService.Delete(
+            x => x.EducationalProfileId == request.Id,
+            false
+        );
+        var deleteResult2 = await deleteVocationalSubjectService.Delete(
+            x => x.EducationalProfileId == request.Id,
+            false
+        );
+
+        if (deleteResult1.IsFailed || deleteResult2.IsFailed)
+            return Result.Fail([.. deleteResult1.Errors, .. deleteResult2.Errors]);
+
         var result = await updateSingle.Update(updateRequestMapper.Map(request));
         return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
     }
