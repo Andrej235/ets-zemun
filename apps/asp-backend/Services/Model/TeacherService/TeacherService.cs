@@ -16,7 +16,7 @@ public partial class TeacherService(
     ICreateSingleService<TeacherTranslation> createSingleTranslationService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
-    IReadRangeSelectedService<Teacher> readRangeSelectedService,
+    ICountService<Teacher> countService,
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
     IDeleteService<Teacher> deleteService,
@@ -35,8 +35,7 @@ public partial class TeacherService(
         createSingleTranslationService;
     private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
     private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
-    private readonly IReadRangeSelectedService<Teacher> readRangeSelectedService =
-        readRangeSelectedService;
+    private readonly ICountService<Teacher> countService = countService;
     private readonly IUpdateSingleService<Teacher> updateService = updateService;
     private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
         updateTranslationService;

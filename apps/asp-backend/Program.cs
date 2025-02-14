@@ -140,7 +140,7 @@ builder.Services.AddScoped<
 >();
 builder.Services.AddScoped<IReadSingleService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IReadRangeService<Teacher>, ReadService<Teacher>>();
-builder.Services.AddScoped<IReadRangeSelectedService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<ICountService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IUpdateSingleService<Teacher>, UpdateService<Teacher>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<TeacherTranslation>,

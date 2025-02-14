@@ -40,12 +40,8 @@ public partial class TeacherService : ITeacherService
                 $"subject-{subjectId ?? -1}-teachers-count",
                 async (_) =>
                 {
-                    var result = await readRangeSelectedService.Get(
-                        x => new { },
-                        subjectId is null ? x => true : x => x.Subjects.Any(s => s.Id == subjectId)
-                    );
-
-                    return result.ValueOrDefault?.Count() ?? 0;
+                    var result = await countService.Count(null);
+                    return result.Value;
                 },
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
