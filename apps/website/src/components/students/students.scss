@@ -274,7 +274,11 @@
     .table-container {
       width: 100%;
 
-      .part-time-table {
+      caption {
+        font-size: 2rem;
+      }
+
+      table {
         margin-top: 1rem;
 
         th,
@@ -290,13 +294,15 @@
     .table-container {
       width: 100%;
 
-      .part-time-table {
+      table {
         margin-top: 1rem;
 
         caption {
           font-size: 2rem;
         }
+      }
 
+      .part-time-table {
         th,
         td {
           padding: 0rem !important;
