@@ -11,7 +11,8 @@ namespace EtsZemun.Services.Read
         : IReadSingleService<TEntity>,
             IReadRangeService<TEntity>,
             IReadSingleSelectedService<TEntity>,
-            IReadRangeSelectedService<TEntity>
+            IReadRangeSelectedService<TEntity>,
+            ICountService<TEntity>
         where TEntity : class
     {
         private const string FAILED_TO_UNWRAP_ERROR_MESSAGE = "Failed to unwrap query";
@@ -110,5 +111,10 @@ namespace EtsZemun.Services.Read
             (source as WrappedQueryable<TEntity>)?.Source
             ?? (source as WrappedOrderedQueryable<TEntity>)?.Source
             ?? null;
+
+        public async Task<Result<int>> Count(Expression<Func<TEntity, bool>>? criteria) =>
+            criteria is null
+                ? await context.Set<TEntity>().CountAsync()
+                : await context.Set<TEntity>().Where(criteria).CountAsync();
     }
 }

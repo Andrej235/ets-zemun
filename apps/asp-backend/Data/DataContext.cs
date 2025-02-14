@@ -6,9 +6,18 @@ namespace EtsZemun.Data
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
         public DbSet<Award> Awards { get; set; }
+        public DbSet<AwardTranslation> AwardTranslations { get; set; }
         public DbSet<EducationalProfile> EducationalProfiles { get; set; }
+        public DbSet<EducationalProfileGeneralSubject> EducationalProfileGeneralSubjects { get; set; }
+        public DbSet<EducationalProfileVocationalSubject> EducationalProfileVocationalSubjects { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Qualification> Qualifications { get; set; }
+        public DbSet<QualificationTranslation> QualificationTranslations { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectTranslation> SubjectTranslations { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,7 +40,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<AwardTranslation>(awardTranslation =>
             {
-                awardTranslation.HasKey(a => a.AwardId);
+                awardTranslation.HasKey(a => new { a.LanguageId, a.AwardId });
             });
 
             modelBuilder.Entity<EducationalProfile>(educationalProfile =>
@@ -117,7 +126,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<QualificationTranslation>(qualificationTranslation =>
             {
-                qualificationTranslation.HasKey(q => q.QualificationId);
+                qualificationTranslation.HasKey(q => new { q.LanguageId, q.QualificationId });
             });
 
             modelBuilder.Entity<Subject>(subject =>
@@ -138,7 +147,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<SubjectTranslation>(subjectTranslation =>
             {
-                subjectTranslation.HasKey(s => s.SubjectId);
+                subjectTranslation.HasKey(s => new { s.SubjectId, s.LanguageId });
             });
 
             modelBuilder.Entity<Teacher>(teacher =>
@@ -177,7 +186,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<TeacherTranslation>(teacherTranslation =>
             {
-                teacherTranslation.HasKey(t => t.TeacherId);
+                teacherTranslation.HasKey(t => new { t.LanguageId, t.TeacherId });
             });
         }
     }
