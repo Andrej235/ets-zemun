@@ -1,3 +1,4 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Teacher;
 using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Errors;
@@ -44,7 +45,7 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<TeacherResponseDto>>> GetAll(
+    public async Task<ActionResult<LazyLoadResponse<TeacherResponseDto>>> GetAll(
         [FromQuery] int languageId,
         [FromQuery] int? offset,
         [FromQuery] int? limit,
