@@ -159,6 +159,11 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IResponseMapper<Teacher, TeacherResponseDto>, TeacherResponseMapper>();
 #endregion
 
+#region Teacher subject
+builder.Services.AddScoped<ICreateRangeService<TeacherSubject>, CreateService<TeacherSubject>>();
+builder.Services.AddScoped<IDeleteService<TeacherSubject>, DeleteService<TeacherSubject>>();
+#endregion
+
 #region Qualification
 builder.Services.AddScoped<
     IResponseMapper<Qualification, QualificationResponseDto>,

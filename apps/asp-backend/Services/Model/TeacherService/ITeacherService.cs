@@ -23,4 +23,7 @@ public interface ITeacherService
 
     Task<Result> Delete(int id);
     Task<Result> DeleteTranslation(int teacherId, int languageId);
+
+    Task<Result> AddSubject(AddSubjectsToTeacherRequestDto request);
+    Task<Result> RemoveSubject(int teacherId, int subjectId);
 }

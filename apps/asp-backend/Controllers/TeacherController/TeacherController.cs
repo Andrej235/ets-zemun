@@ -140,4 +140,30 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("subject")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> AddSubject([FromBody] AddSubjectsToTeacherRequestDto request)
+    {
+        var result = await teacherService.AddSubject(request);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return Created();
+    }
+
+    [HttpDelete("{teacherId:int}/subject/{subjectId:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> RemoveSubject(int teacherId, int subjectId)
+    {
+        var result = await teacherService.RemoveSubject(teacherId, subjectId);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return NoContent();
+    }
 }

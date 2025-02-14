@@ -14,12 +14,14 @@ namespace EtsZemun.Services.Model.TeacherService;
 public partial class TeacherService(
     ICreateSingleService<Teacher> createSingleService,
     ICreateSingleService<TeacherTranslation> createSingleTranslationService,
+    ICreateRangeService<TeacherSubject> createTeacherSubjectService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
     ICountService<Teacher> countService,
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
     IDeleteService<Teacher> deleteService,
+    IDeleteService<TeacherSubject> deleteTeacherSubjectService,
     IDeleteService<TeacherTranslation> deleteTranslationService,
     IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper,
     IRequestMapper<
@@ -33,6 +35,8 @@ public partial class TeacherService(
     private readonly ICreateSingleService<Teacher> createSingleService = createSingleService;
     private readonly ICreateSingleService<TeacherTranslation> createSingleTranslationService =
         createSingleTranslationService;
+    private readonly ICreateRangeService<TeacherSubject> createTeacherSubjectService =
+        createTeacherSubjectService;
     private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
     private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
     private readonly ICountService<Teacher> countService = countService;
@@ -40,6 +44,8 @@ public partial class TeacherService(
     private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
         updateTranslationService;
     private readonly IDeleteService<Teacher> deleteService = deleteService;
+    private readonly IDeleteService<TeacherSubject> deleteTeacherSubjectService =
+        deleteTeacherSubjectService;
     private readonly IDeleteService<TeacherTranslation> deleteTranslationService =
         deleteTranslationService;
     private readonly IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper =
