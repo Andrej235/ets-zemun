@@ -40,7 +40,9 @@ public partial class TeacherService : ITeacherService
                 $"subject-{subjectId ?? -1}-teachers-count",
                 async (_) =>
                 {
-                    var result = await countService.Count(null);
+                    var result = await countService.Count(
+                        subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId)
+                    );
                     return result.Value;
                 },
                 new() { Expiration = TimeSpan.FromHours(6) }
