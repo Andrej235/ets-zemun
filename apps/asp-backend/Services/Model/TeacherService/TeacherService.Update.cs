@@ -13,7 +13,7 @@ public partial class TeacherService : ITeacherService
             return Result.Fail(teacherResult.Errors);
 
         var teacher = teacherResult.Value;
-        teacher.Email = request.Image;
+        teacher.Email = request.Email;
         teacher.Image = request.Image;
         teacher.StartOfOpenOfficeHoursFirstShift = request.StartOfOpenOfficeHoursFirstShift;
         teacher.StartOfOpenOfficeHoursSecondShift = request.StartOfOpenOfficeHoursSecondShift;

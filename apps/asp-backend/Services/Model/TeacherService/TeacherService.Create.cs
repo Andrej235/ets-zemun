@@ -8,7 +8,11 @@ public partial class TeacherService
     public async Task<Result> Create(CreateTeacherRequestDto request)
     {
         var newTeacher = await createSingleService.Add(createRequestMapper.Map(request));
-        return newTeacher.IsFailed ? Result.Fail(newTeacher.Errors) : Result.Ok();
+        if (newTeacher.IsFailed)
+            return Result.Fail(newTeacher.Errors);
+
+        await hybridCache.RemoveAsync("subject--1-teachers-count");
+        return Result.Ok();
     }
 
     public async Task<Result> CreateTranslation(CreateTeacherTranslationRequestDto request)

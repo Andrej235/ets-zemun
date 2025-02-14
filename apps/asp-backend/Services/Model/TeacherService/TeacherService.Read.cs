@@ -24,6 +24,7 @@ public partial class TeacherService : ITeacherService
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
                     .Include(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .OrderBy(x => x.Id)
         );
 
         if (teachersResult.IsFailed)
