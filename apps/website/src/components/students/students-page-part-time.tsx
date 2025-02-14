@@ -1,10 +1,136 @@
 export default function StudentsPagePartTime() {
+  const deadlines = [
+    {
+      term: "OKTOBARSKI",
+      registration: "09-27.09.2024.",
+      exam: "07-31.10.2024.",
+    },
+    {
+      term: "DECEMBARSKI",
+      registration: "04-22.11.2024.",
+      exam: "02-27.12.2024.",
+    },
+    {
+      term: "MARTOVSKI",
+      registration: "03-21.02.2025.",
+      exam: "03-28.03.2025.",
+    },
+    {
+      term: "MAJSKI",
+      registration: "01-25.04.2025.",
+      exam: "12-30.05.2025.",
+    },
+    {
+      term: "AVGUSTOVSKI",
+      registration: "02-20.06.2025.",
+      exam: "18-29.08.2025.",
+    },
+  ];
+
+  const priceList = [
+    { itemName: "UPIS GODINE", itemPrice: "7.500,00 din." },
+    { itemName: "OBNOVA GODINE", itemPrice: "1.500,00 din." },
+    { itemName: "ISPIT SA PISMENIM RADOM", itemPrice: "1.000,00 din." },
+    { itemName: "ISPIT BEZ PISMENOG", itemPrice: "1.000,00 din." },
+    { itemName: "ISPIT IZ PRAKTIČNE NASTAVE", itemPrice: "1.000,00 din." },
+    { itemName: "ISPIT SA VEŽBAMA", itemPrice: "1.000,00 din." },
+    { itemName: "ZAVRŠNI ISPIT", itemPrice: "2.500,00 din." },
+    { itemName: "MATURSKI ISPIT", itemPrice: "3.000,00 din." },
+  ];
+
+  const examData = [
+    {
+      subject: "SRPSKI JEZIK-maturski",
+      commission: [
+        "Srđan Gagić",
+        "Nada Đurić",
+        "Marina Ristanović",
+        "Vurdelja Dejan",
+        "Radmila Vidović",
+      ],
+      date: "Utorak, 28.01.2025.",
+      time: "14.45, 10.30",
+      cabinet: "17 ili 18",
+    },
+    {
+      subject: "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+      commission: ["Bogdan Luković", "Anđela Pavlović"],
+      date: "Sreda, 29.01.2025.",
+      time: "10.00",
+      cabinet: "14",
+    },
+    {
+      subject: "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+      commission: ["Slavica Per", "Relja Ćurčin", "Vesna Janjić"],
+      date: "Sreda, 29.01.2025.",
+      time: "15.35",
+      cabinet: "14",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-ARM-A",
+      commission: ["Slavica Per", "Saša Stošić"],
+      date: "Četvrtak, 30.01.2025.",
+      time: "11.15",
+      cabinet: "44",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-ARM-B",
+      commission: ["Slavica Per", "Saša Stošić"],
+      date: "petak, 31.01.2025.",
+      time: "13.00",
+      cabinet: "43",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-ER-A",
+      commission: ["Radovan Đurić", "Saviša Nikolić"],
+      date: "Četvrtak, 30.01.2025.",
+      time: "14.00",
+      cabinet: "43",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-ER-B",
+      commission: ["Radovan Đurić", "Slaviša Nikolić"],
+      date: "petak, 31.01.2025.",
+      time: "14.45",
+      cabinet: "43",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-IT-A",
+      commission: ["Galina Bojović", "Relja Ćurčin"],
+      date: "Četvrtak, 30.01.2025.",
+      time: "11.25",
+      cabinet: "50",
+    },
+    {
+      subject: "PRAKTIČNI ISPIT-IT-B",
+      commission: ["Galina Bojović", "Relja Ćurčin"],
+      date: "petak, 31.01.2025.",
+      time: "12.10",
+      cabinet: "50",
+    },
+    {
+      subject: "SERVISER TERMIČKIH I RASHLADNIH UREĐAJA",
+      commission: ["Branko Lončar", "Mavrak Milenko"],
+      date: "31.01.2025.",
+      time: "14.00",
+      cabinet: "73",
+    },
+    {
+      subject: "MATURSKI ISPIT (elektrotehničar automatike)",
+      commission: ["Cvija Jelenković", "Vesna Janjić", "Branislav Siljković"],
+      date: "30.01.2025., 31.01.2025.",
+      time: "13.00, 14.00",
+      cabinet: "40",
+    },
+  ];
+
   return (
     <div className="part-time-container">
-      <div className="deadlines">
-        <h2>ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025.GODINI</h2>
-
+      <div className="table-container">
         <table>
+          <caption>
+            ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025.GODINI
+          </caption>
           <thead>
             <tr>
               <th>ROKOVI</th>
@@ -13,69 +139,25 @@ export default function StudentsPagePartTime() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>OKTOBARSKI</td>
-              <td>09-27.09.2024.</td>
-              <td>07-31.10.2024.</td>
-            </tr>
-            <tr>
-              <td>DECEMBARSKI</td>
-              <td>04-22.11.2024.</td>
-              <td>02-27.12.2024.</td>
-            </tr>
-            <tr>
-              <td>MARTOVSKI</td>
-              <td>03-21.02.2025.</td>
-              <td>03-28.03.2025.</td>
-            </tr>
-            <tr>
-              <td>MAJSKI</td>
-              <td>01-25.04.2025.</td>
-              <td>12-30.05.2025.</td>
-            </tr>
-            <tr>
-              <td>AVGUSTOVSKI</td>
-              <td>02-20.06.2025.</td>
-              <td>18-29.08.2025.</td>
-            </tr>
+            {deadlines.map((deadline, index) => (
+              <tr key={index + ""}>
+                <td>{deadline.term}</td>
+                <td>{deadline.registration}</td>
+                <td>{deadline.exam}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
       <div className="price-list">
         <h2>CENOVNIK VANREDNOG ŠKOLOVANjA ZA ŠKOLSKU 2024/2025.GODINU</h2>
-        <div className="price-list-item">
-          <div className="item-name">UPIS GODINE</div>
-          <div className="item-price">7.500,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">OBNOVA GODINE</div>
-          <div className="item-price">1.500,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">ISPIT SA PISMENIM RADOM</div>
-          <div className="item-price">1.000,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">ISPIT BEZ PISMENOG</div>
-          <div className="item-price">1.000,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">ISPIT IZ PRAKTIČNE NASTAVE</div>
-          <div className="item-price">1.000,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">ISPIT SA VEŽBAMA</div>
-          <div className="item-price">1.000,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">ZAVRŠNI ISPIT</div>
-          <div className="item-price">2.500,00 din.</div>
-        </div>
-        <div className="price-list-item">
-          <div className="item-name">MATURSKI ISPIT</div>
-          <div className="item-price">3.000,00 din.</div>
-        </div>
+        {priceList.map((item, index) => (
+          <div className="price-list-item" key={index + ""}>
+            <div className="item-name">{item.itemName}</div>
+            <div className="item-price">{item.itemPrice}</div>
+          </div>
+        ))}
       </div>
 
       <div className="payment-method">
@@ -101,86 +183,15 @@ export default function StudentsPagePartTime() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>SRPSKI JEZIK-maturski</td>
-              <td>
-                Srđan Gagić, Nada Đurić, Marina Ristanović, Vurdelja Dejan,
-                Radmila Vidović
-              </td>
-              <td>Utorak, 28.01.2025.</td>
-              <td>14.45, 10.30</td>
-              <td>17 ili 18</td>
-            </tr>
-            <tr>
-              <td>STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)</td>
-              <td>Bogdan Luković, Anđela Pavlović</td>
-              <td>Sreda, 29.01.2025.</td>
-              <td>10.00</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)</td>
-              <td>Slavica Per, Relja Ćurčin, Vesna Janjić</td>
-              <td>Sreda, 29.01.2025.</td>
-              <td>15.35</td>
-              <td>14</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-ARM-A</td>
-              <td>Slavica Per, Saša Stošić</td>
-              <td>Četvrtak, 30.01.2025.</td>
-              <td>11.15</td>
-              <td>44</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-ARM-B</td>
-              <td>Slavica Per, Saša Stošić</td>
-              <td>petak, 31.01.2025.</td>
-              <td>13.00</td>
-              <td>43</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-ER-A</td>
-              <td>Radovan Đurić, Saviša Nikolić</td>
-              <td>Četvrtak, 30.01.2025.</td>
-              <td>14.00</td>
-              <td>43</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-ER-B</td>
-              <td>Radovan Đurić, Slaviša Nikolić</td>
-              <td>petak, 31.01.2025.</td>
-              <td>14.45</td>
-              <td>43</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-IT-A</td>
-              <td>Galina Bojović, Relja Ćurčin</td>
-              <td>Četvrtak, 30.01.2025.</td>
-              <td>11.25</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>PRAKTIČNI ISPIT-IT-B</td>
-              <td>Galina Bojović, Relja Ćurčin</td>
-              <td>petak, 31.01.2025.</td>
-              <td>12.10</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>SERVISER TERMIČKIH I RASHLADNIH UREĐAJA</td>
-              <td>Branko Lončar, Mavrak Milenko</td>
-              <td>31.01.2025.</td>
-              <td>14.00</td>
-              <td>73</td>
-            </tr>
-            <tr>
-              <td>MATURSKI ISPIT (elektrotehničar automatike)</td>
-              <td>Cvija Jelenković, Vesna Janjić, Branislav Siljković</td>
-              <td>30.01.2025., 31.01.2025.</td>
-              <td>13.00, 14.00</td>
-              <td>40</td>
-            </tr>
+            {examData.map((exam, index) => (
+              <tr key={index + ""}>
+                <td>{exam.subject}</td>
+                <td>{exam.commission.join(", ")}</td>
+                <td>{exam.date}</td>
+                <td>{exam.time}</td>
+                <td>{exam.cabinet}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
