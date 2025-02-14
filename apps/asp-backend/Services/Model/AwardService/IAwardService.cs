@@ -11,7 +11,7 @@ public interface IAwardService
     Task<Result> CreateTranslation(CreateAwardTranslationRequestDto request);
 
     Task<Result<LazyLoadResponse<AwardResponseDto>>> GetAll(
-        int? languageId,
+        int languageId,
         int? offset,
         int? limit
     );

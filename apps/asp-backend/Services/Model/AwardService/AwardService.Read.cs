@@ -8,7 +8,7 @@ namespace EtsZemun.Services.Model.AwardService;
 public partial class AwardService
 {
     public async Task<Result<LazyLoadResponse<AwardResponseDto>>> GetAll(
-        int? languageId,
+        int languageId,
         int? offset,
         int? limit
     )
