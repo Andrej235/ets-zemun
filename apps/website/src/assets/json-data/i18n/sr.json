@@ -165,6 +165,54 @@
       "tagline": "Prijavite se online do 25. juna!",
       "button": "Prijavi se"
     }
+  },
+  "documents": {
+    "groups": [
+      {
+        "title": "Organi upravljanja",
+        "documents": [
+          "Poslovnik o radu nastavničkog veća",
+          "Poslovnik o radu školskog odbora",
+          "Poslovnik o radu učeničkog parlamenta",
+          "Poslovnik o radu saveta roditelja"
+        ]
+      },
+      {
+        "title": "Ponašanje i etika",
+        "documents": [
+          "Etički kodeks",
+          "Pravila ponašanja učenika, zaposlenih, roditelja"
+        ]
+      },
+      {
+        "title": "Bezbednosni protokoli",
+        "documents": [
+          "Pravilnik bezbednosti i zdravlja na radu",
+          "Pravilnik o merama, načinu i postupku zaštite i bezbednosti učenika za vreme boravka u školi i svih aktivnosti koje organizuje"
+        ]
+      },
+      {
+        "title": "Finansijski menadžment",
+        "documents": [
+          "Pravilnik o bankama",
+          "Pravilnik o organizaciji budžetskog računovodstva",
+          "Pravilnik o organizaciji i sistematizaciji radnih mesta  u elektrotehničkoj školi \"Zemun\""
+        ]
+      },
+      {
+        "title": "Politika zaposlenih",
+        "documents": [
+          "Pravilnik o pravima obavezama i odgovornostima zaposlenih",
+          "Pravilnik o radu"
+        ]
+      },
+      {
+        "title": "Institucionalna fondacija",
+        "documents": [
+          "Statut"
+        ]
+      }
+    ]
   }
 }
 

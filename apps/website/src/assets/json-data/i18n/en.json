@@ -165,6 +165,52 @@
       "tagline": "Apply online until June 25th!",
       "button": "Apply now"
     }
+  },
+  "documents": {
+    "groups": [
+      {
+        "title": "Governing Bodies",
+        "documents": [
+          "Rules of Procedure for the Teachers' Council",
+          "Rules of Procedure for the School Board",
+          "Rules of Procedure for the Student Parliament",
+          "Rules of Procedure for the Parent Council"
+        ]
+      },
+      {
+        "title": "Behavior and Ethics",
+        "documents": [
+          "Code of Ethics",
+          "Code of Conduct for Students, Employees, Parents"
+        ]
+      },
+      {
+        "title": "Safety Protocols",
+        "documents": [
+          "Safety and Health at Work Regulations",
+          "Regulations on Measures, Methods, and Procedures for the Protection and Safety of Students during School Stay and all Activities Organized"
+        ]
+      },
+      {
+        "title": "Financial Management",
+        "documents": [
+          "Bank Regulations",
+          "Regulations on the Organization of Budgetary Accounting",
+          "Regulations on the Organization and Systematization of Jobs at the Electrotechnical School \"Zemun\""
+        ]
+      },
+      {
+        "title": "Employee Policy",
+        "documents": [
+          "Regulations on the Rights, Obligations, and Responsibilities of Employees",
+          "Work Regulations"
+        ]
+      },
+      {
+        "title": "Institutional Foundation",
+        "documents": ["Statute"]
+      }
+    ]
   }
 }
 
