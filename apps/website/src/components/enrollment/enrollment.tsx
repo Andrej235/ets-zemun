@@ -1,91 +1,97 @@
 import Icon from "@components/icon/icon";
 import "./enrollment.scss";
-
-const programs = [
-  {
-    name: "Elektrotehničar računara",
-    duration: "4 godine",
-    students: 90,
-    requiredPoints: 85,
-  },
-  {
-    name: "Elektronika",
-    duration: "4 godine",
-    students: 60,
-    requiredPoints: 78,
-  },
-  {
-    name: "Telekomunikacije",
-    duration: "3 godine",
-    students: 30,
-    requiredPoints: 75,
-  },
-  {
-    name: "Energetika",
-    duration: "4 godine",
-    students: 45,
-    requiredPoints: 80,
-  },
-];
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Enrollment() {
+  const { t } = useTranslation();
+
+  const courses = useMemo(() => {
+    return [
+      {
+        name: t("enrollment.courses.0.name"),
+        duration: t("enrollment.courses.0.duration"),
+        students: 90,
+        requiredPoints: 85,
+      },
+      {
+        name: t("enrollment.courses.1.name"),
+        duration: t("enrollment.courses.1.duration"),
+        students: 60,
+        requiredPoints: 78,
+      },
+      {
+        name: t("enrollment.courses.2.name"),
+        duration: t("enrollment.courses.2.duration"),
+        students: 30,
+        requiredPoints: 75,
+      },
+      {
+        name: t("enrollment.courses.3.name"),
+        duration: t("enrollment.courses.3.duration"),
+        students: 45,
+        requiredPoints: 80,
+      },
+    ];
+  }, [t]);
+
   return (
     <div className="enrollment-page">
-      <h1>Upis i Prijemni ispit</h1>
-      <h2>Postanite deo naše zajednice budućih elektrotehničara!</h2>
+      <h1>{t("enrollment.title")}</h1>
+      <h2>{t("enrollment.description")}</h2>
 
       <div className="timeline">
         <div className="card">
-          <h1>21.03. i 22.03.2025. године</h1>
-          <p>Пробни завршни испит</p>
+          <h1>{t("enrollment.timeline.0.date")}</h1>
+          <p>{t("enrollment.timeline.0.event")}</p>
         </div>
 
         <div className="card">
-          <h1>од 16.06. до 18.06.2025.</h1>
-          <p>Полагање завршног испита</p>
+          <h1>{t("enrollment.timeline.1.date")}</h1>
+          <p>{t("enrollment.timeline.1.event")}</p>
         </div>
 
         <div className="card">
-          <h1>24.06. и 25.06.2025.</h1>
-          <p>Попуњавање листе опредељења (жеља) за упис у средњу школу</p>
+          <h1>{t("enrollment.timeline.2.date")}</h1>
+          <p>{t("enrollment.timeline.2.event")}</p>
         </div>
 
         <div className="card">
-          <h1>28.06.2025.</h1>
-          <p>Објављивање коначних резултата расподеле по средњим школама</p>
+          <h1>{t("enrollment.timeline.3.date")}</h1>
+          <p>{t("enrollment.timeline.3.event")}</p>
         </div>
       </div>
 
       <div className="enrollment-table">
-          <table>
-            <caption>Programi upisa</caption>
-            <thead>
-              <tr>
-                <th>Smer</th>
-                <th>Trajanje</th>
-                <th>Broj učenika</th>
-                <th>Potrebni bodovi</th>
+        <table>
+          <caption>{t("enrollment.table.caption")}</caption>
+          <thead>
+            <tr>
+              <th>{t("enrollment.table.head.0")}</th>
+              <th>{t("enrollment.table.head.1")}</th>
+              <th>{t("enrollment.table.head.2")}</th>
+              <th>{t("enrollment.table.head.3")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {courses.map((program, index) => (
+              <tr key={index + ""}>
+                <td>{program.name}</td>
+                <td>{program.duration}</td>
+                <td>{program.students}</td>
+                <td>{program.requiredPoints}</td>
               </tr>
-            </thead>
-            <tbody>
-              {programs.map((program, index) => (
-                <tr key={index + ""}>
-                  <td>{program.name}</td>
-                  <td>{program.duration}</td>
-                  <td>{program.students}</td>
-                  <td>{program.requiredPoints}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="call-to-action">
-        <p>Prijavite se online do 25. juna!</p>
+        <p>{t("enrollment.callToAction.tagline")}</p>
 
         <a href="https://mojasrednjaskola.gov.rs/" target="_blank">
           <button>
-            <p>Prijavi se</p>
+            <p>{t("enrollment.callToAction.button")}</p>
             <Icon name="arrow-right" className="button-icon" />
           </button>
         </a>

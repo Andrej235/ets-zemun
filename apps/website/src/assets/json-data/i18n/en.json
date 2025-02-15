@@ -117,6 +117,54 @@
         ]
       }
     ]
+  },
+  "enrollment": {
+    "title": "Enrollment and Entrance Exam",
+    "description": "Join our community of future electrical engineers!",
+    "timeline": [
+      {
+        "date": "March 21st and 22nd, 2025",
+        "event": "Mock entrance exam"
+      },
+      {
+        "date": "June 16th to 18th, 2025",
+        "event": "Entrance exam"
+      },
+      {
+        "date": "June 24th and 25th, 2025",
+        "event": "Ranking list submission for high school enrollment"
+      },
+      {
+        "date": "June 28th, 2025",
+        "event": "Final results announcement for high school enrollment"
+      }
+    ],
+    "courses": [
+      {
+        "name": "Computer Engineer",
+        "duration": "4 years"
+      },
+      {
+        "name": "Electronics",
+        "duration": "4 years"
+      },
+      {
+        "name": "Telecommunications",
+        "duration": "3 years"
+      },
+      {
+        "name": "Energy Engineering",
+        "duration": "4 years"
+      }
+    ],
+    "table": {
+      "caption": "Enrollment Programs",
+      "head": ["Major", "Duration", "Number of students", "Required points"]
+    },
+    "callToAction": {
+      "tagline": "Apply online until June 25th!",
+      "button": "Apply now"
+    }
   }
 }
 

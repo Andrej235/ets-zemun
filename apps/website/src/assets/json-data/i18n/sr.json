@@ -117,6 +117,54 @@
         ]
       }
     ]
+  },
+  "enrollment": {
+    "title": "Upis i Prijemni ispit",
+    "description": "Postanite deo naše zajednice budućih elektrotehničara!",
+    "timeline": [
+      {
+        "date": "21.03. i 22.03.2025. godine",
+        "event": "Proba završnog ispita"
+      },
+      {
+        "date": "Od 16.06. do 18.06.2025.",
+        "event": "Polaganje završnog ispita"
+      },
+      {
+        "date": "24.06. i 25.06.2025.",
+        "event": "Popunjavanje liste određenja (želje) za upis u srednju školu"
+      },
+      {
+        "date": "28.06.2025.",
+        "event": "Objavljivanje konačnih rezultata raspodele po srednjim školama"
+      }
+    ],
+    "courses": [
+      {
+        "name": "Elektrotehničar računara",
+        "duration": "4 godine"
+      },
+      {
+        "name": "Elektronika",
+        "duration": "4 godine"
+      },
+      {
+        "name": "Telekomunikacije",
+        "duration": "3 godine"
+      },
+      {
+        "name": "Energetika",
+        "duration": "4 godine"
+      }
+    ],
+    "table": {
+      "caption": "Programi upisa",
+      "head": ["Smer", "Trajanje", "Broj učenika", "Potrebni bodovi"]
+    },
+    "callToAction": {
+      "tagline": "Prijavite se online do 25. juna!",
+      "button": "Prijavi se"
+    }
   }
 }
 
