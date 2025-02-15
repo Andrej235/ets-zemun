@@ -2,6 +2,7 @@ import AppHeader from "@components/app-header/app-header";
 import Icon from "@components/icon/icon";
 import { Link, useAsyncError, useRouteError } from "react-router";
 import "./error-component.scss";
+import { useTranslation } from "react-i18next";
 
 type RouteError = {
   status: number;
@@ -41,6 +42,8 @@ export default function ErrorComponent() {
 }
 
 function RouteError({ error }: RouteErrorProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="route-error">
       <div className="route-error-info">
@@ -49,18 +52,18 @@ function RouteError({ error }: RouteErrorProps) {
           {error.statusText}
         </div>
 
-        <p>Nismo mogli da pronadjemo stranu koju ste trazili.</p>
+        <p>{t("errorPage.routeError.title")}</p>
 
         <div className="error-buttons">
           <Link to="/">
             <button className="error-homepage">
-              <p>Pocetna strana</p>
+              <p>{t("errorPage.routeError.buttons.0")}</p>
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
           <Link to={-1 as unknown as string}>
             <button className="error-return">
-              <p>Prosla strana</p>
+              <p>{t("errorPage.routeError.buttons.1")}</p>
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
@@ -71,6 +74,8 @@ function RouteError({ error }: RouteErrorProps) {
 }
 
 function AsyncError({ error }: AsyncErrorProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="async-error">
       <div className="async-error-info">
@@ -79,18 +84,18 @@ function AsyncError({ error }: AsyncErrorProps) {
           {error.statusText}
         </div>
 
-        <p>Nismo mogli da pronadjemo stranu koju ste trazili.</p>
+        <p>{t("errorPage.asyncError.title")}</p>
 
         <div className="error-buttons">
           <Link to="/">
             <button className="error-homepage">
-              <p>Pocetna strana</p>
+              <p>{t("errorPage.asyncError.buttons.0")}</p>
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
           <Link to={-1 as unknown as string}>
             <button className="error-return">
-              <p>Prosla strana</p>
+              <p>{t("errorPage.asyncError.buttons.1")}</p>
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>

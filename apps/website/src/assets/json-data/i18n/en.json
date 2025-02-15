@@ -237,6 +237,16 @@
       "School Twitter account",
       "School Instagram account"
     ]
+  },
+  "errorPage": {
+    "routeError": {
+      "title": "We couldn't find the page you were looking for.",
+      "buttons": ["Home Page", "Previous Page"]
+    },
+    "asyncError": {
+      "title": "We couldn't find the page you were looking for.",
+      "buttons": ["Home Page", "Previous Page"]
+    }
   }
 }
 

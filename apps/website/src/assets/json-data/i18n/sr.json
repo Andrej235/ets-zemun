@@ -231,6 +231,16 @@
       "Školski twitter nalog",
       "Školski instagram nalog"
     ]
+  },
+  "errorPage": {
+    "routeError": {
+      "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
+      "buttons": ["Početna strana", "Prošla strana"]
+    },
+    "asyncError": {
+      "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
+      "buttons": ["Početna strana", "Prošla strana"]
+    }
   }
 }
 
