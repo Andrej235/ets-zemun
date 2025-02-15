@@ -2,12 +2,15 @@ export default function StudentsPagePPService() {
   return (
     <div className="pp-service">
       <h1>Psihološko-pedagoška (PP) služba</h1>
-      <p>
-        Naš PP tim čine školski psiholog Ivana Maćešić i školski pedagog Anđela
-        Mijović. Naš zadatak je da pružamo pomoć i podršku učenicima,
-        roditeljima i nastavnicima. Pratimo i usmeravamo razvoj naših đaka i
-        nudimo pomoć u sagledavanju problema i nalaženju rešenja.
-      </p>
+      <div className="pp-service-description">
+        <p>
+          Naš PP tim čine školski psiholog<b>Ivana Maćešić</b> i
+          školski pedagog <b>Anđela Mijović.</b> Naš zadatak je da pružamo pomoć
+          i podršku učenicima, roditeljima i nastavnicima. Pratimo i usmeravamo
+          razvoj naših đaka i nudimo pomoć u sagledavanju problema i nalaženju
+          rešenja.
+        </p>
+      </div>
 
       <h2>Evo nekih situacija u kojima nam se možete obratiti:</h2>
       <ul>
@@ -55,21 +58,19 @@ export default function StudentsPagePPService() {
         <li>Pomoć u prevenciji zavisnosti i drugih rizičnih ponašanja</li>
       </ul>
 
-      <p>
-        Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo
-        da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja,
-        prihvatanja i podsticanja. Slušamo, razgovaramo i ohrabrujemo – nema
-        optuživanja, etiketiranja, omalovažavanja ili moralisanja. Ukoliko
-        problem prevazivali naše kompetencije, uputićemo vas kome da se obratite
-        za dalju podršku. Razgovore sa psihologom ili pedagogom možete zakazati
-        uz posredovanje odeljenjskog starešine ili samostalno.
-      </p>
+      <div className="pp-service-description">
+        <p>
+          Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo
+          da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja,
+          prihvatanja i podsticanja. Slušamo, razgovaramo i ohrabrujemo – nema
+          optuživanja, etiketiranja, omalovažavanja ili moralisanja. Ukoliko
+          problem prevazivali naše kompetencije, uputićemo vas kome da se
+          obratite za dalju podršku. Razgovore sa psihologom ili pedagogom
+          možete zakazati uz posredovanje odeljenjskog starešine ili samostalno.
+        </p>
+      </div>
 
       <h2>POMOĆ VAN ŠKOLE</h2>
-      <p>
-        Ako vam je iz nekog razloga neprijatno da dolazite kod školskog
-        psihologa ili pedagoga, evo gde još možete potražiti podršku:
-      </p>
       <ul>
         <li>
           Savetovalište za mlade, Dom zdravlja Zemun, Toplička 8,

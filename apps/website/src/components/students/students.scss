@@ -13,6 +13,11 @@
     padding: 0;
   }
 
+  b {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
   section {
     display: flex;
     flex-direction: column;
@@ -179,6 +184,10 @@
     width: 100vw;
     overflow: hidden;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .parliament-container {
       width: 100%;
 
@@ -251,12 +260,16 @@
       }
 
       .payment-method {
-        max-width: 120rem;
-        width: 80%;
+        width: 100%;
         margin-bottom: 8rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         & > h2 {
           margin-bottom: 3rem;
+
           font-size: 3rem;
           font-weight: 500;
           color: $text-primary;
@@ -265,10 +278,52 @@
 
         & > p {
           font-size: 1.6rem;
-          font-weight: 400;
           color: $text-primary;
           text-align: center;
         }
+      }
+    }
+
+    .pp-service {
+      align-self: center;
+      width: 80%;
+      max-width: 120rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & > h1 {
+        margin-bottom: 8rem;
+
+        font-size: 4rem;
+        color: $text-primary;
+        text-align: center;
+      }
+
+      & > h2 {
+        width: 100%;
+        margin-bottom: 3rem;
+
+        font-size: 3rem;
+        font-weight: 500;
+        color: $text-primary;
+        text-align: start;
+      }
+
+      .pp-service-description {
+        width: 100;
+        margin-bottom: 8rem;
+
+        p {
+          font-size: 1.8rem;
+          color: $text-primary;
+        }
+      }
+
+      ul {
+        font-size: 1.6rem;
+        margin-bottom: 8rem;
       }
     }
   }
