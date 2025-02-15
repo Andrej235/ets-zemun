@@ -1,12 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import translatorPlugin from "./plugins/text-transformer/translator-plugin";
-import jsonTranslatorPlugin from "./plugins/text-transformer/json-plugin";
-import babelTextTransformerWrapper from "./plugins/text-transformer/babel-text-transformer-wrapper";
-import searchMapTransformer from "./plugins/search-map/search-map-transformer";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   base: "/",
   preview: {
     port: 5173,
@@ -19,15 +15,7 @@ export default defineConfig(({ mode }) => ({
     },
     allowedHosts: ["localhost.com"],
   },
-  plugins: [
-    translatorPlugin(mode),
-    jsonTranslatorPlugin(),
-    react({
-      babel: {
-        plugins: [babelTextTransformerWrapper(), searchMapTransformer()],
-      },
-    }),
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       "@shared": path.resolve(__dirname, "../shared-frontend"),
@@ -71,5 +59,5 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-}));
+});
 
