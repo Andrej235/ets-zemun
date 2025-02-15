@@ -45,6 +45,11 @@ public partial class AwardService
             ),
         };
 
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"award?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
+
         return Result.Ok(result);
     }
 

@@ -47,6 +47,11 @@ public partial class QualificationService : IQualificationService
             ),
         };
 
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"qualification?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
+
         return Result.Ok(result);
     }
 
