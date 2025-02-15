@@ -18,6 +18,7 @@ import Awards from "./components/awards/awards.tsx";
 import Teachers from "@components/teachers/teachers.tsx";
 import Enrollment from "@components/enrollment/enrollment.tsx";
 import AdminLogin from "@components/admin-login/admin-login.tsx";
+import "./i18n.ts";
 
 const router = createBrowserRouter([
   {

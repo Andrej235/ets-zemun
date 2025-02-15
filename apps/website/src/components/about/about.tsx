@@ -5,9 +5,12 @@ import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import HeroInfoCard from "./hero-info-card";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import Icon from "@components/icon/icon";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
+
+  const { t } = useTranslation();
 
   const fluidCanvas = useMemo(
     () => (
@@ -32,8 +35,8 @@ export default function About() {
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
-            <h1>Elektrotehnička škola "Zemun"</h1>
-            <h2>Mi ne čekamo budućnost, mi joj idemo u susret!</h2>
+            <h1>{t("about.hero.title")}</h1>
+            <h2>{t("about.hero.tagLine")}</h2>
           </div>
 
           <img src="/hero-image.jpg" alt="student" />
