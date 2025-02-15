@@ -1,16 +1,11 @@
+import Icon from "@components/icon/icon";
+
 export default function StudentsPageAntiBullying() {
   return (
     <div className="anti-bullying">
-      <div>
-        <h2>Nasilje</h2>
+      <h1>Nasilje</h1>
 
-        <p>
-          <strong>Kako prijaviti nasilje</strong> <br />
-          <a href="/documents/prijava-nasilja.pdf" target="_blank">
-            Prijava nasilja PDF
-          </a>
-        </p>
-
+      <div className="anti-bullying-description">
         <p>
           Ukoliko ti trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi
           ga odeljenskom starešini, PP službi ili Timu za zaštitu učenika i,
@@ -24,28 +19,34 @@ export default function StudentsPageAntiBullying() {
           uradite ukoliko trpite nasilje ili ste svedok nasilja.
         </p>
 
-        <h2>SOS telefoni</h2>
-        <ul>
-          <li>
-            Prijava digitalnog nasilja – Nacionalni kontakt centar za bezbednost
-            dece na internetu – 19833
-          </li>
-          <li>Nacionalna SOS linija za prevenciju suicida – 011 7777 000</li>
-          <li>Prijava nasilja u porodici – 0800 100 600</li>
-          <li>Nacionalna dečija linija Srbije NADEL – 116111</li>
-          <li>
-            SOS telefonska linija za psihosocijalnu podršku – 0800-200-201
-          </li>
-          <li>
-            Centar za zaštitu žrtava trgovine ljudima –{" "}
-            <a href="http://www.centarzztlj.rs/" target="_blank">
-              Website
-            </a>{" "}
-            broj telefona: +381 63 610 590.
-          </li>
-        </ul>
+        <a
+          className="anti-bullying-link"
+          href="/documents/prijava-nasilja.pdf"
+          target="_blank"
+        >
+          <p>Prijava nasilja PDF</p>
+          <Icon name="arrow-right" />
+        </a>
+      </div>
 
-        <h2>Šta je to školsko nasilje</h2>
+      <h2>SOS telefoni</h2>
+      <ul>
+        <li>
+          Prijava digitalnog nasilja – Nacionalni kontakt centar za bezbednost
+          dece na internetu – 19833
+        </li>
+        <li>Nacionalna SOS linija za prevenciju suicida – 011 7777 000</li>
+        <li>Prijava nasilja u porodici – 0800 100 600</li>
+        <li>Nacionalna dečija linija Srbije NADEL – 116111</li>
+        <li>SOS telefonska linija za psihosocijalnu podršku – 0800-200-201</li>
+        <li>
+          Centar za zaštitu žrtava trgovine ljudima – broj telefona: +381 63 610
+          590.
+        </li>
+      </ul>
+
+      <h2>Šta je to školsko nasilje</h2>
+      <div className="anti-bullying-description">
         <p>
           Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se
           namerno nanese šteta drugome. Međutim, nasilje se može dešavati i
@@ -54,6 +55,7 @@ export default function StudentsPageAntiBullying() {
           onlajn, preko društvenih mreža na kojima su deca iz istih ili
           različitih škola međusobno povezana.
         </p>
+        <br />
         <p>
           Najčešći oblici nasilja u školama su verbalno nasilje (psovanje,
           ismevanje, ogovaranje, pretnje), društveno isključivanje (vršenje
@@ -65,6 +67,7 @@ export default function StudentsPageAntiBullying() {
           Nažalost, izloženost nasilju ne prestaje odlaskom iz škole, već se
           nastavlja i onlajn – digitalno nasilje.
         </p>
+        <br />
         <p>
           U školi nasilje učenici mogu da trpe i od svojih vršnjaka i od
           nastavnika, kao što i učenici mogu da vrše nasilje i nad vršnjacima i
@@ -72,6 +75,7 @@ export default function StudentsPageAntiBullying() {
           strane učenika, ali ima i pretnji, pa i fizičkih napada na
           nastavnike).
         </p>
+        <br />
         <p>
           Osnov za vršenje nasilja počinioci nasilja najčešće vide u
           materijalnom i intelektualnom statusu, u nacionalnoj i seksualnoj
@@ -79,66 +83,74 @@ export default function StudentsPageAntiBullying() {
           diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju
           mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)
         </p>
+      </div>
 
-        <h2>Platforme</h2>
-        <p>Postoje dva dobra veb-mesta koja se bave ovom tematikom:</p>
-        <ul>
-          <li>Nacionalni kontakt centar za bezbednost dece na internetu</li>
-          <li>
-            Nacionalna platforma za prevenciju nasilja koje uključuje decu
-          </li>
-          <li>
-            <a
-              href="https://cuvamte.gov.rs/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Čuvam te Platforma
-            </a>
-          </li>
-        </ul>
+      <h2>Platforme</h2>
+      <ul>
+        <li>Nacionalni kontakt centar za bezbednost dece na internetu</li>
+        <li>Nacionalna platforma za prevenciju nasilja koje uključuje decu</li>
+        <li>
+          <a
+            href="https://cuvamte.gov.rs/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p>Čuvam te Platforma</p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
+      </ul>
 
-        <h2>PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA</h2>
-        <ul>
-          <li>
-            <a href="/documents/support/1.pdf" target="_blank">
+      <h2>PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA</h2>
+      <ul>
+        <li>
+          <a href="/documents/support/1.pdf" target="_blank">
+            <p>
               Kako se suočiti sa događajem u kojem je više osoba povređeno ili
               ubijeno
-            </a>
-          </li>
+            </p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
 
-          <li>
-            <a href="/documents/support/2.pdf" target="_blank">
-              Kako pomoći deci da se vrate u školu nakon tragičnog događaja
-            </a>
-          </li>
+        <li>
+          <a href="/documents/support/2.pdf" target="_blank">
+            <p>Kako pomoći deci da se vrate u školu nakon tragičnog događaja</p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
 
-          <li>
-            <a href="/documents/support/3.pdf" target="_blank">
-              Kako brinuti o sebi tokom kriznih situacija
-            </a>
-          </li>
+        <li>
+          <a href="/documents/support/3.pdf" target="_blank">
+            <p>Kako brinuti o sebi tokom kriznih situacija</p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
 
-          <li>
-            <a href="/documents/support/4.pdf" target="_blank">
-              Delotvorna komunikacija sa decom tokom kriznih situacija
-            </a>
-          </li>
+        <li>
+          <a href="/documents/support/4.pdf" target="_blank">
+            <p>Delotvorna komunikacija sa decom tokom kriznih situacija</p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
 
-          <li>
-            <a href="/documents/support/5.pdf" target="_blank">
+        <li>
+          <a href="/documents/support/5.pdf" target="_blank">
+            <p>
               Razgovor sa decom o terorističkim napadima i pucnjavi u školama i
               zajednici o kojima se izveštava u vestima
-            </a>
-          </li>
+            </p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
 
-          <li>
-            <a href="/documents/support/6.pdf" target="_blank">
-              Uobičajeni znakovi psihosocijalnog distresa dece
-            </a>
-          </li>
-        </ul>
-      </div>
+        <li>
+          <a href="/documents/support/6.pdf" target="_blank">
+            <p>Uobičajeni znakovi psihosocijalnog distresa dece</p>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }
