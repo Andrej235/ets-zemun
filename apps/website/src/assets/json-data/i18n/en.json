@@ -211,6 +211,22 @@
         "documents": ["Statute"]
       }
     ]
+  },
+  "footer": {
+    "about": {
+      "title": "About us",
+      "description": "Our goal is to provide quality education and encourage independent learning and student development, so they can grow into responsible and enterprising individuals in a safe and stimulating environment."
+    },
+    "contact": {
+      "title": "Contact",
+      "address": "Belgrade - Zemun, Nade Dimić 4"
+    },
+    "copyright": "Electrotechnical School \"Zemun\"",
+    "socialMedia": [
+      "School LinkedIn account",
+      "School Twitter account",
+      "School Instagram account"
+    ]
   }
 }
 

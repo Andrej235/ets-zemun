@@ -208,10 +208,24 @@
       },
       {
         "title": "Institucionalna fondacija",
-        "documents": [
-          "Statut"
-        ]
+        "documents": ["Statut"]
       }
+    ]
+  },
+  "footer": {
+    "about": {
+      "title": "O nama",
+      "description": "Sa ciljom da obezbedimo kvalitetno obrazovanje i podstaknemo samostalno učenje i razvoj učenika težimo tome da oni izrastu u odgovorne i preduzimljive ličnosti u sigurnom i podsticajnom okruženju"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "address": "Beograd – Zemun, Nade Dimić 4"
+    },
+    "copyright": "Elektrotehnička škola \"Zemun\"",
+    "socialMedia": [
+      "Školski linkedin nalog",
+      "Školski twitter nalog",
+      "Školski instagram nalog"
     ]
   }
 }
