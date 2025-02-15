@@ -1,0 +1,66 @@
+{
+  "about": {
+    "hero": {
+      "title": "Elektrotehnička škola \"Zemun\"",
+      "tagLine": "Mi ne čekamo budućnost, mi joj idemo u susret!",
+      "heroCards": {
+        "button": "Saznaj vise",
+        "history": {
+          "title": "Istorija",
+          "description": "Pregled istorije naše škole i značajnih trenutaka."
+        },
+        "teachers": {
+          "title": "Nastavnici",
+          "description": "Saznajte više o našim nastavnicima i njihovim kvalifikacijama."
+        },
+        "enrollment": {
+          "title": "Upis i prijem",
+          "description": "Detalji o procesu upisa i prijemnom ispitu."
+        },
+        "competitions": {
+          "title": "Takmičenja i nagrade",
+          "description": "Informacije o svim takmičenjima i osvojenim nagradama."
+        }
+      }
+    },
+    "overview": {
+      "title": "Misija i Vizija",
+      "description": {
+        "1": "Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake i naučne radnike iz oblasti koje obuhvata naš školski program. Nastojimo da kod učenika probudimo želju za usavršavanjem i sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju informacije do kojih dolaze uz korišćenje svih dostupnih izvora.",
+        "2": "Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne aktivnosti. Stvorili smo takvo okruženje da je učenik u centru nastavnog procesa i učenja. Želimo da naša deca postanu preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama menjamo sadašnjost i stvaramo svetliju budućnost."
+      }
+    },
+    "schoolPreviewCards": {
+      "teachers": {
+        "title": "Iskusnih nastavnika",
+        "description": "Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
+      },
+      "students": {
+        "title": "Učenika u dinamičnoj zajednici",
+        "description": "Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
+      },
+      "classrooms": {
+        "title": "Moderno opremljenih kabineta",
+        "description": "Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
+      },
+      "awards": {
+        "title": "Osvojenih nagrada",
+        "description": "Naši učenici su osvojili preko 25 priznanja na regionalnim, nacionalnim i međunarodnim takmičenjima. Dominiraju u STEM projektima, umetničkim izazovima, sportu i debatama, pokazujući izuzetan kreativni potencijal. Kroz mentorstvo nastavnika i prilagođene programe, podstičemo ih da istražuju, razvijaju ideje i postanu ambasadori znanja. Svaka nagrada je priča o njihovoj posvećenosti i upornosti."
+      }
+    },
+    "callToAction": {
+      "title": "Pridružite se našoj obrazovnoj porodici!",
+      "description": "Otvorite vrata ka budućnosti gde se tradicija kombinuje sa tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i saznajte kako gradimo svet koji inspiriše!",
+      "buttons": {
+        "1": "Prijavite se",
+        "2": "Zakažite sastanak"
+      },
+      "orientationTest": {
+        "title": "I dalje niste sigurni?",
+        "description": "Odratite kratak test da vidite da li bi vam bas nasa skola odgovarala!",
+        "button": "Probajte test"
+      }
+    }
+  }
+}
+

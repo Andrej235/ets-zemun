@@ -1,6 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import sr from "@assets/json-data/i18n/sr.json";
+import en from "@assets/json-data/i18n/en.json";
 
 i18n
   .use(LanguageDetector)
@@ -10,24 +12,10 @@ i18n
     fallbackLng: "sr",
     resources: {
       sr: {
-        translation: {
-          about: {
-            hero: {
-              title: 'Elektrotehnička škola "Zemun"',
-              tagLine: "Mi ne čekamo budućnost, mi joj idemo u susret!",
-            },
-          },
-        },
+        translation: sr,
       },
       en: {
-        translation: {
-          about: {
-            hero: {
-              title: "Electrical Engineering School 'Zemun'",
-              tagLine: "We don't wait for the future, we meet it head-on!",
-            },
-          },
-        },
+        translation: en,
       },
     },
   });

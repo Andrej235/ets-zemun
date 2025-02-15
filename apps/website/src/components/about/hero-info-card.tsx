@@ -1,4 +1,5 @@
 import Icon from "@components/icon/icon";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 type HeroInfoCardProps = {
@@ -14,6 +15,9 @@ export default function HeroInfoCard({
   title,
   url,
 }: HeroInfoCardProps) {
+  const { t } = useTranslation();
+  console.log("a");
+
   return (
     <div className="hero-block-element">
       <Icon name={icon} className="hero-block-icon" />
@@ -23,7 +27,7 @@ export default function HeroInfoCard({
           <p>{description}</p>
 
           <Link to={url} className="hero-block-button">
-            <span>Saznaj vise</span>
+            <span>{t("about.hero.heroCards.button")}</span>
           </Link>
         </div>
       </div>

@@ -1,0 +1,66 @@
+{
+  "about": {
+    "hero": {
+      "title": "Electrotechnical School \"Zemun\"",
+      "tagLine": "We don't wait for the future, we go for it!",
+      "heroCards": {
+        "button": "Learn more",
+        "history": {
+          "title": "History",
+          "description": "Review of our school's history and key moments."
+        },
+        "teachers": {
+          "title": "Teachers",
+          "description": "Learn more about our teachers and their qualifications."
+        },
+        "enrollment": {
+          "title": "Enrollment and Admission",
+          "description": "Details about the enrollment and admission process."
+        },
+        "competitions": {
+          "title": "Competitions and Awards",
+          "description": "Information about all competitions and awards."
+        }
+      }
+    },
+    "overview": {
+      "title": "Mission and Vision",
+      "description": {
+        "1": "Our mission is to provide education and create future experts and scientists in the fields covered by our school program. We strive to inspire our students to develop a desire for learning and to become independent researchers and thinkers. We encourage them to explore and learn through various extracurricular activities. We created an environment where the student is at the center of the learning process. We want our children to become entrepreneurs and responsible individuals. We invite you to join us and help shape the future!",
+        "2": "Their satisfaction and safety are our top priorities. We support our students in developing their creativity and skills. We created an environment that allows them to grow and learn. We want our children to become self-confident and independent. We invite you to join us and help shape the future!"
+      }
+    },
+    "schoolPreviewCards": {
+      "teachers": {
+        "title": "Experienced Teachers",
+        "description": "Our team consists of over 100 experienced teachers with rich experience and high qualifications. They encourage critical thinking and a love for learning. Every teacher works to develop our students' skills and knowledge. They are role models for our students and inspire them to become independent and responsible individuals."
+      },
+      "students": {
+        "title": "Students in a Dynamic Community",
+        "description": "Our school gathers over 750 students with different interests and talents. We support them in developing their skills and knowledge. We encourage them to explore and learn through various extracurricular activities. We created an environment that allows them to grow and learn. We want our children to become self-confident and responsible individuals. We invite you to join us and help shape the future!"
+      },
+      "classrooms": {
+        "title": "Modernly Equipped Classrooms",
+        "description": "We have over 40 modernly equipped classrooms with digital boards, laboratory equipment, and innovative software. The classrooms are designed to support teamwork, experiments, and multidisciplinary projects. We created an environment that allows our students to explore and learn in an inspiring environment."
+      },
+      "awards": {
+        "title": "Awards and Recognition",
+        "description": "Our students have won over 25 awards at regional, national, and international competitions. They have shown exceptional potential in STEM projects, artistic challenges, sports, and debates. We support them in developing their skills and knowledge. We encourage them to explore and learn through various extracurricular activities. We created an environment that allows them to grow and learn. Every award is a story about their dedication and perseverance."
+      }
+    },
+    "callToAction": {
+      "title": "Join our Educational Family!",
+      "description": "Open the doors to a future where tradition meets technology and every student is part of a success story. Visit us and see how we build a world that inspires!",
+      "buttons": {
+        "1": "Apply now",
+        "2": "Schedule a meeting"
+      },
+      "orientationTest": {
+        "title": "Still not sure?",
+        "description": "Take a short test to see if our school is the right fit for you!",
+        "button": "Take the test"
+      }
+    }
+  }
+}
+
