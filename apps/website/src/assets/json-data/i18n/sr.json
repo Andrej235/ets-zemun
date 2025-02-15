@@ -196,7 +196,7 @@
         "documents": [
           "Pravilnik o bankama",
           "Pravilnik o organizaciji budžetskog računovodstva",
-          "Pravilnik o organizaciji i sistematizaciji radnih mesta  u elektrotehničkoj školi \"Zemun\""
+          "Pravilnik o organizaciji i sistematizaciji radnih mesta u elektrotehničkoj školi \"Zemun\""
         ]
       },
       {
@@ -211,6 +211,10 @@
         "documents": ["Statut"]
       }
     ]
+  },
+  "header": {
+    "links": ["O nama", "Obrazovni profili", "Učenici", "Novosti", "Dokumenta"],
+    "searchBarPlaceholder": "Pretraži"
   },
   "footer": {
     "about": {

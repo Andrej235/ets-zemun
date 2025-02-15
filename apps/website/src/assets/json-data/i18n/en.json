@@ -212,6 +212,16 @@
       }
     ]
   },
+  "header": {
+    "links": [
+      "About Us",
+      "Educational Profiles",
+      "Students",
+      "News",
+      "Documents"
+    ],
+    "searchBarPlaceholder": "Search"
+  },
   "footer": {
     "about": {
       "title": "About us",

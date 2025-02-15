@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
 import SearchEntry from "src/types/search/search-entry";
+import { useTranslation } from "react-i18next";
 
 type HamburgerNavigationSearchBarProps = {
   readonly onRequestCloseHamburgerNavigation: () => void;
@@ -33,6 +34,8 @@ export default function HamburgerNavigationSearchBar({
     FuseResult<SearchEntry>[]
   >([]);
 
+  const { t } = useTranslation();
+
   return (
     <FocusTrap
       active={isAutoCompleteShown}
@@ -48,8 +51,8 @@ export default function HamburgerNavigationSearchBar({
           <input
             type="text"
             className="search-bar"
-            placeholder="Pretrazi..."
-            aria-label="Pretrazivanje"
+            placeholder={`${t("header.searchBarPlaceholder")}...`}
+            aria-label={t("header.searchBarPlaceholder")}
             ref={inputRef}
             name="search"
             autoComplete="off"
@@ -79,7 +82,7 @@ export default function HamburgerNavigationSearchBar({
               setIsAutoCompleteShown(false);
               onRequestCloseHamburgerNavigation();
             }}
-            aria-label="Pretrazi"
+            aria-label={t("header.searchBarPlaceholder")}
           >
             <Icon name="magnifying-glass" />
           </button>
