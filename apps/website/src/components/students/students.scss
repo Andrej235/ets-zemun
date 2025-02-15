@@ -332,65 +332,71 @@
   }
 
   @media (max-width: 651px) {
-    .price-list {
-      & > h2 {
-        font-size: 2rem !important;
+    .content-container {
+      .part-time-container {
+        .price-list {
+          & > h2 {
+            font-size: 2rem;
+          }
+
+          .item-name {
+            font-size: 1.4rem;
+          }
+
+          .item-price {
+            font-size: 1.4rem;
+          }
+        }
+
+        .payment-method {
+          & > h2 {
+            font-size: 2rem;
+          }
+
+          & > p {
+            font-size: 1.4rem;
+          }
+        }
       }
 
-      .item-name {
-        font-size: 1.4rem !important;
-      }
+      .table-container {
+        width: 100%;
 
-      .item-price {
-        font-size: 1.4rem !important;
-      }
-    }
+        caption {
+          font-size: 2rem;
+        }
 
-    .payment-method {
-      & > h2 {
-        font-size: 2rem !important;
-      }
+        table {
+          margin-top: 1rem;
 
-      & > p {
-        font-size: 1.4rem !important;
-      }
-    }
-
-    .table-container {
-      width: 100%;
-
-      caption {
-        font-size: 2rem;
-      }
-
-      table {
-        margin-top: 1rem;
-
-        th,
-        td {
-          font-size: 1.4rem !important;
-          padding: 1rem !important;
+          th,
+          td {
+            font-size: 1.4rem;
+            padding: 1rem;
+          }
         }
       }
     }
   }
 
   @media (max-width: 425px) {
-    .table-container {
-      width: 100%;
+    .content-container {
+      .table-container {
+        width: 100%;
 
-      table {
-        margin-top: 1rem;
+        table {
+          margin-top: 1rem;
 
-        caption {
-          font-size: 2rem;
+          caption {
+            font-size: 2rem;
+          }
         }
-      }
 
-      .part-time-table {
-        th,
-        td {
-          padding: 0rem !important;
+        .part-time-table {
+          th,
+          td {
+            padding: 0rem;
+          }
         }
       }
     }
