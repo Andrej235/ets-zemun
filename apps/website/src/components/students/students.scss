@@ -321,6 +321,103 @@
         margin-bottom: 8rem;
       }
     }
+
+    .anti-bullying {
+      align-self: center;
+      width: 80%;
+      max-width: 120rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .anti-bullying-link {
+        margin-top: 3rem;
+      }
+
+      a {
+        width: max-content;
+        border: none;
+        color: #fff;
+        background: none;
+        position: relative;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        p {
+          font-size: 1em;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          transform: scaleX(0);
+          transform-origin: bottom right;
+          background: currentColor;
+          transition: transform 0.25s ease-out;
+        }
+
+        &:hover:before,
+        &:focus-visible::before {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
+
+        .icon {
+          transition: 200ms;
+          font-size: 1.65rem;
+          width: max-content;
+          height: max-content;
+        }
+
+        &:hover .icon,
+        &:focus-visible .icon {
+          transform: rotate(-90deg);
+        }
+      }
+
+      & > h1 {
+        margin-bottom: 8rem;
+
+        font-size: 4rem;
+        color: $text-primary;
+        text-align: center;
+      }
+
+      & > h2 {
+        width: 100%;
+        margin-bottom: 3rem;
+
+        font-size: 3rem;
+        font-weight: 500;
+        color: $text-primary;
+        text-align: start;
+      }
+
+      .anti-bullying-description {
+        width: 100;
+        margin-bottom: 8rem;
+
+        p {
+          font-size: 1.8rem;
+          color: $text-primary;
+        }
+      }
+
+      ul {
+        font-size: 1.6rem;
+        margin-bottom: 8rem;
+        align-items: flex-start;
+        align-self: start;
+      }
+    }
   }
 
   .table-container {
