@@ -336,7 +336,7 @@
       }
 
       a {
-        width: max-content;
+        width: fit-content;
         border: none;
         color: #fff;
         background: none;
@@ -348,6 +348,7 @@
         gap: 0.5rem;
 
         p {
+          width: fit-content;
           font-size: 1em;
         }
 
@@ -412,10 +413,13 @@
       }
 
       ul {
-        font-size: 1.6rem;
-        margin-bottom: 8rem;
-        align-items: flex-start;
+        width: 100%;
         align-self: start;
+        margin-bottom: 8rem;
+
+        align-items: flex-start;
+
+        font-size: 1.6rem;
       }
     }
   }
