@@ -243,7 +243,7 @@
           }
 
           .item-price {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 300;
             color: $text-primary;
           }
@@ -334,9 +334,28 @@
   @media (max-width: 651px) {
     .price-list {
       & > h2 {
-        font-size: 2rem;
+        font-size: 2rem !important;
+      }
+
+      .item-name {
+        font-size: 1.4rem !important;
+      }
+
+      .item-price {
+        font-size: 1.4rem !important;
       }
     }
+
+    .payment-method {
+      & > h2 {
+        font-size: 2rem !important;
+      }
+
+      & > p {
+        font-size: 1.4rem !important;
+      }
+    }
+
     .table-container {
       width: 100%;
 
