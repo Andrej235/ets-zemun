@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import "./hamburger-menu.scss";
 import HamburgerNavigation from "@components/hamburger-navigation/hamburger-navigation";
-import SetLanguageContext from "@contexts/set-language-context";
-import LanguageContext from "@contexts/language-context";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
+import "./hamburger-menu.scss";
 
 type HamburgerMenuProps = {
   readonly isHamburgerMenuOpen: boolean;
@@ -16,8 +14,7 @@ function HamburgerMenu({
   onRequestOpen,
   onRequestClose,
 }: HamburgerMenuProps) {
-  const language = useContext(LanguageContext);
-  const setLanguage = useContext(SetLanguageContext);
+  const { i18n } = useTranslation();
 
   return (
     <>
@@ -52,13 +49,15 @@ function HamburgerMenu({
           display: isHamburgerMenuOpen ? "block" : "none",
           opacity: isHamburgerMenuOpen ? 1 : 0,
         }}
-        onClick={() => setLanguage(language === "sr-lat" ? "sr-cyr" : "sr-lat")}
+        onClick={() =>
+          i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr")
+        }
         className="hamburger-menu-language"
         aria-hidden={!isHamburgerMenuOpen}
         tabIndex={isHamburgerMenuOpen ? 0 : -1}
         aria-label="Promeni jezik"
       >
-        {language === "sr-lat" ? <p>lat</p> : <p>ćir</p>}
+        {i18n.language === "sr" ? <p>Srpski</p> : <p>English</p>}
       </motion.button>
 
       <HamburgerNavigation

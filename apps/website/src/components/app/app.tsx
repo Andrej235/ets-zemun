@@ -1,44 +1,24 @@
-//@text-transform-ignore
-import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
-import AppHeader from "@components/app-header/app-header";
-import "./app.scss";
-import LanguageContext, { localLanguages } from "@contexts/language-context";
-import { useEffect, useState, useCallback, useRef } from "react";
-import Scroller from "@components/scroller/scroller";
 import AppFooter from "@components/app-footer/app-footer";
-import SetLanguageContext from "@contexts/set-language-context";
+import AppHeader from "@components/app-header/app-header";
+import Scroller from "@components/scroller/scroller";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
+import "./app.scss";
 
 function App() {
-  const [language, setLanguage] = useState<string>("sr-cyr");
-  const changeLanguage = useCallback((newLang: string) => {
-    localStorage.setItem("language", newLang);
-    setLanguage(newLang);
-  }, []);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
-    const languages = [
-      ...localLanguages,
-      ...(JSON.parse(
-        import.meta.env.VITE_AVAILABLE_LIBRE_LANGUAGES
-      ) as string[]),
-    ];
-
-    let storedLanguage = localStorage.getItem("language") ?? "sr-cyr";
-
-    if (!languages.includes(storedLanguage)) storedLanguage = "sr-cyr";
-    setLanguage(storedLanguage);
-
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
-        changeLanguage(
-          languages[(languages.indexOf(language) + 1) % languages.length]
-        );
+        i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr");
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [language, changeLanguage]);
+  }, [i18n]);
 
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -59,23 +39,19 @@ function App() {
   const headerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <LanguageContext.Provider value={language}>
-      <SetLanguageContext.Provider value={changeLanguage}>
-        <div id="app">
-          <ScrollRestoration />
+    <div id="app">
+      <ScrollRestoration />
 
-          <AppHeader ref={headerRef} />
+      <AppHeader ref={headerRef} />
 
-          <div id="page-content">
-            <Outlet />
-          </div>
+      <div id="page-content">
+        <Outlet />
+      </div>
 
-          <Scroller />
+      <Scroller />
 
-          <AppFooter />
-        </div>
-      </SetLanguageContext.Provider>
-    </LanguageContext.Provider>
+      <AppFooter />
+    </div>
   );
 }
 
