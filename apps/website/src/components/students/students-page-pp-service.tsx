@@ -4,11 +4,12 @@ export default function StudentsPagePPService() {
       <h1>Psihološko-pedagoška (PP) služba</h1>
       <div className="pp-service-description">
         <p>
-          Naš PP tim čine školski psiholog <b>Ivana Maćešić</b> i školski
-          pedagog <b>Anđela Mijović</b>. Naš zadatak je da pružamo pomoć i
-          podršku učenicima, roditeljima i nastavnicima. Pratimo i usmeravamo
-          razvoj naših đaka i nudimo pomoć u sagledavanju problema i nalaženju
-          rešenja.
+          Naš PP tim čine školski psiholog{" "}
+          <b style={{ marginRight: "0px", marginLeft: "0px" }}>Ivana Maćešić</b>{" "}
+          i školski pedagog <b style={{ marginLeft: "5px" }}>Anđela Mijović</b>.
+          Naš zadatak je da pružamo pomoć i podršku učenicima, roditeljima i
+          nastavnicima. Pratimo i usmeravamo razvoj naših đaka i nudimo pomoć u
+          sagledavanju problema i nalaženju rešenja.
         </p>
       </div>
 
@@ -21,37 +22,48 @@ export default function StudentsPagePPService() {
           organizacija školskih obaveza)
         </li>
         <li>
-          <b>Emocionalni problemi</b> (stres, anksioznost i sl, psihološki
-          pritisak usled problema u porodici ili ličnim odnosima, teškoće u
-          kontrolisanju emocija – tuga, ljutnja, frustracija…, problemi sa
-          samopoštovanjem ili samopuzdanjem)
+          <b style={{ marginRight: "5px" }}>Emocionalni problemi</b> (stres,
+          anksioznost i sl, psihološki pritisak usled problema u porodici ili
+          ličnim odnosima, teškoće u kontrolisanju emocija – tuga, ljutnja,
+          frustracija…, problemi sa samopoštovanjem ili samopuzdanjem)
         </li>
         <li>
-          <b>Međuljudski odnosi</b> (problemi u odnosu sa vršnjacima –
-          npr.uznemiravanje, nerazumevanje, konflikti i sl., izolacija ili
-          osećaj usamljenosti, poteškoće u pravljenju i održavanju
-          prijateljstava, sukobi sa nastavnicima ili drugim zaposlenima u školi)
+          <b style={{ marginRight: "5px" }}>Međuljudski odnosi</b> (problemi u
+          odnosu sa vršnjacima – npr.uznemiravanje, nerazumevanje, konflikti i
+          sl., izolacija ili osećaj usamljenosti, poteškoće u pravljenju i
+          održavanju prijateljstava, sukobi sa nastavnicima ili drugim
+          zaposlenima u školi)
         </li>
         <li>
-          <b> Problemi sa samodisciplinom i ponašanjem</b> (agresivno ponašanje,
-          narušavanje pravila škole, postavljanje granica i rešavanje
-          konflikata)
+          <b style={{ marginRight: "0px" }}>
+            Problemi sa samodisciplinom i ponašanjem
+          </b>{" "}
+          (agresivno ponašanje, narušavanje pravila škole, postavljanje granica
+          i rešavanje konflikata)
         </li>
         <li>
-          <b>Prelazni periodi i važne životne promene</b> (prelazak u novi
-          razred, školu ili grad, prilagođavanje na novu sredinu ili nove ljude,
-          promena u porodici – razvodi, smrt bliske osobe, problemi u ličnom
-          životu koji utiču na koncentraciju i školski uspeh)
+          <b style={{ marginRight: "0px" }}>
+            Prelazni periodi i važne životne promene
+          </b>{" "}
+          (prelazak u novi razred, školu ili grad, prilagođavanje na novu
+          sredinu ili nove ljude, promena u porodici – razvodi, smrt bliske
+          osobe, problemi u ličnom životu koji utiču na koncentraciju i školski
+          uspeh)
         </li>
         <li>
-          <b>Karijerno savetovanje i planiranje budućnosti</b> (odluke o daljem
-          profesionalnom usmerenju, istraživanje tržišta rada, planiranje
-          karijere, pomoć u prepoznavanju ličnih jakih strana i talenata)
+          <b style={{ marginRight: "0px" }}>
+            Karijerno savetovanje i planiranje budućnosti
+          </b>{" "}
+          (odluke o daljem profesionalnom usmerenju, istraživanje tržišta rada,
+          planiranje karijere, pomoć u prepoznavanju ličnih jakih strana i
+          talenata)
         </li>
         <li>
-          <b>Psihološka podrška u kriznim situacijama</b> (sećanja na
-          traumatične događaje, suočavanje sa velikim životnim izazovima i
-          promenama)
+          <b style={{ marginRight: "0px" }}>
+            Psihološka podrška u kriznim situacijama
+          </b>{" "}
+          (sećanja na traumatične događaje, suočavanje sa velikim životnim
+          izazovima i promenama)
         </li>
         <li>
           Razgovori o zdravim stilovima života, ophođenju sa stresom i stresnim
