@@ -61,6 +61,62 @@
         "button": "Take the test"
       }
     }
+  },
+  "history": {
+    "segments": [
+      {
+        "title": "Founding of the first technical school in Zemun",
+        "description": [
+          "The founding of the first technical school in Zemun marks the beginning of education in specialized technical disciplines.",
+          "This school made a significant contribution to the education of future engineers and technicians in the region. During this period, the school began teaching technical skills that were necessary for industrial development at that time."
+        ]
+      },
+      {
+        "title": "Relocation to a new building",
+        "description": [
+          "In 1949, the school moved to a new building located in Nade Dimić Street. This building was modernly equipped for that time and provided better conditions for teaching.",
+          "The school then received an internship, which allowed students from other parts of Yugoslavia to be educated in it, making it an important center for technical education in the country."
+        ]
+      },
+      {
+        "title": "Name change to \"Majstorska škola metalske struke\"",
+        "description": [
+          "On October 5, 1954, the school officially changed its name to \"Majstorska škola metalske struke u Zemunu\".",
+          "This name change reflected the expansion of the educational profiles towards the needs of the metal processing industry, which was growing at that time.",
+          "The programs were focused on training masters and workers for the metal industry, providing them with specific skills needed for work in that field."
+        ]
+      },
+      {
+        "title": "Name change to \"Metaloprerađivačka škola za učenike u privredi\"",
+        "description": [
+          "In 1960, the school changed its name to \"Metaloprerađivačka škola za učenike u privredi\", which made it even more specialized in educating students for industrial sectors.",
+          "The school then enrolled 600 students, making it a key educational institution in the region.",
+          "The curriculum and program covered not only the metal industry but also electrical engineering and other technical fields, allowing students to acquire a wide range of skills."
+        ]
+      },
+      {
+        "title": "Name change to \"Mašinski obrazovni centar\"",
+        "description": [
+          "In 1980, the school was renamed to \"Mašinski obrazovni centar\", which marked the expansion of the educational profiles and the introduction of new disciplines in the field of machine engineering.",
+          "The school began to focus on education in the fields of automation and mechanics, with the aim of providing students with advanced knowledge and practical skills for work in modern industry. Also, during this period, the school improved its laboratories and workshops."
+        ]
+      },
+      {
+        "title": "Name change to \"Mašinska škola Zemun\"",
+        "description": [
+          "In 1987, the school changed its name to \"Mašinska škola Zemun\", which reflected its steady development and growth in the field of machine engineering.",
+          "The school became a leading educational institution in Zemun for the education of technicians and engineers, providing students with quality education that was in line with the needs of the industry."
+        ]
+      },
+      {
+        "title": "Name change to Elektrotehnička škola 'Zemun'",
+        "description": [
+          "In April 2003, the school received the name \"Elektrotehnička škola 'Zemun'\", which clearly marked its specialization in the field of electrical engineering, computer science and modern technologies.",
+          "This change was a response to the accelerated technological progress and the need for education of experts in the fields of computer science, electronics, automation and other modern technical disciplines.",
+          "The school continued to provide education and preparation for the labor market, offering modern programs and resources for its students."
+        ]
+      }
+    ]
   }
 }
 
