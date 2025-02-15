@@ -145,6 +145,10 @@ public class SubjectService(
                 },
                 new() { Expiration = TimeSpan.FromHours(6) }
             );
+            mapped.Teachers.NextCursor =
+                mapped.Teachers.LoadedCount < 5
+                    ? null
+                    : $"teacher?languageId={languageId}&offset=5&limit=10&subjectId={subject.Id}";
 
             return mapped;
         });
@@ -190,6 +194,10 @@ public class SubjectService(
             },
             new() { Expiration = TimeSpan.FromHours(6) }
         );
+        mapped.Teachers.NextCursor =
+            mapped.Teachers.LoadedCount < 5
+                ? null
+                : $"teacher?languageId={languageId}&offset=5&limit=10&subjectId={mapped.Id}";
 
         return Result.Ok(mapped);
     }

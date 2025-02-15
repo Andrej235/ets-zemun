@@ -48,6 +48,10 @@ public partial class TeacherService : ITeacherService
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
         };
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"teacher?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
 
         return Result.Ok(result);
     }
