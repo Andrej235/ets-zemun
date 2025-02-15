@@ -209,6 +209,48 @@
         color: $text-primary;
         text-align: center;
       }
+
+      .price-list {
+        max-width: 120rem;
+        width: 80%;
+        margin-bottom: 8rem;
+
+        & > h2 {
+          margin-bottom: 3rem;
+          font-size: 3rem;
+          font-weight: 500;
+          color: $text-primary;
+          text-align: center;
+        }
+
+        .price-list-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .item-name {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: $text-primary;
+          }
+
+          .item-price {
+            font-size: 2rem;
+            font-weight: 500;
+            color: $text-primary;
+          }
+        }
+      }
+
+      .payment-method {
+        & > h2 {
+          margin-bottom: 3rem;
+          font-size: 1.6rem;
+          font-weight: 500;
+          color: $text-primary;
+          text-align: center;
+        }
+      }
     }
   }
 
@@ -271,6 +313,11 @@
   }
 
   @media (max-width: 651px) {
+    .price-list {
+      & > h2 {
+        font-size: 2rem;
+      }
+    }
     .table-container {
       width: 100%;
 

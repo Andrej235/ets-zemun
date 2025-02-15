@@ -126,6 +126,8 @@ export default function StudentsPagePartTime() {
 
   return (
     <div className="part-time-container">
+      <h1>Vanredni učenici</h1>
+      
       <div className="table-container">
         <table>
           <caption>
