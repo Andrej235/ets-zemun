@@ -1,8 +1,5 @@
 .lazy-loading-marker {
   position: absolute;
-  height: 1px;
-  width: 1px;
-  opacity: 0;
 }
 
 *:has(.lazy-loading-marker) {
