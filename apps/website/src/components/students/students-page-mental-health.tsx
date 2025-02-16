@@ -2,8 +2,10 @@ export default function StudentsPageMentalHealth() {
   return (
     <div className="mental-health">
 
+      <h1>Mentalno zdravlje</h1>
+
       <div className="understanding">
-        <h1>Razumevanje adolescentnog perioda</h1>
+        <h2>Razumevanje adolescentnog perioda</h2>
 
         <p>
           Adolescencija je period intenzivnih promena koji obuhvata fizički,
@@ -40,10 +42,10 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="stress">
-        <h1>
+        <h2>
           Adolescencija nosi brojne izazove i stresore koji mogu uticati na
           mentalno zdravlje:
-        </h1>
+        </h2>
 
         <ul>
           <li>
@@ -117,7 +119,7 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="symptoms">
-        <h1>Znakovi i simptomi problema mentalnog zdravlja</h1>
+        <h2>Znakovi i simptomi problema mentalnog zdravlja</h2>
 
         <ul>
           <li>
@@ -151,10 +153,10 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="signs">
-        <h1>
+        <h2>
           Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti
           izazovno, ali postoje znakovi na koje treba obratiti pažnju:
-        </h1>
+        </h2>
 
         <ul>
           <li>
@@ -203,7 +205,7 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="impact">
-        <h1>Uticaj na svakodnevni život</h1>
+        <h2>Uticaj na svakodnevni život</h2>
 
         <div className="behaviour">
           <h2>Ponašanje u školi i kod kuće</h2>
@@ -274,7 +276,7 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="support">
-        <h1>Kako podržati adolescente?</h1>
+        <h2>Kako podržati adolescente?</h2>
 
         <div className="parent-support">
           <h2>Uloga roditelja</h2>
@@ -344,7 +346,7 @@ export default function StudentsPageMentalHealth() {
         </div>
 
         <div className="teacher-support">
-          <h1>Uloga nastavnika</h1>
+          <h2>Uloga nastavnika</h2>
 
           <p>
             Nastavnici mogu imati važnu ulogu u podršci mentalnom zdravlju
@@ -356,7 +358,7 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="self-help">
-        <h1>Strategije za poboljšanje mentalnog zdravlja</h1>
+        <h2>Strategije za poboljšanje mentalnog zdravlja</h2>
 
         <p>
           Praktikovanje samopomoći ključno je za poboljšanje mentalnog zdravlja
@@ -392,7 +394,7 @@ export default function StudentsPageMentalHealth() {
       </div>
 
       <div className="help">
-        <h1>Kome se obratiti za pomoć</h1>
+        <h2>Kome se obratiti za pomoć</h2>
 
         <p>
           Kada se adolescenti suočavaju s problemima mentalnog zdravlja, važno
