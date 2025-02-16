@@ -1,9 +1,9 @@
 import { LoaderFunctionArgs } from "react-router";
 
-type LoaderInit<T extends { [key: string]: object }> = (args: {
+type LoaderInit<T extends { [key: string]: object } | Promise<P>, P> = (args: {
   params: Record<string, string>;
   request: Request;
-}) => LoaderInitData<T> | Promise<LoaderInitData<T>>;
+}) => LoaderInitData<T>;
 
 type LoaderInitData<T> = T | Response | null;
 
@@ -15,9 +15,10 @@ export type LoaderReturnType<C extends Loader<unknown>> = C extends Loader<
   ? T
   : unknown;
 
-export default function createLoader<T extends { [key: string]: object }>(
-  loader: LoaderInit<T>
-): Loader<T> {
+export default function createLoader<
+  T extends { [key: string]: object } | Promise<P>,
+  P
+>(loader: LoaderInit<T, P>): Loader<T> {
   return async (x: LoaderFunctionArgs) => {
     try {
       const data: T | Response | null = await loader({
