@@ -21,12 +21,14 @@ export default function createLoader<
 >(loader: LoaderInit<T, P>): Loader<T> {
   return async (x: LoaderFunctionArgs) => {
     try {
-      const data: T | Response | null = await loader({
+      const data: T | Response | null = loader({
         params: x.params as Record<string, string>,
         request: x.request,
       });
 
-      return data;
+      return data instanceof Promise
+        ? ({ __default: data } as unknown as T)
+        : data;
     } catch (error) {
       console.error(`Error occurred in loader`, error);
       throw error;
