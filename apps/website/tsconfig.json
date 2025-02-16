@@ -33,7 +33,8 @@
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@data/*": ["src/assets/json-data/data/*"],
-      "@utility/*": ["src/utility/*"]
+      "@utility/*": ["src/utility/*"],
+      "@better-router/*": ["src/better-router/*"]
     }
   },
   "include": ["src", "../shared-frontend"],

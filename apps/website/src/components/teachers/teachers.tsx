@@ -1,17 +1,23 @@
 import "./teachers.scss";
-import { teachersMockData } from "./teachers-mock-data";
-import TeacherCard from "./teacher-card";
+import Async from "@better-router/async";
+import useLoader from "@better-router/use-loader";
+import teacherLoader from "@components/teachers/teachers-loader";
 
 export default function Teachers() {
+  const loaderData = useLoader<typeof teacherLoader>();
+
   return (
     <div className="teachers-page">
-
       <h1>Nastavnici</h1>
-      
+
       <div className="teacher-cards-container">
-        {teachersMockData.map((teacher) => (
-          <TeacherCard key={teacher.id} teacher={teacher} />
-        ))}
+        <Async await={loaderData.test}>
+          {(teachers) => {
+            console.log(teachers);
+
+            return null;
+          }}
+        </Async>
       </div>
     </div>
   );

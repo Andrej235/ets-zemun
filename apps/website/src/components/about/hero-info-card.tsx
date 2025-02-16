@@ -16,7 +16,6 @@ export default function HeroInfoCard({
   url,
 }: HeroInfoCardProps) {
   const { t } = useTranslation();
-  console.log("a");
 
   return (
     <div className="hero-block-element">

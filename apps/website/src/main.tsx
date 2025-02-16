@@ -18,6 +18,7 @@ import Teachers from "@components/teachers/teachers.tsx";
 import Enrollment from "@components/enrollment/enrollment.tsx";
 import AdminLogin from "@components/admin-login/admin-login.tsx";
 import "./i18n.ts";
+import teacherLoader from "@components/teachers/teachers-loader.ts";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
       {
         path: "nastavnici",
         element: <Teachers />,
+        loader: teacherLoader,
       },
       {
         path: "upis",
