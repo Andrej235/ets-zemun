@@ -1,7 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./lazy-loaded-list.scss";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Endpoints } from "@shared/api-dsl/types/endpoints/endpoints";
+import { useScroll } from "motion/react";
 
 type LazyLoadResponse<T> = {
   items: T[];
@@ -16,11 +24,13 @@ type EntityType<T extends LazyLoadResponse<unknown>> =
 type LazyLoadedListProps<T extends LazyLoadResponse<unknown>> = {
   readonly response: T;
   readonly children: (loaded: EntityType<T>) => React.ReactNode;
+  readonly loadMoreOn?: `${number}%`;
 };
 
 export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
   response: initialResponse,
   children,
+  loadMoreOn = "85%",
 }: LazyLoadedListProps<T>) {
   const markerRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +70,6 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
       newResponseContent.items
     );
     setCurrentResponse(newResponseContent);
-    console.log(newResponse);
 
     sentCursor.current = null;
     return newResponse;
@@ -93,11 +102,33 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
     };
   }, [markerRef, loadMore]);
 
+  const { scrollY } = useScroll();
+  useLayoutEffect(() => {
+    document.scrollingElement!.scrollTop = scrollY.get();
+  });
+
+  const marker = useMemo(
+    () => (
+      <div
+        className="lazy-loading-marker"
+        ref={markerRef}
+        style={{
+          top: loadMoreOn,
+        }}
+      />
+    ),
+    [loadMoreOn]
+  );
+
+  const memoizedChildren = useMemo(
+    () => (currentResponse.items as EntityType<T>[]).map(children),
+    [children, currentResponse.items]
+  );
+
   return (
     <>
-      <div className="lazy-loading-marker" ref={markerRef} />
-
-      {(currentResponse.items as EntityType<T>[]).map(children)}
+      {marker}
+      {memoizedChildren}
     </>
   );
 }
