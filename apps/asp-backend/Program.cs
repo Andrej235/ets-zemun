@@ -59,7 +59,10 @@ builder
     .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SupportNonNullableReferenceTypes();
+});
 builder.Services.AddControllers();
 builder.Services.AddHybridCache();
 
