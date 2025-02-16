@@ -3,6 +3,7 @@ import Async from "@better-router/async";
 import useLoader from "@better-router/use-loader";
 import teacherLoader from "@components/teachers/teachers-loader";
 import TeacherCard from "./teacher-card";
+import LazyLoadedList from "@components/lazy-loaded-list/lazy-loaded-list";
 
 export default function Teachers() {
   const loaderData = useLoader<typeof teacherLoader>();
@@ -16,9 +17,11 @@ export default function Teachers() {
           {(teachers) => {
             if (teachers.code !== "OK") return null;
 
-            return teachers.content.items.map((x) => (
-              <TeacherCard key={x.id} teacher={x} />
-            ));
+            return (
+              <LazyLoadedList response={teachers.content}>
+                {(x) => <TeacherCard key={x.id} teacher={x} />}
+              </LazyLoadedList>
+            );
           }}
         </Async>
       </div>
