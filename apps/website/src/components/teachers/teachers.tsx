@@ -11,7 +11,7 @@ export default function Teachers() {
       <h1>Nastavnici</h1>
 
       <div className="teacher-cards-container">
-        <Async await={loaderData.test}>
+        <Async await={loaderData}>
           {(teachers) => {
             console.log(teachers);
 

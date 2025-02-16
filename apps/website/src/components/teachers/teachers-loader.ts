@@ -10,7 +10,7 @@ const teacherLoader = createLoader(() => {
         limit: 9,
       },
     }),
-    test: new Promise((r) => {
+    test: new Promise<number>((r) => {
       setTimeout(() => {
         r(1);
       }, 3000);
