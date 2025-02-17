@@ -1,11 +1,11 @@
-import { useMemo, useRef } from "react";
-import "./about.scss";
-import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
-import FluidCanvas from "../../fluid-canvas/fluid-canvas";
-import HeroInfoCard from "./hero-info-card";
-import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
+import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
+import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import FluidCanvas from "../../fluid-canvas/fluid-canvas";
+import "./about.scss";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
