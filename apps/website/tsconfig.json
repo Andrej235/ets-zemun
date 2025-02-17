@@ -34,7 +34,8 @@
       "@assets/*": ["src/assets/*"],
       "@data/*": ["src/assets/json-data/data/*"],
       "@utility/*": ["src/utility/*"],
-      "@better-router/*": ["src/better-router/*"]
+      "@better-router/*": ["src/better-router/*"],
+      "@i18n": ["src/i18n"]
     }
   },
   "include": ["src", "../shared-frontend"],
