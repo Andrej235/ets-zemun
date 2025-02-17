@@ -405,6 +405,63 @@
             ]
           }
         ]
+      },
+      "parentParliament": {
+        "title": "Savet roditelja",
+        "headers": ["Razred", "Roditelj"],
+        "data": [
+          {
+            "grade": "PRVI RAZRED",
+            "classes": [
+              { "className": "I1", "parent": "Ćosović Dragana" },
+              { "className": "I2", "parent": "Dalibor Samardžić" },
+              { "className": "I3", "parent": "Bajkić Dušan" },
+              { "className": "I4", "parent": "Zoran Branković" },
+              { "className": "I5", "parent": "Vladimir Rašović" },
+              { "className": "I6", "parent": "Vesna Vuković" },
+              { "className": "I7", "parent": "Neda Milanović" },
+              { "className": "I8", "parent": "Stefanović Zlatko" }
+            ]
+          },
+          {
+            "grade": "DRUGI RAZRED",
+            "classes": [
+              { "className": "II1", "parent": "Marunić Zorica" },
+              { "className": "II2", "parent": "Siniša Bazina" },
+              { "className": "II3", "parent": "Goran Radović" },
+              { "className": "II4", "parent": "Dejan Dragović" },
+              { "className": "II5", "parent": "Olja Lazarac" },
+              { "className": "II6", "parent": "Goran Živanović" },
+              { "className": "II7", "parent": "Mitrović Aleksandar" },
+              { "className": "II8", "parent": "Blagojević Dragi" }
+            ]
+          },
+          {
+            "grade": "TREĆI RAZRED",
+            "classes": [
+              { "className": "III1", "parent": "Bekrić Ljubica" },
+              { "className": "III2", "parent": "Milena Lužija" },
+              { "className": "III3", "parent": "Tatjana Ivanović" },
+              { "className": "III4", "parent": "Dinić Nenad" },
+              { "className": "III5", "parent": "Branko Ivošević" },
+              { "className": "III6", "parent": "Bajunović Ivana" },
+              { "className": "III7", "parent": "Jasmina Manigodić" },
+              { "className": "III8", "parent": "Spasić Dragan" }
+            ]
+          },
+          {
+            "grade": "ČETVRTI RAZRED",
+            "classes": [
+              { "className": "IV1", "parent": "Mihajlović Aleksandar" },
+              { "className": "IV2", "parent": "Jeina Mirjana" },
+              { "className": "IV3", "parent": "Dimitrijević Ljiljana" },
+              { "className": "IV4", "parent": "Galić Biljana" },
+              { "className": "IV5", "parent": "Andreja Crnogorac" },
+              { "className": "IV6", "parent": "Andrijana Perić Đurđević" },
+              { "className": "IV7", "parent": "Stuparušić Marija" }
+            ]
+          }
+        ]
       }
     }
   }

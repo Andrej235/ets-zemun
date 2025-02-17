@@ -247,6 +247,229 @@
       "title": "We couldn't find the page you were looking for.",
       "buttons": ["Home Page", "Previous Page"]
     }
+  },
+  "students": {
+    "hero": {
+      "title": "All information for students",
+      "tagLine": "Find all the information and resources for your success.",
+      "cards": [
+        "Student Parliament",
+        "Parent Council",
+        "Part Time Students",
+        "PP Service",
+        "Bullying",
+        "Mental Health"
+      ]
+    },
+    "sections": {
+      "studentsParliament": {
+        "title": "Student Parliament",
+        "headers": ["Grade", "Student 1", "Student 2"],
+        "data": [
+          {
+            "grade": "FIRST GRADE",
+            "classes": [
+              {
+                "className": "1/1",
+                "students": ["Miloš Subotić", "Ognjen Čodanović"]
+              },
+              {
+                "className": "1/2",
+                "students": ["Jovana Đerić", "Lazar Lotina"]
+              },
+              {
+                "className": "1/3",
+                "students": ["Ognjen Žižović", "Ognjen Tairovski"]
+              },
+              {
+                "className": "1/4",
+                "students": [
+                  "Anastasija Stanojković",
+                  "Vitomir Vlada Mihajlović"
+                ]
+              },
+              {
+                "className": "1/5",
+                "students": ["Aleksandra Jovičić", "Milica Popović"]
+              },
+              {
+                "className": "1/6",
+                "students": ["Luka Jeremić", "Stefan Marković"]
+              },
+              {
+                "className": "1/7",
+                "students": ["Mateja Janković", "Filip Milutinović"]
+              },
+              { "className": "1/8", "students": ["Davor Aliti", "Uroš Perić"] }
+            ]
+          },
+          {
+            "grade": "SECOND GRADE",
+            "classes": [
+              {
+                "className": "2/1",
+                "students": ["Anđela Cvejtić", "Ana Simonović"]
+              },
+              {
+                "className": "2/2",
+                "students": ["Aleksandra Ćuksanovski", "Filip Kovačević"]
+              },
+              {
+                "className": "2/3",
+                "students": ["Novak Sekulić", "Vuk Spasić"]
+              },
+              {
+                "className": "2/4",
+                "students": ["Vukašin Prokić", "Marko Karaica"]
+              },
+              {
+                "className": "2/5",
+                "students": ["Branko Dinić", "Aleksa Andželić"]
+              },
+              {
+                "className": "2/6",
+                "students": ["Jelena Simić", "Jovan Čolić"]
+              },
+              {
+                "className": "2/7",
+                "students": ["Andrijana Đureković", "Mirko Čikara"]
+              },
+              {
+                "className": "2/8",
+                "students": ["Stefan Ivanović", "Zoran Stefanović"]
+              }
+            ]
+          },
+          {
+            "grade": "THIRD GRADE",
+            "classes": [
+              {
+                "className": "3/1",
+                "students": ["Olivera Glišić", "Tamara Žujić"]
+              },
+              {
+                "className": "3/2",
+                "students": ["Nikola Arsić", "Lazar Živanović"]
+              },
+              {
+                "className": "3/3",
+                "students": ["Mateja Marković", "Veljko Živanović"]
+              },
+              {
+                "className": "3/4",
+                "students": ["Milica Ćetković", "Teodora Džekić"]
+              },
+              {
+                "className": "3/5",
+                "students": ["Lazar Puzović", "Andrej Lukić"]
+              },
+              {
+                "className": "3/6",
+                "students": ["Viktor Bogdanović Abazi", "Nikola Radosavljević"]
+              },
+              {
+                "className": "3/7",
+                "students": ["Sava Lukić", "David Somonji"]
+              },
+              {
+                "className": "3/8",
+                "students": ["Strahinja Jovanović", "Vanja Stanić"]
+              }
+            ]
+          },
+          {
+            "grade": "FOURTH GRADE",
+            "classes": [
+              {
+                "className": "4/1",
+                "students": ["Uroš Nikolić", "Nikola Štrk"]
+              },
+              {
+                "className": "4/2",
+                "students": ["Jovan Bogdanović", "Ivana Jeina"]
+              },
+              {
+                "className": "4/3",
+                "students": ["Anđela Dimitrijević", "Nikolija Sofornijević"]
+              },
+              {
+                "className": "4/4",
+                "students": ["Teodora Malešić", "David Mihajlica"]
+              },
+              {
+                "className": "4/5",
+                "students": ["Uroš Mićunović", "Aleksa Ob teković"]
+              },
+              {
+                "className": "4/6",
+                "students": ["Veljki Grujičić", "Aleksandar Milošević"]
+              },
+              {
+                "className": "4/7",
+                "students": ["Mateja Đukić", "Nina Ristić"]
+              }
+            ]
+          }
+        ]
+      },
+      "parentParliament": {
+        "title": "Parent Council",
+        "headers": ["Grade", "Parent"],
+        "data": [
+          {
+            "grade": "FIRST GRADE",
+            "classes": [
+              { "className": "I1", "parent": "Ćosović Dragana" },
+              { "className": "I2", "parent": "Dalibor Samardžić" },
+              { "className": "I3", "parent": "Bajkić Dušan" },
+              { "className": "I4", "parent": "Zoran Branković" },
+              { "className": "I5", "parent": "Vladimir Rašović" },
+              { "className": "I6", "parent": "Vesna Vuković" },
+              { "className": "I7", "parent": "Neda Milanović" },
+              { "className": "I8", "parent": "Stefanović Zlatko" }
+            ]
+          },
+          {
+            "grade": "SECOND GRADE",
+            "classes": [
+              { "className": "II1", "parent": "Marunić Zorica" },
+              { "className": "II2", "parent": "Siniša Bazina" },
+              { "className": "II3", "parent": "Goran Radović" },
+              { "className": "II4", "parent": "Dejan Dragović" },
+              { "className": "II5", "parent": "Olja Lazarac" },
+              { "className": "II6", "parent": "Goran Živanović" },
+              { "className": "II7", "parent": "Mitrović Aleksandar" },
+              { "className": "II8", "parent": "Blagojević Dragi" }
+            ]
+          },
+          {
+            "grade": "THIRD GRADE",
+            "classes": [
+              { "className": "III1", "parent": "Bekrić Ljubica" },
+              { "className": "III2", "parent": "Milena Lužija" },
+              { "className": "III3", "parent": "Tatjana Ivanović" },
+              { "className": "III4", "parent": "Dinić Nenad" },
+              { "className": "III5", "parent": "Branko Ivošević" },
+              { "className": "III6", "parent": "Bajunović Ivana" },
+              { "className": "III7", "parent": "Jasmina Manigodić" },
+              { "className": "III8", "parent": "Spasić Dragan" }
+            ]
+          },
+          {
+            "grade": "FOURTH GRADE",
+            "classes": [
+              { "className": "IV1", "parent": "Mihajlović Aleksandar" },
+              { "className": "IV2", "parent": "Jeina Mirjana" },
+              { "className": "IV3", "parent": "Dimitrijević Ljiljana" },
+              { "className": "IV4", "parent": "Galić Biljana" },
+              { "className": "IV5", "parent": "Andreja Crnogorac" },
+              { "className": "IV6", "parent": "Andrijana Perić Đurđević" },
+              { "className": "IV7", "parent": "Stuparušić Marija" }
+            ]
+          }
+        ]
+      }
+    }
   }
 }
 
