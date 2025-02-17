@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "l") {
-        i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr");
+        i18n.changeLanguage(i18n.language === "sr_lt" ? "en" : "sr_lt");
       }
     }
 
