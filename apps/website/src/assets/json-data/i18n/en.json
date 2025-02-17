@@ -610,6 +610,63 @@
           "EXAM TIME",
           "CABINET"
         ]
+      },
+      "ppService": {
+        "title": "Psychological-Pedagogical (PP) Service",
+        "description": [
+          "Our PP team consists of school psychologists",
+          "Ivana Maćešić",
+          "and school pedagogues",
+          "Anđela Mijović.",
+          "Our task is to provide support and assistance to students, parents and teachers. We follow and guide the development of our students and provide help in recognizing problems and finding solutions."
+        ],
+        "reachOut": "Here are some situations in which you can contact us:",
+        "reachOutList": [
+          [
+            "Learning difficulties",
+            "and school obligations (difficulties in mastering the material, fear of answering or negative grades, lack of motivation for learning, planning and organizing school obligations)"
+          ],
+          [
+            "Emotional problems",
+            "(stress, anxiety and similar, psychological pressure due to family or personal problems, difficulties in controlling emotions - sadness, anger, frustration ..., problems with self-esteem or self-confidence)"
+          ],
+          [
+            "Interpersonal relationships",
+            "(problems with peers - bullying, misunderstanding, conflicts and the like, isolation or feeling of loneliness, difficulties in making and maintaining friendships, conflicts with teachers or other school staff)"
+          ],
+          [
+            "Self-discipline and behavior problems",
+            "(aggressive behavior, violating school rules, setting boundaries and resolving conflicts)"
+          ],
+          [
+            "Transition periods and important life changes",
+            "(transition to a new class, school or city, adapting to a new environment or people, change in the family - divorce, death of a loved one, personal problems that affect concentration and school success)"
+          ],
+          [
+            "Career guidance and future planning",
+            "(decisions on further professional development, researching the labor market, career planning, help in recognizing personal strengths and talents)"
+          ],
+          [
+            "Psychological support in crisis situations",
+            "(memories of traumatic events, coping with significant life challenges and changes)"
+          ],
+          [
+            "Talks about healthy lifestyles, coping with stress and stressful situations"
+          ],
+          ["Help in preventing addiction and other risky behaviors"]
+        ],
+        "moreInfo": "We strive to jointly understand every situation and help you find solutions. We build a relationship of trust, acceptance and encouragement. We listen, talk and encourage - without blaming, labeling, belittling or moralizing. If a problem exceeds our competence, we will refer you to someone who can provide further support. You can schedule a talk with a psychologist or pedagogue through the class teacher or on your own.",
+        "helpOutsideOfSchool": {
+          "title": "HELP OUTSIDE OF SCHOOL",
+          "options": [
+            "Youth Counseling Center, Health Center Zemun, Toplička 8, savetovaliste.za.mlade@dzzemun.org.rs 011/2616-288",
+            "NADEL (National Children's Helpline) number 116111 or contact them through the website www.116111.rs where you can anonymously write to mental health professionals.",
+            "Institute for Mental Health: phone numbers 063/868 1757 and 063/868 2217",
+            "UKCS Psychiatric Clinic: Support Team 066/8300854, 011/3662 124, 063/310 723",
+            "Online support from the Psychological Society www.dps.org.rs",
+            "Schedule an online counseling session or find information about other types of support on the website svejeok.rs/mladi/podrska"
+          ]
+        }
       }
     }
   }
