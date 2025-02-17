@@ -7,12 +7,15 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
+import { useTranslation } from "react-i18next";
 
 export default function Students() {
-  const [activeSection, setActiveSection] = useState<string>("ucenicki-parlament");
+  const [activeSection, setActiveSection] =
+    useState<string>("ucenicki-parlament");
+  const { t } = useTranslation();
 
   const handleCardClick = (sectionName: string) => {
-      setActiveSection(sectionName);
+    setActiveSection(sectionName);
   };
 
   return (
@@ -20,8 +23,8 @@ export default function Students() {
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
-            <h1>Sve informacije za ucenike</h1>
-            <h2>Pronađite sve informacije i resurse za vaš uspeh.</h2>
+            <h1>{t("students.hero.title")}</h1>
+            <h2>{t("students.hero.tagLine")}</h2>
           </div>
 
           <img src="/hero-image.jpg" alt="student" />
@@ -31,42 +34,42 @@ export default function Students() {
           <div className="hero-cards">
             <HeroInfoCard
               icon="graduation-cap"
-              title="Ucenicki parlament"
+              title={t("students.hero.cards.0")}
               onClick={handleCardClick}
               sectionName="ucenicki-parlament"
               isActive={activeSection === "ucenicki-parlament"}
             />
             <HeroInfoCard
               icon="people-roof"
-              title="Savet roditelja"
+              title={t("students.hero.cards.1")}
               onClick={handleCardClick}
               sectionName="savet-roditelja"
               isActive={activeSection === "savet-roditelja"}
             />
             <HeroInfoCard
               icon="house-user"
-              title="Vanredni učenici"
+              title={t("students.hero.cards.2")}
               onClick={handleCardClick}
               sectionName="vanredni-ucenici"
               isActive={activeSection === "vanredni-ucenici"}
             />
             <HeroInfoCard
               icon="pied-piper-pp"
-              title="PP služba"
+              title={t("students.hero.cards.3")}
               onClick={handleCardClick}
               sectionName="pp-sluzba"
               isActive={activeSection === "pp-sluzba"}
             />
             <HeroInfoCard
               icon="face-angry"
-              title="Nasilje"
+              title={t("students.hero.cards.4")}
               onClick={handleCardClick}
               sectionName="nasilje"
               isActive={activeSection === "nasilje"}
             />
             <HeroInfoCard
               icon="brain"
-              title="Mentalno Zdravlje"
+              title={t("students.hero.cards.5")}
               onClick={handleCardClick}
               sectionName="mentalno-zdravlje"
               isActive={activeSection === "mentalno-zdravlje"}
@@ -76,8 +79,12 @@ export default function Students() {
       </section>
 
       <div className="content-container">
-        {activeSection === "ucenicki-parlament" && <StudentsPageStudentParliament />}
-        {activeSection === "savet-roditelja" && <StudentsPageParentParliament />}
+        {activeSection === "ucenicki-parlament" && (
+          <StudentsPageStudentParliament />
+        )}
+        {activeSection === "savet-roditelja" && (
+          <StudentsPageParentParliament />
+        )}
         {activeSection === "vanredni-ucenici" && <StudentsPagePartTime />}
         {activeSection === "pp-sluzba" && <StudentsPagePPService />}
         {activeSection === "nasilje" && <StudentsPageAntiBullying />}

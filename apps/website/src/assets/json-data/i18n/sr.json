@@ -241,6 +241,20 @@
       "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
       "buttons": ["Početna strana", "Prošla strana"]
     }
+  },
+  "students": {
+    "hero": {
+      "title": "Sve informacije za ucenike",
+      "tagLine": "Pronađite sve informacije i resurse za vaš uspeh.",
+      "cards": [
+        "Ucenicki parlament",
+        "Savet roditelja",
+        "Vanredni učenici",
+        "PP služba",
+        "Nasilje",
+        "Mentalno Zdravlje"
+      ]
+    }
   }
 }
 
