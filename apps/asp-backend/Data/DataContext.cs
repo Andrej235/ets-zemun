@@ -62,13 +62,22 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<EducationalProfileGeneralSubject>(generalSubject =>
             {
-                generalSubject.HasKey(g => new { g.EducationalProfileId, g.SubjectId });
+                generalSubject.HasKey(g => new
+                {
+                    g.EducationalProfileId,
+                    g.SubjectId,
+                    g.Year,
+                });
 
                 generalSubject
                     .HasOne(g => g.Subject)
                     .WithMany()
                     .HasForeignKey(g => g.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                generalSubject.HasIndex(g => new { g.Year, g.EducationalProfileId });
+
+                generalSubject.HasIndex(g => g.Year);
             });
 
             modelBuilder.Entity<EducationalProfileVocationalSubject>(vocationalSubject =>
@@ -182,6 +191,10 @@ namespace EtsZemun.Data
                     .WithMany()
                     .HasForeignKey(t => t.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                teacherSubject.HasIndex(t => t.TeacherId);
+
+                teacherSubject.HasIndex(t => t.SubjectId);
             });
 
             modelBuilder.Entity<TeacherTranslation>(teacherTranslation =>
