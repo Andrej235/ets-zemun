@@ -1,9 +1,8 @@
 import "./teachers.scss";
-import Async from "@better-router/async";
 import useLoader from "@better-router/use-loader";
 import teacherLoader from "@components/teachers/teachers-loader";
+import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
 import TeacherCard from "./teacher-card";
-import LazyLoadedList from "@components/lazy-loaded-list/lazy-loaded-list";
 
 export default function Teachers() {
   const loaderData = useLoader<typeof teacherLoader>();
@@ -13,17 +12,11 @@ export default function Teachers() {
       <h1>Nastavnici</h1>
 
       <div className="teacher-cards-container">
-        <Async await={loaderData}>
-          {(teachers) => {
-            if (teachers.code !== "OK") return null;
-
-            return (
-              <LazyLoadedList response={teachers.content}>
-                {(x) => <TeacherCard key={x.id} teacher={x} />}
-              </LazyLoadedList>
-            );
+        <LazyAwaitedList data={loaderData} success="OK">
+          {(data) => {
+            return <TeacherCard teacher={data} key={data.id} />;
           }}
-        </Async>
+        </LazyAwaitedList>
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 .lazy-loading-marker {
   position: absolute;
+
+  width: 5rem;
+  height: 5rem;
+  background-color: #fff;
 }
 
 *:has(.lazy-loading-marker) {
