@@ -12,29 +12,13 @@ type ParentData = {
 export default function StudentsPageParentParliament() {
   const { t } = useTranslation();
 
-  const parentData: ParentData = useMemo(() => {
-    const data: ParentData = [];
-
-    for (let i = 0; i < 4; i++) {
-      const base = `students.sections.parentParliament.data.${i}`;
-
-      const classes: ParentData[number]["classes"] = [];
-
-      for (let j = 0; j < (i !== 3 ? 8 : 7); j++) {
-        classes.push({
-          className: t(base + `.classes.${j}.className`),
-          parent: t(base + `.classes.${j}.parent`),
-        });
-      }
-
-      data.push({
-        grade: t(base + ".grade"),
-        classes: classes,
-      });
-    }
-
-    return data;
-  }, [t]);
+  const parentData: ParentData = useMemo(
+    () =>
+      t("students.sections.parentParliament.data", {
+        returnObjects: true,
+      }) as ParentData,
+    [t]
+  );
 
   return (
     <div className="parliament-container">

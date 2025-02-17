@@ -12,32 +12,13 @@ type StudentsData = {
 export default function StudentsPageStudentParliament() {
   const { t } = useTranslation();
 
-  const studentsData: StudentsData = useMemo(() => {
-    const data: StudentsData = [];
-
-    for (let i = 0; i < 4; i++) {
-      const base = `students.sections.studentsParliament.data.${i}`;
-
-      const classes: StudentsData[number]["classes"] = [];
-
-      for (let j = 0; j < (i !== 3 ? 8 : 7); j++) {
-        classes.push({
-          className: t(base + `.classes.${j}.className`),
-          students: [
-            t(base + `.classes.${j}.students.0`),
-            t(base + `.classes.${j}.students.1`),
-          ],
-        });
-      }
-
-      data.push({
-        grade: t(base + ".grade"),
-        classes: classes,
-      });
-    }
-
-    return data;
-  }, [t]);
+  const studentsData: StudentsData = useMemo(
+    () =>
+      t("students.sections.studentsParliament.data", {
+        returnObjects: true,
+      }) as StudentsData,
+    [t]
+  );
 
   return (
     <div className="parliament-container">
