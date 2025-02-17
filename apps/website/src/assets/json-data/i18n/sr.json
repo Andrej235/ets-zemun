@@ -669,6 +669,53 @@
             "Zakazati onlajn savetovanje ili pronaći informacije o drugom vidu podrške na stranici svejeok.rs/mladi/podrska"
           ]
         }
+      },
+      "bullying": {
+        "title": "Nasilje",
+        "description": [
+          "Ukoliko ti trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi ga odeljenskom starešini, PP službi ili Timu za zaštitu učenika i, naravno, svojim roditeljima.",
+          "U našoj školi postoji Tim za zaštitu učenika od diskriminacije, nasilja, zlostavljanja, zanemarivanja. Od nastavnika koji čine ovaj Tim u svakom trenutku u školi možete dobiti savet i uput šta da uradite ukoliko trpite nasilje ili ste svedok nasilja.",
+          "Prijava nasilja PDF"
+        ],
+        "sos": {
+          "title": "SOS telefoni",
+          "data": [
+            "Prijava digitalnog nasilja – Nacionalni kontakt centar za bezbednost dece na internetu – 19833",
+            "Nacionalna SOS linija za prevenciju suicida – 011 7777 000",
+            "Prijava nasilja u porodici – 0800 100 600",
+            "Nacionalna dečija linija Srbije NADEL – 116111",
+            "SOS telefonska linija za psihosocijalnu podršku – 0800-200-201",
+            "Centar za zaštitu žrtava trgovine ljudima – broj telefona: +381 63 610 590."
+          ]
+        },
+        "antiBullying": {
+          "title": "Šta je to školsko nasilje",
+          "data": [
+            "Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se namerno nanese šteta drugome. Međutim, nasilje se može dešavati i izvan škole a da se i dalje smatra školskim. Ono se može dešavati u školskom dvorištu nakon nastave ili na putu od kuće do škole, ali i onlajn, preko društvenih mreža na kojima su deca iz istih ili različitih škola međusobno povezana.",
+            "Najčešći oblici nasilja u školama su verbalno nasilje (psovanje, ismevanje, ogovaranje, pretnje), društveno isključivanje (vršenje pritiska na vršnjake da se ne druže i ne komuniciraju sa nekim konkretnim detetom iz škole), ali i fizičko nasilje (udaranja, tuče) i seksualno nasilje (davanje lascivnih nadimaka, nedozvoljena dodirivanja između vršnjaka, nedozvoljeno deljenje fotografija sa društvenih mreža i njihovo komentarisanje u seksualnom smislu). Nažalost, izloženost nasilju ne prestaje odlaskom iz škole, već se nastavlja i onlajn – digitalno nasilje.",
+            "U školi nasilje učenici mogu da trpe i od svojih vršnjaka i od nastavnika, kao što i učenici mogu da vrše nasilje i nad vršnjacima i nad nastavnicima (najčešće su u pitanju provokacije i vređanja od strane učenika, ali ima i pretnji, pa i fizičkih napada na nastavnike).",
+            "Osnov za vršenje nasilja počinioci nasilja najčešće vide u materijalnom i intelektualnom statusu, u nacionalnoj i seksualnoj pripadnosti žrtve – dakle u osnovi nasilja je skoro uvek diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)"
+          ]
+        },
+        "platforms": {
+          "title": "Platforme",
+          "data": [
+            "Nacionalni kontakt centar za bezbednost dece na internetu",
+            "Nacionalna platforma za prevenciju nasilja koje uključuje decu",
+            "Čuvam te Platforma"
+          ]
+        },
+        "support": {
+          "title": "PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA",
+          "data": [
+            "Kako se suočiti sa događajem u kojem je više osoba povređeno ili ubijeno",
+            "Kako pomoći deci da se vrate u školu nakon tragičnog događaja",
+            "Kako brinuti o sebi tokom kriznih situacija",
+            "Delotvorna komunikacija sa decom tokom kriznih situacija",
+            "Razgovor sa decom o terorističkim napadima i pucnjavi u školama i zajednici o kojima se izveštava u vestima",
+            "Uobičajeni znakovi psihosocijalnog distresa dece"
+          ]
+        }
       }
     }
   }

@@ -667,6 +667,52 @@
             "Schedule an online counseling session or find information about other types of support on the website svejeok.rs/mladi/podrska"
           ]
         }
+      },
+      "bullying": {
+        "title": "Bullying",
+        "description": [
+          "If you are a victim of bullying or someone from your environment, report it to the class teacher, PP service or the Student Protection Team and, of course, your parents.",
+          "In our school there is a Student Protection Team that provides support to students who are victims of bullying, discrimination, harassment, and neglect. From the teachers who are part of this Team, you can get advice and guidance on what to do if you are a victim of bullying or a witness to bullying.",
+          "Reporting bullying PDF"
+        ],
+        "sos": {
+          "title": "SOS phones",
+          "data": [
+            "Reporting digital bullying - National Contact Center for Children's Safety on the Internet - 19833",
+            "National SOS line for preventing suicide - 011 7777 000",
+            "Reporting violence in the family - 0800 100 600",
+            "National Children's Helpline NADEL - 116111",
+            "SOS phone line for psycho-social support - 0800-200-201",
+            "Center for Protection of Human Trafficking Victims - phone number: +381 63 610 590."
+          ]
+        },
+        "antiBullying": {
+          "title": "What is school bullying",
+          "data": [
+            "School bullying is violence that occurs in school, with the aim of causing harm to another person. However, bullying can also occur outside of school, but it is still considered school bullying. It can happen in the schoolyard after classes or on the way home from school, as well as online, through social media where children from the same or different schools are connected.",
+            "The most common forms of bullying in schools are verbal bullying (insulting, mocking, threatening), social exclusion (exclusion from social activities or communication with a particular child), and physical bullying (hitting, fighting). Unfortunately, exposure to bullying does not end after leaving school, but continues online - digital bullying.",
+            "In school, bullying can be committed by students against their peers, as well as by teachers against students. The perpetrators of bullying usually see the victim's material and intellectual status, national and sexual identity as the basis for bullying - i.e. discrimination. (text taken from the website of the organization 'I protect you')"
+          ]
+        },
+        "platforms": {
+          "title": "Platforms",
+          "data": [
+            "National Contact Center for Children's Safety on the Internet",
+            "National Platform for Preventing Violence Against Children",
+            "\"Čuvam te\" (I Protect You) Platform"
+          ]
+        },
+        "support": {
+          "title": "SUPPORT FOR SCHOOLS IN CRISIS INTERVENTIONS",
+          "data": [
+            "How to deal with an event in which multiple people are injured or killed",
+            "How to help children return to school after a tragic event",
+            "How to take care of yourself during crisis situations",
+            "Effective communication with children during crisis situations",
+            "Talking to children about terrorist attacks and school shootings in the news",
+            "Common signs of psychosocial distress in children"
+          ]
+        }
       }
     }
   }
