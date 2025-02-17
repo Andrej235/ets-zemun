@@ -468,6 +468,148 @@
             ]
           }
         ]
+      },
+      "partTime": {
+        "title": "Part-time students",
+        "deadlines": [
+          {
+            "term": "OCTOBER",
+            "registration": "09-27.09.2024.",
+            "exam": "07-31.10.2024."
+          },
+          {
+            "term": "DECEMBER",
+            "registration": "04-22.11.2024.",
+            "exam": "02-27.12.2024."
+          },
+          {
+            "term": "MARCH",
+            "registration": "03-21.02.2025.",
+            "exam": "03-28.03.2025."
+          },
+          {
+            "term": "MAY",
+            "registration": "01-25.04.2025.",
+            "exam": "12-30.05.2025."
+          },
+          {
+            "term": "AUGUST",
+            "registration": "02-20.06.2025.",
+            "exam": "18-29.08.2025."
+          }
+        ],
+        "priceList": [
+          { "itemName": "REGISTRATION FEE", "itemPrice": "7.500,00 din." },
+          { "itemName": "RENEWAL FEE", "itemPrice": "1.500,00 din." },
+          { "itemName": "EXAM FEE", "itemPrice": "1.000,00 din." },
+          { "itemName": "PRACTICAL EXAM FEE", "itemPrice": "1.000,00 din." },
+          { "itemName": "FINAL EXAM FEE", "itemPrice": "2.500,00 din." },
+          { "itemName": "MATURSKY EXAM FEE", "itemPrice": "3.000,00 din." }
+        ],
+        "examData": [
+          {
+            "subject": "SERBIAN LANGUAGE - MATURSKY",
+            "commission": [
+              "Srđan Gagić",
+              "Nada Đurić",
+              "Marina Ristanović",
+              "Vurdelja Dejan",
+              "Radmila Vidović"
+            ],
+            "date": "Tuesday, 28.01.2025.",
+            "time": "14.45, 10.30",
+            "cabinet": "17 ili 18"
+          },
+          {
+            "subject": "PROFESSIONAL THEORY EXAM (ARM, IT, ER)",
+            "commission": ["Bogdan Luković", "Anđela Pavlović"],
+            "date": "Wednesday, 29.01.2025.",
+            "time": "10.00",
+            "cabinet": "14"
+          },
+          {
+            "subject": "PROFESSIONAL THEORY EXAM (ARM, IT, ER)",
+            "commission": ["Slavica Per", "Relja Ćurčin", "Vesna Janjić"],
+            "date": "Wednesday, 29.01.2025.",
+            "time": "15.35",
+            "cabinet": "14"
+          },
+          {
+            "subject": "PRACTICAL EXAM - ARM - A",
+            "commission": ["Slavica Per", "Saša Stošić"],
+            "date": "Thursday, 30.01.2025.",
+            "time": "11.15",
+            "cabinet": "44"
+          },
+          {
+            "subject": "PRACTICAL EXAM - ARM - B",
+            "commission": ["Slavica Per", "Saša Stošić"],
+            "date": "Friday, 31.01.2025.",
+            "time": "13.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRACTICAL EXAM - ER - A",
+            "commission": ["Radovan Đurić", "Saviša Nikolić"],
+            "date": "Thursday, 30.01.2025.",
+            "time": "14.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRACTICAL EXAM - ER - B",
+            "commission": ["Radovan Đurić", "Slaviša Nikolić"],
+            "date": "Friday, 31.01.2025.",
+            "time": "14.45",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRACTICAL EXAM - IT - A",
+            "commission": ["Galina Bojović", "Relja Ćurčin"],
+            "date": "Thursday, 30.01.2025.",
+            "time": "11.25",
+            "cabinet": "50"
+          },
+          {
+            "subject": "PRACTICAL EXAM - IT - B",
+            "commission": ["Galina Bojović", "Relja Ćurčin"],
+            "date": "Friday, 31.01.2025.",
+            "time": "12.10",
+            "cabinet": "50"
+          },
+          {
+            "subject": "SERVICE OF THERMAL AND REFRIGERATION EQUIPMENT",
+            "commission": ["Branko Lončar", "Mavrak Milenko"],
+            "date": "31.01.2025.",
+            "time": "14.00",
+            "cabinet": "73"
+          },
+          {
+            "subject": "MATURSKY EXAM (ELECTRICITY)",
+            "commission": [
+              "Cvija Jelenković",
+              "Vesna Janjić",
+              "Branislav Siljković"
+            ],
+            "date": "30.01.2025., 31.01.2025.",
+            "time": "13.00, 14.00",
+            "cabinet": "40"
+          }
+        ],
+        "paymentMethod": {
+          "title": "INVOICE FOR PART-TIME STUDENTS",
+          "description": ["OBLIGATORY:", "INVOICE NUMBER:"]
+        },
+        "deadlinesCaption": "DEADLINES FOR PART-TIME STUDENTS IN THE 2024/2025 SCHOOL YEAR",
+        "deadlinesHeaders": ["DEADLINES", "EXAM PERIOD", "REGISTRATION"],
+        "priceListTitle": "PRICE LIST FOR PART-TIME STUDENTS IN THE 2024/2025 SCHOOL YEAR",
+        "examDataCaption": "FINAL EXAM FOR PART-TIME STUDENTS IN THE DECEMBER/JANUARY PERIOD",
+        "examDataHeaders": [
+          "SUBJECT",
+          "COMMISSION",
+          "EXAM DATE",
+          "EXAM TIME",
+          "CABINET"
+        ]
       }
     }
   }
