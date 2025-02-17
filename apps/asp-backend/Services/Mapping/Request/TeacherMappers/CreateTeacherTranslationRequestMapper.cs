@@ -10,7 +10,7 @@ public class CreateTeacherTranslationRequestMapper
         new()
         {
             TeacherId = request.TeacherId,
-            LanguageId = request.LanguageId,
+            LanguageCode = request.LanguageCode,
             Name = request.Name,
             Bio = request.Bio,
             Title = request.Title,

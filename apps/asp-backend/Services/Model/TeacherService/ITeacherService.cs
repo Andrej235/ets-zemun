@@ -11,18 +11,18 @@ public interface ITeacherService
     Task<Result> CreateTranslation(CreateTeacherTranslationRequestDto request);
 
     Task<Result<LazyLoadResponse<TeacherResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit,
         int? subjectId
     );
-    Task<Result<TeacherResponseDto>> GetSingle(int id, int languageId);
+    Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> Update(UpdateTeacherRequestDto request);
     Task<Result> UpdateTranslation(UpdateTeacherTranslationRequestDto request);
 
     Task<Result> Delete(int id);
-    Task<Result> DeleteTranslation(int teacherId, int languageId);
+    Task<Result> DeleteTranslation(int teacherId, string languageCode);
 
     Task<Result> AddSubject(AddSubjectsToTeacherRequestDto request);
     Task<Result> RemoveSubject(int teacherId, int subjectId);

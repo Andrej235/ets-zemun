@@ -58,7 +58,7 @@ public class SubjectService(
             new()
             {
                 SubjectId = newSubject.Value.Id,
-                LanguageId = request.LanguageId,
+                LanguageCode = request.LanguageCode,
                 Name = request.Name,
                 Description = request.Description,
             }
@@ -72,7 +72,7 @@ public class SubjectService(
 
     public async Task<Result> CreateTranslation(CreateSubjectTranslationRequestDto request)
     {
-        if (request.SubjectId < 1 || request.LanguageId < 1)
+        if (request.SubjectId < 1 || string.IsNullOrWhiteSpace(request.LanguageCode))
             return Result.Fail(new BadRequest("Invalid request"));
 
         var newTranslation = await createSingleTranslationService.Add(
@@ -93,19 +93,19 @@ public class SubjectService(
         return deleteService.Delete(x => x.Id == id);
     }
 
-    public Task<Result> DeleteTranslation(int subjectId, int languageId)
+    public Task<Result> DeleteTranslation(int subjectId, string languageCode)
     {
-        if (subjectId < 1 || languageId < 1)
+        if (subjectId < 1 || string.IsNullOrWhiteSpace(languageCode))
             return Task.FromResult(Result.Fail(new BadRequest("Invalid request")));
 
         return deleteTranslationService.Delete(x =>
-            x.SubjectId == subjectId && x.LanguageId == languageId
+            x.SubjectId == subjectId && x.LanguageCode == languageCode
         );
     }
 
-    public async Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(int languageId)
+    public async Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(string languageCode)
     {
-        if (languageId < 1)
+        if (string.IsNullOrWhiteSpace(languageCode))
             return Result.Fail<IEnumerable<SubjectResponseDto>>(new BadRequest("Invalid request"));
 
         var result = await readRangeService.Get(
@@ -115,13 +115,13 @@ public class SubjectService(
             q =>
                 q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
                     .ThenInclude(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teachers)
                     .ThenInclude(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
-                    .Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)
@@ -148,7 +148,7 @@ public class SubjectService(
             mapped.Teachers.NextCursor =
                 mapped.Teachers.LoadedCount < 5
                     ? null
-                    : $"teacher?languageId={languageId}&offset=5&limit=10&subjectId={subject.Id}";
+                    : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={subject.Id}";
 
             return mapped;
         });
@@ -156,9 +156,9 @@ public class SubjectService(
         return Result.Ok((await Task.WhenAll(mapped)).AsEnumerable());
     }
 
-    public async Task<Result<SubjectResponseDto>> GetSingle(int id, int languageId)
+    public async Task<Result<SubjectResponseDto>> GetSingle(int id, string languageCode)
     {
-        if (id < 1 || languageId < 1)
+        if (id < 1 || string.IsNullOrWhiteSpace(languageCode))
             return Result.Fail<SubjectResponseDto>(new BadRequest("Invalid request"));
 
         var result = await readSingleService.Get(
@@ -166,13 +166,13 @@ public class SubjectService(
             q =>
                 q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
                     .ThenInclude(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teachers)
                     .ThenInclude(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
-                    .Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)
@@ -197,18 +197,18 @@ public class SubjectService(
         mapped.Teachers.NextCursor =
             mapped.Teachers.LoadedCount < 5
                 ? null
-                : $"teacher?languageId={languageId}&offset=5&limit=10&subjectId={mapped.Id}";
+                : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={mapped.Id}";
 
         return Result.Ok(mapped);
     }
 
     public Task<Result> UpdateTranslation(UpdateSubjectTranslationRequestDto request)
     {
-        if (request.SubjectId < 1 || request.LanguageId < 1)
+        if (request.SubjectId < 1 || string.IsNullOrWhiteSpace(request.LanguageCode))
             return Task.FromResult(Result.Fail(new BadRequest("Invalid request")));
 
         return updateTranslationService.Update(
-            x => x.LanguageId == request.LanguageId && x.SubjectId == request.SubjectId,
+            x => x.LanguageCode == request.LanguageCode && x.SubjectId == request.SubjectId,
             x =>
                 x.SetProperty(x => x.Name, request.Name)
                     .SetProperty(x => x.Description, request.Description)

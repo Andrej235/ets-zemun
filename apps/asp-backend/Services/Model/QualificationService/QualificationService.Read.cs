@@ -8,7 +8,7 @@ namespace EtsZemun.Services.Model.QualificationService;
 public partial class QualificationService : IQualificationService
 {
     public async Task<Result<LazyLoadResponse<QualificationResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit,
         int? teacherId
@@ -19,7 +19,7 @@ public partial class QualificationService : IQualificationService
             offset,
             limit ?? 10,
             q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .OrderBy(x => x.Id)
         );
 
@@ -50,16 +50,16 @@ public partial class QualificationService : IQualificationService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"qualification?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
+                : $"qualification?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
 
         return Result.Ok(result);
     }
 
-    public async Task<Result<QualificationResponseDto>> GetSingle(int id, int languageId)
+    public async Task<Result<QualificationResponseDto>> GetSingle(int id, string languageCode)
     {
         var result = await readQualificationService.Get(
             x => x.Id == id,
-            q => q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+            q => q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)

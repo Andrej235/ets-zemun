@@ -40,12 +40,12 @@ public partial class LanguageController(ILanguageService languageService) : Cont
         return Ok(result.Value);
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{code:alpha}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(string code)
     {
-        var result = await languageService.Delete(id);
+        var result = await languageService.Delete(code);
 
         if (result.IsFailed)
             return NotFound();

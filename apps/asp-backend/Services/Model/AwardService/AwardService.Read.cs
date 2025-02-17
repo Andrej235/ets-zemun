@@ -8,7 +8,7 @@ namespace EtsZemun.Services.Model.AwardService;
 public partial class AwardService
 {
     public async Task<Result<LazyLoadResponse<AwardResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit
     )
@@ -18,15 +18,15 @@ public partial class AwardService
             offset,
             limit ?? 10,
             q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
                     .ThenInclude(x => x!.Qualifications)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
                     .ThenInclude(x => x!.Subjects)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (awards.IsFailed)
@@ -48,25 +48,25 @@ public partial class AwardService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"award?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
+                : $"award?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
 
         return Result.Ok(result);
     }
 
-    public async Task<Result<AwardResponseDto>> GetSingle(int id, int languageId)
+    public async Task<Result<AwardResponseDto>> GetSingle(int id, string languageCode)
     {
         var result = await readSingleService.Get(
             x => x.Id == id,
             q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
                     .ThenInclude(x => x!.Qualifications)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Teacher)
                     .ThenInclude(x => x!.Subjects)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)

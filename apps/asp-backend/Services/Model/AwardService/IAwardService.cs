@@ -11,15 +11,15 @@ public interface IAwardService
     Task<Result> CreateTranslation(CreateAwardTranslationRequestDto request);
 
     Task<Result<LazyLoadResponse<AwardResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit
     );
-    Task<Result<AwardResponseDto>> GetSingle(int id, int languageId);
+    Task<Result<AwardResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> Update(UpdateAwardRequestDto request);
     Task<Result> UpdateTranslation(UpdateAwardTranslationRequestDto request);
 
     Task<Result> Delete(int id);
-    Task<Result> DeleteTranslation(int awardId, int languageId);
+    Task<Result> DeleteTranslation(int awardId, string languageCode);
 }

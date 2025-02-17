@@ -46,13 +46,13 @@ public class QualificationController(IQualificationService qualificationService)
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<LazyLoadResponse<QualificationResponseDto>>> GetAll(
-        [FromQuery] int languageId,
+        [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit,
         [FromQuery] int? teacherId
     )
     {
-        var result = await qualificationService.GetAll(languageId, offset, limit, teacherId);
+        var result = await qualificationService.GetAll(languageCode, offset, limit, teacherId);
 
         if (result.IsFailed)
             return BadRequest("Language not found");
@@ -66,10 +66,10 @@ public class QualificationController(IQualificationService qualificationService)
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<QualificationResponseDto>> GetSingle(
         int id,
-        [FromQuery] int languageId
+        [FromQuery] string languageCode
     )
     {
-        var result = await qualificationService.GetSingle(id, languageId);
+        var result = await qualificationService.GetSingle(id, languageCode);
 
         if (result.IsFailed)
         {
@@ -110,12 +110,12 @@ public class QualificationController(IQualificationService qualificationService)
         return NoContent();
     }
 
-    [HttpDelete("{qualificationId:int}/translation/{languageId:int}")]
+    [HttpDelete("{qualificationId:int}/translation/{languageCode:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> DeleteTranslation(int qualificationId, int languageId)
+    public async Task<ActionResult> DeleteTranslation(int qualificationId, string languageCode)
     {
-        var result = await qualificationService.DeleteTranslation(qualificationId, languageId);
+        var result = await qualificationService.DeleteTranslation(qualificationId, languageCode);
 
         if (result.IsFailed)
             return NotFound("Qualification translation not found");
