@@ -31,11 +31,11 @@ public partial class TeacherService : ITeacherService
 
     public async Task<Result> UpdateTranslation(UpdateTeacherTranslationRequestDto request)
     {
-        if (request.TeacherId < 1 || request.LanguageId < 1)
+        if (request.TeacherId < 1 || string.IsNullOrWhiteSpace(request.LanguageCode))
             return Result.Fail(new BadRequest("Invalid request"));
 
         var updateResult = await updateTranslationService.Update(
-            x => x.LanguageId == request.LanguageId && x.TeacherId == request.TeacherId,
+            x => x.LanguageCode == request.LanguageCode && x.TeacherId == request.TeacherId,
             x =>
                 x.SetProperty(x => x.Name, request.Name)
                     .SetProperty(x => x.Bio, request.Bio)

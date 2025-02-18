@@ -24,16 +24,11 @@ public partial class LanguageService(
     public Task<Result<Language>> Create(CreateLanguageRequestDto request) =>
         createSingleService.Add(createMapper.Map(request));
 
-    public Task<Result> Delete(int id) => deleteServic.Delete(x => x.Id == id);
+    public Task<Result> Delete(string code) => deleteServic.Delete(x => x.Code == code);
 
     public Task<Result<IEnumerable<LanguageResponseDto>>> GetAll() =>
         readRangeService.Get(
-            x => new LanguageResponseDto
-            {
-                Id = x.Id,
-                Code = x.Code,
-                FullName = x.FullName,
-            },
+            x => new LanguageResponseDto { Code = x.Code, FullName = x.FullName },
             null
         );
 }

@@ -7,5 +7,10 @@ public class ProfileVocationalSubjectRequestMapper
     : IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileVocationalSubject>
 {
     public EducationalProfileVocationalSubject Map(CreateProfileSubjectRequestDto from) =>
-        new() { PerWeek = from.PerWeek, SubjectId = from.SubjectId };
+        new()
+        {
+            PerWeek = from.PerWeek,
+            Year = from.Year,
+            SubjectId = from.SubjectId,
+        };
 }

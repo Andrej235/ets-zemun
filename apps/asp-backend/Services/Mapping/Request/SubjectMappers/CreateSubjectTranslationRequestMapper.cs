@@ -11,7 +11,7 @@ public class CreateSubjectTranslationRequestMapper
         {
             Name = from.Name,
             Description = from.Description,
-            LanguageId = from.LanguageId,
+            LanguageCode = from.LanguageCode,
             SubjectId = from.SubjectId,
         };
 }

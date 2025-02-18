@@ -10,10 +10,6 @@
     "omitFromTranslation": ["imagePath"]
   },
   {
-    "fileMatch": ["subjects.json"],
-    "url": "src/assets/json-data/schemas/subject-definitions.schema.json"
-  },
-  {
     "fileMatch": ["search-map.json"],
     "url": "src/assets/json-data/schemas/search-map.schema.json",
     "omitFromTranslation": ["url", "keywords", "id"]

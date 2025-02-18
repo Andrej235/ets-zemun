@@ -1,17 +1,13 @@
-import { Faculty } from "./teachers-mock-data";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 
 type TeacherCardProps = {
-  teacher: Faculty;
+  teacher: Schema<"TeacherResponseDto">;
 };
 
 const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
   return (
     <div className="teacher-card">
-      <img
-        src={teacher.imageUrl}
-        alt={teacher.name}
-        className="teacher-image"
-      />
+      <img src={teacher.image} alt={teacher.name} className="teacher-image" />
 
       <div className="teacher-card-header">
         <h2>{teacher.name}</h2>
@@ -23,7 +19,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
         <ul className="subjects">
           <p>Predmeti: </p>
           {teacher.subjects.map((subject) => (
-            <li key={subject}>{subject}</li>
+            <li key={subject.id}>{subject.name}</li>
           ))}
         </ul>
       </div>

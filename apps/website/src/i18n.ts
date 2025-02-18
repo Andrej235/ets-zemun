@@ -1,7 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import sr from "@assets/json-data/i18n/sr.json";
+import sr_cr from "@assets/json-data/i18n/sr_cr.json";
+import sr_lt from "@assets/json-data/i18n/sr_lt.json";
 import en from "@assets/json-data/i18n/en.json";
 
 i18n
@@ -9,10 +10,13 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: "sr",
+    fallbackLng: "sr_lt",
     resources: {
-      sr: {
-        translation: sr,
+      sr_cr: {
+        translation: sr_cr,
+      },
+      sr_lt: {
+        translation: sr_lt,
       },
       en: {
         translation: en,

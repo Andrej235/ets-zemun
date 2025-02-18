@@ -9,4 +9,5 @@ public class EducationalProfileVocationalSubject
     public Subject Subject { get; set; } = null!;
 
     public int PerWeek { get; set; }
+    public int Year { get; set; }
 }

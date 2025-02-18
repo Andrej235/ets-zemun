@@ -19,69 +19,13 @@
       "default": "/images/profiles/default.png",
       "minLength": 20
     },
-    "subjects": {
-      "type": "object",
-      "properties": {
-        "general": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "subjectName": {
-                "type": "string",
-                "default": "default-subject",
-                "minLength": 1,
-                "description": "Name of the subject"
-              },
-              "perWeek": {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "minimum": 0
-                },
-                "minItems": 4,
-                "maxItems": 4,
-                "description": "Weekly count\nFirst element cooresponds to first year, second element cooresponds to second year, third element cooresponds to third year, fourth element cooresponds to fourth year"
-              }
-            },
-            "minLength": 1,
-            "required": ["subjectName", "perWeek"],
-            "additionalProperties": false
-          }
-        },
-        "vocational": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "subjectName": {
-                "type": "string",
-                "default": "default-subject",
-                "minLength": 1,
-                "description": "Name of the subject"
-              },
-              "perWeek": {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "minimum": 0
-                },
-                "minItems": 4,
-                "maxItems": 4,
-                "description": "Weekly count\nFirst element cooresponds to first year, second element cooresponds to second year, third element cooresponds to third year, fourth element cooresponds to fourth year"
-              }
-            },
-            "minLength": 1,
-            "required": ["subjectName", "perWeek"],
-            "additionalProperties": false
-          }
-        }
-      },
-      "required": ["general", "vocational"],
-      "additionalProperties": false
+    "backendId": {
+      "type": "number",
+      "description": "Backend ID of the profile",
+      "minimum": 1
     }
   },
-  "required": ["name", "description", "imagePath", "subjects"],
+  "required": ["name", "description", "imagePath", "backendId"],
   "additionalProperties": false
 }
 

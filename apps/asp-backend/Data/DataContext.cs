@@ -40,7 +40,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<AwardTranslation>(awardTranslation =>
             {
-                awardTranslation.HasKey(a => new { a.LanguageId, a.AwardId });
+                awardTranslation.HasKey(a => new { a.LanguageCode, a.AwardId });
             });
 
             modelBuilder.Entity<EducationalProfile>(educationalProfile =>
@@ -62,18 +62,32 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<EducationalProfileGeneralSubject>(generalSubject =>
             {
-                generalSubject.HasKey(g => new { g.EducationalProfileId, g.SubjectId });
+                generalSubject.HasKey(g => new
+                {
+                    g.EducationalProfileId,
+                    g.SubjectId,
+                    g.Year,
+                });
 
                 generalSubject
                     .HasOne(g => g.Subject)
                     .WithMany()
                     .HasForeignKey(g => g.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                generalSubject.HasIndex(g => new { g.Year, g.EducationalProfileId });
+
+                generalSubject.HasIndex(g => g.Year);
             });
 
             modelBuilder.Entity<EducationalProfileVocationalSubject>(vocationalSubject =>
             {
-                vocationalSubject.HasKey(v => new { v.EducationalProfileId, v.SubjectId });
+                vocationalSubject.HasKey(v => new
+                {
+                    v.EducationalProfileId,
+                    v.SubjectId,
+                    v.Year,
+                });
 
                 vocationalSubject
                     .HasOne(v => v.Subject)
@@ -84,32 +98,30 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<Language>(language =>
             {
-                language.HasKey(l => l.Id);
-
-                language.HasIndex(l => l.Code).IsUnique();
+                language.HasKey(l => l.Code);
 
                 language
                     .HasMany<AwardTranslation>()
                     .WithOne()
-                    .HasForeignKey(a => a.LanguageId)
+                    .HasForeignKey(a => a.LanguageCode)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 language
                     .HasMany<QualificationTranslation>()
                     .WithOne()
-                    .HasForeignKey(q => q.LanguageId)
+                    .HasForeignKey(q => q.LanguageCode)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 language
                     .HasMany<SubjectTranslation>()
                     .WithOne()
-                    .HasForeignKey(s => s.LanguageId)
+                    .HasForeignKey(s => s.LanguageCode)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 language
                     .HasMany<TeacherTranslation>()
                     .WithOne()
-                    .HasForeignKey(t => t.LanguageId)
+                    .HasForeignKey(t => t.LanguageCode)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -126,7 +138,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<QualificationTranslation>(qualificationTranslation =>
             {
-                qualificationTranslation.HasKey(q => new { q.LanguageId, q.QualificationId });
+                qualificationTranslation.HasKey(q => new { q.LanguageCode, q.QualificationId });
             });
 
             modelBuilder.Entity<Subject>(subject =>
@@ -147,7 +159,7 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<SubjectTranslation>(subjectTranslation =>
             {
-                subjectTranslation.HasKey(s => new { s.SubjectId, s.LanguageId });
+                subjectTranslation.HasKey(s => new { s.SubjectId, s.LanguageCode });
             });
 
             modelBuilder.Entity<Teacher>(teacher =>
@@ -182,11 +194,15 @@ namespace EtsZemun.Data
                     .WithMany()
                     .HasForeignKey(t => t.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                teacherSubject.HasIndex(t => t.TeacherId);
+
+                teacherSubject.HasIndex(t => t.SubjectId);
             });
 
             modelBuilder.Entity<TeacherTranslation>(teacherTranslation =>
             {
-                teacherTranslation.HasKey(t => new { t.LanguageId, t.TeacherId });
+                teacherTranslation.HasKey(t => new { t.LanguageCode, t.TeacherId });
             });
         }
     }

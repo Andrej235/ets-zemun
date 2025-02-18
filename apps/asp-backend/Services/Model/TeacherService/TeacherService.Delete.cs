@@ -9,10 +9,10 @@ public partial class TeacherService
         return deleteService.Delete(x => x.Id == id);
     }
 
-    public Task<Result> DeleteTranslation(int teacherId, int languageId)
+    public Task<Result> DeleteTranslation(int teacherId, string languageCode)
     {
         return deleteTranslationService.Delete(x =>
-            x.TeacherId == teacherId && x.LanguageId == languageId
+            x.TeacherId == teacherId && x.LanguageCode == languageCode
         );
     }
 }

@@ -15,6 +15,7 @@ public class ProfileVocationalSubjectResponseMapper(
         new()
         {
             PerWeek = from.PerWeek,
+            Year = from.Year,
             SubjectId = from.SubjectId,
             Subject = subjectMapper.Map(from.Subject),
         };

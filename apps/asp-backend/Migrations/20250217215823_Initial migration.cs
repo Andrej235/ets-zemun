@@ -25,16 +25,15 @@ namespace EtsZemun.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Language",
+                name: "Languages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Code = table.Column<string>(type: "text", nullable: false)
+                    Code = table.Column<string>(type: "text", nullable: false),
+                    FullName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Language", x => x.Id);
+                    table.PrimaryKey("PK_Languages", x => x.Code);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,8 +54,10 @@ namespace EtsZemun.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StartOfOpenOfficeHoursFirstShift = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    StartOfOpenOfficeHoursSecondShift = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false),
+                    StartOfOpenOfficeHoursFirstShift = table.Column<TimeOnly>(type: "time without time zone", nullable: true),
+                    StartOfOpenOfficeHoursSecondShift = table.Column<TimeOnly>(type: "time without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,73 +65,75 @@ namespace EtsZemun.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EducationalProfileGeneralSubject",
+                name: "EducationalProfileGeneralSubjects",
                 columns: table => new
                 {
                     EducationalProfileId = table.Column<int>(type: "integer", nullable: false),
                     SubjectId = table.Column<int>(type: "integer", nullable: false),
+                    Year = table.Column<int>(type: "integer", nullable: false),
                     PerWeek = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationalProfileGeneralSubject", x => new { x.EducationalProfileId, x.SubjectId });
+                    table.PrimaryKey("PK_EducationalProfileGeneralSubjects", x => new { x.EducationalProfileId, x.SubjectId, x.Year });
                     table.ForeignKey(
-                        name: "FK_EducationalProfileGeneralSubject_EducationalProfiles_Educat~",
+                        name: "FK_EducationalProfileGeneralSubjects_EducationalProfiles_Educa~",
                         column: x => x.EducationalProfileId,
                         principalTable: "EducationalProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationalProfileGeneralSubject_Subjects_SubjectId",
+                        name: "FK_EducationalProfileGeneralSubjects_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "EducationalProfileVocationalSubject",
+                name: "EducationalProfileVocationalSubjects",
                 columns: table => new
                 {
                     EducationalProfileId = table.Column<int>(type: "integer", nullable: false),
                     SubjectId = table.Column<int>(type: "integer", nullable: false),
-                    PerWeek = table.Column<int>(type: "integer", nullable: false)
+                    PerWeek = table.Column<int>(type: "integer", nullable: false),
+                    Year = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationalProfileVocationalSubject", x => new { x.EducationalProfileId, x.SubjectId });
+                    table.PrimaryKey("PK_EducationalProfileVocationalSubjects", x => new { x.EducationalProfileId, x.SubjectId });
                     table.ForeignKey(
-                        name: "FK_EducationalProfileVocationalSubject_EducationalProfiles_Edu~",
+                        name: "FK_EducationalProfileVocationalSubjects_EducationalProfiles_Ed~",
                         column: x => x.EducationalProfileId,
                         principalTable: "EducationalProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationalProfileVocationalSubject_Subjects_SubjectId",
+                        name: "FK_EducationalProfileVocationalSubjects_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubjectTranslation",
+                name: "SubjectTranslations",
                 columns: table => new
                 {
                     SubjectId = table.Column<int>(type: "integer", nullable: false),
-                    LanguageId = table.Column<int>(type: "integer", nullable: false),
+                    LanguageCode = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectTranslation", x => x.SubjectId);
+                    table.PrimaryKey("PK_SubjectTranslations", x => new { x.SubjectId, x.LanguageCode });
                     table.ForeignKey(
-                        name: "FK_SubjectTranslation_Language_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Language",
-                        principalColumn: "Id",
+                        name: "FK_SubjectTranslations_Languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "Languages",
+                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SubjectTranslation_Subjects_SubjectId",
+                        name: "FK_SubjectTranslations_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
@@ -160,7 +163,7 @@ namespace EtsZemun.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Qualification",
+                name: "Qualifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -170,9 +173,9 @@ namespace EtsZemun.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Qualification", x => x.Id);
+                    table.PrimaryKey("PK_Qualifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Qualification_Teachers_TeacherId",
+                        name: "FK_Qualifications_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
@@ -180,7 +183,7 @@ namespace EtsZemun.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherSubject",
+                name: "TeacherSubjects",
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(type: "integer", nullable: false),
@@ -188,42 +191,40 @@ namespace EtsZemun.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherSubject", x => new { x.TeacherId, x.SubjectId });
+                    table.PrimaryKey("PK_TeacherSubjects", x => new { x.TeacherId, x.SubjectId });
                     table.ForeignKey(
-                        name: "FK_TeacherSubject_Subjects_SubjectId",
+                        name: "FK_TeacherSubjects_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TeacherSubject_Teachers_TeacherId",
+                        name: "FK_TeacherSubjects_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherTranslation",
+                name: "TeacherTranslations",
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(type: "integer", nullable: false),
-                    LanguageId = table.Column<int>(type: "integer", nullable: false),
+                    LanguageCode = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    Bio = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: false)
+                    Bio = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherTranslation", x => x.TeacherId);
+                    table.PrimaryKey("PK_TeacherTranslations", x => new { x.LanguageCode, x.TeacherId });
                     table.ForeignKey(
-                        name: "FK_TeacherTranslation_Language_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Language",
-                        principalColumn: "Id",
+                        name: "FK_TeacherTranslations_Languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "Languages",
+                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherTranslation_Teachers_TeacherId",
+                        name: "FK_TeacherTranslations_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
@@ -231,11 +232,11 @@ namespace EtsZemun.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AwardTranslation",
+                name: "AwardTranslations",
                 columns: table => new
                 {
                     AwardId = table.Column<int>(type: "integer", nullable: false),
-                    LanguageId = table.Column<int>(type: "integer", nullable: false),
+                    LanguageCode = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Competition = table.Column<string>(type: "text", nullable: false),
@@ -243,43 +244,43 @@ namespace EtsZemun.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AwardTranslation", x => x.AwardId);
+                    table.PrimaryKey("PK_AwardTranslations", x => new { x.LanguageCode, x.AwardId });
                     table.ForeignKey(
-                        name: "FK_AwardTranslation_Awards_AwardId",
+                        name: "FK_AwardTranslations_Awards_AwardId",
                         column: x => x.AwardId,
                         principalTable: "Awards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AwardTranslation_Language_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Language",
-                        principalColumn: "Id",
+                        name: "FK_AwardTranslations_Languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "Languages",
+                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "QualificationTranslation",
+                name: "QualificationTranslations",
                 columns: table => new
                 {
                     QualificationId = table.Column<int>(type: "integer", nullable: false),
-                    LanguageId = table.Column<int>(type: "integer", nullable: false),
+                    LanguageCode = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QualificationTranslation", x => x.QualificationId);
+                    table.PrimaryKey("PK_QualificationTranslations", x => new { x.LanguageCode, x.QualificationId });
                     table.ForeignKey(
-                        name: "FK_QualificationTranslation_Language_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Language",
-                        principalColumn: "Id",
+                        name: "FK_QualificationTranslations_Languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "Languages",
+                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QualificationTranslation_Qualification_QualificationId",
+                        name: "FK_QualificationTranslations_Qualifications_QualificationId",
                         column: x => x.QualificationId,
-                        principalTable: "Qualification",
+                        principalTable: "Qualifications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -290,75 +291,84 @@ namespace EtsZemun.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AwardTranslation_LanguageId",
-                table: "AwardTranslation",
-                column: "LanguageId");
+                name: "IX_AwardTranslations_AwardId",
+                table: "AwardTranslations",
+                column: "AwardId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationalProfileGeneralSubject_SubjectId",
-                table: "EducationalProfileGeneralSubject",
+                name: "IX_EducationalProfileGeneralSubjects_SubjectId",
+                table: "EducationalProfileGeneralSubjects",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationalProfileVocationalSubject_SubjectId",
-                table: "EducationalProfileVocationalSubject",
+                name: "IX_EducationalProfileGeneralSubjects_Year",
+                table: "EducationalProfileGeneralSubjects",
+                column: "Year");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EducationalProfileGeneralSubjects_Year_EducationalProfileId",
+                table: "EducationalProfileGeneralSubjects",
+                columns: new[] { "Year", "EducationalProfileId" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EducationalProfileVocationalSubjects_SubjectId",
+                table: "EducationalProfileVocationalSubjects",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Language_Code",
-                table: "Language",
-                column: "Code",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Qualification_TeacherId",
-                table: "Qualification",
+                name: "IX_Qualifications_TeacherId",
+                table: "Qualifications",
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QualificationTranslation_LanguageId",
-                table: "QualificationTranslation",
-                column: "LanguageId");
+                name: "IX_QualificationTranslations_QualificationId",
+                table: "QualificationTranslations",
+                column: "QualificationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectTranslation_LanguageId",
-                table: "SubjectTranslation",
-                column: "LanguageId");
+                name: "IX_SubjectTranslations_LanguageCode",
+                table: "SubjectTranslations",
+                column: "LanguageCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherSubject_SubjectId",
-                table: "TeacherSubject",
+                name: "IX_TeacherSubjects_SubjectId",
+                table: "TeacherSubjects",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherTranslation_LanguageId",
-                table: "TeacherTranslation",
-                column: "LanguageId");
+                name: "IX_TeacherSubjects_TeacherId",
+                table: "TeacherSubjects",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherTranslations_TeacherId",
+                table: "TeacherTranslations",
+                column: "TeacherId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AwardTranslation");
+                name: "AwardTranslations");
 
             migrationBuilder.DropTable(
-                name: "EducationalProfileGeneralSubject");
+                name: "EducationalProfileGeneralSubjects");
 
             migrationBuilder.DropTable(
-                name: "EducationalProfileVocationalSubject");
+                name: "EducationalProfileVocationalSubjects");
 
             migrationBuilder.DropTable(
-                name: "QualificationTranslation");
+                name: "QualificationTranslations");
 
             migrationBuilder.DropTable(
-                name: "SubjectTranslation");
+                name: "SubjectTranslations");
 
             migrationBuilder.DropTable(
-                name: "TeacherSubject");
+                name: "TeacherSubjects");
 
             migrationBuilder.DropTable(
-                name: "TeacherTranslation");
+                name: "TeacherTranslations");
 
             migrationBuilder.DropTable(
                 name: "Awards");
@@ -367,13 +377,13 @@ namespace EtsZemun.Migrations
                 name: "EducationalProfiles");
 
             migrationBuilder.DropTable(
-                name: "Qualification");
+                name: "Qualifications");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
 
             migrationBuilder.DropTable(
-                name: "Language");
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "Teachers");

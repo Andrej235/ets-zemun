@@ -10,7 +10,7 @@ public class CreateQualificationTranslationRequestMapper
         new()
         {
             QualificationId = from.QualificationId,
-            LanguageId = from.LanguageId,
+            LanguageCode = from.LanguageCode,
             Name = from.Name,
             Description = from.Description,
         };

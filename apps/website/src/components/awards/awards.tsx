@@ -1,9 +1,13 @@
 import { Link } from "react-router";
 import "./awards.scss";
-import { awards } from "./mock-awards-data";
 import { PointerEvent } from "react";
+import useLoader from "@better-router/use-loader";
+import awardsLoader from "./awards-loader";
+import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
 
 export default function Awards() {
+  const loaderData = useLoader<typeof awardsLoader>();
+
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
 
@@ -20,31 +24,28 @@ export default function Awards() {
     <div className="awards-pages">
       <h1>Takmicenja i nagrade</h1>
       <div className="awards-list">
-        {awards.map((award) => (
-          <Link to={award.externalLink ?? "/takmicenja"} key={award.id}>
-            <div
-              key={award.id}
-              className="award-card"
-              onPointerMove={handleMouseMove}
-            >
-              <img src={award.image} alt={award.title} />
-              <div className="award-card-header">
-                <h2>{award.title}</h2>
-                <p>
-                  {award.competition} - {award.year}
-                </p>
-              </div>
-              <div className="content">
-                <div className="content-category">
-                  <p>Kategorija:</p>&nbsp;
-                  <p>{award.category}</p>
+        <LazyAwaitedList data={loaderData} success="OK">
+          {(award) => (
+            <Link to={award.externalLink ?? "/takmicenja"} key={award.id}>
+              <div
+                key={award.id}
+                className="award-card"
+                onPointerMove={handleMouseMove}
+              >
+                <img src={award.image} alt={award.title} />
+                <div className="award-card-header">
+                  <h2>{award.title}</h2>
+                  <p>
+                    {award.competition} - {award.dayOfAward}
+                  </p>
                 </div>
-                {award.projectSummary && <p>{award.projectSummary}</p>}
-                <p>{award.description}</p>
+                <div className="content">
+                  {award.description && <p>{award.description}</p>}
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          )}
+        </LazyAwaitedList>
       </div>
     </div>
   );
