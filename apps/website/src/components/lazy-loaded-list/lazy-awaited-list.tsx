@@ -1,16 +1,15 @@
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { Endpoints } from "@shared/api-dsl/types/endpoints/endpoints";
 import {
+  useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
   useLayoutEffect,
-  useCallback,
-  useEffect,
 } from "react";
-import "./lazy-loaded-list.scss";
-import Async from "@better-router/async";
 import { useScroll } from "motion/react";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { Endpoints } from "@shared/api-dsl/types/endpoints/endpoints";
+import "./lazy-loaded-list.scss";
 
 type ResponseLike<C, T> = {
   code: C;
@@ -55,16 +54,31 @@ export default function LazyLoadedList<
   loadMoreOn = "85%",
 }: LazyLoadedListProps<R, C, T>) {
   const markerRef = useRef<HTMLDivElement>(null);
-  const [responses, setResponses] = useState<
-    {
-      id: number;
-      data: R;
-    }[]
-  >([{ id: 0, data }]);
   const [currentResponse, setCurrentResponse] = useState<R>(data);
+
+  const [loadedResponse, setLoadedResponse] =
+    useState<LazyLoadResponse<unknown> | null>(null);
 
   const sentCursor = useRef<string | null>(null);
   const isWaiting = useRef(false);
+
+  useEffect(() => {
+    isWaiting.current = true;
+
+    const newResponse = data.then((x) => {
+      if (x.code === success) {
+        sentCursor.current = null;
+        isWaiting.current = false;
+
+        const response = x.content as LazyLoadResponse<unknown>;
+        setLoadedResponse(response);
+      }
+
+      return x;
+    });
+
+    setCurrentResponse(newResponse as R);
+  }, [data, success]);
 
   const loadMore = useCallback(async () => {
     if (isWaiting.current) return null;
@@ -90,13 +104,17 @@ export default function LazyLoadedList<
       if (x.code === success) {
         sentCursor.current = null;
         isWaiting.current = false;
+        const newResponse = x.content as LazyLoadResponse<unknown>;
+        newResponse.items = currentAwaitedResponse.items.concat(
+          newResponse.items
+        );
+        setLoadedResponse(newResponse);
       }
 
       return x;
     }) as R;
 
     setCurrentResponse(newResponse);
-    setResponses((x) => [...x, { id: x.length, data: newResponse }]);
     return newResponse;
   }, [currentResponse, success]);
 
@@ -142,31 +160,21 @@ export default function LazyLoadedList<
 
   const memoizedChildren = useMemo(
     () =>
-      responses.map((x) => (
-        <Async await={x.data} key={x.id}>
-          {(data: unknown) => {
-            if ((data as ResponseLike<string, T>).code !== success) return null;
-
-            return (
-              (
-                (data as ResponseLike<string, T>)
-                  .content as LazyLoadResponse<unknown>
-              ).items as (R extends Promise<ResponseLike<string, infer U>>
-                ? U extends LazyLoadResponse<infer V>
-                  ? V
-                  : never
-                : never)[]
-            ).map(children);
-          }}
-        </Async>
-      )),
-    [responses, success, children]
+      loadedResponse &&
+      (
+        loadedResponse.items as (R extends Promise<
+          ResponseLike<string, infer U>
+        >
+          ? U extends LazyLoadResponse<infer V>
+            ? V
+            : never
+          : never)[]
+      ).map(children),
+    [loadedResponse, children]
   );
 
   const { scrollY } = useScroll();
   useLayoutEffect(() => {
-    // FIXME: this is a hack, which doesn't even work because it requires a rerender to restore scroll position but in this version
-    // of lazy list rerender happens only after a request is sent, not after a response is received and the list is rendered (it is rendered inside of 'Async' component)
     document.scrollingElement!.scrollTop = scrollY.get();
   });
 
