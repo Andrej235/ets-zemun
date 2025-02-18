@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/app/app.tsx";
-import "./index.scss";
+import "../../shared-frontend/index.scss";
 import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
@@ -17,6 +17,7 @@ import ErrorComponent from "@components/error-component/error-component.tsx";
 import Awards from "./components/awards/awards.tsx";
 import Teachers from "@components/teachers/teachers.tsx";
 import Enrollment from "@components/enrollment/enrollment.tsx";
+import AdminLogin from "@components/admin-login/admin-login.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "admin-login",
+        element: <AdminLogin />,
       },
       {
         path: "/profili",

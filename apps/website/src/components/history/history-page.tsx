@@ -10,9 +10,7 @@ export default function HistoryPage() {
           animateOnlyOnce: true,
           corderArcRadius: 15,
           timelineStyle: {
-            "1000px": "alternating",
-            "800px": "left",
-            "1020px": "center",
+            "768px": "left",
           },
         }}
       >

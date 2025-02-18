@@ -10,6 +10,9 @@ COPY /apps/website/package*.json ./
 # Install dependencies
 RUN npm install
 
+# Copy the shared frontend files into a sibling directory inside the container
+COPY /apps/shared-frontend /shared-frontend
+
 # Copy the rest of the project files into the container
 COPY . .
 

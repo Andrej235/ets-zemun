@@ -26,16 +26,17 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
+      "@shared/*": ["../shared-frontend/*"],
+      "@api/*": ["../shared-frontend/api-dsl/*"],
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@data/*": ["src/assets/json-data/data/*"],
-      "@styles/*": ["src/assets/sass/*"],
       "@utility/*": ["src/utility/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../shared-frontend"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
 

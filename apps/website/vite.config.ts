@@ -30,7 +30,9 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
-      "@styles": path.resolve(__dirname, "src/assets/sass"),
+      "@shared": path.resolve(__dirname, "../shared-frontend"),
+      "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
+      "@api": path.resolve(__dirname, "../shared-frontend/api-dsl"),
       "@assets": path.resolve(__dirname, "src/assets"),
       "@data": path.resolve(__dirname, "src/assets/json-data/data"),
       "@contexts": path.resolve(__dirname, "src/contexts"),
@@ -44,9 +46,9 @@ export default defineConfig(({ mode }) => ({
       scss: {
         api: "modern-compiler",
         additionalData: `
-           @use "@styles/_palette.scss" as *;\n
-           @use "@styles/_mixins.scss" as *;\n
-           `,
+          @use "@styles/_palette.scss" as *;\n
+          @use "@styles/_mixins.scss" as *;\n
+        `,
       },
     },
   },

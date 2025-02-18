@@ -42,7 +42,6 @@ services:
       - google-auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=ets-zemun;Username=ets-zemun;Password=jfcm09iu43f85fjdskcnxmn
     build:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
