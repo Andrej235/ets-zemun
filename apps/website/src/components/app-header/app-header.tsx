@@ -4,10 +4,12 @@ import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
 import { useState, forwardRef } from "react";
 import FocusTrap from "focus-trap-react";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
+import { useTranslation } from "react-i18next";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-  
+  const { t } = useTranslation();
+
   return (
     <FocusTrap
       active={isHamburgerMenuOpen}
@@ -36,11 +38,11 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
 
         <div className="app-header-navigation">
           <div className="nav-bar">
-            <Link to="/">O nama</Link>
-            <Link to="/profili">Obrazovni profili</Link>
-            <Link to="/ucenici">Ucenici</Link>
-            <Link to="/novosti">Novosti</Link>
-            <Link to="/dokumenta">Dokumenta</Link>
+            <Link to="/">{t("header.links.0")}</Link>
+            <Link to="/profili">{t("header.links.1")}</Link>
+            <Link to="/ucenici">{t("header.links.2")}</Link>
+            <Link to="/novosti">{t("header.links.3")}</Link>
+            <Link to="/dokumenta">{t("header.links.4")}</Link>
           </div>
 
           <HeaderSearchBar />

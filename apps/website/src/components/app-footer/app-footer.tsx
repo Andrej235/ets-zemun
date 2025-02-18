@@ -1,28 +1,26 @@
 import Icon from "@components/icon/icon";
 import "./app-footer.scss";
+import { useTranslation } from "react-i18next";
 
 export default function AppFooter() {
+  const { t } = useTranslation();
+
   return (
     <footer id="app-footer">
       <div className="info">
         <div className="about">
-          <h1>O nama</h1>
+          <h1>{t("footer.about.title")}</h1>
 
-          <p>
-            Sa ciljom da obezbedimo kvalitetno obrazovanje i podstaknemo
-            samostalno učenje i razvoj učenika težimo tome da oni izrastu u
-            odgovorne i preduzimljive ličnosti u sigurnom i podsticajnom
-            okruženju
-          </p>
+          <p>{t("footer.about.description")}</p>
         </div>
 
         <div className="contact">
-          <h1>Kontakt</h1>
+          <h1>{t("footer.contact.title")}</h1>
 
           <div className="column">
             <p>
               <Icon name="location-dot" />
-              <span>Beograd – Zemun, Nade Dimić 4</span>
+              <span>{t("footer.contact.address")}</span>
             </p>
 
             <p>
@@ -67,8 +65,7 @@ export default function AppFooter() {
 
       <div className="copyright">
         <p className="copy">
-          &copy; {" " + new Date().getFullYear() + " "} Elektrotehnička škola
-          "Zemun"
+          &copy; {" " + new Date().getFullYear() + " "} {t("footer.copyright")}
         </p>
 
         <p className="credits">
@@ -86,18 +83,18 @@ export default function AppFooter() {
         <div className="social-media-links">
           <a
             href={"https://www.linkedin.com"}
-            aria-label="Školski linkedin nalog"
+            aria-label={t("footer.socialMedia.0")}
           >
             <Icon name="linkedin" />
           </a>
 
-          <a href={"https://www.x.com"} aria-label="Školski twitter nalog">
+          <a href={"https://www.x.com"} aria-label={t("footer.socialMedia.1")}>
             <Icon name="twitter" />
           </a>
 
           <a
             href={"https://www.instagram.com"}
-            aria-label="Školski instagram nalog"
+            aria-label={t("footer.socialMedia.2")}
           >
             <Icon name="instagram" />
           </a>

@@ -8,6 +8,7 @@ import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
 import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
 import SearchEntry from "src/types/search/search-entry";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
@@ -32,6 +33,7 @@ export default function HeaderSearchBar() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   function handleClose() {
     if (isAutoCompleteShown) {
@@ -132,7 +134,7 @@ export default function HeaderSearchBar() {
               tabIndex={isSearchBarVisible ? undefined : -1}
               type="text"
               className="search-bar"
-              placeholder="Pretrazi..."
+              placeholder={`${t("header.searchBarPlaceholder")}...`}
               ref={inputRef}
               name="search"
               autoComplete="off"
@@ -160,7 +162,7 @@ export default function HeaderSearchBar() {
             className="search-button"
             onClick={isSearchBarVisible ? handleClose : handleOpen}
             ref={buttonRef}
-            aria-label="Pretrazivanje"
+            aria-label={t("header.searchBarPlaceholder")}
           >
             <Icon name="magnifying-glass" />
           </button>

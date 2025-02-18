@@ -1,13 +1,16 @@
+import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
 import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import { useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
-import HeroInfoCard from "../hero-info-card/hero-info-card";
 import "./about.scss";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
+
+  const { t } = useTranslation();
 
   const fluidCanvas = useMemo(
     () => (
@@ -32,8 +35,8 @@ export default function About() {
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
-            <h1>Elektrotehnička škola "Zemun"</h1>
-            <h2>Mi ne čekamo budućnost, mi joj idemo u susret!</h2>
+            <h1>{t("about.hero.title")}</h1>
+            <h2>{t("about.hero.tagLine")}</h2>
           </div>
 
           <img src="/hero-image.jpg" alt="student" />
@@ -45,30 +48,30 @@ export default function About() {
           <div className="hero-cards">
             <HeroInfoCard
               icon="history"
-              title="Istorija"
-              description="Pregled istorije naše škole i značajnih trenutaka."
-              url={"/istorija"}
+              title={t("about.hero.heroCards.history.title")}
+              description={t("about.hero.heroCards.history.description")}
+              url="/istorija"
             />
 
             <HeroInfoCard
               icon="chalkboard-teacher"
-              title="Nastavnici"
-              description="Saznajte više o našim nastavnicima i njihovim kvalifikacijama."
-              url={"/nastavnici"}
+              title={t("about.hero.heroCards.teachers.title")}
+              description={t("about.hero.heroCards.teachers.description")}
+              url="/nastavnici"
             />
 
             <HeroInfoCard
               icon="pencil-alt"
-              title="Upis i prijem"
-              description="Detalji o procesu upisa i prijemnom ispitu."
-              url={"/upis"}
+              title={t("about.hero.heroCards.enrollment.title")}
+              description={t("about.hero.heroCards.enrollment.description")}
+              url="/upis"
             />
 
             <HeroInfoCard
               icon="trophy"
-              title="Takmičenja i nagrade"
-              description="Informacije o svim takmičenjima i osvojenim nagradama."
-              url={"/takmicenja"}
+              title={t("about.hero.heroCards.competitions.title")}
+              description={t("about.hero.heroCards.competitions.description")}
+              url="/takmicenja"
             />
           </div>
 
@@ -82,24 +85,9 @@ export default function About() {
             }}
           >
             <div className="overview-info">
-              <h1>Misija i Vizija</h1>
-              <p>
-                Naša misija je da omogućimo obrazovanje i stvorimo buduće
-                stručnjake i naučne radnike iz oblasti koje obuhvata naš školski
-                program. Nastojimo da kod učenika probudimo želju za
-                usavršavanjem i sticanjem znanja, da su u stanju da samostalno
-                istražuju i obrađuju informacije do kojih dolaze uz korišćenje
-                svih dostupnih izvora.
-              </p>
-              <p>
-                Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam
-                najveći prioriteti. Podstičemo kreativnost učenika kroz razne
-                vannastavne aktivnosti. Stvorili smo takvo okruženje da je
-                učenik u centru nastavnog procesa i učenja. Želimo da naša deca
-                postanu preduzimljive i savesne ličnosti. Pozivamo Vas da
-                zajedno sa nama menjamo sadašnjost i stvaramo svetliju
-                budućnost.
-              </p>
+              <h1>{t("about.overview.title")}</h1>
+              <p>{t("about.overview.description.1")}</p>
+              <p>{t("about.overview.description.2")}</p>
             </div>
 
             <div className="overview-image">
@@ -113,67 +101,62 @@ export default function About() {
         <SchoolPreviewCard
           count={100}
           image="/images/info-cards/teachers.jpg"
-          title="Iskusnih nastavnika"
-          description="Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
+          title={t("about.schoolPreviewCards.teachers.title")}
+          description={t("about.schoolPreviewCards.teachers.description")}
           layout="image-left"
         />
 
         <SchoolPreviewCard
           count={750}
           image="/images/info-cards/students.jpg"
-          title="Učenika u dinamičnoj zajednici"
-          description="Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
+          title={t("about.schoolPreviewCards.students.title")}
+          description={t("about.schoolPreviewCards.students.description")}
           layout="image-right"
         />
 
         <SchoolPreviewCard
           count={40}
-          title="Moderno opremljenih kabineta"
+          title={t("about.schoolPreviewCards.classrooms.title")}
           image="/images/info-cards/samsung-classroom.jpg"
-          description="Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
+          description={t("about.schoolPreviewCards.classrooms.description")}
           layout="image-left"
         />
 
         <SchoolPreviewCard
           count={25}
-          title="Osvojenih nagrada"
+          title={t("about.schoolPreviewCards.awards.title")}
           image="/images/info-cards/trophy.jpg"
-          description="Naši učenici su osvojili preko 25 priznanja na regionalnim, nacionalnim i međunarodnim takmičenjima. Dominiraju u STEM projektima, umetničkim izazovima, sportu i debatama, pokazujući izuzetan kreativni potencijal. Kroz mentorstvo nastavnika i prilagođene programe, podstičemo ih da istražuju, razvijaju ideje i postanu ambasadori znanja. Svaka nagrada je priča o njihovoj posvećenosti i upornosti."
+          description={t("about.schoolPreviewCards.awards.description")}
           layout="image-right"
         />
       </section>
 
       <section className="call-to-action-section">
         <div className="call-to-action">
-          <h1>Pridružite se našoj obrazovnoj porodici!</h1>
+          <h1>{t("about.callToAction.title")}</h1>
 
-          <p>
-            Otvorite vrata ka budućnosti gde se tradicija kombinuje sa
-            tehnologijom, a svaki učenik je deo priče o uspehu. Posetite nas i
-            saznajte kako gradimo svet koji inspiriše!
-          </p>
+          <p>{t("about.callToAction.description")}</p>
 
           <div className="call-to-action-buttons">
             <button className="primary">
-              <p>Prijavite se</p>
+              <p>{t("about.callToAction.buttons.1")}</p>
               <Icon name="arrow-right" className="button-icon" />
             </button>
             <button className="secondary">
-              <p> Zakazite sastanak</p>
+              <p>{t("about.callToAction.buttons.2")}</p>
               <Icon name="arrow-right" className="button-icon" />
             </button>
           </div>
 
           <div className="orientation-test">
-            <h2>I dalje niste sigurni?</h2>
+            <h2>{t("about.callToAction.orientationTest.title")}</h2>
 
             <div>
-              <p>
-                Odratite kratak test da vidite da li bi vam bas nasa skola
-                odgovarala!
-              </p>
+              <p>{t("about.callToAction.orientationTest.description")}</p>
 
-              <button className="secondary">Probajte test</button>
+              <button className="secondary">
+                {t("about.callToAction.orientationTest.button")}
+              </button>
             </div>
           </div>
         </div>
