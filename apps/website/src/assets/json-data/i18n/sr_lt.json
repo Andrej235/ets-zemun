@@ -241,6 +241,625 @@
       "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
       "buttons": ["Početna strana", "Prošla strana"]
     }
+  },
+  "students": {
+    "hero": {
+      "title": "Sve informacije za ucenike",
+      "tagLine": "Pronađite sve informacije i resurse za vaš uspeh.",
+      "cards": [
+        "Ucenicki parlament",
+        "Savet roditelja",
+        "Vanredni učenici",
+        "PP služba",
+        "Nasilje",
+        "Mentalno Zdravlje"
+      ]
+    },
+    "sections": {
+      "studentsParliament": {
+        "title": "Učenički parlament",
+        "headers": ["Razred", "Ucenik 1", "Ucenik 2"],
+        "data": [
+          {
+            "grade": "PRVI RAZRED",
+            "classes": [
+              {
+                "className": "1/1",
+                "students": ["Subotić Miloš", "Čodanović Ognjen"]
+              },
+              {
+                "className": "1/2",
+                "students": ["Jovana Đerić", "Lazar Lotina"]
+              },
+              {
+                "className": "1/3",
+                "students": ["Žižović Ognjen", "Tairovski Ognjen"]
+              },
+              {
+                "className": "1/4",
+                "students": [
+                  "Anastasija Stanojković",
+                  "Vitomir Vlada Mihajlović"
+                ]
+              },
+              {
+                "className": "1/5",
+                "students": ["Jovičić Aleksandra", "Popović Milica"]
+              },
+              {
+                "className": "1/6",
+                "students": ["Luka Jeremić", "Stefan Marković"]
+              },
+              {
+                "className": "1/7",
+                "students": ["Janković Mateja", "Milutinović Filip"]
+              },
+              { "className": "1/8", "students": ["Aliti Davor", "Perić Uroš"] }
+            ]
+          },
+          {
+            "grade": "DRUGI RAZRED",
+            "classes": [
+              {
+                "className": "2/1",
+                "students": ["Anđela Cvejtić", "Ana Simonović"]
+              },
+              {
+                "className": "2/2",
+                "students": ["Aleksandra Ćuksanovski", "Filip Kovačević"]
+              },
+              {
+                "className": "2/3",
+                "students": ["Novak Sekulić", "Vuk Spasić"]
+              },
+              {
+                "className": "2/4",
+                "students": ["Prokić Vukašin", "Karaica Marko"]
+              },
+              {
+                "className": "2/5",
+                "students": ["Dinić Branko", "Aleksa Andželić"]
+              },
+              {
+                "className": "2/6",
+                "students": ["Jelena Simić", "Jovan Čolić"]
+              },
+              {
+                "className": "2/7",
+                "students": ["Đureković Andrijana", "Mirko Čikara"]
+              },
+              {
+                "className": "2/8",
+                "students": ["Ivanović Stefan", "Stefanović Zoran"]
+              }
+            ]
+          },
+          {
+            "grade": "TREĆI RAZRED",
+            "classes": [
+              {
+                "className": "3/1",
+                "students": ["Olivera Glišić", "Tamara Žujić"]
+              },
+              {
+                "className": "3/2",
+                "students": ["Nikola Arsić", "Lazar Živanović"]
+              },
+              {
+                "className": "3/3",
+                "students": ["Mateja Marković", "Veljko Živanović"]
+              },
+              {
+                "className": "3/4",
+                "students": ["Ćetković Milica", "Džekić Teodora"]
+              },
+              {
+                "className": "3/5",
+                "students": ["Puzović Lazar", "Lukić Andrej"]
+              },
+              {
+                "className": "3/6",
+                "students": ["Viktor Bogdanović Abazi", "Nikola Radosavljević"]
+              },
+              {
+                "className": "3/7",
+                "students": ["Sava Lukić", "David Somonji"]
+              },
+              {
+                "className": "3/8",
+                "students": ["Jovanović Strahinja", "Stanić Vanja"]
+              }
+            ]
+          },
+          {
+            "grade": "ČETVRTI RAZRED",
+            "classes": [
+              {
+                "className": "4/1",
+                "students": ["Uroš Nikolić", "Nikola Štrk"]
+              },
+              {
+                "className": "4/2",
+                "students": ["Jovan Bogdanović", "Ivana Jeina"]
+              },
+              {
+                "className": "4/3",
+                "students": ["Anđela Dimitrijević", "Nikolija Sofornijević"]
+              },
+              {
+                "className": "4/4",
+                "students": ["Teodora Malešić", "Mihajlica David"]
+              },
+              {
+                "className": "4/5",
+                "students": ["Uroš Mićunović", "Aleksa Ob etković"]
+              },
+              {
+                "className": "4/6",
+                "students": ["Veljki Grujičić", "Milošević Aleksandar"]
+              },
+              {
+                "className": "4/7",
+                "students": ["Mateja Đukić", "Nina Ristić"]
+              }
+            ]
+          }
+        ]
+      },
+      "parentParliament": {
+        "title": "Savet roditelja",
+        "headers": ["Razred", "Roditelj"],
+        "data": [
+          {
+            "grade": "PRVI RAZRED",
+            "classes": [
+              { "className": "I1", "parent": "Ćosović Dragana" },
+              { "className": "I2", "parent": "Dalibor Samardžić" },
+              { "className": "I3", "parent": "Bajkić Dušan" },
+              { "className": "I4", "parent": "Zoran Branković" },
+              { "className": "I5", "parent": "Vladimir Rašović" },
+              { "className": "I6", "parent": "Vesna Vuković" },
+              { "className": "I7", "parent": "Neda Milanović" },
+              { "className": "I8", "parent": "Stefanović Zlatko" }
+            ]
+          },
+          {
+            "grade": "DRUGI RAZRED",
+            "classes": [
+              { "className": "II1", "parent": "Marunić Zorica" },
+              { "className": "II2", "parent": "Siniša Bazina" },
+              { "className": "II3", "parent": "Goran Radović" },
+              { "className": "II4", "parent": "Dejan Dragović" },
+              { "className": "II5", "parent": "Olja Lazarac" },
+              { "className": "II6", "parent": "Goran Živanović" },
+              { "className": "II7", "parent": "Mitrović Aleksandar" },
+              { "className": "II8", "parent": "Blagojević Dragi" }
+            ]
+          },
+          {
+            "grade": "TREĆI RAZRED",
+            "classes": [
+              { "className": "III1", "parent": "Bekrić Ljubica" },
+              { "className": "III2", "parent": "Milena Lužija" },
+              { "className": "III3", "parent": "Tatjana Ivanović" },
+              { "className": "III4", "parent": "Dinić Nenad" },
+              { "className": "III5", "parent": "Branko Ivošević" },
+              { "className": "III6", "parent": "Bajunović Ivana" },
+              { "className": "III7", "parent": "Jasmina Manigodić" },
+              { "className": "III8", "parent": "Spasić Dragan" }
+            ]
+          },
+          {
+            "grade": "ČETVRTI RAZRED",
+            "classes": [
+              { "className": "IV1", "parent": "Mihajlović Aleksandar" },
+              { "className": "IV2", "parent": "Jeina Mirjana" },
+              { "className": "IV3", "parent": "Dimitrijević Ljiljana" },
+              { "className": "IV4", "parent": "Galić Biljana" },
+              { "className": "IV5", "parent": "Andreja Crnogorac" },
+              { "className": "IV6", "parent": "Andrijana Perić Đurđević" },
+              { "className": "IV7", "parent": "Stuparušić Marija" }
+            ]
+          }
+        ]
+      },
+      "partTime": {
+        "title": "Vanredni učenici",
+        "deadlines": [
+          {
+            "term": "OKTOBARSKI",
+            "registration": "09-27.09.2024.",
+            "exam": "07-31.10.2024."
+          },
+          {
+            "term": "DECEMBARSKI",
+            "registration": "04-22.11.2024.",
+            "exam": "02-27.12.2024."
+          },
+          {
+            "term": "MARTOVSKI",
+            "registration": "03-21.02.2025.",
+            "exam": "03-28.03.2025."
+          },
+          {
+            "term": "MAJSKI",
+            "registration": "01-25.04.2025.",
+            "exam": "12-30.05.2025."
+          },
+          {
+            "term": "AVGUSTOVSKI",
+            "registration": "02-20.06.2025.",
+            "exam": "18-29.08.2025."
+          }
+        ],
+        "priceList": [
+          { "itemName": "UPIS GODINE", "itemPrice": "7.500,00 din." },
+          { "itemName": "OBNOVA GODINE", "itemPrice": "1.500,00 din." },
+          {
+            "itemName": "ISPIT SA PISMENIM RADOM",
+            "itemPrice": "1.000,00 din."
+          },
+          { "itemName": "ISPIT BEZ PISMENOG", "itemPrice": "1.000,00 din." },
+          {
+            "itemName": "ISPIT IZ PRAKTIČNE NASTAVE",
+            "itemPrice": "1.000,00 din."
+          },
+          { "itemName": "ISPIT SA VEŽBAMA", "itemPrice": "1.000,00 din." },
+          { "itemName": "ZAVRŠNI ISPIT", "itemPrice": "2.500,00 din." },
+          { "itemName": "MATURSKI ISPIT", "itemPrice": "3.000,00 din." }
+        ],
+        "examData": [
+          {
+            "subject": "SRPSKI JEZIK-maturski",
+            "commission": [
+              "Srđan Gagić",
+              "Nada Đurić",
+              "Marina Ristanović",
+              "Vurdelja Dejan",
+              "Radmila Vidović"
+            ],
+            "date": "Utorak, 28.01.2025.",
+            "time": "14.45, 10.30",
+            "cabinet": "17 ili 18"
+          },
+          {
+            "subject": "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+            "commission": ["Bogdan Luković", "Anđela Pavlović"],
+            "date": "Sreda, 29.01.2025.",
+            "time": "10.00",
+            "cabinet": "14"
+          },
+          {
+            "subject": "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+            "commission": ["Slavica Per", "Relja Ćurčin", "Vesna Janjić"],
+            "date": "Sreda, 29.01.2025.",
+            "time": "15.35",
+            "cabinet": "14"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-ARM-A",
+            "commission": ["Slavica Per", "Saša Stošić"],
+            "date": "Četvrtak, 30.01.2025.",
+            "time": "11.15",
+            "cabinet": "44"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-ARM-B",
+            "commission": ["Slavica Per", "Saša Stošić"],
+            "date": "petak, 31.01.2025.",
+            "time": "13.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-er-A",
+            "commission": ["Radovan Đurić", "Saviša Nikolić"],
+            "date": "Četvrtak, 30.01.2025.",
+            "time": "14.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-er-B",
+            "commission": ["Radovan Đurić", "Slaviša Nikolić"],
+            "date": "petak, 31.01.2025.",
+            "time": "14.45",
+            "cabinet": "43"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-IT-A",
+            "commission": ["Galina Bojović", "Relja Ćurčin"],
+            "date": "Četvrtak, 30.01.2025.",
+            "time": "11.25",
+            "cabinet": "50"
+          },
+          {
+            "subject": "PRAKTIČNI ISPIT-IT-B",
+            "commission": ["Galina Bojović", "Relja Ćurčin"],
+            "date": "petak, 31.01.2025.",
+            "time": "12.10",
+            "cabinet": "50"
+          },
+          {
+            "subject": "SERVISER TERMIČKIH I RASHLADNIH UREĐAJA",
+            "commission": ["Branko Lončar", "Mavrak Milenko"],
+            "date": "31.01.2025.",
+            "time": "14.00",
+            "cabinet": "73"
+          },
+          {
+            "subject": "MATURSKI ISPIT (elektrotehničar automatike)",
+            "commission": [
+              "Cvija Jelenković",
+              "Vesna Janjić",
+              "Branislav Siljković"
+            ],
+            "date": "30.01.2025., 31.01.2025.",
+            "time": "13.00, 14.00",
+            "cabinet": "40"
+          }
+        ],
+        "paymentMethod": {
+          "title": "RAČUN ZA UPLATU ZA VANREDNE UČENIKE",
+          "description": ["OBAVEZNO:", "POZIV NA BROJ:"]
+        },
+        "deadlinesCaption": "ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025.GODINI",
+        "deadlinesHeaders": ["ROKOVI", "POLAGANJA", "PRIJAVLJIVANJA"],
+        "priceListTitle": "CENOVNIK VANREDNOG ŠKOLOVANjA ZA ŠKOLSKU 2024/2025.GODINU",
+        "examDataCaption": "MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO/JANUARSKOM ROKU",
+        "examDataHeaders": [
+          "PREDMET",
+          "KOMISIJA",
+          "DATUM POLAGANjA",
+          "VREME POLAGANjA",
+          "KABINET"
+        ]
+      },
+      "ppService": {
+        "title": "Psihološko-pedagoška (PP) služba",
+        "description": [
+          "Naš PP tim čine školski psiholog",
+          "Ivana Maćešić",
+          "i školski pedagog",
+          "Anđela Mijović.",
+          "Naš zadatak je da pružamo pomoć i podršku učenicima, roditeljima i nastavnicima. Pratimo i usmeravamo razvoj naših đaka i nudimo pomoć u sagledavanju problema i nalaženju rešenja."
+        ],
+        "reachOut": "Evo nekih situacija u kojima nam se možete obratiti:",
+        "reachOutList": [
+          [
+            "Problemi sa učenjem",
+            "i školskim obavezama (teškoće u savladavanju gradiva, strah od odgovaranja ili negativnih ocena, nedostatak motivacije za učenje, planiranje i organizacija školskih obaveza)"
+          ],
+          [
+            "Emocionalni problemi",
+            "(stres, anksioznost i slično, psihološki pritisak usled problema u porodici ili ličnim odnosima, teškoće u kontrolisanju emocija – tuga, ljutnja, frustracija…, problemi sa samopoštovanjem ili samopuzdanjem)"
+          ],
+          [
+            "Međuljudski odnosi",
+            "(problemi u odnosu sa vršnjacima – npr.uznemiravanje, nerazumevanje, konflikti i sl., izolacija ili osećaj usamljenosti, poteškoće u pravljenju i održavanju prijateljstava, sukobi sa nastavnicima ili drugim zaposlenima u školi)"
+          ],
+          [
+            "Problemi sa samodisciplinom i ponašanjem",
+            "(agresivno ponašanje, narušavanje pravila škole, postavljanje granica i rešavanje konflikata)"
+          ],
+          [
+            "Prelazni periodi i važne životne promene",
+            "(prelazak u novi razred, školu ili grad, prilagođavanje na novu sredinu ili nove ljude, promena u porodici – razvodi, smrt bliske osobe, problemi u ličnom životu koji utiču na koncentraciju i školski uspeh)"
+          ],
+          [
+            "Karijerno savetovanje i planiranje budućnosti",
+            "(odluke o daljem profesionalnom usmerenju, istraživanje tržišta rada, planiranje karijere, pomoć u prepoznavanju ličnih jakih strana i talenata)"
+          ],
+          [
+            "Psihološka podrška u kriznim situacijama",
+            "(sećanja na traumatične događaje, suočavanje sa velikim životnim izazovima i promenama)"
+          ],
+          [
+            "Razgovori o zdravim stilovima života, ophođenju sa stresom i stresnim situacijama"
+          ],
+          ["Pomoć u prevenciji zavisnosti i drugih rizičnih ponašanja"]
+        ],
+        "moreInfo": "Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja, prihvatanja i podsticanja. Slušamo, razgovaramo i ohrabrujemo – nema optuživanja, etiketiranja, omalovažavanja ili moralisanja. Ukoliko problem prevazivali naše kompetencije, uputićemo vas kome da se obratite za dalju podršku. Razgovore sa psihologom ili pedagogom možete zakazati uz posredovanje odeljenjskog starešine ili samostalno.",
+        "helpOutsideOfSchool": {
+          "title": "POMOĆ VAN ŠKOLE",
+          "options": [
+            "Savetovalište za mlade, Dom zdravlja Zemun, Toplička 8, savetovaliste.za.mlade@dzzemun.org.rs 011/2616-288",
+            "NADEL (Nacionalna dečja linija) broj 116111 ili ih kontaktirati putem sajta www.116111.rs preko kojeg je moguće anonimno pisati stručnjacima za mentalno zdravlje.",
+            "Institut za mentalno zdravlje: broj telefona 063/868 1757 i 063/868 2217",
+            "Klinika za psihijatriju UKCS: Tim za podršku 066/8300854, 011/3662 124, 063/310 723",
+            "Onlajn podrška Društva psihologa www.dps.org.rs",
+            "Zakazati onlajn savetovanje ili pronaći informacije o drugom vidu podrške na stranici svejeok.rs/mladi/podrska"
+          ]
+        }
+      },
+      "bullying": {
+        "title": "Nasilje",
+        "description": [
+          "Ukoliko ti trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi ga odeljenskom starešini, PP službi ili Timu za zaštitu učenika i, naravno, svojim roditeljima.",
+          "U našoj školi postoji Tim za zaštitu učenika od diskriminacije, nasilja, zlostavljanja, zanemarivanja. Od nastavnika koji čine ovaj Tim u svakom trenutku u školi možete dobiti savet i uput šta da uradite ukoliko trpite nasilje ili ste svedok nasilja.",
+          "Prijava nasilja PDF"
+        ],
+        "sos": {
+          "title": "SOS telefoni",
+          "data": [
+            "Prijava digitalnog nasilja – Nacionalni kontakt centar za bezbednost dece na internetu – 19833",
+            "Nacionalna SOS linija za prevenciju suicida – 011 7777 000",
+            "Prijava nasilja u porodici – 0800 100 600",
+            "Nacionalna dečija linija Srbije NADEL – 116111",
+            "SOS telefonska linija za psihosocijalnu podršku – 0800-200-201",
+            "Centar za zaštitu žrtava trgovine ljudima – broj telefona: +381 63 610 590."
+          ]
+        },
+        "antiBullying": {
+          "title": "Šta je to školsko nasilje",
+          "data": [
+            "Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se namerno nanese šteta drugome. Međutim, nasilje se može dešavati i izvan škole a da se i dalje smatra školskim. Ono se može dešavati u školskom dvorištu nakon nastave ili na putu od kuće do škole, ali i onlajn, preko društvenih mreža na kojima su deca iz istih ili različitih škola međusobno povezana.",
+            "Najčešći oblici nasilja u školama su verbalno nasilje (psovanje, ismevanje, ogovaranje, pretnje), društveno isključivanje (vršenje pritiska na vršnjake da se ne druže i ne komuniciraju sa nekim konkretnim detetom iz škole), ali i fizičko nasilje (udaranja, tuče) i seksualno nasilje (davanje lascivnih nadimaka, nedozvoljena dodirivanja između vršnjaka, nedozvoljeno deljenje fotografija sa društvenih mreža i njihovo komentarisanje u seksualnom smislu). Nažalost, izloženost nasilju ne prestaje odlaskom iz škole, već se nastavlja i onlajn – digitalno nasilje.",
+            "U školi nasilje učenici mogu da trpe i od svojih vršnjaka i od nastavnika, kao što i učenici mogu da vrše nasilje i nad vršnjacima i nad nastavnicima (najčešće su u pitanju provokacije i vređanja od strane učenika, ali ima i pretnji, pa i fizičkih napada na nastavnike).",
+            "Osnov za vršenje nasilja počinioci nasilja najčešće vide u materijalnom i intelektualnom statusu, u nacionalnoj i seksualnoj pripadnosti žrtve – dakle u osnovi nasilja je skoro uvek diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)"
+          ]
+        },
+        "platforms": {
+          "title": "Platforme",
+          "data": [
+            "Nacionalni kontakt centar za bezbednost dece na internetu",
+            "Nacionalna platforma za prevenciju nasilja koje uključuje decu",
+            "Čuvam te Platforma"
+          ]
+        },
+        "support": {
+          "title": "PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA",
+          "data": [
+            "Kako se suočiti sa događajem u kojem je više osoba povređeno ili ubijeno",
+            "Kako pomoći deci da se vrate u školu nakon tragičnog događaja",
+            "Kako brinuti o sebi tokom kriznih situacija",
+            "Delotvorna komunikacija sa decom tokom kriznih situacija",
+            "Razgovor sa decom o terorističkim napadima i pucnjavi u školama i zajednici o kojima se izveštava u vestima",
+            "Uobičajeni znakovi psihosocijalnog distresa dece"
+          ]
+        }
+      },
+      "mentalHealth": {
+        "title": "Mentalno zdravlje",
+        "understandingMentalHealth": {
+          "title": "Razumevanje adolescentnog perioda",
+          "text": "Adolescencija je period intenzivnih promena koji obuhvata fizički, emocionalni i socijalni razvoj.",
+          "list": [
+            [
+              "Fizičke promene:",
+              "U tinejdžerskim godinama, telo prolazi kroz značajne promene, uključujući rast, razvoj seksualnih karakteristika i hormonske promene. Ove promene mogu dovesti do osećaja nesigurnosti i samokritike. Treba se navići na „izmenjenu“ telesnu šemu. Ne postoji adolescent koji je u potpunosti zadovoljan svojim izgledom!"
+            ],
+            [
+              "Emocionalne promene:",
+              "Adolescenti često doživljavaju intenzivne emocije i promene raspoloženja, osetljivost, preteranu samokritičnost, ponekad sklonost depresivnom raspoloženju, kao i sanjarenja i povlačenja u svoj svet. Ovo je period istraživanja sopstvenog identiteta, što može dovesti do konflikata unutar sebe i sa drugima. Često se suočavaju sa strahom od odbacivanja i potrebom za pripadnošću."
+            ],
+            [
+              "Socijalne promene:",
+              "Tinejdžeri počinju da razvijaju složenije socijalne odnose. Vršnjaci i romantični odnosi postaju ključni. Adolescenti uče kako da komuniciraju, sarađuju i upravljaju konfliktima u situacijama u kojima se ranije nisu nalazili. Ove promene mogu biti izazovne i dovesti do stresa, ali i do razvoja novih socijalnih veština."
+            ]
+          ]
+        },
+        "challenges": {
+          "title": "Adolescencija nosi brojne izazove i stresore koji mogu uticati na mentalno zdravlje:",
+          "list": [
+            {
+              "item": "Socijalni pritisak: Tinejdžeri često osećaju pritisak da se uklope u grupu ili ispune očekivanja vršnjaka. Ovaj pritisak može dovesti do anksioznosti i neprijatnosti.",
+              "advice": "Nisi sam/sama! I drugi vršnjaci oko tebe slično osećaju i prolaze kroz iste dileme iako se to možda po njihovom ponašanju ne vidi na prvi pogled!"
+            },
+            {
+              "item": "Akademski stres: Školski zahtevi, ispiti i konkurencija mogu biti veliki izvor stresa. Strah od neuspeha može uticati na samopouzdanje i mentalno zdravlje.",
+              "advice": "Daš sve od sebe i uradiš ono što je u tvojoj moći da nešto savladaš – pitaš za podršku u učenju, bolje organizuješ obaveze i vreme. Bitna je tvoja unutrašnja motivacija da nešto postigneš i mera koju ti odrediš i za koju si spreman/spremna da preuzmeš odgovornost."
+            },
+            {
+              "item": "Problemi u porodici: Konflikti u porodici, razvodi, bolesti ili promene u porodici mogu uticati na emocionalno blagostanje adolescenata.",
+              "advice": "Traži podršku i pomoć od odrasle osobe od poverenja ili drugara koji može da te sasluša. Mnogi oko nas prolaze kroz slične dileme i „krize“ i tek kada se otvorimo i kažemo, možemo da dobijemo pomoć. Nisu svi ljudi oko nas, ma koliko bili bliski, senzibilisani da „čitaju“ naše misli ili osećanja…"
+            },
+            {
+              "item": "Formiranje identiteta i samorazumevanje: Proces otkrivanja sopstvenog identiteta može biti zbunjujući i emocionalno izazovan, što može dovesti do osećaja usamljenosti ili nesigurnosti.",
+              "advice": "Otkrivanje ko smo, šta volimo, čemu težimo… u nekim segmentima će trajati ceo život J. Prava je mudrost zavoleti sebe onakvima kakvi jesmo! To je proces."
+            },
+            {
+              "item": "Tehnološki uticaji: Upotreba društvenih medija može biti dvostruki mač, pružajući podršku, ali i donoseći poređenja i opterećenje, što može uticati na samopoštovanje.",
+              "advice": "Budite kritični prema informacijama koje pronađete na internetu. Proveravajte iz više izvora, upoređujte, vežbajte moć svoj zdravog razuma J Nezaboravite da i oni koji na društvene mreže postavljaju svoje fotografije u „najboljim“ i „najsrećnijim“ izdanjima, takođe imaju „teške“ dane, trenutke i krize, samo što je malo onih koji to podele na društvenim mrežama…"
+            }
+          ],
+          "conclusion": "Upravo su ove promene i izazovi u adolescenciji kritični za razvoj mentalnog zdravlja i mogu imati dugoročne posledice na život mladih. Podrška iz okruženja – roditelja, nastavnika i vršnjaka – može značajno uticati na prevazilaženje ovih izazova."
+        },
+        "symptoms": {
+          "title": "Znakovi i simptomi problema mentalnog zdravlja",
+          "list": [
+            "Anksioznost: Simptomi anksioznosti mogu uključivati stalni osećaj zabrinutosti, napetost, nervozu i fizičke simptome kao što su tahikardija, znojenje ili tresenje. Adolescenti mogu imati poteškoća u fokusiranju, izbegavati socijalne situacije ili doživljavati panične napade.",
+            "Depresija: Depresivni simptomi mogu obuhvatati osećaj tuge, beznađa, gubitak interesovanja za aktivnosti koje su nekada bile zabavne, kao i promene u apetitu i spavanju. Adolescenti mogu postati povučeni, pokazivati malu energiju i imati probleme s koncentracijom.",
+            "Zamka: U adolescenciji se nekada dešava da se depresivni simptomi ispolje na način na koji to nikada ne bismo mogli da pretpostavimo – kroz hiperaktivnost, pričljivost, preterano eksponiranje… Ovakva ponašanja su, u tom slučaju, neka vrsta brane ili zaštite koju osoba postavi da bi joj se moglo prići…",
+            "Stres: Stres može proizilaziti iz različitih izvora, uključujući školske obaveze, probleme u odnosima ili porodici. Simptomi stresa mogu uključivati razdražljivost, probleme sa spavanjem, fizičke simptome poput glavobolje ili stomačnih problema i opšti osećaj preopterećenosti."
+          ]
+        },
+        "identifyingProblems": {
+          "title": "Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti izazovno, ali postoje znakovi na koje treba obratiti pažnju:",
+          "list": [
+            "Promene u ponašanju: Iznenadne promene u ponašanju, kao što su povlačenje iz društvenih aktivnosti, gubitak interesovanja za hobije ili aktivnosti koje su nekada voleli, mogu ukazivati na probleme.",
+            "Promene u raspoloženju: Česte oscilacije, kao što su prekidi raspoloženja, bes, ili konstantna tuga, mogu biti znak problema.",
+            "Lošiji uspah u školi: problemi s koncentracijom i opšta nezainteresovanost za učenje mogu ukazivati na dublje probleme.",
+            "Fizički simptomi: Česti fizički problemi bez medicinskog objašnjenja, kao što su glavobolje, stomačni bolovi ili umor, mogu biti znaci stresa ili anksioznosti.",
+            "Izolacija: Izolacija od prijatelja i porodice, izbegavanje društvenih situacija i osećaj usamljenosti mogu ukazivati na probleme mentalnog zdravlja.",
+            "Govor o samoubilačkim mislima ili samopovređivanju: Svaka izjava o samoubilačkim mislima ili samopovređivanju zahteva hitnu pažnju i pomoć."
+          ],
+          "conclusion": "Važno je da roditelji, nastavnici i druge odrasle osobe budu pažljivi i otvoreni za razgovor o mentalnom zdravlju, kako bi pružili podršku adolescentima koji se suočavaju s problemima. Rano prepoznavanje i intervencija mogu značajno uticati na ishod i oporavak. Nekada je reč o normalnoj razvojnoj fazi, a nekada se može raditi i o ozbiljnijim naznakama koje treba prevenirati na vreme."
+        },
+        "impact": {
+          "title": "Uticaj na svakodnevni život",
+          "list": [
+            {
+              "title": "Ponašanje u školi i kod kuće",
+              "description": "Problemi mentalnog zdravlja mogu značajno uticati na ponašanje adolescenata u različitim okruženjima, uključujući školu i dom.",
+              "items": [
+                "Ponašanje u školi: Adolescenti koji se bore s mentalnim problemima mogu pokazivati smanjenu motivaciju za učenje, često izbegavaju školske obaveze ili izostaju. Mogu biti razdražljivi, imati poteškoća s koncentracijom i izvršavanjem zadataka, što može dovesti do pada školskog uspeha. Ponekad, anksioznost ili stres mogu prouzrokovati fizičke simptome, kao što su glavobolje ili stomačni bolovi, što dodatno otežava prisustvovanje nastavi.",
+                "Ponašanje kod kuće: Kod kuće, adolescenti mogu postati povučeni, zatvoreni ili se sukobljavati sa članovima porodice. Roditelji mogu primetiti promene u raspoloženju, česti konflikt ili nedostatak interesovanja za porodične aktivnosti. Ova dinamika može stvoriti napetu atmosferu, što dodatno pogoršava mentalno zdravlje adolescenta."
+              ]
+            },
+            {
+              "title": "Odnosi s vršnjacima i porodicom",
+              "description": "Mentalno zdravlje adolescenata u velikoj meri utiče i na njihove odnose s vršnjacima i članovima porodice.",
+              "items": [
+                "Odnosi s vršnjacima: Adolescenti koji se suočavaju s anksioznošću, depresijom ili drugim problemima mogu imati poteškoća u održavanju odnosa s vršnjacima. Oni mogu izbegavati društvene interakcije, što može dovesti do osećaja usamljenosti i izolacije. Ova izolacija može pogoršati simptome, stvarajući začarani krug. Takođe, mogu se osećati nesigurno u socijalnim situacijama, što može dovesti do konfliktnih situacija ili problema s prijateljima.",
+                "Odnosi s porodicom: Stres i problemi mentalnog zdravlja mogu prouzrokovati konflikte u porodici. Adolescenti mogu biti razdražljivi ili povučeni, što može stvoriti distancu između njih i roditelja. Nepravilna komunikacija i nedostatak razumevanja mogu dovesti do nedorazumevanja i sukoba. Međutim, otvorena komunikacija i podrška od strane članova porodice mogu pomoći u prevazilaženju ovih problema i ojačati odnose."
+              ]
+            }
+          ],
+          "conclusion": "Problemi mentalnog zdravlja mogu imati dubok uticaj na svakodnevni život adolescenata, uključujući njihovo ponašanje u školi i kod kuće, kao i odnose s vršnjacima i porodicom. Rano prepoznavanje i podrška mogu značajno pomoći u ublažavanju ovih problema."
+        },
+        "support": {
+          "title": "Kako podržati adolescente?",
+          "parent": {
+            "title": "Uloga roditelja",
+            "description": "Roditelji igraju ključnu ulogu u podršci adolescentima tokom ovog važnog razvojnog perioda. Podrška može uključivati:",
+            "communicating": {
+              "title": "Važnost otvorene komunikacije",
+              "description": "Otvorena komunikacija je od suštinskog značaja u odnosima između roditelja i adolescenata. Ona podrazumeva:",
+              "list": [
+                "Postavljanje osnova za dijalog: Roditelji treba da stvore atmosferu u kojoj adolescenti mogu slobodno da izraze svoje osećaje i brige bez straha od kritike ili osude.",
+                "Aktivno slušanje: Pokazivanje interesovanja za ono što adolescenti govore i razumevanje njihovih osećaja može pomoći u izgradnji poverenja.",
+                "Razgovor o mentalnom zdravlju: Otvorena diskusija o temama mentalnog zdravlja, kao što su stres, anksioznost i depresija, može ohrabriti adolescente da potraže pomoć ako im je potrebna."
+              ]
+            },
+            "awareness": {
+              "title": "Prepoznavanje znakova i reagovanje",
+              "description": "Roditelji bi trebalo da budu svesni znakova koji mogu ukazivati na probleme mentalnog zdravlja kod adolescenata:",
+              "list": [
+                "Obratite pažnju na promene: Budite oprezni na značajne promene u ponašanju, raspoloženju ili školskim postignućima. Ovo može uključivati povlačenje, razdražljivost ili pad u učenju.",
+                "Reagovanje na znake: Ako primetite znakove problema, važno je da reagujete odmah. Pogovorite s adolescentom o vašim zabrinutostima i ohrabrite ih da potraže stručnu pomoć ako je potrebno.",
+                "Podrška: Informišite se o dostupnim resursima, kao što su školski psiholozi ili terapeuti, savetovališta za mlade i sl."
+              ]
+            },
+            "conclusion": "Aktivna uloga roditelja u podršci adolescentima, otvorena komunikacija i pravovremeno reagovanje na znakove problema mentalnog zdravlja mogu značajno uticati na dobrobit mladih."
+          },
+          "teacher": {
+            "title": "Uloga nastavnika",
+            "description": "Nastavnici mogu imati važnu ulogu u podršci mentalnom zdravlju učenika kroz praćenje, stvaranje podržavajućeg okruženja i saradnju s roditeljima i stručnjacima. Njihova uloga može značajno uticati na dobrobit i razvoj adolescenata."
+          }
+        },
+        "improving": {
+          "title": "Strategije za poboljšanje mentalnog zdravlja",
+          "description": "Praktikovanje samopomoći ključno je za poboljšanje mentalnog zdravlja i dobrobiti. To podrazumeva aktivnosti i navike koje adolescenti mogu uključiti u svoje svakodnevne rutine:",
+          "list": [
+            "Samosvest: Razumevanje i prepoznavanje svojih emocija i potreba važan je korak u samoodržavanju. Ovo može uključivati vođenje dnevnika, gde adolescenti mogu zapisivati svoje osećaje i iskustva.",
+            "Upravljanje stresom: Učenje tehnika za upravljanje stresom, kao što su planiranje i organizovanje obaveza, može značajno smanjiti osećaj preopterećenosti.",
+            "Postavljanje granica: Razumevanje važnosti postavljanja granica u odnosima i obavezama može pomoći u očuvanju mentalnog zdravlja."
+          ],
+          "conclusion": "Primenom strategija za samopomoć, vežbama opuštanja i redovnom fizičkom aktivnošću, adolescenti mogu značajno poboljšati svoje mentalno zdravlje i dobrobit. Ove strategije pružaju osnovne alate za upravljanje stresom i poboljšanje kvaliteta života."
+        },
+        "help": {
+          "title": "Kome se obratiti za pomoć",
+          "description": "Kada se adolescenti suočavaju s problemima mentalnog zdravlja, važno je znati gde mogu potražiti pomoć. Neke od mogućih opcija uključuju:",
+          "list": [
+            "Školski psiholozi i pedagozi: Mogu pomoći u rešavanju problema ili uputiti na dalje resurse.",
+            "Lekari i terapeuti: Pedijatri u Domu zdravlja lekari mogu biti prva tačka kontakta. Oni mogu uputiti na specijaliste za mentalno zdravlje, kao što su psihijatri, psiholozi, psihoterapeuti.",
+            "Institut za mentalno zdravlje – Savetovalište za mlade, Milana Kašanina 3, 11000 Beograd (poznatija kao Palmotićeva)",
+            "Klinika za neurologiju, Klinički Centar Srbije, Dr. Subotića Starijeg 6",
+            "NADEL – Nacionalna dečija linija 166111"
+          ],
+          "conclusion": "Svi činioci — roditelji, nastavnici, vršnjaci i zajednica u celini — imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
+        }
+      }
+    }
   }
 }
 
