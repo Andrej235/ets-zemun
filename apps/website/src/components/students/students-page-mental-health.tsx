@@ -4,7 +4,7 @@ export default function StudentsPageMentalHealth() {
 
       <h1>Mentalno zdravlje</h1>
 
-      <div className="understanding">
+      <div className="mental-health-description">
         <h2>Razumevanje adolescentnog perioda</h2>
 
         <p>
@@ -41,7 +41,7 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="stress">
+      <div className="mental-health-description">
         <h2>
           Adolescencija nosi brojne izazove i stresore koji mogu uticati na
           mentalno zdravlje:
@@ -118,7 +118,7 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="symptoms">
+      <div className="mental-health-description">
         <h2>Znakovi i simptomi problema mentalnog zdravlja</h2>
 
         <ul>
@@ -152,7 +152,7 @@ export default function StudentsPageMentalHealth() {
         </ul>
       </div>
 
-      <div className="signs">
+      <div className="mental-health-description">
         <h2>
           Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti
           izazovno, ali postoje znakovi na koje treba obratiti pažnju:
@@ -204,11 +204,11 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="impact">
+      <div className="mental-health-description">
         <h2>Uticaj na svakodnevni život</h2>
 
-        <div className="behaviour">
-          <h2>Ponašanje u školi i kod kuće</h2>
+        <div className="mental-health-description-item">
+          <h3>Ponašanje u školi i kod kuće</h3>
           <p>
             Problemi mentalnog zdravlja mogu značajno uticati na ponašanje
             adolescenata u različitim okruženjima, uključujući školu i dom.
@@ -236,8 +236,8 @@ export default function StudentsPageMentalHealth() {
           </ul>
         </div>
 
-        <div className="relationships">
-          <h2>Odnosi s vršnjacima i porodicom</h2>
+        <div className="mental-health-description-item">
+          <h3>Odnosi s vršnjacima i porodicom</h3>
 
           <p>
             Mentalno zdravlje adolescenata u velikoj meri utiče i na njihove
@@ -275,18 +275,18 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="support">
+      <div className="mental-health-description">
         <h2>Kako podržati adolescente?</h2>
 
-        <div className="parent-support">
-          <h2>Uloga roditelja</h2>
+        <div className="mental-health-description-item">
+          <h3>Uloga roditelja</h3>
 
           <p>
             Roditelji igraju ključnu ulogu u podršci adolescentima tokom ovog
             važnog razvojnog perioda. Podrška može uključivati:
           </p>
 
-          <h2>Važnost otvorene komunikacije</h2>
+          <h3>Važnost otvorene komunikacije</h3>
           <p>
             Otvorena komunikacija je od suštinskog značaja u odnosima između
             roditelja i adolescenata. Ona podrazumeva:
@@ -312,7 +312,7 @@ export default function StudentsPageMentalHealth() {
             </li>
           </ul>
 
-          <h2>Prepoznavanje znakova i reagovanje</h2>
+          <h3>Prepoznavanje znakova i reagovanje</h3>
 
           <p>
             Roditelji bi trebalo da budu svesni znakova koji mogu ukazivati na
@@ -345,8 +345,8 @@ export default function StudentsPageMentalHealth() {
           </p>
         </div>
 
-        <div className="teacher-support">
-          <h2>Uloga nastavnika</h2>
+        <div className="mental-health-description-item">
+          <h3>Uloga nastavnika</h3>
 
           <p>
             Nastavnici mogu imati važnu ulogu u podršci mentalnom zdravlju
@@ -357,7 +357,7 @@ export default function StudentsPageMentalHealth() {
         </div>
       </div>
 
-      <div className="self-help">
+      <div className="mental-health-description">
         <h2>Strategije za poboljšanje mentalnog zdravlja</h2>
 
         <p>
@@ -393,7 +393,7 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="help">
+      <div className="mental-health-description">
         <h2>Kome se obratiti za pomoć</h2>
 
         <p>
