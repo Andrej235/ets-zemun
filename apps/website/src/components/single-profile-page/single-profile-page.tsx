@@ -6,6 +6,7 @@ import SingleProfilePageLoader from "./single-profile-page-loader";
 import "./single-profile-page.scss";
 import Async from "@better-router/async";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import SubjectOverlay from "./subject-overlay";
 
 type SubjectItem = {
   name: string;
@@ -52,27 +53,15 @@ export default function SingleProfilePage() {
     <div className="single-profile-page">
       <div className={"overlay" + (selectedSubject ? " active" : "")}>
         {selectedSubject && (
-          <motion.div
-            layout
-            layoutId={selectedSubject.subject.subject.name}
-            className={
-              "full-screen-subject-container subject-item " +
-              selectedSubject.type
-            }
-            ref={selectedSubjectRef}
+          <SubjectOverlay
+            key={selectedSubject.subject.subjectId}
             onLayoutAnimationComplete={() => {
               isInAnimation.current = false;
             }}
-          >
-            <motion.p layout className="subject-name">
-              {selectedSubject.subject.subject.name}
-            </motion.p>
-            <motion.p className="subject-count" layout>
-              {selectedSubject.subject.perWeek}x nedeljno
-            </motion.p>
-
-            <button onClick={() => console.log("hi")}>Hi</button>
-          </motion.div>
+            subject={selectedSubject.subject}
+            type={selectedSubject.type}
+            ref={selectedSubjectRef}
+          />
         )}
       </div>
 
