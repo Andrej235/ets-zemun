@@ -1,55 +1,11 @@
-import { useState } from "react";
-
 export default function StudentsPageMentalHealth() {
   return (
     <div className="mental-health">
-      <FrequentlyAskedQuestion
-        question="Šta je mentalno zdravlje?"
-        answer="Mentalno zdravlje odnosi se na naše emocionalno, psihološko i socijalno blagostanje. Utiče na način na koji razmišljamo, osećamo i ponašamo se. Mentalno zdravlje je ključno za razvijanje svesti o sebi, donošenje odluka, izgradnju odnosa i prevazilaženje svakodnevnih izazova. Ono podrazumeva da koristimo svoje sposobnosti i potencijale – da se nosimo s teškoćama, upravljamo stresom, održavamo pozitivnu sliku o sebi. Kod adolescenata, mentalno zdravlje može značajno uticati na samopouzdanje, školski uspeh i opštu dobrobit."
-      />
 
-      <FrequentlyAskedQuestion question="Koji je značaj mentalnog zdravlja za adolescente?">
-        <p>
-          <span>
-            Mentalno zdravlje je izuzetno važno za adolescente iz više razloga.
-            U ovom periodu života, mladi se suočavaju s brojnim promenama i
-            izazovima, kao što su formiranje identiteta, socijalizacija i
-            stresovi u školi. Dobro mentalno zdravlje pomaže im da:
-          </span>
+      <h1>Mentalno zdravlje</h1>
 
-          <ul>
-            <li>
-              Izgrade samopouzdanje: Zdravo mentalno stanje podstiče adolescente
-              da veruju u svoje sposobnosti, što im omogućava da se lakše suoče
-              sa izazovima.
-            </li>
-            <li>
-              Upravljaju stresom: Razumevanje i upravljanje stresom ključno je
-              za uspeh u školi i životu.
-            </li>
-            <li>
-              Razvijaju odnose: Razvijeno mentalno zdravlje pomaže u izgradnji i
-              održavanju pozitivnih odnosa sa vršnjacima i porodicom.
-            </li>
-            <li>
-              Postignu uspeh u školi: Adolescenti s dobrim mentalnim zdravljem
-              su skloniji boljim školskim uspesima, jer mogu da se fokusiraju i
-              aktivno uče.
-            </li>
-          </ul>
-
-          <span>
-            Podrška mentalnom zdravlju može sprečiti razvoj ozbiljnijih
-            mentalnih problema, kao što su depresija ili anksioznost. Održavanje
-            dobrog mentalnog zdravlja u adolescenciji ne samo da poboljšava
-            kvalitet života mladih, već i postavlja osnove za zdraviji i
-            uspešniji odrasli život.
-          </span>
-        </p>
-      </FrequentlyAskedQuestion>
-
-      <div className="understanding">
-        <h1>Razumevanje adolescentnog perioda</h1>
+      <div className="mental-health-description">
+        <h2>Razumevanje adolescentnog perioda</h2>
 
         <p>
           Adolescencija je period intenzivnih promena koji obuhvata fizički,
@@ -85,11 +41,11 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="stress">
-        <h1>
+      <div className="mental-health-description">
+        <h2>
           Adolescencija nosi brojne izazove i stresore koji mogu uticati na
           mentalno zdravlje:
-        </h1>
+        </h2>
 
         <ul>
           <li>
@@ -162,8 +118,8 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="symptoms">
-        <h1>Znakovi i simptomi problema mentalnog zdravlja</h1>
+      <div className="mental-health-description">
+        <h2>Znakovi i simptomi problema mentalnog zdravlja</h2>
 
         <ul>
           <li>
@@ -196,11 +152,11 @@ export default function StudentsPageMentalHealth() {
         </ul>
       </div>
 
-      <div className="signs">
-        <h1>
+      <div className="mental-health-description">
+        <h2>
           Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti
           izazovno, ali postoje znakovi na koje treba obratiti pažnju:
-        </h1>
+        </h2>
 
         <ul>
           <li>
@@ -248,11 +204,11 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="impact">
-        <h1>Uticaj na svakodnevni život</h1>
+      <div className="mental-health-description">
+        <h2>Uticaj na svakodnevni život</h2>
 
-        <div className="behaviour">
-          <h2>Ponašanje u školi i kod kuće</h2>
+        <div className="mental-health-description-item">
+          <h3>Ponašanje u školi i kod kuće</h3>
           <p>
             Problemi mentalnog zdravlja mogu značajno uticati na ponašanje
             adolescenata u različitim okruženjima, uključujući školu i dom.
@@ -280,8 +236,8 @@ export default function StudentsPageMentalHealth() {
           </ul>
         </div>
 
-        <div className="relationships">
-          <h2>Odnosi s vršnjacima i porodicom</h2>
+        <div className="mental-health-description-item">
+          <h3>Odnosi s vršnjacima i porodicom</h3>
 
           <p>
             Mentalno zdravlje adolescenata u velikoj meri utiče i na njihove
@@ -319,53 +275,18 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="support">
-        <h1>Kako podržati adolescente?</h1>
+      <div className="mental-health-description">
+        <h2>Kako podržati adolescente?</h2>
 
-        <div className="parent-support">
-          <h2>Uloga roditelja</h2>
+        <div className="mental-health-description-item">
+          <h3>Uloga roditelja</h3>
 
           <p>
             Roditelji igraju ključnu ulogu u podršci adolescentima tokom ovog
             važnog razvojnog perioda. Podrška može uključivati:
           </p>
 
-          <FrequentlyAskedQuestion
-            question="Stvaranje podsticajnog okruženja"
-            answer="Roditelji mogu pomoći adolescentima da se osećaju sigurno i prihvaćeno, podstičući ih da istražuju svoje interese i hobije. Ovo može pomoći u razvoju samopouzdanja i nezavisnosti."
-          />
-
-          <FrequentlyAskedQuestion question="Pružanje emocionalne podrške">
-            <p>
-              Budite dostupni za razgovor i ohrabrujte adolescente da dele svoje
-              misli i osećanja. Često slušanje i razumevanje mogu značajno
-              pomoći u ublažavanju stresa i anksioznosti.
-            </p>
-
-            <p className="advice">
-              Savet: Kad god vam se ukaže prilika slušajte svoje dete šta vam
-              govori i razgovarajte sa njim. Nekada će to biti u pola noći,
-              nekada u tramvaju, nekada kada ste umorni… Smognite snage, ne
-              odlažite za sledeći put jer vam se dete možda neće otvoriti
-              sledeći put – možda je baš sada smoglo snage da vam nešto važno
-              kaže.
-            </p>
-          </FrequentlyAskedQuestion>
-
-          <FrequentlyAskedQuestion question="Omogućavanje samostalnosti">
-            <p>
-              Davanje adolescentima mogućnosti da donose odluke i preuzmu
-              odgovornosti može ih osnažiti i pripremiti za odrasle obaveze.
-            </p>
-
-            <p>
-              Savet: Pustite ih da pogreše, uče iz svojih grešaka i budu
-              odgovorni za sebe. Naravno, govorimo o životno bezazlenim
-              situacijama.
-            </p>
-          </FrequentlyAskedQuestion>
-
-          <h2>Važnost otvorene komunikacije</h2>
+          <h3>Važnost otvorene komunikacije</h3>
           <p>
             Otvorena komunikacija je od suštinskog značaja u odnosima između
             roditelja i adolescenata. Ona podrazumeva:
@@ -391,7 +312,7 @@ export default function StudentsPageMentalHealth() {
             </li>
           </ul>
 
-          <h2>Prepoznavanje znakova i reagovanje</h2>
+          <h3>Prepoznavanje znakova i reagovanje</h3>
 
           <p>
             Roditelji bi trebalo da budu svesni znakova koji mogu ukazivati na
@@ -424,8 +345,8 @@ export default function StudentsPageMentalHealth() {
           </p>
         </div>
 
-        <div className="teacher-support">
-          <h1>Uloga nastavnika</h1>
+        <div className="mental-health-description-item">
+          <h3>Uloga nastavnika</h3>
 
           <p>
             Nastavnici mogu imati važnu ulogu u podršci mentalnom zdravlju
@@ -433,97 +354,11 @@ export default function StudentsPageMentalHealth() {
             s roditeljima i stručnjacima. Njihova uloga može značajno uticati na
             dobrobit i razvoj adolescenata.
           </p>
-
-          <FrequentlyAskedQuestion question="Pratiti promene u ponašanju učenika">
-            <p>
-              Nastavnici igraju važnu ulogu u prepoznavanju promena u ponašanju
-              učenika. Pažljivo posmatranje učenika može pomoći u
-              identifikovanju znakova problema mentalnog zdravlja. Ključni
-              aspekti uključuju:
-            </p>
-
-            <ul>
-              <li>
-                Identifikovanje znakova: Promene kod učinka, izostanaci,
-                nedostatak interesovanja za učenje ili povlačenje iz društvenih
-                aktivnosti. Ove promene mogu ukazivati na dublje probleme.
-              </li>
-
-              <li>
-                Razgovaranje s učenicima: Stvaranje poverenja i otvorene
-                komunikacije može ohrabriti učenike da dele svoje brige ili
-                probleme. Nastavnici mogu biti prva osoba s kojom učenik
-                razgovara o svojim osećanjima.
-              </li>
-
-              <li>
-                Prijavljivanje zabrinutosti: Kada nastavnici primete znake
-                problema, važno je da o tome obaveste nadležne osobe u školi,
-                odeljenjske starešine, školskog psihologa ili pedagoga, koji
-                mogu pružiti dodatnu podršku.
-              </li>
-            </ul>
-          </FrequentlyAskedQuestion>
-
-          <FrequentlyAskedQuestion question="Kreiranje podržavajućeg okruženja">
-            <p>
-              Nastavnici mogu značajno uticati na mentalno zdravlje učenika
-              stvaranjem podržavajućeg okruženja:
-            </p>
-
-            <ul>
-              <li>
-                Promovisanje inkluzije: Svi učenici treba da se osećaju
-                prihvaćeno i vrednovano. Nastavnici mogu podsticati saradnju i
-                podršku među učenicima.
-              </li>
-
-              <li>
-                Ohrabrivanje otvorenog dijaloga: Kreiranje prostora u kojem
-                učenici mogu slobodno izraziti svoje misli i osećanja može
-                pomoći u smanjenju stigme oko mentalnog zdravlja.
-              </li>
-
-              <li>
-                Pružanje resursa: Nastavnici mogu informisati učenike o
-                resursima za podršku, kao što su školski psiholozi, i
-                ohrabrivati ih da potraže pomoć kada je potrebno.
-              </li>
-            </ul>
-          </FrequentlyAskedQuestion>
-
-          <FrequentlyAskedQuestion question="Saradnja s roditeljima i stručnjacima">
-            <p>
-              Saradnja s roditeljima i stručnjacima ključna je za pružanje
-              sveobuhvatne podrške učenicima:
-            </p>
-
-            <ul>
-              <li>
-                Komunikacija s roditeljima: Redovna komunikacija s roditeljima o
-                učinku i ponašanju učenika, deljenje svojih utisaka i
-                ohrabrivanje roditelje da se uključe u proces podrške.
-              </li>
-              <li>
-                Saradnja sa stručnjacima: Nastavnici / odeljenjske starešine,
-                mogu sarađivati sa školskim psihologom, pedagogom i drugim
-                stručnjacima da bi osigurali da učenici dobiju odgovarajuću
-                pomoć i podršku.
-              </li>
-
-              <li>
-                Timski pristup: Uvek je korisno raditi u timu kako bi se razvili
-                individualni planovi podrške za učenike koji se suočavaju s
-                mentalnim zdravstvenim problemima. Ovaj pristup osigurava da svi
-                uključeni imaju jasnu strategiju za pomoć.
-              </li>
-            </ul>
-          </FrequentlyAskedQuestion>
         </div>
       </div>
 
-      <div className="self-help">
-        <h1>Strategije za poboljšanje mentalnog zdravlja</h1>
+      <div className="mental-health-description">
+        <h2>Strategije za poboljšanje mentalnog zdravlja</h2>
 
         <p>
           Praktikovanje samopomoći ključno je za poboljšanje mentalnog zdravlja
@@ -550,52 +385,6 @@ export default function StudentsPageMentalHealth() {
           </li>
         </ul>
 
-        <FrequentlyAskedQuestion question="Vežbe opuštanja i meditacija su efikasni alati za poboljšanje mentalnog zdravlja">
-          <ul>
-            <li>
-              Tehnike dubokog disanja: Praktikovanje dubokog disanja može pomoći
-              u smanjenju anksioznosti i stresa. Ove tehnike uključuju polagano
-              i duboko udahivanje, čime se aktivira parasimpatički nervni sistem
-              i podstiče opuštanje.
-            </li>
-
-            <li>
-              Meditacija: Meditacija, uključujući vođene meditacije i tehnike
-              usmeravanja pažnje, može poboljšati koncentraciju i smanjiti
-              stres. Čak i kratke sesije meditacije mogu biti korisne.
-            </li>
-
-            <li>
-              Joga: Joga kombinuje fizičke vežbe, disanje i meditaciju, što je
-              idealno za opuštanje uma i tela. Pružanje fleksibilnosti i fizičke
-              snage istovremeno pozitivno utiče na mentalno zdravlje.
-            </li>
-          </ul>
-        </FrequentlyAskedQuestion>
-
-        <FrequentlyAskedQuestion question="Fizička aktivnost i zdrave navike u ishrani igraju značajnu ulogu u održavanju mentalnog zdravlja">
-          <ul>
-            <li>
-              Fizička aktivnost: Redovna fizička aktivnost oslobađa endorfine,
-              hormone koji poboljšavaju raspoloženje. Čak i kratke šetnje ili
-              vežbe u prirodi mogu značajno poboljšati mentalno stanje.
-            </li>
-
-            <li>
-              Zdrava ishrana: Uravnotežena ishrana, koja uključuje voće, povrće,
-              cela zrna i zdrave masti, važna je za mentalno zdravlje. Neke
-              studije ukazuju na vezu između ishrane i raspoloženja, te je važno
-              izbegavati prerađenu hranu i prekomerni šećer.
-            </li>
-
-            <li>
-              Hidratacija: Dovoljan unos vode takođe igra važnu ulogu u
-              održavanju energije i koncentracije. Dehidratacija može negativno
-              uticati na raspoloženje i kognitivne funkcije.
-            </li>
-          </ul>
-        </FrequentlyAskedQuestion>
-
         <p>
           Primenom strategija za samopomoć, vežbama opuštanja i redovnom
           fizičkom aktivnošću, adolescenti mogu značajno poboljšati svoje
@@ -604,8 +393,8 @@ export default function StudentsPageMentalHealth() {
         </p>
       </div>
 
-      <div className="help">
-        <h1>Kome se obratiti za pomoć</h1>
+      <div className="mental-health-description">
+        <h2>Kome se obratiti za pomoć</h2>
 
         <p>
           Kada se adolescenti suočavaju s problemima mentalnog zdravlja, važno
@@ -649,29 +438,3 @@ export default function StudentsPageMentalHealth() {
     </div>
   );
 }
-
-type FAQProps = {
-  readonly question: string;
-} & (
-  | { readonly answer: string; children?: never }
-  | { readonly children: React.ReactNode; answer?: never }
-);
-
-function FrequentlyAskedQuestion({ question, answer, children }: FAQProps) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="faq">
-      <button onClick={() => setOpen(!open)}>
-        <p className="question">{question}</p>
-      </button>
-
-      {open && (
-        <div className="answer">
-          {typeof answer === "string" ? <p>{answer}</p> : children}
-        </div>
-      )}
-    </div>
-  );
-}
-

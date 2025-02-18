@@ -422,6 +422,85 @@
         font-size: 1.6rem;
       }
     }
+
+    .mental-health {
+      align-self: center;
+      width: 80%;
+      max-width: 120rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & > h1 {
+        margin-bottom: 8rem;
+
+        font-size: 4rem;
+        color: $text-primary;
+        text-align: center;
+      }
+
+      & > h2 {
+        width: 100%;
+        margin-bottom: 3rem;
+
+        font-size: 3rem;
+        font-weight: 500;
+        color: $text-primary;
+        text-align: start;
+      }
+
+      .mental-health-description {
+        width: 100;
+        margin-bottom: 8rem;
+
+        & > h2 {
+          width: 100%;
+          margin-bottom: 3rem;
+  
+          font-size: 3rem;
+          font-weight: 500;
+          color: $text-primary;
+          text-align: start;
+        }
+
+        p {
+          font-size: 1.8rem;
+          color: $text-primary;
+        }
+      }
+
+      .mental-health-description-item {
+        width: 100;
+        margin-bottom: 4rem;
+
+        & > h3 {
+          width: 100%;
+          margin-bottom: 2rem;
+          margin-top: 2rem;
+  
+          font-size: 2.6rem;
+          font-weight: 400;
+          color: $text-primary;
+          text-align: start;
+        }
+  
+        p {
+          font-size: 1.8rem;
+          color: $text-primary;
+        }
+      }
+
+      ul {
+        width: 100%;
+        align-self: start;
+        margin-bottom: 8rem;
+
+        align-items: flex-start;
+
+        font-size: 1.6rem;
+      }
+    }
   }
 
   .table-container {
