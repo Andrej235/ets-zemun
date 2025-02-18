@@ -1,13 +1,15 @@
-import { LoaderFunctionArgs } from "react-router";
+import { LoaderFunctionArgs, redirect } from "react-router";
 
 type LoaderInit<T extends { [key: string]: object } | Promise<P>, P> = (args: {
   params: Record<string, string>;
   request: Request;
 }) => LoaderInitData<T>;
 
-type LoaderInitData<T> = T | Response | null;
+type LoaderInitData<T> = T | ReturnType<typeof redirect> | null;
 
-export type Loader<T> = (x: LoaderFunctionArgs) => Promise<T | Response | null>;
+export type Loader<T> = (
+  x: LoaderFunctionArgs
+) => Promise<T | ReturnType<typeof redirect> | null>;
 
 export type LoaderReturnType<C extends Loader<unknown>> = C extends Loader<
   infer T
@@ -21,7 +23,7 @@ export default function createLoader<
 >(loader: LoaderInit<T, P>): Loader<T> {
   return async (x: LoaderFunctionArgs) => {
     try {
-      const data: T | Response | null = loader({
+      const data: T | ReturnType<typeof redirect> | null = loader({
         params: x.params as Record<string, string>,
         request: x.request,
       });
