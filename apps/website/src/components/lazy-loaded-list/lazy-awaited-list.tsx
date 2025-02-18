@@ -41,6 +41,7 @@ type LazyLoadedListProps<
   ) => React.ReactNode;
   readonly success: C;
   readonly loadMoreOn?: `${number}%`;
+  readonly skeleton?: React.ReactNode;
 };
 
 export default function LazyLoadedList<
@@ -52,12 +53,13 @@ export default function LazyLoadedList<
   children,
   success,
   loadMoreOn = "85%",
+  skeleton,
 }: LazyLoadedListProps<R, C, T>) {
   const markerRef = useRef<HTMLDivElement>(null);
   const [currentResponse, setCurrentResponse] = useState<R>(data);
-
   const [loadedResponse, setLoadedResponse] =
     useState<LazyLoadResponse<unknown> | null>(null);
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
   const sentCursor = useRef<string | null>(null);
   const isWaiting = useRef(false);
@@ -72,12 +74,14 @@ export default function LazyLoadedList<
 
         const response = x.content as LazyLoadResponse<unknown>;
         setLoadedResponse(response);
+        setShowSkeleton(false);
       }
 
       return x;
     });
 
     setCurrentResponse(newResponse as R);
+    setShowSkeleton(true);
   }, [data, success]);
 
   const loadMore = useCallback(async () => {
@@ -109,12 +113,14 @@ export default function LazyLoadedList<
           newResponse.items
         );
         setLoadedResponse(newResponse);
+        setShowSkeleton(false);
       }
 
       return x;
     }) as R;
 
     setCurrentResponse(newResponse);
+    setShowSkeleton(true);
     return newResponse;
   }, [currentResponse, success]);
 
@@ -182,6 +188,7 @@ export default function LazyLoadedList<
     <>
       {marker}
       {memoizedChildren}
+      {showSkeleton && skeleton}
     </>
   );
 }

@@ -12,7 +12,27 @@ export default function Teachers() {
       <h1>Nastavnici</h1>
 
       <div className="teacher-cards-container">
-        <LazyAwaitedList data={loaderData} success="OK">
+        <LazyAwaitedList
+          data={loaderData}
+          success="OK"
+          skeleton={Array.from({ length: 9 }).map((_, i) => (
+            <TeacherCard
+              teacher={{
+                id: i,
+                name: "Nastavnik",
+                bio: "Bio",
+                email: "email",
+                image: "",
+                qualifications: [],
+                startOfOpenOfficeHoursFirstShift: "",
+                startOfOpenOfficeHoursSecondShift: "",
+                subjects: [],
+                title: "",
+              }}
+              key={"skeleton_" + i}
+            />
+          ))}
+        >
           {(data) => {
             return <TeacherCard teacher={data} key={data.id} />;
           }}
