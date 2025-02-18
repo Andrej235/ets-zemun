@@ -19,6 +19,7 @@ import Enrollment from "@components/enrollment/enrollment.tsx";
 import AdminLogin from "@components/admin-login/admin-login.tsx";
 import "./i18n.ts";
 import teacherLoader from "@components/teachers/teachers-loader.ts";
+import awardsLoader from "@components/awards/awards-loader.ts";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
       {
         path: "/takmicenja",
         element: <Awards />,
+        loader: awardsLoader,
       },
       {
         path: "nastavnici",
