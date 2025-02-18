@@ -9,10 +9,6 @@
       "url": "/apps/website/src/assets/json-data/schemas/profile.schema.json"
     },
     {
-      "fileMatch": ["subjects.json"],
-      "url": "/apps/website/src/assets/json-data/schemas/subject-definitions.schema.json"
-    },
-    {
       "fileMatch": ["search-map.json"],
       "url": "/apps/website/src/assets/json-data/schemas/search-map.schema.json"
     },
