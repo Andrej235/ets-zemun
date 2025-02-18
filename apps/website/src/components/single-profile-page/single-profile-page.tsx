@@ -1,18 +1,12 @@
+import Async from "@better-router/async";
 import useLoader from "@better-router/use-loader";
 import useOutsideClick from "@hooks/use-outside-click";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { AnimatePresence, motion } from "motion/react";
-import { MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SingleProfilePageLoader from "./single-profile-page-loader";
 import "./single-profile-page.scss";
-import Async from "@better-router/async";
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import SubjectOverlay from "./subject-overlay";
-
-type SubjectItem = {
-  name: string;
-  count: number;
-  type: "general" | "vocational";
-};
 
 export default function SingleProfilePage() {
   const loaderData = useLoader<typeof SingleProfilePageLoader>();
@@ -195,6 +189,21 @@ export default function SingleProfilePage() {
 
             const subjects = response.content;
 
+            const mapped = subjects.generalSubjects
+              .filter((x) => x.year === selectedYear)
+              .map((x) => ({
+                ...x,
+                type: "general" as "general" | "vocational",
+              }))
+              .concat(
+                subjects.vocationalSubjects
+                  .filter((x) => x.year === selectedYear)
+                  .map((x) => ({
+                    ...x,
+                    type: "vocational",
+                  }))
+              );
+
             return (
               <>
                 <div className="year-selector">
@@ -220,39 +229,37 @@ export default function SingleProfilePage() {
 
                 <div className="subjects-list">
                   <AnimatePresence mode="popLayout">
-                    {subjects.generalSubjects
-                      .filter((x) => x.year === selectedYear)
-                      .map((x) => (
-                        <SubjectItem
-                          key={`${x.subjectId},${x.year}`}
-                          subjectItem={x}
-                          type="general"
-                          isInAnimation={isInAnimation}
-                          setSelectedSubject={() =>
-                            setSelectedSubject({
-                              subject: x,
-                              type: "general",
-                            })
-                          }
-                        />
-                      ))}
+                    {mapped.map((x) => (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        layout
+                        onLayoutAnimationComplete={() => {
+                          isInAnimation.current = false;
+                        }}
+                        layoutId={x.subject.name}
+                        key={x.subject.name}
+                        className={"subject-item " + x.type}
+                        onClick={() => {
+                          if (isInAnimation.current) return;
 
-                    {subjects.vocationalSubjects
-                      .filter((x) => x.year === selectedYear)
-                      .map((x) => (
-                        <SubjectItem
-                          key={`${x.subjectId},${x.year}`}
-                          subjectItem={x}
-                          type="vocational"
-                          isInAnimation={isInAnimation}
-                          setSelectedSubject={() =>
-                            setSelectedSubject({
-                              subject: x,
-                              type: "vocational",
-                            })
-                          }
-                        />
-                      ))}
+                          isInAnimation.current = true;
+                          setSelectedSubject({
+                            subject: x,
+                            type: x.type,
+                          });
+                        }}
+                      >
+                        <motion.p layout className="subject-name">
+                          {x.subject.name}
+                        </motion.p>
+                        <motion.p layout className="subject-count">
+                          {x.perWeek}x nedeljno
+                        </motion.p>
+                      </motion.div>
+                    ))}
                   </AnimatePresence>
                 </div>
               </>
@@ -261,49 +268,6 @@ export default function SingleProfilePage() {
         </Async>
       </div>
     </div>
-  );
-}
-
-type SubjectItemProps = {
-  readonly subjectItem: Schema<"ProfileSubjectResponseDto">;
-  readonly type: "general" | "vocational";
-  readonly isInAnimation: MutableRefObject<boolean>;
-  readonly setSelectedSubject: () => void;
-};
-
-function SubjectItem({
-  subjectItem,
-  type,
-  isInAnimation,
-  setSelectedSubject: selectSubject,
-}: SubjectItemProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      layout
-      onLayoutAnimationComplete={() => {
-        isInAnimation.current = false;
-      }}
-      layoutId={subjectItem.subject.name}
-      key={subjectItem.subject.name}
-      className={"subject-item " + type}
-      onClick={() => {
-        if (isInAnimation.current) return;
-
-        isInAnimation.current = true;
-        selectSubject();
-      }}
-    >
-      <motion.p layout className="subject-name">
-        {subjectItem.subject.name}
-      </motion.p>
-      <motion.p layout className="subject-count">
-        {subjectItem.perWeek}x nedeljno
-      </motion.p>
-    </motion.div>
   );
 }
 
