@@ -8,8 +8,8 @@ public interface IEducationalProfileService
 {
     Task<Result> Create(CreateEducationalProfileRequestDto request);
 
-    Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll();
-    Task<Result<EducationalProfileResponseDto>> GetSingle(int id);
+    Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll(string languageCode);
+    Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> Update(UpdateEducationalProfileRequestDto request);
 

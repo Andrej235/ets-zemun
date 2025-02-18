@@ -29,9 +29,11 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<EducationalProfileResponseDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<EducationalProfileResponseDto>>> GetAll(
+        [FromQuery] string languageCode
+    )
     {
-        var result = await profileService.GetAll();
+        var result = await profileService.GetAll(languageCode);
 
         if (result.IsFailed)
             return BadRequest(); //This can probably not ever occur (because, no language), but still feels weird to omit it
@@ -42,9 +44,12 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<EducationalProfileResponseDto>> GetSingle(int id)
+    public async Task<ActionResult<EducationalProfileResponseDto>> GetSingle(
+        int id,
+        [FromQuery] string languageCode
+    )
     {
-        var result = await profileService.GetSingle(id);
+        var result = await profileService.GetSingle(id, languageCode);
 
         if (result.IsFailed)
             return NotFound();

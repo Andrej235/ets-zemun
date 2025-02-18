@@ -179,6 +179,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'EducationalProfiles' ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -219,7 +220,7 @@ export type APIMap = {
     '/profile/{id}': {
       get: {
         tags: [ 'EducationalProfiles' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
