@@ -35,6 +35,19 @@ export default function SingleProfilePage() {
     setSelectedSubject(null);
   });
 
+  function getYearName(year: number) {
+    switch (year) {
+      case 1:
+        return "I";
+      case 2:
+        return "II";
+      case 3:
+        return "III";
+      case 4:
+        return "IV";
+    }
+  }
+
   return (
     <div className="single-profile-page">
       <div className={"overlay" + (selectedSubject ? " active" : "")}>
@@ -187,83 +200,76 @@ export default function SingleProfilePage() {
       </div>
 
       <div className="subjects-container">
-        <div className="year-selector">
-          <button
-            className={selectedYear === 1 ? "selected" : ""}
-            onClick={() => handleYearChange(1)}
-          >
-            <p>I</p>
-          </button>
+        <Async await={loaderData}>
+          {(response) => {
+            if (response.code !== "OK") return null;
 
-          <button
-            className={selectedYear === 2 ? "selected" : ""}
-            onClick={() => handleYearChange(2)}
-          >
-            <p>II</p>
-          </button>
+            const subjects = response.content;
 
-          <button
-            className={selectedYear === 3 ? "selected" : ""}
-            onClick={() => handleYearChange(3)}
-          >
-            <p>III</p>
-          </button>
+            return (
+              <>
+                <div className="year-selector">
+                  {Array.from(
+                    [
+                      ...new Set(
+                        [
+                          ...subjects.generalSubjects,
+                          ...subjects.vocationalSubjects,
+                        ].map((x) => x.year)
+                      ),
+                    ].map((year) => (
+                      <button
+                        key={year}
+                        className={selectedYear === year ? "selected" : ""}
+                        onClick={() => handleYearChange(year)}
+                      >
+                        <p>{getYearName(year)}</p>
+                      </button>
+                    ))
+                  )}
+                </div>
 
-          <button
-            className={selectedYear === 4 ? "selected" : ""}
-            onClick={() => handleYearChange(4)}
-          >
-            <p>IV</p>
-          </button>
-        </div>
+                <div className="subjects-list">
+                  <AnimatePresence mode="popLayout">
+                    {subjects.generalSubjects
+                      .filter((x) => x.year === selectedYear)
+                      .map((x) => (
+                        <SubjectItem
+                          key={`${x.subjectId},${x.year}`}
+                          subjectItem={x}
+                          type="general"
+                          isInAnimation={isInAnimation}
+                          setSelectedSubject={() =>
+                            setSelectedSubject({
+                              subject: x,
+                              type: "general",
+                            })
+                          }
+                        />
+                      ))}
 
-        <div className="subjects-list">
-          <Async await={loaderData}>
-            {(response) => {
-              if (response.code !== "OK") return null;
-
-              const subjects = response.content;
-
-              return (
-                <AnimatePresence mode="popLayout">
-                  {subjects.generalSubjects
-                    .filter((x) => x.year === selectedYear)
-                    .map((x) => (
-                      <SubjectItem
-                        key={`${x.subjectId},${x.year}`}
-                        subjectItem={x}
-                        type="general"
-                        isInAnimation={isInAnimation}
-                        setSelectedSubject={() =>
-                          setSelectedSubject({
-                            subject: x,
-                            type: "general",
-                          })
-                        }
-                      />
-                    ))}
-
-                  {subjects.vocationalSubjects
-                    .filter((x) => x.year === selectedYear)
-                    .map((x) => (
-                      <SubjectItem
-                        key={`${x.subjectId},${x.year}`}
-                        subjectItem={x}
-                        type="vocational"
-                        isInAnimation={isInAnimation}
-                        setSelectedSubject={() =>
-                          setSelectedSubject({
-                            subject: x,
-                            type: "vocational",
-                          })
-                        }
-                      />
-                    ))}
-                </AnimatePresence>
-              );
-            }}
-          </Async>
-        </div>
+                    {subjects.vocationalSubjects
+                      .filter((x) => x.year === selectedYear)
+                      .map((x) => (
+                        <SubjectItem
+                          key={`${x.subjectId},${x.year}`}
+                          subjectItem={x}
+                          type="vocational"
+                          isInAnimation={isInAnimation}
+                          setSelectedSubject={() =>
+                            setSelectedSubject({
+                              subject: x,
+                              type: "vocational",
+                            })
+                          }
+                        />
+                      ))}
+                  </AnimatePresence>
+                </div>
+              </>
+            );
+          }}
+        </Async>
       </div>
     </div>
   );

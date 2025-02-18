@@ -82,7 +82,12 @@ namespace EtsZemun.Data
 
             modelBuilder.Entity<EducationalProfileVocationalSubject>(vocationalSubject =>
             {
-                vocationalSubject.HasKey(v => new { v.EducationalProfileId, v.SubjectId });
+                vocationalSubject.HasKey(v => new
+                {
+                    v.EducationalProfileId,
+                    v.SubjectId,
+                    v.Year,
+                });
 
                 vocationalSubject
                     .HasOne(v => v.Subject)
