@@ -38,6 +38,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
     useState<LazyLoadResponse<unknown>>(initialResponse);
 
   const sentCursor = useRef<string | null>(null);
+  const preserveScroll = useRef(false);
 
   const loadMore = useCallback(async () => {
     if (
@@ -69,6 +70,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
     newResponseContent.items = currentResponse.items.concat(
       newResponseContent.items
     );
+    preserveScroll.current = true;
     setCurrentResponse(newResponseContent);
 
     sentCursor.current = null;
@@ -104,7 +106,8 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
 
   const { scrollY } = useScroll();
   useLayoutEffect(() => {
-    document.scrollingElement!.scrollTop = scrollY.get();
+    if (preserveScroll.current)
+      document.scrollingElement!.scrollTop = scrollY.get();
   });
 
   const marker = useMemo(

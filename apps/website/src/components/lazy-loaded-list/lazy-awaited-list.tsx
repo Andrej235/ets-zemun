@@ -67,6 +67,7 @@ const LazyAwaitedList = genericMemo(
 
     const sentCursor = useRef<string | null>(null);
     const isWaiting = useRef(false);
+    const preserveScroll = useRef(false);
 
     useEffect(() => {
       isWaiting.current = true;
@@ -123,6 +124,7 @@ const LazyAwaitedList = genericMemo(
         return x;
       }) as R;
 
+      preserveScroll.current = true;
       setCurrentResponse(newResponse);
       setShowSkeleton(true);
       return newResponse;
@@ -185,7 +187,8 @@ const LazyAwaitedList = genericMemo(
 
     const { scrollY } = useScroll();
     useLayoutEffect(() => {
-      document.scrollingElement!.scrollTop = scrollY.get();
+      if (preserveScroll.current)
+        document.scrollingElement!.scrollTop = scrollY.get();
     });
 
     return (
