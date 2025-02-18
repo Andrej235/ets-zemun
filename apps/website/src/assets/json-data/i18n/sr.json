@@ -716,6 +716,148 @@
             "Uobičajeni znakovi psihosocijalnog distresa dece"
           ]
         }
+      },
+      "mentalHealth": {
+        "title": "Mentalno zdravlje",
+        "understandingMentalHealth": {
+          "title": "Razumevanje adolescentnog perioda",
+          "text": "Adolescencija je period intenzivnih promena koji obuhvata fizički, emocionalni i socijalni razvoj.",
+          "list": [
+            [
+              "Fizičke promene:",
+              "U tinejdžerskim godinama, telo prolazi kroz značajne promene, uključujući rast, razvoj seksualnih karakteristika i hormonske promene. Ove promene mogu dovesti do osećaja nesigurnosti i samokritike. Treba se navići na „izmenjenu“ telesnu šemu. Ne postoji adolescent koji je u potpunosti zadovoljan svojim izgledom!"
+            ],
+            [
+              "Emocionalne promene:",
+              "Adolescenti često doživljavaju intenzivne emocije i promene raspoloženja, osetljivost, preteranu samokritičnost, ponekad sklonost depresivnom raspoloženju, kao i sanjarenja i povlačenja u svoj svet. Ovo je period istraživanja sopstvenog identiteta, što može dovesti do konflikata unutar sebe i sa drugima. Često se suočavaju sa strahom od odbacivanja i potrebom za pripadnošću."
+            ],
+            [
+              "Socijalne promene:",
+              "Tinejdžeri počinju da razvijaju složenije socijalne odnose. Vršnjaci i romantični odnosi postaju ključni. Adolescenti uče kako da komuniciraju, sarađuju i upravljaju konfliktima u situacijama u kojima se ranije nisu nalazili. Ove promene mogu biti izazovne i dovesti do stresa, ali i do razvoja novih socijalnih veština."
+            ]
+          ]
+        },
+        "challenges": {
+          "title": "Adolescencija nosi brojne izazove i stresore koji mogu uticati na mentalno zdravlje:",
+          "list": [
+            {
+              "item": "Socijalni pritisak: Tinejdžeri često osećaju pritisak da se uklope u grupu ili ispune očekivanja vršnjaka. Ovaj pritisak može dovesti do anksioznosti i neprijatnosti.",
+              "advice": "Nisi sam/sama! I drugi vršnjaci oko tebe slično osećaju i prolaze kroz iste dileme iako se to možda po njihovom ponašanju ne vidi na prvi pogled!"
+            },
+            {
+              "item": "Akademski stres: Školski zahtevi, ispiti i konkurencija mogu biti veliki izvor stresa. Strah od neuspeha može uticati na samopouzdanje i mentalno zdravlje.",
+              "advice": "Daš sve od sebe i uradiš ono što je u tvojoj moći da nešto savladaš – pitaš za podršku u učenju, bolje organizuješ obaveze i vreme. Bitna je tvoja unutrašnja motivacija da nešto postigneš i mera koju ti odrediš i za koju si spreman/spremna da preuzmeš odgovornost."
+            },
+            {
+              "item": "Problemi u porodici: Konflikti u porodici, razvodi, bolesti ili promene u porodici mogu uticati na emocionalno blagostanje adolescenata.",
+              "advice": "Traži podršku i pomoć od odrasle osobe od poverenja ili drugara koji može da te sasluša. Mnogi oko nas prolaze kroz slične dileme i „krize“ i tek kada se otvorimo i kažemo, možemo da dobijemo pomoć. Nisu svi ljudi oko nas, ma koliko bili bliski, senzibilisani da „čitaju“ naše misli ili osećanja…"
+            },
+            {
+              "item": "Formiranje identiteta i samorazumevanje: Proces otkrivanja sopstvenog identiteta može biti zbunjujući i emocionalno izazovan, što može dovesti do osećaja usamljenosti ili nesigurnosti.",
+              "advice": "Otkrivanje ko smo, šta volimo, čemu težimo… u nekim segmentima će trajati ceo život J. Prava je mudrost zavoleti sebe onakvima kakvi jesmo! To je proces."
+            },
+            {
+              "item": "Tehnološki uticaji: Upotreba društvenih medija može biti dvostruki mač, pružajući podršku, ali i donoseći poređenja i opterećenje, što može uticati na samopoštovanje.",
+              "advice": "Budite kritični prema informacijama koje pronađete na internetu. Proveravajte iz više izvora, upoređujte, vežbajte moć svoj zdravog razuma J Nezaboravite da i oni koji na društvene mreže postavljaju svoje fotografije u „najboljim“ i „najsrećnijim“ izdanjima, takođe imaju „teške“ dane, trenutke i krize, samo što je malo onih koji to podele na društvenim mrežama…"
+            }
+          ],
+          "conclusion": "Upravo su ove promene i izazovi u adolescenciji kritični za razvoj mentalnog zdravlja i mogu imati dugoročne posledice na život mladih. Podrška iz okruženja – roditelja, nastavnika i vršnjaka – može značajno uticati na prevazilaženje ovih izazova."
+        },
+        "symptoms": {
+          "title": "Znakovi i simptomi problema mentalnog zdravlja",
+          "list": [
+            "Anksioznost: Simptomi anksioznosti mogu uključivati stalni osećaj zabrinutosti, napetost, nervozu i fizičke simptome kao što su tahikardija, znojenje ili tresenje. Adolescenti mogu imati poteškoća u fokusiranju, izbegavati socijalne situacije ili doživljavati panične napade.",
+            "Depresija: Depresivni simptomi mogu obuhvatati osećaj tuge, beznađa, gubitak interesovanja za aktivnosti koje su nekada bile zabavne, kao i promene u apetitu i spavanju. Adolescenti mogu postati povučeni, pokazivati malu energiju i imati probleme s koncentracijom.",
+            "Zamka: U adolescenciji se nekada dešava da se depresivni simptomi ispolje na način na koji to nikada ne bismo mogli da pretpostavimo – kroz hiperaktivnost, pričljivost, preterano eksponiranje… Ovakva ponašanja su, u tom slučaju, neka vrsta brane ili zaštite koju osoba postavi da bi joj se moglo prići…",
+            "Stres: Stres može proizilaziti iz različitih izvora, uključujući školske obaveze, probleme u odnosima ili porodici. Simptomi stresa mogu uključivati razdražljivost, probleme sa spavanjem, fizičke simptome poput glavobolje ili stomačnih problema i opšti osećaj preopterećenosti."
+          ]
+        },
+        "identifyingProblems": {
+          "title": "Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti izazovno, ali postoje znakovi na koje treba obratiti pažnju:",
+          "list": [
+            "Promene u ponašanju: Iznenadne promene u ponašanju, kao što su povlačenje iz društvenih aktivnosti, gubitak interesovanja za hobije ili aktivnosti koje su nekada voleli, mogu ukazivati na probleme.",
+            "Promene u raspoloženju: Česte oscilacije, kao što su prekidi raspoloženja, bes, ili konstantna tuga, mogu biti znak problema.",
+            "Lošiji uspah u školi: problemi s koncentracijom i opšta nezainteresovanost za učenje mogu ukazivati na dublje probleme.",
+            "Fizički simptomi: Česti fizički problemi bez medicinskog objašnjenja, kao što su glavobolje, stomačni bolovi ili umor, mogu biti znaci stresa ili anksioznosti.",
+            "Izolacija: Izolacija od prijatelja i porodice, izbegavanje društvenih situacija i osećaj usamljenosti mogu ukazivati na probleme mentalnog zdravlja.",
+            "Govor o samoubilačkim mislima ili samopovređivanju: Svaka izjava o samoubilačkim mislima ili samopovređivanju zahteva hitnu pažnju i pomoć."
+          ],
+          "conclusion": "Važno je da roditelji, nastavnici i druge odrasle osobe budu pažljivi i otvoreni za razgovor o mentalnom zdravlju, kako bi pružili podršku adolescentima koji se suočavaju s problemima. Rano prepoznavanje i intervencija mogu značajno uticati na ishod i oporavak. Nekada je reč o normalnoj razvojnoj fazi, a nekada se može raditi i o ozbiljnijim naznakama koje treba prevenirati na vreme."
+        },
+        "impact": {
+          "title": "Uticaj na svakodnevni život",
+          "list": [
+            {
+              "title": "Ponašanje u školi i kod kuće",
+              "description": "Problemi mentalnog zdravlja mogu značajno uticati na ponašanje adolescenata u različitim okruženjima, uključujući školu i dom.",
+              "items": [
+                "Ponašanje u školi: Adolescenti koji se bore s mentalnim problemima mogu pokazivati smanjenu motivaciju za učenje, često izbegavaju školske obaveze ili izostaju. Mogu biti razdražljivi, imati poteškoća s koncentracijom i izvršavanjem zadataka, što može dovesti do pada školskog uspeha. Ponekad, anksioznost ili stres mogu prouzrokovati fizičke simptome, kao što su glavobolje ili stomačni bolovi, što dodatno otežava prisustvovanje nastavi.",
+                "Ponašanje kod kuće: Kod kuće, adolescenti mogu postati povučeni, zatvoreni ili se sukobljavati sa članovima porodice. Roditelji mogu primetiti promene u raspoloženju, česti konflikt ili nedostatak interesovanja za porodične aktivnosti. Ova dinamika može stvoriti napetu atmosferu, što dodatno pogoršava mentalno zdravlje adolescenta."
+              ]
+            },
+            {
+              "title": "Odnosi s vršnjacima i porodicom",
+              "description": "Mentalno zdravlje adolescenata u velikoj meri utiče i na njihove odnose s vršnjacima i članovima porodice.",
+              "items": [
+                "Odnosi s vršnjacima: Adolescenti koji se suočavaju s anksioznošću, depresijom ili drugim problemima mogu imati poteškoća u održavanju odnosa s vršnjacima. Oni mogu izbegavati društvene interakcije, što može dovesti do osećaja usamljenosti i izolacije. Ova izolacija može pogoršati simptome, stvarajući začarani krug. Takođe, mogu se osećati nesigurno u socijalnim situacijama, što može dovesti do konfliktnih situacija ili problema s prijateljima.",
+                "Odnosi s porodicom: Stres i problemi mentalnog zdravlja mogu prouzrokovati konflikte u porodici. Adolescenti mogu biti razdražljivi ili povučeni, što može stvoriti distancu između njih i roditelja. Nepravilna komunikacija i nedostatak razumevanja mogu dovesti do nedorazumevanja i sukoba. Međutim, otvorena komunikacija i podrška od strane članova porodice mogu pomoći u prevazilaženju ovih problema i ojačati odnose."
+              ]
+            }
+          ],
+          "conclusion": "Problemi mentalnog zdravlja mogu imati dubok uticaj na svakodnevni život adolescenata, uključujući njihovo ponašanje u školi i kod kuće, kao i odnose s vršnjacima i porodicom. Rano prepoznavanje i podrška mogu značajno pomoći u ublažavanju ovih problema."
+        },
+        "support": {
+          "title": "Kako podržati adolescente?",
+          "parent": {
+            "title": "Uloga roditelja",
+            "description": "Roditelji igraju ključnu ulogu u podršci adolescentima tokom ovog važnog razvojnog perioda. Podrška može uključivati:",
+            "communicating": {
+              "title": "Važnost otvorene komunikacije",
+              "description": "Otvorena komunikacija je od suštinskog značaja u odnosima između roditelja i adolescenata. Ona podrazumeva:",
+              "list": [
+                "Postavljanje osnova za dijalog: Roditelji treba da stvore atmosferu u kojoj adolescenti mogu slobodno da izraze svoje osećaje i brige bez straha od kritike ili osude.",
+                "Aktivno slušanje: Pokazivanje interesovanja za ono što adolescenti govore i razumevanje njihovih osećaja može pomoći u izgradnji poverenja.",
+                "Razgovor o mentalnom zdravlju: Otvorena diskusija o temama mentalnog zdravlja, kao što su stres, anksioznost i depresija, može ohrabriti adolescente da potraže pomoć ako im je potrebna."
+              ]
+            },
+            "awareness": {
+              "title": "Prepoznavanje znakova i reagovanje",
+              "description": "Roditelji bi trebalo da budu svesni znakova koji mogu ukazivati na probleme mentalnog zdravlja kod adolescenata:",
+              "list": [
+                "Obratite pažnju na promene: Budite oprezni na značajne promene u ponašanju, raspoloženju ili školskim postignućima. Ovo može uključivati povlačenje, razdražljivost ili pad u učenju.",
+                "Reagovanje na znake: Ako primetite znakove problema, važno je da reagujete odmah. Pogovorite s adolescentom o vašim zabrinutostima i ohrabrite ih da potraže stručnu pomoć ako je potrebno.",
+                "Podrška: Informišite se o dostupnim resursima, kao što su školski psiholozi ili terapeuti, savetovališta za mlade i sl."
+              ]
+            },
+            "conclusion": "Aktivna uloga roditelja u podršci adolescentima, otvorena komunikacija i pravovremeno reagovanje na znakove problema mentalnog zdravlja mogu značajno uticati na dobrobit mladih."
+          },
+          "teacher": {
+            "title": "Uloga nastavnika",
+            "description": "Nastavnici mogu imati važnu ulogu u podršci mentalnom zdravlju učenika kroz praćenje, stvaranje podržavajućeg okruženja i saradnju s roditeljima i stručnjacima. Njihova uloga može značajno uticati na dobrobit i razvoj adolescenata."
+          }
+        },
+        "improving": {
+          "title": "Strategije za poboljšanje mentalnog zdravlja",
+          "description": "Praktikovanje samopomoći ključno je za poboljšanje mentalnog zdravlja i dobrobiti. To podrazumeva aktivnosti i navike koje adolescenti mogu uključiti u svoje svakodnevne rutine:",
+          "list": [
+            "Samosvest: Razumevanje i prepoznavanje svojih emocija i potreba važan je korak u samoodržavanju. Ovo može uključivati vođenje dnevnika, gde adolescenti mogu zapisivati svoje osećaje i iskustva.",
+            "Upravljanje stresom: Učenje tehnika za upravljanje stresom, kao što su planiranje i organizovanje obaveza, može značajno smanjiti osećaj preopterećenosti.",
+            "Postavljanje granica: Razumevanje važnosti postavljanja granica u odnosima i obavezama može pomoći u očuvanju mentalnog zdravlja."
+          ],
+          "conclusion": "Primenom strategija za samopomoć, vežbama opuštanja i redovnom fizičkom aktivnošću, adolescenti mogu značajno poboljšati svoje mentalno zdravlje i dobrobit. Ove strategije pružaju osnovne alate za upravljanje stresom i poboljšanje kvaliteta života."
+        },
+        "help": {
+          "title": "Kome se obratiti za pomoć",
+          "description": "Kada se adolescenti suočavaju s problemima mentalnog zdravlja, važno je znati gde mogu potražiti pomoć. Neke od mogućih opcija uključuju:",
+          "list": [
+            "Školski psiholozi i pedagozi: Mogu pomoći u rešavanju problema ili uputiti na dalje resurse.",
+            "Lekari i terapeuti: Pedijatri u Domu zdravlja lekari mogu biti prva tačka kontakta. Oni mogu uputiti na specijaliste za mentalno zdravlje, kao što su psihijatri, psiholozi, psihoterapeuti.",
+            "Institut za mentalno zdravlje – Savetovalište za mlade, Milana Kašanina 3, 11000 Beograd (poznatija kao Palmotićeva)",
+            "Klinika za neurologiju, Klinički Centar Srbije, Dr. Subotića Starijeg 6",
+            "NADEL – Nacionalna dečija linija 166111"
+          ],
+          "conclusion": "Svi činioci — roditelji, nastavnici, vršnjaci i zajednica u celini — imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
+        }
       }
     }
   }
