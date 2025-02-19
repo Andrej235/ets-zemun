@@ -14,11 +14,11 @@
           "description": "Learn more about our teachers and their qualifications."
         },
         "enrollment": {
-          "title": "Enrollment and Admission",
+          "title": "Enrollment",
           "description": "Details about the enrollment and admission process."
         },
         "competitions": {
-          "title": "Competitions and Awards",
+          "title": "Awards",
           "description": "Information about all competitions and awards."
         }
       }
