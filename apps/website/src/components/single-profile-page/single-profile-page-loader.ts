@@ -6,19 +6,34 @@ import erData from "@data/profiles/elektrotehničar-računara.json";
 import euData from "@data/profiles/elektrotehničar-automatike.json";
 import klimeData from "@data/profiles/elektromehaničar-za-rashladne-i-termičke-uredjaje.json";
 import { LoaderArgs } from "src/types/utility/react-router-loader-args";
+import ProfileSchema from "@assets/json-data/ts-schemas/profile.schema";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import i18n from "@i18n";
+import createLoader from "@better-router/create-loader";
 
-export default function SingleProfilePageLoader({
-  params: { profileName },
-}: LoaderArgs) {
-  if (!profileName) return redirect("/profili");
+const SingleProfilePageLoader = createLoader(
+  ({ params: { profileName } }: LoaderArgs) => {
+    if (!profileName) return redirect("/profili");
 
+    const jsonData = getJSON(profileName);
+    if (!jsonData) return redirect("/profili");
+
+    return sendAPIRequest("/profile/{id}", {
+      method: "get",
+      parameters: {
+        id: jsonData.backendId,
+        languageCode: i18n.language,
+      },
+    });
+  }
+);
+
+function getJSON(profileName: string): ProfileSchema | null {
   const preview = profilePreviewData.profiles.find((x) =>
     x.profileURL.includes(profileName)
   );
 
-  if (!preview) return redirect("/profili");
-
-  switch (preview.abbreviation) {
+  switch (preview?.abbreviation) {
     case "it":
       return itData;
     case "arm":
@@ -33,4 +48,6 @@ export default function SingleProfilePageLoader({
       return null;
   }
 }
+
+export default SingleProfilePageLoader;
 

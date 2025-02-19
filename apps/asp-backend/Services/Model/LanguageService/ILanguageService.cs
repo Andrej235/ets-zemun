@@ -9,5 +9,5 @@ public interface ILanguageService
 {
     Task<Result<Language>> Create(CreateLanguageRequestDto request);
     Task<Result<IEnumerable<LanguageResponseDto>>> GetAll();
-    Task<Result> Delete(int id);
+    Task<Result> Delete(string code);
 }

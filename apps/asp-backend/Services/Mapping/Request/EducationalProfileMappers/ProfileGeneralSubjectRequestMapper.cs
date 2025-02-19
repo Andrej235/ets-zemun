@@ -7,5 +7,10 @@ public class ProfileGeneralSubjectRequestMapper
     : IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>
 {
     public EducationalProfileGeneralSubject Map(CreateProfileSubjectRequestDto from) =>
-        new() { PerWeek = from.PerWeek, SubjectId = from.SubjectId };
+        new()
+        {
+            PerWeek = from.PerWeek,
+            Year = from.Year,
+            SubjectId = from.SubjectId,
+        };
 }

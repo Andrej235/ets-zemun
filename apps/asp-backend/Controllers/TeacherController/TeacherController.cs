@@ -53,13 +53,13 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<LazyLoadResponse<TeacherResponseDto>>> GetAll(
-        [FromQuery] int languageId,
+        [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit,
         [FromQuery] int? subjectId
     )
     {
-        var result = await teacherService.GetAll(languageId, offset, limit, subjectId);
+        var result = await teacherService.GetAll(languageCode, offset, limit, subjectId);
 
         if (result.IsFailed)
             return BadRequest("Language not found");
@@ -73,10 +73,10 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TeacherResponseDto>> GetSingle(
         int id,
-        [FromQuery] int languageId
+        [FromQuery] string languageCode
     )
     {
-        var result = await teacherService.GetSingle(id, languageId);
+        var result = await teacherService.GetSingle(id, languageCode);
 
         if (result.IsFailed)
         {
@@ -146,14 +146,14 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{teacherId:int}/translation/{languageId:int}")]
+    [HttpDelete("{teacherId:int}/translation/{languageCode:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> DeleteTranslation(int teacherId, int languageId)
+    public async Task<ActionResult> DeleteTranslation(int teacherId, string languageCode)
     {
-        var result = await teacherService.DeleteTranslation(teacherId, languageId);
+        var result = await teacherService.DeleteTranslation(teacherId, languageCode);
 
         if (result.IsFailed)
             return NotFound();

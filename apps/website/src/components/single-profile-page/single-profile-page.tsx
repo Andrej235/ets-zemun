@@ -1,46 +1,21 @@
-import ProfileSchema from "@assets/json-data/ts-schemas/profile.schema";
+import Async from "@better-router/async";
+import useLoader from "@better-router/use-loader";
 import useOutsideClick from "@hooks/use-outside-click";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useRef, useState } from "react";
-import { useLoaderData } from "react-router";
+import { useRef, useState } from "react";
+import SingleProfilePageLoader from "./single-profile-page-loader";
 import "./single-profile-page.scss";
-
-type SubjectItem = {
-  name: string;
-  count: number;
-  type: "general" | "vocational";
-};
+import SubjectOverlay from "./subject-overlay";
 
 export default function SingleProfilePage() {
-  const loaderData = useLoaderData<ProfileSchema>();
-
-  const subjects = useMemo(() => {
-    return [
-      ...loaderData.subjects.vocational,
-      ...loaderData.subjects.general,
-    ].reduce((acc: SubjectItem[][], x) => {
-      x.perWeek.forEach((y, index) => {
-        if (y !== 0) {
-          if (!acc[index]) {
-            acc[index] = [];
-          }
-          acc[index].push({
-            name: x.subjectName,
-            count: y,
-            type: loaderData.subjects.general.includes(x)
-              ? "general"
-              : "vocational",
-          });
-        }
-      });
-      return acc;
-    }, []);
-  }, [loaderData]);
+  const loaderData = useLoader<typeof SingleProfilePageLoader>();
 
   const [selectedYear, setSelectedYear] = useState(1);
-  const [selectedSubject, setSelectedSubject] = useState<SubjectItem | null>(
-    null
-  );
+  const [selectedSubject, setSelectedSubject] = useState<{
+    subject: Schema<"ProfileSubjectResponseDto">;
+    type: "general" | "vocational";
+  } | null>(null);
 
   const handleYearChange = (year: number) => {
     setSelectedYear(year);
@@ -55,31 +30,32 @@ export default function SingleProfilePage() {
     setSelectedSubject(null);
   });
 
+  function getYearName(year: number) {
+    switch (year) {
+      case 1:
+        return "I";
+      case 2:
+        return "II";
+      case 3:
+        return "III";
+      case 4:
+        return "IV";
+    }
+  }
+
   return (
     <div className="single-profile-page">
       <div className={"overlay" + (selectedSubject ? " active" : "")}>
         {selectedSubject && (
-          <motion.div
-            layout
-            layoutId={selectedSubject.name}
-            className={
-              "full-screen-subject-container subject-item " +
-              selectedSubject.type
-            }
-            ref={selectedSubjectRef}
+          <SubjectOverlay
+            key={selectedSubject.subject.subjectId}
             onLayoutAnimationComplete={() => {
               isInAnimation.current = false;
             }}
-          >
-            <motion.p layout className="subject-name">
-              {selectedSubject.name}
-            </motion.p>
-            <motion.p className="subject-count" layout>
-              {selectedSubject.count}x nedeljno
-            </motion.p>
-
-            <button onClick={() => console.log("hi")}>Hi</button>
-          </motion.div>
+            subject={selectedSubject.subject}
+            type={selectedSubject.type}
+            ref={selectedSubjectRef}
+          />
         )}
       </div>
 
@@ -207,68 +183,89 @@ export default function SingleProfilePage() {
       </div>
 
       <div className="subjects-container">
-        <div className="year-selector">
-          <button
-            className={selectedYear === 1 ? "selected" : ""}
-            onClick={() => handleYearChange(1)}
-          >
-            <p>I</p>
-          </button>
+        <Async await={loaderData}>
+          {(response) => {
+            if (response.code !== "OK") return null;
 
-          <button
-            className={selectedYear === 2 ? "selected" : ""}
-            onClick={() => handleYearChange(2)}
-          >
-            <p>II</p>
-          </button>
+            const subjects = response.content;
 
-          <button
-            className={selectedYear === 3 ? "selected" : ""}
-            onClick={() => handleYearChange(3)}
-          >
-            <p>III</p>
-          </button>
+            const mapped = subjects.generalSubjects
+              .filter((x) => x.year === selectedYear)
+              .map((x) => ({
+                ...x,
+                type: "general" as "general" | "vocational",
+              }))
+              .concat(
+                subjects.vocationalSubjects
+                  .filter((x) => x.year === selectedYear)
+                  .map((x) => ({
+                    ...x,
+                    type: "vocational",
+                  }))
+              );
 
-          <button
-            className={selectedYear === 4 ? "selected" : ""}
-            onClick={() => handleYearChange(4)}
-          >
-            <p>IV</p>
-          </button>
-        </div>
+            return (
+              <>
+                <div className="year-selector">
+                  {Array.from(
+                    [
+                      ...new Set(
+                        [
+                          ...subjects.generalSubjects,
+                          ...subjects.vocationalSubjects,
+                        ].map((x) => x.year)
+                      ),
+                    ].map((year) => (
+                      <button
+                        key={year}
+                        className={selectedYear === year ? "selected" : ""}
+                        onClick={() => handleYearChange(year)}
+                      >
+                        <p>{getYearName(year)}</p>
+                      </button>
+                    ))
+                  )}
+                </div>
 
-        <div className="subjects-list">
-          <AnimatePresence mode="popLayout">
-            {subjects[selectedYear - 1]?.map((subjectItem) => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                layout
-                onLayoutAnimationComplete={() => {
-                  isInAnimation.current = false;
-                }}
-                layoutId={subjectItem.name}
-                key={subjectItem.name}
-                className={"subject-item " + subjectItem.type}
-                onClick={() => {
-                  if (isInAnimation.current) return;
+                <div className="subjects-list">
+                  <AnimatePresence mode="popLayout">
+                    {mapped.map((x) => (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        layout
+                        onLayoutAnimationComplete={() => {
+                          isInAnimation.current = false;
+                        }}
+                        layoutId={x.subject.name}
+                        key={x.subject.name}
+                        className={"subject-item " + x.type}
+                        onClick={() => {
+                          if (isInAnimation.current) return;
 
-                  isInAnimation.current = true;
-                  setSelectedSubject(subjectItem);
-                }}
-              >
-                <motion.p layout className="subject-name">
-                  {subjectItem.name}
-                </motion.p>
-                <motion.p layout className="subject-count">
-                  {subjectItem.count}x nedeljno
-                </motion.p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+                          isInAnimation.current = true;
+                          setSelectedSubject({
+                            subject: x,
+                            type: x.type,
+                          });
+                        }}
+                      >
+                        <motion.p layout className="subject-name">
+                          {x.subject.name}
+                        </motion.p>
+                        <motion.p layout className="subject-count">
+                          {x.perWeek}x nedeljno
+                        </motion.p>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </>
+            );
+          }}
+        </Async>
       </div>
     </div>
   );

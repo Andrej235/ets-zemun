@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EtsZemun.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250213171722_Fix translation primary keys")]
-    partial class Fixtranslationprimarykeys
+    [Migration("20250217215823_Initial migration")]
+    partial class Initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,8 +55,8 @@ namespace EtsZemun.Migrations
 
             modelBuilder.Entity("EtsZemun.Models.AwardTranslation", b =>
                 {
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LanguageCode")
+                        .HasColumnType("text");
 
                     b.Property<int>("AwardId")
                         .HasColumnType("integer");
@@ -76,7 +76,7 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("LanguageId", "AwardId");
+                    b.HasKey("LanguageCode", "AwardId");
 
                     b.HasIndex("AwardId");
 
@@ -104,12 +104,19 @@ namespace EtsZemun.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
+
                     b.Property<int>("PerWeek")
                         .HasColumnType("integer");
 
-                    b.HasKey("EducationalProfileId", "SubjectId");
+                    b.HasKey("EducationalProfileId", "SubjectId", "Year");
 
                     b.HasIndex("SubjectId");
+
+                    b.HasIndex("Year");
+
+                    b.HasIndex("Year", "EducationalProfileId");
 
                     b.ToTable("EducationalProfileGeneralSubjects");
                 });
@@ -125,6 +132,9 @@ namespace EtsZemun.Migrations
                     b.Property<int>("PerWeek")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
+
                     b.HasKey("EducationalProfileId", "SubjectId");
 
                     b.HasIndex("SubjectId");
@@ -134,24 +144,14 @@ namespace EtsZemun.Migrations
 
             modelBuilder.Entity("EtsZemun.Models.Language", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
+                    b.HasKey("Code");
 
                     b.ToTable("Languages");
                 });
@@ -179,8 +179,8 @@ namespace EtsZemun.Migrations
 
             modelBuilder.Entity("EtsZemun.Models.QualificationTranslation", b =>
                 {
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LanguageCode")
+                        .HasColumnType("text");
 
                     b.Property<int>("QualificationId")
                         .HasColumnType("integer");
@@ -193,7 +193,7 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("LanguageId", "QualificationId");
+                    b.HasKey("LanguageCode", "QualificationId");
 
                     b.HasIndex("QualificationId");
 
@@ -218,8 +218,8 @@ namespace EtsZemun.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LanguageCode")
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -229,9 +229,9 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("SubjectId", "LanguageId");
+                    b.HasKey("SubjectId", "LanguageCode");
 
-                    b.HasIndex("LanguageId");
+                    b.HasIndex("LanguageCode");
 
                     b.ToTable("SubjectTranslations");
                 });
@@ -275,13 +275,15 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("SubjectId");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("TeacherSubjects");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.TeacherTranslation", b =>
                 {
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LanguageCode")
+                        .HasColumnType("text");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("integer");
@@ -298,7 +300,7 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("LanguageId", "TeacherId");
+                    b.HasKey("LanguageCode", "TeacherId");
 
                     b.HasIndex("TeacherId");
 
@@ -325,7 +327,7 @@ namespace EtsZemun.Migrations
 
                     b.HasOne("EtsZemun.Models.Language", null)
                         .WithMany()
-                        .HasForeignKey("LanguageId")
+                        .HasForeignKey("LanguageCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -383,7 +385,7 @@ namespace EtsZemun.Migrations
                 {
                     b.HasOne("EtsZemun.Models.Language", null)
                         .WithMany()
-                        .HasForeignKey("LanguageId")
+                        .HasForeignKey("LanguageCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -398,7 +400,7 @@ namespace EtsZemun.Migrations
                 {
                     b.HasOne("EtsZemun.Models.Language", null)
                         .WithMany()
-                        .HasForeignKey("LanguageId")
+                        .HasForeignKey("LanguageCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -428,7 +430,7 @@ namespace EtsZemun.Migrations
                 {
                     b.HasOne("EtsZemun.Models.Language", null)
                         .WithMany()
-                        .HasForeignKey("LanguageId")
+                        .HasForeignKey("LanguageCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

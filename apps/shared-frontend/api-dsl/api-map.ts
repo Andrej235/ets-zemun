@@ -37,7 +37,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Award' ],
-        parameters: [ { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -110,7 +110,7 @@ export type APIMap = {
     '/award/{id}': {
       get: {
         tags: [ 'Award' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -142,10 +142,10 @@ export type APIMap = {
         }
       }
     },
-    '/award/{awardId}/translation/{languageId}': {
+    '/award/{awardId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Award' ],
-        parameters: [ { name: 'awardId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'awardId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
         responses: {
           '204': { description: 'No Content' },
           '404': {
@@ -179,6 +179,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'EducationalProfiles' ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -219,7 +220,7 @@ export type APIMap = {
     '/profile/{id}': {
       get: {
         tags: [ 'EducationalProfiles' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -290,10 +291,10 @@ export type APIMap = {
         }
       }
     },
-    '/language/{id}': {
+    '/language/{code}': {
       delete: {
         tags: [ 'Language' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'code', in: 'path', required: true, schema: { pattern: '^[A-Za-z]*$', type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '404': {
@@ -327,7 +328,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Qualification' ],
-        parameters: [ { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'teacherId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'teacherId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -383,7 +384,7 @@ export type APIMap = {
     '/qualification/{id}': {
       get: {
         tags: [ 'Qualification' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -419,10 +420,10 @@ export type APIMap = {
         }
       }
     },
-    '/qualification/{qualificationId}/translation/{languageId}': {
+    '/qualification/{qualificationId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Qualification' ],
-        parameters: [ { name: 'qualificationId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'qualificationId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
         responses: {
           '204': { description: 'No Content' },
           '404': {
@@ -456,7 +457,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -516,7 +517,7 @@ export type APIMap = {
     '/subject/{id}': {
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -552,10 +553,10 @@ export type APIMap = {
         }
       }
     },
-    '/subject/{subjectId}/translation/{languageId}': {
+    '/subject/{subjectId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
         responses: {
           '204': { description: 'No Content' },
           '404': {
@@ -589,7 +590,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Teacher' ],
-        parameters: [ { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'subjectId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'subjectId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -666,7 +667,7 @@ export type APIMap = {
     '/teacher/{id}': {
       get: {
         tags: [ 'Teacher' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -702,10 +703,10 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/{teacherId}/translation/{languageId}': {
+    '/teacher/{teacherId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Teacher' ],
-        parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
         responses: {
           '204': { description: 'No Content' },
           '404': {
@@ -760,55 +761,55 @@ export type APIMap = {
     schemas: {
       AddSubjectsToTeacherRequestDto: {
         type: 'object',
-        properties: { teacherId: { type: 'integer', format: 'int32' }, subjectIds: { type: 'array', items: { type: 'integer', format: 'int32' }, nullable: true } },
+        properties: { teacherId: { type: 'integer', format: 'int32' }, subjectIds: { type: 'array', items: { type: 'integer', format: 'int32' } } },
         additionalProperties: false
       },
-      AwardResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string', nullable: true }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, description: { type: 'string', nullable: true }, competition: { type: 'string', nullable: true }, student: { type: 'string', nullable: true }, teacher: { '$ref': '#/components/schemas/TeacherResponseDto' }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
-      AwardResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/AwardResponseDto' }, nullable: true }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      CreateAwardRequestDto: { type: 'object', properties: { image: { type: 'string', nullable: true }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true }, translation: { '$ref': '#/components/schemas/CreateAwardTranslationRequestDto' } }, additionalProperties: false },
-      CreateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, title: { type: 'string', nullable: true }, description: { type: 'string', nullable: true }, competition: { type: 'string', nullable: true }, student: { type: 'string', nullable: true } }, additionalProperties: false },
+      AwardResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' }, teacher: { '$ref': '#/components/schemas/TeacherResponseDto' }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
+      AwardResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/AwardResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      CreateAwardRequestDto: { type: 'object', properties: { image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true }, translation: { '$ref': '#/components/schemas/CreateAwardTranslationRequestDto' } }, additionalProperties: false },
+      CreateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       CreateEducationalProfileRequestDto: {
         type: 'object',
-        properties: { generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' }, nullable: true }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' }, nullable: true } },
+        properties: { generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
         additionalProperties: false
       },
-      CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string', nullable: true }, fullName: { type: 'string', nullable: true } }, additionalProperties: false },
-      CreateProfileSubjectRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, perWeek: { type: 'integer', format: 'int32' } }, additionalProperties: false },
+      CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
+      CreateProfileSubjectRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       CreateQualificationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, translation: { '$ref': '#/components/schemas/CreateQualificationTranslationRequestDto' } }, additionalProperties: false },
-      CreateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      CreateSubjectRequestDto: { type: 'object', properties: { languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      CreateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      CreateTeacherRequestDto: { type: 'object', properties: { email: { type: 'string', nullable: true }, image: { type: 'string', nullable: true }, translation: { '$ref': '#/components/schemas/CreateTeacherTranslationRequestDto' } }, additionalProperties: false },
-      CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, bio: { type: 'string', nullable: true } }, additionalProperties: false },
+      CreateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      CreateSubjectRequestDto: { type: 'object', properties: { languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      CreateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      CreateTeacherRequestDto: { type: 'object', properties: { email: { type: 'string' }, image: { type: 'string' }, translation: { '$ref': '#/components/schemas/CreateTeacherTranslationRequestDto' } }, additionalProperties: false },
+      CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       EducationalProfileResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' }, nullable: true }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' }, nullable: true } },
+        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
         additionalProperties: false
       },
-      LanguageResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, code: { type: 'string', nullable: true }, fullName: { type: 'string', nullable: true } }, additionalProperties: false },
+      LanguageResponseDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       ProblemDetails: { type: 'object', properties: { type: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, status: { type: 'integer', format: 'int32', nullable: true }, detail: { type: 'string', nullable: true }, instance: { type: 'string', nullable: true } }, additionalProperties: {} },
-      ProfileSubjectResponseDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, perWeek: { type: 'integer', format: 'int32' } }, additionalProperties: false },
-      QualificationResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      QualificationResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' }, nullable: true }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true } }, additionalProperties: false },
-      SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
+      ProfileSubjectResponseDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' } }, additionalProperties: false },
+      QualificationResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      QualificationResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
+      SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
       TeacherResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, bio: { type: 'string', nullable: true }, email: { type: 'string', nullable: true }, image: { type: 'string', nullable: true }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' }, nullable: true }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, nullable: true } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
         additionalProperties: false
       },
-      TeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/TeacherResponseDto' }, nullable: true }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      UpdateAwardRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string', nullable: true }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
-      UpdateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, title: { type: 'string', nullable: true }, description: { type: 'string', nullable: true }, competition: { type: 'string', nullable: true }, student: { type: 'string', nullable: true } }, additionalProperties: false },
+      TeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/TeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      UpdateAwardRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
+      UpdateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       UpdateEducationalProfileRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' }, nullable: true }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' }, nullable: true } },
+        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
         additionalProperties: false
       },
-      UpdateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      UpdateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, description: { type: 'string', nullable: true } }, additionalProperties: false },
-      UpdateTeacherRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, email: { type: 'string', nullable: true }, image: { type: 'string', nullable: true }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true } }, additionalProperties: false },
-      UpdateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageId: { type: 'integer', format: 'int32' }, name: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, bio: { type: 'string', nullable: true } }, additionalProperties: false }
+      UpdateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      UpdateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      UpdateTeacherRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true } }, additionalProperties: false },
+      UpdateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false }
     }
   }
 }

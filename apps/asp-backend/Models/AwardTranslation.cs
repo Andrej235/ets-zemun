@@ -3,7 +3,7 @@ namespace EtsZemun.Models;
 public class AwardTranslation
 {
     public int AwardId { get; set; }
-    public int LanguageId { get; set; }
+    public string LanguageCode { get; set; } = null!;
 
     public string Title { get; set; } = null!;
     public string? Description { get; set; }

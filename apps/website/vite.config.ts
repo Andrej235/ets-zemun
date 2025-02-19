@@ -27,6 +27,8 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@components": path.resolve(__dirname, "src/components"),
       "@utility": path.resolve(__dirname, "src/utility"),
+      "@better-router": path.resolve(__dirname, "src/better-router"),
+      "@i18n": path.resolve(__dirname, "src/i18n.ts"),
     },
   },
   css: {

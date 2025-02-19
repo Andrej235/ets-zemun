@@ -57,7 +57,9 @@ public class EducationalProfileService(
         return deleteService.Delete(x => x.Id == id);
     }
 
-    public async Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll()
+    public async Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll(
+        string languageCode
+    )
     {
         var result = await readRangeService.Get(
             null,
@@ -66,10 +68,10 @@ public class EducationalProfileService(
             q =>
                 q.Include(x => x.GeneralSubjects)
                     .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.VocationalSubjects)
                     .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         return result.IsFailed
@@ -77,17 +79,17 @@ public class EducationalProfileService(
             : Result.Ok(result.Value.Select(x => responseMapper.Map(x)));
     }
 
-    public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id)
+    public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode)
     {
         var result = await readSingleService.Get(
             x => x.Id == id,
             q =>
                 q.Include(x => x.GeneralSubjects)
                     .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.VocationalSubjects)
                     .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations)
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         return result.IsFailed

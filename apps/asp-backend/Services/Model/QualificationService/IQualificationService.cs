@@ -11,15 +11,15 @@ public interface IQualificationService
     Task<Result> CreateTranslation(CreateQualificationTranslationRequestDto request);
 
     Task<Result<LazyLoadResponse<QualificationResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit,
         int? teacherId
     );
-    Task<Result<QualificationResponseDto>> GetSingle(int id, int languageId);
+    Task<Result<QualificationResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> UpdateTranslation(UpdateQualificationTranslationRequestDto request);
 
     Task<Result> Delete(int id);
-    Task<Result> DeleteTranslation(int qualificationId, int languageId);
+    Task<Result> DeleteTranslation(int qualificationId, string languageCode);
 }

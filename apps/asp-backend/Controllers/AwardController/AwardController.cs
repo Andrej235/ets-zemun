@@ -52,12 +52,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<LazyLoadResponse<AwardResponseDto>>> GetAll(
-        [FromQuery] int languageId,
+        [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit
     )
     {
-        var result = await awardService.GetAll(languageId, offset, limit);
+        var result = await awardService.GetAll(languageCode, offset, limit);
 
         if (result.IsFailed)
             return BadRequest();
@@ -68,9 +68,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<AwardResponseDto>> GetById(int id, [FromQuery] int languageId)
+    public async Task<ActionResult<AwardResponseDto>> GetById(
+        int id,
+        [FromQuery] string languageCode
+    )
     {
-        var result = await awardService.GetSingle(id, languageId);
+        var result = await awardService.GetSingle(id, languageCode);
 
         if (result.IsFailed)
             return NotFound();
@@ -129,14 +132,14 @@ public class AwardController(IAwardService awardService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{awardId:int}/translation/{languageId:int}")]
+    [HttpDelete("{awardId:int}/translation/{languageCode:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> DeleteTranslation(int awardId, int languageId)
+    public async Task<ActionResult> DeleteTranslation(int awardId, string languageCode)
     {
-        var result = await awardService.DeleteTranslation(awardId, languageId);
+        var result = await awardService.DeleteTranslation(awardId, languageCode);
 
         if (result.IsFailed)
             return NotFound();

@@ -10,7 +10,7 @@ public class UpdateAwardTranslationRequestMapper
         new()
         {
             AwardId = from.AwardId,
-            LanguageId = from.LanguageId,
+            LanguageCode = from.LanguageCode,
             Competition = from.Competition,
             Description = from.Description,
             Student = from.Student,

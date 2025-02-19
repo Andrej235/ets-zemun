@@ -8,7 +8,7 @@ namespace EtsZemun.Services.Model.TeacherService;
 public partial class TeacherService : ITeacherService
 {
     public async Task<Result<LazyLoadResponse<TeacherResponseDto>>> GetAll(
-        int languageId,
+        string languageCode,
         int? offset,
         int? limit,
         int? subjectId
@@ -19,11 +19,11 @@ public partial class TeacherService : ITeacherService
             offset,
             limit ?? 10,
             q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .OrderBy(x => x.Id)
         );
 
@@ -51,21 +51,21 @@ public partial class TeacherService : ITeacherService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"teacher?languageId={languageId}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
+                : $"teacher?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
 
         return Result.Ok(result);
     }
 
-    public async Task<Result<TeacherResponseDto>> GetSingle(int id, int languageId)
+    public async Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode)
     {
         var result = await readSingleService.Get(
             x => x.Id == id,
             q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageId == languageId))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageId == languageId))
+                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)

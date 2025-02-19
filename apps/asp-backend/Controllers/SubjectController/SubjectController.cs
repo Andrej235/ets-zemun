@@ -52,10 +52,10 @@ public partial class SubjectController(ISubjectService subjectService) : Control
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<SubjectResponseDto>>> GetAll(
-        [FromQuery] int languageId
+        [FromQuery] string languageCode
     )
     {
-        var result = await subjectService.GetAll(languageId);
+        var result = await subjectService.GetAll(languageCode);
 
         if (result.IsFailed)
             return BadRequest();
@@ -69,10 +69,10 @@ public partial class SubjectController(ISubjectService subjectService) : Control
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<SubjectResponseDto>> GetSingle(
         int id,
-        [FromQuery] int languageId
+        [FromQuery] string languageCode
     )
     {
-        var result = await subjectService.GetSingle(id, languageId);
+        var result = await subjectService.GetSingle(id, languageCode);
 
         if (result.IsFailed)
         {
@@ -120,14 +120,14 @@ public partial class SubjectController(ISubjectService subjectService) : Control
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{subjectId:int}/translation/{languageId:int}")]
+    [HttpDelete("{subjectId:int}/translation/{languageCode:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> DeleteTranslation(int subjectId, int languageId)
+    public async Task<ActionResult> DeleteTranslation(int subjectId, string languageCode)
     {
-        var result = await subjectService.DeleteTranslation(subjectId, languageId);
+        var result = await subjectService.DeleteTranslation(subjectId, languageCode);
 
         if (result.IsFailed)
             return NotFound();
