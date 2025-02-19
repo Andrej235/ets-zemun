@@ -36,5 +36,15 @@ namespace EtsZemun.Controllers.Auth
             await signInManager.UserManager.AddToRoleAsync(user, request.Role);
             return NoContent();
         }
+
+        [Authorize(Roles = "Mod,Admin")]
+        [HttpGet("admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public IActionResult ChangePassword()
+        {
+            return Ok();
+        }
     }
 }
