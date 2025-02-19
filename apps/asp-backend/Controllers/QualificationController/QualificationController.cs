@@ -3,6 +3,7 @@ using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Response.Qualification;
 using EtsZemun.Errors;
 using EtsZemun.Services.Model.QualificationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.QualificationController;
@@ -14,9 +15,12 @@ public class QualificationController(IQualificationService qualificationService)
 {
     private readonly IQualificationService qualificationService = qualificationService;
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Create([FromBody] CreateQualificationRequestDto request)
     {
         var result = await qualificationService.Create(request);
@@ -27,9 +31,12 @@ public class QualificationController(IQualificationService qualificationService)
         return Created();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost("translation")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> CreateTranslation(
         [FromBody] CreateQualificationTranslationRequestDto request
     )
@@ -82,9 +89,12 @@ public class QualificationController(IQualificationService qualificationService)
         return Ok(result.Value);
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> UpdateTranslation(
         [FromBody] UpdateQualificationTranslationRequestDto request
     )
@@ -97,8 +107,11 @@ public class QualificationController(IQualificationService qualificationService)
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id)
     {
@@ -110,8 +123,11 @@ public class QualificationController(IQualificationService qualificationService)
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{qualificationId:int}/translation/{languageId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteTranslation(int qualificationId, int languageId)
     {

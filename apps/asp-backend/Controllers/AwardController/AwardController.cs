@@ -2,6 +2,7 @@ using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Response.Award;
 using EtsZemun.Services.Model.AwardService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.AwardController;
@@ -13,9 +14,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
 {
     private readonly IAwardService awardService = awardService;
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Create([FromBody] CreateAwardRequestDto request)
     {
         var result = await awardService.Create(request);
@@ -26,9 +30,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
         return Created();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost("translation")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> CreateTranslation(
         [FromBody] CreateAwardTranslationRequestDto request
     )
@@ -71,9 +78,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
         return Ok(result.Value);
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Update([FromBody] UpdateAwardRequestDto request)
     {
         var result = await awardService.Update(request);
@@ -84,9 +94,12 @@ public class AwardController(IAwardService awardService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> UpdateTranslation(
         [FromBody] UpdateAwardTranslationRequestDto request
     )
@@ -99,8 +112,11 @@ public class AwardController(IAwardService awardService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id)
     {
@@ -112,8 +128,11 @@ public class AwardController(IAwardService awardService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{awardId:int}/translation/{languageId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteTranslation(int awardId, int languageId)
     {

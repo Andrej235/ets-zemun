@@ -2,6 +2,7 @@ using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
 using EtsZemun.Errors;
 using EtsZemun.Services.Model.SubjectService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.SubjectController;
@@ -13,9 +14,12 @@ public partial class SubjectController(ISubjectService subjectService) : Control
 {
     private readonly ISubjectService subjectService = subjectService;
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Create([FromBody] CreateSubjectRequestDto request)
     {
         var result = await subjectService.Create(request);
@@ -26,9 +30,12 @@ public partial class SubjectController(ISubjectService subjectService) : Control
         return Created();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost("translation")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> CreateTranslation(
         [FromBody] CreateSubjectTranslationRequestDto request
     )
@@ -78,9 +85,12 @@ public partial class SubjectController(ISubjectService subjectService) : Control
         return Ok(result.Value);
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> UpdateTranslation(
         [FromBody] UpdateSubjectTranslationRequestDto request
     )
@@ -93,8 +103,11 @@ public partial class SubjectController(ISubjectService subjectService) : Control
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id)
     {
@@ -106,8 +119,11 @@ public partial class SubjectController(ISubjectService subjectService) : Control
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{subjectId:int}/translation/{languageId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteTranslation(int subjectId, int languageId)
     {

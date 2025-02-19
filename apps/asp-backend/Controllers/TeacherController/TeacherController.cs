@@ -3,6 +3,7 @@ using EtsZemun.DTOs.Request.Teacher;
 using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Errors;
 using EtsZemun.Services.Model.TeacherService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.TeacherController;
@@ -14,9 +15,12 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
 {
     private readonly ITeacherService teacherService = teacherService;
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Create([FromBody] CreateTeacherRequestDto request)
     {
         var result = await teacherService.Create(request);
@@ -27,9 +31,12 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return Created();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost("translation")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> CreateTranslation(
         [FromBody] CreateTeacherTranslationRequestDto request
     )
@@ -82,9 +89,12 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return Ok(result.Value);
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Update([FromBody] UpdateTeacherRequestDto request)
     {
@@ -101,9 +111,12 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> UpdateTranslation(
         [FromBody] UpdateTeacherTranslationRequestDto request
     )
@@ -116,8 +129,11 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id)
     {
@@ -129,8 +145,11 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{teacherId:int}/translation/{languageId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteTranslation(int teacherId, int languageId)
     {
@@ -142,9 +161,12 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost("subject")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> AddSubject([FromBody] AddSubjectsToTeacherRequestDto request)
     {
         var result = await teacherService.AddSubject(request);
@@ -155,8 +177,11 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return Created();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{teacherId:int}/subject/{subjectId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> RemoveSubject(int teacherId, int subjectId)
     {
