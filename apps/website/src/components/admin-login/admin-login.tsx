@@ -1,6 +1,10 @@
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { useRef } from "react";
 
 export default function AdminLogin() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   return (
     <div>
       <br />
@@ -9,9 +13,25 @@ export default function AdminLogin() {
       <br />
       <br />
 
+      <input type="email" name="email" id="email" ref={emailRef} />
+      <input type="password" name="password" id="password" ref={passwordRef} />
       <button
         onClick={async () => {
-          window.location.href = "https://api.localhost.com/auth/login";
+          const response = await sendAPIRequest("/auth/login", {
+            method: "post",
+            parameters: {
+              useCookies: true,
+            },
+            payload: {
+              email: emailRef.current!.value,
+              password: passwordRef.current!.value,
+              twoFactorCode: "",
+              twoFactorRecoveryCode: "",
+            },
+          });
+
+          if (response.code !== "OK") return;
+          window.location.href = "https://admin.localhost.com";
         }}
       >
         Login
@@ -20,31 +40,9 @@ export default function AdminLogin() {
       <br />
 
       <button
-        onClick={async () => {
-          const response = await sendAPIRequest("/auth", {
-            method: "get",
-          });
-
-          if (response.code === "OK") console.log(response);
-          else console.error(response);
-        }}
+        onClick={() => sendAPIRequest("/auth/logout", { method: "delete" })}
       >
-        Get Username
-      </button>
-
-      <br />
-
-      <button
-        onClick={async () => {
-          const response = await sendAPIRequest("/auth/logout", {
-            method: "get",
-          });
-
-          if (response.code === "OK") console.log(response);
-          else console.error(response);
-        }}
-      >
-        Logout
+        Log out
       </button>
 
       <a href={"https://admin.localhost.com"}>Admin page</a>
