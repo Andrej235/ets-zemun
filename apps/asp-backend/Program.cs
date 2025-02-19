@@ -79,9 +79,22 @@ builder.Services.AddDbContext<IdentityDataContext>(options =>
 });
 
 builder
-    .Services.AddIdentity<IdentityUser, IdentityRole>()
+    .Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    {
+        options.Password.RequireUppercase = false;
+    })
     .AddEntityFrameworkStores<IdentityDataContext>()
+    .AddApiEndpoints()
     .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        return Task.CompletedTask;
+    };
+});
 
 builder.Services.AddCors(options =>
 {
@@ -314,6 +327,9 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+
+var authGroup = app.MapGroup("/auth");
+authGroup.MapIdentityApi<IdentityUser>();
 
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
