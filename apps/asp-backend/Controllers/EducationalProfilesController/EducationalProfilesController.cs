@@ -1,6 +1,7 @@
 using EtsZemun.DTOs.Request.EducationalProfile;
 using EtsZemun.DTOs.Response.EducationalProfile;
 using EtsZemun.Services.Model.EducationalProfileService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.EducationalProfilesController;
@@ -13,9 +14,12 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
 {
     private readonly IEducationalProfileService profileService = profileService;
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Create([FromBody] CreateEducationalProfileRequestDto request)
     {
         var result = await profileService.Create(request);
@@ -57,9 +61,12 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
         return Ok(result.Value);
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> Update([FromBody] UpdateEducationalProfileRequestDto request)
     {
         var result = await profileService.Update(request);
@@ -70,8 +77,11 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
         return NoContent();
     }
 
+    [Authorize(Roles = "Mod,Admin")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Delete(int id)
     {
