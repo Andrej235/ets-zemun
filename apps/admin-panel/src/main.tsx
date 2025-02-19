@@ -5,6 +5,7 @@ import "../../shared-frontend/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ErrorComponent from "@components/error-component/error-component";
 import About from "@components/about/about";
+import News from "@components/news/news";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "/vesti",
+        element: <News />,
       },
     ],
   },

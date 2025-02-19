@@ -29,6 +29,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
         <div className="app-header-navigation">
           <div className="nav-bar">
             <Link to="/">Pocetna</Link>
+            <Link to="/vesti">Vesti</Link>
           </div>
         </div>
 
