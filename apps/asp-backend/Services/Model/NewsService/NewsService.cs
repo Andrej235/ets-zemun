@@ -16,6 +16,7 @@ public partial class NewsService(
     ICreateRangeService<NewsImage> createRangeImageService,
     ICreateSingleService<NewsTranslation> createTranslationService,
     IReadRangeService<News> readService,
+    IReadRangeService<NewsImage> readImageService,
     IReadSingleService<News> readSingleService,
     ICountService<News> countService,
     ICountService<NewsImage> imageCountService,
@@ -36,6 +37,7 @@ public partial class NewsService(
     private readonly ICreateSingleService<NewsTranslation> createTranslationService =
         createTranslationService;
     private readonly IReadRangeService<News> readService = readService;
+    private readonly IReadRangeService<NewsImage> readImageService = readImageService;
     private readonly IReadSingleService<News> readSingleService = readSingleService;
     private readonly ICountService<News> countService = countService;
     private readonly ICountService<NewsImage> imageCountService = imageCountService;

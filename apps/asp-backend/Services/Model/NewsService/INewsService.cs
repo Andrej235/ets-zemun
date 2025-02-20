@@ -16,6 +16,7 @@ public interface INewsService
         int? limit
     );
     Task<Result<NewsResponseDto>> GetById(int id, string? languageCode);
+    Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(int id, int? offset, int? limit);
 
     Task<Result> Update(UpdateNewsRequestDto request);
     Task<Result> UpdateTranslation(UpdateNewsTranslationRequestDto request);

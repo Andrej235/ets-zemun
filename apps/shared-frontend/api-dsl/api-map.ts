@@ -711,6 +711,22 @@ export type APIMap = {
         }
       }
     },
+    '/news/{id}/images': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/news/{newsId}/translation/{languageCode}': {
       delete: {
         tags: [ 'News' ],
@@ -1382,6 +1398,8 @@ export type APIMap = {
       LoginRequest: { required: [ 'email', 'password' ], type: 'object', properties: { email: { type: 'string' }, password: { type: 'string' }, twoFactorCode: { type: 'string', nullable: true }, twoFactorRecoveryCode: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsImage: { type: 'object', properties: { newsId: { type: 'integer', format: 'int32' }, imageId: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       NewsImageLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsImage' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      NewsImageResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
+      NewsImageResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsImageResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' } }, additionalProperties: false },
       NewsPreviewResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, markup: { type: 'string' }, images: { '$ref': '#/components/schemas/NewsImageLazyLoadResponse' } }, additionalProperties: false },

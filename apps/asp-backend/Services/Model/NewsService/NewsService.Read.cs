@@ -1,5 +1,6 @@
 using EtsZemun.DTOs;
 using EtsZemun.DTOs.Response.News;
+using EtsZemun.Errors;
 using EtsZemun.Services.Read;
 using FluentResults;
 
@@ -66,9 +67,56 @@ public partial class NewsService
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
             Items = [],
-            NextCursor = $"news/images?newsId={id}&offset=0&limit=1",
+            NextCursor = $"news/{id}/images?offset=0&limit=1",
         };
 
         return Result.Ok(mapped);
+    }
+
+    public async Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(
+        int id,
+        int? offset,
+        int? limit
+    )
+    {
+        if (id < 1)
+            return Result.Fail<LazyLoadResponse<NewsImageResponseDto>>(
+                new BadRequest("Invalid request")
+            );
+
+        var result = await readImageService.Get(
+            x => x.NewsId == id,
+            offset,
+            limit ?? 1,
+            x => x.OrderBy(x => x.ImageId)
+        );
+
+        if (result.IsFailed)
+            return Result.Fail<LazyLoadResponse<NewsImageResponseDto>>(result.Errors);
+
+        var mapped = result.Value.Select(x => new NewsImageResponseDto()
+        {
+            Id = x.ImageId,
+            Image = x.Image,
+        });
+
+        var total = await hybridCache.GetOrCreateAsync(
+            $"news-{id}-images-count",
+            async (_) => (await imageCountService.Count(x => x.NewsId == id)).Value,
+            new() { Expiration = TimeSpan.FromHours(6) }
+        );
+
+        return Result.Ok(
+            new LazyLoadResponse<NewsImageResponseDto>()
+            {
+                Items = mapped,
+                LoadedCount = mapped.Count(),
+                TotalCount = total,
+                NextCursor =
+                    total <= ((limit ?? 0) + (offset ?? 1))
+                        ? null
+                        : $"news/{id}/images?offset={(offset ?? 0) + (limit ?? 1)}&limit={limit ?? 1}",
+            }
+        );
     }
 }

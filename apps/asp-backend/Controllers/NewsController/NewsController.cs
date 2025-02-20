@@ -79,6 +79,23 @@ public class NewsController(INewsService newsService) : ControllerBase
         return Ok(result.Value);
     }
 
+    [HttpGet("{id:int}/images")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<LazyLoadResponse<NewsImageResponseDto>>> GetImages(
+        int id,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit
+    )
+    {
+        var result = await newsService.GetImages(id, offset, limit);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return Ok(result.Value);
+    }
+
     [Authorize(Roles = "Mod,Admin")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
