@@ -62,7 +62,7 @@ public partial class NewsService
             LoadedCount = 0,
             TotalCount = await hybridCache.GetOrCreateAsync(
                 $"news-{id}-images-count",
-                async (_) => (await countService.Count(x => x.NewsId == id)).Value,
+                async (_) => (await imageCountService.Count(x => x.NewsId == id)).Value,
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
             Items = [],

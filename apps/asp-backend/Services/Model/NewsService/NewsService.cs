@@ -16,7 +16,8 @@ public partial class NewsService(
     ICreateSingleService<NewsTranslation> createTranslationService,
     IReadRangeService<News> readService,
     IReadSingleService<News> readSingleService,
-    ICountService<NewsImage> countService,
+    ICountService<News> countService,
+    ICountService<NewsImage> imageCountService,
     IExecuteUpdateService<News> updateService,
     IExecuteUpdateService<NewsTranslation> updateTranslationService,
     IDeleteService<News> deleteService,
@@ -33,7 +34,8 @@ public partial class NewsService(
         createTranslationService;
     private readonly IReadRangeService<News> readService = readService;
     private readonly IReadSingleService<News> readSingleService = readSingleService;
-    private readonly ICountService<NewsImage> countService = countService;
+    private readonly ICountService<News> countService = countService;
+    private readonly ICountService<NewsImage> imageCountService = imageCountService;
     private readonly IExecuteUpdateService<News> updateService = updateService;
     private readonly IExecuteUpdateService<NewsTranslation> updateTranslationService =
         updateTranslationService;
@@ -49,4 +51,5 @@ public partial class NewsService(
     private readonly IResponseMapper<News, NewsPreviewResponseDto> responsePreviewMapper =
         responsePreviewMapper;
     private readonly IResponseMapper<News, NewsResponseDto> responseMapper = responseMapper;
+    private readonly HybridCache hybridCache = hybridCache;
 }
