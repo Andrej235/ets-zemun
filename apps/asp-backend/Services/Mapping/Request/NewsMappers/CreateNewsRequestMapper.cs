@@ -18,6 +18,6 @@ public class CreateNewsRequestMapper(
             Date = from.Date,
             PreviewImage = from.PreviewImage,
             Translations = [translationMapper.Map(from.Translation)],
-            Images = [],
+            Images = from.Images.Select(x => new NewsImage { Image = x }),
         };
 }
