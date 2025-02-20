@@ -1,6 +1,5 @@
 import { Outlet, ScrollRestoration } from "react-router";
 import "./app.scss";
-//@ts-expect-error tailwind
 import "./app.css";
 import AppHeader from "@components/app-header/app-header";
 import AppFooter from "@components/app-footer/app-footer";

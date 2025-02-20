@@ -157,8 +157,8 @@ export default function NewNewsArticle() {
 
     console.log(quill.root.innerHTML, imageSources);
     console.log(previewData);
-    // localStorage.removeItem("draft");
-    // localStorage.removeItem("preview");
+    //* localStorage.removeItem("draft");
+    //* localStorage.removeItem("preview");
     setIsModalOpen(false);
   }
 

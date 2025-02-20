@@ -13,6 +13,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@ui": path.resolve(__dirname, "./src/components/ui"),
+      "@better-router": path.resolve(__dirname, "./src/better-router"),
       "@shared": path.resolve(__dirname, "../shared-frontend"),
       "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
       "@api": path.resolve(__dirname, "../shared-frontend/api-dsl"),

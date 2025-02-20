@@ -1,0 +1,8 @@
+.lazy-loading-marker {
+  position: absolute;
+}
+
+*:has(.lazy-loading-marker) {
+  position: relative;
+}
+

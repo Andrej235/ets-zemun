@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import ErrorComponent from "@components/error-component/error-component";
 import About from "@components/about/about";
 import News from "@components/news/news";
+import NewNewsArticle from "./components/news/new-news-article";
+import AllNews from "./components/news/all-news";
+import newsLoader from "./components/news/news-loader";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,17 @@ const router = createBrowserRouter([
       {
         path: "/vesti",
         element: <News />,
+        children: [
+          {
+            path: "",
+            element: <AllNews />,
+            loader: newsLoader,
+          },
+          {
+            path: "napravi",
+            element: <NewNewsArticle />,
+          },
+        ],
       },
     ],
   },
