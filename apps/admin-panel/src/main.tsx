@@ -9,6 +9,8 @@ import News from "@components/news/news";
 import NewNewsArticle from "./components/news/new-news-article";
 import AllNews from "./components/news/all-news";
 import newsLoader from "./components/news/news-loader";
+import FullNewsArticle from "./components/news/full-news-article";
+import fullNewsArticleLoader from "./components/news/full-news-article-loader";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,11 @@ const router = createBrowserRouter([
           {
             path: "napravi",
             element: <NewNewsArticle />,
+          },
+          {
+            path: ":id",
+            element: <FullNewsArticle />,
+            loader: fullNewsArticleLoader,
           },
         ],
       },

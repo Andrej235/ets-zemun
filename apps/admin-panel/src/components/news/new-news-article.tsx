@@ -94,7 +94,7 @@ export default function NewNewsArticle() {
     };
 
     const toolbar = quill.getModule("toolbar") as Toolbar;
-    toolbar.addHandler("image", (x) => {
+    toolbar.addHandler("image", () => {
       const input = document.createElement("input");
       input.setAttribute("type", "file");
       input.setAttribute("accept", "image/*");
@@ -104,7 +104,6 @@ export default function NewNewsArticle() {
         const file = input.files![0];
         addImage(file);
       };
-      console.log(x);
     });
 
     quill.on("text-change", () => {
@@ -132,6 +131,7 @@ export default function NewNewsArticle() {
           source: src,
         });
       image.setAttribute("src", "");
+      image.id = `image-${i + 1}`;
     });
 
     const payload: Schema<"CreateNewsRequestDto"> = {
@@ -155,12 +155,8 @@ export default function NewNewsArticle() {
       payload,
     });
 
-    console.log(response, JSON.stringify(payload));
-
     if (response.code !== "No Content") return;
 
-    console.log(quill.root.innerHTML, imageSources);
-    console.log(previewData);
     //* localStorage.removeItem("draft");
     //* localStorage.removeItem("preview");
     setIsModalOpen(false);

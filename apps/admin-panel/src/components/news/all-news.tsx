@@ -10,7 +10,7 @@ export default function AllNews() {
     <div className="max-w-full h-max overflow-auto flex justify-center">
       <div className="w-max h-max p-10 grid grid-cols-3 gap-8 overflow-auto">
         <LazyAwaitedList data={loaderData} success="OK">
-          {(news) => <NewsPreview news={news} />}
+          {(news) => <NewsPreview key={news.id} news={news} />}
         </LazyAwaitedList>
       </div>
     </div>
