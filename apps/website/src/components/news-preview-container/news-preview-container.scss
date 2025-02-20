@@ -1,4 +1,4 @@
-.news-container {
+.news-wrapper {
   width: 100%;
 
   display: flex;
@@ -8,55 +8,20 @@
   .news-section-title {
     font-size: 4.5rem;
     font-weight: 900;
+    margin-bottom: 5rem;
 
     @media screen and (max-width: 1024px) {
       font-size: 4rem;
     }
   }
 
-  .options-container {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 5rem;
-
-    .option-button {
-      position: relative;
-      padding: 1rem 2rem;
-      background: none;
-
-      font-size: 2rem;
-
-      .underline {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0.2rem;
-        background-color: $text-primary;
-      }
-
-      p {
-        transition: 200ms ease-out;
-      }
-
-      &:hover p {
-        transform: translate(0, -0.7rem);
-      }
-
-      &:focus-visible p {
-        transform: translate(0, -0.7rem);
-        color: $accent-secondary;
-      }
-    }
-  }
-
-  .news-and-events-section {
+  .news-section {
     display: flex;
     flex-direction: column;
     gap: 5rem;
     max-height: fit-content;
 
-    .news-events-container {
+    .news-container {
       width: 95%;
       display: flex;
       justify-content: center;

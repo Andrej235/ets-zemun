@@ -1,6 +1,6 @@
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
-import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
+import NewsPreviewContainer from "@components/news-preview-container/news-preview-container";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -151,7 +151,7 @@ export default function About() {
       </section>
 
       <section>
-        <NewsAndEventsPreviewContainer />
+        <NewsPreviewContainer />
       </section>
     </div>
   );
