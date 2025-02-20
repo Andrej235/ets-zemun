@@ -11,8 +11,32 @@ import { Textarea } from "../ui/textarea";
 import { DatePicker } from "../ui/date-picker";
 import NewsPreview from "./news-preview";
 
+type PreviewData = {
+  title: string;
+  description: string;
+  image: string;
+  date: Date;
+};
+
 export default function News() {
   const { quillRef, quill } = useQuill();
+
+  const [previewData, setPreviewData] = useState<PreviewData>({
+    title: "",
+    description: "",
+    image: "",
+    date: new Date(),
+  });
+
+  function handlePreviewDataChange(
+    callback: (prev: PreviewData) => PreviewData
+  ) {
+    setPreviewData((prev) => {
+      const newData = callback(prev);
+      localStorage.setItem("preview", JSON.stringify(newData));
+      return newData;
+    });
+  }
 
   const compressImage = async (file: File, quality = 1) => {
     // Get as image data
@@ -35,6 +59,15 @@ export default function News() {
       type: blob!.type,
     });
   };
+
+  useEffect(() => {
+    const preview = localStorage.getItem("preview");
+    if (!preview) return;
+
+    const loadedData = JSON.parse(preview) as PreviewData;
+    loadedData.date = new Date(loadedData.date);
+    setPreviewData(loadedData);
+  }, []);
 
   useEffect(() => {
     if (!quill) return;
@@ -100,14 +133,11 @@ export default function News() {
     });
 
     console.log(quill.root.innerHTML, imageSources);
+    console.log(previewData);
     localStorage.removeItem("draft");
+    localStorage.removeItem("preview");
     setIsModalOpen(false);
   }
-
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [title, setTitle] = useState<string>("");
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>("");
 
   return (
     <div className="w-full h-max p-20 flex flex-col gap-20">
@@ -116,11 +146,23 @@ export default function News() {
           <Input
             placeholder="Naslov"
             className="pt-5 pb-5 h-10"
-            onChange={(x) => setTitle(x.target.value)}
+            onChange={(x) =>
+              handlePreviewDataChange((prev) => ({
+                ...prev,
+                title: x.target.value,
+              }))
+            }
+            value={previewData.title}
           />
           <Textarea
             placeholder="Kratak opis"
-            onChange={(x) => setDescription(x.target.value)}
+            onChange={(x) =>
+              handlePreviewDataChange((prev) => ({
+                ...prev,
+                description: x.target.value,
+              }))
+            }
+            value={previewData.description}
           />
           <Input
             type="file"
@@ -133,18 +175,29 @@ export default function News() {
               reader.readAsDataURL(compressedImage);
               reader.onload = () => {
                 const imageDataUrl = reader.result as string;
-                setPreviewImage(imageDataUrl);
+                handlePreviewDataChange((prev) => ({
+                  ...prev,
+                  image: imageDataUrl,
+                }));
               };
             }}
           />
-          <DatePicker date={date} setDate={setDate} />
+          <DatePicker
+            date={previewData.date}
+            setDate={(x) =>
+              handlePreviewDataChange((prev) => ({
+                ...prev,
+                date: x ?? new Date(),
+              }))
+            }
+          />
         </div>
 
         <NewsPreview
-          date={date ?? new Date()}
-          title={title}
-          description={description}
-          image={previewImage ?? ""}
+          date={previewData.date}
+          title={previewData.title}
+          description={previewData.description}
+          image={previewData.image}
         />
       </div>
 
