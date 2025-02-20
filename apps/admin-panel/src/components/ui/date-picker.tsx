@@ -17,15 +17,15 @@ type DatePickerProps = {
 export function DatePicker({ date, setDate }: DatePickerProps) {
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="p-6">
         <Button
           variant={"outline"}
           className={cn(
-            "w-[240px] justify-start text-left font-normal",
+            "w-full h-max justify-start text-left text-2xl",
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon />
+          <CalendarIcon className="h-max! scale-150 mr-2" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
