@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { DatePicker } from "@/components/ui/date-picker";
 import NewsPreview from "@/components/news/news-preview";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 
 type PreviewData = {
   title: string;
@@ -133,10 +134,13 @@ export default function NewNewsArticle() {
       image.setAttribute("src", "");
     });
 
-    const payload = {
+    const payload: Schema<"CreateNewsRequestDto"> = {
       date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
       previewImage: previewData.previewImage,
-      images: imageSources.map((x) => x.source),
+      images: imageSources.map((x) => ({
+        id: x.id,
+        image: x.source,
+      })),
       translation: {
         languageCode: "sr_lt",
         newsId: -1,
@@ -217,7 +221,11 @@ export default function NewNewsArticle() {
         </div>
 
         <NewsPreview
-          news={{ ...previewData, id: -1, date: previewData.date.toDateString() }}
+          news={{
+            ...previewData,
+            id: -1,
+            date: previewData.date.toDateString(),
+          }}
           disabledLink
         />
       </div>

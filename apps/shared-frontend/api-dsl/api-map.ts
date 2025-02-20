@@ -1344,9 +1344,10 @@ export type APIMap = {
         additionalProperties: false
       },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
+      CreateNewsImageRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
-        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date-time' }, translation: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' }, images: { type: 'array', items: { type: 'string' } } },
+        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translation: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
         additionalProperties: false
       },
       CreateNewsTranslationRequestDto: { type: 'object', properties: { newsId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
@@ -1381,7 +1382,7 @@ export type APIMap = {
       LoginRequest: { required: [ 'email', 'password' ], type: 'object', properties: { email: { type: 'string' }, password: { type: 'string' }, twoFactorCode: { type: 'string', nullable: true }, twoFactorRecoveryCode: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsImage: { type: 'object', properties: { newsId: { type: 'integer', format: 'int32' }, imageId: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       NewsImageLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsImage' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date-time' } }, additionalProperties: false },
+      NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' } }, additionalProperties: false },
       NewsPreviewResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, markup: { type: 'string' }, images: { '$ref': '#/components/schemas/NewsImageLazyLoadResponse' } }, additionalProperties: false },
       ProblemDetails: { type: 'object', properties: { type: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, status: { type: 'integer', format: 'int32', nullable: true }, detail: { type: 'string', nullable: true }, instance: { type: 'string', nullable: true } }, additionalProperties: {} },
@@ -1411,7 +1412,7 @@ export type APIMap = {
       },
       UpdateNewsRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date-time' }, images: { type: 'array', items: { type: 'string' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, images: { type: 'array', items: { type: 'string' } } },
         additionalProperties: false
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },

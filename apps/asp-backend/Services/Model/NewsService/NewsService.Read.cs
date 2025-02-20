@@ -66,7 +66,7 @@ public partial class NewsService
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
             Items = [],
-            NextCursor = $"news/images?newsId={id}&offset=0&limit=10",
+            NextCursor = $"news/images?newsId={id}&offset=0&limit=1",
         };
 
         return Result.Ok(mapped);

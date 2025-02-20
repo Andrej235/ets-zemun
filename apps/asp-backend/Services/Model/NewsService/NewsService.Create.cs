@@ -13,7 +13,12 @@ public partial class NewsService
             return Result.Fail(newNews.Errors);
 
         var newImages = await createRangeImageService.Add(
-            request.Images.Select(x => new NewsImage() { NewsId = newNews.Value.Id, Image = x })
+            request.Images.Select(x => new NewsImage()
+            {
+                NewsId = newNews.Value.Id,
+                Image = x.Image,
+                ImageId = x.Id,
+            })
         );
         if (newImages.IsFailed)
             return Result.Fail(newImages.Errors);
