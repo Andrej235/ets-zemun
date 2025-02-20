@@ -13,6 +13,7 @@ namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService(
     ICreateSingleService<News> createService,
+    ICreateRangeService<NewsImage> createRangeImageService,
     ICreateSingleService<NewsTranslation> createTranslationService,
     IReadRangeService<News> readService,
     IReadSingleService<News> readSingleService,
@@ -30,6 +31,8 @@ public partial class NewsService(
 ) : INewsService
 {
     private readonly ICreateSingleService<News> createService = createService;
+    private readonly ICreateRangeService<NewsImage> createRangeImageService =
+        createRangeImageService;
     private readonly ICreateSingleService<NewsTranslation> createTranslationService =
         createTranslationService;
     private readonly IReadRangeService<News> readService = readService;

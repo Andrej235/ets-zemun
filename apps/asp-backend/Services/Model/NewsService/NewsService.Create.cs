@@ -1,4 +1,5 @@
 using EtsZemun.DTOs.Request.News;
+using EtsZemun.Models;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.NewsService;
@@ -10,6 +11,12 @@ public partial class NewsService
         var newNews = await createService.Add(createRequestMapper.Map(request));
         if (newNews.IsFailed)
             return Result.Fail(newNews.Errors);
+
+        var newImages = await createRangeImageService.Add(
+            request.Images.Select(x => new NewsImage() { NewsId = newNews.Value.Id, Image = x })
+        );
+        if (newImages.IsFailed)
+            return Result.Fail(newImages.Errors);
 
         await hybridCache.RemoveAsync("news-count");
         return Result.Ok();
