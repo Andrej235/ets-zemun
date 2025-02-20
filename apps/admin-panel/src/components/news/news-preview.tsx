@@ -1,5 +1,5 @@
 import { PointerEvent } from "react";
-import "./news-preview.scss";
+import "./news.scss";
 
 type NewsPreviewProps = {
   readonly date: Date;

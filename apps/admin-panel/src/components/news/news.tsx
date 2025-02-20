@@ -9,9 +9,32 @@ import Toolbar from "quill/modules/toolbar";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { DatePicker } from "../ui/date-picker";
+import NewsPreview from "./news-preview";
 
 export default function News() {
   const { quillRef, quill } = useQuill();
+
+  const compressImage = async (file: File, quality = 1) => {
+    // Get as image data
+    const imageBitmap = await createImageBitmap(file);
+
+    // Draw to canvas
+    const canvas = document.createElement("canvas");
+    canvas.width = imageBitmap.width;
+    canvas.height = imageBitmap.height;
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(imageBitmap, 0, 0);
+
+    // Turn into Blob
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", quality)
+    );
+
+    // Turn Blob into File
+    return new File([blob!], file.name, {
+      type: blob!.type,
+    });
+  };
 
   useEffect(() => {
     if (!quill) return;
@@ -23,28 +46,6 @@ export default function News() {
       const range = quill.getSelection();
       if (!range) return;
       quill.insertEmbed(range.index, "image", url);
-    };
-
-    const compressImage = async (file: File, quality = 1) => {
-      // Get as image data
-      const imageBitmap = await createImageBitmap(file);
-
-      // Draw to canvas
-      const canvas = document.createElement("canvas");
-      canvas.width = imageBitmap.width;
-      canvas.height = imageBitmap.height;
-      const ctx = canvas.getContext("2d")!;
-      ctx.drawImage(imageBitmap, 0, 0);
-
-      // Turn into Blob
-      const blob = await new Promise<Blob | null>((resolve) =>
-        canvas.toBlob(resolve, "image/jpeg", quality)
-      );
-
-      // Turn Blob into File
-      return new File([blob!], file.name, {
-        type: blob!.type,
-      });
     };
 
     const addImage = async (file: File) => {
@@ -103,15 +104,48 @@ export default function News() {
     setIsModalOpen(false);
   }
 
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [title, setTitle] = useState<string>("");
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [description, setDescription] = useState<string>("");
+
   return (
     <div className="w-full h-max p-20 flex flex-col gap-20">
       <div className="w-full h-max flex gap-10">
         <div className="w-full flex flex-col gap-3">
-          <Input placeholder="Naslov" className="pt-5 pb-5 h-10" />
-          <Textarea placeholder="Kratak opis" />
-          <Input type="file" />
-          <DatePicker />
+          <Input
+            placeholder="Naslov"
+            className="pt-5 pb-5 h-10"
+            onChange={(x) => setTitle(x.target.value)}
+          />
+          <Textarea
+            placeholder="Kratak opis"
+            onChange={(x) => setDescription(x.target.value)}
+          />
+          <Input
+            type="file"
+            onChange={async (x) => {
+              const file = x.target.files?.[0];
+              if (!file) return;
+
+              const compressedImage = await compressImage(file, 0.5);
+              const reader = new FileReader();
+              reader.readAsDataURL(compressedImage);
+              reader.onload = () => {
+                const imageDataUrl = reader.result as string;
+                setPreviewImage(imageDataUrl);
+              };
+            }}
+          />
+          <DatePicker date={date} setDate={setDate} />
         </div>
+
+        <NewsPreview
+          date={date ?? new Date()}
+          title={title}
+          description={description}
+          image={previewImage ?? ""}
+        />
       </div>
 
       <div className="w-full h-[100vh]">

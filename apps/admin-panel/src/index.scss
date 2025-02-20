@@ -1,0 +1,50 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: $text-primary;
+  background-color: $background;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: 10px;
+}
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  max-width: 100svw;
+  min-height: 100svh;
+  max-height: 100svh;
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  min-height: 100svh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+i.icon {
+  color: $text-primary;
+}
+
+@media screen and (max-width: 768.98px) {
+  :root {
+    font-size: 8px;
+  }
+}
+
