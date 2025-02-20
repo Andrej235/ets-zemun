@@ -413,24 +413,6 @@
         grid-template-rows: 1fr 1fr;
       }
     }
-
-    .orientation-test {
-      div {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-
-      p {
-        font-size: 1.5rem;
-      }
-
-      button {
-        width: 15rem;
-        height: 4rem;
-        font-size: 1.4rem;
-      }
-    }
   }
 }
 

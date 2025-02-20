@@ -54,11 +54,6 @@
       "buttons": {
         "1": "Apply now",
         "2": "Schedule a meeting"
-      },
-      "orientationTest": {
-        "title": "Still not sure?",
-        "description": "Take a short test to see if our school is the right fit for you!",
-        "button": "Take the test"
       }
     }
   },

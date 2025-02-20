@@ -147,18 +147,6 @@ export default function About() {
               <Icon name="arrow-right" className="button-icon" />
             </button>
           </div>
-
-          <div className="orientation-test">
-            <h2>{t("about.callToAction.orientationTest.title")}</h2>
-
-            <div>
-              <p>{t("about.callToAction.orientationTest.description")}</p>
-
-              <button className="secondary">
-                {t("about.callToAction.orientationTest.button")}
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 
