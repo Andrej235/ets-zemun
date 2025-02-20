@@ -10,6 +10,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { DatePicker } from "../ui/date-picker";
 import NewsPreview from "./news-preview";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
 type PreviewData = {
   title: string;
@@ -111,7 +112,7 @@ export default function News() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function handleSave() {
+  async function handleSave() {
     if (!quill) return;
 
     const root = quill.root;
@@ -129,13 +130,34 @@ export default function News() {
           source: src,
         });
       image.setAttribute("src", "");
-      image.id = "image_" + (i + 1);
     });
+
+    const payload = {
+      date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
+      previewImage: previewData.image,
+      images: imageSources.map((x) => x.source),
+      translation: {
+        languageCode: "sr_lt",
+        newsId: -1,
+        title: previewData.title,
+        description: previewData.description,
+        markup: root.innerHTML,
+      },
+    };
+
+    const response = await sendAPIRequest("/news", {
+      method: "post",
+      payload,
+    });
+
+    console.log(response, JSON.stringify(payload));
+
+    if (response.code !== "No Content") return;
 
     console.log(quill.root.innerHTML, imageSources);
     console.log(previewData);
-    localStorage.removeItem("draft");
-    localStorage.removeItem("preview");
+    // localStorage.removeItem("draft");
+    // localStorage.removeItem("preview");
     setIsModalOpen(false);
   }
 

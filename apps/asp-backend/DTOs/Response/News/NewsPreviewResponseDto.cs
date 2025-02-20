@@ -6,5 +6,5 @@ public class NewsPreviewResponseDto
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string PreviewImage { get; set; } = null!;
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
 }

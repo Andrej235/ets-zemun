@@ -4,8 +4,9 @@ public class News
 {
     public int Id { get; set; }
     public string PreviewImage { get; set; } = null!;
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
+    public bool IsApproved { get; set; }
 
-    public IEnumerable<NewsTranslation> Translations { get; set; } = [];
-    public IEnumerable<NewsImage> Images { get; set; } = [];
+    public ICollection<NewsTranslation> Translations { get; set; } = [];
+    public ICollection<NewsImage> Images { get; set; } = [];
 }
