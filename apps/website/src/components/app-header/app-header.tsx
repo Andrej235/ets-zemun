@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <FocusTrap
@@ -46,6 +47,16 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           </div>
 
           <HeaderSearchBar />
+
+          <button
+            onClick={() =>
+              i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr")
+            }
+            className="language-button"
+            aria-label="Promeni jezik"
+          >
+            {i18n.language === "sr" ? <p>Srpski</p> : <p>English</p>}
+          </button>
         </div>
 
         <div className="background" />
