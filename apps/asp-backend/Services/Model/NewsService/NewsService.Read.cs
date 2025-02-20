@@ -56,6 +56,19 @@ public partial class NewsService
         if (result.IsFailed)
             return Result.Fail<NewsResponseDto>(result.Errors);
 
-        return Result.Ok(responseMapper.Map(result.Value));
+        var mapped = responseMapper.Map(result.Value);
+        mapped.Images = new()
+        {
+            LoadedCount = 0,
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"news-{id}-images-count",
+                async (_) => (await countService.Count(x => x.NewsId == id)).Value,
+                new() { Expiration = TimeSpan.FromHours(6) }
+            ),
+            Items = [],
+            NextCursor = $"news/images?newsId={id}&offset=0&limit=10",
+        };
+
+        return Result.Ok(mapped);
     }
 }

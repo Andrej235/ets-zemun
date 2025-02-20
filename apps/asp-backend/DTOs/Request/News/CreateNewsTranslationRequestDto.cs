@@ -6,6 +6,6 @@ public class CreateNewsTranslationRequestDto
     public string LanguageCode { get; set; } = null!;
 
     public string Title { get; set; } = null!;
-    public string Content { get; set; } = null!;
+    public string Description { get; set; } = null!;
     public string Markup { get; set; } = null!;
 }
