@@ -1,18 +1,16 @@
 import { PointerEvent } from "react";
 import "./news.scss";
+import { Link } from "react-router";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 
 type NewsPreviewProps = {
-  readonly date: Date;
-  readonly title: string;
-  readonly description: string;
-  readonly image: string;
+  readonly news: Schema<"NewsPreviewResponseDto">;
+  readonly disabledLink?: boolean;
 };
 
 export default function NewsPreview({
-  date,
-  title,
-  description,
-  image,
+  news: { date, description, id, previewImage: image, title },
+  disabledLink,
 }: NewsPreviewProps) {
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -27,8 +25,8 @@ export default function NewsPreview({
   };
 
   return (
-    <a
-      href=" "
+    <Link
+      to={disabledLink ? "#" : `${id}`}
       className="news-article-preview"
       onPointerMove={handleMouseMove}
     >
@@ -39,9 +37,9 @@ export default function NewsPreview({
         <h1 className="title">{title}</h1>
         <br />
         <p className="description">{description}</p>
-        <p className="date">{date.toLocaleDateString()}</p>
+        <p className="date">{date}</p>
       </div>
-    </a>
+    </Link>
   );
 }
 

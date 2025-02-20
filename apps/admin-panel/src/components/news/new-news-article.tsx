@@ -16,7 +16,7 @@ import sendAPIRequest from "@shared/api-dsl/send-api-request";
 type PreviewData = {
   title: string;
   description: string;
-  image: string;
+  previewImage: string;
   date: Date;
 };
 
@@ -26,7 +26,7 @@ export default function NewNewsArticle() {
   const [previewData, setPreviewData] = useState<PreviewData>({
     title: "",
     description: "",
-    image: "",
+    previewImage: "",
     date: new Date(),
   });
 
@@ -135,7 +135,7 @@ export default function NewNewsArticle() {
 
     const payload = {
       date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
-      previewImage: previewData.image,
+      previewImage: previewData.previewImage,
       images: imageSources.map((x) => x.source),
       translation: {
         languageCode: "sr_lt",
@@ -200,7 +200,7 @@ export default function NewNewsArticle() {
                 const imageDataUrl = reader.result as string;
                 handlePreviewDataChange((prev) => ({
                   ...prev,
-                  image: imageDataUrl,
+                  previewImage: imageDataUrl,
                 }));
               };
             }}
@@ -217,10 +217,8 @@ export default function NewNewsArticle() {
         </div>
 
         <NewsPreview
-          date={previewData.date}
-          title={previewData.title}
-          description={previewData.description}
-          image={previewData.image}
+          news={{ ...previewData, id: -1, date: previewData.date.toDateString() }}
+          disabledLink
         />
       </div>
 
