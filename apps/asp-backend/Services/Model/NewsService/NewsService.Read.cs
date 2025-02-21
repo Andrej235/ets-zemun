@@ -9,7 +9,7 @@ namespace EtsZemun.Services.Model.NewsService;
 public partial class NewsService
 {
     public async Task<Result<LazyLoadResponse<NewsPreviewResponseDto>>> GetAll(
-        string? languageCode,
+        string languageCode,
         int? offset,
         int? limit
     )
@@ -47,7 +47,7 @@ public partial class NewsService
         return Result.Ok(result);
     }
 
-    public async Task<Result<NewsResponseDto>> GetById(int id, string? languageCode)
+    public async Task<Result<NewsResponseDto>> GetById(int id, string languageCode)
     {
         var result = await readSingleService.Get(
             x => x.Id == id,
@@ -70,6 +70,22 @@ public partial class NewsService
             NextCursor = $"news/{id}/images?offset=0&limit=1",
         };
 
+        return Result.Ok(mapped);
+    }
+
+    public async Task<Result<NewsPreviewResponseDto>> GetPreviewById(int id, string languageCode)
+    {
+        var news = await readSingleService.Get(
+            x => x.Id == id,
+            q =>
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(t => t.Date)
+        );
+
+        if (news.IsFailed)
+            return Result.Fail<NewsPreviewResponseDto>(news.Errors);
+
+        var mapped = responsePreviewMapper.Map(news.Value);
         return Result.Ok(mapped);
     }
 

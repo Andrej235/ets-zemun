@@ -711,6 +711,22 @@ export type APIMap = {
         }
       }
     },
+    '/news/{id}/preview': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/news/{id}/images': {
       get: {
         tags: [ 'News' ],

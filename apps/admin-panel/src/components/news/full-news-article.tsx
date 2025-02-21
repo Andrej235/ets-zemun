@@ -61,6 +61,7 @@ export default function FullNewsArticle() {
               <Button
                 variant={"secondary"}
                 className="w-48 h-12 rounded-md cursor-pointer"
+                onClick={() => navigate("promeni")}
               >
                 Promeni
               </Button>

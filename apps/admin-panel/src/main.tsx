@@ -11,6 +11,8 @@ import AllNews from "./components/news/all-news";
 import newsLoader from "./components/news/news-loader";
 import FullNewsArticle from "./components/news/full-news-article";
 import fullNewsArticleLoader from "./components/news/full-news-article-loader";
+import editNewsArticleLoader from "./components/news/edit-news-article-loader";
+import EditNewsArticle from "./components/news/edit-news-article";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,11 @@ const router = createBrowserRouter([
             path: ":id",
             element: <FullNewsArticle />,
             loader: fullNewsArticleLoader,
+          },
+          {
+            path: ":id/promeni",
+            element: <EditNewsArticle />,
+            loader: editNewsArticleLoader,
           },
         ],
       },

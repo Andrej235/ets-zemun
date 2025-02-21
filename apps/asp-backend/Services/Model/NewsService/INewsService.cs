@@ -11,11 +11,12 @@ public interface INewsService
     Task<Result> CreateTranslation(CreateNewsTranslationRequestDto request);
 
     Task<Result<LazyLoadResponse<NewsPreviewResponseDto>>> GetAll(
-        string? languageCode,
+        string languageCode,
         int? offset,
         int? limit
     );
-    Task<Result<NewsResponseDto>> GetById(int id, string? languageCode);
+    Task<Result<NewsResponseDto>> GetById(int id, string languageCode);
+    Task<Result<NewsPreviewResponseDto>> GetPreviewById(int id, string languageCode);
     Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(int id, int? offset, int? limit);
 
     Task<Result> Update(UpdateNewsRequestDto request);

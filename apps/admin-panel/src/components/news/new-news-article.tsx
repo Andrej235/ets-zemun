@@ -15,7 +15,7 @@ import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { useNavigate } from "react-router";
 
-type PreviewData = {
+export type PreviewData = {
   title: string;
   description: string;
   previewImage: string;
