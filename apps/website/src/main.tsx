@@ -1,25 +1,26 @@
+import AdminLogin from "@components/admin-login/admin-login.tsx";
+import Auth from "@components/auth/auth.tsx";
+import awardsLoader from "@components/awards/awards-loader.ts";
+import Enrollment from "@components/enrollment/enrollment.tsx";
+import ErrorComponent from "@components/error-component/error-component.tsx";
+import HistoryPage from "@components/history/history-page.tsx";
+import teacherLoader from "@components/teachers/teachers-loader.ts";
+import Teachers from "@components/teachers/teachers.tsx";
+import "overlayscrollbars/overlayscrollbars.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./components/app/app.tsx";
-import "../../shared-frontend/index.scss";
-import "overlayscrollbars/overlayscrollbars.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
-import Students from "./components/students/students.tsx";
-import News from "./components/news/news.tsx";
-import Documents from "./components/documents/documents.tsx";
+import "../../shared-frontend/index.scss";
 import About from "./components/about/about.tsx";
-import SingleProfilePage from "./components/single-profile-page/single-profile-page.tsx";
-import SingleProfilePageLoader from "./components/single-profile-page/single-profile-page-loader.ts";
-import HistoryPage from "@components/history/history-page.tsx";
-import ErrorComponent from "@components/error-component/error-component.tsx";
+import App from "./components/app/app.tsx";
 import Awards from "./components/awards/awards.tsx";
-import Teachers from "@components/teachers/teachers.tsx";
-import Enrollment from "@components/enrollment/enrollment.tsx";
-import AdminLogin from "@components/admin-login/admin-login.tsx";
+import Documents from "./components/documents/documents.tsx";
+import News from "./components/news/news.tsx";
+import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
+import SingleProfilePageLoader from "./components/single-profile-page/single-profile-page-loader.ts";
+import SingleProfilePage from "./components/single-profile-page/single-profile-page.tsx";
+import Students from "./components/students/students.tsx";
 import "./i18n.ts";
-import teacherLoader from "@components/teachers/teachers-loader.ts";
-import awardsLoader from "@components/awards/awards-loader.ts";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "prijava",
+        element: <Auth />,
       },
       {
         path: "admin-login",
