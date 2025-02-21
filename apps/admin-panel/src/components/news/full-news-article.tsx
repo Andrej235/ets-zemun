@@ -1,7 +1,9 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
 import useLazyLoad from "@/hooks/use-lazy-load";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,8 +16,6 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import fullNewsArticleLoader from "./full-news-article-loader";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { useNavigate } from "react-router";
 
 export default function FullNewsArticle() {
   const loaderData = useLoader<typeof fullNewsArticleLoader>();
@@ -61,9 +61,13 @@ export default function FullNewsArticle() {
               <Button
                 variant={"secondary"}
                 className="w-48 h-12 rounded-md cursor-pointer"
-                onClick={() => navigate("promeni")}
+                onClick={() =>
+                  news.content.markup === ""
+                    ? navigate("napravi-prevod")
+                    : navigate("promeni")
+                }
               >
-                Promeni
+                {news.content.markup === "" ? "Napravi prevod" : "Promeni"}
               </Button>
 
               <AlertDialog>

@@ -40,7 +40,7 @@ export default function NewsPreview({
         <img src={image} alt={title} />
       </div>
       <div className="info">
-        <h1 className="title">
+        <h1 className={"title" + (missingLanguage ? " text-red-500!" : "")}>
           {missingLanguage ? "Nije napravljen prevod" : title}
         </h1>
         <br />

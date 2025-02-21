@@ -14,6 +14,7 @@ import fullNewsArticleLoader from "./components/news/full-news-article-loader";
 import editNewsArticleLoader from "./components/news/edit-news-article-loader";
 import EditNewsArticle from "./components/news/edit-news-article";
 import "./i18n";
+import createTranslationNewsArticleLoader from "./components/news/create-news-translation-loader";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
             path: ":id/promeni",
             element: <EditNewsArticle />,
             loader: editNewsArticleLoader,
+          },
+          {
+            path: ":id/napravi-prevod",
+            element: <EditNewsArticle createTranslation />,
+            loader: createTranslationNewsArticleLoader,
           },
         ],
       },

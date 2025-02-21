@@ -18,7 +18,13 @@ import { useNavigate } from "react-router";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { useTranslation } from "react-i18next";
 
-export default function EditNewsArticle() {
+type EditNewsArticleProps = {
+  readonly createTranslation?: boolean;
+};
+
+export default function EditNewsArticle({
+  createTranslation,
+}: EditNewsArticleProps) {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
 
   return (
@@ -27,7 +33,11 @@ export default function EditNewsArticle() {
         if (data.preview.code !== "OK" || data.full.code !== "OK") return null;
 
         return (
-          <Editor preview={data.preview.content} full={data.full.content} />
+          <Editor
+            preview={data.preview.content}
+            full={data.full.content}
+            createTranslation={createTranslation}
+          />
         );
       }}
     </Async>
@@ -37,9 +47,10 @@ export default function EditNewsArticle() {
 type EditorProps = {
   readonly preview: Schema<"NewsPreviewResponseDto">;
   readonly full: Schema<"NewsResponseDto">;
+  readonly createTranslation?: boolean;
 };
 
-function Editor({ preview, full: news }: EditorProps) {
+function Editor({ preview, full: news, createTranslation }: EditorProps) {
   const { quillRef, quill } = useQuill();
   const navigate = useNavigate();
 
@@ -108,25 +119,30 @@ function Editor({ preview, full: news }: EditorProps) {
       image.id = `image-${i + 1}`;
     });
 
-    const newsPayload: Schema<"UpdateNewsRequestDto"> = {
+    if (!createTranslation) {
+      const newsPayload: Schema<"UpdateNewsRequestDto"> = {
+        id: news.id,
+        date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
+        previewImage: previewData.previewImage,
+        images: imageSources.map((x) => ({
+          id: x.id,
+          image: x.source,
+        })),
+      };
+
+      const newsResponse = await sendAPIRequest("/news", {
+        method: "put",
+        payload: newsPayload,
+      });
+
+      if (newsResponse.code !== "No Content") return;
+    }
+
+    const translationPayload:
+      | Schema<"UpdateNewsTranslationRequestDto">
+      | Schema<"CreateNewsTranslationRequestDto"> = {
       id: news.id,
-      date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
-      previewImage: previewData.previewImage,
-      images: imageSources.map((x) => ({
-        id: x.id,
-        image: x.source,
-      })),
-    };
-
-    const newsResponse = await sendAPIRequest("/news", {
-      method: "put",
-      payload: newsPayload,
-    });
-
-    if (newsResponse.code !== "No Content") return;
-
-    const translationPayload: Schema<"UpdateNewsTranslationRequestDto"> = {
-      id: news.id,
+      newsId: news.id,
       title: previewData.title,
       description: previewData.description,
       languageCode: i18n.language,
@@ -134,8 +150,8 @@ function Editor({ preview, full: news }: EditorProps) {
     };
 
     const translationResponse = await sendAPIRequest("/news/translation", {
-      method: "put",
-      payload: translationPayload,
+      method: createTranslation ? "post" : "put",
+      payload: translationPayload as never,
     });
 
     if (translationResponse.code !== "No Content") return;
