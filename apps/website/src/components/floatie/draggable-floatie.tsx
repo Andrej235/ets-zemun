@@ -47,6 +47,7 @@ export default function DraggableFloatie({
           opacity: !isDragging && isFloatieVisible ? 1 : 0,
         }}
         className={"draggable-floatie"}
+        tabIndex={isFloatieVisible ? undefined : -1}
       >
         {children}
       </motion.button>

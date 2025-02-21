@@ -1,6 +1,6 @@
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
-import NewsAndEventsPreviewContainer from "@components/news-and-events-preview-container/news-and-events-preview-container";
+import NewsPreviewContainer from "@components/news-preview-container/news-preview-container";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -147,23 +147,11 @@ export default function About() {
               <Icon name="arrow-right" className="button-icon" />
             </button>
           </div>
-
-          <div className="orientation-test">
-            <h2>{t("about.callToAction.orientationTest.title")}</h2>
-
-            <div>
-              <p>{t("about.callToAction.orientationTest.description")}</p>
-
-              <button className="secondary">
-                {t("about.callToAction.orientationTest.button")}
-              </button>
-            </div>
-          </div>
         </div>
       </section>
 
       <section>
-        <NewsAndEventsPreviewContainer />
+        <NewsPreviewContainer />
       </section>
     </div>
   );

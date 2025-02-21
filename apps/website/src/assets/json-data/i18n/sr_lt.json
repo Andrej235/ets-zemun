@@ -54,11 +54,6 @@
       "buttons": {
         "1": "Prijavite se",
         "2": "Zakažite sastanak"
-      },
-      "orientationTest": {
-        "title": "I dalje niste sigurni?",
-        "description": "Odratite kratak test da vidite da li bi vam bas nasa skola odgovarala!",
-        "button": "Probajte test"
       }
     }
   },

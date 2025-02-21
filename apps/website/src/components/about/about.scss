@@ -273,6 +273,7 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      padding-right: 1rem;
 
       h1 {
         width: 80%;
@@ -410,24 +411,6 @@
       @media screen and (max-width: 390px) {
         grid-template-columns: minmax(10rem, 20rem);
         grid-template-rows: 1fr 1fr;
-      }
-    }
-
-    .orientation-test {
-      div {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-
-      p {
-        font-size: 1.5rem;
-      }
-
-      button {
-        width: 15rem;
-        height: 4rem;
-        font-size: 1.4rem;
       }
     }
   }
