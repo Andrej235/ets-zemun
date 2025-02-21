@@ -1,55 +1,40 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
+using EtsZemun.DTOs.Request.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EtsZemun.Controllers
+namespace EtsZemun.Controllers.Auth
 {
     [Route("auth")]
-    public class AuthController : Controller
+    [ApiController]
+    public class AuthController(SignInManager<IdentityUser> signInManager) : ControllerBase
     {
-        [HttpGet("login")]
-        public IActionResult Login()
-        {
-            var properties = new AuthenticationProperties
-            {
-                RedirectUri = Url.Action(nameof(RedirectToMainPage), "Auth"),
-            };
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
+        private readonly SignInManager<IdentityUser> signInManager = signInManager;
 
-        [HttpGet("redirect")]
-        public IActionResult RedirectToMainPage()
-        {
-            return Redirect($"https://localhost.com/ucenici");
-        }
-
-        [HttpGet("logout")]
+        [Authorize]
+        [HttpDelete("logout")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Logout()
         {
-            // Sign the user out of the cookie authentication scheme
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect($"https://localhost.com");
+            await signInManager.SignOutAsync();
+            return NoContent();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUsername()
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("change-role")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> ChangeRole([FromBody] ChangeRoleRequestDto request)
         {
-            var result = await HttpContext.AuthenticateAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme
-            );
+            var user = await signInManager.UserManager.FindByIdAsync(request.UserId);
 
-            return Ok(result.Principal?.Claims.Select(x => x.Value));
-        }
+            if (user is null)
+                return NotFound();
 
-        [HttpGet("admin")]
-        public async Task<IActionResult> Admin()
-        {
-            var result = await HttpContext.AuthenticateAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme
-            );
-
-            return result.Principal?.Claims.Any() ?? false ? Ok() : Unauthorized();
+            await signInManager.UserManager.AddToRoleAsync(user, request.Role);
+            return NoContent();
         }
     }
 }
