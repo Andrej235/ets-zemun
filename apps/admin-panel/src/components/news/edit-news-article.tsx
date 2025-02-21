@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import compressImage from "@/lib/compress-image";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -47,22 +47,36 @@ function Editor({ preview, full: news }: EditorProps) {
     date: new Date(),
   });
 
-  function handlePreviewDataChange(
-    callback: (prev: PreviewData) => PreviewData
-  ) {
-    setPreviewData((prev) => {
-      const newData = callback(prev);
-      localStorage.setItem("preview", JSON.stringify(newData));
-      return newData;
-    });
-  }
+  const handlePreviewDataChange = useCallback(
+    (callback: (prev: PreviewData) => PreviewData) => {
+      setPreviewData((prev) => {
+        const newData = callback(prev);
+
+        const drafts = localStorage.getItem("editor-previews");
+        const draftsData = drafts ? JSON.parse(drafts) : {};
+        draftsData[news.id] = newData;
+        localStorage.setItem("editor-previews", JSON.stringify(draftsData));
+
+        return newData;
+      });
+    },
+    [news.id]
+  );
 
   useEffect(() => {
-    handlePreviewDataChange(() => ({
-      ...preview,
-      date: new Date(preview.date),
-    }));
-  }, [preview]);
+    const drafts = localStorage.getItem("editor-previews");
+    const draftData = drafts ? JSON.parse(drafts)[preview.id] : null;
+
+    if (!draftData) {
+      handlePreviewDataChange(() => ({
+        ...preview,
+        date: new Date(preview.date),
+      }));
+    } else {
+      draftData.date = new Date(draftData.date);
+      setPreviewData(draftData);
+    }
+  }, [preview, handlePreviewDataChange]);
 
   function handleSave() {
     console.log("save");
@@ -70,8 +84,6 @@ function Editor({ preview, full: news }: EditorProps) {
 
   useEffect(() => {
     if (!quill) return;
-
-    quill.root.innerHTML = news.markup;
 
     const insertToEditor = (url: string) => {
       const range = quill.getSelection();
@@ -101,13 +113,38 @@ function Editor({ preview, full: news }: EditorProps) {
       };
     });
 
-    recursivelyLazyLoad(news.images, (images) => {
-      images.forEach((image) => {
-        const imageRef = quill.root.querySelector(`img#image-${image.id}`);
+    quill.on("text-change", () => {
+      const drafts = localStorage.getItem("editor-drafts");
+      if (!drafts) {
+        localStorage.setItem(
+          "editor-drafts",
+          JSON.stringify({
+            [news.id]: quill.root.innerHTML,
+          })
+        );
+        return;
+      }
 
-        imageRef?.setAttribute("src", image.image);
-      });
+      const draftsData = JSON.parse(drafts);
+      draftsData[news.id] = quill.root.innerHTML;
+      localStorage.setItem("editor-drafts", JSON.stringify(draftsData));
     });
+
+    const drafts = localStorage.getItem("editor-drafts");
+    const draftData = drafts ? JSON.parse(drafts)[news.id] : null;
+
+    if (!draftData) {
+      quill.root.innerHTML = news.markup;
+
+      recursivelyLazyLoad(news.images, (images) => {
+        images.forEach((image) => {
+          const imageRef = quill.root.querySelector(`img#image-${image.id}`);
+          imageRef?.setAttribute("src", image.image);
+        });
+      });
+    } else {
+      quill.root.innerHTML = draftData;
+    }
   }, [quill, news]);
 
   return (
