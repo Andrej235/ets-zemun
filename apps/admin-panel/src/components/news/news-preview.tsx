@@ -1,7 +1,7 @@
-import { PointerEvent } from "react";
-import "./news.scss";
-import { Link } from "react-router";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { PointerEvent } from "react";
+import { Link } from "react-router";
+import "./news.scss";
 
 type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;

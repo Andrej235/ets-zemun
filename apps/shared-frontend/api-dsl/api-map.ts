@@ -1444,7 +1444,7 @@ export type APIMap = {
       },
       UpdateNewsRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, images: { type: 'array', items: { type: 'string' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
         additionalProperties: false
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },

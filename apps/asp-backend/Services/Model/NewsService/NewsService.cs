@@ -23,6 +23,7 @@ public partial class NewsService(
     IExecuteUpdateService<News> updateService,
     IExecuteUpdateService<NewsTranslation> updateTranslationService,
     IDeleteService<News> deleteService,
+    IDeleteService<NewsImage> deleteImageService,
     IDeleteService<NewsTranslation> deleteTranslationService,
     IRequestMapper<CreateNewsRequestDto, News> createRequestMapper,
     IRequestMapper<CreateNewsTranslationRequestDto, NewsTranslation> createTranslationRequestMapper,
@@ -45,6 +46,7 @@ public partial class NewsService(
     private readonly IExecuteUpdateService<NewsTranslation> updateTranslationService =
         updateTranslationService;
     private readonly IDeleteService<News> deleteService = deleteService;
+    private readonly IDeleteService<NewsImage> deleteImageService = deleteImageService;
     private readonly IDeleteService<NewsTranslation> deleteTranslationService =
         deleteTranslationService;
     private readonly IRequestMapper<CreateNewsRequestDto, News> createRequestMapper =

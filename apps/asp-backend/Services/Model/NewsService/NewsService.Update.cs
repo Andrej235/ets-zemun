@@ -1,21 +1,46 @@
 using EtsZemun.DTOs.Request.News;
 using EtsZemun.Errors;
+using EtsZemun.Models;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService
 {
-    public Task<Result> Update(UpdateNewsRequestDto request)
+    public async Task<Result> Update(UpdateNewsRequestDto request)
     {
-        return request.Id < 1
-            ? Task.FromResult(Result.Fail(new BadRequest("Invalid request")))
-            : updateService.Update(
-                x => x.Id == request.Id,
-                x =>
-                    x.SetProperty(x => x.Date, request.Date)
-                        .SetProperty(x => x.PreviewImage, request.PreviewImage)
-            );
+        if (request.Id < 1)
+            return Result.Fail(new BadRequest("Invalid request"));
+
+        var updateResult = await updateService.Update(
+            x => x.Id == request.Id,
+            x =>
+                x.SetProperty(x => x.Date, request.Date)
+                    .SetProperty(x => x.PreviewImage, request.PreviewImage)
+        );
+
+        if (updateResult.IsFailed)
+            return updateResult;
+
+        var deleteImagesResult = await deleteImageService.Delete(
+            x => x.NewsId == request.Id,
+            false
+        );
+        if (deleteImagesResult.IsFailed)
+            return deleteImagesResult;
+
+        var createImagesResult = await createRangeImageService.Add(
+            request.Images.Select(x => new NewsImage
+            {
+                NewsId = request.Id,
+                ImageId = x.Id,
+                Image = x.Image,
+            })
+        );
+        if (createImagesResult.IsFailed)
+            return createImagesResult;
+
+        return Result.Ok();
     }
 
     public Task<Result> UpdateTranslation(UpdateNewsTranslationRequestDto request)

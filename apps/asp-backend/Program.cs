@@ -345,6 +345,7 @@ builder.Services.AddScoped<
     UpdateService<NewsTranslation>
 >();
 builder.Services.AddScoped<IDeleteService<News>, DeleteService<News>>();
+builder.Services.AddScoped<IDeleteService<NewsImage>, DeleteService<NewsImage>>();
 builder.Services.AddScoped<IDeleteService<NewsTranslation>, DeleteService<NewsTranslation>>();
 builder.Services.AddScoped<IRequestMapper<CreateNewsRequestDto, News>, CreateNewsRequestMapper>();
 builder.Services.AddScoped<

@@ -15,6 +15,7 @@ import { PreviewData } from "./new-news-article";
 import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
 import Toolbar from "quill/modules/toolbar";
 import { useNavigate } from "react-router";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
 export default function EditNewsArticle() {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
@@ -80,8 +81,71 @@ function Editor({ preview, full: news }: EditorProps) {
     }
   }, [preview, handlePreviewDataChange]);
 
-  function handleSave() {
-    console.log("save");
+  async function handleSave() {
+    if (!quill) return;
+
+    const root = quill.root;
+    const images = root.querySelectorAll("img");
+    const imageSources: {
+      source: string;
+      id: number;
+    }[] = [];
+
+    images.forEach((image, i) => {
+      const src = image.getAttribute("src");
+      if (src)
+        imageSources.push({
+          id: i + 1,
+          source: src,
+        });
+      image.setAttribute("src", "");
+      image.id = `image-${i + 1}`;
+    });
+
+    const newsPayload: Schema<"UpdateNewsRequestDto"> = {
+      id: news.id,
+      date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
+      previewImage: previewData.previewImage,
+      images: imageSources.map((x) => ({
+        id: x.id,
+        image: x.source,
+      })),
+    };
+
+    const newsResponse = await sendAPIRequest("/news", {
+      method: "put",
+      payload: newsPayload,
+    });
+
+    if (newsResponse.code !== "No Content") return;
+
+    const translationPayload: Schema<"UpdateNewsTranslationRequestDto"> = {
+      id: news.id,
+      title: previewData.title,
+      description: previewData.description,
+      languageCode: "sr_lt",
+      markup: root.innerHTML,
+    };
+
+    const translationResponse = await sendAPIRequest("/news/translation", {
+      method: "put",
+      payload: translationPayload,
+    });
+
+    if (translationResponse.code !== "No Content") return;
+
+    const previews = localStorage.getItem("editor-previews");
+    const previewsData = previews ? JSON.parse(previews) : {};
+    delete previewsData[news.id];
+    localStorage.setItem("editor-previews", JSON.stringify(previewsData));
+
+    const drafts = localStorage.getItem("editor-drafts");
+    const draftsData = drafts ? JSON.parse(drafts) : {};
+    delete draftsData[news.id];
+    localStorage.setItem("editor-drafts", JSON.stringify(draftsData));
+
+    setIsModalOpen(false);
+    navigate("/vesti");
   }
 
   useEffect(() => {
