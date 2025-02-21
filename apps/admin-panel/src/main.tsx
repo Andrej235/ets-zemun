@@ -13,6 +13,7 @@ import FullNewsArticle from "./components/news/full-news-article";
 import fullNewsArticleLoader from "./components/news/full-news-article-loader";
 import editNewsArticleLoader from "./components/news/edit-news-article-loader";
 import EditNewsArticle from "./components/news/edit-news-article";
+import "./i18n";
 
 const router = createBrowserRouter([
   {

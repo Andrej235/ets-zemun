@@ -1,4 +1,5 @@
 import createLoader from "@/better-router/create-loader";
+import i18n from "@/i18n";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
 const editNewsArticleLoader = createLoader(({ params: { id } }) => ({
@@ -6,14 +7,14 @@ const editNewsArticleLoader = createLoader(({ params: { id } }) => ({
     method: "get",
     parameters: {
       id: +id,
-      languageCode: "sr_lt",
+      languageCode: i18n.language,
     },
   }),
   full: sendAPIRequest("/news/{id}", {
     method: "get",
     parameters: {
       id: +id,
-      languageCode: "sr_lt",
+      languageCode: i18n.language,
     },
   }),
 }));

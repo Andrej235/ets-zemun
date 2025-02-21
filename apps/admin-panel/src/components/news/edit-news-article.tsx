@@ -16,6 +16,7 @@ import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
 import Toolbar from "quill/modules/toolbar";
 import { useNavigate } from "react-router";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { useTranslation } from "react-i18next";
 
 export default function EditNewsArticle() {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
@@ -41,6 +42,8 @@ type EditorProps = {
 function Editor({ preview, full: news }: EditorProps) {
   const { quillRef, quill } = useQuill();
   const navigate = useNavigate();
+
+  const { i18n } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [previewData, setPreviewData] = useState<PreviewData>({
@@ -123,7 +126,7 @@ function Editor({ preview, full: news }: EditorProps) {
       id: news.id,
       title: previewData.title,
       description: previewData.description,
-      languageCode: "sr_lt",
+      languageCode: i18n.language,
       markup: root.innerHTML,
     };
 

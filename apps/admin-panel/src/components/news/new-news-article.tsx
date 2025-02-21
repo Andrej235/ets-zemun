@@ -14,6 +14,7 @@ import NewsPreview from "@/components/news/news-preview";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export type PreviewData = {
   title: string;
@@ -24,6 +25,7 @@ export type PreviewData = {
 
 export default function NewNewsArticle() {
   const { quillRef, quill } = useQuill();
+  const { i18n } = useTranslation();
 
   const [previewData, setPreviewData] = useState<PreviewData>({
     title: "",
@@ -145,7 +147,7 @@ export default function NewNewsArticle() {
         image: x.source,
       })),
       translation: {
-        languageCode: "sr_lt",
+        languageCode: i18n.language,
         newsId: -1,
         title: previewData.title,
         description: previewData.description,
