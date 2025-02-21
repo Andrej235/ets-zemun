@@ -81,6 +81,11 @@ export default function AppFooter() {
         </p>
 
         <div className="social-media-links">
+          <button className="auth-button">
+            <p>Log in</p>
+            <Icon name="arrow-right" className="button-icon" />
+          </button>
+
           <a
             href={"https://www.linkedin.com"}
             aria-label={t("footer.socialMedia.0")}
