@@ -4,12 +4,15 @@ import NewsPreview from "@/components/news/news-preview";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import useLazyLoad from "@/hooks/use-lazy-load";
+import compressImage from "@/lib/compress-image";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuill } from "react-quilljs";
+import { Button } from "../ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import editNewsArticleLoader from "./edit-news-article-loader";
 import { PreviewData } from "./new-news-article";
-import compressImage from "@/lib/compress-image";
+import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
 
 export default function EditNewsArticle() {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
@@ -33,19 +36,9 @@ type EditorProps = {
 };
 
 function Editor({ preview, full: news }: EditorProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  useLazyLoad(Promise.resolve(news.images), (x) => {
-    if (!containerRef.current) return;
+  const { quillRef, quill } = useQuill();
 
-    x.forEach((image) => {
-      const imageRef = containerRef.current!.querySelector(
-        `img#image-${image.id}`
-      );
-
-      imageRef?.setAttribute("src", image.image);
-    });
-  });
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [previewData, setPreviewData] = useState<PreviewData>({
     title: "",
     description: "",
@@ -69,6 +62,24 @@ function Editor({ preview, full: news }: EditorProps) {
       date: new Date(preview.date),
     }));
   }, [preview]);
+
+  function handleSave() {
+    console.log("save");
+  }
+
+  useEffect(() => {
+    if (!quill) return;
+
+    quill.root.innerHTML = news.markup;
+
+    recursivelyLazyLoad(news.images, (images) => {
+      images.forEach((image) => {
+        const imageRef = quill.root.querySelector(`img#image-${image.id}`);
+
+        imageRef?.setAttribute("src", image.image);
+      });
+    });
+  }, [quill, news]);
 
   return (
     <div className="w-full h-max p-20 flex flex-col gap-20">
@@ -136,13 +147,44 @@ function Editor({ preview, full: news }: EditorProps) {
         />
       </div>
 
-      <div
-        className="border-2 rounded-4xl p-8"
-        ref={containerRef}
-        dangerouslySetInnerHTML={{
-          __html: news.markup,
-        }}
-      />
+      <div className="w-full min-h-[100vh]">
+        <div ref={quillRef} />
+
+        <Popover open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <PopoverTrigger
+            className={
+              "fixed bottom-12 right-12 text-2xl p-6 rounded-2xl bg-secondary text-secondary-foreground shadow-sm hover:bg-sky-900 transition-colors cursor-pointer"
+            }
+          >
+            Sacuvaj
+          </PopoverTrigger>
+          <PopoverContent className="flex flex-col justify-center gap-3 p-12 min-w-max rounded-2xl">
+            <h1 className="w-max font-bold text-3xl">
+              Da li ste sigurni da zelite da sacuvate promene?
+            </h1>
+            <h2 className="w-max text-2xl text-muted-foreground">
+              Ova akcija je nepovratna
+            </h2>
+
+            <div className="flex justify-end gap-6">
+              <Button
+                variant="outline"
+                onClick={() => setIsModalOpen(false)}
+                className="text-xl h-max p-4 cursor-pointer"
+              >
+                Odustani
+              </Button>
+              <Button
+                variant="default"
+                className="text-xl h-max p-4 cursor-pointer"
+                onClick={handleSave}
+              >
+                Sacuvaj
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
     </div>
   );
 }

@@ -22,34 +22,37 @@ export default function useLazyLoad<T>(
     response.then((x) => {
       if (x) {
         onLoad(x.items);
-        cycle(x);
+        recursivelyLazyLoad(x, onLoad);
       }
     });
-
-    async function cycle(current: LazyLoadResponse<T>) {
-      if (!current.nextCursor) return;
-
-      const newResponse = (await sendAPIRequest(
-        ("/" + current.nextCursor) as Endpoints,
-        {
-          method: "get",
-        } as never
-      )) as unknown;
-
-      if (
-        typeof newResponse !== "object" ||
-        !newResponse ||
-        !("code" in newResponse) ||
-        !("content" in newResponse) ||
-        newResponse.code !== "OK"
-      )
-        return null;
-
-      const content = newResponse.content as LazyLoadResponse<T>;
-
-      cycle(content);
-      onLoad(content.items);
-    }
   }, [response, onLoad]);
+}
+
+export async function recursivelyLazyLoad<T>(
+  current: LazyLoadResponse<T>,
+  onLoad: (loadedData: T[]) => void
+) {
+  if (!current.nextCursor) return;
+
+  const newResponse = (await sendAPIRequest(
+    ("/" + current.nextCursor) as Endpoints,
+    {
+      method: "get",
+    } as never
+  )) as unknown;
+
+  if (
+    typeof newResponse !== "object" ||
+    !newResponse ||
+    !("code" in newResponse) ||
+    !("content" in newResponse) ||
+    newResponse.code !== "OK"
+  )
+    return null;
+
+  const content = newResponse.content as LazyLoadResponse<T>;
+
+  recursivelyLazyLoad(content, onLoad);
+  onLoad(content.items);
 }
 
