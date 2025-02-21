@@ -14,6 +14,7 @@ import editNewsArticleLoader from "./edit-news-article-loader";
 import { PreviewData } from "./new-news-article";
 import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
 import Toolbar from "quill/modules/toolbar";
+import { useNavigate } from "react-router";
 
 export default function EditNewsArticle() {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
@@ -38,6 +39,7 @@ type EditorProps = {
 
 function Editor({ preview, full: news }: EditorProps) {
   const { quillRef, quill } = useQuill();
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [previewData, setPreviewData] = useState<PreviewData>({
@@ -147,8 +149,37 @@ function Editor({ preview, full: news }: EditorProps) {
     }
   }, [quill, news]);
 
+  const [isInDraftMode, setIsInDraftMode] = useState(false);
+  useEffect(() => {
+    const drafts = localStorage.getItem("editor-drafts");
+    if (!drafts) return;
+
+    const draftsData = JSON.parse(drafts);
+    if (draftsData[news.id]) setIsInDraftMode(true);
+  }, [news.id]);
+
   return (
-    <div className="w-full h-max p-20 flex flex-col gap-20">
+    <div className="w-full h-max p-20 flex flex-col gap-16">
+      {isInDraftMode && (
+        <div className="w-full h-max p-6 text-accent-foreground flex gap-4 items-center">
+          <p>
+            Trenutno menjate radnu verziju ovog clanka, ako zelite da odbacite
+            stare promene kliknite na dugme odbaci
+          </p>
+
+          <Button
+            onClick={() => {
+              localStorage.removeItem("editor-drafts");
+              localStorage.removeItem("editor-previews");
+              navigate(0);
+            }}
+            variant={"destructive"}
+          >
+            Odbaci
+          </Button>
+        </div>
+      )}
+
       <div className="w-full h-max flex gap-10 ">
         <div className="flex flex-col gap-3 flex-1/2">
           <Input
