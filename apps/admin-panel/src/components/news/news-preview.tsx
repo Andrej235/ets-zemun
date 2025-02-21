@@ -6,11 +6,13 @@ import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;
   readonly disabledLink?: boolean;
+  readonly highlight?: boolean;
 };
 
 export default function NewsPreview({
   news: { date, description, id, previewImage: image, title },
   disabledLink,
+  highlight,
 }: NewsPreviewProps) {
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -27,7 +29,9 @@ export default function NewsPreview({
   return (
     <Link
       to={disabledLink ? "#" : `${id}`}
-      className="news-article-preview"
+      className={`news-article-preview ${
+        highlight ? "border-2 border-accent-foreground" : ""
+      }`}
       onPointerMove={handleMouseMove}
     >
       <div className="image-container">
