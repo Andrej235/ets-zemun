@@ -13,6 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import editNewsArticleLoader from "./edit-news-article-loader";
 import { PreviewData } from "./new-news-article";
 import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
+import Toolbar from "quill/modules/toolbar";
 
 export default function EditNewsArticle() {
   const loaderData = useLoader<typeof editNewsArticleLoader>();
@@ -71,6 +72,34 @@ function Editor({ preview, full: news }: EditorProps) {
     if (!quill) return;
 
     quill.root.innerHTML = news.markup;
+
+    const insertToEditor = (url: string) => {
+      const range = quill.getSelection();
+      if (!range) return;
+      quill.insertEmbed(range.index, "image", url);
+    };
+
+    const addImage = async (file: File) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(await compressImage(file, 0.5));
+      reader.onload = () => {
+        const imageDataUrl = reader.result as string;
+        insertToEditor(imageDataUrl);
+      };
+    };
+
+    const toolbar = quill.getModule("toolbar") as Toolbar;
+    toolbar.addHandler("image", () => {
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.click();
+
+      input.onchange = () => {
+        const file = input.files![0];
+        addImage(file);
+      };
+    });
 
     recursivelyLazyLoad(news.images, (images) => {
       images.forEach((image) => {
