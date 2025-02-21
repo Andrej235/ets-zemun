@@ -58,19 +58,22 @@ function Editor({ preview, full: news }: EditorProps) {
       setPreviewData((prev) => {
         const newData = callback(prev);
 
-        const drafts = localStorage.getItem("editor-previews");
+        const drafts = localStorage.getItem(`editor-previews-${i18n.language}`);
         const draftsData = drafts ? JSON.parse(drafts) : {};
         draftsData[news.id] = newData;
-        localStorage.setItem("editor-previews", JSON.stringify(draftsData));
+        localStorage.setItem(
+          `editor-previews-${i18n.language}`,
+          JSON.stringify(draftsData)
+        );
 
         return newData;
       });
     },
-    [news.id]
+    [news.id, i18n.language]
   );
 
   useEffect(() => {
-    const drafts = localStorage.getItem("editor-previews");
+    const drafts = localStorage.getItem(`editor-previews-${i18n.language}`);
     const draftData = drafts ? JSON.parse(drafts)[preview.id] : null;
 
     if (!draftData) {
@@ -82,7 +85,7 @@ function Editor({ preview, full: news }: EditorProps) {
       draftData.date = new Date(draftData.date);
       setPreviewData(draftData);
     }
-  }, [preview, handlePreviewDataChange]);
+  }, [preview, handlePreviewDataChange, i18n.language]);
 
   async function handleSave() {
     if (!quill) return;
@@ -137,15 +140,21 @@ function Editor({ preview, full: news }: EditorProps) {
 
     if (translationResponse.code !== "No Content") return;
 
-    const previews = localStorage.getItem("editor-previews");
+    const previews = localStorage.getItem(`editor-previews-${i18n.language}`);
     const previewsData = previews ? JSON.parse(previews) : {};
     delete previewsData[news.id];
-    localStorage.setItem("editor-previews", JSON.stringify(previewsData));
+    localStorage.setItem(
+      `editor-previews-${i18n.language}`,
+      JSON.stringify(previewsData)
+    );
 
-    const drafts = localStorage.getItem("editor-drafts");
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
     const draftsData = drafts ? JSON.parse(drafts) : {};
     delete draftsData[news.id];
-    localStorage.setItem("editor-drafts", JSON.stringify(draftsData));
+    localStorage.setItem(
+      `editor-drafts-${i18n.language}`,
+      JSON.stringify(draftsData)
+    );
 
     setIsModalOpen(false);
     navigate("/vesti");
@@ -183,10 +192,10 @@ function Editor({ preview, full: news }: EditorProps) {
     });
 
     quill.on("text-change", () => {
-      const drafts = localStorage.getItem("editor-drafts");
+      const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
       if (!drafts) {
         localStorage.setItem(
-          "editor-drafts",
+          `editor-drafts-${i18n.language}`,
           JSON.stringify({
             [news.id]: quill.root.innerHTML,
           })
@@ -196,10 +205,13 @@ function Editor({ preview, full: news }: EditorProps) {
 
       const draftsData = JSON.parse(drafts);
       draftsData[news.id] = quill.root.innerHTML;
-      localStorage.setItem("editor-drafts", JSON.stringify(draftsData));
+      localStorage.setItem(
+        `editor-drafts-${i18n.language}`,
+        JSON.stringify(draftsData)
+      );
     });
 
-    const drafts = localStorage.getItem("editor-drafts");
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
     const draftData = drafts ? JSON.parse(drafts)[news.id] : null;
 
     if (!draftData) {
@@ -214,16 +226,16 @@ function Editor({ preview, full: news }: EditorProps) {
     } else {
       quill.root.innerHTML = draftData;
     }
-  }, [quill, news]);
+  }, [quill, news, i18n.language]);
 
   const [isInDraftMode, setIsInDraftMode] = useState(false);
   useEffect(() => {
-    const drafts = localStorage.getItem("editor-drafts");
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
     if (!drafts) return;
 
     const draftsData = JSON.parse(drafts);
     if (draftsData[news.id]) setIsInDraftMode(true);
-  }, [news.id]);
+  }, [news.id, i18n.language]);
 
   return (
     <div className="w-full h-max p-20 flex flex-col gap-16">
@@ -236,9 +248,26 @@ function Editor({ preview, full: news }: EditorProps) {
 
           <Button
             onClick={() => {
-              localStorage.removeItem("editor-drafts");
-              localStorage.removeItem("editor-previews");
-              navigate(0);
+              const previews = localStorage.getItem(
+                `editor-previews-${i18n.language}`
+              );
+              const previewsData = previews ? JSON.parse(previews) : {};
+              delete previewsData[news.id];
+              localStorage.setItem(
+                `editor-previews-${i18n.language}`,
+                JSON.stringify(previewsData)
+              );
+
+              const drafts = localStorage.getItem(
+                `editor-drafts-${i18n.language}`
+              );
+              const draftsData = drafts ? JSON.parse(drafts) : {};
+              delete draftsData[news.id];
+              localStorage.setItem(
+                `editor-drafts-${i18n.language}`,
+                JSON.stringify(draftsData)
+              );
+              navigate(-1);
             }}
             variant={"destructive"}
           >

@@ -7,12 +7,14 @@ type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;
   readonly disabledLink?: boolean;
   readonly highlight?: boolean;
+  readonly missingLanguage?: boolean;
 };
 
 export default function NewsPreview({
   news: { date, description, id, previewImage: image, title },
   disabledLink,
   highlight,
+  missingLanguage,
 }: NewsPreviewProps) {
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -38,7 +40,9 @@ export default function NewsPreview({
         <img src={image} alt={title} />
       </div>
       <div className="info">
-        <h1 className="title">{title}</h1>
+        <h1 className="title">
+          {missingLanguage ? "Nije napravljen prevod" : title}
+        </h1>
         <br />
         <p className="description">{description}</p>
         <p className="date">{date}</p>
