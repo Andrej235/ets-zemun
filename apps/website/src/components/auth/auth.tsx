@@ -14,7 +14,10 @@ export default function Auth() {
 
   return (
     <div className="auth-page">
-      <div className={`auth-container ${active ? "active" : ""}`} id="container">
+      <div
+        className={`auth-container ${active ? "active" : ""}`}
+        id="container"
+      >
         <div className="form-container sign-up">
           <form>
             <h1>Create Account</h1>
@@ -22,7 +25,9 @@ export default function Auth() {
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
-            <button>Sign Up</button>
+            <button>
+              <span>Sign Up</span>
+            </button>
           </form>
         </div>
 
@@ -33,7 +38,9 @@ export default function Auth() {
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <a href="/">Forget Your Password?</a>
-            <button>Sign In</button>
+            <button>
+              <span>Sign In</span>
+            </button>
           </form>
         </div>
 
@@ -43,7 +50,7 @@ export default function Auth() {
               <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all of site features</p>
               <button className="hidden" onClick={handleLoginClick}>
-                Sign In
+                <span>Sign In</span>
               </button>
             </div>
             <div className="toggle-panel toggle-right">
@@ -52,7 +59,7 @@ export default function Auth() {
                 Register with your personal details to use all of site features
               </p>
               <button className="hidden" onClick={handleRegisterClick}>
-                Sign Up
+                <span>Sign Up</span>
               </button>
             </div>
           </div>
