@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import searchMapTransformer from "./plugins/search-map/search-map-transformer";
 
 export default defineConfig({
   base: "/",
@@ -15,7 +16,13 @@ export default defineConfig({
     },
     allowedHosts: ["localhost.com"],
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [searchMapTransformer()],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       "@shared": path.resolve(__dirname, "../shared-frontend"),
