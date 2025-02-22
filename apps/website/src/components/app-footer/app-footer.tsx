@@ -1,6 +1,7 @@
 import Icon from "@components/icon/icon";
 import "./app-footer.scss";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 export default function AppFooter() {
   const { t } = useTranslation();
@@ -81,6 +82,11 @@ export default function AppFooter() {
         </p>
 
         <div className="social-media-links">
+          <Link to="/prijava" className="auth-button">
+            <p>Log in</p>
+            <Icon name="arrow-right" className="button-icon" />
+          </Link>
+
           <a
             href={"https://www.linkedin.com"}
             aria-label={t("footer.socialMedia.0")}
