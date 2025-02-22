@@ -164,13 +164,7 @@ export default function About() {
                   if (news.code !== "OK") return null;
 
                   return news.content.items.map((x) => (
-                    <NewsPreview
-                      key={x.id}
-                      date={new Date(x.date)}
-                      title={x.title}
-                      description={x.description}
-                      image={x.previewImage}
-                    />
+                    <NewsPreview key={x.id} news={x} />
                   ));
                 }}
               </Async>

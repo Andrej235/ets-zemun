@@ -11,15 +11,7 @@ export default function News() {
     <div className="news-page-container">
       <div className="articles-container">
         <LazyAwaitedList data={loaderData} success="OK">
-          {(data) => (
-            <NewsPreview
-              date={new Date(data.date)}
-              title={data.title}
-              description={data.description}
-              image={data.previewImage}
-              key={data.id}
-            />
-          )}
+          {(data) => <NewsPreview key={data.id} news={data} />}
         </LazyAwaitedList>
       </div>
     </div>
