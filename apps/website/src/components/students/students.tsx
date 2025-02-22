@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
@@ -14,9 +14,23 @@ export default function Students() {
     useState<string>("ucenicki-parlament");
   const { t } = useTranslation();
 
+  const contentContainerRef = useRef<HTMLDivElement | null>(null);
+  const [isInitialRender, setIsInitialRender] = useState(true);
+
   const handleCardClick = (sectionName: string) => {
     setActiveSection(sectionName);
   };
+
+  useEffect(() => {
+    if (!isInitialRender && contentContainerRef.current) {
+      contentContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      setIsInitialRender(false);
+    }
+  }, [activeSection]);
 
   return (
     <div className="students-page-container">
@@ -78,7 +92,7 @@ export default function Students() {
         </div>
       </section>
 
-      <div className="content-container">
+      <div className="content-container" ref={contentContainerRef}>
         {activeSection === "ucenicki-parlament" && (
           <StudentsPageStudentParliament />
         )}
