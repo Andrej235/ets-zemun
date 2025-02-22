@@ -106,7 +106,7 @@ export default function Auth() {
         id="container"
       >
         <div className="form-container sign-up">
-          <form>
+          <div className="form">
             <h1>Kreiraj Nalog</h1>
             <span>ili koristite svoj email za registraciju</span>
             <input type="text" placeholder="Ime" ref={registrationNameRef} />
@@ -123,11 +123,11 @@ export default function Auth() {
             <button onClick={handleRegister}>
               <span>Registruj se</span>
             </button>
-          </form>
+          </div>
         </div>
 
         <div className="form-container sign-in">
-          <form>
+          <div className="form">
             <h1>Prijavi se</h1>
             <span>ili koristite svoj email i lozinku</span>
             <input type="email" placeholder="Email" ref={loginEmailRef} />
@@ -140,7 +140,7 @@ export default function Auth() {
             <button onClick={handleLogin}>
               <span>Prijavi se</span>
             </button>
-          </form>
+          </div>
         </div>
 
         <div className="toggle-container">
