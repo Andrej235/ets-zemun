@@ -1,9 +1,12 @@
 import aboutPageNewsLoader from "@components/about/about-page-news-loader.ts";
 import AdminLogin from "@components/admin-login/admin-login.tsx";
+import appLoader from "@components/app/app-loader.ts";
 import Auth from "@components/auth/auth.tsx";
 import awardsLoader from "@components/awards/awards-loader.ts";
 import Enrollment from "@components/enrollment/enrollment.tsx";
 import ErrorComponent from "@components/error-component/error-component.tsx";
+import fullNewsArticleLoader from "@components/full-news-article/full-news-article-loader.ts";
+import FullNewsArticle from "@components/full-news-article/full-news-article.tsx";
 import HistoryPage from "@components/history/history-page.tsx";
 import newsPageLoader from "@components/news/news-page-loader.ts";
 import teacherLoader from "@components/teachers/teachers-loader.ts";
@@ -23,13 +26,12 @@ import SingleProfilePage from "./components/single-profile-page/single-profile-p
 import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
-import FullNewsArticle from "@components/full-news-article/full-news-article.tsx";
-import fullNewsArticleLoader from "@components/full-news-article/full-news-article-loader.ts";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: appLoader,
     errorElement: <ErrorComponent />,
     children: [
       {

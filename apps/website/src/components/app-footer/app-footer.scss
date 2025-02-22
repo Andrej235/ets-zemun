@@ -88,6 +88,7 @@
       display: flex;
       justify-content: center;
       gap: 1.5rem;
+      max-width: 100%;
 
       .auth-button {
         position: relative;
@@ -130,6 +131,13 @@
         }
       }
 
+      .username {
+        display: grid;
+        place-items: center;
+        max-width: 100%;
+        word-wrap: break-word;
+      }
+
       a {
         place-items: center;
         display: grid;
@@ -155,6 +163,8 @@
 
     .credits {
       grid-area: credits;
+      min-width: max-content;
+      margin-right: 1rem;
 
       display: flex;
       align-items: center;
