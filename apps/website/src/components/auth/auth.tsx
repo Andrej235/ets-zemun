@@ -107,16 +107,25 @@ export default function Auth() {
               type="text"
               placeholder={t("auth.signUp.namePlaceholder")}
               ref={registrationNameRef}
+              name="registerName"
+              id="registerName"
+              autoComplete="off"
             />
             <input
               type="email"
               placeholder={t("auth.signUp.emailPlaceholder")}
               ref={registrationEmailRef}
+              name="registerEmail"
+              id="registerEmail"
+              autoComplete="off"
             />
             <input
               type="password"
               placeholder={t("auth.signUp.passwordPlaceholder")}
               ref={registrationPasswordRef}
+              name="registerPassword"
+              id="registerPassword"
+              autoComplete="off"
             />
             <button onClick={handleRegister}>
               <span>{t("auth.signUp.button")}</span>
@@ -132,11 +141,15 @@ export default function Auth() {
               type="email"
               placeholder={t("auth.signIn.emailPlaceholder")}
               ref={loginEmailRef}
+              name="loginEmail"
+              id="loginEmail"
             />
             <input
               type="password"
               placeholder={t("auth.signIn.passwordPlaceholder")}
               ref={loginPasswordRef}
+              name="loginPassword"
+              id="loginPassword"
             />
             <button onClick={handleLogin}>
               <span>{t("auth.signIn.button")}</span>
