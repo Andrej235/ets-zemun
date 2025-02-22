@@ -1,5 +1,4 @@
 import aboutPageNewsLoader from "@components/about/about-page-news-loader.ts";
-import AdminLogin from "@components/admin-login/admin-login.tsx";
 import appLoader from "@components/app/app-loader.ts";
 import Auth from "@components/auth/auth.tsx";
 import awardsLoader from "@components/awards/awards-loader.ts";
@@ -42,10 +41,6 @@ const router = createBrowserRouter([
       {
         path: "prijava",
         element: <Auth />,
-      },
-      {
-        path: "admin-login",
-        element: <AdminLogin />,
       },
       {
         path: "/profili",
