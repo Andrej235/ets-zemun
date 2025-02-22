@@ -49,6 +49,21 @@ export type APIMap = {
         }
       }
     },
+    '/auth/user': {
+      get: {
+        tags: [ 'Auth' ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/GetUserResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/GetUserResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/GetUserResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/award': {
       post: {
         tags: [ 'Award' ],
@@ -1534,6 +1549,7 @@ export type APIMap = {
         additionalProperties: false
       },
       ForgotPasswordRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
+      GetUserResponseDto: { type: 'object', properties: { username: { type: 'string' } }, additionalProperties: false },
       HttpValidationProblemDetails: {
         type: 'object',
         properties: {

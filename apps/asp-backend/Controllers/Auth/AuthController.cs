@@ -1,4 +1,5 @@
 using EtsZemun.DTOs.Request.Auth;
+using EtsZemun.DTOs.Response.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,9 +43,22 @@ namespace EtsZemun.Controllers.Auth
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public IActionResult ChangePassword()
+        public IActionResult CheckForAdminStatus()
         {
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public ActionResult<GetUserResponseDto> CheckForUserStatus()
+        {
+            var userName = User.Identity?.Name;
+            if (userName is null)
+                return Unauthorized();
+
+            return Ok(new GetUserResponseDto() { Username = userName });
         }
     }
 }
