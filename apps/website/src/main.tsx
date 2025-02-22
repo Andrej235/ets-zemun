@@ -24,6 +24,7 @@ import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
 import FullNewsArticle from "@components/full-news-article/full-news-article.tsx";
+import fullNewsArticleLoader from "@components/full-news-article/full-news-article-loader.ts";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
       {
         path: "/novosti/:newsId",
         element: <FullNewsArticle />,
+        loader: fullNewsArticleLoader,
       },
       {
         path: "/dokumenta",
