@@ -3,18 +3,12 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { validateEmail, validatePassword } from "./auth-validation";
 import "./auth.scss";
+import { useTranslation } from "react-i18next";
 
 export default function Auth() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
-
-  const handleRegisterClick = () => {
-    setActive(true);
-  };
-
-  const handleLoginClick = () => {
-    setActive(false);
-  };
+  const { t } = useTranslation();
 
   const registrationNameRef = useRef<HTMLInputElement>(null);
   const registrationEmailRef = useRef<HTMLInputElement>(null);
@@ -107,38 +101,45 @@ export default function Auth() {
       >
         <div className="form-container sign-up">
           <div className="form">
-            <h1>Kreiraj Nalog</h1>
-            <span>ili koristite svoj email za registraciju</span>
-            <input type="text" placeholder="Ime" ref={registrationNameRef} />
+            <h1>{t("auth.signUp.primary")}</h1>
+            <span>{t("auth.signUp.secondary")}</span>
+            <input
+              type="text"
+              placeholder={t("auth.signUp.namePlaceholder")}
+              ref={registrationNameRef}
+            />
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t("auth.signUp.emailPlaceholder")}
               ref={registrationEmailRef}
             />
             <input
               type="password"
-              placeholder="Lozinka"
+              placeholder={t("auth.signUp.passwordPlaceholder")}
               ref={registrationPasswordRef}
             />
             <button onClick={handleRegister}>
-              <span>Registruj se</span>
+              <span>{t("auth.signUp.button")}</span>
             </button>
           </div>
         </div>
 
         <div className="form-container sign-in">
           <div className="form">
-            <h1>Prijavi se</h1>
-            <span>ili koristite svoj email i lozinku</span>
-            <input type="email" placeholder="Email" ref={loginEmailRef} />
+            <h1>{t("auth.signIn.primary")}</h1>
+            <span>{t("auth.signIn.secondary")}</span>
+            <input
+              type="email"
+              placeholder={t("auth.signIn.emailPlaceholder")}
+              ref={loginEmailRef}
+            />
             <input
               type="password"
-              placeholder="Lozinka"
+              placeholder={t("auth.signIn.passwordPlaceholder")}
               ref={loginPasswordRef}
             />
-            <a href="/">Zaboravili ste lozinku?</a>
             <button onClick={handleLogin}>
-              <span>Prijavi se</span>
+              <span>{t("auth.signIn.button")}</span>
             </button>
           </div>
         </div>
@@ -146,23 +147,17 @@ export default function Auth() {
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">
-              <h1>Dobrodošli nazad!</h1>
-              <p>
-                Unesite svoje lične podatke da biste koristili sve funkcije
-                sajta
-              </p>
-              <button className="hidden" onClick={handleLoginClick}>
-                <span>Prijavi se</span>
+              <h1>{t("auth.toggleLeft.title")}</h1>
+              <p>{t("auth.toggleLeft.description")}</p>
+              <button className="hidden" onClick={() => setActive(false)}>
+                <span>{t("auth.toggleLeft.button")}</span>
               </button>
             </div>
             <div className="toggle-panel toggle-right">
-              <h1>Zdravo, nastavniče!</h1>
-              <p>
-                Registrujte se sa svojim ličnim podacima da biste koristili sve
-                funkcije sajta
-              </p>
-              <button className="hidden" onClick={handleRegisterClick}>
-                <span>Registruj se</span>
+              <h1>{t("auth.toggleRight.title")}</h1>
+              <p>{t("auth.toggleRight.description")}</p>
+              <button className="hidden" onClick={() => setActive(true)}>
+                <span>{t("auth.toggleRight.button")}</span>
               </button>
             </div>
           </div>
