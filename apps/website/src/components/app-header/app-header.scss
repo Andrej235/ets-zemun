@@ -6,7 +6,7 @@
   width: 100%;
   min-height: 10rem;
   max-height: 10rem;
-  padding: 1rem 5rem;
+  padding: 1rem 0rem 1rem 5rem;
   background-color: $secondary-background;
   box-shadow: 0 2px 15px $shadow;
 
@@ -60,7 +60,7 @@
     position: relative;
     display: flex;
     border-radius: 1rem;
-    max-height: 5rem;
+    height: 5rem;
 
     .nav-bar {
       position: relative;
@@ -104,6 +104,22 @@
     }
   }
 
+  .language-button {
+    width: max-content;
+    min-width: 8rem;
+    background-color: transparent;
+
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    font-size: 1.8rem;
+
+    a {
+      padding: 1rem 0 !important;
+    }
+  }
+  
   @media screen and (max-width: 1075px) {
     grid-template-columns: max-content 1fr max-content;
 
