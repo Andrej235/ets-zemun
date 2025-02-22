@@ -11,10 +11,13 @@ export default function About() {
       <br />
       Admin Panel
       <Button
-        onClick={() => {
-          sendAPIRequest("/auth/logout", {
+        onClick={async () => {
+          const response = await sendAPIRequest("/auth/logout", {
             method: "delete",
           });
+
+          if (response.code !== "No Content") return;
+          window.location.href = "https://localhost.com";
         }}
       >
         Logout
