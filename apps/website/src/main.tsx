@@ -22,6 +22,7 @@ import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
 import newsPageLoader from "@components/news/news-page-loader.ts";
+import aboutPageNewsLoader from "@components/about/about-page-news-loader.ts";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+        loader: aboutPageNewsLoader,
       },
       {
         path: "prijava",
