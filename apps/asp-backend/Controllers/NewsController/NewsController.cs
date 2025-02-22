@@ -113,6 +113,84 @@ public class NewsController(INewsService newsService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
+    [HttpGet("admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult<LazyLoadResponse<NewsPreviewResponseDto>>> AdminGetAll(
+        [FromQuery] string languageCode,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit
+    )
+    {
+        var result = await newsService.AdminGetAll(languageCode, offset, limit);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return Ok(result.Value);
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpGet("admin/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<NewsResponseDto>> AdminGetById(
+        int id,
+        [FromQuery] string languageCode
+    )
+    {
+        var result = await newsService.AdminGetById(id, languageCode);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return Ok(result.Value);
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpGet("admin/{id:int}/preview")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<NewsPreviewResponseDto>> AdminGetPreview(
+        int id,
+        [FromQuery] string languageCode
+    )
+    {
+        var result = await newsService.AdminGetPreviewById(id, languageCode);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return Ok(result.Value);
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpGet("admin/{id:int}/images")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<LazyLoadResponse<NewsImageResponseDto>>> AdminGetImages(
+        int id,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit
+    )
+    {
+        var result = await newsService.AdminGetImages(id, offset, limit);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return Ok(result.Value);
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -8,14 +8,14 @@ namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService
 {
-    public async Task<Result<LazyLoadResponse<NewsPreviewResponseDto>>> GetAll(
+    public async Task<Result<LazyLoadResponse<NewsPreviewResponseDto>>> AdminGetAll(
         string languageCode,
         int? offset,
         int? limit
     )
     {
         var news = await readService.Get(
-            x => x.IsApproved,
+            null,
             offset,
             limit,
             q =>
@@ -33,8 +33,8 @@ public partial class NewsService
             Items = mapped,
             LoadedCount = mapped.Count(),
             TotalCount = await hybridCache.GetOrCreateAsync(
-                "news-count",
-                async (_) => (await countService.Count(x => x.IsApproved)).Value,
+                "news-count-admin",
+                async (_) => (await countService.Count(null)).Value,
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
         };
@@ -47,10 +47,10 @@ public partial class NewsService
         return Result.Ok(result);
     }
 
-    public async Task<Result<NewsResponseDto>> GetById(int id, string languageCode)
+    public async Task<Result<NewsResponseDto>> AdminGetById(int id, string languageCode)
     {
         var result = await readSingleService.Get(
-            x => x.Id == id && x.IsApproved,
+            x => x.Id == id,
             q => q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
@@ -73,10 +73,13 @@ public partial class NewsService
         return Result.Ok(mapped);
     }
 
-    public async Task<Result<NewsPreviewResponseDto>> GetPreviewById(int id, string languageCode)
+    public async Task<Result<NewsPreviewResponseDto>> AdminGetPreviewById(
+        int id,
+        string languageCode
+    )
     {
         var news = await readSingleService.Get(
-            x => x.Id == id && x.IsApproved,
+            x => x.Id == id,
             q =>
                 q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .OrderByDescending(t => t.Date)
@@ -89,7 +92,7 @@ public partial class NewsService
         return Result.Ok(mapped);
     }
 
-    public async Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(
+    public async Task<Result<LazyLoadResponse<NewsImageResponseDto>>> AdminGetImages(
         int id,
         int? offset,
         int? limit

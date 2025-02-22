@@ -3,7 +3,7 @@ import i18n from "@/i18n";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
 const fullNewsArticleLoader = createLoader(({ params: { id } }) =>
-  sendAPIRequest("/news/{id}", {
+  sendAPIRequest("/news/admin/{id}", {
     method: "get",
     parameters: {
       id: +id,

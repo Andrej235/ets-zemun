@@ -3,7 +3,7 @@ import createLoader from "@better-router/create-loader";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
 const newsLoader = createLoader(() =>
-  sendAPIRequest("/news", {
+  sendAPIRequest("/news/admin", {
     method: "get",
     parameters: {
       languageCode: i18n.language,
