@@ -2,12 +2,14 @@ import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { PointerEvent } from "react";
 import { Link } from "react-router";
 import "./news.scss";
+import Icon from "../icon/icon";
 
 type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;
   readonly disabledLink?: boolean;
   readonly highlight?: boolean;
   readonly missingLanguage?: boolean;
+  readonly approved?: boolean;
 };
 
 export default function NewsPreview({
@@ -15,6 +17,7 @@ export default function NewsPreview({
   disabledLink,
   highlight,
   missingLanguage,
+  approved = true,
 }: NewsPreviewProps) {
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -42,6 +45,8 @@ export default function NewsPreview({
       <div className="info">
         <h1 className={"title" + (missingLanguage ? " text-red-500!" : "")}>
           {missingLanguage ? "Nije napravljen prevod" : title}
+
+          {!approved && <Icon name="warning" className="text-red-500! ml-4" />}
         </h1>
         <br />
         <p className="description">{description}</p>

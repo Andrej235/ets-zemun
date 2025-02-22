@@ -23,6 +23,7 @@ export default function AllNews() {
         <LazyAwaitedList data={loaderData} success="OK">
           {(news) => (
             <NewsPreview
+              approved={news.isApproved}
               key={news.id}
               news={news}
               highlight={highlightedIds.includes(news.id)}

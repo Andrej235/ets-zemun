@@ -16,6 +16,7 @@ public class NewsPreviewResponseMapper : IResponseMapper<News, NewsPreviewRespon
             PreviewImage = from.PreviewImage,
             Title = translation?.Title ?? "",
             Description = translation?.Description ?? "",
+            IsApproved = from.IsApproved,
         };
     }
 }
