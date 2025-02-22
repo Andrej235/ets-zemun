@@ -207,6 +207,38 @@ public class NewsController(INewsService newsService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
+    [HttpPut("approve/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Approve(int id)
+    {
+        var result = await newsService.Approve(id);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpPut("disapprove/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> Disapprove(int id)
+    {
+        var result = await newsService.Disapprove(id);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
     [HttpPut("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

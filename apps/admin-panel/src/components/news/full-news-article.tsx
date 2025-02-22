@@ -70,6 +70,29 @@ export default function FullNewsArticle() {
                 {news.content.markup === "" ? "Napravi prevod" : "Promeni"}
               </Button>
 
+              <Button
+                variant={"secondary"}
+                className="w-48 h-12 rounded-md cursor-pointer"
+                onClick={async () => {
+                  const response = await sendAPIRequest(
+                    news.content.isApproved
+                      ? "/news/disapprove/{id}"
+                      : "/news/approve/{id}",
+                    {
+                      method: "put",
+                      parameters: {
+                        id: news.content.id,
+                      },
+                    }
+                  );
+
+                  if (response.code !== "No Content") return;
+                  navigate(0);
+                }}
+              >
+                {news.content.isApproved ? "Odbij" : "Potvrdi"}
+              </Button>
+
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button

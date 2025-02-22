@@ -55,4 +55,14 @@ public partial class NewsService
                         .SetProperty(x => x.Markup, request.Markup)
             );
     }
+
+    public Task<Result> Approve(int id)
+    {
+        return updateService.Update(x => x.Id == id, x => x.SetProperty(x => x.IsApproved, true));
+    }
+
+    public Task<Result> Disapprove(int id)
+    {
+        return updateService.Update(x => x.Id == id, x => x.SetProperty(x => x.IsApproved, false));
+    }
 }

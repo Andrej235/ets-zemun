@@ -33,6 +33,8 @@ public interface INewsService
     );
 
     Task<Result> Update(UpdateNewsRequestDto request);
+    Task<Result> Approve(int id);
+    Task<Result> Disapprove(int id);
     Task<Result> UpdateTranslation(UpdateNewsTranslationRequestDto request);
 
     Task<Result> Delete(int id);

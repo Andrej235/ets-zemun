@@ -351,6 +351,7 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
             ...previewData,
             id: -1,
             date: previewData.date.toDateString(),
+            isApproved: true,
           }}
           disabledLink
         />

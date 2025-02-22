@@ -229,6 +229,7 @@ export default function NewNewsArticle() {
             ...previewData,
             id: -1,
             date: previewData.date.toDateString(),
+            isApproved: true
           }}
           disabledLink
         />
