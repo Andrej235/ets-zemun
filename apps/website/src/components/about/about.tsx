@@ -1,15 +1,19 @@
+import useLoader from "@better-router/use-loader";
+import aboutPageNewsLoader from "@components/about/about-page-news-loader";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
-import NewsPreviewContainer from "@components/news-preview-container/news-preview-container";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import FluidCanvas from "../../fluid-canvas/fluid-canvas";
 import "./about.scss";
+import { Link } from "react-router";
+import Async from "@better-router/async";
+import NewsPreview from "@components/news-preview/news-preview";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
-
+  const loaderData = useLoader<typeof aboutPageNewsLoader>();
   const { t } = useTranslation();
 
   const fluidCanvas = useMemo(
@@ -151,7 +155,27 @@ export default function About() {
       </section>
 
       <section>
-        <NewsPreviewContainer />
+        <div className="news-wrapper">
+          <h1 className="news-section-title">Novosti</h1>
+          <section className="news-section">
+            <div className="news-container">
+              <Async await={loaderData}>
+                {(news) => {
+                  if (news.code !== "OK") return null;
+
+                  return news.content.items.map((x) => (
+                    <NewsPreview key={x.id} news={x} />
+                  ));
+                }}
+              </Async>
+            </div>
+
+            <Link to="/novosti" className="view-all-link">
+              <p>Sve Novosti</p>
+              <Icon name="arrow-right" />
+            </Link>
+          </section>
+        </div>
       </section>
     </div>
   );
