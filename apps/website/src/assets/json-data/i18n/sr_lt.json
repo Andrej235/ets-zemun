@@ -55,7 +55,17 @@
         "1": "Prijavite se",
         "2": "Zakažite sastanak"
       }
+    },
+    "news": {
+      "title": "Novosti",
+      "viewAll": "Sve Novosti"
     }
+  },
+  "teachers": {
+    "title": "Nastavnici"
+  },
+  "awards": {
+    "title": "Takmicenja i nagrade"
   },
   "history": {
     "segments": [
@@ -225,7 +235,11 @@
       "Školski linkedin nalog",
       "Školski twitter nalog",
       "Školski instagram nalog"
-    ]
+    ],
+    "login": {
+      "btn": "Prijavi se",
+      "as": "Ulogovani ste kao"
+    }
   },
   "errorPage": {
     "routeError": {

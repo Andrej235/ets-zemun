@@ -143,7 +143,7 @@ export default function About() {
 
       <section>
         <div className="news-wrapper">
-          <h1 className="news-section-title">Novosti</h1>
+          <h1 className="news-section-title">{t("about.news.title")}</h1>
           <section className="news-section">
             <div className="news-container">
               <Async await={loaderData}>
@@ -158,7 +158,7 @@ export default function About() {
             </div>
 
             <Link to="/novosti" className="view-all-link">
-              <p>Sve Novosti</p>
+              <p>{t("about.news.viewAll")}</p>
               <Icon name="arrow-right" />
             </Link>
           </section>

@@ -91,12 +91,16 @@ export default function AppFooter() {
               if (user.code !== "OK")
                 return (
                   <Link to="/prijava" className="auth-button">
-                    <p>Ulogujte se</p>
+                    <p>{t("footer.login.btn")}</p>
                     <Icon name="arrow-right" className="button-icon" />
                   </Link>
                 );
 
-              return <p className="username">Ulogovani ste kao {user.content.username}</p>;
+              return (
+                <p className="username">
+                  {t("footer.login.as")} {user.content.username}
+                </p>
+              );
             }}
           </Async>
 

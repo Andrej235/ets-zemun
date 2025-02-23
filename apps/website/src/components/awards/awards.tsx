@@ -4,9 +4,11 @@ import { PointerEvent } from "react";
 import useLoader from "@better-router/use-loader";
 import awardsLoader from "./awards-loader";
 import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
+import { useTranslation } from "react-i18next";
 
 export default function Awards() {
   const loaderData = useLoader<typeof awardsLoader>();
+  const { t } = useTranslation();
 
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -22,7 +24,7 @@ export default function Awards() {
 
   return (
     <div className="awards-pages">
-      <h1>Takmicenja i nagrade</h1>
+      <h1>{t("awards.title")}</h1>
       <div className="awards-list">
         <LazyAwaitedList data={loaderData} success="OK">
           {(award) => (

@@ -55,7 +55,17 @@
         "1": "Apply now",
         "2": "Schedule a meeting"
       }
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "View all news"
     }
+  },
+  "teachers": {
+    "title": "Teachers"
+  },
+  "awards": {
+    "title": "Competitions and Awards"
   },
   "history": {
     "segments": [
@@ -231,7 +241,11 @@
       "School LinkedIn account",
       "School Twitter account",
       "School Instagram account"
-    ]
+    ],
+    "login": {
+      "btn": "Login",
+      "as": "Logged in as"
+    }
   },
   "errorPage": {
     "routeError": {
