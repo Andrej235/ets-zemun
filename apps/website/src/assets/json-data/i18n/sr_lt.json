@@ -77,9 +77,9 @@
         ]
       },
       {
-        "title": "Premestanje u novu zgradu",
+        "title": "Premeštanje u novu zgradu",
         "description": [
-          "U 1949. godini, škola je preselila u novu zgradu koja se nalazila u ulici Nade Dimić. Ova zgrada bila je savremeno opremljena za to vreme i omogućila je bolje uslove za nastavu.",
+          "U 1949. godini, škola se preselila u novu zgradu koja se nalazila u ulici Nade Dimić. Ova zgrada bila je savremeno opremljena za to vreme i omogućila je bolje uslove za nastavu.",
           "Škola je tada dobila i internat, što je omogućilo da se u njoj obrazuju i učenici iz drugih delova Jugoslavije, čime je škola postala važan centar za tehničku edukaciju u zemlji."
         ]
       },
@@ -239,7 +239,9 @@
     "login": {
       "btn": "Prijavi se",
       "as": "Ulogovani ste kao"
-    }
+    },
+    "creditsPrefix": "Napravili:",
+    "credits": "Kreator ovog sajta"
   },
   "errorPage": {
     "routeError": {

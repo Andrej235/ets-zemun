@@ -75,12 +75,20 @@ export default function AppFooter() {
 
         <p className="credits">
           <span className="separator" />
-          <span>{"Made by: "}</span>
-          <a href={"https://github.com/andrej235"} target="_blank">
+          <span>{t("footer.creditsPrefix")}</span>
+          <a
+            href={"https://github.com/andrej235"}
+            target="_blank"
+            aria-label={t("footer.credits")}
+          >
             {"Andrej Nenadić"}
           </a>
           <span>{"&"}</span>
-          <a href={"https://github.com/andjelic-a"} target="_blank">
+          <a
+            href={"https://github.com/andjelic-a"}
+            target="_blank"
+            aria-label={t("footer.credits")}
+          >
             {"Aleksa Andjelić"}
           </a>
         </p>

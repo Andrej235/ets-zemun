@@ -245,7 +245,9 @@
     "login": {
       "btn": "Login",
       "as": "Logged in as"
-    }
+    },
+    "creditsPrefix": "Made by:",
+    "credits": "Co-creator of this website"
   },
   "errorPage": {
     "routeError": {
