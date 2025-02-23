@@ -57,18 +57,37 @@
   background-color: $secondary-background !important;
   border-radius: 8px;
   box-shadow: 0px 5px 15px $shadow;
-  overflow: hidden;
   transition: translate 0.3s ease;
 
   display: flex;
   flex-direction: column;
   min-width: 40rem;
 
+  .expanded-info-container {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: $secondary-background;
+    z-index: -1;
+  }
+
   &.expanded {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) !important;
+    transform: translate(-100%, -50%) !important;
+
+    .expanded-info-container {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: $secondary-background;
+      z-index: -1;
+    }
   }
 
   &:not(.expanded):hover {

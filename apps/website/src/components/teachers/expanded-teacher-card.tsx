@@ -17,6 +17,16 @@ export default function ExpandedTeacherCard({
   const containerRef = useRef<HTMLDivElement>(null);
   useOutsideClick(containerRef, onRequestClose);
 
+  function transformTime(time: string): string {
+    const [hours, minutes] = time.split(":").map(Number);
+    const endMinutes = (minutes + 45) % 60;
+    const endHours = hours + Math.floor((minutes + 45) / 60);
+
+    return `${hours}:${minutes
+      .toString()
+      .padStart(2, "0")}-${endHours}:${endMinutes.toString().padStart(2, "0")}`;
+  }
+
   return (
     <div className="overlay">
       <motion.div
@@ -52,7 +62,17 @@ export default function ExpandedTeacherCard({
           {teacher.email}
         </motion.a>
 
-        <motion.div layout className="expanded-section"></motion.div>
+        <motion.div layout className="expanded-info-container">
+          {teacher.qualifications.map((qualification) => (
+            <p key={qualification.id}>{qualification.name}</p>
+          ))}
+
+          {teacher.startOfOpenOfficeHoursFirstShift &&
+            transformTime(teacher.startOfOpenOfficeHoursFirstShift)}
+
+          {teacher.startOfOpenOfficeHoursSecondShift &&
+            transformTime(teacher.startOfOpenOfficeHoursSecondShift)}
+        </motion.div>
       </motion.div>
     </div>
   );

@@ -41,6 +41,8 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
       <motion.a layout className="email" href={`mailto:${teacher.email}`}>
         {teacher.email}
       </motion.a>
+
+      <motion.div layout className="expanded-content-container" />
     </motion.button>
   );
 }
