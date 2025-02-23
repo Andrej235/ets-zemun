@@ -13,7 +13,7 @@ public partial class LanguageController(ILanguageService languageService) : Cont
 {
     private readonly ILanguageService languageService = languageService;
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,7 +43,25 @@ public partial class LanguageController(ILanguageService languageService) : Cont
         return Ok(result.Value);
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = "Admin")]
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult<LanguageResponseDto>> Update(
+        [FromBody] UpdateLanguageRequestDto request
+    )
+    {
+        var result = await languageService.Update(request);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{code:alpha}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -1,6 +1,6 @@
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useRevalidator } from "react-router";
 import { validateEmail, validatePassword } from "./auth-validation";
 import "./auth.scss";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function Auth() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
+  const revalidator = useRevalidator();
   const { t } = useTranslation();
 
   const registrationNameRef = useRef<HTMLInputElement>(null);
@@ -60,6 +61,7 @@ export default function Auth() {
 
     isWaitingForResponse.current = false;
     if (loginResponse.code !== "OK") return;
+    revalidator.revalidate();
     navigate("/");
   }
 
@@ -90,6 +92,7 @@ export default function Auth() {
 
     isWaitingForResponse.current = false;
     if (response.code !== "OK") return;
+    revalidator.revalidate();
     navigate("/");
   }
 

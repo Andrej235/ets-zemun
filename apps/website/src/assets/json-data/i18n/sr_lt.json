@@ -55,7 +55,20 @@
         "1": "Prijavite se",
         "2": "Zakažite sastanak"
       }
+    },
+    "news": {
+      "title": "Novosti",
+      "viewAll": "Sve Novosti"
     }
+  },
+  "teachers": {
+    "title": "Nastavnici"
+  },
+  "awards": {
+    "title": "Takmicenja i nagrade"
+  },
+  "heroInfoCard": {
+    "button": "Saznaj vise"
   },
   "history": {
     "segments": [
@@ -67,9 +80,9 @@
         ]
       },
       {
-        "title": "Premestanje u novu zgradu",
+        "title": "Premeštanje u novu zgradu",
         "description": [
-          "U 1949. godini, škola je preselila u novu zgradu koja se nalazila u ulici Nade Dimić. Ova zgrada bila je savremeno opremljena za to vreme i omogućila je bolje uslove za nastavu.",
+          "U 1949. godini, škola se preselila u novu zgradu koja se nalazila u ulici Nade Dimić. Ova zgrada bila je savremeno opremljena za to vreme i omogućila je bolje uslove za nastavu.",
           "Škola je tada dobila i internat, što je omogućilo da se u njoj obrazuju i učenici iz drugih delova Jugoslavije, čime je škola postala važan centar za tehničku edukaciju u zemlji."
         ]
       },
@@ -225,7 +238,17 @@
       "Školski linkedin nalog",
       "Školski twitter nalog",
       "Školski instagram nalog"
-    ]
+    ],
+    "login": {
+      "btn": "Prijavi se",
+      "as": "Ulogovani ste kao"
+    },
+    "credits": {
+      "createdBy": "Napravili:",
+      "prefix": "Kreator ovog sajta",
+      "andrej": "Andrej Nenadić",
+      "aleksa": "Aleksa Anđelić"
+    }
   },
   "errorPage": {
     "routeError": {

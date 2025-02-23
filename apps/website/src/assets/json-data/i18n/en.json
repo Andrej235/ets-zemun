@@ -55,7 +55,20 @@
         "1": "Apply now",
         "2": "Schedule a meeting"
       }
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "View all news"
     }
+  },
+  "teachers": {
+    "title": "Teachers"
+  },
+  "awards": {
+    "title": "Competitions and Awards"
+  },
+  "heroInfoCard": {
+    "button": "Learn more"
   },
   "history": {
     "segments": [
@@ -231,7 +244,17 @@
       "School LinkedIn account",
       "School Twitter account",
       "School Instagram account"
-    ]
+    ],
+    "login": {
+      "btn": "Login",
+      "as": "Logged in as"
+    },
+    "credits": {
+      "createdBy": "Made by:",
+      "prefix": "Co-creator of this website",
+      "andrej": "Andrej Nenadić",
+      "aleksa": "Aleksa Anđelić"
+    }
   },
   "errorPage": {
     "routeError": {

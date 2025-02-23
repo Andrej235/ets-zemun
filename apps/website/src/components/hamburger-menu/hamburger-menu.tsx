@@ -2,6 +2,7 @@ import HamburgerNavigation from "@components/hamburger-navigation/hamburger-navi
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import "./hamburger-menu.scss";
+import { useRevalidator } from "react-router";
 
 type HamburgerMenuProps = {
   readonly isHamburgerMenuOpen: boolean;
@@ -15,6 +16,7 @@ function HamburgerMenu({
   onRequestClose,
 }: HamburgerMenuProps) {
   const { i18n } = useTranslation();
+  const revalidator = useRevalidator();
 
   return (
     <>
@@ -49,9 +51,10 @@ function HamburgerMenu({
           display: isHamburgerMenuOpen ? "block" : "none",
           opacity: isHamburgerMenuOpen ? 1 : 0,
         }}
-        onClick={() =>
-          i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr")
-        }
+        onClick={() => {
+          i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr");
+          revalidator.revalidate();
+        }}
         className="hamburger-menu-language"
         aria-hidden={!isHamburgerMenuOpen}
         tabIndex={isHamburgerMenuOpen ? 0 : -1}

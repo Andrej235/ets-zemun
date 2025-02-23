@@ -6,10 +6,10 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: true,
     fallbackLng: "sr_lt",
+    supportedLngs: ["sr", "sr_lt", "en"],
     resources: {
-      sr_cr: {
+      sr: {
         translation: {},
       },
       sr_lt: {

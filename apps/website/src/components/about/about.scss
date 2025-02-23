@@ -236,18 +236,6 @@
           }
         }
       }
-
-      .fluid-canvas {
-        position: absolute;
-        z-index: 0;
-        height: 100%;
-        width: 100%;
-
-        canvas {
-          width: 100% !important;
-          height: 100% !important;
-        }
-      }
     }
   }
 

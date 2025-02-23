@@ -136,6 +136,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<IExecuteUpdateService<Language>, UpdateService<Language>>();
 builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
 builder.Services.AddScoped<
     IRequestMapper<CreateLanguageRequestDto, Language>,

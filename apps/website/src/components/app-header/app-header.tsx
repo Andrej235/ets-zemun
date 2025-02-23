@@ -1,15 +1,15 @@
-import "./app-header.scss";
-import { Link } from "react-router";
 import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
-import { useState, forwardRef } from "react";
-import FocusTrap from "focus-trap-react";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
+import FocusTrap from "focus-trap-react";
+import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link, useRevalidator } from "react-router";
+import "./app-header.scss";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-  const { t } = useTranslation();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const revalidator = useRevalidator();
 
   return (
     <FocusTrap
@@ -49,13 +49,14 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <HeaderSearchBar />
 
           <button
-            onClick={() =>
-              i18n.changeLanguage(i18n.language === "sr" ? "en" : "sr")
-            }
+            onClick={() => {
+              i18n.changeLanguage(i18n.language === "sr_lt" ? "en" : "sr_lt");
+              revalidator.revalidate();
+            }}
             className="language-button"
             aria-label="Promeni jezik"
           >
-            {i18n.language === "sr" ? <p>Srpski</p> : <p>English</p>}
+            {i18n.language === "sr_lt" ? <p>Srpski</p> : <p>English</p>}
           </button>
         </div>
 
