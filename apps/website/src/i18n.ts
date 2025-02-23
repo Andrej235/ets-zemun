@@ -10,9 +10,13 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: "sr_lt",
+    fallbackLng: "sr",
+    supportedLngs: ["sr", "sr_lt", "en"],
+    interpolation: {
+      escapeValue: false, // React already escapes values
+    },
     resources: {
-      sr_cr: {
+      sr: {
         translation: sr_cr,
       },
       sr_lt: {
