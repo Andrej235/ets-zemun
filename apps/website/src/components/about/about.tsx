@@ -1,30 +1,19 @@
+import Async from "@better-router/async";
 import useLoader from "@better-router/use-loader";
 import aboutPageNewsLoader from "@components/about/about-page-news-loader";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import Icon from "@components/icon/icon";
-import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
-import { useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import FluidCanvas from "../../fluid-canvas/fluid-canvas";
-import "./about.scss";
-import { Link } from "react-router";
-import Async from "@better-router/async";
 import NewsPreview from "@components/news-preview/news-preview";
+import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import { useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
+import "./about.scss";
 
 export default function About() {
   const heroSpaceRef = useRef<HTMLDivElement>(null);
   const loaderData = useLoader<typeof aboutPageNewsLoader>();
   const { t } = useTranslation();
-
-  const fluidCanvas = useMemo(
-    () => (
-      <FluidCanvas
-        containerToApplyEventListenersTo={heroSpaceRef}
-        gridSize={[512, 256]}
-      />
-    ),
-    []
-  );
 
   return (
     <div
@@ -47,8 +36,6 @@ export default function About() {
         </div>
 
         <div className="hero-block" ref={heroSpaceRef}>
-          {!fluidCanvas}
-
           <div className="hero-cards">
             <HeroInfoCard
               icon="history"
