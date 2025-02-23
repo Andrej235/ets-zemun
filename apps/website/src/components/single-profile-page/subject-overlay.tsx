@@ -67,7 +67,11 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
                 <div className="teachers">
                   <LazyLoadedList response={response.content.teachers}>
                     {(teacher) => (
-                      <TeacherCard teacher={teacher} key={teacher.id} />
+                      <TeacherCard
+                        onSelect={() => {}}
+                        teacher={teacher}
+                        key={teacher.id}
+                      />
                     )}
                   </LazyLoadedList>
                 </div>
