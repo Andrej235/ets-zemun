@@ -10,7 +10,6 @@ import HistoryPage from "@components/history/history-page.tsx";
 import newsPageLoader from "@components/news/news-page-loader.ts";
 import teacherLoader from "@components/teachers/teachers-loader.ts";
 import Teachers from "@components/teachers/teachers.tsx";
-import "overlayscrollbars/overlayscrollbars.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
