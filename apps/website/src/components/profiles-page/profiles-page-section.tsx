@@ -2,9 +2,12 @@ import Icon from "@components/icon/icon";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 
 export default function ProfilesPageSection() {
-  const [selectedSubjectIdx, setSelectedSubjectIdx] = useState<number | null>(null);
+  const [selectedSubjectIdx, setSelectedSubjectIdx] = useState<number | null>(
+    null
+  );
   const subjectsContainerRef = useRef<HTMLUListElement>(null);
 
   function handleSelectSubject(idx: number) {
@@ -40,6 +43,19 @@ export default function ProfilesPageSection() {
 
   return (
     <div className="profiles-page-section">
+      <SchoolPreviewCard
+        title="Elektrotehnicar informacionih tehnologija"
+        image="/placeholder.jpg"
+        description="Elektrotehničar informacionih tehnologija je savremeni obrazovni
+            profil osmišljen za učenike koji žele da se specijalizuju u oblasti
+            informacionih tehnologija, koja predstavlja osnovu današnjeg
+            digitalnog društva.<br />
+            Nakon završetka školovanja, učenici su spremni da nastave
+            obrazovanje na fakultetima tehničkih usmerenja ili da započnu
+            karijeru u IT industriji na pozicijama poput junior programera,
+            mrežnog tehničara ili administratora baza podataka."
+        layout="image-left"
+      />
       <div className="header">
         <div className="image-container">
           <img src="/placeholder.jpg" alt="Placeholder" />
@@ -199,7 +215,10 @@ function SubjectItem({
         },
       }}
     >
-      <button onClick={() => handleSelectSubject(idx)} key={`it-subject-${idx}`}>
+      <button
+        onClick={() => handleSelectSubject(idx)}
+        key={`it-subject-${idx}`}
+      >
         <Icon name={icon} />
         <span className="title">{title}</span>
       </button>

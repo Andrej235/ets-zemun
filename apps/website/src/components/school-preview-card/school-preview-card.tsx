@@ -49,7 +49,12 @@ export default function SchoolPreviewCard({
           <span>{count !== undefined && currentCount + "+"}</span> {" " + title}
         </h1>
 
-        <p className="description">{description}</p>
+        <p
+          className="description"
+          dangerouslySetInnerHTML={{
+            __html: description.replace(/<br\s*\/?>/g, "<br />"),
+          }}
+        ></p>
       </div>
     </PreviewCard>
   );

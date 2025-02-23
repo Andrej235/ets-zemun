@@ -1,15 +1,22 @@
 .profiles-page {
-  overflow-x: hidden;
-  padding: 0 10vw;
+  justify-self: center;
+  max-width: 100svw;
 
   display: flex;
   flex-direction: column;
-  gap: 25rem;
+
+  overflow: hidden;
+
+  @media screen and (max-width: 1440px) {
+    padding: 0;
+  }
 
   .profiles-page-section {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    width: 100svw;
 
     .header {
       display: flex;
