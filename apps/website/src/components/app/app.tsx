@@ -2,24 +2,10 @@ import AppFooter from "@components/app-footer/app-footer";
 import AppHeader from "@components/app-header/app-header";
 import Scroller from "@components/scroller/scroller";
 import { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
 import "./app.scss";
 
 function App() {
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "l") {
-        i18n.changeLanguage(i18n.language === "sr_lt" ? "en" : "sr_lt");
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [i18n]);
-
   const [searchParams] = useSearchParams();
   useEffect(() => {
     const searchKey = searchParams.get("searchKey");
