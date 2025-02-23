@@ -67,6 +67,9 @@
   "awards": {
     "title": "Competitions and Awards"
   },
+  "heroInfoCard": {
+    "button": "Learn more"
+  },
   "history": {
     "segments": [
       {
@@ -246,8 +249,12 @@
       "btn": "Login",
       "as": "Logged in as"
     },
-    "creditsPrefix": "Made by:",
-    "credits": "Co-creator of this website"
+    "credits": {
+      "createdBy": "Made by:",
+      "prefix": "Co-creator of this website",
+      "andrej": "Andrej Nenadić",
+      "aleksa": "Aleksa Anđelić"
+    }
   },
   "errorPage": {
     "routeError": {

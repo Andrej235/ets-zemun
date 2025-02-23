@@ -67,6 +67,9 @@
   "awards": {
     "title": "Takmicenja i nagrade"
   },
+  "heroInfoCard": {
+    "button": "Saznaj vise"
+  },
   "history": {
     "segments": [
       {
@@ -240,8 +243,12 @@
       "btn": "Prijavi se",
       "as": "Ulogovani ste kao"
     },
-    "creditsPrefix": "Napravili:",
-    "credits": "Kreator ovog sajta"
+    "credits": {
+      "createdBy": "Napravili:",
+      "prefix": "Kreator ovog sajta",
+      "andrej": "Andrej Nenadić",
+      "aleksa": "Aleksa Anđelić"
+    }
   },
   "errorPage": {
     "routeError": {
