@@ -4,10 +4,11 @@ using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.AwardMappers;
 
-public class AwardResponseMapper(IResponseMapper<Teacher, TeacherResponseDto> teacherMapper)
+public class AwardResponseMapper(IResponseMapper<Teacher, TeacherPreviewResponseDto> teacherMapper)
     : IResponseMapper<Award, AwardResponseDto>
 {
-    private readonly IResponseMapper<Teacher, TeacherResponseDto> teacherMapper = teacherMapper;
+    private readonly IResponseMapper<Teacher, TeacherPreviewResponseDto> teacherMapper =
+        teacherMapper;
 
     public AwardResponseDto Map(Award from)
     {

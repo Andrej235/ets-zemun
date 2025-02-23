@@ -13,6 +13,6 @@ public class AwardResponseDto
     public string Competition { get; set; } = null!;
     public string Student { get; set; } = null!;
 
-    public TeacherResponseDto? Teacher { get; set; }
+    public TeacherPreviewResponseDto? Teacher { get; set; }
     public int? TeacherId { get; set; }
 }

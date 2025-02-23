@@ -69,6 +69,13 @@
           color: $accent-secondary-highlight;
         }
 
+        h3 {
+          text-align: center;
+          color: $text-primary;
+          font-size: 2rem;
+          font-weight: 500;
+        }
+
         p {
           text-align: center;
           color: $text-secondary;
@@ -119,3 +126,4 @@
     }
   }
 }
+
