@@ -1,16 +1,23 @@
 using EtsZemun.DTOs.Request.Auth;
 using EtsZemun.DTOs.Response.Auth;
+using EtsZemun.Services.Mapping.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EtsZemun.Controllers.Auth
 {
     [Route("auth")]
     [ApiController]
-    public class AuthController(SignInManager<IdentityUser> signInManager) : ControllerBase
+    public class AuthController(
+        SignInManager<IdentityUser> signInManager,
+        IResponseMapper<IdentityUser, FullUserResponseDto> responseMapper
+    ) : ControllerBase
     {
         private readonly SignInManager<IdentityUser> signInManager = signInManager;
+        private readonly IResponseMapper<IdentityUser, FullUserResponseDto> responseMapper =
+            responseMapper;
 
         [Authorize]
         [HttpDelete("logout")]
@@ -59,6 +66,24 @@ namespace EtsZemun.Controllers.Auth
                 return Unauthorized();
 
             return Ok(new GetUserResponseDto() { Username = userName });
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("user/all")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<ActionResult<List<GetUserResponseDto>>> CheckForAllUserStatus()
+        {
+            var users = await signInManager.UserManager.Users.ToListAsync();
+            var mapped = users.Select(async x =>
+            {
+                var mapped = responseMapper.Map(x);
+                mapped.Role = await signInManager.UserManager.GetRolesAsync(x);
+                return mapped;
+            });
+
+            return Ok(mapped);
         }
     }
 }
