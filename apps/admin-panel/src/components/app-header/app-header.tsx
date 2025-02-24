@@ -42,7 +42,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="sr_cr">Српски</SelectItem>
+              <SelectItem value="sr">Српски</SelectItem>
               <SelectItem value="sr_lt">Srpski</SelectItem>
               <SelectItem value="en">English</SelectItem>
             </SelectGroup>
@@ -62,6 +62,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <div className="nav-bar">
             <Link to="/">Pocetna</Link>
             <Link to="/vesti">Vesti</Link>
+            <Link to="/jezici">Jezici</Link>
           </div>
         </div>
 

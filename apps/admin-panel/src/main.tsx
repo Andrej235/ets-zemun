@@ -15,6 +15,8 @@ import editNewsArticleLoader from "./components/news/edit-news-article-loader";
 import EditNewsArticle from "./components/news/edit-news-article";
 import "./i18n";
 import createTranslationNewsArticleLoader from "./components/news/create-news-translation-loader";
+import Languages from "./components/languages/languages";
+import languageLoader from "./components/languages/language-loader";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,11 @@ const router = createBrowserRouter([
             loader: createTranslationNewsArticleLoader,
           },
         ],
+      },
+      {
+        path: "/jezici",
+        element: <Languages />,
+        loader: languageLoader,
       },
     ],
   },
