@@ -17,6 +17,8 @@ import "./i18n";
 import createTranslationNewsArticleLoader from "./components/news/create-news-translation-loader";
 import Languages from "./components/languages/languages";
 import languageLoader from "./components/languages/language-loader";
+import Users from "./components/users/users";
+import userLoader from "./components/users/users-loader";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,11 @@ const router = createBrowserRouter([
         path: "/jezici",
         element: <Languages />,
         loader: languageLoader,
+      },
+      {
+        path: "/korisnici",
+        element: <Users />,
+        loader: userLoader,
       },
     ],
   },

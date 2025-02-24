@@ -86,23 +86,17 @@ namespace EtsZemun.Controllers.Auth
                 .Take(limit ?? 10)
                 .ToListAsync();
 
-            var mapped = new List<Task<FullUserResponseDto>>();
-
+            var mapped = new List<FullUserResponseDto>();
             foreach (var user in users)
             {
-                mapped.Add(
-                    Task.Run(async () =>
-                    {
-                        var mapped = responseMapper.Map(user);
-                        mapped.Role = await signInManager.UserManager.GetRolesAsync(user);
-                        return mapped;
-                    })
-                );
+                var current = responseMapper.Map(user);
+                current.Role = await signInManager.UserManager.GetRolesAsync(user);
+                mapped.Add(current);
             }
 
             LazyLoadResponse<FullUserResponseDto> result = new()
             {
-                Items = await Task.WhenAll(mapped),
+                Items = mapped,
                 TotalCount = await hybridCache.GetOrCreateAsync(
                     "users-count",
                     async (x) => await signInManager.UserManager.Users.CountAsync(x)
