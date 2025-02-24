@@ -98,14 +98,19 @@
 
       .auth-button {
         position: relative;
-        width: 10rem;
-        height: 4rem;
+
+        width: max-content;
+        min-width: 10rem;
+        height: max-content;
+        padding: 1rem 2rem;
         background-color: $accent;
         border-radius: 25rem;
+
         display: flex;
         justify-content: center;
         align-items: center;
         transition: 0.3s background-color;
+        gap: 2rem;
 
         p {
           transition: 0.3s;
