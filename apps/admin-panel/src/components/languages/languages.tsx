@@ -32,6 +32,7 @@ import languageLoader from "./language-loader";
 
 export default function Languages() {
   const loaderData = useLoader<typeof languageLoader>();
+  const waitingForRequest = useRef(false);
 
   const codeInputRef = useRef<HTMLInputElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -40,6 +41,9 @@ export default function Languages() {
   const { revalidate } = useRevalidator();
 
   async function hangleCreate() {
+    if (waitingForRequest.current) return;
+    waitingForRequest.current = true;
+
     if (!codeInputRef.current || !nameInputRef.current) return;
 
     const response = await sendAPIRequest("/language", {
@@ -56,11 +60,15 @@ export default function Languages() {
     nameInputRef.current.value = "";
     setIsCreateOpen(false);
     revalidate();
+    waitingForRequest.current = false;
   }
 
   async function handleUpdate(
     updatedLanguage: Schema<"UpdateLanguageRequestDto">
   ) {
+    if (waitingForRequest.current) return;
+    waitingForRequest.current = true;
+
     const response = await sendAPIRequest("/language", {
       method: "put",
       payload: updatedLanguage,
@@ -69,9 +77,13 @@ export default function Languages() {
     if (response.code !== "No Content") return;
 
     revalidate();
+    waitingForRequest.current = false;
   }
 
   async function handleDelete(code: string) {
+    if (waitingForRequest.current) return;
+    waitingForRequest.current = true;
+
     const response = await sendAPIRequest("/language/{code}", {
       method: "delete",
       parameters: {
@@ -81,6 +93,7 @@ export default function Languages() {
 
     if (response.code !== "No Content") return;
     revalidate();
+    waitingForRequest.current = false;
   }
 
   return (
