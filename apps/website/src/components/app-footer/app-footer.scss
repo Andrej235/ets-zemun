@@ -76,9 +76,8 @@
     border-top: 1px solid $accent-secondary;
     padding-top: 2rem;
 
-    display: grid;
-    grid-template-columns: max-content 1fr max-content;
-    grid-template-areas: "copy credits links";
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 1.5rem;
 
@@ -151,27 +150,17 @@
       }
     }
 
-    .copy {
-      grid-area: copy;
-
+    .copy-container {
       display: flex;
-      align-items: center;
-      gap: 10rem;
 
-      font-size: 1.5rem;
-    }
+      .copy {
+        grid-area: copy;
 
-    .credits {
-      grid-area: credits;
-      min-width: max-content;
-      margin-right: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10rem;
 
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      a {
-        place-items: center;
+        font-size: 1.5rem;
       }
 
       .separator {
@@ -180,15 +169,35 @@
         width: 3px;
         background-color: $accent-secondary;
       }
+
+      .credits {
+        grid-area: credits;
+        min-width: max-content;
+        margin-right: 1rem;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        a {
+          place-items: center;
+        }
+      }
     }
 
-    @media screen and (max-width: 900px) {
-      grid-template-rows: max-content max-content;
-      grid-template-columns: 1fr max-content;
-      grid-template-areas: "credits credits" "copy links";
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
 
-      .credits :first-child {
-        display: none;
+    @media screen and (max-width: 600px) {
+      .copy-container {
+        flex-direction: column;
+        align-items: center;
+
+        .credits :first-child {
+          display: none;
+        }
       }
     }
   }
