@@ -1,3 +1,4 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Auth;
 using EtsZemun.DTOs.Response.Auth;
 using EtsZemun.Services.Mapping.Response;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace EtsZemun.Controllers.Auth
 {
@@ -12,12 +14,14 @@ namespace EtsZemun.Controllers.Auth
     [ApiController]
     public class AuthController(
         SignInManager<IdentityUser> signInManager,
-        IResponseMapper<IdentityUser, FullUserResponseDto> responseMapper
+        IResponseMapper<IdentityUser, FullUserResponseDto> responseMapper,
+        HybridCache hybridCache
     ) : ControllerBase
     {
         private readonly SignInManager<IdentityUser> signInManager = signInManager;
         private readonly IResponseMapper<IdentityUser, FullUserResponseDto> responseMapper =
             responseMapper;
+        private readonly HybridCache hybridCache = hybridCache;
 
         [Authorize]
         [HttpDelete("logout")]
@@ -73,17 +77,45 @@ namespace EtsZemun.Controllers.Auth
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<List<GetUserResponseDto>>> CheckForAllUserStatus()
+        public async Task<
+            ActionResult<LazyLoadResponse<FullUserResponseDto>>
+        > CheckForAllUserStatus([FromQuery] int? offset, [FromQuery] int? limit)
         {
-            var users = await signInManager.UserManager.Users.ToListAsync();
-            var mapped = users.Select(async x =>
-            {
-                var mapped = responseMapper.Map(x);
-                mapped.Role = await signInManager.UserManager.GetRolesAsync(x);
-                return mapped;
-            });
+            var users = await signInManager
+                .UserManager.Users.Skip(offset ?? 0)
+                .Take(limit ?? 10)
+                .ToListAsync();
 
-            return Ok(mapped);
+            var mapped = new List<Task<FullUserResponseDto>>();
+
+            foreach (var user in users)
+            {
+                mapped.Add(
+                    Task.Run(async () =>
+                    {
+                        var mapped = responseMapper.Map(user);
+                        mapped.Role = await signInManager.UserManager.GetRolesAsync(user);
+                        return mapped;
+                    })
+                );
+            }
+
+            LazyLoadResponse<FullUserResponseDto> result = new()
+            {
+                Items = await Task.WhenAll(mapped),
+                TotalCount = await hybridCache.GetOrCreateAsync(
+                    "users-count",
+                    async (x) => await signInManager.UserManager.Users.CountAsync(x)
+                ),
+                LoadedCount = mapped.Count,
+            };
+
+            result.NextCursor =
+                result.LoadedCount < (limit ?? 10)
+                    ? null
+                    : $"auth/user/all?offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
+
+            return Ok(result);
         }
     }
 }

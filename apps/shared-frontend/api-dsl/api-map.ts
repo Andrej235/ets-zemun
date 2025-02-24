@@ -67,14 +67,11 @@ export type APIMap = {
     '/auth/user/all': {
       get: {
         tags: [ 'Auth' ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
-            content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/GetUserResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/GetUserResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/GetUserResponseDto' } } }
-            }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } } }
           },
           '401': {
             description: 'Unauthorized',
@@ -1597,6 +1594,12 @@ export type APIMap = {
         additionalProperties: false
       },
       ForgotPasswordRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
+      FullUserResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'string' }, username: { type: 'string' }, email: { type: 'string' }, emailConfirmed: { type: 'boolean' }, role: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false
+      },
+      FullUserResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/FullUserResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       GetUserResponseDto: { type: 'object', properties: { username: { type: 'string' } }, additionalProperties: false },
       HttpValidationProblemDetails: {
         type: 'object',
