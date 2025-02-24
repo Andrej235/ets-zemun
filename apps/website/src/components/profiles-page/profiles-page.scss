@@ -105,5 +105,26 @@
       }
     }
   }
+
+  @media screen and (max-width: 1024px) {
+    .profiles-page-section {
+      .profiles-button-container {
+        width: 100%;
+        min-width: 0;
+        height: 100%;
+        padding: 2rem 5rem;
+
+        .button-left {
+          align-self: center;
+          position: static;
+        }
+
+        .button-right {
+          align-self: center;
+          position: static;
+        }
+      }
+    }
+  }
 }
 
