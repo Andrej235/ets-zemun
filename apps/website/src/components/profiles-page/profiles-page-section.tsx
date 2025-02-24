@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
 import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
 import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
+import Icon from "@components/icon/icon";
 
 type SchoolPreviewCardProps = {
   readonly layout: string;
@@ -12,7 +13,6 @@ type SchoolPreviewCardProps = {
 export default function ProfilesPageSection({
   layout,
 }: SchoolPreviewCardProps) {
-
   function getAnimation(layout: string) {
     switch (layout) {
       case "image-left":
@@ -49,10 +49,12 @@ export default function ProfilesPageSection({
             className="button-link"
             to={"/profili/elektrotehnicar-informacionih-tehnologija"}
           >
-            Saznaj vise
+            <p>Saznaj vise</p>
+            <Icon className="learn-icon" name="arrow-right" />
           </Link>
         </motion.div>
       </div>
     </div>
   );
 }
+
