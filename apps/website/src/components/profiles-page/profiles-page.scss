@@ -46,28 +46,62 @@
         height: fit-content;
         position: relative;
         top: -3rem;
-        left: 22%;
-        transform: translate(-22%, -50%);
+        left: 18%;
+        transform: translate(-18%, -50%);
       }
 
       .button-right {
         position: relative;
         top: -3rem;
-        left: 68%;
-        transform: translate(-68%, -50%);
+        left: 65%;
+        transform: translate(-65%, -50%);
 
         width: fit-content;
         height: fit-content;
       }
 
       .button-link {
-        width: 12rem;
-        height: 4rem;
+        position: relative;
+
+        width: 18rem;
+        height: 5rem;
+        border-radius: 25rem;
         background-color: $accent;
 
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: 0.3s background-color;
+
+        p {
+          transition: 0.3s;
+          font-size: 1.6rem;
+          font-weight: 500;
+        }
+
+        .learn-icon {
+          position: absolute;
+          right: 2rem;
+          opacity: 0;
+          transition: 0.3s;
+          font-size: 1.8rem;
+          color: black;
+        }
+
+        &:hover {
+          background-color: #fff;
+          
+          p {
+            transform: translateX(-1rem);
+            color: #000;
+          }
+
+          .learn-icon {
+            right: 1rem;
+            opacity: 1;
+            color: #000;
+          }
+        }
       }
     }
   }
