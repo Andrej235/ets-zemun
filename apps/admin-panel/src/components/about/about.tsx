@@ -1,4 +1,5 @@
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { Button } from "../ui/button";
 
 export default function About() {
   return (
@@ -8,17 +9,19 @@ export default function About() {
       <br />
       <br />
       <br />
-
-      <button
+      Admin Panel
+      <Button
         onClick={async () => {
-          const response = await sendAPIRequest("/auth", {
-            method: "get",
+          const response = await sendAPIRequest("/auth/logout", {
+            method: "delete",
           });
-          console.log(response);
+
+          if (response.code !== "No Content") return;
+          window.location.href = "https://localhost.com";
         }}
       >
-        Get auth claims
-      </button>
+        Logout
+      </Button>
     </div>
   );
 }

@@ -3,13 +3,15 @@ import useLoader from "@better-router/use-loader";
 import teacherLoader from "@components/teachers/teachers-loader";
 import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
 import TeacherCard from "./teacher-card";
+import { useTranslation } from "react-i18next";
 
 export default function Teachers() {
   const loaderData = useLoader<typeof teacherLoader>();
+  const { t } = useTranslation();
 
   return (
     <div className="teachers-page">
-      <h1>Nastavnici</h1>
+      <h1>{t("teachers.title")}</h1>
 
       <div className="teacher-cards-container">
         <LazyAwaitedList

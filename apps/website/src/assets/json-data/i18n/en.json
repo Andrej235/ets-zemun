@@ -55,7 +55,20 @@
         "1": "Apply now",
         "2": "Schedule a meeting"
       }
+    },
+    "news": {
+      "title": "News",
+      "viewAll": "View all news"
     }
+  },
+  "teachers": {
+    "title": "Teachers"
+  },
+  "awards": {
+    "title": "Competitions and Awards"
+  },
+  "heroInfoCard": {
+    "button": "Learn more"
   },
   "history": {
     "segments": [
@@ -231,7 +244,17 @@
       "School LinkedIn account",
       "School Twitter account",
       "School Instagram account"
-    ]
+    ],
+    "login": {
+      "btn": "Login",
+      "as": "Logged in as"
+    },
+    "credits": {
+      "createdBy": "Made by:",
+      "prefix": "Co-creator of this website",
+      "andrej": "Andrej Nenadić",
+      "aleksa": "Aleksa Anđelić"
+    }
   },
   "errorPage": {
     "routeError": {
@@ -851,6 +874,33 @@
           "conclusion": "All factors — parents, teachers, peers, and the community as a whole — play an important role in creating a supportive environment for adolescents. Through open communication, active support, and resource availability, we can help young people feel accepted. By providing support and understanding, we create a space where adolescents can successfully manage challenges and develop their mental health."
         }
       }
+    }
+  },
+  "auth": {
+    "signUp": {
+      "primary": "Create an Account",
+      "secondary": "or use your email for registration",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "button": "Sign Up"
+    },
+    "signIn": {
+      "primary": "Sign In",
+      "secondary": "or use your email and password",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "button": "Sign In"
+    },
+    "toggleLeft": {
+      "title": "Welcome Back!",
+      "description": "Enter your personal information to use all website features",
+      "button": "Sign In"
+    },
+    "toggleRight": {
+      "title": "Hi, Teacher!",
+      "description": "Register with your personal information to use all website features",
+      "button": "Sign Up"
     }
   }
 }

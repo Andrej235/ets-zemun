@@ -47,7 +47,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Awards", (string)null);
+                    b.ToTable("Awards");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.AwardTranslation", b =>
@@ -77,7 +77,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("AwardId");
 
-                    b.ToTable("AwardTranslations", (string)null);
+                    b.ToTable("AwardTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.EducationalProfile", b =>
@@ -90,7 +90,7 @@ namespace EtsZemun.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EducationalProfiles", (string)null);
+                    b.ToTable("EducationalProfiles");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.EducationalProfileGeneralSubject", b =>
@@ -115,7 +115,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("Year", "EducationalProfileId");
 
-                    b.ToTable("EducationalProfileGeneralSubjects", (string)null);
+                    b.ToTable("EducationalProfileGeneralSubjects");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.EducationalProfileVocationalSubject", b =>
@@ -136,7 +136,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("EducationalProfileVocationalSubjects", (string)null);
+                    b.ToTable("EducationalProfileVocationalSubjects");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Language", b =>
@@ -150,7 +150,78 @@ namespace EtsZemun.Migrations
 
                     b.HasKey("Code");
 
-                    b.ToTable("Languages", (string)null);
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PreviewImage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Date");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.NewsImage", b =>
+                {
+                    b.Property<int>("NewsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ImageId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("NewsId", "ImageId");
+
+                    b.HasIndex("NewsId");
+
+                    b.ToTable("NewsImages");
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.NewsTranslation", b =>
+                {
+                    b.Property<string>("LanguageCode")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NewsId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Markup")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LanguageCode", "NewsId");
+
+                    b.HasIndex("NewsId");
+
+                    b.ToTable("NewsTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Qualification", b =>
@@ -171,7 +242,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Qualifications", (string)null);
+                    b.ToTable("Qualifications");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.QualificationTranslation", b =>
@@ -194,7 +265,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("QualificationTranslations", (string)null);
+                    b.ToTable("QualificationTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Subject", b =>
@@ -207,7 +278,7 @@ namespace EtsZemun.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.SubjectTranslation", b =>
@@ -230,7 +301,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("LanguageCode");
 
-                    b.ToTable("SubjectTranslations", (string)null);
+                    b.ToTable("SubjectTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Teacher", b =>
@@ -257,7 +328,7 @@ namespace EtsZemun.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.TeacherSubject", b =>
@@ -274,7 +345,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherSubjects", (string)null);
+                    b.ToTable("TeacherSubjects");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.TeacherTranslation", b =>
@@ -301,7 +372,7 @@ namespace EtsZemun.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherTranslations", (string)null);
+                    b.ToTable("TeacherTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Award", b =>
@@ -365,6 +436,30 @@ namespace EtsZemun.Migrations
                     b.Navigation("Profile");
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.NewsImage", b =>
+                {
+                    b.HasOne("EtsZemun.Models.News", null)
+                        .WithMany("Images")
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.NewsTranslation", b =>
+                {
+                    b.HasOne("EtsZemun.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguageCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EtsZemun.Models.News", null)
+                        .WithMany("Translations")
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Qualification", b =>
@@ -448,6 +543,13 @@ namespace EtsZemun.Migrations
                     b.Navigation("GeneralSubjects");
 
                     b.Navigation("VocationalSubjects");
+                });
+
+            modelBuilder.Entity("EtsZemun.Models.News", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Qualification", b =>

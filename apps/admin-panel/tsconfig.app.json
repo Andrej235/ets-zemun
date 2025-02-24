@@ -27,6 +27,9 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
+      "@/*": ["./src/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@better-router/*": ["./src/better-router/*"],
       "@shared/*": ["../shared-frontend/*"],
       "@api/*": ["../shared-frontend/api-dsl/*"],
       "@components/*": ["src/components/*"]

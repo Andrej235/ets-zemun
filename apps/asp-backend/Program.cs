@@ -2,11 +2,13 @@ using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Request.EducationalProfile;
 using EtsZemun.DTOs.Request.Language;
+using EtsZemun.DTOs.Request.News;
 using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
 using EtsZemun.DTOs.Response.Award;
 using EtsZemun.DTOs.Response.EducationalProfile;
+using EtsZemun.DTOs.Response.News;
 using EtsZemun.DTOs.Response.Qualification;
 using EtsZemun.DTOs.Response.Subject;
 using EtsZemun.DTOs.Response.Teacher;
@@ -18,18 +20,21 @@ using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.AwardMappers;
 using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
+using EtsZemun.Services.Mapping.Request.NewsMappers;
 using EtsZemun.Services.Mapping.Request.QualificationMappers;
 using EtsZemun.Services.Mapping.Request.SubjectMappers;
 using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
 using EtsZemun.Services.Mapping.Response.AwardMappers;
 using EtsZemun.Services.Mapping.Response.EducationalProfileMappers;
+using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
+using EtsZemun.Services.Model.NewsService;
 using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
@@ -92,6 +97,17 @@ builder
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.Cookie.Domain = ".localhost.com";
+
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return Task.CompletedTask;
+    };
+
     options.Events.OnRedirectToAccessDenied = context =>
     {
         context.Response.StatusCode = StatusCodes.Status403Forbidden;
@@ -120,6 +136,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<IExecuteUpdateService<Language>, UpdateService<Language>>();
 builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
 builder.Services.AddScoped<
     IRequestMapper<CreateLanguageRequestDto, Language>,
@@ -311,6 +328,36 @@ builder.Services.AddScoped<
     UpdateAwardTranslationRequestMapper
 >();
 builder.Services.AddScoped<IResponseMapper<Award, AwardResponseDto>, AwardResponseMapper>();
+#endregion
+
+#region News
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<ICreateSingleService<News>, CreateService<News>>();
+builder.Services.AddScoped<ICreateRangeService<NewsImage>, CreateService<NewsImage>>();
+builder.Services.AddScoped<ICreateSingleService<NewsTranslation>, CreateService<NewsTranslation>>();
+builder.Services.AddScoped<IReadRangeService<News>, ReadService<News>>();
+builder.Services.AddScoped<IReadRangeService<NewsImage>, ReadService<NewsImage>>();
+builder.Services.AddScoped<IReadSingleService<News>, ReadService<News>>();
+builder.Services.AddScoped<ICountService<News>, ReadService<News>>();
+builder.Services.AddScoped<ICountService<NewsImage>, ReadService<NewsImage>>();
+builder.Services.AddScoped<IExecuteUpdateService<News>, UpdateService<News>>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<NewsTranslation>,
+    UpdateService<NewsTranslation>
+>();
+builder.Services.AddScoped<IDeleteService<News>, DeleteService<News>>();
+builder.Services.AddScoped<IDeleteService<NewsImage>, DeleteService<NewsImage>>();
+builder.Services.AddScoped<IDeleteService<NewsTranslation>, DeleteService<NewsTranslation>>();
+builder.Services.AddScoped<IRequestMapper<CreateNewsRequestDto, News>, CreateNewsRequestMapper>();
+builder.Services.AddScoped<
+    IRequestMapper<CreateNewsTranslationRequestDto, NewsTranslation>,
+    CreateNewsTranslationRequestMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<News, NewsPreviewResponseDto>,
+    NewsPreviewResponseMapper
+>();
+builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseMapper>();
 #endregion
 
 #endregion
