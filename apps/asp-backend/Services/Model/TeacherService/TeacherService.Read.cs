@@ -2,6 +2,7 @@ using EtsZemun.DTOs;
 using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Services.Read;
 using FluentResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace EtsZemun.Services.Model.TeacherService;
 
@@ -11,11 +12,13 @@ public partial class TeacherService : ITeacherService
         string languageCode,
         int? offset,
         int? limit,
-        int? subjectId
+        string? search
     )
     {
         var teachersResult = await readRangeService.Get(
-            subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId),
+            search is null
+                ? null
+                : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%")),
             offset,
             limit ?? 10,
             q =>
@@ -37,11 +40,13 @@ public partial class TeacherService : ITeacherService
             Items = mapped,
             LoadedCount = mapped.Count(),
             TotalCount = await hybridCache.GetOrCreateAsync(
-                $"subject-{subjectId ?? -1}-teachers-count",
+                $"teachers-count-q-{search ?? ""}",
                 async (_) =>
                 {
                     var result = await countService.Count(
-                        subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId)
+                        search is null
+                            ? null
+                            : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%"))
                     );
                     return result.Value;
                 },
@@ -51,7 +56,7 @@ public partial class TeacherService : ITeacherService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"teacher?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
+                : $"teacher?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(search is null ? "" : "&q=" + search)}";
 
         return Result.Ok(result);
     }
@@ -60,11 +65,13 @@ public partial class TeacherService : ITeacherService
         string languageCode,
         int? offset,
         int? limit,
-        int? subjectId
+        string? search
     )
     {
         var teachersResult = await readRangeService.Get(
-            subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId),
+            search is null
+                ? null
+                : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%")),
             offset,
             limit ?? 10,
             q =>
@@ -82,11 +89,13 @@ public partial class TeacherService : ITeacherService
             Items = mapped,
             LoadedCount = mapped.Count(),
             TotalCount = await hybridCache.GetOrCreateAsync(
-                $"subject-{subjectId ?? -1}-teachers-count",
+                $"teachers-count-q-{search ?? ""}",
                 async (_) =>
                 {
                     var result = await countService.Count(
-                        subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId)
+                        search is null
+                            ? null
+                            : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%"))
                     );
                     return result.Value;
                 },
@@ -96,7 +105,7 @@ public partial class TeacherService : ITeacherService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"teacher/simple?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
+                : $"teacher/simple?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(search is null ? "" : "&q=" + search)}";
 
         return Result.Ok(result);
     }

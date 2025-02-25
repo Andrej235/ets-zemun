@@ -171,13 +171,8 @@ export default function Subjects() {
 
                   <TableCell>
                     <AlertDialog>
-                      <AlertDialogTrigger>
-                        <Button
-                          variant="outline"
-                          className="group min-h-20 min-w-20 p-4"
-                        >
-                          <Trash2 className="min-w-full min-h-full group-hover:animate-spin group-hover:text-red-600 transition-colors" />
-                        </Button>
+                      <AlertDialogTrigger className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground group min-h-20 min-w-20 p-4">
+                        <Trash2 className="min-w-full min-h-full group-hover:animate-spin group-hover:text-red-600 transition-colors" />
                       </AlertDialogTrigger>
 
                       <AlertDialogContent>

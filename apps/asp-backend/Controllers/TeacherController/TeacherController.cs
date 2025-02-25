@@ -56,10 +56,10 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit,
-        [FromQuery] int? subjectId
+        [FromQuery] string? q
     )
     {
-        var result = await teacherService.GetAll(languageCode, offset, limit, subjectId);
+        var result = await teacherService.GetAll(languageCode, offset, limit, q);
 
         if (result.IsFailed)
             return BadRequest("Language not found");
@@ -74,10 +74,10 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit,
-        [FromQuery] int? subjectId
+        [FromQuery] string? q
     )
     {
-        var result = await teacherService.GetAllSimple(languageCode, offset, limit, subjectId);
+        var result = await teacherService.GetAllSimple(languageCode, offset, limit, q);
 
         if (result.IsFailed)
             return BadRequest("Language not found");
