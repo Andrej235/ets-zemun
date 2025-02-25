@@ -1,10 +1,11 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
+import i18n from "@/i18n";
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { Save } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import LazyLoadedList from "../lazy-loaded-list/lazy-loaded-list";
 import {
@@ -18,6 +19,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import fullSubjectLoader from "./full-subject-loader";
@@ -102,6 +104,42 @@ export default function FullSubject() {
       );
 
     setInitialTeachers(selectedTeachers);
+  }
+
+  const [currentPage, setCurrentPage] = useState<
+    Schema<"SimpleTeacherResponseDto">[] | null
+  >(null);
+  const isLoadingData = useRef(false);
+  const [pageCount, setPageCount] = useState(0);
+
+  useEffect(() => {
+    if (isLoadingData.current) return;
+    isLoadingData.current = true;
+
+    loaderData.teachers.then((x) => {
+      isLoadingData.current = false;
+      setCurrentPage(x.code === "OK" ? x.content.items : []);
+    });
+  }, [loaderData]);
+
+  function handleNextClick() {
+    if (isLoadingData.current) return;
+    isLoadingData.current = true;
+
+    sendAPIRequest("/teacher/simple", {
+      method: "get",
+      parameters: {
+        limit: 9,
+        offset: 9 * (pageCount + 1),
+        languageCode: i18n.language,
+      },
+    }).then(async (x) => {
+      setCurrentPage(
+        (prev) => prev?.concat(x.code === "OK" ? x.content.items : []) ?? []
+      );
+      setPageCount(pageCount + 1);
+      isLoadingData.current = false;
+    });
   }
 
   return (
@@ -222,7 +260,7 @@ export default function FullSubject() {
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-col w-full">
         <h1>Nastavnici</h1>
 
         <Async await={loaderData.subject}>
@@ -234,9 +272,21 @@ export default function FullSubject() {
             return (
               <>
                 {teachers.loadedCount > 0 ? (
-                  <LazyLoadedList response={teachers}>
-                    {(x) => <div key={x.id}>{x.name}</div>}
-                  </LazyLoadedList>
+                  <div className="grid grid-cols-3 gap-12 w-max self-center">
+                    <LazyLoadedList response={teachers}>
+                      {(x) => (
+                        <Card key={x.id} className="w-120 h-120">
+                          <CardHeader>
+                            <CardTitle>{x.name}</CardTitle>
+                          </CardHeader>
+
+                          <CardDescription>
+                            <img src={x.image} alt={x.name} />
+                          </CardDescription>
+                        </Card>
+                      )}
+                    </LazyLoadedList>
+                  </div>
                 ) : (
                   <p className="my-4">
                     Trenutno nijedan nastavnik ne predaje ovaj predmet
@@ -244,7 +294,9 @@ export default function FullSubject() {
                 )}
 
                 <AlertDialog>
-                  <AlertDialogTrigger>Dodaj nastavnika</AlertDialogTrigger>
+                  <AlertDialogTrigger className="mt-12">
+                    Dodaj nastavnika
+                  </AlertDialogTrigger>
 
                   <AlertDialogContent className="min-w-2/3 min-h-2/3 grid-rows-[max-content_1fr] gap-12 p-12 max-h-2/3">
                     <AlertDialogHeader className="max-h-max space-y-1">
@@ -258,39 +310,41 @@ export default function FullSubject() {
                     </AlertDialogHeader>
 
                     <div className="h-full w-full max-h-full overflow-auto grid grid-cols-3 grid-flow-row gap-8 p-8 rounded-lg">
-                      <Async await={loaderData.teachers}>
-                        {(teachers) => {
-                          if (teachers.code !== "OK") return null;
-
-                          return teachers.content.items.map((x) => (
-                            <Button
-                              variant="ghost"
-                              key={x.id}
-                              className={`flex flex-col gap-2 border-2 border-muted w-full h-[30rem] p-6 ${
-                                selectedTeachers.includes(x.id)
-                                  ? "bg-muted border-slate-700"
-                                  : ""
-                              }`}
-                              onClick={() =>
-                                setSelectedTeachers((prev) => {
-                                  if (prev.includes(x.id)) {
-                                    return prev.filter((y) => y !== x.id);
-                                  } else {
-                                    return [...prev, x.id];
-                                  }
-                                })
+                      {currentPage?.map((x) => (
+                        <Button
+                          variant="ghost"
+                          key={x.id}
+                          className={`flex flex-col gap-2 border-2 border-muted w-full h-[30rem] p-6 ${
+                            selectedTeachers.includes(x.id)
+                              ? "bg-muted border-slate-700"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedTeachers((prev) => {
+                              if (prev.includes(x.id)) {
+                                return prev.filter((y) => y !== x.id);
+                              } else {
+                                return [...prev, x.id];
                               }
-                            >
-                              <img
-                                src={x.image}
-                                alt={x.name}
-                                className="w-full h-full object-cover"
-                              />
-                              <h2 className="text-center text-xl">{x.name}</h2>
-                            </Button>
-                          ));
-                        }}
-                      </Async>
+                            })
+                          }
+                        >
+                          <img
+                            src={x.image}
+                            alt={x.name}
+                            className="w-full h-full object-cover"
+                          />
+                          <h2 className="text-center text-xl">{x.name}</h2>
+                        </Button>
+                      ))}
+
+                      <Button
+                        onClick={handleNextClick}
+                        className="col-start-2 col-end-2 py-8"
+                        variant="secondary"
+                      >
+                        Ucitaj jos nastavnika
+                      </Button>
                     </div>
 
                     <AlertDialogFooter className="flex gap-12 justify-center!">
