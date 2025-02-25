@@ -15,7 +15,7 @@ export type APIMap = {
       }
     },
     '/auth/change-role': {
-      patch: {
+      put: {
         tags: [ 'Auth' ],
         requestBody: {
           content: { 'application/json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } } }

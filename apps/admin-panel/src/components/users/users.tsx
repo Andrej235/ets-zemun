@@ -1,10 +1,29 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { APIResponse } from "@shared/api-dsl/types/endpoints/response-parser";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import {
   Table,
   TableBody,
@@ -73,6 +92,56 @@ export default function Users() {
     setPageCount(pageCount + 1);
   }
 
+  const [roleChanges, setRoleChanges] = useState<
+    {
+      id: string;
+      userName: string;
+      oldRole: string;
+      newRole: string;
+      change: () => Promise<APIResponse<"/auth/change-role", "put">>;
+    }[]
+  >([]);
+
+  function handleChangeRole(role: string, user: Schema<"FullUserResponseDto">) {
+    const curr = roleChanges.find((x) => x.id === user.id);
+    const newChange = () =>
+      sendAPIRequest(`/auth/change-role`, {
+        method: "put",
+        payload: {
+          userId: user.id,
+          role,
+        },
+      });
+
+    if (!curr)
+      setRoleChanges((x) => {
+        x.push({
+          id: user.id,
+          userName: user.username,
+          oldRole: user.role[0],
+          newRole: role,
+          change: newChange,
+        });
+        return [...x];
+      });
+    else
+      setRoleChanges((x) => {
+        curr.change = newChange;
+        return [...x];
+      });
+  }
+
+  async function handleSaveClick() {
+    const responses = await Promise.all(roleChanges.map((x) => x.change()));
+
+    for (const response of responses) {
+      if (response.code !== "No Content") {
+        console.log(response);
+        alert(response);
+      }
+    }
+  }
+
   return (
     <Table>
       <TableHeader>
@@ -98,6 +167,7 @@ export default function Users() {
               page?.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell>{user.username}</TableCell>
+
                   <TableCell
                     className={
                       user.emailConfirmed ? "text-green-600" : "text-red-600"
@@ -105,7 +175,24 @@ export default function Users() {
                   >
                     {user.email}
                   </TableCell>
-                  <TableCell>{user.role}</TableCell>
+
+                  <TableCell>
+                    <Select
+                      defaultValue={user.role[0]}
+                      onValueChange={(e) => handleChangeRole(e, user)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Izaberite role" />
+                      </SelectTrigger>
+
+                      <SelectContent>
+                        <SelectItem value="Admin">Admin</SelectItem>
+                        <SelectItem value="Mod">Mod</SelectItem>
+                        <SelectItem value="Teacher">Teacher</SelectItem>
+                        <SelectItem value="User">User</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
                 </TableRow>
               ))
             }
@@ -114,6 +201,46 @@ export default function Users() {
       </TableBody>
 
       <TableFooter>
+        <TableRow>
+          <TableCell colSpan={3} className="flex justify-center">
+            <AlertDialog>
+              <AlertDialogTrigger>Sacuvaj promene</AlertDialogTrigger>
+
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Da li ste sigurni da zelite da sacuvate sve promene?
+                  </AlertDialogTitle>
+
+                  <AlertDialogDescription>
+                    {roleChanges.map((x) => (
+                      <span
+                        key={x.id}
+                        className="text-xl flex w-max h-max items-center justify-center"
+                      >
+                        <span className="mr-2 pr-2 border-r-2 border-accent">
+                          {x.userName}
+                        </span>
+
+                        <span className="text-xl flex h-max w-max items-center gap-2">
+                          {x.oldRole || "none"} <MoveRight /> {x.newRole}
+                        </span>
+                      </span>
+                    ))}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Odustani</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleSaveClick}>
+                    Sacuvaj
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </TableCell>
+        </TableRow>
+
         <TableRow>
           <TableCell colSpan={3}>
             <div className="flex items-center gap-2">

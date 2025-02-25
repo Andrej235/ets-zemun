@@ -34,7 +34,7 @@ namespace EtsZemun.Controllers.Auth
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPatch("change-role")]
+        [HttpPut("change-role")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -45,6 +45,10 @@ namespace EtsZemun.Controllers.Auth
             if (user is null)
                 return NotFound();
 
+            await signInManager.UserManager.RemoveFromRolesAsync(
+                user,
+                await signInManager.UserManager.GetRolesAsync(user)
+            );
             await signInManager.UserManager.AddToRoleAsync(user, request.Role);
             return NoContent();
         }
