@@ -7,7 +7,7 @@ const subjectsLoader = createLoader(() =>
     method: "get",
     parameters: {
       languageCode: i18n.language,
-      limit: 15,
+      limit: 10,
       offset: 0,
     },
   })
