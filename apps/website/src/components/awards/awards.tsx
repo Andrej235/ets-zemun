@@ -30,7 +30,7 @@ export default function Awards() {
           data={loaderData}
           success="OK"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
-            <div className="award-card" key={"skeleton_" + i}></div>
+            <div className="award-card skeleton" key={"skeleton_" + i}></div>
           ))}
         >
           {(award) => (
