@@ -26,6 +26,7 @@ public class SubjectService(
     IDeleteService<SubjectTranslation> deleteTranslationService,
     IRequestMapper<CreateSubjectTranslationRequestDto, SubjectTranslation> createTranslationMapper,
     IResponseMapper<Subject, SubjectResponseDto> responseMapper,
+    IResponseMapper<Subject, SimpleSubjectResponseDto> simpleResponseMapper,
     HybridCache hybridCache
 ) : ISubjectService
 {
@@ -47,6 +48,8 @@ public class SubjectService(
         SubjectTranslation
     > createTranslationMapper = createTranslationMapper;
     private readonly IResponseMapper<Subject, SubjectResponseDto> responseMapper = responseMapper;
+    private readonly IResponseMapper<Subject, SimpleSubjectResponseDto> simpleResponseMapper =
+        simpleResponseMapper;
     private readonly HybridCache hybridCache = hybridCache;
 
     public async Task<Result> Create(CreateSubjectRequestDto request)
@@ -105,14 +108,14 @@ public class SubjectService(
         );
     }
 
-    public async Task<Result<LazyLoadResponse<SubjectResponseDto>>> GetAll(
+    public async Task<Result<LazyLoadResponse<SimpleSubjectResponseDto>>> GetAll(
         string languageCode,
         int? offset,
         int? limit
     )
     {
         if (string.IsNullOrWhiteSpace(languageCode))
-            return Result.Fail<LazyLoadResponse<SubjectResponseDto>>(
+            return Result.Fail<LazyLoadResponse<SimpleSubjectResponseDto>>(
                 new BadRequest("Invalid request")
             );
 
@@ -121,48 +124,15 @@ public class SubjectService(
             offset,
             limit,
             q =>
-                q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
-                    .ThenInclude(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .OrderByDescending(t => t.Id)
         );
 
         if (result.IsFailed)
-            return Result.Fail<LazyLoadResponse<SubjectResponseDto>>(result.Errors);
+            return Result.Fail<LazyLoadResponse<SimpleSubjectResponseDto>>(result.Errors);
 
-        var mapped = result.Value.Select(async subject =>
-        {
-            var mapped = responseMapper.Map(subject);
-            mapped.Teachers.LoadedCount = subject.Teachers.Count;
-            mapped.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
-                $"subject-{subject.Id}-teachers-count",
-                async (_) =>
-                {
-                    var result = await readSingleSelectedService.Get(
-                        x => new { x.Teachers.Count },
-                        x => x.Id == subject.Id
-                    );
-
-                    var count = result.ValueOrDefault?.Count;
-                    return count ?? 0;
-                },
-                new() { Expiration = TimeSpan.FromHours(6) }
-            );
-            mapped.Teachers.NextCursor =
-                mapped.Teachers.LoadedCount < 5
-                    ? null
-                    : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={subject.Id}";
-
-            return mapped;
-        });
-
-        var response = new LazyLoadResponse<SubjectResponseDto>
+        var mapped = result.Value.Select(simpleResponseMapper.Map);
+        var response = new LazyLoadResponse<SimpleSubjectResponseDto>
         {
             LoadedCount = result.Value.Count(),
             TotalCount = await hybridCache.GetOrCreateAsync(
@@ -170,7 +140,7 @@ public class SubjectService(
                 async (_) => (await countService.Count(null)).Value,
                 new() { Expiration = TimeSpan.FromHours(6) }
             ),
-            Items = await Task.WhenAll(mapped),
+            Items = mapped,
         };
 
         return Result.Ok(response);

@@ -1163,7 +1163,7 @@ export type APIMap = {
         responses: {
           '200': {
             description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } } }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } } }
           },
           '400': {
             description: 'Bad Request',
@@ -1627,8 +1627,8 @@ export type APIMap = {
       ResendConfirmationEmailRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
       ResetPasswordRequest: { required: [ 'email', 'newPassword', 'resetCode' ], type: 'object', properties: { email: { type: 'string' }, resetCode: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
       SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
+      SimpleSubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
-      SubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       TeacherResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },

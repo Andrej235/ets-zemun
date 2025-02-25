@@ -10,7 +10,7 @@ public interface ISubjectService
     Task<Result> Create(CreateSubjectRequestDto request);
     Task<Result> CreateTranslation(CreateSubjectTranslationRequestDto request);
 
-    Task<Result<LazyLoadResponse<SubjectResponseDto>>> GetAll(
+    Task<Result<LazyLoadResponse<SimpleSubjectResponseDto>>> GetAll(
         string languageCode,
         int? offset,
         int? limit

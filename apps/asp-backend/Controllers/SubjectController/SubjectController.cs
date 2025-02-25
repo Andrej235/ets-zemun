@@ -52,7 +52,7 @@ public partial class SubjectController(ISubjectService subjectService) : Control
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<LazyLoadResponse<SubjectResponseDto>>> GetAll(
+    public async Task<ActionResult<LazyLoadResponse<SimpleSubjectResponseDto>>> GetAll(
         [FromQuery] string languageCode,
         [FromQuery] int? offset,
         [FromQuery] int? limit

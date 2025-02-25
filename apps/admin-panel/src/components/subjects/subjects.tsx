@@ -24,6 +24,15 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import i18n from "@/i18n";
 import { useNavigate } from "react-router";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 export default function Subjects() {
   const loaderData = useLoader<typeof subjectsLoader>();
@@ -115,97 +124,113 @@ export default function Subjects() {
   }
 
   return (
-    <div>
-      <Table>
-        <TableHeader>
-          <TableRow className="flex">
-            <TableCell className="flex-1/5">Ime</TableCell>
-            <TableCell className="flex-4/5">Opis</TableCell>
-          </TableRow>
-        </TableHeader>
+    <Table>
+      <TableHeader>
+        <TableRow className="flex">
+          <TableCell className="flex-1/5">Ime</TableCell>
+          <TableCell className="flex-4/5">Opis</TableCell>
+        </TableRow>
+      </TableHeader>
 
-        <TableBody>
-          {currentPage && (
-            <Async await={currentPage}>
-              {(page) =>
-                page.map((subject) => (
-                  <TableRow key={subject.id} className="flex items-center">
-                    <TableCell className="flex-1/5">
-                      <Input defaultValue={subject.name} />
-                    </TableCell>
+      <TableBody>
+        {currentPage && (
+          <Async await={currentPage}>
+            {(page) =>
+              page.map((subject) => (
+                <TableRow key={subject.id} className="flex items-center">
+                  <TableCell className="flex-1/5">
+                    <Input defaultValue={subject.name} />
+                  </TableCell>
 
-                    <TableCell className="flex-4/5">
-                      <Textarea defaultValue={subject.description} />
-                    </TableCell>
+                  <TableCell className="flex-4/5">
+                    <Textarea defaultValue={subject.description} />
+                  </TableCell>
 
-                    <TableCell>
-                      <Button
-                        variant="outline"
-                        className="group min-h-20 min-w-20 p-4"
-                        onClick={(e) => {
-                          const target = e.target as HTMLElement;
-                          const name = (
-                            target.parentElement?.parentElement?.firstChild
-                              ?.firstChild as HTMLInputElement
-                          ).value;
+                  <TableCell>
+                    <Button
+                      variant="outline"
+                      className="group min-h-20 min-w-20 p-4"
+                      onClick={(e) => {
+                        const target = e.target as HTMLElement;
+                        const name = (
+                          target.parentElement?.parentElement?.firstChild
+                            ?.firstChild as HTMLInputElement
+                        ).value;
 
-                          const desc = (
-                            target.parentElement?.previousSibling
-                              ?.firstChild as HTMLInputElement
-                          ).value;
+                        const desc = (
+                          target.parentElement?.previousSibling
+                            ?.firstChild as HTMLInputElement
+                        ).value;
 
-                          handleUpdate(subject, name, desc);
-                        }}
-                      >
-                        <Save className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
-                      </Button>
-                    </TableCell>
+                        handleUpdate(subject, name, desc);
+                      }}
+                    >
+                      <Save className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
+                    </Button>
+                  </TableCell>
 
-                    <TableCell>
-                      <Button
-                        variant="outline"
-                        className="group min-h-20 min-w-20 p-4"
-                        onClick={() => handleDelete(subject)}
-                      >
-                        <Trash2 className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
-                      </Button>
-                    </TableCell>
+                  <TableCell>
+                    <AlertDialog>
+                      <AlertDialogTrigger>
+                        <Button
+                          variant="outline"
+                          className="group min-h-20 min-w-20 p-4"
+                        >
+                          <Trash2 className="min-w-full min-h-full group-hover:animate-spin group-hover:text-red-600 transition-colors" />
+                        </Button>
+                      </AlertDialogTrigger>
 
-                    <TableCell>
-                      <Button
-                        variant="outline"
-                        className="group min-h-20 min-w-20 p-4"
-                        onClick={() => navigate(`/predmeti/${subject.id}`)}
-                      >
-                        <ShowerHead className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))
-              }
-            </Async>
-          )}
-        </TableBody>
+                      <AlertDialogContent>
+                        <AlertDialogTitle>
+                          Da li ste sigurni da zelite da obrisete ovaj predmet?
+                        </AlertDialogTitle>
 
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>
-              <div className="flex items-center gap-2">
-                <Button onClick={handlePrevClick}>
-                  <ChevronLeft />
-                </Button>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Otkazi</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleDelete(subject)}
+                          >
+                            Obrisi
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </TableCell>
 
-                <b>Page count: {pageCount}</b>
+                  <TableCell>
+                    <Button
+                      variant="outline"
+                      className="group min-h-20 min-w-20 p-4"
+                      onClick={() => navigate(`/predmeti/${subject.id}`)}
+                    >
+                      <ShowerHead className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            }
+          </Async>
+        )}
+      </TableBody>
 
-                <Button onClick={handleNextClick}>
-                  <ChevronRight />
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </div>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={3}>
+            <div className="flex items-center gap-2">
+              <Button onClick={handlePrevClick}>
+                <ChevronLeft />
+              </Button>
+
+              <b>Page count: {pageCount}</b>
+
+              <Button onClick={handleNextClick}>
+                <ChevronRight />
+              </Button>
+            </div>
+          </TableCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
   );
 }
 

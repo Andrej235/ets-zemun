@@ -1,26 +1,28 @@
+import About from "@components/about/about";
+import ErrorComponent from "@components/error-component/error-component";
+import News from "@components/news/news";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./components/app/app";
-import "./index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ErrorComponent from "@components/error-component/error-component";
-import About from "@components/about/about";
-import News from "@components/news/news";
-import NewNewsArticle from "./components/news/new-news-article";
+import App from "./components/app/app";
+import languageLoader from "./components/languages/language-loader";
+import Languages from "./components/languages/languages";
 import AllNews from "./components/news/all-news";
-import newsLoader from "./components/news/news-loader";
+import createTranslationNewsArticleLoader from "./components/news/create-news-translation-loader";
+import EditNewsArticle from "./components/news/edit-news-article";
+import editNewsArticleLoader from "./components/news/edit-news-article-loader";
 import FullNewsArticle from "./components/news/full-news-article";
 import fullNewsArticleLoader from "./components/news/full-news-article-loader";
-import editNewsArticleLoader from "./components/news/edit-news-article-loader";
-import EditNewsArticle from "./components/news/edit-news-article";
-import "./i18n";
-import createTranslationNewsArticleLoader from "./components/news/create-news-translation-loader";
-import Languages from "./components/languages/languages";
-import languageLoader from "./components/languages/language-loader";
-import Users from "./components/users/users";
-import userLoader from "./components/users/users-loader";
+import NewNewsArticle from "./components/news/new-news-article";
+import newsLoader from "./components/news/news-loader";
+import FullSubject from "./components/subjects/full-subject";
+import fullSubjectLoader from "./components/subjects/full-subject-loader";
 import Subjects from "./components/subjects/subjects";
 import subjectsLoader from "./components/subjects/subjects-loader";
+import Users from "./components/users/users";
+import userLoader from "./components/users/users-loader";
+import "./i18n";
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,11 @@ const router = createBrowserRouter([
         path: "/predmeti",
         element: <Subjects />,
         loader: subjectsLoader,
+      },
+      {
+        path: "/predmeti/:id",
+        element: <FullSubject />,
+        loader: fullSubjectLoader,
       },
       {
         path: "/jezici",
