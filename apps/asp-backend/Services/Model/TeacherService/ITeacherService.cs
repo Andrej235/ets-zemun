@@ -16,6 +16,12 @@ public interface ITeacherService
         int? limit,
         int? subjectId
     );
+    Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllSimple(
+        string languageCode,
+        int? offset,
+        int? limit,
+        int? subjectId
+    );
     Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> Update(UpdateTeacherRequestDto request);

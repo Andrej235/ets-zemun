@@ -29,6 +29,7 @@ public partial class TeacherService(
         TeacherTranslation
     > createTranslationRequestMapper,
     IResponseMapper<Teacher, TeacherResponseDto> responseMapper,
+    IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper,
     HybridCache hybridCache
 ) : ITeacherService
 {
@@ -55,5 +56,7 @@ public partial class TeacherService(
         TeacherTranslation
     > createTranslationRequestMapper = createTranslationRequestMapper;
     private readonly IResponseMapper<Teacher, TeacherResponseDto> responseMapper = responseMapper;
+    private readonly IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper =
+        simpleResponseMapper;
     private readonly HybridCache hybridCache = hybridCache;
 }

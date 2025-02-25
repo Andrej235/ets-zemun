@@ -39,7 +39,7 @@ export default function Subjects() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState<Promise<
-    Schema<"SubjectResponseDto">[]
+    Schema<"SimpleSubjectResponseDto">[]
   > | null>(null);
   const isLoadingData = useRef(false);
   const [pageCount, setPageCount] = useState(0);
@@ -95,7 +95,7 @@ export default function Subjects() {
   }
 
   async function handleUpdate(
-    subject: Schema<"SubjectResponseDto">,
+    subject: Schema<"SimpleSubjectResponseDto">,
     newName: string,
     newDesc: string
   ) {
@@ -112,7 +112,7 @@ export default function Subjects() {
     if (response.code !== "No Content") alert(response);
   }
 
-  async function handleDelete(subject: Schema<"SubjectResponseDto">) {
+  async function handleDelete(subject: Schema<"SimpleSubjectResponseDto">) {
     const response = await sendAPIRequest("/subject/{id}", {
       method: "delete",
       parameters: {

@@ -200,6 +200,10 @@ builder.Services.AddScoped<
     CreateTeacherTranslationRequestMapper
 >();
 builder.Services.AddScoped<IResponseMapper<Teacher, TeacherResponseDto>, TeacherResponseMapper>();
+builder.Services.AddScoped<
+    IResponseMapper<Teacher, SimpleTeacherResponseDto>,
+    SimpleTeacherResponseMapper
+>();
 #endregion
 
 #region Teacher subject

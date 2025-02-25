@@ -67,6 +67,24 @@ public class TeacherController(ITeacherService teacherService) : ControllerBase
         return Ok(result.Value);
     }
 
+    [HttpGet("simple")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllSimple(
+        [FromQuery] string languageCode,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit,
+        [FromQuery] int? subjectId
+    )
+    {
+        var result = await teacherService.GetAllSimple(languageCode, offset, limit, subjectId);
+
+        if (result.IsFailed)
+            return BadRequest("Language not found");
+
+        return Ok(result.Value);
+    }
+
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

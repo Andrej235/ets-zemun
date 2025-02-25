@@ -9,6 +9,11 @@ public class SimpleSubjectResponseMapper : IResponseMapper<Subject, SimpleSubjec
     {
         var translation = from.Translations.FirstOrDefault();
 
-        return new() { Id = from.Id, Name = translation?.Name ?? "" };
+        return new()
+        {
+            Id = from.Id,
+            Name = translation?.Name ?? "",
+            Description = translation?.Description ?? "",
+        };
     }
 }

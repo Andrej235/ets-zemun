@@ -1,13 +1,26 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
-import fullSubjectLoader from "./full-subject-loader";
+import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Save } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import LazyLoadedList from "../lazy-loaded-list/lazy-loaded-list";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import { Save } from "lucide-react";
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import LazyLoadedList from "../lazy-loaded-list/lazy-loaded-list";
+import fullSubjectLoader from "./full-subject-loader";
 
 export default function FullSubject() {
   const loaderData = useLoader<typeof fullSubjectLoader>();
@@ -44,6 +57,51 @@ export default function FullSubject() {
     });
 
     if (response.code !== "No Content") alert(response);
+  }
+
+  const [initialTeachers, setInitialTeachers] = useState<number[]>([]);
+  const [selectedTeachers, setSelectedTeachers] = useState<number[]>([]);
+  const { id: subjectId } = useParams();
+
+  useEffect(() => {
+    loaderData.subject.then((x) => {
+      const initialTeachers =
+        x.code === "OK" ? x.content.teachers.items.map((x) => x.id) : [];
+      setInitialTeachers(initialTeachers);
+      setSelectedTeachers(initialTeachers);
+    });
+  }, [loaderData]);
+
+  async function saveTeacherChanges() {
+    console.log(selectedTeachers, initialTeachers);
+
+    if (!subjectId || isNaN(+subjectId)) return;
+
+    initialTeachers
+      .filter((x) => !selectedTeachers.includes(x))
+      .forEach((id) =>
+        sendAPIRequest("/teacher/{teacherId}/subject/{subjectId}", {
+          method: "delete",
+          parameters: {
+            subjectId: +subjectId,
+            teacherId: id,
+          },
+        })
+      );
+
+    selectedTeachers
+      .filter((x) => !initialTeachers.includes(x))
+      .forEach((id) =>
+        sendAPIRequest(`/teacher/subject`, {
+          method: "post",
+          payload: {
+            subjectIds: [+subjectId],
+            teacherId: id,
+          },
+        })
+      );
+
+    setInitialTeachers(selectedTeachers);
   }
 
   return (
@@ -167,16 +225,88 @@ export default function FullSubject() {
       <div>
         <h1>Nastavnici</h1>
 
-        <Async await={loaderData.teachers}>
+        <Async await={loaderData.subject}>
           {(data) => {
             if (data.code !== "OK") return null;
 
             const teachers = data.content.teachers;
 
             return (
-              <LazyLoadedList response={teachers}>
-                {(x) => <div>{x.name}</div>}
-              </LazyLoadedList>
+              <>
+                {teachers.loadedCount > 0 ? (
+                  <LazyLoadedList response={teachers}>
+                    {(x) => <div key={x.id}>{x.name}</div>}
+                  </LazyLoadedList>
+                ) : (
+                  <p className="my-4">
+                    Trenutno nijedan nastavnik ne predaje ovaj predmet
+                  </p>
+                )}
+
+                <AlertDialog>
+                  <AlertDialogTrigger>Dodaj nastavnika</AlertDialogTrigger>
+
+                  <AlertDialogContent className="min-w-2/3 min-h-2/3 grid-rows-[max-content_1fr] gap-12 p-12 max-h-2/3">
+                    <AlertDialogHeader className="max-h-max space-y-1">
+                      <AlertDialogTitle className="text-3xl text-center">
+                        Izaberite nastavnike koji ce predavati ovaj predmet
+                      </AlertDialogTitle>
+
+                      <AlertDialogDescription className="text-center text-muted-foreground text-xl">
+                        Izaberite jednog ili vise nastavnika
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <div className="h-full w-full max-h-full overflow-auto grid grid-cols-3 grid-flow-row gap-8 p-8 rounded-lg">
+                      <Async await={loaderData.teachers}>
+                        {(teachers) => {
+                          if (teachers.code !== "OK") return null;
+
+                          return teachers.content.items.map((x) => (
+                            <Button
+                              variant="ghost"
+                              key={x.id}
+                              className={`flex flex-col gap-2 border-2 border-muted w-full h-[30rem] p-6 ${
+                                selectedTeachers.includes(x.id)
+                                  ? "bg-muted border-slate-700"
+                                  : ""
+                              }`}
+                              onClick={() =>
+                                setSelectedTeachers((prev) => {
+                                  if (prev.includes(x.id)) {
+                                    return prev.filter((y) => y !== x.id);
+                                  } else {
+                                    return [...prev, x.id];
+                                  }
+                                })
+                              }
+                            >
+                              <img
+                                src={x.image}
+                                alt={x.name}
+                                className="w-full h-full object-cover"
+                              />
+                              <h2 className="text-center text-xl">{x.name}</h2>
+                            </Button>
+                          ));
+                        }}
+                      </Async>
+                    </div>
+
+                    <AlertDialogFooter className="flex gap-12 justify-center!">
+                      <AlertDialogCancel className="text-xl text-red-500">
+                        Odbaci promene
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        className="text-xl px-8"
+                        onClick={saveTeacherChanges}
+                      >
+                        Potvrdi
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </>
             );
           }}
         </Async>

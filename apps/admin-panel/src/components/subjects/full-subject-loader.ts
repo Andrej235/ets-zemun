@@ -26,11 +26,18 @@ const fullSubjectLoader = createLoader(({ params: { id } }) => ({
       },
     }),
   },
-  teachers: sendAPIRequest("/subject/{id}", {
+  subject: sendAPIRequest("/subject/{id}", {
     method: "get",
     parameters: {
       id: +id,
       languageCode: i18n.language,
+    },
+  }),
+  teachers: sendAPIRequest("/teacher/simple", {
+    method: "get",
+    parameters: {
+      languageCode: i18n.language,
+      limit: 9,
     },
   }),
 }));
