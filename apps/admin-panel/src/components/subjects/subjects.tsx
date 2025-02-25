@@ -3,7 +3,13 @@ import { Button } from "@/components/ui/button";
 import { TableFooter } from "@/components/ui/table";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { ChevronLeft, ChevronRight, Save } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Save,
+  ShowerHead,
+  Trash2,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
   Table,
@@ -17,9 +23,11 @@ import Async from "@/better-router/async";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import i18n from "@/i18n";
+import { useNavigate } from "react-router";
 
 export default function Subjects() {
   const loaderData = useLoader<typeof subjectsLoader>();
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState<Promise<
     Schema<"SubjectResponseDto">[]
@@ -95,6 +103,17 @@ export default function Subjects() {
     if (response.code !== "No Content") alert(response);
   }
 
+  async function handleDelete(subject: Schema<"SubjectResponseDto">) {
+    const response = await sendAPIRequest("/subject/{id}", {
+      method: "delete",
+      parameters: {
+        id: subject.id,
+      },
+    });
+
+    if (response.code !== "No Content") alert(response);
+  }
+
   return (
     <div>
       <Table>
@@ -119,7 +138,7 @@ export default function Subjects() {
                       <Textarea defaultValue={subject.description} />
                     </TableCell>
 
-                    <TableCell className="1/8">
+                    <TableCell>
                       <Button
                         variant="outline"
                         className="group min-h-20 min-w-20 p-4"
@@ -139,6 +158,26 @@ export default function Subjects() {
                         }}
                       >
                         <Save className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
+                      </Button>
+                    </TableCell>
+
+                    <TableCell>
+                      <Button
+                        variant="outline"
+                        className="group min-h-20 min-w-20 p-4"
+                        onClick={() => handleDelete(subject)}
+                      >
+                        <Trash2 className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
+                      </Button>
+                    </TableCell>
+
+                    <TableCell>
+                      <Button
+                        variant="outline"
+                        className="group min-h-20 min-w-20 p-4"
+                        onClick={() => navigate(`/predmeti/${subject.id}`)}
+                      >
+                        <ShowerHead className="min-w-full min-h-full group-hover:animate-spin group-hover:text-green-600 transition-colors" />
                       </Button>
                     </TableCell>
                   </TableRow>
