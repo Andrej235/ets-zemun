@@ -27,7 +27,7 @@ public partial class TeacherService : ITeacherService
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .OrderBy(x => x.Id)
+                    .OrderByDescending(x => x.Id)
         );
 
         if (teachersResult.IsFailed)
@@ -76,7 +76,7 @@ public partial class TeacherService : ITeacherService
             limit ?? 10,
             q =>
                 q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .OrderBy(x => x.Id)
+                    .OrderByDescending(x => x.Id)
         );
 
         if (teachersResult.IsFailed)
