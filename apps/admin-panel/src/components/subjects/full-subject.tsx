@@ -332,7 +332,7 @@ export default function FullSubject() {
                           <img
                             src={x.image}
                             alt={x.name}
-                            className="w-full h-full object-cover"
+                            className="w-max h-max max-w-full max-h-full object-cover"
                           />
                           <h2 className="text-center text-xl">{x.name}</h2>
                         </Button>

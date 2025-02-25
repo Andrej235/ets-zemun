@@ -23,6 +23,10 @@ import Users from "./components/users/users";
 import userLoader from "./components/users/users-loader";
 import "./i18n";
 import "./index.scss";
+import Teachers from "./components/teachers/teachers";
+import teachersLoader from "./components/teachers/teachers-loader";
+import fullTeacherLoader from "./components/teachers/full-teacher-loader";
+import FullTeacher from "./components/teachers/full-teacher";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +82,16 @@ const router = createBrowserRouter([
         path: "/jezici",
         element: <Languages />,
         loader: languageLoader,
+      },
+      {
+        path: "/nastavnici",
+        element: <Teachers />,
+        loader: teachersLoader,
+      },
+      {
+        path: "/nastavnici/:id",
+        element: <FullTeacher />,
+        loader: fullTeacherLoader,
       },
       {
         path: "/korisnici",

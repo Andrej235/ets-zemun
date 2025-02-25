@@ -64,6 +64,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             <Link to="/vesti">Vesti</Link>
             <Link to="/jezici">Jezici</Link>
             <Link to="/predmeti">Predmeti</Link>
+            <Link to="/nastavnici">Nastavnici</Link>
             <Link to="/korisnici">Korisnici</Link>
           </div>
         </div>
