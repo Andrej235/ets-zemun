@@ -26,7 +26,13 @@ export default function Awards() {
     <div className="awards-pages">
       <h1>{t("awards.title")}</h1>
       <div className="awards-list">
-        <LazyAwaitedList data={loaderData} success="OK">
+        <LazyAwaitedList
+          data={loaderData}
+          success="OK"
+          skeleton={Array.from({ length: 9 }).map((_, i) => (
+            <div className="award-card" key={"skeleton_" + i}></div>
+          ))}
+        >
           {(award) => (
             <Link to={award.externalLink ?? "/takmicenja"} key={award.id}>
               <div
