@@ -5,8 +5,11 @@ import { Button } from "../ui/button";
 import { useNavigate, useRevalidator } from "react-router";
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -130,11 +133,15 @@ export default function Teachers() {
               name="image"
               autoComplete="off"
             />
+          </div>
 
-            <Button
-              className="text-2xl h-16"
+          <AlertDialogFooter>
+            <AlertDialogCancel className="text-2xl h-16">Odustani</AlertDialogCancel>
+
+            <AlertDialogAction
+              className="bg-primary text-primary-foreground shadow hover:bg-primary/70 text-2xl h-16"
               onClick={(e) => {
-                const container = (e.target as HTMLElement).parentElement;
+                const container = (e.target as HTMLElement).parentElement?.previousElementSibling;
                 if (!container) return;
 
                 const name = (
@@ -172,8 +179,8 @@ export default function Teachers() {
               }}
             >
               Dodaj nastavnika
-            </Button>
-          </div>
+            </AlertDialogAction>
+          </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
