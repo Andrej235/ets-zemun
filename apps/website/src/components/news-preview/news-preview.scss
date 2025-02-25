@@ -1,6 +1,6 @@
 .news-article-preview {
   position: relative;
-  max-width: 50rem;
+  width: 50rem;
   height: 80rem;
   background-color: $secondary-background;
   border-radius: 0.5rem;
@@ -122,3 +122,10 @@
   }
 }
 
+.skeleton {
+  cursor: default;
+  
+  &::after {
+    display: none;
+  }
+}
