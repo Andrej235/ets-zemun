@@ -18,21 +18,7 @@ export default function Teachers() {
           data={loaderData}
           success="OK"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
-            <TeacherCard
-              teacher={{
-                id: i,
-                name: "Nastavnik",
-                bio: "Bio",
-                email: "email",
-                image: "",
-                qualifications: [],
-                startOfOpenOfficeHoursFirstShift: "",
-                startOfOpenOfficeHoursSecondShift: "",
-                subjects: [],
-                title: "",
-              }}
-              key={"skeleton_" + i}
-            />
+            <div className="teacher-card" key={"skeleton_" + i}></div>
           ))}
         >
           {(data) => {
