@@ -1,6 +1,6 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
-using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Errors;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
@@ -19,6 +19,7 @@ public class SubjectService(
     ICreateSingleService<SubjectTranslation> createSingleTranslationService,
     IReadSingleService<Subject> readSingleService,
     IReadSingleSelectedService<Subject> readSingleSelectedService,
+    ICountService<Subject> countService,
     IReadRangeService<Subject> readRangeService,
     IExecuteUpdateService<SubjectTranslation> updateTranslationService,
     IDeleteService<Subject> deleteService,
@@ -34,6 +35,7 @@ public class SubjectService(
     private readonly IReadSingleService<Subject> readSingleService = readSingleService;
     private readonly IReadSingleSelectedService<Subject> readSingleSelectedService =
         readSingleSelectedService;
+    private readonly ICountService<Subject> countService = countService;
     private readonly IReadRangeService<Subject> readRangeService = readRangeService;
     private readonly IExecuteUpdateService<SubjectTranslation> updateTranslationService =
         updateTranslationService;
@@ -103,15 +105,21 @@ public class SubjectService(
         );
     }
 
-    public async Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(string languageCode)
+    public async Task<Result<LazyLoadResponse<SubjectResponseDto>>> GetAll(
+        string languageCode,
+        int? offset,
+        int? limit
+    )
     {
         if (string.IsNullOrWhiteSpace(languageCode))
-            return Result.Fail<IEnumerable<SubjectResponseDto>>(new BadRequest("Invalid request"));
+            return Result.Fail<LazyLoadResponse<SubjectResponseDto>>(
+                new BadRequest("Invalid request")
+            );
 
         var result = await readRangeService.Get(
             null,
-            null,
-            null,
+            offset,
+            limit,
             q =>
                 q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
                     .ThenInclude(x => x.Subjects)
@@ -122,10 +130,11 @@ public class SubjectService(
                     .ThenInclude(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(t => t.Id)
         );
 
         if (result.IsFailed)
-            return Result.Fail<IEnumerable<SubjectResponseDto>>(result.Errors);
+            return Result.Fail<LazyLoadResponse<SubjectResponseDto>>(result.Errors);
 
         var mapped = result.Value.Select(async subject =>
         {
@@ -153,7 +162,18 @@ public class SubjectService(
             return mapped;
         });
 
-        return Result.Ok((await Task.WhenAll(mapped)).AsEnumerable());
+        var response = new LazyLoadResponse<SubjectResponseDto>
+        {
+            LoadedCount = result.Value.Count(),
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"subject-count",
+                async (_) => (await countService.Count(null)).Value,
+                new() { Expiration = TimeSpan.FromHours(6) }
+            ),
+            Items = await Task.WhenAll(mapped),
+        };
+
+        return Result.Ok(response);
     }
 
     public async Task<Result<SubjectResponseDto>> GetSingle(int id, string languageCode)

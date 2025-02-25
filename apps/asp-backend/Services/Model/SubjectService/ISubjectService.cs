@@ -1,3 +1,4 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
 using FluentResults;
@@ -9,7 +10,11 @@ public interface ISubjectService
     Task<Result> Create(CreateSubjectRequestDto request);
     Task<Result> CreateTranslation(CreateSubjectTranslationRequestDto request);
 
-    Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(string languageCode);
+    Task<Result<LazyLoadResponse<SubjectResponseDto>>> GetAll(
+        string languageCode,
+        int? offset,
+        int? limit
+    );
     Task<Result<SubjectResponseDto>> GetSingle(int id, string languageCode);
 
     Task<Result> UpdateTranslation(UpdateSubjectTranslationRequestDto request);

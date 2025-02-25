@@ -1159,15 +1159,11 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
-            content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } }
-            }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SubjectResponseDtoLazyLoadResponse' } } }
           },
           '400': {
             description: 'Bad Request',
@@ -1632,6 +1628,7 @@ export type APIMap = {
       ResetPasswordRequest: { required: [ 'email', 'newPassword', 'resetCode' ], type: 'object', properties: { email: { type: 'string' }, resetCode: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
       SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
       SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
+      SubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       TeacherResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
