@@ -91,6 +91,18 @@
         flex-direction: column;
         gap: 1rem;
 
+        h3 {
+          width: fit-content;
+          color: $text-secondary;
+          font-size: 1.6rem;
+          font-weight: 400;
+          transition: 0.2s;
+        }
+
+        .teacher-link:hover {
+          color: $accent-secondary-highlight;
+        }
+
         .content-category {
           display: flex;
 

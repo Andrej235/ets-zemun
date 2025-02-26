@@ -38,27 +38,15 @@ export default function Awards() {
                   </p>
                 </div>
 
-                <h3>{award.student}</h3>
-                {award.teacherId && (
-                  <Link to={`/nastavnici/${award.teacherId}`}>
-                    {award.teacher.name}
-                  </Link>
-                )}
-
                 <div className="content">
+                  <h3>Ucenik: {" " + award.student}</h3>
+                  {award.teacherId && (
+                    <Link to={`/nastavnici/${award.teacherId}`}>
+                      <h3 className="teacher-link"> Nastavnik: {" " + award.teacher.name}</h3>
+                    </Link>
+                  )}
                   {award.description && <p>{award.description}</p>}
                 </div>
-                {award.externalLink && (
-                  <div className="external-link">
-                    <a
-                      href={award.externalLink}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {award.externalLink}
-                    </a>
-                  </div>
-                )}
               </div>
             </Link>
           )}
