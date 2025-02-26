@@ -14,18 +14,19 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { useNavigate } from "react-router";
+import { useNavigate, useRevalidator } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import compressImage from "@/lib/compress-image";
 import i18n from "@/i18n";
-import { Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 
 export default function FullTeacher() {
   const loaderData = useLoader<typeof fullTeacherLoader>();
   const navigate = useNavigate();
+  const { revalidate } = useRevalidator();
   const isWaitingForResponse = useRef(false);
 
   async function handleDelete(teacher: Schema<"TeacherResponseDto">) {
@@ -132,6 +133,9 @@ export default function FullTeacher() {
     description: string,
     date: string
   ) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
     const teacher = await loaderData;
     if (teacher.code !== "OK") return;
 
@@ -149,12 +153,17 @@ export default function FullTeacher() {
       },
     });
 
+    isWaitingForResponse.current = false;
     if (response.code !== "Created") alert(response);
+    revalidate();
   }
 
   async function handleDeleteQualification(
     qualification: Schema<"QualificationResponseDto">
   ) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
     const response = await sendAPIRequest("/qualification/{id}", {
       method: "delete",
       parameters: {
@@ -162,7 +171,44 @@ export default function FullTeacher() {
       },
     });
 
+    isWaitingForResponse.current = false;
     if (response.code !== "No Content") alert(response);
+    revalidate();
+  }
+
+  async function handleEditQualification(
+    qualification: Schema<"QualificationResponseDto">,
+    name: string,
+    description: string
+  ) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    if (
+      name === qualification.name &&
+      description === qualification.description
+    ) {
+      isWaitingForResponse.current = false;
+      return;
+    }
+
+    const response = await sendAPIRequest("/qualification/translation", {
+      method:
+        qualification.name.length < 1 && qualification.description
+          ? "post"
+          : "put",
+      payload: {
+        name,
+        description,
+        qualificationId: qualification.id,
+        languageCode: i18n.language,
+      },
+    });
+
+    isWaitingForResponse.current = false;
+    if (response.code !== "No Content" && response.code !== "Created")
+      alert(response);
+    revalidate();
   }
 
   return (
@@ -283,40 +329,107 @@ export default function FullTeacher() {
                     <div className="flex justify-between w-full">
                       <p className="font-bold text-xl">{qualification.name}</p>
 
-                      <AlertDialog>
-                        <AlertDialogTrigger className="group aspect-square p-0">
-                          <Trash2 className="min-w-full min-h-full group-hover:stroke-red-500" />
-                        </AlertDialogTrigger>
+                      <div className="flex gap-4">
+                        <AlertDialog>
+                          <AlertDialogTrigger className="group aspect-square p-0">
+                            <Trash2 className="min-w-full min-h-full group-hover:stroke-red-500" />
+                          </AlertDialogTrigger>
 
-                        <AlertDialogContent className="min-w-max">
-                          <AlertDialogHeader className="flex flex-col min-w-max">
-                            <AlertDialogTitle className="text-4xl">
-                              Da li ste sigurni da želite da obrišete ovu
-                              kvalifikaciju?
-                            </AlertDialogTitle>
-                            <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
-                              Ova akcija je{" "}
-                              <span className="text-red-500 font-bold">
-                                nepovratna
-                              </span>
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
+                          <AlertDialogContent className="min-w-max">
+                            <AlertDialogHeader className="flex flex-col min-w-max">
+                              <AlertDialogTitle className="text-4xl">
+                                Da li ste sigurni da želite da obrišete ovu
+                                kvalifikaciju?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                                Ova akcija je{" "}
+                                <span className="text-red-500 font-bold">
+                                  nepovratna
+                                </span>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
 
-                          <AlertDialogFooter>
-                            <AlertDialogCancel className="text-2xl h-16 w-32 mr-4">
-                              Odustani
-                            </AlertDialogCancel>
-                            <AlertDialogAction
-                              className="bg-red-500 text-foreground hover:bg-red-900 text-2xl h-16 w-32"
-                              onClick={() =>
-                                handleDeleteQualification(qualification)
-                              }
-                            >
-                              Obrisi
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel className="text-2xl h-16 w-32 mr-4">
+                                Odustani
+                              </AlertDialogCancel>
+                              <AlertDialogAction
+                                className="bg-red-500 text-foreground hover:bg-red-900 text-2xl h-16 w-32"
+                                onClick={() =>
+                                  handleDeleteQualification(qualification)
+                                }
+                              >
+                                Obrisi
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+
+                        <AlertDialog>
+                          <AlertDialogTrigger className="group aspect-square p-0">
+                            <Edit className="min-w-full min-h-full group-hover:stroke-yellow-500" />
+                          </AlertDialogTrigger>
+
+                          <AlertDialogContent className="min-w-2/3 min-h-2/3 grid-rows-[max-content_1fr] gap-16">
+                            <AlertDialogHeader className="flex flex-col min-w-max">
+                              <AlertDialogTitle className="text-4xl">
+                                Izmeni kvalifikaciju
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                                Unesite podatke o kvalifikaciji
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+
+                            <div className="flex flex-col gap-4">
+                              <Input
+                                placeholder="Naziv"
+                                className="h-16 text-xl"
+                                defaultValue={qualification.name}
+                              />
+                              <Textarea
+                                placeholder="Opis"
+                                className="h-32 text-xl"
+                                defaultValue={qualification.description}
+                              />
+                            </div>
+
+                            <AlertDialogFooter>
+                              <AlertDialogCancel className="text-2xl h-16 w-32 mr-4">
+                                Odustani
+                              </AlertDialogCancel>
+                              <AlertDialogAction
+                                className="text-2xl h-16 w-32"
+                                onClick={(e) => {
+                                  const target = e.target as HTMLButtonElement;
+                                  target.disabled = true;
+                                  const parent =
+                                    target.parentElement
+                                      ?.previousElementSibling;
+
+                                  const name =
+                                    (
+                                      parent?.children[0] as HTMLInputElement
+                                    )?.value?.trim() || qualification.name;
+
+                                  const description =
+                                    (
+                                      parent?.children[1] as HTMLInputElement
+                                    )?.value?.trim() ||
+                                    qualification.description;
+
+                                  handleEditQualification(
+                                    qualification,
+                                    name,
+                                    description
+                                  );
+                                }}
+                              >
+                                Izmeni
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
                     </div>
 
                     <p className="text-muted-foreground">
@@ -331,7 +444,7 @@ export default function FullTeacher() {
                     Dodaj kvalifikaciju
                   </AlertDialogTrigger>
 
-                  <AlertDialogContent className="min-w-3/4 min-h-3/4 grid-rows-[max-content_1fr] gap-16">
+                  <AlertDialogContent className="min-w-2/3 min-h-2/3 grid-rows-[max-content_1fr] gap-16">
                     <AlertDialogHeader className="flex flex-col min-w-max">
                       <AlertDialogTitle className="text-4xl text-center">
                         Dodaj kvalifikaciju
