@@ -21,6 +21,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import compressImage from "@/lib/compress-image";
 import i18n from "@/i18n";
+import { Trash2 } from "lucide-react";
 
 export default function FullTeacher() {
   const loaderData = useLoader<typeof fullTeacherLoader>();
@@ -151,6 +152,19 @@ export default function FullTeacher() {
     if (response.code !== "Created") alert(response);
   }
 
+  async function handleDeleteQualification(
+    qualification: Schema<"QualificationResponseDto">
+  ) {
+    const response = await sendAPIRequest("/qualification/{id}", {
+      method: "delete",
+      parameters: {
+        id: qualification.id,
+      },
+    });
+
+    if (response.code !== "No Content") alert(response);
+  }
+
   return (
     <Async await={loaderData}>
       {(data) => {
@@ -262,18 +276,54 @@ export default function FullTeacher() {
                 <p className="font-bold text-3xl mb-4">Kvalifikacije</p>
 
                 {teacher.qualifications.map((qualification) => (
-                  <Button
-                    variant="ghost"
+                  <div
                     key={qualification.id}
-                    className="flex flex-col items-start w-full min-h-max h-32 border-2 border-slate-600"
+                    className="flex flex-col items-start w-full min-h-max h-32 border-2 border-slate-600 p-4"
                   >
-                    <p className="font-bold text-xl">{qualification.name}</p>
+                    <div className="flex justify-between w-full">
+                      <p className="font-bold text-xl">{qualification.name}</p>
+
+                      <AlertDialog>
+                        <AlertDialogTrigger className="group aspect-square p-0">
+                          <Trash2 className="min-w-full min-h-full group-hover:stroke-red-500" />
+                        </AlertDialogTrigger>
+
+                        <AlertDialogContent className="min-w-max">
+                          <AlertDialogHeader className="flex flex-col min-w-max">
+                            <AlertDialogTitle className="text-4xl">
+                              Da li ste sigurni da želite da obrišete ovu
+                              kvalifikaciju?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                              Ova akcija je{" "}
+                              <span className="text-red-500 font-bold">
+                                nepovratna
+                              </span>
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+
+                          <AlertDialogFooter>
+                            <AlertDialogCancel className="text-2xl h-16 w-32 mr-4">
+                              Odustani
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              className="bg-red-500 text-foreground hover:bg-red-900 text-2xl h-16 w-32"
+                              onClick={() =>
+                                handleDeleteQualification(qualification)
+                              }
+                            >
+                              Obrisi
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+
                     <p className="text-muted-foreground">
                       {qualification.dateObtained}
                     </p>
-
                     <p>{qualification.description}</p>
-                  </Button>
+                  </div>
                 ))}
 
                 <AlertDialog>
