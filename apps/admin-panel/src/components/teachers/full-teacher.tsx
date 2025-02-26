@@ -211,6 +211,31 @@ export default function FullTeacher() {
     revalidate();
   }
 
+  async function handleRemoveSubject(
+    subject: Schema<"SimpleSubjectResponseDto">
+  ) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    const teacher = await loaderData;
+    if (teacher.code !== "OK") return;
+
+    const response = await sendAPIRequest(
+      "/teacher/{teacherId}/subject/{subjectId}",
+      {
+        method: "delete",
+        parameters: {
+          teacherId: teacher.content.id,
+          subjectId: subject.id,
+        },
+      }
+    );
+
+    isWaitingForResponse.current = false;
+    if (response.code !== "No Content") alert(response);
+    revalidate();
+  }
+
   return (
     <Async await={loaderData}>
       {(data) => {
@@ -312,7 +337,43 @@ export default function FullTeacher() {
                     key={subject.id}
                     className="flex flex-col w-full min-h-max h-32 border-2 border-slate-600 p-4"
                   >
-                    <p className="font-bold text-xl">{subject.name}</p>
+                    <div className="flex justify-between">
+                      <p className="font-bold text-xl">{subject.name}</p>
+
+                      <AlertDialog>
+                        <AlertDialogTrigger className="group aspect-square p-0">
+                          <Trash2 className="min-w-full min-h-full group-hover:stroke-red-500" />
+                        </AlertDialogTrigger>
+
+                        <AlertDialogContent className="min-w-max">
+                          <AlertDialogHeader className="flex flex-col min-w-max">
+                            <AlertDialogTitle className="text-4xl">
+                              Da li ste sigurni da želite da uklonite ovaj
+                              predmet?
+                            </AlertDialogTitle>
+
+                            <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                              Ova akcija ce samo ukloniti ovog nastavnika kao
+                              predavaca ovog predmeta, nece izbrisati sam
+                              predmet ili nastavnika
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+
+                          <AlertDialogFooter>
+                            <AlertDialogCancel className="text-2xl h-16 w-32 mr-4">
+                              Odustani
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              className="bg-red-500 text-foreground hover:bg-red-900 text-2xl h-16 w-32"
+                              onClick={() => handleRemoveSubject(subject)}
+                            >
+                              Ukloni
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+
                     <p>{subject.description}</p>
                   </div>
                 ))}
