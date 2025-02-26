@@ -1,5 +1,4 @@
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 
 type TeacherCardProps = {
@@ -11,24 +10,22 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
   const { t } = useTranslation();
 
   return (
-    <motion.button
+    <button
       className="teacher-card"
-      layout
       onClick={onSelect}
-      layoutId={String(teacher.id)}
     >
-      <motion.img
+      <img
         src={teacher.image}
         alt={teacher.name}
         className="teacher-image"
       />
 
-      <motion.div layout className="teacher-card-header">
+      <div className="teacher-card-header">
         <h2>{teacher.name}</h2>
         <p>{teacher.title}</p>
-      </motion.div>
+      </div>
 
-      <motion.div layout className="basic-info">
+      <div className="basic-info">
         <p>{teacher.bio}</p>
         <ul className="subjects">
           <p>{t("teachers.subjects")}</p>
@@ -36,14 +33,14 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
             <li key={subject.id}>{subject.name}</li>
           ))}
         </ul>
-      </motion.div>
+      </div>
 
-      <motion.a layout className="email" href={`mailto:${teacher.email}`}>
+      <a className="email" href={`mailto:${teacher.email}`}>
         {teacher.email}
-      </motion.a>
+      </a>
 
-      <motion.div layout className="expanded-content-container" />
-    </motion.button>
+      <div className="expanded-content-container" />
+    </button>
   );
 }
 
