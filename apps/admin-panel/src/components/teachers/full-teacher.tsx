@@ -1,7 +1,12 @@
-import useLoader from "@/better-router/use-loader";
-import fullTeacherLoader from "./full-teacher-loader";
 import Async from "@/better-router/async";
+import useLoader from "@/better-router/use-loader";
+import i18n from "@/i18n";
+import compressImage from "@/lib/compress-image";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Edit, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useRevalidator } from "react-router";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,18 +18,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { useNavigate, useRevalidator } from "react-router";
-import { useEffect, useRef, useState } from "react";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import compressImage from "@/lib/compress-image";
-import i18n from "@/i18n";
-import { Edit, Trash2 } from "lucide-react";
+import fullTeacherLoader from "./full-teacher-loader";
 
 export default function FullTeacher() {
-  const loaderData = useLoader<typeof fullTeacherLoader>();
+  const { teacher: teacherLoaderData, subjects: subjectsLoaderData } =
+    useLoader<typeof fullTeacherLoader>();
   const navigate = useNavigate();
   const { revalidate } = useRevalidator();
   const isWaitingForResponse = useRef(false);
@@ -48,8 +49,8 @@ export default function FullTeacher() {
   const [image, setImage] = useState<string>("");
   const changedImage = useRef(false);
   useEffect(() => {
-    loaderData.then((x) => x.code === "OK" && setImage(x.content.image));
-  }, [loaderData]);
+    teacherLoaderData.then((x) => x.code === "OK" && setImage(x.content.image));
+  }, [teacherLoaderData]);
 
   async function handleImageChange(file: File | null) {
     if (!file) return;
@@ -77,7 +78,7 @@ export default function FullTeacher() {
     )
       return;
 
-    const loaderDataResponse = await loaderData;
+    const loaderDataResponse = await teacherLoaderData;
     if (loaderDataResponse.code !== "OK") return;
 
     const loadedTeacher = loaderDataResponse.content;
@@ -136,7 +137,7 @@ export default function FullTeacher() {
     if (isWaitingForResponse.current) return;
     isWaitingForResponse.current = true;
 
-    const teacher = await loaderData;
+    const teacher = await teacherLoaderData;
     if (teacher.code !== "OK") return;
 
     const response = await sendAPIRequest("/qualification", {
@@ -217,7 +218,7 @@ export default function FullTeacher() {
     if (isWaitingForResponse.current) return;
     isWaitingForResponse.current = true;
 
-    const teacher = await loaderData;
+    const teacher = await teacherLoaderData;
     if (teacher.code !== "OK") return;
 
     const response = await sendAPIRequest(
@@ -236,8 +237,100 @@ export default function FullTeacher() {
     revalidate();
   }
 
+  const [currentPage, setCurrentPage] = useState<
+    Schema<"SimpleSubjectResponseDto">[] | null
+  >(null);
+  const [pageCount, setPageCount] = useState(0);
+
+  useEffect(() => {
+    teacherLoaderData.then((x) => {
+      if (x.code !== "OK") return;
+      const initial = x.content.subjects.map((x) => x.id);
+      setInitialSubjects(initial);
+      setSelectedSubjects(initial);
+    });
+  }, [teacherLoaderData]);
+
+  useEffect(() => {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    subjectsLoaderData.then((x) => {
+      isWaitingForResponse.current = false;
+      setCurrentPage(x.code === "OK" ? x.content.items : []);
+    });
+  }, [subjectsLoaderData]);
+
+  function handleNextClick() {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    sendAPIRequest("/subject", {
+      method: "get",
+      parameters: {
+        limit: 9,
+        offset: 9 * (pageCount + 1),
+        languageCode: i18n.language,
+      },
+    }).then(async (x) => {
+      setCurrentPage(
+        (prev) => prev?.concat(x.code === "OK" ? x.content.items : []) ?? []
+      );
+      setPageCount(pageCount + 1);
+      isWaitingForResponse.current = false;
+    });
+  }
+
+  const [initialSubjects, setInitialSubjects] = useState<number[]>([]);
+  const [selectedSubjects, setSelectedSubjects] = useState<number[]>([]);
+
+  async function saveSelectedSubjectsChanges() {
+    const teacherData = await teacherLoaderData;
+    if (teacherData.code !== "OK") return;
+
+    const teacherId = teacherData.content.id;
+    const promises: Promise<{
+      code: string;
+    }>[] = [];
+
+    initialSubjects
+      .filter((x) => !selectedSubjects.includes(x))
+      .forEach((id) =>
+        promises.push(
+          sendAPIRequest("/teacher/{teacherId}/subject/{subjectId}", {
+            method: "delete",
+            parameters: {
+              teacherId: +teacherId,
+              subjectId: id,
+            },
+          })
+        )
+      );
+
+    promises.push(
+      sendAPIRequest(`/teacher/subject`, {
+        method: "post",
+        payload: {
+          subjectIds: selectedSubjects.filter(
+            (x) => !initialSubjects.includes(x)
+          ),
+          teacherId: teacherId,
+        },
+      })
+    );
+
+    const responses = await Promise.all(promises);
+
+    responses.forEach((x) => {
+      if (x.code !== "No Content" && x.code !== "Created") alert(x);
+    });
+
+    setInitialSubjects(selectedSubjects);
+    revalidate();
+  }
+
   return (
-    <Async await={loaderData}>
+    <Async await={teacherLoaderData}>
       {(data) => {
         if (data.code !== "OK") return null;
         const teacher = data.content;
@@ -377,6 +470,69 @@ export default function FullTeacher() {
                     <p>{subject.description}</p>
                   </div>
                 ))}
+
+                <AlertDialog>
+                  <AlertDialogTrigger className="bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/70 h-24 rounded-lg">
+                    Izmeni Predmete
+                  </AlertDialogTrigger>
+
+                  <AlertDialogContent className="min-w-2/3 min-h-2/3 max-h-2/3 grid-rows-[max-content_1fr] gap-16">
+                    <AlertDialogHeader className="flex flex-col min-w-max">
+                      <AlertDialogTitle className="text-4xl text-center">
+                        Izaberite predmete
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                        Izaberite predmete koje ovaj nastavnik predaje
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <div className="h-full w-full max-h-full overflow-auto grid grid-cols-3 grid-flow-row gap-8 p-8 rounded-lg">
+                      {currentPage?.map((x) => (
+                        <Button
+                          variant="ghost"
+                          key={x.id}
+                          className={`flex flex-col gap-2 border-2 border-muted w-full h-[30rem] p-6 ${
+                            selectedSubjects.includes(x.id)
+                              ? "bg-muted border-slate-700"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedSubjects((prev) => {
+                              if (prev.includes(x.id)) {
+                                return prev.filter((y) => y !== x.id);
+                              } else {
+                                return [...prev, x.id];
+                              }
+                            })
+                          }
+                        >
+                          <p className="font-bold text-2xl">{x.name}</p>
+                          <p>{x.description}</p>
+                        </Button>
+                      ))}
+
+                      <Button
+                        onClick={handleNextClick}
+                        className="col-start-2 col-end-2 py-8"
+                        variant="secondary"
+                      >
+                        Ucitaj jos predmeta
+                      </Button>
+                    </div>
+
+                    <AlertDialogFooter className="flex gap-12 justify-center!">
+                      <AlertDialogCancel className="text-xl text-red-500">
+                        Odbaci promene
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        className="text-xl px-8"
+                        onClick={saveSelectedSubjectsChanges}
+                      >
+                        Potvrdi
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
 
               <div className="flex flex-col gap-4">

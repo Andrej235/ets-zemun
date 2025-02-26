@@ -75,8 +75,6 @@ export default function FullSubject() {
   }, [loaderData]);
 
   async function saveTeacherChanges() {
-    console.log(selectedTeachers, initialTeachers);
-
     if (!subjectId || isNaN(+subjectId)) return;
 
     initialTeachers
