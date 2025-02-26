@@ -126,6 +126,31 @@ export default function FullTeacher() {
     }
   }
 
+  async function handleAddQualification(
+    name: string,
+    description: string,
+    date: string
+  ) {
+    const teacher = await loaderData;
+    if (teacher.code !== "OK") return;
+
+    const response = await sendAPIRequest("/qualification", {
+      method: "post",
+      payload: {
+        dateObtained: date,
+        teacherId: teacher.content.id,
+        translation: {
+          qualificationId: -1,
+          languageCode: i18n.language,
+          name,
+          description,
+        },
+      },
+    });
+
+    if (response.code !== "Created") alert(response);
+  }
+
   return (
     <Async await={loaderData}>
       {(data) => {
@@ -250,6 +275,63 @@ export default function FullTeacher() {
                     <p>{qualification.description}</p>
                   </Button>
                 ))}
+
+                <AlertDialog>
+                  <AlertDialogTrigger className="bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/70 h-24 rounded-lg">
+                    Dodaj kvalifikaciju
+                  </AlertDialogTrigger>
+
+                  <AlertDialogContent className="min-w-3/4 min-h-3/4 grid-rows-[max-content_1fr] gap-16">
+                    <AlertDialogHeader className="flex flex-col min-w-max">
+                      <AlertDialogTitle className="text-4xl text-center">
+                        Dodaj kvalifikaciju
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="text-2xl text-muted-foreground text-center">
+                        Unesite podatke o kvalifikaciji
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <div className="flex flex-col gap-4">
+                      <Input placeholder="Naziv" className="h-16 text-xl" />
+                      <Textarea placeholder="Opis" className="h-64 text-xl" />
+                      <Input
+                        placeholder="Datum dobijanja (yyyy-mm-dd)"
+                        className="h-16 text-xl"
+                      />
+
+                      <div className="flex">
+                        <AlertDialogCancel className="text-2xl h-16 w-64 mr-4">
+                          Odustani
+                        </AlertDialogCancel>
+                        <AlertDialogAction
+                          className="text-2xl h-16 w-64"
+                          onClick={(e) => {
+                            const target = e.target as HTMLButtonElement;
+                            target.disabled = true;
+                            const parent = target.parentElement?.parentElement;
+
+                            const name = (
+                              parent?.firstChild as HTMLInputElement
+                            )?.value?.trim();
+
+                            const description = (
+                              parent?.children[1] as HTMLTextAreaElement
+                            )?.value?.trim();
+
+                            const date = (
+                              parent?.children[2] as HTMLInputElement
+                            )?.value?.trim();
+
+                            if (name && description && date)
+                              handleAddQualification(name, description, date);
+                          }}
+                        >
+                          Sacuvaj
+                        </AlertDialogAction>
+                      </div>
+                    </div>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </div>
           </div>
