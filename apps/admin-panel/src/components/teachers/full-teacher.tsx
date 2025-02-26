@@ -91,7 +91,12 @@ export default function FullTeacher() {
       bio !== loadedTeacher.bio
     ) {
       const response = await sendAPIRequest("/teacher/translation", {
-        method: "put",
+        method:
+          loadedTeacher.name.length < 1 &&
+          loadedTeacher.title.length < 1 &&
+          loadedTeacher.bio.length < 1
+            ? "post"
+            : "put",
         payload: {
           teacherId: loadedTeacher.id,
           languageCode: i18n.language,
@@ -101,7 +106,8 @@ export default function FullTeacher() {
         },
       });
 
-      if (response.code !== "No Content") alert(response);
+      if (response.code !== "Created" && response.code !== "No Content")
+        alert(response);
     }
 
     if (email !== loadedTeacher.email || changedImage.current) {
@@ -210,6 +216,41 @@ export default function FullTeacher() {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mt-16">
+              <div className="flex flex-col gap-4">
+                <p className="font-bold text-3xl mb-4">Predmeti</p>
+
+                {teacher.subjects.map((subject) => (
+                  <div
+                    key={subject.id}
+                    className="flex flex-col w-full min-h-max h-32 border-2 border-slate-600 p-4"
+                  >
+                    <p className="font-bold text-xl">{subject.name}</p>
+                    <p>{subject.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <p className="font-bold text-3xl mb-4">Kvalifikacije</p>
+
+                {teacher.qualifications.map((qualification) => (
+                  <Button
+                    variant="ghost"
+                    key={qualification.id}
+                    className="flex flex-col items-start w-full min-h-max h-32 border-2 border-slate-600"
+                  >
+                    <p className="font-bold text-xl">{qualification.name}</p>
+                    <p className="text-muted-foreground">
+                      {qualification.dateObtained}
+                    </p>
+
+                    <p>{qualification.description}</p>
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         );
