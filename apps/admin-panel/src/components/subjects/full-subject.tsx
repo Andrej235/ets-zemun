@@ -271,28 +271,6 @@ export default function FullSubject() {
 
             return (
               <>
-                {teachers.loadedCount > 0 ? (
-                  <div className="grid grid-cols-3 gap-12 w-max self-center">
-                    <LazyLoadedList response={teachers}>
-                      {(x) => (
-                        <Card key={x.id} className="w-120 h-120">
-                          <CardHeader>
-                            <CardTitle>{x.name}</CardTitle>
-                          </CardHeader>
-
-                          <CardDescription>
-                            <img src={x.image} alt={x.name} />
-                          </CardDescription>
-                        </Card>
-                      )}
-                    </LazyLoadedList>
-                  </div>
-                ) : (
-                  <p className="my-4">
-                    Trenutno nijedan nastavnik ne predaje ovaj predmet
-                  </p>
-                )}
-
                 <AlertDialog>
                   <AlertDialogTrigger className="mt-12">
                     Dodaj nastavnika
@@ -360,6 +338,28 @@ export default function FullSubject() {
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
+
+                {teachers.loadedCount > 0 ? (
+                  <div className="grid grid-cols-3 gap-12 w-max self-center">
+                    <LazyLoadedList response={teachers}>
+                      {(x) => (
+                        <Card key={x.id} className="w-120 h-120">
+                          <CardHeader>
+                            <CardTitle>{x.name}</CardTitle>
+                          </CardHeader>
+
+                          <CardDescription>
+                            <img src={x.image} alt={x.name} />
+                          </CardDescription>
+                        </Card>
+                      )}
+                    </LazyLoadedList>
+                  </div>
+                ) : (
+                  <p className="my-4">
+                    Trenutno nijedan nastavnik ne predaje ovaj predmet
+                  </p>
+                )}
               </>
             );
           }}
