@@ -284,6 +284,10 @@ builder.Services.AddScoped<
     EducationalProfileResponseMapper
 >();
 builder.Services.AddScoped<
+    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto>,
+    SimpleEducationalProfilesResponseMapper
+>();
+builder.Services.AddScoped<
     IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
     ProfileGeneralSubjectRequestMapper
 >();

@@ -31,6 +31,8 @@ import { Awards } from "./components/awards/awards";
 import awardsLoader from "./components/awards/awards-loader";
 import FullAward from "./components/awards/full-award";
 import fullAwardLoader from "./components/awards/full-award-loader";
+import EducationalProfiles from "./components/edu-profiles/edu-profiles";
+import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-loader";
 
 const router = createBrowserRouter([
   {
@@ -111,6 +113,11 @@ const router = createBrowserRouter([
         path: "/nagrade/:id",
         element: <FullAward />,
         loader: fullAwardLoader,
+      },
+      {
+        path: "profili",
+        element: <EducationalProfiles />,
+        loader: educationalProfilesLoader,
       },
     ],
   },

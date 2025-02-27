@@ -307,9 +307,9 @@ export type APIMap = {
           '200': {
             description: 'OK',
             content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } }
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } }
             }
           },
           '400': {
@@ -1606,7 +1606,7 @@ export type APIMap = {
       CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       EducationalProfileResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
         additionalProperties: false
       },
       ForgotPasswordRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
@@ -1646,6 +1646,7 @@ export type APIMap = {
       RegisterRequest: { required: [ 'email', 'password' ], type: 'object', properties: { email: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
       ResendConfirmationEmailRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
       ResetPasswordRequest: { required: [ 'email', 'newPassword', 'resetCode' ], type: 'object', properties: { email: { type: 'string' }, resetCode: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
+      SimpleEducationalProfileResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
       SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       SimpleSubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       SimpleTeacherResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, image: { type: 'string' } }, additionalProperties: false },

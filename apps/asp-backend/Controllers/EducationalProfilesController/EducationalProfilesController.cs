@@ -33,7 +33,7 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<EducationalProfileResponseDto>>> GetAll(
+    public async Task<ActionResult<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
         [FromQuery] string languageCode
     )
     {
