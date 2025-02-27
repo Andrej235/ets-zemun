@@ -33,6 +33,8 @@ import FullAward from "./components/awards/full-award";
 import fullAwardLoader from "./components/awards/full-award-loader";
 import EducationalProfiles from "./components/edu-profiles/edu-profiles";
 import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-loader";
+import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
+import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +120,11 @@ const router = createBrowserRouter([
         path: "profili",
         element: <EducationalProfiles />,
         loader: educationalProfilesLoader,
+      },
+      {
+        path: "profili/:id",
+        element: <FullEducationalProfile />,
+        loader: fullEducationalProfileLoader,
       },
     ],
   },
