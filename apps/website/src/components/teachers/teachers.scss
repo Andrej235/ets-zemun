@@ -42,16 +42,6 @@
   }
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
 .teacher-card {
   height: 55rem;
   background-color: $secondary-background !important;
@@ -62,33 +52,6 @@
   display: flex;
   flex-direction: column;
   min-width: 40rem;
-
-  .expanded-info-container {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100%;
-    height: 100%;
-    background-color: $secondary-background;
-    z-index: -1;
-  }
-
-  &.expanded {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-100%, -50%) !important;
-
-    .expanded-info-container {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      height: 100%;
-      background-color: $secondary-background;
-      z-index: -1;
-    }
-  }
 
   &:not(.expanded):hover {
     translate: 0 -5px;
@@ -131,6 +94,7 @@
     p {
       color: $text-secondary;
       font-size: 1.6rem;
+      text-wrap: wrap;
     }
 
     ul.subjects {
@@ -173,6 +137,169 @@
 
     &:hover {
       color: $accent-secondary;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .teacher-card-expanded-wrapper {
+    display: flex;
+  }
+
+  .teacher-card-expanded {
+    width: 50rem;
+    height: 60rem;
+    background-color: $secondary-background !important;
+    transition: translate 0.3s ease;
+    border-radius: 8px 0 0 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    img {
+      align-self: center;
+      width: 20rem;
+      aspect-ratio: 1;
+      object-fit: fill;
+      border-radius: 1rem;
+      margin: 1rem 0;
+    }
+
+    .teacher-card-header {
+      h2 {
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: $accent-secondary-highlight;
+      }
+
+      p {
+        text-align: center;
+        color: $text-secondary;
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
+    }
+
+    .basic-info {
+      padding: 2rem;
+      align-self: flex-start;
+      text-align: start;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      p {
+        color: $text-secondary;
+        font-size: 1.6rem;
+        text-wrap: wrap;
+      }
+
+      ul.subjects {
+        padding-inline: 0;
+        list-style: none;
+
+        p {
+          font-weight: 500;
+          font-size: 1.6rem;
+          color: $text-secondary;
+        }
+
+        li {
+          font-size: 1.5rem;
+          color: $text-secondary;
+          margin-bottom: 0.5rem;
+          line-height: 1.5;
+          padding-left: 1.5rem;
+          position: relative;
+
+          &::before {
+            content: "•";
+            color: $accent-secondary;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+
+    .email {
+      margin-top: auto;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1.6rem;
+      color: $text-secondary;
+
+      &:hover {
+        color: $accent-secondary;
+      }
+    }
+  }
+
+  .expanded-info-container {
+    top: 0;
+    left: 100%;
+    width: 50rem;
+    height: 60rem;
+    padding: 1rem 2rem;
+    background-color: $secondary-background;
+    z-index: -1;
+    border-radius: 0 8px 8px 0;
+
+    .bio {
+      font-size: 1.5rem;
+      color: $text-secondary;
+
+      .bio-h {
+        font-size: 1.6rem;
+        font-weight: 500;
+      }
+    }
+
+    .qualification {
+      margin-top: 2rem;
+      .qualification-h {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: $text-secondary;
+      }
+
+      p {
+        font-size: 1.5rem;
+        color: $text-secondary;
+      }
+    }
+  }
+
+  .expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -50%) !important;
+
+    .expanded-info-container {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: $secondary-background;
+      z-index: -1;
     }
   }
 }
