@@ -27,7 +27,7 @@ public partial class AwardService
                     .Include(x => x.Teacher)
                     .ThenInclude(x => x!.Subjects)
                     .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
-                    .OrderByDescending(x => x.DayOfAward)
+                    .OrderByDescending(x => x.Id)
         );
 
         if (awards.IsFailed)

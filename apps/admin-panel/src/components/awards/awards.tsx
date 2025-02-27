@@ -34,12 +34,12 @@ export function Awards() {
   const imageRef = useRef<HTMLInputElement>(null);
 
   async function handleCreate() {
-    const title = titleRef.current?.value;
-    const description = descriptionRef.current?.value ?? null;
-    const competitionName = competitionNameRef.current?.value;
-    const studentName = studentNameRef.current?.value;
-    const competitionLink = competitionLinkRef.current?.value ?? null;
-    const awardDate = awardDateRef.current?.value;
+    const title = titleRef.current?.value?.trim();
+    const description = descriptionRef.current?.value?.trim() ?? null;
+    const competitionName = competitionNameRef.current?.value?.trim();
+    const studentName = studentNameRef.current?.value?.trim();
+    const competitionLink = competitionLinkRef.current?.value?.trim() ?? null;
+    const awardDate = awardDateRef.current?.value?.trim();
     const image = imageRef.current?.files?.[0];
 
     if (!title || !competitionName || !studentName || !awardDate || !image)
