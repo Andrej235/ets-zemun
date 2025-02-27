@@ -19,14 +19,6 @@ public partial class AwardService
             limit ?? 10,
             q =>
                 q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Qualifications)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Subjects)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
                     .OrderByDescending(x => x.Id)
         );
 
@@ -58,16 +50,7 @@ public partial class AwardService
     {
         var result = await readSingleService.Get(
             x => x.Id == id,
-            q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Qualifications)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teacher)
-                    .ThenInclude(x => x!.Subjects)
-                    .ThenInclude(x => x!.Translations.Where(t => t.LanguageCode == languageCode))
+            q => q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
         );
 
         if (result.IsFailed)

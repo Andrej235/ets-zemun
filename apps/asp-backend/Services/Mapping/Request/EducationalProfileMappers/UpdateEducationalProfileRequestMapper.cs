@@ -27,6 +27,7 @@ public class UpdateEducationalProfileRequestMapper(
         new()
         {
             Id = from.Id,
+            Name = from.Name,
             GeneralSubjects = [.. from.GeneralSubjects.Select(g => generalSubjectMapper.Map(g))],
             VocationalSubjects =
             [

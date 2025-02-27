@@ -40,7 +40,7 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
         var result = await profileService.GetAll(languageCode);
 
         if (result.IsFailed)
-            return BadRequest(); //This can probably not ever occur (because, no language), but still feels weird to omit it
+            return BadRequest();
 
         return Ok(result.Value);
     }

@@ -49,15 +49,6 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           </SelectContent>
         </Select>
 
-        <Link
-          to="/"
-          className="logo"
-          tabIndex={isHamburgerMenuOpen ? -1 : undefined}
-          aria-hidden={isHamburgerMenuOpen}
-        >
-          <img src="/logo.png" alt="Logo" />
-        </Link>
-
         <div className="app-header-navigation">
           <div className="nav-bar">
             <Link to="/">Pocetna</Link>

@@ -58,7 +58,6 @@ export function Awards() {
       payload: {
         image: imageBase64,
         externalLink: competitionLink,
-        teacherId: null,
         dayOfAward: awardDate,
         translation: {
           languageCode: i18n.language,
