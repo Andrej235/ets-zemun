@@ -1,6 +1,8 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { RotateCcwSquare, Save, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
@@ -13,9 +15,8 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import fullEducationalProfileLoader from "./full-edu-profile-loader";
 import { Input } from "../ui/input";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import fullEducationalProfileLoader from "./full-edu-profile-loader";
 
 type Subject = {
   type: "general" | "vocational";
@@ -161,26 +162,128 @@ export default function FullEducationalProfile() {
     isWaitingForResponse.current = false;
   }
 
+  function handleChangeType(subject: Subject) {
+    setSelectedSubjects((prev) => {
+      const index = prev.findIndex((x) => x.year === selectedYear);
+      if (index < 0) return prev;
+      const subjects = prev[index].subjects;
+
+      const currIdx = subjects.findIndex(
+        (x) => x.subjectId === subject.subjectId
+      );
+      if (currIdx < 0) return prev;
+
+      prev[index].subjects[currIdx] = {
+        ...subject,
+        type: subject.type === "general" ? "vocational" : "general",
+      };
+
+      return [...prev];
+    });
+  }
+
+  function handleChangePerWeek(subject: Subject, perWeek: number) {
+    setSelectedSubjects((prev) => {
+      const index = prev.findIndex((x) => x.year === selectedYear);
+      if (index < 0) return prev;
+      const subjects = prev[index].subjects;
+
+      const currIdx = subjects.findIndex(
+        (x) => x.subjectId === subject.subjectId
+      );
+      if (currIdx < 0) return prev;
+
+      prev[index].subjects[currIdx] = {
+        ...subject,
+        perWeek,
+      };
+
+      return [...prev];
+    });
+  }
+
   return (
     <div className="flex flex-col gap-16 p-16">
       <Async await={loaderData.profile}>
         {(profile) => {
           if (profile.code !== "OK") return;
 
-          return <Input defaultValue={profile.content.name} />;
+          return (
+            <Input
+              defaultValue={profile.content.name}
+              className="h-24 text-2xl px-4"
+            />
+          );
         }}
       </Async>
 
       <div className="grid grid-cols-[1fr_max-content] w-full">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
-          {selectedSubjects
-            .filter((x) => x.year === selectedYear)[0]
-            ?.subjects.map((x) => (
-              <div key={x.subjectId}>{x.subject.name}</div>
-            ))}
+        <div className="flex flex-col gap-16 items-start">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 min-w-full">
+            {selectedSubjects
+              .filter((x) => x.year === selectedYear)[0]
+              ?.subjects.map((x) => (
+                <div
+                  key={x.subjectId}
+                  className="flex flex-col gap-4 border-2 border-slate-700 rounded-md p-4"
+                >
+                  <div className="flex justify-between">
+                    <p className="font-bold text-3xl">{x.subject.name}</p>
+
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleSelectSubject(x.subject, null)}
+                      className="text-2xl h-12 w-12 p-2 hover:bg-red-500"
+                    >
+                      <Trash2 className="min-w-full! min-h-full!" />
+                    </Button>
+                  </div>
+                  <p className="text-xl h-full">{x.subject.description}</p>
+                  <div className="flex gap-4 w-full justify-between items-center">
+                    <Input
+                      type="number"
+                      className="w-full h-16"
+                      defaultValue={x.perWeek}
+                    />
+
+                    <Button
+                      variant="ghost"
+                      className="h-16 w-16 p-2 hover:bg-slate-500"
+                      onClick={(e) => {
+                        const perWeek = Number(
+                          (
+                            (e.target as HTMLElement)
+                              .previousElementSibling as HTMLInputElement
+                          )?.value
+                        );
+                        handleChangePerWeek(x, perWeek);
+                      }}
+                    >
+                      <Save className="min-w-full! min-h-full!" />
+                    </Button>
+                  </div>
+                  <div className="flex gap-4 w-full justify-between items-center">
+                    <p className="text-xl">
+                      {x.type === "general" ? "Opste-obrazovni" : "Strucan"}{" "}
+                      predmet
+                    </p>
+
+                    <Button
+                      variant="ghost"
+                      className="h-16 w-16 p-2 hover:bg-slate-500"
+                      onClick={() => handleChangeType(x)}
+                    >
+                      <RotateCcwSquare className="min-w-full! min-h-full!" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+          </div>
 
           <AlertDialog>
-            <AlertDialogTrigger>Promeni predmete</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/60 h-24 w-96 text-2xl">
+              Promeni predmete
+            </AlertDialogTrigger>
 
             <AlertDialogContent className="min-w-3/4 min-h-3/4 max-h-3/4 overflow-auto grid-rows-[max-content_1fr] gap-16 p-12">
               <AlertDialogHeader className="flex items-center">
@@ -202,8 +305,10 @@ export default function FullEducationalProfile() {
                         key={subject.id}
                         subject={subject}
                         onSelect={handleSelectSubject}
-                        isSelected={selectedSubjects.some((x) =>
-                          x.subjects.some((y) => y.subjectId === subject.id)
+                        isSelected={selectedSubjects.some(
+                          (x) =>
+                            x.year === selectedYear &&
+                            x.subjects.some((y) => y.subjectId === subject.id)
                         )}
                       />
                     ));
@@ -220,10 +325,16 @@ export default function FullEducationalProfile() {
           </AlertDialog>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 items-center">
           {selectedSubjects.map((year) => (
-            <Button key={year.year} onClick={() => setSelectedYear(year.year)}>
-              <h2>{year.year}</h2>
+            <Button
+              key={year.year}
+              onClick={() => setSelectedYear(year.year)}
+              className={`min-h-24 min-w-24 max-h-24 max-w-24 bg-accent text-white hover:bg-slate-700 ${
+                year.year === selectedYear ? "bg-slate-500" : ""
+              }`}
+            >
+              <h2 className="text-3xl">{year.year}</h2>
             </Button>
           ))}
 
@@ -234,6 +345,7 @@ export default function FullEducationalProfile() {
                 { year: selectedSubjects.length + 1, subjects: [] },
               ])
             }
+            className="text-2xl h-16"
           >
             Dodaj godinu
           </Button>
