@@ -16,20 +16,10 @@ export default function ExpandedTeacherCard({
   const containerRef = useRef<HTMLDivElement>(null);
   useOutsideClick(containerRef, onRequestClose);
 
-  function transformTime(time: string): string {
-    const [hours, minutes] = time.split(":").map(Number);
-    const endMinutes = (minutes + 45) % 60;
-    const endHours = hours + Math.floor((minutes + 45) / 60);
-
-    return `${hours}:${minutes
-      .toString()
-      .padStart(2, "0")}-${endHours}:${endMinutes.toString().padStart(2, "0")}`;
-  }
-
   return (
     <div className="overlay">
       <div
-        className="teacher-card expanded"
+        className="teacher-card-expanded"
         key={teacher.id}
         ref={containerRef}
       >
@@ -41,7 +31,6 @@ export default function ExpandedTeacherCard({
         </div>
 
         <div className="basic-info">
-          <p>{teacher.bio}</p>
           <ul className="subjects">
             <p>{t("teachers.subjects")}</p>
             {teacher.subjects.map((subject) => (
@@ -53,17 +42,17 @@ export default function ExpandedTeacherCard({
         <a className="email" href={`mailto:${teacher.email}`}>
           {teacher.email}
         </a>
-
-        <div className="expanded-info-container">
+      </div>
+      <div className="expanded-info-container">
+        <div className="bio">
+          <p className="bio-h">Bio:</p>
+          <p>{teacher.bio}</p>
+        </div>
+        <div className="qualification">
+          <p className="qualification-h">Qualification:</p>
           {teacher.qualifications.map((qualification) => (
             <p key={qualification.id}>{qualification.name}</p>
           ))}
-
-          {teacher.startOfOpenOfficeHoursFirstShift &&
-            transformTime(teacher.startOfOpenOfficeHoursFirstShift)}
-
-          {teacher.startOfOpenOfficeHoursSecondShift &&
-            transformTime(teacher.startOfOpenOfficeHoursSecondShift)}
         </div>
       </div>
     </div>
