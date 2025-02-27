@@ -1,1 +1,59 @@
-{"entries":[{"id":"o-nama","title":"O Nama","keywords":["o nama","o skoli"],"url":"/?searchKey=o-nama"},{"id":"misija-i-vizija","keywords":["misija","vizija","misija i vizija"],"title":"Misija i Vizija","url":"/?searchKey=misija-i-vizija"}]}
+{
+  "entries": [
+    {
+      "id": "o-nama",
+      "title": "O Nama",
+      "keywords": ["o nama", "o skoli"],
+      "url": "/?searchKey=o-nama"
+    },
+    {
+      "id": "misija-i-vizija",
+      "keywords": ["misija", "vizija", "misija i vizija"],
+      "title": "Misija i Vizija",
+      "url": "/?searchKey=misija-i-vizija"
+    },
+    {
+      "id": "istorija",
+      "keywords": ["istorija", "istorija skole"],
+      "title": "Istorija",
+      "url": "/istorija"
+    },
+    {
+      "id": "nastavnici",
+      "keywords": ["nastavnici", "nastavnici skole"],
+      "title": "Nastavnici",
+      "url": "/nastavnici"
+    },
+    {
+      "id": "upis-i-prijem",
+      "keywords": ["upis", "prijem", "upis i prijem"],
+      "title": "Upis i prijem",
+      "url": "/upis"
+    },
+    {
+      "id": "takmicenja-i-nagrade",
+      "keywords": ["takmicenja", "nagrade", "takmicenja i nagrade"],
+      "title": "Takmičenja i nagrade",
+      "url": "/takmicenja"
+    },
+    {
+      "id": "novosti",
+      "keywords": ["novosti", "novosti skole", "dogadjaji", "dogadjanja"],
+      "title": "Novosti",
+      "url": "/novosti"
+    },
+    {
+      "id": "ucenici",
+      "keywords": ["ucenici", "vanredni-ucenici", "ucenicki-parlament", "savet-roditelja", "pp-sluzba", "psiholosko-pedagoska-sluzba", "nasilje", "mentalno-zdravlje"],
+      "title": "Ucenici",
+      "url": "/ucenici"
+    },
+    {
+        "id": "obrazovni-profili",
+        "keywords": ["obrazovni-profili", "obrazovni", "profili", "profili-skole"],
+        "title": "Obrazovni Profili",
+        "url": "/profili"
+      }
+  ]
+}
+
