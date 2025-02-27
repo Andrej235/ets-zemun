@@ -1,6 +1,10 @@
-import useLoader from "@/better-router/use-loader";
-import educationalProfilesLoader from "./edu-profiles-loader";
 import Async from "@/better-router/async";
+import useLoader from "@/better-router/use-loader";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Edit, Plus, Trash2 } from "lucide-react";
+import { useRef } from "react";
+import { useNavigate, useRevalidator } from "react-router";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,11 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Edit, Plus, Trash2 } from "lucide-react";
 import { Input } from "../ui/input";
-import { useNavigate, useRevalidator } from "react-router";
-import { useRef } from "react";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import {
   Table,
   TableBody,
@@ -25,8 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Button } from "../ui/button";
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import educationalProfilesLoader from "./edu-profiles-loader";
 
 export default function EducationalProfiles() {
   const loaderData = useLoader<typeof educationalProfilesLoader>();
@@ -76,8 +75,8 @@ export default function EducationalProfiles() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Id</TableHead>
-            <TableHead>Ime</TableHead>
+            <TableHead className="text-2xl">Id</TableHead>
+            <TableHead className="text-2xl">Ime</TableHead>
             <TableHead />
           </TableRow>
         </TableHeader>
@@ -90,27 +89,35 @@ export default function EducationalProfiles() {
 
               return profiles.map((profile) => (
                 <TableRow key={profile.id}>
-                  <TableCell>{profile.id}</TableCell>
-                  <TableCell>{profile.name}</TableCell>
+                  <TableCell className="text-3xl min-w-32">
+                    {profile.id}
+                  </TableCell>
+                  <TableCell className="text-3xl w-full">
+                    {profile.name}
+                  </TableCell>
 
                   <TableCell className="flex gap-2">
                     <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button>
-                          <Trash2 />
-                        </Button>
+                      <AlertDialogTrigger className="min-h-full w-24 h-24 flex justify-center ml-4 hover:bg-red-500 rounded-md transition-colors">
+                        <Trash2 className="min-h-full! aspect-square" />
                       </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Potvrda brisanja</AlertDialogTitle>
-                          <AlertDialogDescription>
+                      <AlertDialogContent className="min-w-max">
+                        <AlertDialogHeader className="min-w-max">
+                          <AlertDialogTitle className="text-3xl">
+                            Potvrda brisanja
+                          </AlertDialogTitle>
+                          <AlertDialogDescription className="text-xl">
                             Da li ste sigurni da zelite da obrisete ovaj
                             obrazovni profil?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                        <AlertDialogFooter className="mt-8 gap-4">
+                          <AlertDialogCancel className="text-xl h-12 w-48">
+                            Cancel
+                          </AlertDialogCancel>
                           <AlertDialogAction
+                            className="text-xl h-12 w-48"
                             onClick={() => handleDelete(profile)}
                           >
                             Confirm
@@ -119,9 +126,12 @@ export default function EducationalProfiles() {
                       </AlertDialogContent>
                     </AlertDialog>
 
-                    <Button onClick={() => navigate(`/profili/${profile.id}`)}>
-                      <Edit />
-                    </Button>
+                    <button
+                      className="w-24 h-24 grid place-items-center rounded-md hover:bg-slate-700 hover:text-accent-foreground"
+                      onClick={() => navigate(`/profili/${profile.id}`)}
+                    >
+                      <Edit className="min-h-full! aspect-square" />
+                    </button>
                   </TableCell>
                 </TableRow>
               ));

@@ -1,11 +1,13 @@
 import Async from "@/better-router/async";
 import useLoader from "@/better-router/use-loader";
+import i18n from "@/i18n";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { RotateCcwSquare, Save, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
+  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -17,7 +19,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import fullEducationalProfileLoader from "./full-edu-profile-loader";
-import i18n from "@/i18n";
+import { useNavigate } from "react-router";
 
 type Subject = {
   type: "general" | "vocational";
@@ -35,6 +37,7 @@ export default function FullEducationalProfile() {
   const loaderData = useLoader<typeof fullEducationalProfileLoader>();
   const [selectedYear, setSelectedYear] = useState(1);
   const isWaitingForResponse = useRef(false);
+  const navigate = useNavigate();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const [selectedSubjects, setSelectedSubjects] = useState<
@@ -215,7 +218,7 @@ export default function FullEducationalProfile() {
   }, [loaderData.subjects]);
 
   async function loadMoreSubjects() {
-    if(isWaitingForResponse.current) return;
+    if (isWaitingForResponse.current) return;
     isWaitingForResponse.current = true;
 
     const newResponse = await sendAPIRequest("/subject", {
@@ -233,6 +236,24 @@ export default function FullEducationalProfile() {
     setSubjects([...subjects, ...newResponse.content.items]);
   }
 
+  async function handleDelete(
+    profile: Schema<"SimpleEducationalProfileResponseDto">
+  ) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    const response = await sendAPIRequest("/profile/{id}", {
+      method: "delete",
+      parameters: {
+        id: profile.id,
+      },
+    });
+
+    if (response.code !== "No Content") return;
+    isWaitingForResponse.current = false;
+    navigate("/profili");
+  }
+
   return (
     <div className="flex flex-col gap-16 p-16">
       <Async await={loaderData.profile}>
@@ -240,10 +261,41 @@ export default function FullEducationalProfile() {
           if (profile.code !== "OK") return;
 
           return (
-            <Input
-              defaultValue={profile.content.name}
-              className="h-24 text-2xl px-4"
-            />
+            <div className="flex justify-between">
+              <Input
+                defaultValue={profile.content.name}
+                className="h-24 text-2xl px-4"
+              />
+
+              <AlertDialog>
+                <AlertDialogTrigger className="min-h-full w-24 flex justify-center ml-4 hover:bg-red-500 rounded-md transition-colors">
+                  <Trash2 className="min-h-full! aspect-square" />
+                </AlertDialogTrigger>
+                <AlertDialogContent className="min-w-max">
+                  <AlertDialogHeader className="min-w-max">
+                    <AlertDialogTitle className="text-3xl">
+                      Potvrda brisanja
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="text-xl">
+                      Da li ste sigurni da zelite da obrisete ovaj obrazovni
+                      profil?
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+
+                  <AlertDialogFooter className="mt-8 gap-4">
+                    <AlertDialogCancel className="text-xl h-12 w-48">
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      className="text-xl h-12 w-48"
+                      onClick={() => handleDelete(profile.content)}
+                    >
+                      Confirm
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
           );
         }}
       </Async>
