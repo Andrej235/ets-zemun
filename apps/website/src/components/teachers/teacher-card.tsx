@@ -9,16 +9,20 @@ type TeacherCardProps = {
 function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
   const { t } = useTranslation();
 
+  function truncateBio(bio: string): string {
+    const words = bio.split(" ");
+    if (words.length > 15) {
+      return words.slice(0, 15).join(" ") + "...";
+    }
+    return bio;
+  }
+
+  const displayedSubjects = teacher.subjects.slice(0, 3);
+  const hasMoreSubjects = teacher.subjects.length > 3;
+
   return (
-    <button
-      className="teacher-card"
-      onClick={onSelect}
-    >
-      <img
-        src={teacher.image}
-        alt={teacher.name}
-        className="teacher-image"
-      />
+    <button className="teacher-card" onClick={onSelect}>
+      <img src={teacher.image} alt={teacher.name} className="teacher-image" />
 
       <div className="teacher-card-header">
         <h2>{teacher.name}</h2>
@@ -26,12 +30,13 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
       </div>
 
       <div className="basic-info">
-        <p>{teacher.bio}</p>
+        <p>{truncateBio(teacher.bio)}</p>
         <ul className="subjects">
           <p>{t("teachers.subjects")}</p>
-          {teacher.subjects.map((subject) => (
+          {displayedSubjects.map((subject) => (
             <li key={subject.id}>{subject.name}</li>
           ))}
+          {hasMoreSubjects && <li>...</li>}
         </ul>
       </div>
 
@@ -45,4 +50,3 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
 }
 
 export default TeacherCard;
-
