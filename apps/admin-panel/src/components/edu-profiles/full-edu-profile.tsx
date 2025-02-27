@@ -17,6 +17,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import fullEducationalProfileLoader from "./full-edu-profile-loader";
+import i18n from "@/i18n";
 
 type Subject = {
   type: "general" | "vocational";
@@ -202,6 +203,36 @@ export default function FullEducationalProfile() {
     });
   }
 
+  const [subjects, setSubjects] = useState<
+    Schema<"SimpleSubjectResponseDto">[]
+  >([]);
+  const currentPage = useRef(1);
+
+  useEffect(() => {
+    loaderData.subjects.then((x) =>
+      setSubjects(x.code === "OK" ? x.content.items : [])
+    );
+  }, [loaderData.subjects]);
+
+  async function loadMoreSubjects() {
+    if(isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    const newResponse = await sendAPIRequest("/subject", {
+      method: "get",
+      parameters: {
+        languageCode: i18n.language,
+        limit: 9,
+        offset: currentPage.current * 9,
+      },
+    });
+
+    if (newResponse.code !== "OK") return;
+    currentPage.current++;
+    isWaitingForResponse.current = false;
+    setSubjects([...subjects, ...newResponse.content.items]);
+  }
+
   return (
     <div className="flex flex-col gap-16 p-16">
       <Async await={loaderData.profile}>
@@ -295,25 +326,28 @@ export default function FullEducationalProfile() {
                 </AlertDialogDescription>
               </AlertDialogHeader>
 
-              <div className="grid grid-cols-3 gap-8">
-                <Async await={loaderData.subjects}>
-                  {(subjects) => {
-                    if (subjects.code !== "OK") return;
+              <div className="flex flex-col">
+                <div className="grid grid-cols-3 gap-8">
+                  {subjects.map((subject) => (
+                    <SubjectCard
+                      key={subject.id}
+                      subject={subject}
+                      onSelect={handleSelectSubject}
+                      isSelected={selectedSubjects.some(
+                        (x) =>
+                          x.year === selectedYear &&
+                          x.subjects.some((y) => y.subjectId === subject.id)
+                      )}
+                    />
+                  ))}
+                </div>
 
-                    return subjects.content.items.map((subject) => (
-                      <SubjectCard
-                        key={subject.id}
-                        subject={subject}
-                        onSelect={handleSelectSubject}
-                        isSelected={selectedSubjects.some(
-                          (x) =>
-                            x.year === selectedYear &&
-                            x.subjects.some((y) => y.subjectId === subject.id)
-                        )}
-                      />
-                    ));
-                  }}
-                </Async>
+                <Button
+                  className="text-xl h-16 w-64 self-center mt-16"
+                  onClick={loadMoreSubjects}
+                >
+                  Ucitaj vise predmeta
+                </Button>
               </div>
 
               <AlertDialogFooter className="justify-center!">
