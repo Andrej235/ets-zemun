@@ -27,6 +27,8 @@ import Teachers from "./components/teachers/teachers";
 import teachersLoader from "./components/teachers/teachers-loader";
 import fullTeacherLoader from "./components/teachers/full-teacher-loader";
 import FullTeacher from "./components/teachers/full-teacher";
+import { Awards } from "./components/awards/awards";
+import awardsLoader from "./components/awards/awards-loader";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +99,11 @@ const router = createBrowserRouter([
         path: "/korisnici",
         element: <Users />,
         loader: userLoader,
+      },
+      {
+        path: "/nagrade",
+        element: <Awards />,
+        loader: awardsLoader,
       },
     ],
   },
