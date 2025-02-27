@@ -266,6 +266,7 @@ export default function FullSubject() {
             if (data.code !== "OK") return null;
 
             const teachers = data.content.teachers;
+            console.log(teachers.nextCursor);
 
             return (
               <>

@@ -154,12 +154,12 @@ public class SubjectService(
         var result = await readSingleService.Get(
             x => x.Id == id,
             q =>
-                q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
+                q.Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Subjects)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
+                    .Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
+                    .Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
@@ -187,7 +187,7 @@ public class SubjectService(
         mapped.Teachers.NextCursor =
             mapped.Teachers.LoadedCount < 5
                 ? null
-                : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={mapped.Id}";
+                : $"teacher/simple/for-subject/{mapped.Id}?languageCode={languageCode}&offset=5&limit=10";
 
         return Result.Ok(mapped);
     }
