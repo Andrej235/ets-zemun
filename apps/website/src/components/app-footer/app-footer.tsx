@@ -69,29 +69,32 @@ export default function AppFooter() {
       </div>
 
       <div className="copyright">
-        <p className="copy">
-          &copy; {" " + new Date().getFullYear() + " "} {t("footer.copyright")}
-        </p>
+        <div className="copy-container">
+          <p className="copy">
+            &copy; {" " + new Date().getFullYear() + " "}{" "}
+            {t("footer.copyright")}
+          </p>
 
-        <p className="credits">
-          <span className="separator" />
-          <span>{t("footer.credits.createdBy")}</span>
-          <a
-            href={"https://github.com/andrej235"}
-            target="_blank"
-            aria-label={t("footer.credits.prefix")}
-          >
-            {t("footer.credits.andrej")}
-          </a>
-          <span>{"&"}</span>
-          <a
-            href={"https://github.com/andjelic-a"}
-            target="_blank"
-            aria-label={t("footer.credits.prefix")}
-          >
-            {t("footer.credits.aleksa")}
-          </a>
-        </p>
+          <p className="credits">
+            <span className="separator" />
+            <span>{t("footer.credits.createdBy")}</span>
+            <a
+              href={"https://github.com/andrej235"}
+              target="_blank"
+              aria-label={t("footer.credits.prefix")}
+            >
+              {t("footer.credits.andrej")}
+            </a>
+            <span>{"&"}</span>
+            <a
+              href={"https://github.com/andjelic-a"}
+              target="_blank"
+              aria-label={t("footer.credits.prefix")}
+            >
+              {t("footer.credits.aleksa")}
+            </a>
+          </p>
+        </div>
 
         <div className="social-media-links">
           <Async await={loaderData}>

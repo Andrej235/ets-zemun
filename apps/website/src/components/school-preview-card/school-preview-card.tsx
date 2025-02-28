@@ -11,7 +11,7 @@ type SchoolPreviewCardProps = {
   readonly image: string;
   readonly description: string;
   readonly title: string;
-  readonly count: number;
+  readonly count?: number;
 };
 
 export default function SchoolPreviewCard({
@@ -26,6 +26,8 @@ export default function SchoolPreviewCard({
 
   useEffect(() => {
     if (!containerRef.current) return;
+
+    if (count === undefined) return;
 
     const cleanup = inView(containerRef.current, () => {
       animate(0, count, {
@@ -44,10 +46,15 @@ export default function SchoolPreviewCard({
     <PreviewCard imagePath={image} layout={layout} imageAlt={title}>
       <div className={"school-preview-card " + layout} ref={containerRef}>
         <h1 className="title">
-          <span>{currentCount}+</span> {" " + title}
+          <span>{count !== undefined && currentCount + "+"}</span> {" " + title}
         </h1>
 
-        <p className="description">{description}</p>
+        <p
+          className="description"
+          dangerouslySetInnerHTML={{
+            __html: description.replace(/<br\s*\/?>/g, "<br />"),
+          }}
+        ></p>
       </div>
     </PreviewCard>
   );
