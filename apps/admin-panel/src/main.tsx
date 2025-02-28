@@ -38,6 +38,7 @@ import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-pro
 import appLoader from "./components/app/app-loader";
 import Auth from "./components/auth/auth";
 import Forbidden from "./components/forbidden/forbidden";
+import aboutLoader from "./components/about/about-loader";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <About />,
+        loader: aboutLoader,
       },
       {
         path: "auth",
