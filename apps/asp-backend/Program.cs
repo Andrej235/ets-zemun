@@ -104,7 +104,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = ".localhost.com";
+    options.Cookie.Domain = "localhost";
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -123,13 +123,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "WebsitePolicy",
-        builder =>
+        policyBuilder =>
         {
-            builder
-                .WithOrigins("https://localhost.com", "https://admin.localhost.com")
-                .AllowCredentials()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            if (builder.Environment.IsDevelopment())
+                policyBuilder
+                    .WithOrigins("http://localhost:5173", "http://localhost:5174")
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
         }
     );
 });

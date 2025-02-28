@@ -2,7 +2,7 @@ import { Endpoints, Methods } from "./types/endpoints/endpoints";
 import { Request } from "./types/endpoints/request-parser";
 import { APIResponse } from "./types/endpoints/response-parser";
 
-const baseAPIUrl = "https://api.localhost.com";
+const baseAPIUrl = "http://localhost:5000";
 
 type Response<
   Endpoint extends Endpoints,

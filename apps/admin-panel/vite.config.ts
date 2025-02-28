@@ -11,7 +11,6 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    allowedHosts: ["admin.localhost.com"],
   },
   resolve: {
     alias: {
