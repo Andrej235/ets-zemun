@@ -8,6 +8,9 @@ export default defineConfig({
   server: {
     host: true,
     port: 5174,
+    watch: {
+      usePolling: true,
+    },
     allowedHosts: ["admin.localhost.com"],
   },
   resolve: {
