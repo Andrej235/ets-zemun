@@ -31,7 +31,10 @@ type ParseAllResponses<Responses extends unknown[]> = Responses extends [
           : First extends {
               description: infer Description;
             }
-          ? { code: Description }
+          ? {
+              code: Description;
+              content: null;
+            }
           : never)
       | ParseAllResponses<Rest>
   : never;

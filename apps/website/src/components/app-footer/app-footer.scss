@@ -70,7 +70,7 @@
           grid-row: 1;
           grid-column: 1;
           grid-column-end: 2;
-          
+
           display: flex;
           justify-content: center;
         }
@@ -95,59 +95,6 @@
       justify-content: center;
       gap: 1.5rem;
       max-width: 100%;
-
-      .auth-button {
-        position: relative;
-
-        width: max-content;
-        min-width: 10rem;
-        height: max-content;
-        padding: 1rem 2rem;
-        background-color: $accent;
-        border-radius: 25rem;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 0.3s background-color;
-        gap: 2rem;
-
-        p {
-          transition: 0.3s;
-          font-size: 1.6rem;
-          font-weight: 500;
-        }
-
-        .button-icon {
-          position: absolute;
-          right: 2rem;
-          opacity: 0;
-          transition: 0.3s;
-          font-size: 1.6rem;
-          color: black;
-        }
-
-        &:hover {
-          background-color: white;
-          color: black;
-
-          p {
-            transform: translateX(-1rem);
-          }
-
-          .button-icon {
-            right: 1rem;
-            opacity: 1;
-          }
-        }
-      }
-
-      .username {
-        display: grid;
-        place-items: center;
-        max-width: 100%;
-        word-wrap: break-word;
-      }
 
       a {
         place-items: center;

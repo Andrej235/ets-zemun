@@ -243,10 +243,6 @@
       "Školski twitter nalog",
       "Školski instagram nalog"
     ],
-    "login": {
-      "btn": "Prijavi se",
-      "as": "Ulogovani ste kao"
-    },
     "credits": {
       "createdBy": "Napravili:",
       "prefix": "Kreator ovog sajta",
@@ -881,33 +877,6 @@
           "conclusion": "Svi činioci — roditelji, nastavnici, vršnjaci i zajednica u celini — imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
         }
       }
-    }
-  },
-  "auth": {
-    "signUp": {
-      "primary": "Kreiraj Nalog",
-      "secondary": "ili koristite svoj email za registraciju",
-      "namePlaceholder": "Ime",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Lozinka",
-      "button": "Registruj se"
-    },
-    "signIn": {
-      "primary": "Prijavi se",
-      "secondary": "ili koristite svoj email i lozinku",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Lozinka",
-      "button": "Prijavi se"
-    },
-    "toggleLeft": {
-      "title": "Dobrodošli nazad!",
-      "description": "Unesite svoje lične podatke da biste koristili sve funkcije sajta",
-      "button": "Prijavi se"
-    },
-    "toggleRight": {
-      "title": "Zdravo, nastavniče!",
-      "description": "Registrujte se sa svojim ličnim podacima da biste koristili sve funkcije sajta",
-      "button": "Registruj se"
     }
   }
 }

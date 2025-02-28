@@ -1,14 +1,9 @@
 import Icon from "@components/icon/icon";
-import "./app-footer.scss";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
-import useLoader from "@better-router/use-loader";
-import appLoader from "@components/app/app-loader";
-import Async from "@better-router/async";
+import "./app-footer.scss";
 
 export default function AppFooter() {
   const { t } = useTranslation();
-  const loaderData = useLoader<typeof appLoader>();
 
   return (
     <footer id="app-footer">
@@ -97,24 +92,6 @@ export default function AppFooter() {
         </div>
 
         <div className="social-media-links">
-          <Async await={loaderData}>
-            {(user) => {
-              if (user.code !== "OK")
-                return (
-                  <Link to="/prijava" className="auth-button">
-                    <p>{t("footer.login.btn")}</p>
-                    <Icon name="arrow-right" className="button-icon" />
-                  </Link>
-                );
-
-              return (
-                <p className="username">
-                  {t("footer.login.as")} {user.content.username}
-                </p>
-              );
-            }}
-          </Async>
-
           <a
             href={"https://www.linkedin.com"}
             aria-label={t("footer.socialMedia.0")}
