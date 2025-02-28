@@ -125,10 +125,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -143,10 +140,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -168,10 +162,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -195,10 +186,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -220,10 +208,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -240,10 +225,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       delete: {
@@ -263,10 +245,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -288,10 +267,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -315,10 +291,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -337,10 +310,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -362,10 +332,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -382,10 +349,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       delete: {
@@ -405,10 +369,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -581,10 +542,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -598,10 +556,7 @@ export type APIMap = {
               'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/LanguageResponseDto' } } }
             }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -623,10 +578,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -648,10 +600,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1003,10 +952,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -1021,10 +967,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1048,10 +991,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -1073,10 +1013,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1097,10 +1034,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       delete: {
@@ -1120,10 +1054,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1145,10 +1076,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1172,10 +1100,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -1190,10 +1115,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1217,10 +1139,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -1242,10 +1161,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1266,10 +1182,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       delete: {
@@ -1289,10 +1202,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1314,10 +1224,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1341,10 +1248,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       get: {
@@ -1359,10 +1263,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -1388,10 +1289,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1415,10 +1313,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       put: {
@@ -1440,10 +1335,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1460,10 +1352,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1480,10 +1369,7 @@ export type APIMap = {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1504,10 +1390,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       },
       delete: {
@@ -1527,10 +1410,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1552,10 +1432,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1579,10 +1456,7 @@ export type APIMap = {
             description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     },
@@ -1604,10 +1478,7 @@ export type APIMap = {
             description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
-          '429': {
-            description: 'Too Many Requests',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
+          '503': { description: 'Service Unavailable' }
         }
       }
     }

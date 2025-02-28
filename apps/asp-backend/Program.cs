@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Request.EducationalProfile;
@@ -44,6 +45,7 @@ using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -380,6 +382,26 @@ builder.Services.AddScoped<
 
 #endregion
 
+#region Rate limiting
+var tokenPolicy = "token";
+
+builder.Services.AddRateLimiter(x =>
+    x.AddTokenBucketLimiter(
+        policyName: tokenPolicy,
+        options =>
+        {
+            options.TokenLimit = 10;
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 15;
+            options.ReplenishmentPeriod = TimeSpan.FromSeconds(1);
+            options.TokensPerPeriod = 2;
+            options.AutoReplenishment = true;
+        }
+    )
+);
+
+#endregion
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -399,11 +421,12 @@ using (var scope = app.Services.CreateScope())
 var authGroup = app.MapGroup("/auth");
 authGroup.MapIdentityApi<IdentityUser>();
 
+app.UseRateLimiter();
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers().RequireRateLimiting(tokenPolicy);
 
 if (app.Environment.IsDevelopment())
 {

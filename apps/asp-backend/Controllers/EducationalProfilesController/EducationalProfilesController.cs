@@ -8,7 +8,7 @@ namespace EtsZemun.Controllers.EducationalProfilesController;
 
 [Route("profile")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public class EducationalProfilesController(IEducationalProfileService profileService)
     : ControllerBase
 {
