@@ -2,7 +2,8 @@ import { Endpoints, Methods } from "./types/endpoints/endpoints";
 import { Request } from "./types/endpoints/request-parser";
 import { APIResponse } from "./types/endpoints/response-parser";
 
-const baseAPIUrl = "http://localhost:5000";
+const baseAPIUrl = (import.meta as unknown as { env: { VITE_API_URL: string } })
+  .env.VITE_API_URL;
 
 type Response<
   Endpoint extends Endpoints,

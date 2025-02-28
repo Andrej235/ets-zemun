@@ -11,6 +11,7 @@ services:
       - 5173:5173
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:5000
 
   admin-panel:
     image: admin-panel
@@ -24,6 +25,7 @@ services:
       - 5174:5174
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:5000
 
   asp-backend:
     image: asp-backend
