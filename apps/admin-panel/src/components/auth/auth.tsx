@@ -106,7 +106,7 @@ export default function Auth() {
             <span>ili koristite svoj email za registraciju</span>
             <input
               type="text"
-              placeholder="ime"
+              placeholder="Ime"
               ref={registrationNameRef}
               name="registerName"
               id="registerName"
@@ -114,7 +114,7 @@ export default function Auth() {
             />
             <input
               type="email"
-              placeholder="email"
+              placeholder="Email"
               ref={registrationEmailRef}
               name="registerEmail"
               id="registerEmail"
@@ -122,7 +122,7 @@ export default function Auth() {
             />
             <input
               type="password"
-              placeholder="lozinka"
+              placeholder="Lozinka"
               ref={registrationPasswordRef}
               name="registerPassword"
               id="registerPassword"
@@ -140,14 +140,14 @@ export default function Auth() {
             <span>ili koristite svoj email i lozinku</span>
             <input
               type="email"
-              placeholder="email"
+              placeholder="Email"
               ref={loginEmailRef}
               name="loginEmail"
               id="loginEmail"
             />
             <input
               type="password"
-              placeholder="lozinka"
+              placeholder="Lozinka"
               ref={loginPasswordRef}
               name="loginPassword"
               id="loginPassword"
@@ -161,16 +161,6 @@ export default function Auth() {
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">
-              <h1>Dobrodošli nazad!</h1>
-              <p>
-                Unesite svoje lične podatke da biste koristili sve funkcije
-                sajta
-              </p>
-              <button className="hidden" onClick={() => setActive(false)}>
-                <span>Prijavi se</span>
-              </button>
-            </div>
-            <div className="toggle-panel toggle-right">
               <h1>Zdravo, nastavniče!</h1>
               <p>
                 Registrujte se sa svojim ličnim podacima da biste koristili sve
@@ -178,6 +168,16 @@ export default function Auth() {
               </p>
               <button className="hidden" onClick={() => setActive(true)}>
                 <span>Registruj se</span>
+              </button>
+            </div>
+            <div className="toggle-panel toggle-right">
+              <h1>Dobrodošli nazad!</h1>
+              <p>
+                Unesite svoje lične podatke da biste koristili sve funkcije
+                sajta
+              </p>
+              <button className="hidden" onClick={() => setActive(false)}>
+                <span>Prijavi se</span>
               </button>
             </div>
           </div>

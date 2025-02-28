@@ -37,6 +37,7 @@ import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
 import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
 import appLoader from "./components/app/app-loader";
 import Auth from "./components/auth/auth";
+import Forbidden from "./components/forbidden/forbidden";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
     loader: appLoader,
     shouldRevalidate: () => false,
     errorElement: <ErrorComponent />,
+    hydrateFallbackElement: <div />,
     children: [
       {
         path: "/",
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "auth",
         element: <Auth />,
+      },
+      {
+        path: "/forbidden",
+        element: <Forbidden />,
       },
       {
         path: "/vesti",
