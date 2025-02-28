@@ -1,7 +1,10 @@
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { redirect } from "react-router";
+import { LoaderFunctionArgs, redirect } from "react-router";
 
-const appLoader = async () => {
+const appLoader = async (args: LoaderFunctionArgs) => {
+  const opened = new URL(args.request.url).pathname;
+  if (opened === "/auth" || opened === "/forbidden") return null;
+
   const userStatus = await sendAPIRequest("/auth/user", {
     method: "get",
   });

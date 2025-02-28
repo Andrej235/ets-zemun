@@ -36,17 +36,23 @@ import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-lo
 import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
 import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
 import appLoader from "./components/app/app-loader";
+import Auth from "./components/auth/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     loader: appLoader,
+    shouldRevalidate: () => false,
     errorElement: <ErrorComponent />,
     children: [
       {
         path: "/",
         element: <About />,
+      },
+      {
+        path: "auth",
+        element: <Auth />,
       },
       {
         path: "/vesti",
