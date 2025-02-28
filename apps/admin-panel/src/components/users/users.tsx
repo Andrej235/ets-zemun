@@ -3,7 +3,7 @@ import useLoader from "@/better-router/use-loader";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { APIResponse } from "@shared/api-dsl/types/endpoints/response-parser";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MoveRight, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
@@ -33,30 +33,32 @@ import {
   TableRow,
 } from "../ui/table";
 import userLoader from "./users-loader";
+import { useRevalidator } from "react-router";
 
 export default function Users() {
   const loaderData = useLoader<typeof userLoader>();
   const [currentPage, setCurrentPage] = useState<Promise<
     Schema<"FullUserResponseDto">[]
   > | null>(null);
-  const isLoadingData = useRef(false);
+  const isWaitingForResponse = useRef(false);
   const [pageCount, setPageCount] = useState(0);
+  const { revalidate } = useRevalidator();
 
   useEffect(() => {
-    if (isLoadingData.current) return;
-    isLoadingData.current = true;
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
 
     setCurrentPage(
       loaderData.then((x) => {
-        isLoadingData.current = false;
+        isWaitingForResponse.current = false;
         return x.code === "OK" ? x.content.items : [];
       })
     );
   }, [loaderData]);
 
   function handlePrevClick() {
-    if (isLoadingData.current) return;
-    isLoadingData.current = true;
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
 
     const response = sendAPIRequest("/auth/user/all", {
       method: "get",
@@ -65,7 +67,7 @@ export default function Users() {
         offset: 15 * (pageCount - 1),
       },
     }).then((x) => {
-      isLoadingData.current = false;
+      isWaitingForResponse.current = false;
       return x.code === "OK" ? x.content.items : [];
     });
 
@@ -74,8 +76,8 @@ export default function Users() {
   }
 
   function handleNextClick() {
-    if (isLoadingData.current) return;
-    isLoadingData.current = true;
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
 
     const response = sendAPIRequest("/auth/user/all", {
       method: "get",
@@ -84,7 +86,7 @@ export default function Users() {
         offset: 15 * (pageCount + 1),
       },
     }).then((x) => {
-      isLoadingData.current = false;
+      isWaitingForResponse.current = false;
       return x.code === "OK" ? x.content.items : [];
     });
 
@@ -142,19 +144,42 @@ export default function Users() {
     }
   }
 
+  async function handleDelete(user: Schema<"FullUserResponseDto">) {
+    if (isWaitingForResponse.current) return;
+    isWaitingForResponse.current = true;
+
+    setRoleChanges((x) => {
+      return x.filter((y) => y.id !== user.id);
+    });
+
+    const response = await sendAPIRequest(`/auth/user/{userId}`, {
+      method: "delete",
+      parameters: {
+        userId: user.id,
+      },
+    });
+
+    if (response.code !== "No Content") {
+      console.log(response);
+      alert(response);
+    }
+    isWaitingForResponse.current = false;
+    revalidate();
+  }
+
   return (
-    <Table>
+    <Table className="mt-16">
       <TableHeader>
         <TableRow>
-          <TableCell>
+          <TableCell className="text-2xl">
             <b>Name</b>
           </TableCell>
 
-          <TableCell>
+          <TableCell className="text-2xl">
             <b>Email</b>
           </TableCell>
 
-          <TableCell>
+          <TableCell className="text-2xl">
             <b>Role</b>
           </TableCell>
         </TableRow>
@@ -165,33 +190,63 @@ export default function Users() {
           <Async await={currentPage}>
             {(page) =>
               page?.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell>{user.username}</TableCell>
+                <TableRow key={user.id} className="h-24">
+                  <TableCell className="text-2xl">{user.username}</TableCell>
 
-                  <TableCell
-                    className={
-                      user.emailConfirmed ? "text-green-600" : "text-red-600"
-                    }
-                  >
-                    {user.email}
-                  </TableCell>
+                  <TableCell className="text-2xl">{user.email}</TableCell>
 
                   <TableCell>
-                    <Select
-                      defaultValue={user.role[0]}
-                      onValueChange={(e) => handleChangeRole(e, user)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Izaberite role" />
-                      </SelectTrigger>
+                    <div className="flex gap4">
+                      <Select
+                        defaultValue={user.role[0]}
+                        onValueChange={(e) => handleChangeRole(e, user)}
+                      >
+                        <SelectTrigger className="w-full text-2xl">
+                          <SelectValue
+                            placeholder="Izaberite role"
+                            className="text-2xl"
+                          />
+                        </SelectTrigger>
 
-                      <SelectContent>
-                        <SelectItem value="Admin">Admin</SelectItem>
-                        <SelectItem value="Mod">Mod</SelectItem>
-                        <SelectItem value="Teacher">Teacher</SelectItem>
-                        <SelectItem value="User">User</SelectItem>
-                      </SelectContent>
-                    </Select>
+                        <SelectContent>
+                          <SelectItem value="Admin">Admin</SelectItem>
+                          <SelectItem value="Mod">Mod</SelectItem>
+                          <SelectItem value="Teacher">Teacher</SelectItem>
+                          <SelectItem value="User">User</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <AlertDialog>
+                        <AlertDialogTrigger className="min-h-full aspect-square flex justify-center ml-4 hover:bg-red-500 rounded-md transition-colors">
+                          <Trash2 className="min-h-full! aspect-square" />
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="min-w-max">
+                          <AlertDialogHeader className="min-w-max">
+                            <AlertDialogTitle className="text-3xl">
+                              Da li ste sigurni da zelite da{" "}
+                              <b className="text-red-600">trajno</b> obrisete
+                              ovaj nalog?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="text-xl">
+                              Ova akcija je nepovratna i bice sacuvana cim
+                              potvrdite brisanje
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+
+                          <AlertDialogFooter className="mt-8 gap-4">
+                            <AlertDialogCancel className="text-xl h-12 w-48">
+                              Odustani
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              className="text-xl h-12 w-48"
+                              onClick={() => handleDelete(user)}
+                            >
+                              Obrisi
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))

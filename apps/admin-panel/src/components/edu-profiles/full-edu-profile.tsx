@@ -284,13 +284,13 @@ export default function FullEducationalProfile() {
 
                   <AlertDialogFooter className="mt-8 gap-4">
                     <AlertDialogCancel className="text-xl h-12 w-48">
-                      Cancel
+                      Odustani
                     </AlertDialogCancel>
                     <AlertDialogAction
                       className="text-xl h-12 w-48"
                       onClick={() => handleDelete(profile.content)}
                     >
-                      Confirm
+                      Potvrdi
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>

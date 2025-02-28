@@ -115,5 +115,21 @@ namespace EtsZemun.Controllers.Auth
 
             return Ok(result);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("user/{userId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteUser([FromRoute] string userId)
+        {
+            var user = await signInManager.UserManager.FindByIdAsync(userId);
+            if (user is null)
+                return NotFound();
+
+            await signInManager.UserManager.DeleteAsync(user);
+            return NoContent();
+        }
     }
 }
