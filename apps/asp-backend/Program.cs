@@ -6,6 +6,7 @@ using EtsZemun.DTOs.Request.News;
 using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.DTOs.Response.Auth;
 using EtsZemun.DTOs.Response.Award;
 using EtsZemun.DTOs.Response.EducationalProfile;
 using EtsZemun.DTOs.Response.News;
@@ -31,6 +32,7 @@ using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
+using EtsZemun.Services.Mapping.Response.UserMappers;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
@@ -154,6 +156,7 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IReadSingleService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadRangeService<Subject>, ReadService<Subject>>();
+builder.Services.AddScoped<ICountService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<SubjectTranslation>,
     UpdateService<SubjectTranslation>
@@ -197,6 +200,10 @@ builder.Services.AddScoped<
     CreateTeacherTranslationRequestMapper
 >();
 builder.Services.AddScoped<IResponseMapper<Teacher, TeacherResponseDto>, TeacherResponseMapper>();
+builder.Services.AddScoped<
+    IResponseMapper<Teacher, SimpleTeacherResponseDto>,
+    SimpleTeacherResponseMapper
+>();
 #endregion
 
 #region Teacher subject
@@ -275,6 +282,10 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto>,
     EducationalProfileResponseMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto>,
+    SimpleEducationalProfilesResponseMapper
 >();
 builder.Services.AddScoped<
     IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
@@ -358,6 +369,13 @@ builder.Services.AddScoped<
     NewsPreviewResponseMapper
 >();
 builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseMapper>();
+#endregion
+
+#region User
+builder.Services.AddScoped<
+    IResponseMapper<IdentityUser, FullUserResponseDto>,
+    FullUserResponseMapper
+>();
 #endregion
 
 #endregion

@@ -42,26 +42,23 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="sr_cr">Српски</SelectItem>
+              <SelectItem value="sr">Српски</SelectItem>
               <SelectItem value="sr_lt">Srpski</SelectItem>
               <SelectItem value="en">English</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
 
-        <Link
-          to="/"
-          className="logo"
-          tabIndex={isHamburgerMenuOpen ? -1 : undefined}
-          aria-hidden={isHamburgerMenuOpen}
-        >
-          <img src="/logo.png" alt="Logo" />
-        </Link>
-
         <div className="app-header-navigation">
           <div className="nav-bar">
             <Link to="/">Pocetna</Link>
             <Link to="/vesti">Vesti</Link>
+            <Link to="/jezici">Jezici</Link>
+            <Link to="/predmeti">Predmeti</Link>
+            <Link to="/profili">Profili</Link>
+            <Link to="/nastavnici">Nastavnici</Link>
+            <Link to="/nagrade">Nagrade</Link>
+            <Link to="/korisnici">Korisnici</Link>
           </div>
         </div>
 

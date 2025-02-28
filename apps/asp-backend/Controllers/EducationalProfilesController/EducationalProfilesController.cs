@@ -33,14 +33,14 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<EducationalProfileResponseDto>>> GetAll(
+    public async Task<ActionResult<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
         [FromQuery] string languageCode
     )
     {
         var result = await profileService.GetAll(languageCode);
 
         if (result.IsFailed)
-            return BadRequest(); //This can probably not ever occur (because, no language), but still feels weird to omit it
+            return BadRequest();
 
         return Ok(result.Value);
     }

@@ -2,6 +2,7 @@ using EtsZemun.DTOs;
 using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Services.Read;
 using FluentResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace EtsZemun.Services.Model.TeacherService;
 
@@ -11,11 +12,13 @@ public partial class TeacherService : ITeacherService
         string languageCode,
         int? offset,
         int? limit,
-        int? subjectId
+        string? search
     )
     {
         var teachersResult = await readRangeService.Get(
-            subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId),
+            search is null
+                ? null
+                : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%")),
             offset,
             limit ?? 10,
             q =>
@@ -24,7 +27,7 @@ public partial class TeacherService : ITeacherService
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .OrderBy(x => x.Id)
+                    .OrderByDescending(x => x.Id)
         );
 
         if (teachersResult.IsFailed)
@@ -37,11 +40,13 @@ public partial class TeacherService : ITeacherService
             Items = mapped,
             LoadedCount = mapped.Count(),
             TotalCount = await hybridCache.GetOrCreateAsync(
-                $"subject-{subjectId ?? -1}-teachers-count",
+                $"teachers-count-q-{search ?? ""}",
                 async (_) =>
                 {
                     var result = await countService.Count(
-                        subjectId is null ? null : x => x.Subjects.Any(s => s.Id == subjectId)
+                        search is null
+                            ? null
+                            : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%"))
                     );
                     return result.Value;
                 },
@@ -51,7 +56,101 @@ public partial class TeacherService : ITeacherService
         result.NextCursor =
             result.LoadedCount < (limit ?? 10)
                 ? null
-                : $"teacher?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(subjectId is null ? "" : "&subjectId=" + subjectId)}";
+                : $"teacher?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(search is null ? "" : "&q=" + search)}";
+
+        return Result.Ok(result);
+    }
+
+    public async Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllSimple(
+        string languageCode,
+        int? offset,
+        int? limit,
+        string? search
+    )
+    {
+        var teachersResult = await readRangeService.Get(
+            search is null
+                ? null
+                : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%")),
+            offset,
+            limit ?? 10,
+            q =>
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(x => x.Id)
+        );
+
+        if (teachersResult.IsFailed)
+            return Result.Fail<LazyLoadResponse<SimpleTeacherResponseDto>>(teachersResult.Errors);
+
+        var mapped = teachersResult.Value.Select(simpleResponseMapper.Map);
+
+        LazyLoadResponse<SimpleTeacherResponseDto> result = new()
+        {
+            Items = mapped,
+            LoadedCount = mapped.Count(),
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"teachers-count-q-{search ?? ""}",
+                async (_) =>
+                {
+                    var result = await countService.Count(
+                        search is null
+                            ? null
+                            : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%"))
+                    );
+                    return result.Value;
+                },
+                new() { Expiration = TimeSpan.FromHours(6) }
+            ),
+        };
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"teacher/simple?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(search is null ? "" : "&q=" + search)}";
+
+        return Result.Ok(result);
+    }
+
+    public async Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllForSubject(
+        string languageCode,
+        int subjectId,
+        int? offset,
+        int? limit
+    )
+    {
+        var teachersResult = await readRangeService.Get(
+            x => x.Subjects.Any(s => s.Id == subjectId),
+            offset,
+            limit ?? 10,
+            q =>
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(x => x.Id)
+        );
+
+        if (teachersResult.IsFailed)
+            return Result.Fail<LazyLoadResponse<SimpleTeacherResponseDto>>(teachersResult.Errors);
+
+        var mapped = teachersResult.Value.Select(simpleResponseMapper.Map);
+
+        LazyLoadResponse<SimpleTeacherResponseDto> result = new()
+        {
+            Items = mapped,
+            LoadedCount = mapped.Count(),
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"subject-{subjectId}-teachers-count",
+                async (_) =>
+                {
+                    var result = await countService.Count(x =>
+                        x.Subjects.Any(s => s.Id == subjectId)
+                    );
+                    return result.Value;
+                },
+                new() { Expiration = TimeSpan.FromHours(6) }
+            ),
+        };
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"teacher/simple/for-subject/{subjectId}?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
 
         return Result.Ok(result);
     }

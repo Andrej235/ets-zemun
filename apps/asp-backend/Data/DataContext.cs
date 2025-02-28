@@ -33,12 +33,6 @@ namespace EtsZemun.Data
                     .WithOne()
                     .HasForeignKey(a => a.AwardId)
                     .OnDelete(DeleteBehavior.Cascade);
-
-                award
-                    .HasOne(a => a.Teacher)
-                    .WithMany()
-                    .HasForeignKey(a => a.TeacherId)
-                    .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<AwardTranslation>(awardTranslation =>

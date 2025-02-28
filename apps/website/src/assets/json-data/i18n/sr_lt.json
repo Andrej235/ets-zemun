@@ -149,20 +149,24 @@
     ],
     "courses": [
       {
+        "name": "Elektrotehničar informacionih tehnologija",
+        "duration": "4 godine"
+      },
+      {
+        "name": "Administrator računarskih mreža",
+        "duration": "4 godine"
+      },
+      {
+        "name": "Elektrotehničar automatike",
+        "duration": "4 godine"
+      },
+      {
         "name": "Elektrotehničar računara",
         "duration": "4 godine"
       },
       {
-        "name": "Elektronika",
-        "duration": "4 godine"
-      },
-      {
-        "name": "Telekomunikacije",
+        "name": "Elektromehaničar za termičke i rashladne uređaje",
         "duration": "3 godine"
-      },
-      {
-        "name": "Energetika",
-        "duration": "4 godine"
       }
     ],
     "table": {

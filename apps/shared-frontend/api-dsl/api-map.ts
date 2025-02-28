@@ -15,7 +15,7 @@ export type APIMap = {
       }
     },
     '/auth/change-role': {
-      patch: {
+      put: {
         tags: [ 'Auth' ],
         requestBody: {
           content: { 'application/json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/ChangeRoleRequestDto' } } }
@@ -59,6 +59,47 @@ export type APIMap = {
           },
           '401': {
             description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/auth/user/all': {
+      get: {
+        tags: [ 'Auth' ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/FullUserResponseDtoLazyLoadResponse' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/auth/user/{userId}': {
+      delete: {
+        tags: [ 'Auth' ],
+        parameters: [ { name: 'userId', in: 'path', required: true, schema: { type: 'string' } } ],
+        responses: {
+          '204': { description: 'No Content' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           }
         }
@@ -287,9 +328,9 @@ export type APIMap = {
           '200': {
             description: 'OK',
             content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } }
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } }
             }
           },
           '400': {
@@ -1139,15 +1180,11 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
-            content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/SubjectResponseDto' } } }
-            }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleSubjectResponseDtoLazyLoadResponse' } } }
           },
           '400': {
             description: 'Bad Request',
@@ -1312,7 +1349,7 @@ export type APIMap = {
       },
       get: {
         tags: [ 'Teacher' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'subjectId', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'q', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -1401,6 +1438,46 @@ export type APIMap = {
           },
           '403': {
             description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '429': {
+            description: 'Too Many Requests',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/teacher/simple': {
+      get: {
+        tags: [ 'Teacher' ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'q', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } } }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '429': {
+            description: 'Too Many Requests',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/teacher/simple/for-subject/{subjectId}': {
+      get: {
+        tags: [ 'Teacher' ],
+        parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } } }
+          },
+          '400': {
+            description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
           '429': {
@@ -1543,14 +1620,14 @@ export type APIMap = {
         properties: { teacherId: { type: 'integer', format: 'int32' }, subjectIds: { type: 'array', items: { type: 'integer', format: 'int32' } } },
         additionalProperties: false
       },
-      AwardResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' }, teacher: { '$ref': '#/components/schemas/TeacherResponseDto' }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
+      AwardResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       AwardResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/AwardResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       ChangeRoleRequestDto: { required: [ 'role', 'userId' ], type: 'object', properties: { userId: { minLength: 1, type: 'string' }, role: { minLength: 1, type: 'string' } }, additionalProperties: false },
-      CreateAwardRequestDto: { type: 'object', properties: { image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true }, translation: { '$ref': '#/components/schemas/CreateAwardTranslationRequestDto' } }, additionalProperties: false },
+      CreateAwardRequestDto: { type: 'object', properties: { image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, translation: { '$ref': '#/components/schemas/CreateAwardTranslationRequestDto' } }, additionalProperties: false },
       CreateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       CreateEducationalProfileRequestDto: {
         type: 'object',
-        properties: { generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
+        properties: { name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
         additionalProperties: false
       },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
@@ -1570,10 +1647,16 @@ export type APIMap = {
       CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       EducationalProfileResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
         additionalProperties: false
       },
       ForgotPasswordRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
+      FullUserResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'string' }, username: { type: 'string' }, email: { type: 'string' }, emailConfirmed: { type: 'boolean' }, role: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false
+      },
+      FullUserResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/FullUserResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       GetUserResponseDto: { type: 'object', properties: { username: { type: 'string' } }, additionalProperties: false },
       HttpValidationProblemDetails: {
         type: 'object',
@@ -1604,7 +1687,11 @@ export type APIMap = {
       RegisterRequest: { required: [ 'email', 'password' ], type: 'object', properties: { email: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
       ResendConfirmationEmailRequest: { required: [ 'email' ], type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
       ResetPasswordRequest: { required: [ 'email', 'newPassword', 'resetCode' ], type: 'object', properties: { email: { type: 'string' }, resetCode: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
-      SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
+      SimpleEducationalProfileResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
+      SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      SimpleSubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      SimpleTeacherResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, image: { type: 'string' } }, additionalProperties: false },
+      SimpleTeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleTeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
       TeacherResponseDto: {
         type: 'object',
@@ -1614,11 +1701,11 @@ export type APIMap = {
       TeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/TeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       TwoFactorRequest: { type: 'object', properties: { enable: { type: 'boolean', nullable: true }, twoFactorCode: { type: 'string', nullable: true }, resetSharedKey: { type: 'boolean' }, resetRecoveryCodes: { type: 'boolean' }, forgetMachine: { type: 'boolean' } }, additionalProperties: false },
       TwoFactorResponse: { required: [ 'isMachineRemembered', 'isTwoFactorEnabled', 'recoveryCodesLeft', 'sharedKey' ], type: 'object', properties: { sharedKey: { type: 'string' }, recoveryCodesLeft: { type: 'integer', format: 'int32' }, recoveryCodes: { type: 'array', items: { type: 'string' }, nullable: true }, isTwoFactorEnabled: { type: 'boolean' }, isMachineRemembered: { type: 'boolean' } }, additionalProperties: false },
-      UpdateAwardRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, teacherId: { type: 'integer', format: 'int32', nullable: true } }, additionalProperties: false },
+      UpdateAwardRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true } }, additionalProperties: false },
       UpdateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       UpdateEducationalProfileRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
         additionalProperties: false
       },
       UpdateLanguageRequestDto: { type: 'object', properties: { oldCode: { type: 'string' }, newCode: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
