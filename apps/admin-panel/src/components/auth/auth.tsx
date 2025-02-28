@@ -166,7 +166,7 @@ export default function Auth() {
                 Registrujte se sa svojim ličnim podacima da biste koristili sve
                 funkcije sajta
               </p>
-              <button className="hidden" onClick={() => setActive(true)}>
+              <button className="hidden" onClick={() => setActive(false)}>
                 <span>Registruj se</span>
               </button>
             </div>
@@ -176,7 +176,7 @@ export default function Auth() {
                 Unesite svoje lične podatke da biste koristili sve funkcije
                 sajta
               </p>
-              <button className="hidden" onClick={() => setActive(false)}>
+              <button className="hidden" onClick={() => setActive(true)}>
                 <span>Prijavi se</span>
               </button>
             </div>
