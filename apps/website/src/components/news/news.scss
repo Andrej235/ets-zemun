@@ -1,5 +1,5 @@
 .news-page-container {
-  padding: 5rem 3rem;
+  padding: 5rem 0;
 
   display: grid;
   place-items: center;
@@ -9,7 +9,7 @@
     grid-template-columns: repeat(auto-fit, minmax(min(50rem, 90vw), 1fr));
     place-items: center;
     gap: 5rem 3rem;
-    max-width: min(165rem, 90vw);
+    max-width: min(165rem, 100vw);
 
     @media screen and (max-width: 1024px) {
       gap: 3rem;
