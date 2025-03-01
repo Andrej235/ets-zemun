@@ -72,7 +72,43 @@
       "id": "dokumenta",
       "keywords": ["dokumenta", "dokumenta skole"],
       "title": "Dokumenta",
-      "url": "/novosti"
+      "url": "/dokumenta"
+    },
+    {
+      "id": "organi-upravljanja",
+      "keywords": ["organi upravljanja", "organi", "upravljanja"],
+      "title": "Organi upravljanja",
+      "url": "/dokumenta?searchKey=organi-upravljanja"
+    },
+    {
+      "id": "ponasanje-i-etika",
+      "keywords": ["ponasanje i etika", "ponasanje", "etika"],
+      "title": "Ponasanje i etika",
+      "url": "/dokumenta?searchKey=ponasanje-i-etika"
+    },
+    {
+      "id": "bezbedonosni-protokoli",
+      "keywords": ["bezbedonosni protokoli", "bezbedonosni", "protokoli"],
+      "title": "Bezbedonosni protokoli",
+      "url": "/dokumenta?searchKey=bezbedonosni-protokoli"
+    },
+    {
+      "id": "finansijski-menadzment",
+      "keywords": ["finansijski menadzment", "finansijski", "menadzment"],
+      "title": "Finansijski menadzment",
+      "url": "/dokumenta?searchKey=finansijski-menadzment"
+    },
+    {
+      "id": "politika-zaposlenih",
+      "keywords": ["politika zaposlenih", "politika", "zaposlenih"],
+      "title": "Politika zaposlenih",
+      "url": "/dokumenta?searchKey=politika-zaposlenih"
+    },
+    {
+      "id": "instintualna-fondacija",
+      "keywords": ["instintualna fondacija", "instintualna", "fondacija"],
+      "title": "Instintualna fondacija",
+      "url": "/dokumenta?searchKey=instintualna-fondacija"
     }
   ]
 }
