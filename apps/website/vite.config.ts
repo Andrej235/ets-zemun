@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import searchMapTransformer from "./plugins/search-map/search-map-transformer";
+import tsconfigPaths from "vite-tsconfig-paths";
+import netlifyPlugin from "@netlify/vite-plugin-react-router";
 
 export default defineConfig({
   base: "/",
@@ -21,6 +23,8 @@ export default defineConfig({
         plugins: [searchMapTransformer()],
       },
     }),
+    tsconfigPaths(),
+    netlifyPlugin(),
   ],
   resolve: {
     alias: {
