@@ -28,7 +28,7 @@ export default function Awards() {
       <div className="awards-list">
         <LazyAwaitedList
           data={loaderData}
-          success="OK"
+          success="200"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
             <div className="award-card skeleton" key={"skeleton_" + i}></div>
           ))}

@@ -16,7 +16,7 @@ export default function Teachers() {
       <div className="teacher-cards-container">
         <LazyAwaitedList
           data={loaderData}
-          success="OK"
+          success="200"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
             <div className="teacher-card" key={"skeleton_" + i}></div>
           ))}
