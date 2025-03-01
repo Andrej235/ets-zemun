@@ -44,16 +44,36 @@
     },
     {
       "id": "ucenici",
-      "keywords": ["ucenici", "vanredni-ucenici", "ucenicki-parlament", "savet-roditelja", "pp-sluzba", "psiholosko-pedagoska-sluzba", "nasilje", "mentalno-zdravlje"],
+      "keywords": [
+        "ucenici",
+        "vanredni ucenici",
+        "ucenicki parlament",
+        "savet roditelja",
+        "pp sluzba",
+        "psiholosko-pedagoska sluzba",
+        "nasilje",
+        "mentalno zdravlje"
+      ],
       "title": "Ucenici",
       "url": "/ucenici"
     },
     {
-        "id": "obrazovni-profili",
-        "keywords": ["obrazovni-profili", "obrazovni", "profili", "profili-skole"],
-        "title": "Obrazovni Profili",
-        "url": "/profili"
-      }
+      "id": "obrazovni-profili",
+      "keywords": [
+        "obrazovni profili",
+        "obrazovni",
+        "profili",
+        "profili skole"
+      ],
+      "title": "Obrazovni Profili",
+      "url": "/profili"
+    },
+    {
+      "id": "dokumenta",
+      "keywords": ["dokumenta", "dokumenta skole"],
+      "title": "Dokumenta",
+      "url": "/novosti"
+    }
   ]
 }
 
