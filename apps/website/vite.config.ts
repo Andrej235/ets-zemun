@@ -64,8 +64,6 @@ export default defineConfig({
 
           if (packageName.includes("motion")) return "vendor-motion";
 
-          if (packageName.includes("three")) return "vendor-three";
-
           return "vendor";
         },
       },
