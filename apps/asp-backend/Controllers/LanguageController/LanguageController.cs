@@ -8,7 +8,7 @@ namespace EtsZemun.Controllers.LanguageController;
 
 [Route("language")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public partial class LanguageController(ILanguageService languageService) : ControllerBase
 {
     private readonly ILanguageService languageService = languageService;

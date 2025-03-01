@@ -10,7 +10,7 @@ namespace EtsZemun.Controllers.SubjectController;
 
 [Route("subject")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public partial class SubjectController(ISubjectService subjectService) : ControllerBase
 {
     private readonly ISubjectService subjectService = subjectService;

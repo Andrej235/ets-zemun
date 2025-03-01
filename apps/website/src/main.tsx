@@ -1,6 +1,4 @@
 import aboutPageNewsLoader from "@components/about/about-page-news-loader.ts";
-import appLoader from "@components/app/app-loader.ts";
-import Auth from "@components/auth/auth.tsx";
 import awardsLoader from "@components/awards/awards-loader.ts";
 import Enrollment from "@components/enrollment/enrollment.tsx";
 import ErrorComponent from "@components/error-component/error-component.tsx";
@@ -29,17 +27,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: appLoader,
     errorElement: <ErrorComponent />,
     children: [
       {
         path: "/",
         element: <About />,
         loader: aboutPageNewsLoader,
-      },
-      {
-        path: "prijava",
-        element: <Auth />,
       },
       {
         path: "/profili",

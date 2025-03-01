@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Request.EducationalProfile;
@@ -44,6 +45,7 @@ using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,11 +60,6 @@ var configuration = builder.Configuration;
 
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
-
-builder
-    .Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -102,7 +99,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = ".localhost.com";
+    options.Cookie.Domain = "localhost";
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -121,13 +118,23 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "WebsitePolicy",
-        builder =>
+        policyBuilder =>
         {
-            builder
-                .WithOrigins("https://localhost.com", "https://admin.localhost.com")
-                .AllowCredentials()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            if (builder.Environment.IsDevelopment())
+                policyBuilder
+                    .WithOrigins("http://localhost:5173", "http://localhost:5174")
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            else
+                policyBuilder
+                    .WithOrigins(
+                        "https://ets-zemun.netlify.app",
+                        "https://admin.ets-zemun.netlify.app"
+                    )
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
         }
     );
 });
@@ -380,6 +387,26 @@ builder.Services.AddScoped<
 
 #endregion
 
+#region Rate limiting
+var tokenPolicy = "token";
+
+builder.Services.AddRateLimiter(x =>
+    x.AddTokenBucketLimiter(
+        policyName: tokenPolicy,
+        options =>
+        {
+            options.TokenLimit = 10;
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 15;
+            options.ReplenishmentPeriod = TimeSpan.FromSeconds(1);
+            options.TokensPerPeriod = 2;
+            options.AutoReplenishment = true;
+        }
+    )
+);
+
+#endregion
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -399,11 +426,12 @@ using (var scope = app.Services.CreateScope())
 var authGroup = app.MapGroup("/auth");
 authGroup.MapIdentityApi<IdentityUser>();
 
+app.UseRateLimiter();
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers().RequireRateLimiting(tokenPolicy);
 
 if (app.Environment.IsDevelopment())
 {

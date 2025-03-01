@@ -35,16 +35,32 @@ import EducationalProfiles from "./components/edu-profiles/edu-profiles";
 import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-loader";
 import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
 import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
+import appLoader from "./components/app/app-loader";
+import Auth from "./components/auth/auth";
+import Forbidden from "./components/forbidden/forbidden";
+import aboutLoader from "./components/about/about-loader";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: appLoader,
+    shouldRevalidate: () => false,
     errorElement: <ErrorComponent />,
+    hydrateFallbackElement: <div />,
     children: [
       {
         path: "/",
         element: <About />,
+        loader: aboutLoader,
+      },
+      {
+        path: "auth",
+        element: <Auth />,
+      },
+      {
+        path: "/forbidden",
+        element: <Forbidden />,
       },
       {
         path: "/vesti",

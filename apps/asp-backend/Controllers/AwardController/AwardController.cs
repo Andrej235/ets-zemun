@@ -9,7 +9,7 @@ namespace EtsZemun.Controllers.AwardController;
 
 [Route("award")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public class AwardController(IAwardService awardService) : ControllerBase
 {
     private readonly IAwardService awardService = awardService;

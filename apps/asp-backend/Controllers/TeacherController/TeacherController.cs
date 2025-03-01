@@ -10,7 +10,7 @@ namespace EtsZemun.Controllers.TeacherController;
 
 [Route("teacher")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public class TeacherController(ITeacherService teacherService) : ControllerBase
 {
     private readonly ITeacherService teacherService = teacherService;

@@ -10,7 +10,7 @@ namespace EtsZemun.Controllers.QualificationController;
 
 [Route("qualification")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public class QualificationController(IQualificationService qualificationService) : ControllerBase
 {
     private readonly IQualificationService qualificationService = qualificationService;
