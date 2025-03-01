@@ -126,6 +126,15 @@ builder.Services.AddCors(options =>
                     .AllowCredentials()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+            else
+                policyBuilder
+                    .WithOrigins(
+                        "https://ets-zemun.netlify.app",
+                        "https://admin.ets-zemun.netlify.app"
+                    )
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
         }
     );
 });
