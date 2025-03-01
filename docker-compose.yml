@@ -1,6 +1,6 @@
 services:
   website:
-    image: website
+    image: andrejnenadic/ets-zemun-website
     build:
       context: .
       dockerfile: apps/website/Dockerfile
@@ -14,7 +14,7 @@ services:
       - VITE_API_URL=http://localhost:5000
 
   admin-panel:
-    image: admin-panel
+    image: andrejnenadic/ets-zemun-admin-panel
     build:
       context: .
       dockerfile: apps/admin-panel/Dockerfile
@@ -28,7 +28,7 @@ services:
       - VITE_API_URL=http://localhost:5000
 
   asp-backend:
-    image: asp-backend
+    image: andrejnenadic/ets-zemun-backend
     volumes:
       - aspnet-data:/app/keys
     secrets:
