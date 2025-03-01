@@ -58,16 +58,17 @@ export default async function sendAPIRequest<
   const response = await fetch(url, requestInit);
   try {
     const responseBody = await response.json();
+    console.log("sendApiRequest", response, responseBody);
 
     return {
-      code: response.status,
+      code: response.status.toString(),
       content: responseBody,
     } as Response<Endpoint, T>;
   } catch (error) {
     console.error(error);
 
     return {
-      code: response.status,
+      code: response.status.toString(),
       content: null,
     } as Response<Endpoint, T>;
   }
