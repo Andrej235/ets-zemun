@@ -39,7 +39,7 @@ export default function FullAward() {
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    loaderData.then((x) => x.code === "OK" && setImage(x.content.image));
+    loaderData.then((x) => x.code === "200" && setImage(x.content.image));
   }, [loaderData]);
 
   async function handleImageChange(file: File | null) {
@@ -60,7 +60,7 @@ export default function FullAward() {
     isWaitingForResponse.current = true;
 
     const loadedAward = await loaderData;
-    if (loadedAward.code !== "OK") return;
+    if (loadedAward.code !== "200") return;
 
     const title =
       (titleRef.current?.value?.trim() ?? "") || loadedAward.content.title;
@@ -94,7 +94,7 @@ export default function FullAward() {
         },
       });
 
-      if (response.code !== "No Content") alert(response);
+      if (response.code !== "204") alert(response);
     }
 
     if (
@@ -121,8 +121,7 @@ export default function FullAward() {
         },
       });
 
-      if (response.code !== "No Content" && response.code !== "Created")
-        alert(response);
+      if (response.code !== "201" && response.code !== "204") alert(response);
 
       if (createTranslation) revalidate();
     }
@@ -138,14 +137,14 @@ export default function FullAward() {
       },
     });
 
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     navigate("/nagrade");
   }
 
   return (
     <Async await={loaderData}>
       {(data) => {
-        if (data.code !== "OK") return null;
+        if (data.code !== "200") return null;
         const award = data.content;
 
         return (

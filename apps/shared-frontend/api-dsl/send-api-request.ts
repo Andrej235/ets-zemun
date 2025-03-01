@@ -58,7 +58,6 @@ export default async function sendAPIRequest<
   const response = await fetch(url, requestInit);
   try {
     const responseBody = await response.json();
-    console.log("sendApiRequest", response, responseBody);
 
     return {
       code: response.status.toString(),

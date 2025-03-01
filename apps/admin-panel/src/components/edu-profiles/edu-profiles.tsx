@@ -47,7 +47,7 @@ export default function EducationalProfiles() {
       },
     });
 
-    if (response.code !== "Created") return;
+    if (response.code !== "201") return;
     isWaitingForResponse.current = false;
     revalidate();
   }
@@ -65,7 +65,7 @@ export default function EducationalProfiles() {
       },
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
     isWaitingForResponse.current = false;
     revalidate();
   }
@@ -84,7 +84,7 @@ export default function EducationalProfiles() {
         <TableBody>
           <Async await={loaderData}>
             {(data) => {
-              if (data.code !== "OK") return;
+              if (data.code !== "200") return;
               const profiles = data.content;
 
               return profiles.map((profile) => (

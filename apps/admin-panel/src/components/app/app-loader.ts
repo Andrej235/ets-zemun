@@ -9,13 +9,13 @@ const appLoader = async (args: LoaderFunctionArgs) => {
     method: "get",
   });
 
-  if (userStatus.code !== "OK") return redirect("/auth");
+  if (userStatus.code !== "200") return redirect("/auth");
 
   const adminStatus = await sendAPIRequest("/auth/admin", {
     method: "get",
   });
 
-  if (adminStatus.code !== "OK") return redirect("/forbidden");
+  if (adminStatus.code !== "200") return redirect("/forbidden");
 
   return null;
 };

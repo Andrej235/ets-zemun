@@ -50,7 +50,7 @@ export default function FullEducationalProfile() {
   useEffect(() => {
     async function setInitialState() {
       const profileData = await loaderData.profile;
-      if (profileData.code !== "OK") return;
+      if (profileData.code !== "200") return;
       const profile = profileData.content;
 
       const years = Array.from([
@@ -127,7 +127,7 @@ export default function FullEducationalProfile() {
     isWaitingForResponse.current = true;
 
     const profile = await loaderData.profile;
-    if (profile.code !== "OK") return;
+    if (profile.code !== "200") return;
 
     const name =
       (nameInputRef.current?.value?.trim() ?? "") || profile.content.name;
@@ -162,7 +162,7 @@ export default function FullEducationalProfile() {
       },
     });
 
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     isWaitingForResponse.current = false;
   }
 
@@ -213,7 +213,7 @@ export default function FullEducationalProfile() {
 
   useEffect(() => {
     loaderData.subjects.then((x) =>
-      setSubjects(x.code === "OK" ? x.content.items : [])
+      setSubjects(x.code === "200" ? x.content.items : [])
     );
   }, [loaderData.subjects]);
 
@@ -230,7 +230,7 @@ export default function FullEducationalProfile() {
       },
     });
 
-    if (newResponse.code !== "OK") return;
+    if (newResponse.code !== "200") return;
     currentPage.current++;
     isWaitingForResponse.current = false;
     setSubjects([...subjects, ...newResponse.content.items]);
@@ -249,7 +249,7 @@ export default function FullEducationalProfile() {
       },
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
     isWaitingForResponse.current = false;
     navigate("/profili");
   }
@@ -258,7 +258,7 @@ export default function FullEducationalProfile() {
     <div className="flex flex-col gap-16 p-16">
       <Async await={loaderData.profile}>
         {(profile) => {
-          if (profile.code !== "OK") return;
+          if (profile.code !== "200") return;
 
           return (
             <div className="flex justify-between">

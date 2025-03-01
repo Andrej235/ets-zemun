@@ -54,7 +54,7 @@ export default function Languages() {
       },
     });
 
-    if (response.code !== "Created") return;
+    if (response.code !== "201") return;
 
     codeInputRef.current.value = "";
     nameInputRef.current.value = "";
@@ -74,7 +74,7 @@ export default function Languages() {
       payload: updatedLanguage,
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
 
     revalidate();
     waitingForRequest.current = false;
@@ -91,7 +91,7 @@ export default function Languages() {
       },
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
     revalidate();
     waitingForRequest.current = false;
   }
@@ -100,7 +100,7 @@ export default function Languages() {
     <div className="p-10">
       <Async await={loaderData}>
         {(data) => {
-          if (data.code !== "OK") return null;
+          if (data.code !== "200") return null;
 
           return (
             <Table>

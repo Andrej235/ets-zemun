@@ -46,7 +46,7 @@ export async function recursivelyLazyLoad<T>(
     !newResponse ||
     !("code" in newResponse) ||
     !("content" in newResponse) ||
-    newResponse.code !== "OK"
+    newResponse.code !== "200"
   )
     return null;
 

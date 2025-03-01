@@ -42,14 +42,14 @@ export default function FullTeacher() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     navigate("/nastavnici");
   }
 
   const [image, setImage] = useState<string>("");
   const changedImage = useRef(false);
   useEffect(() => {
-    teacherLoaderData.then((x) => x.code === "OK" && setImage(x.content.image));
+    teacherLoaderData.then((x) => x.code === "200" && setImage(x.content.image));
   }, [teacherLoaderData]);
 
   async function handleImageChange(file: File | null) {
@@ -79,7 +79,7 @@ export default function FullTeacher() {
       return;
 
     const loaderDataResponse = await teacherLoaderData;
-    if (loaderDataResponse.code !== "OK") return;
+    if (loaderDataResponse.code !== "200") return;
 
     const loadedTeacher = loaderDataResponse.content;
 
@@ -109,7 +109,7 @@ export default function FullTeacher() {
         },
       });
 
-      if (response.code !== "Created" && response.code !== "No Content")
+      if (response.code !== "201" && response.code !== "204")
         alert(response);
     }
 
@@ -125,7 +125,7 @@ export default function FullTeacher() {
         },
       });
 
-      if (response.code !== "No Content") alert(response);
+      if (response.code !== "204") alert(response);
     }
   }
 
@@ -138,7 +138,7 @@ export default function FullTeacher() {
     isWaitingForResponse.current = true;
 
     const teacher = await teacherLoaderData;
-    if (teacher.code !== "OK") return;
+    if (teacher.code !== "200") return;
 
     const response = await sendAPIRequest("/qualification", {
       method: "post",
@@ -155,7 +155,7 @@ export default function FullTeacher() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "Created") alert(response);
+    if (response.code !== "201") alert(response);
     revalidate();
   }
 
@@ -173,7 +173,7 @@ export default function FullTeacher() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     revalidate();
   }
 
@@ -207,7 +207,7 @@ export default function FullTeacher() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content" && response.code !== "Created")
+    if (response.code !== "204" && response.code !== "201")
       alert(response);
     revalidate();
   }
@@ -219,7 +219,7 @@ export default function FullTeacher() {
     isWaitingForResponse.current = true;
 
     const teacher = await teacherLoaderData;
-    if (teacher.code !== "OK") return;
+    if (teacher.code !== "200") return;
 
     const response = await sendAPIRequest(
       "/teacher/{teacherId}/subject/{subjectId}",
@@ -233,7 +233,7 @@ export default function FullTeacher() {
     );
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     revalidate();
   }
 
@@ -244,7 +244,7 @@ export default function FullTeacher() {
 
   useEffect(() => {
     teacherLoaderData.then((x) => {
-      if (x.code !== "OK") return;
+      if (x.code !== "200") return;
       const initial = x.content.subjects.map((x) => x.id);
       setInitialSubjects(initial);
       setSelectedSubjects(initial);
@@ -257,7 +257,7 @@ export default function FullTeacher() {
 
     subjectsLoaderData.then((x) => {
       isWaitingForResponse.current = false;
-      setCurrentPage(x.code === "OK" ? x.content.items : []);
+      setCurrentPage(x.code === "200" ? x.content.items : []);
     });
   }, [subjectsLoaderData]);
 
@@ -274,7 +274,7 @@ export default function FullTeacher() {
       },
     }).then(async (x) => {
       setCurrentPage(
-        (prev) => prev?.concat(x.code === "OK" ? x.content.items : []) ?? []
+        (prev) => prev?.concat(x.code === "200" ? x.content.items : []) ?? []
       );
       setPageCount(pageCount + 1);
       isWaitingForResponse.current = false;
@@ -286,7 +286,7 @@ export default function FullTeacher() {
 
   async function saveSelectedSubjectsChanges() {
     const teacherData = await teacherLoaderData;
-    if (teacherData.code !== "OK") return;
+    if (teacherData.code !== "200") return;
 
     const teacherId = teacherData.content.id;
     const promises: Promise<{
@@ -322,7 +322,7 @@ export default function FullTeacher() {
     const responses = await Promise.all(promises);
 
     responses.forEach((x) => {
-      if (x.code !== "No Content" && x.code !== "Created") alert(x);
+      if (x.code !== "204" && x.code !== "201") alert(x);
     });
 
     setInitialSubjects(selectedSubjects);
@@ -332,7 +332,7 @@ export default function FullTeacher() {
   return (
     <Async await={teacherLoaderData}>
       {(data) => {
-        if (data.code !== "OK") return null;
+        if (data.code !== "200") return null;
         const teacher = data.content;
 
         return (
