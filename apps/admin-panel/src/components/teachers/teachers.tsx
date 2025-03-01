@@ -56,14 +56,14 @@ export default function Teachers() {
       },
     });
 
-    if (response.code !== "Created") alert(response);
+    if (response.code !== "201") alert(response);
     else revalidate();
   }
 
   return (
     <div className="flex min-w-full min-h-full justify-center">
       <div className="h-full w-2/3 max-h-full grid grid-cols-3 grid-flow-row gap-8 p-8 rounded-lg">
-        <LazyAwaitedList data={loaderData} success="OK">
+        <LazyAwaitedList data={loaderData} success="200">
           {(x) => (
             <Button
               key={x.id}

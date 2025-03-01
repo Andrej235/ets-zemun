@@ -148,7 +148,7 @@ export default function About() {
             <div className="news-container">
               <Async await={loaderData}>
                 {(news) => {
-                  if (news.code !== "OK") return null;
+                  if (news.code !== "200") return null;
 
                   return news.content.items.map((x) => (
                     <NewsPreview key={x.id} news={x} />

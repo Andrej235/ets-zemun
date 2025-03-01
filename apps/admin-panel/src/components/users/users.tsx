@@ -51,7 +51,7 @@ export default function Users() {
     setCurrentPage(
       loaderData.then((x) => {
         isWaitingForResponse.current = false;
-        return x.code === "OK" ? x.content.items : [];
+        return x.code === "200" ? x.content.items : [];
       })
     );
   }, [loaderData]);
@@ -68,7 +68,7 @@ export default function Users() {
       },
     }).then((x) => {
       isWaitingForResponse.current = false;
-      return x.code === "OK" ? x.content.items : [];
+      return x.code === "200" ? x.content.items : [];
     });
 
     setCurrentPage(response);
@@ -87,7 +87,7 @@ export default function Users() {
       },
     }).then((x) => {
       isWaitingForResponse.current = false;
-      return x.code === "OK" ? x.content.items : [];
+      return x.code === "200" ? x.content.items : [];
     });
 
     setCurrentPage(response);
@@ -137,7 +137,7 @@ export default function Users() {
     const responses = await Promise.all(roleChanges.map((x) => x.change()));
 
     for (const response of responses) {
-      if (response.code !== "No Content") {
+      if (response.code !== "204") {
         console.log(response);
         alert(response);
       }
@@ -159,7 +159,7 @@ export default function Users() {
       },
     });
 
-    if (response.code !== "No Content") {
+    if (response.code !== "204") {
       console.log(response);
       alert(response);
     }

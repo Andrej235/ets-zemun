@@ -39,7 +39,7 @@ export default function Auth() {
       },
     });
 
-    if (response.code !== "OK") {
+    if (response.code !== "200") {
       isWaitingForResponse.current = false;
       return;
     }
@@ -58,7 +58,7 @@ export default function Auth() {
     });
 
     isWaitingForResponse.current = false;
-    if (loginResponse.code !== "OK") return;
+    if (loginResponse.code !== "200") return;
     revalidator.revalidate();
     navigate("/");
   }
@@ -89,7 +89,7 @@ export default function Auth() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "OK") return;
+    if (response.code !== "200") return;
     revalidator.revalidate();
     navigate("/");
   }

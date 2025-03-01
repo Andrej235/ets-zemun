@@ -30,13 +30,13 @@ export default function FullNewsArticle() {
       },
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
 
     navigate("/vesti");
   }
 
   useLazyLoad(
-    loaderData.then((x) => (x.code === "OK" ? x.content.images : null)),
+    loaderData.then((x) => (x.code === "200" ? x.content.images : null)),
     (x) => {
       if (!containerRef.current) return;
 
@@ -53,7 +53,7 @@ export default function FullNewsArticle() {
   return (
     <Async await={loaderData}>
       {(news) => {
-        if (news.code !== "OK") return null;
+        if (news.code !== "200") return null;
 
         return (
           <div className="max-w-full h-max flex flex-col gap-8 justify-center items-center">
@@ -86,7 +86,7 @@ export default function FullNewsArticle() {
                     }
                   );
 
-                  if (response.code !== "No Content") return;
+                  if (response.code !== "204") return;
                   navigate(0);
                 }}
               >

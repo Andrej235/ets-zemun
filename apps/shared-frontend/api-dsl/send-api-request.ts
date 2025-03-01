@@ -60,14 +60,14 @@ export default async function sendAPIRequest<
     const responseBody = await response.json();
 
     return {
-      code: response.statusText,
+      code: response.status.toString(),
       content: responseBody,
     } as Response<Endpoint, T>;
   } catch (error) {
     console.error(error);
 
     return {
-      code: response.statusText,
+      code: response.status.toString(),
       content: null,
     } as Response<Endpoint, T>;
   }

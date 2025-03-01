@@ -44,7 +44,7 @@ export default function FullSubject() {
         },
       });
 
-      if (response.code !== "Created") alert(response);
+      if (response.code !== "201") alert(response);
       return;
     }
 
@@ -58,7 +58,7 @@ export default function FullSubject() {
       },
     });
 
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
   }
 
   const [initialTeachers, setInitialTeachers] = useState<number[]>([]);
@@ -68,7 +68,7 @@ export default function FullSubject() {
   useEffect(() => {
     loaderData.subject.then((x) => {
       const initialTeachers =
-        x.code === "OK" ? x.content.teachers.items.map((x) => x.id) : [];
+        x.code === "200" ? x.content.teachers.items.map((x) => x.id) : [];
       setInitialTeachers(initialTeachers);
       setSelectedTeachers(initialTeachers);
     });
@@ -116,7 +116,7 @@ export default function FullSubject() {
 
     loaderData.teachers.then((x) => {
       isLoadingData.current = false;
-      setCurrentPage(x.code === "OK" ? x.content.items : []);
+      setCurrentPage(x.code === "200" ? x.content.items : []);
     });
   }, [loaderData]);
 
@@ -133,7 +133,7 @@ export default function FullSubject() {
       },
     }).then(async (x) => {
       setCurrentPage(
-        (prev) => prev?.concat(x.code === "OK" ? x.content.items : []) ?? []
+        (prev) => prev?.concat(x.code === "200" ? x.content.items : []) ?? []
       );
       setPageCount(pageCount + 1);
       isLoadingData.current = false;
@@ -150,7 +150,7 @@ export default function FullSubject() {
 
           <Async await={loaderData.translations.sr}>
             {(data) => {
-              if (data.code !== "OK") return null;
+              if (data.code !== "200") return null;
 
               return (
                 <div className="flex gap-4">
@@ -187,7 +187,7 @@ export default function FullSubject() {
 
           <Async await={loaderData.translations.sr_lt}>
             {(data) => {
-              if (data.code !== "OK") return null;
+              if (data.code !== "200") return null;
 
               return (
                 <div className="flex gap-4">
@@ -227,7 +227,7 @@ export default function FullSubject() {
 
           <Async await={loaderData.translations.en}>
             {(data) => {
-              if (data.code !== "OK") return null;
+              if (data.code !== "200") return null;
 
               return (
                 <div className="flex gap-4">
@@ -263,7 +263,7 @@ export default function FullSubject() {
 
         <Async await={loaderData.subject}>
           {(data) => {
-            if (data.code !== "OK") return null;
+            if (data.code !== "200") return null;
 
             const teachers = data.content.teachers;
             console.log(teachers.nextCursor);

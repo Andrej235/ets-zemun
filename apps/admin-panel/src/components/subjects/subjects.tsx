@@ -53,7 +53,7 @@ export default function Subjects() {
     setCurrentPage(
       loaderData.then((x) => {
         isLoadingData.current = false;
-        return x.code === "OK" ? x.content.items : [];
+        return x.code === "200" ? x.content.items : [];
       })
     );
   }, [loaderData]);
@@ -71,7 +71,7 @@ export default function Subjects() {
       },
     }).then((x) => {
       isLoadingData.current = false;
-      return x.code === "OK" ? x.content.items : [];
+      return x.code === "200" ? x.content.items : [];
     });
 
     setCurrentPage(response);
@@ -91,7 +91,7 @@ export default function Subjects() {
       },
     }).then((x) => {
       isLoadingData.current = false;
-      return x.code === "OK" ? x.content.items : [];
+      return x.code === "200" ? x.content.items : [];
     });
 
     setCurrentPage(response);
@@ -117,7 +117,7 @@ export default function Subjects() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     else alert("Uspesno izmenjen predmet");
   }
 
@@ -133,7 +133,7 @@ export default function Subjects() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code !== "No Content") alert(response);
+    if (response.code !== "204") alert(response);
     else revalidate();
   }
 
@@ -153,7 +153,7 @@ export default function Subjects() {
     });
 
     isWaitingForResponse.current = false;
-    if (response.code === "Created") {
+    if (response.code === "201") {
       setIsCreationPopoverOpen(false);
       revalidate();
     } else alert(response);

@@ -30,7 +30,7 @@ export default function EditNewsArticle({
   return (
     <Async await={loaderData}>
       {(data) => {
-        if (data.preview.code !== "OK" || data.full.code !== "OK") return null;
+        if (data.preview.code !== "200" || data.full.code !== "200") return null;
 
         return (
           <Editor
@@ -135,7 +135,7 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
         payload: newsPayload,
       });
 
-      if (newsResponse.code !== "No Content") return;
+      if (newsResponse.code !== "204") return;
     }
 
     const translationPayload:
@@ -154,7 +154,7 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
       payload: translationPayload as never,
     });
 
-    if (translationResponse.code !== "No Content") return;
+    if (translationResponse.code !== "204") return;
 
     const previews = localStorage.getItem(`editor-previews-${i18n.language}`);
     const previewsData = previews ? JSON.parse(previews) : {};

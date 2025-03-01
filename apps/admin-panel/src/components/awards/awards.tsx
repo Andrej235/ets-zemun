@@ -70,13 +70,13 @@ export function Awards() {
       },
     });
 
-    if (response.code !== "Created") return;
+    if (response.code !== "201") return;
     revalidate();
   }
 
   return (
     <div className="awards-list pt-16!">
-      <LazyAwaitedList data={loaderData} success="OK">
+      <LazyAwaitedList data={loaderData} success="200">
         {(x) => <AwardsCard award={x} key={x.id} />}
       </LazyAwaitedList>
 

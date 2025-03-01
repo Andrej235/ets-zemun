@@ -61,7 +61,7 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
         {fullSubject && (
           <Async await={fullSubject}>
             {(response) => {
-              if (response.code !== "OK") return null;
+              if (response.code !== "200") return null;
 
               return (
                 <div className="teachers">

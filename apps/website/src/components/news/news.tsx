@@ -13,7 +13,7 @@ export default function News() {
       <div className="articles-container">
         <LazyAwaitedList
           data={loaderData}
-          success="OK"
+          success="200"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
             <div className="news-article-preview skeleton" key={"skeleton_" + i}></div>
           ))}

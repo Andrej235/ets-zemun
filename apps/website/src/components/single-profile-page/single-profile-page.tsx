@@ -185,7 +185,7 @@ export default function SingleProfilePage() {
       <div className="subjects-container">
         <Async await={loaderData}>
           {(response) => {
-            if (response.code !== "OK") return null;
+            if (response.code !== "200") return null;
 
             const subjects = response.content;
 

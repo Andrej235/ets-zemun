@@ -61,7 +61,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
       !newResponse ||
       !("code" in newResponse) ||
       !("content" in newResponse) ||
-      newResponse.code !== "OK"
+      newResponse.code !== "200"
     )
       return null;
 

@@ -10,7 +10,7 @@ export default function FullNewsArticle() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLazyLoad(
-    loaderData.then((x) => (x.code === "OK" ? x.content.images : null)),
+    loaderData.then((x) => (x.code === "200" ? x.content.images : null)),
     (x) => {
       if (!containerRef.current) return;
 
@@ -27,7 +27,7 @@ export default function FullNewsArticle() {
   return (
     <Async await={loaderData}>
       {(data) => {
-        if (data.code !== "OK") return null;
+        if (data.code !== "200") return null;
 
         return (
           <div

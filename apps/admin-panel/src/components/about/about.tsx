@@ -13,7 +13,7 @@ export default function About() {
       method: "delete",
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
     navigate("/auth");
   }
 
