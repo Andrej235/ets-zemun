@@ -130,7 +130,7 @@ builder.Services.AddCors(options =>
                 policyBuilder
                     .WithOrigins(
                         "https://ets-zemun.netlify.app",
-                        "https://admin.ets-zemun.netlify.app"
+                        "https://admin-ets-zemun.netlify.app"
                     )
                     .AllowCredentials()
                     .AllowAnyMethod()
