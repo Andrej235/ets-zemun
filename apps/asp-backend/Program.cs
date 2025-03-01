@@ -61,11 +61,6 @@ var configuration = builder.Configuration;
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 
-builder
-    .Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    .SetApplicationName("EtsZemun");
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
