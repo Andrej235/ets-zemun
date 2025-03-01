@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
@@ -8,15 +8,34 @@ import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 
 export default function Students() {
-  const [activeSection, setActiveSection] =
-    useState<string>("ucenicki-parlament");
   const { t } = useTranslation();
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [searchParams] = useSearchParams();
+  const searchKey = searchParams.get("searchKey");
+
+  const sections = [
+    { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
+    { id: "savet-roditelja", component: <StudentsPageParentParliament /> },
+    { id: "vanredni-ucenici", component: <StudentsPagePartTime /> },
+    { id: "pp-sluzba", component: <StudentsPagePPService /> },
+    { id: "nasilje", component: <StudentsPageAntiBullying /> },
+    { id: "mentalno-zdravlje", component: <StudentsPageMentalHealth /> },
+  ];
+
+  useEffect(() => {
+    if (searchKey) {
+      setActiveSection(searchKey);
+    }
+  }, [searchKey]);
 
   const handleCardClick = (sectionName: string) => {
     setActiveSection(sectionName);
   };
+
+  const activeComponent = sections.find(section => section.id === activeSection)?.component;
 
   return (
     <div className="students-page-container">
@@ -79,18 +98,8 @@ export default function Students() {
       </section>
 
       <div className="content-container">
-        {activeSection === "ucenicki-parlament" && (
-          <StudentsPageStudentParliament />
-        )}
-        {activeSection === "savet-roditelja" && (
-          <StudentsPageParentParliament />
-        )}
-        {activeSection === "vanredni-ucenici" && <StudentsPagePartTime />}
-        {activeSection === "pp-sluzba" && <StudentsPagePPService />}
-        {activeSection === "nasilje" && <StudentsPageAntiBullying />}
-        {activeSection === "mentalno-zdravlje" && <StudentsPageMentalHealth />}
+        {activeComponent}
       </div>
     </div>
   );
 }
-

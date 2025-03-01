@@ -58,6 +58,42 @@
       "url": "/ucenici"
     },
     {
+      "id": "ucenicki-parlament",
+      "keywords": ["ucenicki parlament", "ucenicki", "parlament"],
+      "title": "Ucenicki parlament",
+      "url": "/ucenici?searchKey=ucenicki-parlament"
+    },
+    {
+      "id": "savet-roditelja",
+      "keywords": ["savet roditelja", "savet", "roditelja"],
+      "title": "Savet roditelja",
+      "url": "/ucenici?searchKey=savet-roditelja"
+    },
+    {
+      "id": "vanredni-ucenici",
+      "keywords": ["vanredni ucenici", "vanredni", "ucenici"],
+      "title": "Vanredni ucenici",
+      "url": "/ucenici?searchKey=vanredni-ucenici"
+    },
+    {
+      "id": "pp-sluzba",
+      "keywords": ["pp sluzba", "pp", "sluzba", "psiholosko-pedagoska sluzba"],
+      "title": "PP služba",
+      "url": "/ucenici?searchKey=pp-sluzba"
+    },
+    {
+      "id": "nasilje",
+      "keywords": ["nasilje"],
+      "title": "Nasilje",
+      "url": "/ucenici?searchKey=nasilje"
+    },
+    {
+      "id": "mentalno-zdravlje",
+      "keywords": ["mentalno zdravlje", "mentalno", "zdravlje"],
+      "title": "Mentalno Zdravlje",
+      "url": "/ucenici?searchKey=mentalno-zdravlje"
+    },
+    {
       "id": "obrazovni-profili",
       "keywords": [
         "obrazovni profili",
