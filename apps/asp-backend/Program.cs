@@ -43,7 +43,6 @@ using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -99,7 +98,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = "localhost";
+    options.Cookie.Domain = null;
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -130,7 +129,7 @@ builder.Services.AddCors(options =>
                 policyBuilder
                     .WithOrigins(
                         "https://ets-zemun.netlify.app",
-                        "https://admin.ets-zemun.netlify.app"
+                        "https://admin-ets-zemun.netlify.app"
                     )
                     .AllowCredentials()
                     .AllowAnyMethod()
