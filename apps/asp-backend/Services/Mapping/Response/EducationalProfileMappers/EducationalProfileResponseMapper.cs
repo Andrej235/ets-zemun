@@ -27,6 +27,7 @@ public class EducationalProfileResponseMapper(
         new()
         {
             Id = from.Id,
+            Name = from.Name,
             GeneralSubjects = [.. from.GeneralSubjects.Select(generalSubjectMapper.Map)],
             VocationalSubjects = [.. from.VocationalSubjects.Select(vocationalSubjectMapper.Map)],
         };

@@ -46,13 +46,15 @@
       }
     }
 
-    @media screen and (max-width: 1350px) {
+    @media screen and (max-width: 1148px) {
       grid-template-columns: 1fr;
       grid-template-rows: max-content max-content;
     }
 
-    @media screen and (max-width: 1075px) {
-      display: block;
+    @media screen and (max-width: 570px) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: center;
 
       .about {
         display: none;
@@ -60,12 +62,17 @@
 
       .contact {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, max-content);
+        width: 90%;
+        height: max-content;
+        max-width: 27rem;
 
         h1 {
           grid-row: 1;
           grid-column: 1;
           grid-column-end: 2;
+
+          display: flex;
+          justify-content: center;
         }
       }
     }
@@ -76,9 +83,8 @@
     border-top: 1px solid $accent-secondary;
     padding-top: 2rem;
 
-    display: grid;
-    grid-template-columns: max-content 1fr max-content;
-    grid-template-areas: "copy credits links";
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 1.5rem;
 
@@ -89,54 +95,6 @@
       justify-content: center;
       gap: 1.5rem;
       max-width: 100%;
-
-      .auth-button {
-        position: relative;
-        width: 10rem;
-        height: 4rem;
-        background-color: $accent;
-        border-radius: 25rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 0.3s background-color;
-
-        p {
-          transition: 0.3s;
-          font-size: 1.6rem;
-          font-weight: 500;
-        }
-
-        .button-icon {
-          position: absolute;
-          right: 2rem;
-          opacity: 0;
-          transition: 0.3s;
-          font-size: 1.6rem;
-          color: black;
-        }
-
-        &:hover {
-          background-color: white;
-          color: black;
-
-          p {
-            transform: translateX(-1rem);
-          }
-
-          .button-icon {
-            right: 1rem;
-            opacity: 1;
-          }
-        }
-      }
-
-      .username {
-        display: grid;
-        place-items: center;
-        max-width: 100%;
-        word-wrap: break-word;
-      }
 
       a {
         place-items: center;
@@ -151,27 +109,17 @@
       }
     }
 
-    .copy {
-      grid-area: copy;
-
+    .copy-container {
       display: flex;
-      align-items: center;
-      gap: 10rem;
 
-      font-size: 1.5rem;
-    }
+      .copy {
+        grid-area: copy;
 
-    .credits {
-      grid-area: credits;
-      min-width: max-content;
-      margin-right: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10rem;
 
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      a {
-        place-items: center;
+        font-size: 1.5rem;
       }
 
       .separator {
@@ -180,15 +128,35 @@
         width: 3px;
         background-color: $accent-secondary;
       }
+
+      .credits {
+        grid-area: credits;
+        min-width: max-content;
+        margin-right: 1rem;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        a {
+          place-items: center;
+        }
+      }
     }
 
-    @media screen and (max-width: 900px) {
-      grid-template-rows: max-content max-content;
-      grid-template-columns: 1fr max-content;
-      grid-template-areas: "credits credits" "copy links";
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
 
-      .credits :first-child {
-        display: none;
+    @media screen and (max-width: 600px) {
+      .copy-container {
+        flex-direction: column;
+        align-items: center;
+
+        .credits :first-child {
+          display: none;
+        }
       }
     }
 

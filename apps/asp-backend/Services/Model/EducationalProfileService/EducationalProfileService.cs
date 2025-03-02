@@ -21,7 +21,8 @@ public class EducationalProfileService(
     IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
-    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
+    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper,
+    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto> simpleResponseMapper
 ) : IEducationalProfileService
 {
     private readonly ICreateSingleService<EducationalProfile> createSingle = createSingle;
@@ -45,6 +46,10 @@ public class EducationalProfileService(
         EducationalProfile,
         EducationalProfileResponseDto
     > responseMapper = responseMapper;
+    private readonly IResponseMapper<
+        EducationalProfile,
+        SimpleEducationalProfileResponseDto
+    > simpleResponseMapper = simpleResponseMapper;
 
     public async Task<Result> Create(CreateEducationalProfileRequestDto request)
     {
@@ -57,7 +62,7 @@ public class EducationalProfileService(
         return deleteService.Delete(x => x.Id == id);
     }
 
-    public async Task<Result<IEnumerable<EducationalProfileResponseDto>>> GetAll(
+    public async Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
         string languageCode
     )
     {
@@ -75,8 +80,8 @@ public class EducationalProfileService(
         );
 
         return result.IsFailed
-            ? Result.Fail<IEnumerable<EducationalProfileResponseDto>>(result.Errors)
-            : Result.Ok(result.Value.Select(x => responseMapper.Map(x)));
+            ? Result.Fail<IEnumerable<SimpleEducationalProfileResponseDto>>(result.Errors)
+            : Result.Ok(result.Value.Select(simpleResponseMapper.Map));
     }
 
     public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode)

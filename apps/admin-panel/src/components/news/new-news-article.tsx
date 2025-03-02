@@ -160,7 +160,7 @@ export default function NewNewsArticle() {
       payload,
     });
 
-    if (response.code !== "No Content") return;
+    if (response.code !== "204") return;
 
     localStorage.removeItem("draft");
     localStorage.removeItem("preview");

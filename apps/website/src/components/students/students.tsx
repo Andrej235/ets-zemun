@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
 import StudentsPageParentParliament from "./students-page-parent-parliament";
@@ -7,11 +9,11 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
-import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router";
 
 export default function Students() {
   const { t } = useTranslation();
+
+  const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<string>("");
   const [searchParams] = useSearchParams();
   const searchKey = searchParams.get("searchKey");
@@ -107,7 +109,9 @@ export default function Students() {
         </div>
       </section>
 
-      <div className="content-container">{activeComponent}</div>
+      <div className="content-container" ref={contentContainerRef}>
+        {activeComponent}
+      </div>
     </div>
   );
 }

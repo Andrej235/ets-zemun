@@ -18,7 +18,6 @@ public class CreateAwardRequestMapper(
             Image = from.Image,
             ExternalLink = from.ExternalLink,
             DayOfAward = from.DayOfAward,
-            TeacherId = from.TeacherId,
             Translations = [translationMapper.Map(from.Translation)],
         };
 }

@@ -2,13 +2,17 @@ import * as path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import netlifyPlugin from "@netlify/vite-plugin-react-router";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), tsconfigPaths(), netlifyPlugin()],
   server: {
     host: true,
     port: 5174,
-    allowedHosts: ["admin.localhost.com"],
+    watch: {
+      usePolling: true,
+    },
   },
   resolve: {
     alias: {
@@ -29,6 +33,23 @@ export default defineConfig({
           @use "@styles/_palette.scss" as *;\n
           @use "@styles/_mixins.scss" as *;\n
        `,
+      },
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+
+          const match = /node_modules\/((?:@[^/]+\/)?[^/]+)/.exec(id);
+          const packageName = match?.[1];
+          if (!packageName) return;
+
+          if (packageName.includes("motion")) return "vendor-motion";
+
+          return "vendor";
+        },
       },
     },
   },

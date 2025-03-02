@@ -1,3 +1,4 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
 using EtsZemun.Errors;
@@ -9,7 +10,7 @@ namespace EtsZemun.Controllers.SubjectController;
 
 [Route("subject")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public partial class SubjectController(ISubjectService subjectService) : ControllerBase
 {
     private readonly ISubjectService subjectService = subjectService;
@@ -51,11 +52,13 @@ public partial class SubjectController(ISubjectService subjectService) : Control
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<SubjectResponseDto>>> GetAll(
-        [FromQuery] string languageCode
+    public async Task<ActionResult<LazyLoadResponse<SimpleSubjectResponseDto>>> GetAll(
+        [FromQuery] string languageCode,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit
     )
     {
-        var result = await subjectService.GetAll(languageCode);
+        var result = await subjectService.GetAll(languageCode, offset, limit);
 
         if (result.IsFailed)
             return BadRequest();

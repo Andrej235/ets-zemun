@@ -1,3 +1,4 @@
+using System.Threading.RateLimiting;
 using EtsZemun.Data;
 using EtsZemun.DTOs.Request.Award;
 using EtsZemun.DTOs.Request.EducationalProfile;
@@ -6,6 +7,7 @@ using EtsZemun.DTOs.Request.News;
 using EtsZemun.DTOs.Request.Qualification;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.DTOs.Response.Auth;
 using EtsZemun.DTOs.Response.Award;
 using EtsZemun.DTOs.Response.EducationalProfile;
 using EtsZemun.DTOs.Response.News;
@@ -31,6 +33,7 @@ using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
+using EtsZemun.Services.Mapping.Response.UserMappers;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
@@ -40,8 +43,8 @@ using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,11 +59,6 @@ var configuration = builder.Configuration;
 
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
-
-builder
-    .Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
-    .SetApplicationName("EtsZemun");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -100,7 +98,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = ".localhost.com";
+    options.Cookie.Domain = null;
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -119,13 +117,23 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "WebsitePolicy",
-        builder =>
+        policyBuilder =>
         {
-            builder
-                .WithOrigins("https://localhost.com", "https://admin.localhost.com")
-                .AllowCredentials()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            if (builder.Environment.IsDevelopment())
+                policyBuilder
+                    .WithOrigins("http://localhost:5173", "http://localhost:5174")
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            else
+                policyBuilder
+                    .WithOrigins(
+                        "https://ets-zemun.netlify.app",
+                        "https://admin-ets-zemun.netlify.app"
+                    )
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
         }
     );
 });
@@ -154,6 +162,7 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IReadSingleService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadRangeService<Subject>, ReadService<Subject>>();
+builder.Services.AddScoped<ICountService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<SubjectTranslation>,
     UpdateService<SubjectTranslation>
@@ -198,8 +207,8 @@ builder.Services.AddScoped<
 >();
 builder.Services.AddScoped<IResponseMapper<Teacher, TeacherResponseDto>, TeacherResponseMapper>();
 builder.Services.AddScoped<
-    IResponseMapper<Teacher, TeacherPreviewResponseDto>,
-    TeacherPreviewResponseMapper
+    IResponseMapper<Teacher, SimpleTeacherResponseDto>,
+    SimpleTeacherResponseMapper
 >();
 #endregion
 
@@ -279,6 +288,10 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto>,
     EducationalProfileResponseMapper
+>();
+builder.Services.AddScoped<
+    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto>,
+    SimpleEducationalProfilesResponseMapper
 >();
 builder.Services.AddScoped<
     IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
@@ -364,6 +377,33 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseMapper>();
 #endregion
 
+#region User
+builder.Services.AddScoped<
+    IResponseMapper<IdentityUser, FullUserResponseDto>,
+    FullUserResponseMapper
+>();
+#endregion
+
+#endregion
+
+#region Rate limiting
+var tokenPolicy = "token";
+
+builder.Services.AddRateLimiter(x =>
+    x.AddTokenBucketLimiter(
+        policyName: tokenPolicy,
+        options =>
+        {
+            options.TokenLimit = 10;
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 15;
+            options.ReplenishmentPeriod = TimeSpan.FromSeconds(1);
+            options.TokensPerPeriod = 2;
+            options.AutoReplenishment = true;
+        }
+    )
+);
+
 #endregion
 
 var app = builder.Build();
@@ -385,11 +425,12 @@ using (var scope = app.Services.CreateScope())
 var authGroup = app.MapGroup("/auth");
 authGroup.MapIdentityApi<IdentityUser>();
 
+app.UseRateLimiter();
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers().RequireRateLimiting(tokenPolicy);
 
 if (app.Environment.IsDevelopment())
 {

@@ -12,7 +12,4 @@ public class AwardResponseDto
     public string? Description { get; set; }
     public string Competition { get; set; } = null!;
     public string Student { get; set; } = null!;
-
-    public TeacherPreviewResponseDto? Teacher { get; set; }
-    public int? TeacherId { get; set; }
 }

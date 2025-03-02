@@ -40,12 +40,7 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Awards");
                 });
@@ -87,6 +82,10 @@ namespace EtsZemun.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -373,16 +372,6 @@ namespace EtsZemun.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("TeacherTranslations");
-                });
-
-            modelBuilder.Entity("EtsZemun.Models.Award", b =>
-                {
-                    b.HasOne("EtsZemun.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.AwardTranslation", b =>

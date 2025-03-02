@@ -14,7 +14,19 @@ public interface ITeacherService
         string languageCode,
         int? offset,
         int? limit,
-        int? subjectId
+        string? search
+    );
+    Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllSimple(
+        string languageCode,
+        int? offset,
+        int? limit,
+        string? search
+    );
+    Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllForSubject(
+        string languageCode,
+        int subjectId,
+        int? offset,
+        int? limit
     );
     Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode);
 

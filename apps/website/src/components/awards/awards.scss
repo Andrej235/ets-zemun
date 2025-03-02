@@ -117,6 +117,14 @@
         }
       }
     }
+
+    .skeleton {
+      cursor: default;
+
+      &::after {
+        display: none;
+      }
+    }
   }
 }
 

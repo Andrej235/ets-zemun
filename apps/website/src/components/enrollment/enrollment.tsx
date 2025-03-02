@@ -11,26 +11,32 @@ export default function Enrollment() {
       {
         name: t("enrollment.courses.0.name"),
         duration: t("enrollment.courses.0.duration"),
-        students: 90,
-        requiredPoints: 85,
+        students: 60,
+        requiredPoints: 80.04,
       },
       {
         name: t("enrollment.courses.1.name"),
         duration: t("enrollment.courses.1.duration"),
         students: 60,
-        requiredPoints: 78,
+        requiredPoints: 69.86,
       },
       {
         name: t("enrollment.courses.2.name"),
         duration: t("enrollment.courses.2.duration"),
         students: 30,
-        requiredPoints: 75,
+        requiredPoints: 66.86,
       },
       {
         name: t("enrollment.courses.3.name"),
         duration: t("enrollment.courses.3.duration"),
-        students: 45,
-        requiredPoints: 80,
+        students: 30,
+        requiredPoints: 70.69,
+      },
+      {
+        name: t("enrollment.courses.4.name"),
+        duration: t("enrollment.courses.4.duration"),
+        students: 30,
+        requiredPoints: 47.64,
       },
     ];
   }, [t]);

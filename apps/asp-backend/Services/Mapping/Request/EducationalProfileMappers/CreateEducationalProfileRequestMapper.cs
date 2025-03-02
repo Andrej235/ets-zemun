@@ -26,6 +26,7 @@ public class CreateEducationalProfileRequestMapper(
     public EducationalProfile Map(CreateEducationalProfileRequestDto from) =>
         new()
         {
+            Name = from.Name,
             GeneralSubjects = [.. from.GeneralSubjects.Select(g => generalSubjectMapper.Map(g))],
             VocationalSubjects =
             [

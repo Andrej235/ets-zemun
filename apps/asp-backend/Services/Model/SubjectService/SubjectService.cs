@@ -1,6 +1,6 @@
+using EtsZemun.DTOs;
 using EtsZemun.DTOs.Request.Subject;
 using EtsZemun.DTOs.Response.Subject;
-using EtsZemun.DTOs.Response.Teacher;
 using EtsZemun.Errors;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
@@ -19,12 +19,14 @@ public class SubjectService(
     ICreateSingleService<SubjectTranslation> createSingleTranslationService,
     IReadSingleService<Subject> readSingleService,
     IReadSingleSelectedService<Subject> readSingleSelectedService,
+    ICountService<Subject> countService,
     IReadRangeService<Subject> readRangeService,
     IExecuteUpdateService<SubjectTranslation> updateTranslationService,
     IDeleteService<Subject> deleteService,
     IDeleteService<SubjectTranslation> deleteTranslationService,
     IRequestMapper<CreateSubjectTranslationRequestDto, SubjectTranslation> createTranslationMapper,
     IResponseMapper<Subject, SubjectResponseDto> responseMapper,
+    IResponseMapper<Subject, SimpleSubjectResponseDto> simpleResponseMapper,
     HybridCache hybridCache
 ) : ISubjectService
 {
@@ -34,6 +36,7 @@ public class SubjectService(
     private readonly IReadSingleService<Subject> readSingleService = readSingleService;
     private readonly IReadSingleSelectedService<Subject> readSingleSelectedService =
         readSingleSelectedService;
+    private readonly ICountService<Subject> countService = countService;
     private readonly IReadRangeService<Subject> readRangeService = readRangeService;
     private readonly IExecuteUpdateService<SubjectTranslation> updateTranslationService =
         updateTranslationService;
@@ -45,6 +48,8 @@ public class SubjectService(
         SubjectTranslation
     > createTranslationMapper = createTranslationMapper;
     private readonly IResponseMapper<Subject, SubjectResponseDto> responseMapper = responseMapper;
+    private readonly IResponseMapper<Subject, SimpleSubjectResponseDto> simpleResponseMapper =
+        simpleResponseMapper;
     private readonly HybridCache hybridCache = hybridCache;
 
     public async Task<Result> Create(CreateSubjectRequestDto request)
@@ -103,57 +108,42 @@ public class SubjectService(
         );
     }
 
-    public async Task<Result<IEnumerable<SubjectResponseDto>>> GetAll(string languageCode)
+    public async Task<Result<LazyLoadResponse<SimpleSubjectResponseDto>>> GetAll(
+        string languageCode,
+        int? offset,
+        int? limit
+    )
     {
         if (string.IsNullOrWhiteSpace(languageCode))
-            return Result.Fail<IEnumerable<SubjectResponseDto>>(new BadRequest("Invalid request"));
+            return Result.Fail<LazyLoadResponse<SimpleSubjectResponseDto>>(
+                new BadRequest("Invalid request")
+            );
 
         var result = await readRangeService.Get(
             null,
-            null,
-            null,
+            offset,
+            limit,
             q =>
-                q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
-                    .ThenInclude(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
-                    .ThenInclude(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(t => t.Id)
         );
 
         if (result.IsFailed)
-            return Result.Fail<IEnumerable<SubjectResponseDto>>(result.Errors);
+            return Result.Fail<LazyLoadResponse<SimpleSubjectResponseDto>>(result.Errors);
 
-        var mapped = result.Value.Select(async subject =>
+        var mapped = result.Value.Select(simpleResponseMapper.Map);
+        var response = new LazyLoadResponse<SimpleSubjectResponseDto>
         {
-            var mapped = responseMapper.Map(subject);
-            mapped.Teachers.LoadedCount = subject.Teachers.Count;
-            mapped.Teachers.TotalCount = await hybridCache.GetOrCreateAsync(
-                $"subject-{subject.Id}-teachers-count",
-                async (_) =>
-                {
-                    var result = await readSingleSelectedService.Get(
-                        x => new { x.Teachers.Count },
-                        x => x.Id == subject.Id
-                    );
-
-                    var count = result.ValueOrDefault?.Count;
-                    return count ?? 0;
-                },
+            LoadedCount = result.Value.Count(),
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"subject-count",
+                async (_) => (await countService.Count(null)).Value,
                 new() { Expiration = TimeSpan.FromHours(6) }
-            );
-            mapped.Teachers.NextCursor =
-                mapped.Teachers.LoadedCount < 5
-                    ? null
-                    : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={subject.Id}";
+            ),
+            Items = mapped,
+        };
 
-            return mapped;
-        });
-
-        return Result.Ok((await Task.WhenAll(mapped)).AsEnumerable());
+        return Result.Ok(response);
     }
 
     public async Task<Result<SubjectResponseDto>> GetSingle(int id, string languageCode)
@@ -164,12 +154,12 @@ public class SubjectService(
         var result = await readSingleService.Get(
             x => x.Id == id,
             q =>
-                q.Include(x => x.Teachers.OrderBy(t => t.Id).Take(5))
+                q.Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Subjects)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
+                    .Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.Teachers)
+                    .Include(x => x.Teachers.OrderByDescending(t => t.Id).Take(5))
                     .ThenInclude(x => x.Qualifications)
                     .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
                     .Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
@@ -197,7 +187,7 @@ public class SubjectService(
         mapped.Teachers.NextCursor =
             mapped.Teachers.LoadedCount < 5
                 ? null
-                : $"teacher?languageCode={languageCode}&offset=5&limit=10&subjectId={mapped.Id}";
+                : $"teacher/simple/for-subject/{mapped.Id}?languageCode={languageCode}&offset=5&limit=10";
 
         return Result.Ok(mapped);
     }

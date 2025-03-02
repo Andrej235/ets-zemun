@@ -246,10 +246,6 @@
       "School Twitter account",
       "School Instagram account"
     ],
-    "login": {
-      "btn": "Login",
-      "as": "Logged in as"
-    },
     "credits": {
       "createdBy": "Made by:",
       "prefix": "Co-creator of this website",

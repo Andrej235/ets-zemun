@@ -20,7 +20,7 @@ export default function AllNews() {
   return (
     <div className="max-w-full h-max overflow-auto flex justify-center">
       <div className="w-max h-max p-10 grid grid-cols-3 gap-8 overflow-auto">
-        <LazyAwaitedList data={loaderData} success="OK">
+        <LazyAwaitedList data={loaderData} success="200">
           {(news) => (
             <NewsPreview
               approved={news.isApproved}

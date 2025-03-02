@@ -12,6 +12,5 @@ public class UpdateAwardRequestMapper : IRequestMapper<UpdateAwardRequestDto, Aw
             Image = from.Image,
             ExternalLink = from.ExternalLink,
             DayOfAward = from.DayOfAward,
-            TeacherId = from.TeacherId,
         };
 }
