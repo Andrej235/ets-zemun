@@ -906,6 +906,107 @@
       "description": "Registrujte se sa svojim ličnim podacima da biste koristili sve funkcije sajta",
       "button": "Registruj se"
     }
+  },
+  "searchKeys": {
+    "about": {
+      "keywords": ["o nama", "o školi"],
+      "title": "O Nama"
+    },
+    "missionAndVision": {
+      "keywords": ["misija", "vizija", "misija i vizija"],
+      "title": "Misija i Vizija"
+    },
+    "history": {
+      "keywords": ["istorija", "istorija škole"],
+      "title": "Istorija"
+    },
+    "teachers": {
+      "keywords": ["nastavnici", "nastavnici škole"],
+      "title": "Nastavnici"
+    },
+    "enrollment": {
+      "keywords": ["upis", "prijem", "upis i prijem"],
+      "title": "Upis i prijem"
+    },
+    "awards": {
+      "keywords": ["takmičenja", "nagrade", "takmičenja i nagrade"],
+      "title": "Takmičenja i nagrade"
+    },
+    "news": {
+      "keywords": ["novosti", "novosti škole", "događaji", "događanja"],
+      "title": "Novosti"
+    },
+    "students": {
+      "keywords": [
+        "učenici",
+        "vanredni učenici",
+        "učenički parlament",
+        "savet roditelja",
+        "pp služba",
+        "psihološko-pedagoška služba",
+        "nasilje",
+        "mentalno zdravlje"
+      ],
+      "title": "Učenici"
+    },
+    "studentsParliament": {
+      "keywords": ["učenički parlament", "učenici", "parlament"],
+      "title": "Učenički parlament"
+    },
+    "parentParliament": {
+      "keywords": ["savet roditelja", "savet", "roditelja"],
+      "title": "Savet roditelja"
+    },
+    "partTimeStundents": {
+      "keywords": ["vanredni učenici", "vanredni", "učenici"],
+      "title": "Vanredni učenici"
+    },
+    "ppService": {
+      "keywords": ["pp služba", "pp", "služba", "psihološko-pedagoška služba"],
+      "title": "PP služba"
+    },
+    "bullying": {
+      "keywords": ["nasilje"],
+      "title": "Nasilje"
+    },
+    "mentalHealth": {
+      "keywords": ["mentalno zdravlje", "mentalno", "zdravlje"],
+      "title": "Mentalno Zdravlje"
+    },
+    "educationProfiles": {
+      "keywords": [
+        "obrazovni profili",
+        "obrazovni",
+        "profili",
+        "profili škole"
+      ],
+      "title": "Obrazovni Profili"
+    },
+    "documents": {
+      "keywords": [
+        "dokumenta",
+        "dokumenta škole",
+        "organi upravljanja",
+        "organi",
+        "upravljanja",
+        "ponašanje i etika",
+        "ponašanje",
+        "etika",
+        "bezbednosni protokoli",
+        "bezbednosni",
+        "protokoli",
+        "finansijski menadžment",
+        "finansijski",
+        "menadžment",
+        "politika zaposlenih",
+        "politika",
+        "zaposlenih",
+        "instinktualna fondacija",
+        "instinktualna",
+        "fondacija"
+      ],
+      "title": "Dokumenta"
+    }
   }
 }
 
