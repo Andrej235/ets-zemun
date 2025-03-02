@@ -23,7 +23,15 @@ export default function Awards() {
   };
 
   return (
-    <div className="awards-pages">
+    <div
+      className="awards-pages"
+      searchKey={{
+        id: "takmicenja-i-nagrade",
+        keywords: "searchKey.awards.keywords",
+        title: "searchKey.awards.title",
+        url: "/takmicenja",
+      }}
+    >
       <h1>{t("awards.title")}</h1>
       <div className="awards-list">
         <LazyAwaitedList data={loaderData} success="OK">
@@ -42,7 +50,10 @@ export default function Awards() {
                   <h3>Ucenik: {" " + award.student}</h3>
                   {award.teacherId && (
                     <Link to={`/nastavnici/${award.teacherId}`}>
-                      <h3 className="teacher-link"> Nastavnik: {" " + award.teacher.name}</h3>
+                      <h3 className="teacher-link">
+                        {" "}
+                        Nastavnik: {" " + award.teacher.name}
+                      </h3>
                     </Link>
                   )}
                   {award.description && <p>{award.description}</p>}

@@ -2,7 +2,7 @@ declare global {
   type SearchKey = {
     id: string;
     title: string;
-    keywords: SearchKeyKeywords;
+    keywords: string;
     url: string;
   };
 

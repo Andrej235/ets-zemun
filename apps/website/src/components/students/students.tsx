@@ -35,10 +35,20 @@ export default function Students() {
     setActiveSection(sectionName);
   };
 
-  const activeComponent = sections.find(section => section.id === activeSection)?.component;
+  const activeComponent = sections.find(
+    (section) => section.id === activeSection
+  )?.component;
 
   return (
-    <div className="students-page-container">
+    <div
+      className="students-page-container"
+      searchKey={{
+        id: "ucenici",
+        keywords: "searchKey.students.keywords",
+        title: "searchKey.students.title",
+        url: "/ucenici",
+      }}
+    >
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
@@ -97,9 +107,8 @@ export default function Students() {
         </div>
       </section>
 
-      <div className="content-container">
-        {activeComponent}
-      </div>
+      <div className="content-container">{activeComponent}</div>
     </div>
   );
 }
+

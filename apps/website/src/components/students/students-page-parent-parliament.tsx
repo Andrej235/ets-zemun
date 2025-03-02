@@ -21,7 +21,15 @@ export default function StudentsPageParentParliament() {
   );
 
   return (
-    <div className="parliament-container">
+    <div
+      className="parliament-container"
+      searchKey={{
+        id: "savet-roditelja",
+        keywords: "searchKey.parentParliament.keywords",
+        title: "searchKey.parentParliament.title",
+        url: "/ucenici?searchKey=savet-roditelja",
+      }}
+    >
       <h1>{t("students.sections.parentParliament.title")}</h1>
 
       {parentData.map((gradeData) => (
