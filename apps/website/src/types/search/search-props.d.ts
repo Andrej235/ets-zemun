@@ -6,8 +6,6 @@ declare global {
     url: string;
   };
 
-  type SearchKeyKeywords = [string, ...string[]];
-
   namespace JSX {
     interface IntrinsicAttributes {
       searchKey?: SearchKey;

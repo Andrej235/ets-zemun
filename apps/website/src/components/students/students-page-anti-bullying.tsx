@@ -10,8 +10,8 @@ export default function StudentsPageAntiBullying() {
       searchKey={{
         id: "nasilje",
         keywords: "searchKeys.bullying.keywords",
-        title: "searchKeys.bullying.keywords",
-        url: "/ucenici?searchKey=nasilje",
+        title: "searchKeys.bullying.title",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.bullying.title")}</h1>

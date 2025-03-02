@@ -16,7 +16,6 @@ export default function Students() {
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] = useState<string>("");
   const [searchParams] = useSearchParams();
-  const searchKey = searchParams.get("searchKey");
 
   const sections = [
     { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
@@ -28,12 +27,15 @@ export default function Students() {
   ];
 
   useEffect(() => {
-    if (searchKey) {
-      setActiveSection(searchKey);
-    }
-  }, [searchKey]);
+    const searchKey = searchParams.get("searchKey");
+    if (!searchKey) return;
+
+    setActiveSection(searchKey);
+    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [searchParams]);
 
   const handleCardClick = (sectionName: string) => {
+    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     setActiveSection(sectionName);
   };
 
@@ -46,8 +48,8 @@ export default function Students() {
       className="students-page-container"
       searchKey={{
         id: "ucenici",
-        keywords: "searchKey.students.keywords",
-        title: "searchKey.students.title",
+        keywords: "searchKeys.students.keywords",
+        title: "searchKeys.students.title",
         url: "/ucenici",
       }}
     >

@@ -4,6 +4,7 @@ import { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import SearchEntry from "src/types/search/search-entry";
+import { useTranslation } from "react-i18next";
 
 type AutoCompleteSuggestions = {
   readonly containerRef: React.RefObject<HTMLDivElement>;
@@ -22,6 +23,7 @@ export default function AutoCompleteSuggestions({
   searchAutoComplete,
   onBeforeNavigate,
 }: AutoCompleteSuggestions) {
+  const { t } = useTranslation();
   const autoCompleteContainerRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
@@ -119,8 +121,8 @@ export default function AutoCompleteSuggestions({
                 className="search-bar-auto-complete-item"
                 key={result.item.id}
               >
-                <p className="title">{result.item.title}</p>
-                <p className="description">{result.item.title}</p>
+                <p className="title">{t(result.item.title)}</p>
+                <p className="description">{t(result.item.title)}</p>
               </a>
             ))
           ) : (

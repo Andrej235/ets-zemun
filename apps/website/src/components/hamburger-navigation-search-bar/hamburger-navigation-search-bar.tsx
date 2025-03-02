@@ -22,19 +22,20 @@ export default function HamburgerNavigationSearchBar({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const fuse = useMemo(
     () =>
       new Fuse(searchMap.entries as SearchEntry[], {
         keys: ["title", "keywords"],
+        getFn: (entry, path) => t(entry[path as keyof SearchEntry]),
       }),
-    []
+    [t]
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
     FuseResult<SearchEntry>[]
   >([]);
-
-  const { t } = useTranslation();
 
   return (
     <FocusTrap

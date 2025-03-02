@@ -10,7 +10,7 @@ export default function StudentsPagePPService() {
         id: "pp-sluzba",
         keywords: "searchKeys.ppService.keywords",
         title: "searchKeys.ppService.title",
-        url: "/ucenici?searchKey=pp-sluzba",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.ppService.title")}</h1>

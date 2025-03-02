@@ -873,33 +873,6 @@
       }
     }
   },
-  "auth": {
-    "signUp": {
-      "primary": "Create an Account",
-      "secondary": "or use your email for registration",
-      "namePlaceholder": "Name",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Password",
-      "button": "Sign Up"
-    },
-    "signIn": {
-      "primary": "Sign In",
-      "secondary": "or use your email and password",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Password",
-      "button": "Sign In"
-    },
-    "toggleLeft": {
-      "title": "Welcome Back!",
-      "description": "Enter your personal information to use all website features",
-      "button": "Sign In"
-    },
-    "toggleRight": {
-      "title": "Hi, Teacher!",
-      "description": "Register with your personal information to use all website features",
-      "button": "Sign Up"
-    }
-  },
   "searchKeys": {
     "about": {
       "keywords": ["about us", "about the school"],

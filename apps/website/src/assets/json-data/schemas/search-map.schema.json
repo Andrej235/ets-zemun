@@ -20,12 +20,8 @@
             "description": "Title of the resource"
           },
           "keywords": {
-            "type": "array",
-            "minLength": 1,
-            "items": {
-              "type": "string",
-              "description": "Keywords to match for"
-            }
+            "type": "string",
+            "description": "Keywords to match for"
           }
         },
         "required": ["url", "keywords", "title", "id"],

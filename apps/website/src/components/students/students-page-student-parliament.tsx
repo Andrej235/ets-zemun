@@ -25,9 +25,9 @@ export default function StudentsPageStudentParliament() {
       className="parliament-container"
       searchKey={{
         id: "ucenicki-parlament",
-        keywords: "searchKey.studentsParliament.keywords",
-        title: "searchKey.studentsParliament.title",
-        url: "/ucenici?searchKey=ucenicki-parlament",
+        keywords: "searchKeys.studentsParliament.keywords",
+        title: "searchKeys.studentsParliament.title",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.studentsParliament.title")}</h1>

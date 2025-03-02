@@ -9,8 +9,8 @@ export default function StudentsPageMentalHealth() {
       searchKey={{
         id: "mentalno-zdravlje",
         keywords: "searchKeys.mentalHealth.keywords",
-        title: "mentalHealth.title",
-        url: "/ucenici?searchKey=mentalno-zdravlje",
+        title: "searchKeys.mentalHealth.title",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.mentalHealth.title")}</h1>

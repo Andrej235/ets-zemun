@@ -54,7 +54,7 @@ export default function StudentsPagePartTime() {
         id: "vanredni-ucenici",
         keywords: "searchKeys.partTimeStundents.keywords",
         title: "searchKeys.partTimeStundents.title",
-        url: "/ucenici?searchKey=vanredni-ucenici",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.partTime.title")}</h1>

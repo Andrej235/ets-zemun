@@ -27,8 +27,8 @@ export default function Awards() {
       className="awards-pages"
       searchKey={{
         id: "takmicenja-i-nagrade",
-        keywords: "searchKey.awards.keywords",
-        title: "searchKey.awards.title",
+        keywords: "searchKeys.awards.keywords",
+        title: "searchKeys.awards.title",
         url: "/takmicenja",
       }}
     >
@@ -54,14 +54,6 @@ export default function Awards() {
 
                 <div className="content">
                   <h3>Ucenik: {" " + award.student}</h3>
-                  {award.teacherId && (
-                    <Link to={`/nastavnici/${award.teacherId}`}>
-                      <h3 className="teacher-link">
-                        {" "}
-                        Nastavnik: {" " + award.teacher.name}
-                      </h3>
-                    </Link>
-                  )}
                   {award.description && <p>{award.description}</p>}
                 </div>
               </div>

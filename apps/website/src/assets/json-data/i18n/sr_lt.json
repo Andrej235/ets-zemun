@@ -880,33 +880,6 @@
       }
     }
   },
-  "auth": {
-    "signUp": {
-      "primary": "Kreiraj Nalog",
-      "secondary": "ili koristite svoj email za registraciju",
-      "namePlaceholder": "Ime",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Lozinka",
-      "button": "Registruj se"
-    },
-    "signIn": {
-      "primary": "Prijavi se",
-      "secondary": "ili koristite svoj email i lozinku",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Lozinka",
-      "button": "Prijavi se"
-    },
-    "toggleLeft": {
-      "title": "Dobrodošli nazad!",
-      "description": "Unesite svoje lične podatke da biste koristili sve funkcije sajta",
-      "button": "Prijavi se"
-    },
-    "toggleRight": {
-      "title": "Zdravo, nastavniče!",
-      "description": "Registrujte se sa svojim ličnim podacima da biste koristili sve funkcije sajta",
-      "button": "Registruj se"
-    }
-  },
   "searchKeys": {
     "about": {
       "keywords": ["o nama", "o školi"],

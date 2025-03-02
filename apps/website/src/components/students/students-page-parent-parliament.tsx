@@ -25,9 +25,9 @@ export default function StudentsPageParentParliament() {
       className="parliament-container"
       searchKey={{
         id: "savet-roditelja",
-        keywords: "searchKey.parentParliament.keywords",
-        title: "searchKey.parentParliament.title",
-        url: "/ucenici?searchKey=savet-roditelja",
+        keywords: "searchKeys.parentParliament.keywords",
+        title: "searchKeys.parentParliament.title",
+        url: "/ucenici",
       }}
     >
       <h1>{t("students.sections.parentParliament.title")}</h1>
