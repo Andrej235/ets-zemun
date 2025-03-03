@@ -62,7 +62,8 @@
     }
   },
   "teachers": {
-    "title": "Teachers"
+    "title": "Teachers",
+    "subjects": "Subjects:"
   },
   "awards": {
     "title": "Competitions and Awards"
@@ -870,6 +871,112 @@
           "conclusion": "All factors — parents, teachers, peers, and the community as a whole — play an important role in creating a supportive environment for adolescents. Through open communication, active support, and resource availability, we can help young people feel accepted. By providing support and understanding, we create a space where adolescents can successfully manage challenges and develop their mental health."
         }
       }
+    }
+  },
+  "searchKeys": {
+    "about": {
+      "keywords": ["about us", "about the school"],
+      "title": "About Us"
+    },
+    "missionAndVision": {
+      "keywords": ["mission", "vision", "mission and vision"],
+      "title": "Mission and Vision"
+    },
+    "history": {
+      "keywords": ["history", "history of the school"],
+      "title": "History"
+    },
+    "teachers": {
+      "keywords": ["teachers", "teachers of the school"],
+      "title": "Teachers"
+    },
+    "enrollment": {
+      "keywords": ["enrollment", "admission", "enrollment and admission"],
+      "title": "Enrollment and Admission"
+    },
+    "awards": {
+      "keywords": ["competitions", "awards", "competitions and awards"],
+      "title": "Competitions and Awards"
+    },
+    "news": {
+      "keywords": ["news", "school news", "events", "happenings"],
+      "title": "News"
+    },
+    "students": {
+      "keywords": [
+        "students",
+        "part-time students",
+        "student parliament",
+        "parent council",
+        "pp service",
+        "psychological-pedagogical service",
+        "violence",
+        "mental health"
+      ],
+      "title": "Students"
+    },
+    "studentsParliament": {
+      "keywords": ["student parliament", "students", "parliament"],
+      "title": "Student Parliament"
+    },
+    "parentParliament": {
+      "keywords": ["parent council", "council", "parents"],
+      "title": "Parent Council"
+    },
+    "partTimeStundents": {
+      "keywords": ["part-time students", "part-time", "students"],
+      "title": "Part-Time Students"
+    },
+    "ppService": {
+      "keywords": [
+        "pp service",
+        "pp",
+        "service",
+        "psychological-pedagogical service"
+      ],
+      "title": "PP Service"
+    },
+    "bullying": {
+      "keywords": ["violence"],
+      "title": "Bullying"
+    },
+    "mentalHealth": {
+      "keywords": ["mental health", "mental", "health"],
+      "title": "Mental Health"
+    },
+    "educationProfiles": {
+      "keywords": [
+        "educational profiles",
+        "educational",
+        "profiles",
+        "school profiles"
+      ],
+      "title": "Educational Profiles"
+    },
+    "documents": {
+      "keywords": [
+        "documents",
+        "school documents",
+        "governing bodies",
+        "bodies",
+        "management",
+        "behavior and ethics",
+        "behavior",
+        "ethics",
+        "security protocols",
+        "security",
+        "protocols",
+        "financial management",
+        "financial",
+        "management",
+        "employment policy",
+        "policy",
+        "employees",
+        "instinctual foundation",
+        "instinctual",
+        "foundation"
+      ],
+      "title": "Documents"
     }
   }
 }

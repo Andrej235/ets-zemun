@@ -9,7 +9,15 @@ export default function News() {
   const loaderData = useLoader<typeof newsPageLoader>();
 
   return (
-    <div className="news-page-container">
+    <div
+      className="news-page-container"
+      searchKey={{
+        id: "novosti",
+        keywords: "searchKeys.news.keywords",
+        title: "searchKeys.news.title",
+        url: "/novosti",
+      }}
+    >
       <div className="articles-container">
         <LazyAwaitedList
           data={loaderData}

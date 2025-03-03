@@ -1,5 +1,7 @@
-import { useState, useRef } from "react";
 import HeroInfoCard from "@components/hero-info-card/hero-info-card";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
 import StudentsPageParentParliament from "./students-page-parent-parliament";
@@ -7,28 +9,50 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
-import { useTranslation } from "react-i18next";
 
 export default function Students() {
-  const [activeSection, setActiveSection] =
-    useState<string>("ucenicki-parlament");
   const { t } = useTranslation();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [searchParams] = useSearchParams();
+
+  const sections = [
+    { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
+    { id: "savet-roditelja", component: <StudentsPageParentParliament /> },
+    { id: "vanredni-ucenici", component: <StudentsPagePartTime /> },
+    { id: "pp-sluzba", component: <StudentsPagePPService /> },
+    { id: "nasilje", component: <StudentsPageAntiBullying /> },
+    { id: "mentalno-zdravlje", component: <StudentsPageMentalHealth /> },
+  ];
+
+  useEffect(() => {
+    const searchKey = searchParams.get("searchKey");
+    if (!searchKey) return;
+
+    setActiveSection(searchKey);
+    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [searchParams]);
 
   const handleCardClick = (sectionName: string) => {
+    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     setActiveSection(sectionName);
-
-    if (contentContainerRef.current) {
-      contentContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
   };
 
+  const activeComponent = sections.find(
+    (section) => section.id === activeSection
+  )?.component;
+
   return (
-    <div className="students-page-container">
+    <div
+      className="students-page-container"
+      searchKey={{
+        id: "ucenici",
+        keywords: "searchKeys.students.keywords",
+        title: "searchKeys.students.title",
+        url: "/ucenici",
+      }}
+    >
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">
@@ -88,16 +112,7 @@ export default function Students() {
       </section>
 
       <div className="content-container" ref={contentContainerRef}>
-        {activeSection === "ucenicki-parlament" && (
-          <StudentsPageStudentParliament />
-        )}
-        {activeSection === "savet-roditelja" && (
-          <StudentsPageParentParliament />
-        )}
-        {activeSection === "vanredni-ucenici" && <StudentsPagePartTime />}
-        {activeSection === "pp-sluzba" && <StudentsPagePPService />}
-        {activeSection === "nasilje" && <StudentsPageAntiBullying />}
-        {activeSection === "mentalno-zdravlje" && <StudentsPageMentalHealth />}
+        {activeComponent}
       </div>
     </div>
   );

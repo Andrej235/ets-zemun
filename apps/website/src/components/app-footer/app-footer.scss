@@ -159,6 +159,18 @@
         }
       }
     }
+
+    @media screen and (max-width: 500px){
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media screen and (max-width: 350px){
+      .social-media-links{
+        flex-direction: column;
+      }
+    }
   }
 }
 

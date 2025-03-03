@@ -62,7 +62,8 @@
     }
   },
   "teachers": {
-    "title": "Nastavnici"
+    "title": "Nastavnici",
+    "subjects": "Predmeti:"
   },
   "awards": {
     "title": "Takmicenja i nagrade"
@@ -877,6 +878,211 @@
           "conclusion": "Svi činioci — roditelji, nastavnici, vršnjaci i zajednica u celini — imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
         }
       }
+    }
+  },
+  "searchKeys": {
+    "about": {
+      "keywords": ["o nama", "o školi", "о нама", "о школи"],
+      "title": "O Nama"
+    },
+    "missionAndVision": {
+      "keywords": [
+        "misija",
+        "vizija",
+        "misija i vizija",
+        "мисија",
+        "визија",
+        "мисија и визија"
+      ],
+      "title": "Misija i Vizija"
+    },
+    "history": {
+      "keywords": ["istorija", "istorija škole", "историја", "историја школе"],
+      "title": "Istorija"
+    },
+    "teachers": {
+      "keywords": [
+        "nastavnici",
+        "nastavnici škole",
+        "наставници",
+        "наставници школе"
+      ],
+      "title": "Nastavnici"
+    },
+    "enrollment": {
+      "keywords": [
+        "upis",
+        "prijem",
+        "upis i prijem",
+        "упис",
+        "пријем",
+        "упис и пријем"
+      ],
+      "title": "Upis i prijem"
+    },
+    "awards": {
+      "keywords": [
+        "takmičenja",
+        "nagrade",
+        "takmičenja i nagrade",
+        "такмичења",
+        "награде",
+        "такмичења и награде"
+      ],
+      "title": "Takmičenja i nagrade"
+    },
+    "news": {
+      "keywords": [
+        "novosti",
+        "novosti škole",
+        "događaji",
+        "događanja",
+        "новости",
+        "новости школе",
+        "догађаји",
+        "догађања"
+      ],
+      "title": "Novosti"
+    },
+    "students": {
+      "keywords": [
+        "učenici",
+        "vanredni učenici",
+        "učenički parlament",
+        "savet roditelja",
+        "pp služba",
+        "psihološko-pedagoška služba",
+        "nasilje",
+        "mentalno zdravlje",
+        "ученици",
+        "ванредни ученици",
+        "ученички парламент",
+        "савет родитеља",
+        "пп служба",
+        "психолошко-педагошка служба",
+        "насиље",
+        "ментално здравље"
+      ],
+      "title": "Učenici"
+    },
+    "studentsParliament": {
+      "keywords": [
+        "učenički parlament",
+        "učenici",
+        "parlament",
+        "ученички парламент",
+        "ученици",
+        "парламент"
+      ],
+      "title": "Učenički parlament"
+    },
+    "parentParliament": {
+      "keywords": [
+        "savet roditelja",
+        "savet",
+        "roditelja",
+        "савет родитеља",
+        "савет",
+        "родитеља"
+      ],
+      "title": "Savet roditelja"
+    },
+    "partTimeStundents": {
+      "keywords": [
+        "vanredni učenici",
+        "vanredni",
+        "učenici",
+        "ванредни ученици",
+        "ванредни",
+        "ученици"
+      ],
+      "title": "Vanredni učenici"
+    },
+    "ppService": {
+      "keywords": [
+        "pp služba",
+        "pp",
+        "služba",
+        "psihološko-pedagoška služba",
+        "пп служба",
+        "пп",
+        "служба",
+        "психолошко-педагошка служба"
+      ],
+      "title": "PP služba"
+    },
+    "bullying": {
+      "keywords": ["nasilje", "насиље"],
+      "title": "Nasilje"
+    },
+    "mentalHealth": {
+      "keywords": [
+        "mentalno zdravlje",
+        "mentalno",
+        "zdravlje",
+        "ментално здравље",
+        "ментално",
+        "здравље"
+      ],
+      "title": "Mentalno Zdravlje"
+    },
+    "educationProfiles": {
+      "keywords": [
+        "obrazovni profili",
+        "obrazovni",
+        "profili",
+        "profili škole",
+        "образовни профили",
+        "образовни",
+        "профили",
+        "профили школе"
+      ],
+      "title": "Obrazovni Profili"
+    },
+    "documents": {
+      "keywords": [
+        "dokumenta",
+        "dokumenta škole",
+        "organi upravljanja",
+        "organi",
+        "upravljanja",
+        "ponašanje i etika",
+        "ponašanje",
+        "etika",
+        "bezbednosni protokoli",
+        "bezbednosni",
+        "protokoli",
+        "finansijski menadžment",
+        "finansijski",
+        "menadžment",
+        "politika zaposlenih",
+        "politika",
+        "zaposlenih",
+        "instinktualna fondacija",
+        "instinktualna",
+        "fondacija",
+        "документа",
+        "документа школе",
+        "органи управљања",
+        "органи",
+        "управљања",
+        "понашање и етика",
+        "понашање",
+        "етика",
+        "безбедносни протоколи",
+        "безбедносни",
+        "протоколи",
+        "финансијски менаџмент",
+        "финансијски",
+        "менаџмент",
+        "политика запослених",
+        "политика",
+        "запослених",
+        "инстинктуална фондација",
+        "инстинктуална",
+        "фондација"
+      ],
+      "title": "Dokumenta"
     }
   }
 }

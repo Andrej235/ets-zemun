@@ -1,5 +1,6 @@
 import Async from "@better-router/async";
 import LazyLoadedList from "@components/lazy-loaded-list/lazy-loaded-list";
+import ExpandedTeacherCard from "@components/teachers/expanded-teacher-card";
 import TeacherCard from "@components/teachers/teacher-card";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { APIResponse } from "@shared/api-dsl/types/endpoints/response-parser";
@@ -20,6 +21,8 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
     const [fullSubject, setFullSubject] = useState<Promise<
       APIResponse<"/subject/{id}", "get">
     > | null>(null);
+    const [selectedTeacher, setSelectedTeacher] =
+      useState<Schema<"TeacherResponseDto"> | null>(null);
 
     const {
       i18n: { language },
@@ -67,13 +70,25 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
                 <div className="teachers">
                   <LazyLoadedList response={response.content.teachers}>
                     {(teacher) => (
-                      <TeacherCard teacher={teacher} key={teacher.id} />
+                      <TeacherCard
+                        onSelect={() => setSelectedTeacher(teacher)}
+                        teacher={teacher}
+                        key={teacher.id}
+                      />
                     )}
                   </LazyLoadedList>
                 </div>
               );
             }}
           </Async>
+        )}
+
+        {selectedTeacher && (
+          <ExpandedTeacherCard
+            teacher={selectedTeacher}
+            onRequestClose={() => setSelectedTeacher(null)}
+            key={selectedTeacher.id}
+          />
         )}
       </motion.div>
     );

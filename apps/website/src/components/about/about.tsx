@@ -20,8 +20,8 @@ export default function About() {
       id="about-page"
       searchKey={{
         id: "o-nama",
-        title: "O Nama",
-        keywords: ["o nama", "o skoli"],
+        title: "searchKeys.about.title",
+        keywords: "searchKeys.about.keywords",
         url: "/",
       }}
     >
@@ -70,8 +70,8 @@ export default function About() {
             className="overview"
             searchKey={{
               id: "misija-i-vizija",
-              keywords: ["misija", "vizija", "misija i vizija"],
-              title: "Misija i Vizija",
+              keywords: "searchKeys.missionAndVision.keywords",
+              title: "searchKeys.missionAndVision.title",
               url: "/",
             }}
           >

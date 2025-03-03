@@ -752,6 +752,12 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       <div
         className={`history-container ${timelineStyle}`}
         ref={historyContainerRef}
+        searchKey={{
+          id: "istorija",
+          keywords: "searchKeys.history.keywords",
+          title: "searchKeys.history.title",
+          url: "/istorija",
+        }}
       >
         <svg className="history-line" fill="none" strokeWidth={3}>
           <path ref={pathRef} />

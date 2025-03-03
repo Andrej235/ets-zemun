@@ -6,18 +6,21 @@ import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
-import SearchMapSchema from "@assets/json-data/ts-schemas/search-map.schema";
 import SearchEntry from "src/types/search/search-entry";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const fuse = useMemo(
     () =>
-      new Fuse(searchMap.entries as SearchMapSchema["entries"], {
+      new Fuse(searchMap.entries as SearchEntry[], {
         keys: ["title", "keywords"],
+        getFn: (entry, path) => t(entry[path as keyof SearchEntry]),
       }),
-    []
+    [t]
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
@@ -31,9 +34,6 @@ export default function HeaderSearchBar() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const navigate = useNavigate();
-  const { t } = useTranslation();
 
   function handleClose() {
     if (isAutoCompleteShown) {

@@ -83,15 +83,8 @@ async function run() {
                 if (typeof obj.title !== "string") {
                   throw new Error("title must be a string");
                 }
-                if (
-                  !Array.isArray(obj.keywords) ||
-                  !obj.keywords.every(
-                    (kw) => typeof kw === "string" || typeof kw === "number"
-                  )
-                ) {
-                  throw new Error(
-                    "keywords must be an array of strings or numbers"
-                  );
+                if (typeof obj.keywords !== "string") {
+                  throw new Error("keywords must be a string");
                 }
 
                 obj.url += `?searchKey=${obj.id}`;
@@ -123,7 +116,7 @@ function mapArrayElements(elements: unknown[]): (string | number)[] {
     ) {
       return el.value;
     }
-    
+
     throw new Error("Array elements must be string or number literals");
   });
 }

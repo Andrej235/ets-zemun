@@ -4,7 +4,15 @@ export default function StudentsPagePPService() {
   const { t } = useTranslation();
 
   return (
-    <div className="pp-service">
+    <div
+      className="pp-service"
+      searchKey={{
+        id: "pp-sluzba",
+        keywords: "searchKeys.ppService.keywords",
+        title: "searchKeys.ppService.title",
+        url: "/ucenici",
+      }}
+    >
       <h1>{t("students.sections.ppService.title")}</h1>
       <div className="pp-service-description">
         <p>

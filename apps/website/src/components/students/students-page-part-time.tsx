@@ -48,7 +48,15 @@ export default function StudentsPagePartTime() {
   );
 
   return (
-    <div className="part-time-container">
+    <div
+      className="part-time-container"
+      searchKey={{
+        id: "vanredni-ucenici",
+        keywords: "searchKeys.partTimeStundents.keywords",
+        title: "searchKeys.partTimeStundents.title",
+        url: "/ucenici",
+      }}
+    >
       <h1>{t("students.sections.partTime.title")}</h1>
 
       <div className="table-container">

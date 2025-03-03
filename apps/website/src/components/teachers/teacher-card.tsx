@@ -1,12 +1,27 @@
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { useTranslation } from "react-i18next";
 
 type TeacherCardProps = {
-  teacher: Schema<"TeacherResponseDto">;
+  readonly teacher: Schema<"TeacherResponseDto">;
+  readonly onSelect: () => void;
 };
 
-const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
+function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
+  const { t } = useTranslation();
+
+  function truncateBio(bio: string): string {
+    const words = bio.split(" ");
+    if (words.length > 15) {
+      return words.slice(0, 15).join(" ") + "...";
+    }
+    return bio;
+  }
+
+  const displayedSubjects = teacher.subjects.slice(0, 3);
+  const hasMoreSubjects = teacher.subjects.length > 3;
+
   return (
-    <div className="teacher-card">
+    <button className="teacher-card" onClick={onSelect}>
       <img src={teacher.image} alt={teacher.name} className="teacher-image" />
 
       <div className="teacher-card-header">
@@ -15,21 +30,23 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
       </div>
 
       <div className="basic-info">
-        <p>{teacher.bio}</p>
+        <p>{truncateBio(teacher.bio)}</p>
         <ul className="subjects">
-          <p>Predmeti: </p>
-          {teacher.subjects.map((subject) => (
+          <p>{t("teachers.subjects")}</p>
+          {displayedSubjects.map((subject) => (
             <li key={subject.id}>{subject.name}</li>
           ))}
+          {hasMoreSubjects && <li>...</li>}
         </ul>
       </div>
 
       <a className="email" href={`mailto:${teacher.email}`}>
         {teacher.email}
       </a>
-    </div>
+
+      <div className="expanded-content-container" />
+    </button>
   );
-};
+}
 
 export default TeacherCard;
-
