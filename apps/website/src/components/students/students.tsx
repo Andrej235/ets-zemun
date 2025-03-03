@@ -14,7 +14,7 @@ export default function Students() {
   const { t } = useTranslation();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("");
+  const [activeSection, setActiveSection] = useState<string>("ucenicki-parlament");
   const [searchParams] = useSearchParams();
 
   const sections = [
