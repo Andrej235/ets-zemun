@@ -6,8 +6,6 @@
   flex-direction: column;
   align-items: center;
 
-  overflow: hidden;
-
   .overlay {
     position: fixed;
     top: 0;
@@ -53,7 +51,7 @@
   }
 
   .header {
-    max-width: 160rem;
+    max-width: 165rem;
     width: 90%;
     margin-top: 5rem;
 
@@ -63,7 +61,7 @@
     gap: 5rem;
 
     .image-container {
-      width: 70rem;
+      width: 80rem;
       aspect-ratio: 16/9;
       border-radius: 2rem;
       overflow: hidden;
@@ -116,6 +114,7 @@
 
       p {
         font-size: 1.8rem;
+        max-width: 140rem;
       }
     }
 
@@ -147,7 +146,7 @@
 
   .subjects-container {
     width: 90%;
-    margin-top: 3rem;
+    margin-top: 10rem;
 
     display: grid;
     grid-template-columns: 1fr max-content;
@@ -243,46 +242,27 @@
 
   .subject-item {
     background-color: $secondary-background;
-    padding: 18px 15px 15px 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px $shadow;
+    box-shadow: 0px 5px 15px $shadow;
     box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 0.3rem;
+    cursor: pointer;
 
     .subject-name {
       position: relative;
-      font-size: 1.5rem;
+      font-size: 2.2rem;
       padding-left: 0.7rem;
       color: $text-primary;
-
-      &::before {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        width: 0.35rem;
-        height: 100%;
-        transform: translate(-0.7rem, 0);
-      }
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: $text-primary;
-      margin-bottom: 1rem;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       color: $text-secondary;
-    }
-
-    &.general {
-      .subject-name::before {
-        background-color: $accent-secondary;
-      }
     }
 
     &.vocational {
@@ -293,7 +273,7 @@
 
     .subject-count {
       color: $text-secondary;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
     }
 
     @media screen and (max-width: 768px) {

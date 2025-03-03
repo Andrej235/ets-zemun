@@ -250,6 +250,7 @@ export default function SingleProfilePage() {
                             type: x.type,
                           });
                         }}
+                        whileHover={{ y: "-1rem" }}
                       >
                         <motion.p layout className="subject-name">
                           {x.subject.name}
