@@ -61,7 +61,10 @@ export default function SingleProfilePage() {
 
       <div className="header">
         <div className="image-container">
-          <img src="/placeholder.jpg" alt="Placeholder" />
+          <img
+            src="/images/profiles/elektrotehnicar-informacionih-tehnologija.jpg"
+            alt="Placeholder"
+          />
         </div>
 
         <div className="info">
@@ -77,12 +80,6 @@ export default function SingleProfilePage() {
             IT industriji, kao i za nastavak obrazovanja na visokoškolskim
             ustanovama tehničkog usmerenja.
           </p>
-        </div>
-      </div>
-
-      <div className="body">
-        <section>
-          <h2>Mogućnosti nakon školovanja</h2>
 
           <p>
             Po završetku školovanja, učenici su spremni da nastave svoje
@@ -93,7 +90,10 @@ export default function SingleProfilePage() {
             tehničara, administratora baza podataka, tehničke podrške, kao i
             mnogim drugim ulogama u oblasti informacionih tehnologija.
           </p>
-        </section>
+        </div>
+      </div>
+
+      <div className="body">
 
         <section>
           <h2>Obrazovni program i stečene veštine</h2>

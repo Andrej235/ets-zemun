@@ -1,5 +1,12 @@
 .single-profile-page {
-  padding: 2rem min(15rem, 5vw);
+  justify-self: center;
+  max-width: 100svw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
 
   .overlay {
     position: fixed;
@@ -46,36 +53,31 @@
   }
 
   .header {
+    max-width: 160rem;
+    width: 90%;
+    margin-top: 5rem;
+    
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5rem;
 
     .image-container {
-      flex: 6;
-      height: fit-content;
-      position: relative;
+      width: 70rem;
+      aspect-ratio: 16/9;
+      border-radius: 2rem;
+      overflow: hidden;
 
       img {
         width: 100%;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          #00000000 0%,
-          #00000055 50%,
-          $background 95%
-        );
+        object-fit: cover;
       }
     }
 
     .info {
-      flex: 4;
-      padding: 5rem 0;
+      max-width: 80rem;
+      width: 70%;
 
       display: flex;
       flex-direction: column;
@@ -87,12 +89,13 @@
       }
 
       p {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
       }
     }
   }
 
   .body {
+    max-width: 160rem;
     margin-top: 2rem;
 
     display: flex;

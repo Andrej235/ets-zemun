@@ -29,7 +29,7 @@ export default function ProfilesPageSection({
     <div className="profiles-page-section">
       <SchoolPreviewCard
         title="Elektrotehnicar informacionih tehnologija"
-        image="/placeholder.jpg"
+        image="/images/profiles/elektrotehnicar-informacionih-tehnologija.jpg"
         description="Elektrotehničar informacionih tehnologija je savremeni obrazovni
             profil osmišljen za učenike koji žele da se specijalizuju u oblasti
             informacionih tehnologija, koja predstavlja osnovu današnjeg
