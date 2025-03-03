@@ -78,3 +78,28 @@
   }
 }
 
+.scroller-inner-container {
+  i.icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: visible;
+    stroke-width: 4px;
+    stroke: $text-primary;
+
+    circle {
+      transition: 0.09s;
+    }
+  }
+}
+
