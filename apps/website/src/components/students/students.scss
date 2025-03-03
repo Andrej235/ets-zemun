@@ -50,7 +50,7 @@
           font-weight: 600;
           color: $text-primary;
           text-align: center;
-          text-shadow: $accent-secondary 0px 0px 10px;
+          text-shadow: $text-secondary 0px 0px 10px;
         }
 
         h2 {
@@ -58,7 +58,7 @@
           font-weight: 400;
           color: $text-primary;
           text-align: center;
-          text-shadow: $accent-secondary 0px 0px 10px;
+          text-shadow: $text-secondary 0px 0px 10px;
         }
       }
       img {
@@ -142,6 +142,7 @@
             align-items: flex-end;
 
             font-size: 5rem;
+            color: $text-primary;
           }
 
           .hero-block-info {
@@ -347,7 +348,7 @@
       a {
         width: fit-content;
         border: none;
-        color: #fff;
+        color: $text-primary;
         background: none;
         position: relative;
         cursor: pointer;
