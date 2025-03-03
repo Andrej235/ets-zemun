@@ -94,7 +94,6 @@ export default function SingleProfilePage() {
       </div>
 
       <div className="body">
-
         <section>
           <h2>Obrazovni program i stečene veštine</h2>
 
