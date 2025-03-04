@@ -48,7 +48,7 @@
         h1 {
           font-size: 6rem;
           font-weight: 600;
-          color: $text-primary;
+          color: #fff;
           text-align: center;
           text-shadow: $text-secondary 0px 0px 10px;
         }
@@ -56,7 +56,7 @@
         h2 {
           font-size: 3rem;
           font-weight: 400;
-          color: $text-primary;
+          color: #fff;
           text-align: center;
           text-shadow: $text-secondary 0px 0px 10px;
         }
@@ -143,6 +143,10 @@
 
             font-size: 5rem;
             color: $text-primary;
+
+            @media (prefers-color-scheme: light) {
+              color: $accent;
+            }
           }
 
           .hero-block-info {
@@ -158,6 +162,10 @@
               font-weight: 600;
               margin: 3rem 0;
               transition: 200ms ease-out;
+
+              @media (prefers-color-scheme: light) {
+                color: $accent;
+              }
             }
           }
 
