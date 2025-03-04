@@ -59,29 +59,29 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
           {subject.perWeek}x nedeljno
         </motion.p>
 
-        <button onClick={() => console.log("hi")}>Hi</button>
+        <div className="subject-teachers">
+          {fullSubject && (
+            <Async await={fullSubject}>
+              {(response) => {
+                if (response.code !== "200") return null;
 
-        {fullSubject && (
-          <Async await={fullSubject}>
-            {(response) => {
-              if (response.code !== "200") return null;
-
-              return (
-                <div className="teachers">
-                  <LazyLoadedList response={response.content.teachers}>
-                    {(teacher) => (
-                      <TeacherCard
-                        onSelect={() => setSelectedTeacher(teacher)}
-                        teacher={teacher}
-                        key={teacher.id}
-                      />
-                    )}
-                  </LazyLoadedList>
-                </div>
-              );
-            }}
-          </Async>
-        )}
+                return (
+                  <div className="teachers">
+                    <LazyLoadedList response={response.content.teachers}>
+                      {(teacher) => (
+                        <TeacherCard
+                          onSelect={() => setSelectedTeacher(teacher)}
+                          teacher={teacher}
+                          key={teacher.id}
+                        />
+                      )}
+                    </LazyLoadedList>
+                  </div>
+                );
+              }}
+            </Async>
+          )}
+        </div>
 
         {selectedTeacher && (
           <ExpandedTeacherCard
