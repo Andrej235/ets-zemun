@@ -27,11 +27,62 @@
     }
 
     .full-screen-subject-container {
-      width: 80%;
-      height: 80%;
+      width: 30%;
+      height: 30%;
+      padding: 5rem;
 
-      .subject-teachers {
-        width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .subject-name {
+        padding: 0;
+
+        display: flex;
+
+        font-size: 3.2rem;
+        color: $accent-secondary;
+
+      }
+
+      .subject-general {
+        height: max-content;
+        width: 10rem;
+        margin-left: 2rem;
+        padding: 0.7rem 2rem;
+        border-radius: 5rem;
+        border: 2px solid wheat;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.7rem;
+        color: wheat;
+      }
+
+      .subject-vocational {
+        height: max-content;
+        width: 10rem;
+        margin-left: 2rem;
+        padding: 0.7rem 2rem;
+        border-radius: 5rem;
+        border: 2px solid aqua;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.7rem;
+        color: aqua;
+      }
+
+      .subject-description {
+        text-align: center;
+        font-size: 1.8rem;
+        color: $text-primary;
+        margin-top: 2rem;
       }
     }
   }
@@ -126,7 +177,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 0 1rem;
-      gap: 1.5rem;
+      gap: 2.5rem;
       margin-block: 2rem;
 
       li {

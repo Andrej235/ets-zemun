@@ -22,11 +22,7 @@ export default function SingleProfilePage() {
   };
 
   const selectedSubjectRef = useRef<HTMLDivElement>(null);
-  const isInAnimation = useRef(false);
   useOutsideClick(selectedSubjectRef, () => {
-    if (isInAnimation.current) return;
-
-    isInAnimation.current = true;
     setSelectedSubject(null);
   });
 
@@ -49,9 +45,6 @@ export default function SingleProfilePage() {
         {selectedSubject && (
           <SubjectOverlay
             key={selectedSubject.subject.subjectId}
-            onLayoutAnimationComplete={() => {
-              isInAnimation.current = false;
-            }}
             subject={selectedSubject.subject}
             type={selectedSubject.type}
             ref={selectedSubjectRef}
@@ -235,16 +228,10 @@ export default function SingleProfilePage() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                         layout
-                        onLayoutAnimationComplete={() => {
-                          isInAnimation.current = false;
-                        }}
                         layoutId={x.subject.name}
                         key={x.subject.name}
                         className={"subject-item " + x.type}
                         onClick={() => {
-                          if (isInAnimation.current) return;
-
-                          isInAnimation.current = true;
                           setSelectedSubject({
                             subject: x,
                             type: x.type,
@@ -252,12 +239,12 @@ export default function SingleProfilePage() {
                         }}
                         whileHover={{ y: "-1rem" }}
                       >
-                        <motion.p layout className="subject-name">
+                        <p className="subject-name">
                           {x.subject.name}
-                        </motion.p>
-                        <motion.p layout className="subject-count">
+                        </p>
+                        <p className="subject-count">
                           {x.perWeek}x nedeljno
-                        </motion.p>
+                        </p>
                       </motion.div>
                     ))}
                   </AnimatePresence>

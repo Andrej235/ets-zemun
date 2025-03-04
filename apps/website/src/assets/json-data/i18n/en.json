@@ -175,6 +175,15 @@
       "button": "Apply now"
     }
   },
+  "educationalProfiles": {
+    "subjects": {
+      "types": {
+        "general": "General",
+        "vocational": "Vocational",
+        "weeks": "weeks"
+      }
+    }
+  },
   "documents": {
     "groups": [
       {

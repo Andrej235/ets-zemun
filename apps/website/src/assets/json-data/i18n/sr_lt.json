@@ -179,6 +179,15 @@
       "button": "Prijavi se"
     }
   },
+  "educationalProfiles": {
+    "subjects": {
+      "types": {
+        "general": "Opšti",
+        "vocational": "Stručni",
+        "weeks": "nedeljno"
+      }
+    }
+  },
   "documents": {
     "groups": [
       {
