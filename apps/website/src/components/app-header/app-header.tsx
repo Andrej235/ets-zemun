@@ -1,7 +1,7 @@
 import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
 import FocusTrap from "focus-trap-react";
-import {forwardRef, useState, useRef} from 'react';
+import { forwardRef, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useRevalidator } from "react-router";
 import "./app-header.scss";
@@ -26,11 +26,11 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
     i18n.changeLanguage(newLanguage);
     revalidator.revalidate();
   };
-
+  
   const popupRef = useRef<HTMLDivElement>(null);
-    useOutsideClick(popupRef, () => {
-      setIsPopupOpen(false);
-    });
+  useOutsideClick(popupRef, () => {
+    setIsPopupOpen(false);
+  });
 
   return (
     <FocusTrap
@@ -78,30 +78,40 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             ></Icon>
           </button>
 
-          <div ref={popupRef} className={`settings-popup ${isPopupOpen ? "" : "closed"}`}>
+          <div
+            ref={popupRef}
+            className={`settings-popup ${isPopupOpen ? "" : "closed"}`}
+          >
             <div className="language-options">
               <button
                 onClick={() => handleLanguageChange("sr_lt")}
                 tabIndex={isPopupOpen ? 0 : -1}
-                className={`language-button ${currentLanguage === "sr_lt" ? "active-language" : ""}`}
+                className={`language-button ${
+                  currentLanguage === "sr_lt" ? "active-language" : ""
+                }`}
               >
                 {languageOptions.sr_lt}
               </button>
               <button
                 onClick={() => handleLanguageChange("sr_cr")}
                 tabIndex={isPopupOpen ? 0 : -1}
-                className={`language-button ${currentLanguage === "sr_cr" ? "active-language" : ""}`}
+                className={`language-button ${
+                  currentLanguage === "sr_cr" ? "active-language" : ""
+                }`}
               >
                 {languageOptions.sr_cr}
               </button>
               <button
                 onClick={() => handleLanguageChange("en")}
                 tabIndex={isPopupOpen ? 0 : -1}
-                className={`language-button ${currentLanguage === "en" ? "active-language" : ""}`}
+                className={`language-button ${
+                  currentLanguage === "en" ? "active-language" : ""
+                }`}
               >
                 {languageOptions.en}
               </button>
             </div>
+            <button className="theme-button"></button>
           </div>
         </div>
         <div className="background" />
