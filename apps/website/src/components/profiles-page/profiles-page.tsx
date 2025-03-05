@@ -15,6 +15,9 @@ export default function ProfilesPage() {
       <h1>Obrazovni profili</h1>
       <ProfilesPageSection layout="image-left"/>
       <ProfilesPageSection layout="image-right"/>
+      <ProfilesPageSection layout="image-left"/>
+      <ProfilesPageSection layout="image-right"/>
+      <ProfilesPageSection layout="image-left"/>
     </div>
   );
 }

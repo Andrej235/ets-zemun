@@ -7,9 +7,12 @@ import { useRef, useState } from "react";
 import SingleProfilePageLoader from "./single-profile-page-loader";
 import "./single-profile-page.scss";
 import SubjectOverlay from "./subject-overlay";
+import { useTranslation } from "react-i18next";
 
 export default function SingleProfilePage() {
   const loaderData = useLoader<typeof SingleProfilePageLoader>();
+
+  const { t } = useTranslation();
 
   const [selectedYear, setSelectedYear] = useState(1);
   const [selectedSubject, setSelectedSubject] = useState<{
@@ -61,116 +64,62 @@ export default function SingleProfilePage() {
         </div>
 
         <div className="info">
-          <h1>Elektrotehnicar informacionih tehnologija</h1>
+          <h1>{t("educationalProfiles.it.title")}</h1>
 
-          <p>
-            Elektrotehničar informacionih tehnologija je savremeni obrazovni
-            profil osmišljen za učenike koji žele da se specijalizuju u oblasti
-            informacionih tehnologija, koja predstavlja temelj savremenog
-            digitalnog društva i jedan od najperspektivnijih sektora u
-            savremenom svetu. Ovaj obrazovni profil omogućava učenicima da
-            steknu širok spektar znanja i praktičnih veština neophodnih za rad u
-            IT industriji, kao i za nastavak obrazovanja na visokoškolskim
-            ustanovama tehničkog usmerenja.
-          </p>
+          <p>{t("educationalProfiles.it.descriptionOne")}</p>
 
-          <p>
-            Po završetku školovanja, učenici su spremni da nastave svoje
-            obrazovanje na fakultetima koji se bave informacionim tehnologijama,
-            softverskim inženjeringom, računarstvom i srodnim oblastima. Takođe,
-            stiču kompetencije koje im omogućavaju da odmah započnu karijeru u
-            IT industriji na pozicijama poput junior programera, mrežnog
-            tehničara, administratora baza podataka, tehničke podrške, kao i
-            mnogim drugim ulogama u oblasti informacionih tehnologija.
-          </p>
+          <p>{t("educationalProfiles.it.descriptionTwo")}</p>
         </div>
       </div>
 
       <div className="body">
         <section>
-          <h2>Obrazovni program i stečene veštine</h2>
+          <h2> {t("educationalProfiles.it.program.title")}</h2>
 
-          <p>
-            Tokom četvorogodišnjeg školovanja, učenici se upoznavaju sa širokim
-            spektrom znanja i veština iz oblasti programiranja, mrežnih
-            tehnologija, baza podataka i računarskog hardvera. Ova znanja
-            uključuju:
-          </p>
+          <p>{t("educationalProfiles.it.program.descriptionOne")}</p>
 
           <ul className="skills">
             <li>
-              <h2> Programiranje i razvoj softvera</h2>
+              <h2>{t("educationalProfiles.it.program.programming.title")}</h2>
               <p>
-                Rad sa savremenim programskim jezicima, izrada desktop i web
-                aplikacija, objektno orijentisano programiranje
+                {t("educationalProfiles.it.program.programming.description")}
               </p>
             </li>
 
             <li>
-              <h2> Veb tehnologije</h2>
-              <p>
-                Kreiranje statičkih i dinamičkih veb stranica, korišćenje HTML,
-                CSS, JavaScript i naprednih frontend i backend tehnologija
-              </p>
+              <h2>{t("educationalProfiles.it.program.web.title")}</h2>
+              <p>{t("educationalProfiles.it.program.web.description")}</p>
             </li>
 
             <li>
-              <h2> Baze podataka</h2>
-              <p>
-                Dizajn, implementacija i administracija baza podataka, rad sa
-                SQL i NoSQL bazama
-              </p>
+              <h2>{t("educationalProfiles.it.program.database.title")}</h2>
+              <p>{t("educationalProfiles.it.program.database.description")}</p>
             </li>
 
             <li>
-              <h2> Mrežne tehnologije</h2>
-              <p>
-                Projektovanje, konfiguracija i održavanje računarskih mreža, rad
-                sa mrežnim protokolima i sigurnosnim sistemima
-              </p>
+              <h2>{t("educationalProfiles.it.program.network.title")}</h2>
+              <p>{t("educationalProfiles.it.program.network.description")}</p>
             </li>
 
             <li>
-              <h2> Računarski hardver</h2>
-              <p>
-                Razumevanje principa rada računarskih komponenti i uređaja,
-                sastavljanje i održavanje računarskih sistema
-              </p>
+              <h2>{t("educationalProfiles.it.program.hardware.title")}</h2>
+              <p>{t("educationalProfiles.it.program.hardware.description")}</p>
             </li>
           </ul>
 
-          <p>
-            Osim tehničkih znanja, učenici razvijaju ključnesoft skills veštine,
-            kao što su analitičko razmišljanje, sposobnost rešavanja problema,
-            timski rad i prilagodljivost – osobine koje su izuzetno važne za
-            uspeh u dinamičnom svetu informacionih tehnologija.
-          </p>
+          <p>{t("educationalProfiles.it.program.descriptionTwo")}</p>
         </section>
 
         <section>
-          <h2>Nastava i praktična primena znanja</h2>
+          <h2>{t("educationalProfiles.it.knowledgeApplication.title")}</h2>
 
-          <p>
-            Nastavni proces kombinuje teorijska predavanja i praktičan rad u
-            savremeno opremljenim kabinetima i laboratorijama, čime se učenicima
-            omogućava da stečeno znanje odmah primenjuju kroz realne projekte i
-            zadatke. Praktična nastava i stručna praksa dodatno pripremaju
-            učenike za rad u realnom okruženju, kroz saradnju sa IT kompanijama
-            i institucijama.
-          </p>
+          <p>{t("educationalProfiles.it.knowledgeApplication.description")}</p>
         </section>
 
         <section>
-          <h2>Za koga je ovaj obrazovni profil?</h2>
+          <h2>{t("educationalProfiles.it.target.title")}</h2>
 
-          <p>
-            Elektrotehničar informacionih tehnologija je idealan izbor za sve
-            one koji žele da se bave modernim tehnologijama, vole rešavanje
-            problema i žele da budu deo jednog od najbrže rastućih sektora
-            današnjice. Bilo da planiraju nastavak studija ili žele da odmah
-            započnu karijeru u IT industriji, ovaj obrazovni profil pruža
-            stabilnu osnovu za profesionalni razvoj i uspeh.
-          </p>
+          <p>{t("educationalProfiles.it.target.description")}</p>
         </section>
       </div>
 
@@ -239,12 +188,8 @@ export default function SingleProfilePage() {
                         }}
                         whileHover={{ y: "-1rem" }}
                       >
-                        <p className="subject-name">
-                          {x.subject.name}
-                        </p>
-                        <p className="subject-count">
-                          {x.perWeek}x nedeljno
-                        </p>
+                        <p className="subject-name">{x.subject.name}</p>
+                        <p className="subject-count">{x.perWeek}x nedeljno</p>
                       </motion.div>
                     ))}
                   </AnimatePresence>
