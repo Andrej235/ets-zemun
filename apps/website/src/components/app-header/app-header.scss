@@ -113,6 +113,83 @@
     font-size: 1.6rem;
   }
 
+  .settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+
+    .gear {
+      color: $text-primary;
+      transition: 0.25s ease-out;
+    }
+
+    .active {
+      color: $accent-secondary;
+      transform: rotate(90deg);
+    }
+
+    &:hover {
+      .gear {
+        color: $accent-secondary;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .closed {
+    opacity: 0;
+  }
+
+  .settings-popup {
+    position: absolute;
+    z-index: 9999;
+    top: 3rem;
+    right: 3rem;
+    overflow: hidden;
+
+    width: 25rem;
+    height: 20rem;
+    background: $background;
+    border: $secondary-background 2px solid;
+    box-shadow: 0 2px 15px $shadow;
+    border-radius: 1rem;
+    transition: 0.2s ease-out;
+
+    display: flex;
+    flex-direction: column;
+
+    .language-options {
+      width: 100%;
+      height: 15rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .theme-button {
+      height: 5rem;
+      width: 100%;
+      background-color: $secondary-background;
+    }
+
+    .language-button,
+    .theme-button {
+      width: 100%;
+      height: 5rem;
+      background: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 0;
+
+      &:hover {
+        background-color: $accent-secondary-highlight;
+      }
+    }
+    .active-language {
+      background-color: $accent-secondary;
+    }
+  }
+
   @media screen and (max-width: 1300px) {
     font-size: 1.8rem;
 
@@ -120,7 +197,7 @@
       padding: 1rem 0 !important;
     }
   }
-  
+
   @media screen and (max-width: 1075px) {
     grid-template-columns: max-content 1fr max-content;
 
@@ -137,3 +214,4 @@
     }
   }
 }
+
