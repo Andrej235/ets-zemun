@@ -186,6 +186,48 @@
         "vocational": "Stručni",
         "weeks": "nedeljno"
       }
+    },
+    "it": {
+      "title": "Elektrotehničar informacionih tehnologija",
+      "descriptionOne": "Elektrotehničar informacionih tehnologija je savremeni obrazovni profil osmišljen za učenike koji žele da se specijalizuju u oblasti informacionih tehnologija, koja predstavlja temelj savremenog digitalnog društva i jedan od najperspektivnijih sektora u savremenom svetu. Ovaj obrazovni profil omogućava učenicima da steknu širok spektar znanja i praktičnih veština neophodnih za rad u IT industriji, kao i za nastavak obrazovanja na visokoškolskim ustanovama tehničkog usmerenja.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za učešće u izradi softverskih aplikacija, kreiranje i razvijanje baza podataka, statičkih i dinamičkih veb prezentacija, kao i održavanje i proveru sigurnosti informacionih sistema.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznavaju sa širokim spektrom znanja i veština iz oblasti programiranja, mrežnih tehnologija, baza podataka i računarskog hardvera. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih znanja, učenici razvijaju ključnesoft skills veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i prilagodljivost – osobine koje su izuzetno važne za uspeh u dinamičnom svetu informacionih tehnologija.",
+        "programming": {
+          "title": "Programiranje i razvoj softvera",
+          "description": "Rad sa savremenim programskim jezicima, izrada desktop i web aplikacija, objektno orijentisano programiranje"
+        },
+        "web": {
+          "title": "Veb tehnologije",
+          "description": "Kreiranje statičkih i dinamičkih veb stranica, korišćenje HTML, CSS, JavaScript i naprednih frontend i backend tehnologija"
+        },
+        "database": {
+          "title": "Baza podataka",
+          "description": "Dizajn, implementacija i administracija baza podataka, rad sa SQL i NoSQL bazama"
+        },
+        "network": {
+          "title": "Mrežne tehnologije",
+          "description": "Projektovanje, konfiguracija i održavanje računarskih mreža, rad sa mrežnim protokolima i sigurnosnim sistemima"
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Konfiguracija i održavanje računarskih mreža, rad sa operativnim sistemima i softverom"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastavni proces kombinuje teorijska predavanja i praktičan rad u savremeno opremljenim kabinetima i laboratorijama, čime se učenicima omogućava da stečeno znanje odmah primenjuju kroz realne projekte i zadatke. Praktična nastava i stručna praksa dodatno pripremaju učenike za rad u realnom okruženju, kroz saradnju sa IT kompanijama i institucijama."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar informacionih tehnologija je idealan izbor za sve one koji žele da se bave modernim tehnologijama, vole rešavanje problema i žele da budu deo jednog od najbrže rastućih sektora današnjice. Bilo da planiraju nastavak studija ili žele da odmah započnu karijeru u IT industriji, ovaj obrazovni profil pruža stabilnu osnovu za profesionalni razvoj i uspeh."
+      }
+    },
+    "electrical": {
+      "title": "Elektrotehničar",
+      "description": "Elektrotehničar"
     }
   },
   "documents": {

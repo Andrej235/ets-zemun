@@ -182,6 +182,44 @@
         "vocational": "Vocational",
         "weeks": "weeks"
       }
+    },
+    "it": {
+      "title": "Information Technology Technician",
+      "descriptionOne": "The Information Technology Technician is a modern educational profile designed for students who want to specialize in the field of information technology, which is the foundation of the modern digital society and one of the most promising sectors in the contemporary world. This educational profile allows students to acquire a wide range of knowledge and practical skills necessary for work in the IT industry, as well as for continuing education at higher technical institutions.",
+      "descriptionTwo": "After completing their studies, students are equipped to participate in the development of software applications, creating and developing databases, static and dynamic web presentations, as well as maintaining and verifying the security of information systems.",
+      "program": {
+        "title": "Educational Program and Acquired Skills",
+        "descriptionOne": "During the four-year education, students are introduced to a wide range of knowledge and skills in programming, network technologies, databases, and computer hardware. This knowledge includes:",
+        "descriptionTwo": "In addition to technical knowledge, students develop essential soft skills, such as analytical thinking, problem-solving ability, teamwork, and adaptability – qualities that are extremely important for success in the dynamic world of information technology.",
+        "programming": {
+          "title": "Programming and Software Development",
+          "description": "Working with modern programming languages, creating desktop and web applications, object-oriented programming"
+        },
+        "web": {
+          "title": "Web Technologies",
+          "description": "Creating static and dynamic web pages, using HTML, CSS, JavaScript, and advanced frontend and backend technologies"
+        },
+        "database": {
+          "title": "Databases",
+          "description": "Design, implementation, and administration of databases, working with SQL and NoSQL databases"
+        },
+        "network": {
+          "title": "Network Technologies",
+          "description": "Designing, configuring, and maintaining computer networks, working with network protocols and security systems"
+        },
+        "hardware": {
+          "title": "Computer Hardware",
+          "description": "Configuring and maintaining computer networks, working with operating systems and software"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Teaching and Practical Knowledge Application",
+        "description": "The teaching process combines theoretical lectures and practical work in modernly equipped classrooms and laboratories, allowing students to immediately apply the knowledge they acquire through real projects and tasks. Practical teaching and professional practice further prepare students for work in a real environment, through collaboration with IT companies and institutions."
+      },
+      "target": {
+        "title": "Who is this educational profile for?",
+        "description": "The Information Technology Technician is an ideal choice for those who want to work with modern technologies, enjoy problem-solving, and want to be part of one of the fastest-growing sectors of today. Whether they plan to continue their studies or want to start a career in the IT industry right away, this educational profile provides a solid foundation for professional development and success."
+      }
     }
   },
   "documents": {
