@@ -82,18 +82,21 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             <div className="language-options">
               <button
                 onClick={() => handleLanguageChange("sr_lt")}
+                tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${currentLanguage === "sr_lt" ? "active-language" : ""}`}
               >
                 {languageOptions.sr_lt}
               </button>
               <button
                 onClick={() => handleLanguageChange("sr_cr")}
+                tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${currentLanguage === "sr_cr" ? "active-language" : ""}`}
               >
                 {languageOptions.sr_cr}
               </button>
               <button
                 onClick={() => handleLanguageChange("en")}
+                tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${currentLanguage === "en" ? "active-language" : ""}`}
               >
                 {languageOptions.en}

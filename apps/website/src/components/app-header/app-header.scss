@@ -129,7 +129,8 @@
       transform: rotate(90deg);
     }
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       .gear {
         color: $accent-secondary;
         transform: rotate(90deg);
@@ -181,7 +182,8 @@
       cursor: pointer;
       border-radius: 0;
 
-      &:hover {
+      &:hover,
+      &:focus-within {
         background-color: $accent-secondary-highlight;
       }
     }
