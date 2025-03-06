@@ -9,7 +9,7 @@ import "./single-profile-page.scss";
 import SubjectOverlay from "./subject-overlay";
 import { useTranslation } from "react-i18next";
 
-export default function SingleProfilePage() {
+export default function SingleProfileITPage() {
   const loaderData = useLoader<typeof SingleProfilePageLoader>();
 
   const { t } = useTranslation();
