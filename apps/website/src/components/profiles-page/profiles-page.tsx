@@ -1,5 +1,6 @@
 import "./profiles-page.scss";
-import ProfilesPageSection from "./profiles-page-section";
+import ProfilesPageITSection from "./profiles-page-it-section";
+import ProfilesPageAdministratorSection from "./profiles-page-administrator-section";
 
 export default function ProfilesPage() {
   return (
@@ -13,11 +14,11 @@ export default function ProfilesPage() {
       }}
     >
       <h1>Obrazovni profili</h1>
-      <ProfilesPageSection layout="image-left"/>
-      <ProfilesPageSection layout="image-right"/>
-      <ProfilesPageSection layout="image-left"/>
-      <ProfilesPageSection layout="image-right"/>
-      <ProfilesPageSection layout="image-left"/>
+      <ProfilesPageITSection layout="image-left"/>
+      <ProfilesPageAdministratorSection layout="image-right"/>
+      <ProfilesPageITSection layout="image-left"/>
+      <ProfilesPageITSection layout="image-right"/>
+      <ProfilesPageITSection layout="image-left"/>
     </div>
   );
 }
