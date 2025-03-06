@@ -10,7 +10,7 @@ type SchoolPreviewCardProps = {
   readonly layout: string;
 };
 
-export default function ProfilesPageSection({
+export default function ProfilesPageITSection({
   layout,
 }: SchoolPreviewCardProps) {
   function getAnimation(layout: string) {
