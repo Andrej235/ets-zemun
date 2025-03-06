@@ -225,9 +225,81 @@
         "description": "Elektrotehničar informacionih tehnologija je idealan izbor za sve one koji žele da se bave modernim tehnologijama, vole rešavanje problema i žele da budu deo jednog od najbrže rastućih sektora današnjice. Bilo da planiraju nastavak studija ili žele da odmah započnu karijeru u IT industriji, ovaj obrazovni profil pruža stabilnu osnovu za profesionalni razvoj i uspeh."
       }
     },
-    "electrical": {
-      "title": "Elektrotehničar",
-      "description": "Elektrotehničar"
+    "administrator": {
+      "title": "Administrator računarskih mreža",
+      "descriptionOne": "Administrator računarskih mreža je specijalizovani obrazovni profil koji pruža sveobuhvatnu obuku u oblasti projektovanja, konfiguracije, administracije i održavanja računarskih mreža. Ovaj profil omogućava učenicima da steknu praktične i teorijske veštine potrebne za upravljanje i zaštitu računarskih sistema, mrežnih infrastruktura i baza podataka, što je osnov za uspeh u digitalnom i povezanom poslovnom okruženju.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za rad na instalaciji, održavanju i konfiguraciji računarskih mreža, rad sa različitim operativnim sistemima, kao i za primenu mera zaštite računarskih sistema i mreža. Takođe, steći će veštine u administraciji baza podataka, implementaciji sigurnosnih sistema i dijagnostici mrežnih problema.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa osnovama projektovanja i implementacije računarskih mreža, konfiguracije i održavanja mrežnih uređaja, kao i sa radom u operativnim sistemima. Program obuhvata sledeće oblasti:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i komunikacija, koje su ključne za uspešan rad u IT sektoru.",
+        "networking": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje, konfiguracija i administracija računarskih mreža, rad sa mrežnim uređajima, topologijama i mrežnim protokolima"
+        },
+        "security": {
+          "title": "Sigurnost mreža",
+          "description": "Primena sigurnosnih mera za zaštitu računarskih sistema i mreža, enkripcija, firewall-i, VPN-ovi i zaštita od napada"
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Instalacija i održavanje računarskih sistema, rad sa mrežnim uređajima, serverima i ostalim infrastrukturnim komponentama"
+        },
+        "operatingSystems": {
+          "title": "Operativni sistemi",
+          "description": "Instalacija, konfiguracija i održavanje operativnih sistema, kao što su Windows, Linux, i UNIX, za mrežni rad"
+        },
+        "database": {
+          "title": "Baze podataka",
+          "description": "Dizajn, implementacija i administracija baza podataka, rad sa SQL bazama podataka i NoSQL rešenjima"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastavni proces kombinuje teorijska predavanja i praktične vežbe u modernim laboratorijama, gde učenici primenjuju stečena znanja kroz realne projekte. Kroz saradnju sa industrijskim partnerima i primenu naučenih veština u praksi, učenici se pripremaju za profesionalni rad u dinamičnom okruženju IT sektora."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Ovaj obrazovni profil je idealan za učenike koji žele da se bave dizajnom, administracijom i sigurnošću računarskih mreža, uživaju u rešavanju tehničkih problema i žele da budu ključni članovi timova koji održavaju digitalnu infrastrukturu. Takođe, pruža osnovu za dalje školovanje na visokim školama i fakultetima tehničkog i računarstva usmerenja."
+      }
+    },
+    "electricalEngineer": {
+      "title": "Elektrotehničar računara",
+      "descriptionOne": "Elektrotehničar računara je obrazovni profil koji priprema učenike za rad na hardveru i softveru računara. Ovaj profil omogućava učenicima da steknu potrebna znanja i veštine za konfiguraciju, održavanje, dijagnostiku i popravku računara, kao i za razvoj i implementaciju softverskih aplikacija. Učenici koji završe ovaj profil mogu se zaposliti u velikom broju različitih industrija, jer računari nalaze primenu u gotovo svim oblastima ljudskog života.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za programiranje na popularnim programskim jezicima, razvoj desktop i web aplikacija, rad sa bazama podataka, implementaciju i održavanje računarskih mreža, kao i za administraciju mrežnih operativnih sistema.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti računarskog hardvera, programiranja, baza podataka, računarskih mreža i sistemskog softvera. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "programming": {
+          "title": "Programiranje",
+          "description": "Rad sa programskim jezicima C, C++ i C#, kreiranje objekata u C#, razvoj Windows aplikacija, rad sa bazama podataka putem ADO.NET."
+        },
+        "web": {
+          "title": "Razvoj aplikacija",
+          "description": "Razvijanje i implementacija aplikacija za desktop i web platforme koristeći savremene tehnologije i alatke za razvoj softvera."
+        },
+        "database": {
+          "title": "Baze podataka",
+          "description": "Dizajn i administracija baza podataka, rad sa SQL i NoSQL bazama podataka, kao i implementacija veza sa bazama podataka."
+        },
+        "network": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje, konfiguracija i održavanje računarskih mreža, rad sa mrežnim protokolima i administracija mrežnih operativnih sistema."
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Konfiguracija računara, rad sa računalnim komponentama, testiranje, dijagnostika i otklanjanje kvarova na računarskom hardveru."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad na realnim projektima i zadacima. Praktična nastava omogućava učenicima da steknu iskustvo u radu sa računarskim sistemima, mrežama i softverskim alatima."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar računara je idealan izbor za učenike koji žele da se bave radom sa računarima, bilo na softverskom ili hardverskom nivou, i koji žele da budu deo dinamične i stalno rastuće IT industrije. Ovaj obrazovni profil je takođe odlična osnova za dalji nastavak školovanja na fakultetima tehničkog i računarskog smera."
+      }
     }
   },
   "documents": {
