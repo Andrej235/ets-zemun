@@ -20,6 +20,7 @@ import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
 import SingleProfilePageITLoader from "./components/single-profile-page/single-profile-it-page-loader.ts";
 import SingleProfileITPage from "./components/single-profile-page/single-profile-it-page.tsx";
 import SingleProfileAdministratorPage from "./components/single-profile-page/single-profile-administrator-page.tsx";
+import SingleProfileElectricalEngineerPage from "./components/single-profile-page/single-profile-electrical-engineer-page.tsx";
 import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
       {
         path: "profili/administrator-racunarskih-mreza",
         element: <SingleProfileAdministratorPage />,
+        loader: SingleProfilePageITLoader,
+      },
+      {
+        path: "profili/elektrotehnicar-racunara",
+        element: <SingleProfileElectricalEngineerPage />,
         loader: SingleProfilePageITLoader,
       },
       {
