@@ -2,6 +2,7 @@ import "./profiles-page.scss";
 import ProfilesPageITSection from "./profiles-page-it-section";
 import ProfilesPageAdministratorSection from "./profiles-page-administrator-section";
 import ProfilesPageElecticalEngineerSection from "./profiles-page-electical-engineer";
+import ProfilesPageElecticalAutomaticsSection from "./profiles-page-electical-automatics";
 
 export default function ProfilesPage() {
   return (
@@ -18,7 +19,7 @@ export default function ProfilesPage() {
       <ProfilesPageITSection layout="image-left"/>
       <ProfilesPageAdministratorSection layout="image-right"/>
       <ProfilesPageElecticalEngineerSection layout="image-left"/>
-      <ProfilesPageITSection layout="image-right"/>
+      <ProfilesPageElecticalAutomaticsSection layout="image-right"/>
       <ProfilesPageITSection layout="image-left"/>
     </div>
   );
