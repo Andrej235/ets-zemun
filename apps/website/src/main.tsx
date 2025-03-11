@@ -22,6 +22,7 @@ import SingleProfileITPage from "./components/single-profile-page/single-profile
 import SingleProfileAdministratorPage from "./components/single-profile-page/single-profile-administrator-page.tsx";
 import SingleProfileElectricalEngineerPage from "./components/single-profile-page/single-profile-electrical-engineer-page.tsx";
 import SingleProfileElectricalAutomaticsPage from "./components/single-profile-page/single-profile-electrical-automatics-page.tsx";
+import SingleProfileElectricalDevicesPage from "@components/single-profile-page/single-profile-electrical-devices-page.tsx";
 import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
       {
         path: "profili/elektrotehnicar-automatike",
         element: <SingleProfileElectricalAutomaticsPage />,
+        loader: SingleProfilePageITLoader,
+      },
+      {
+        path: "profili/elektromehanicar-za-rashladne-i-termicke-uredjaje",
+        element: <SingleProfileElectricalDevicesPage />,
         loader: SingleProfilePageITLoader,
       },
       {

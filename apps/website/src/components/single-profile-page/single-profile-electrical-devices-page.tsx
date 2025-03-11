@@ -9,7 +9,7 @@ import "./single-profile-page.scss";
 import SubjectOverlay from "./subject-overlay";
 import { useTranslation } from "react-i18next";
 
-export default function SingleProfileElectricalAutomaticsPage() {
+export default function SingleProfileElectricalDevicesPage() {
   const loaderData = useLoader<typeof SingleProfilePageLoader>();
 
   const { t } = useTranslation();
@@ -58,56 +58,56 @@ export default function SingleProfileElectricalAutomaticsPage() {
       <div className="header">
         <div className="image-container">
           <img
-            src="/images/profiles/elektrotehnicar-automatike.jpg"
-            alt="Elektrotehničar automatike"
+            src="/images/profiles/elektromehanicar-za-rashladne-i-termicke-uredjaje.jpg"
+            alt="Elektromehaničar za rashladne i termičke uređaje"
           />
         </div>
 
         <div className="info">
-          <h1>{t("educationalProfiles.electricalAutomatics.title")}</h1>
+          <h1>{t("educationalProfiles.electricalDevices.title")}</h1>
 
-          <p>{t("educationalProfiles.electricalAutomatics.descriptionOne")}</p>
+          <p>{t("educationalProfiles.electricalDevices.descriptionOne")}</p>
 
-          <p>{t("educationalProfiles.electricalAutomatics.descriptionTwo")}</p>
+          <p>{t("educationalProfiles.electricalDevices.descriptionTwo")}</p>
         </div>
       </div>
 
       <div className="body">
         <section>
-          <h2>{t("educationalProfiles.electricalAutomatics.program.title")}</h2>
+          <h2>{t("educationalProfiles.electricalDevices.program.title")}</h2>
 
-          <p>{t("educationalProfiles.electricalAutomatics.program.descriptionOne")}</p>
+          <p>{t("educationalProfiles.electricalDevices.program.descriptionOne")}</p>
 
           <ul className="skills">
             <li>
               <h2>
-                {t("educationalProfiles.electricalAutomatics.program.automation.title")}
+                {t("educationalProfiles.electricalDevices.program.installations.title")}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.automation.description"
+                  "educationalProfiles.electricalDevices.program.installations.description"
                 )}
               </p>
             </li>
 
             <li>
               <h2>
-                {t("educationalProfiles.electricalAutomatics.program.robotics.title")}
+                {t("educationalProfiles.electricalDevices.program.thermal.title")}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.robotics.description"
+                  "educationalProfiles.electricalDevices.program.thermal.description"
                 )}
               </p>
             </li>
 
             <li>
               <h2>
-                {t("educationalProfiles.electricalAutomatics.program.network.title")}
+                {t("educationalProfiles.electricalDevices.program.cooling.title")}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.network.description"
+                  "educationalProfiles.electricalDevices.program.cooling.description"
                 )}
               </p>
             </li>
@@ -115,36 +115,36 @@ export default function SingleProfileElectricalAutomaticsPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.measurement.title"
+                  "educationalProfiles.electricalDevices.program.diagnostics.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.measurement.description"
+                  "educationalProfiles.electricalDevices.program.diagnostics.description"
                 )}
               </p>
             </li>
           </ul>
 
-          <p>{t("educationalProfiles.electricalAutomatics.program.descriptionTwo")}</p>
+          <p>{t("educationalProfiles.electricalDevices.program.descriptionTwo")}</p>
         </section>
 
         <section>
           <h2>
-            {t("educationalProfiles.electricalAutomatics.knowledgeApplication.title")}
+            {t("educationalProfiles.electricalDevices.knowledgeApplication.title")}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalAutomatics.knowledgeApplication.description"
+              "educationalProfiles.electricalDevices.knowledgeApplication.description"
             )}
           </p>
         </section>
 
         <section>
-          <h2>{t("educationalProfiles.electricalAutomatics.target.title")}</h2>
+          <h2>{t("educationalProfiles.electricalDevices.target.title")}</h2>
 
-          <p>{t("educationalProfiles.electricalAutomatics.target.description")}</p>
+          <p>{t("educationalProfiles.electricalDevices.target.description")}</p>
         </section>
       </div>
 
