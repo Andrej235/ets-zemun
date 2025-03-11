@@ -93,7 +93,7 @@
 
         &:hover {
           background-color: #fff;
-          
+
           p {
             transform: translateX(-1rem);
             color: #000;
@@ -120,11 +120,19 @@
         .button-left {
           align-self: center;
           position: static;
+
+          top: none;
+          left: none;
+          transform: none;
         }
 
         .button-right {
           align-self: center;
           position: static;
+
+          top: none;
+          left: none;
+          transform: none;
         }
       }
     }
