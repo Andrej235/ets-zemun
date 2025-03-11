@@ -1,10 +1,11 @@
+import Icon from "@components/icon/icon";
 import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
 import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
 import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
-import Icon from "@components/icon/icon";
 
 type SchoolPreviewCardProps = {
   readonly layout: string;
@@ -13,6 +14,8 @@ type SchoolPreviewCardProps = {
 export default function ProfilesPageAdministratorSection({
   layout,
 }: SchoolPreviewCardProps) {
+  const { t } = useTranslation();
+
   function getAnimation(layout: string) {
     switch (layout) {
       case "image-left":
@@ -28,17 +31,13 @@ export default function ProfilesPageAdministratorSection({
   return (
     <div className="profiles-page-section">
       <SchoolPreviewCard
-        title="Administrator računarskih mreža"
+        title={t("educationalProfiles.administrator.title")}
         image="/images/profiles/administrator-racunarskih-mreza.jpg"
-        description="Administrator računarskih mreža
-            je obrazovni profil osmišljen za učenike koji
-            žele da se specijalizuju u oblasti računarskih
-            mreža, administriranja mreža, sigurnosti na
-            mrežama, web programiranja, i rada sa bazama
-            podataka. <br /> Nakon završetka školovanja, 
-            učenici mogu da se zaposle u firmama koje 
-            poseduju umrežene računare ili nastave dalje 
-            školovanje na višim školama i fakultetima tehničkog usmerenja."
+        description={
+          t("educationalProfiles.administrator.descriptionOne") +
+          "</br>" +
+          t("educationalProfiles.administrator.descriptionTwo")
+        }
         layout={layout === "image-left" ? "image-left" : "image-right"}
       />
 

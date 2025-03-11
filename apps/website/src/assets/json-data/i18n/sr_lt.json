@@ -189,7 +189,7 @@
     },
     "it": {
       "title": "Elektrotehničar informacionih tehnologija",
-      "descriptionOne": "Elektrotehničar informacionih tehnologija je savremeni obrazovni profil osmišljen za učenike koji žele da se specijalizuju u oblasti informacionih tehnologija, koja predstavlja temelj savremenog digitalnog društva i jedan od najperspektivnijih sektora u savremenom svetu. Ovaj obrazovni profil omogućava učenicima da steknu širok spektar znanja i praktičnih veština neophodnih za rad u IT industriji, kao i za nastavak obrazovanja na visokoškolskim ustanovama tehničkog usmerenja.",
+      "descriptionOne": "Elektrotehničar informacionih tehnologija je savremeni obrazovni profil osmišljen za učenike koji žele da se specijalizuju u oblasti informacionih tehnologija, koja predstavlja temelj savremenog digitalnog društva i jedan od najperspektivnijih sektora u savremenom svetu.",
       "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za učešće u izradi softverskih aplikacija, kreiranje i razvijanje baza podataka, statičkih i dinamičkih veb prezentacija, kao i održavanje i proveru sigurnosti informacionih sistema.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
@@ -227,7 +227,7 @@
     },
     "administrator": {
       "title": "Administrator računarskih mreža",
-      "descriptionOne": "Administrator računarskih mreža je specijalizovani obrazovni profil koji pruža sveobuhvatnu obuku u oblasti projektovanja, konfiguracije, administracije i održavanja računarskih mreža. Ovaj profil omogućava učenicima da steknu praktične i teorijske veštine potrebne za upravljanje i zaštitu računarskih sistema, mrežnih infrastruktura i baza podataka, što je osnov za uspeh u digitalnom i povezanom poslovnom okruženju.",
+      "descriptionOne": "Administrator računarskih mreža je specijalizovani obrazovni profil koji pruža sveobuhvatnu obuku u oblasti projektovanja, konfiguracije, administracije i održavanja računarskih mreža.",
       "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za rad na instalaciji, održavanju i konfiguraciji računarskih mreža, rad sa različitim operativnim sistemima, kao i za primenu mera zaštite računarskih sistema i mreža. Takođe, steći će veštine u administraciji baza podataka, implementaciji sigurnosnih sistema i dijagnostici mrežnih problema.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
@@ -265,7 +265,7 @@
     },
     "electricalEngineer": {
       "title": "Elektrotehničar računara",
-      "descriptionOne": "Elektrotehničar računara je obrazovni profil koji priprema učenike za rad na hardveru i softveru računara. Ovaj profil omogućava učenicima da steknu potrebna znanja i veštine za konfiguraciju, održavanje, dijagnostiku i popravku računara, kao i za razvoj i implementaciju softverskih aplikacija. Učenici koji završe ovaj profil mogu se zaposliti u velikom broju različitih industrija, jer računari nalaze primenu u gotovo svim oblastima ljudskog života.",
+      "descriptionOne": "Elektrotehničar računara je obrazovni profil koji priprema učenike za rad na hardveru i softveru računara. Ovaj profil omogućava učenicima da steknu potrebna znanja i veštine za konfiguraciju, održavanje, dijagnostiku i popravku računara, kao i za razvoj i implementaciju softverskih aplikacija.",
       "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za programiranje na popularnim programskim jezicima, razvoj desktop i web aplikacija, rad sa bazama podataka, implementaciju i održavanje računarskih mreža, kao i za administraciju mrežnih operativnih sistema.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
@@ -303,7 +303,7 @@
     },
     "electricalAutomatics": {
       "title": "Elektrotehničar automatike",
-      "descriptionOne": "Elektrotehničar automatike je obrazovni profil koji priprema učenike za rad u industriji, sa fokusom na automatske proizvodne procese i regulaciju fizičkih veličina kao što su temperatura, nivo, protok i slične. Učenici koji završe ovaj profil mogu se zaposliti u proizvodnji, projektovanju ili u trgovini, a budućnost ovog profila je veoma perspektivna u industriji koja se sve više automatizuje.",
+      "descriptionOne": "Elektrotehničar automatike je obrazovni profil koji priprema učenike za rad u industriji, sa fokusom na automatske proizvodne procese i regulaciju fizičkih veličina kao što su temperatura, nivo, protok i slične.",
       "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za montažu, nadzor i rukovanje sistemima mernih i regulacionih uređaja, rad sa računarskim sistemima za prikupljanje i obradu podataka, kao i za upravljanje industrijskim robotima i automatizovanim transportnim sistemima.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
@@ -341,7 +341,7 @@
     },
     "electricalDevices": {
       "title": "Elektromehaničar za rashladne i termičke uređaje",
-      "descriptionOne": "Elektromehaničar za rashladne i termičke uređaje je obrazovni profil trećeg stepena koji priprema učenike za rad na montaži, održavanju i popravci rashladnih, termičkih i klima uređaja. Ovaj profil omogućava učenicima da steknu potrebna znanja i veštine za rad u industriji i servisu električnih termičkih i rashladnih uređaja.",
+      "descriptionOne": "Elektromehaničar za rashladne i termičke uređaje je obrazovni profil trećeg stepena koji priprema učenike za rad na montaži, održavanju i popravci rashladnih, termičkih i klima uređaja.",
       "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za projektovanje i čitanje elektrošema, dijagnostiku i popravku kvarova, montažu i servisiranje klima i rashladnih uređaja, kao i korišćenje odgovarajuće tehničke dokumentacije.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
