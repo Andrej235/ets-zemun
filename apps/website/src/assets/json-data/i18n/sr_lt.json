@@ -300,6 +300,78 @@
         "title": "Za koga je ovaj obrazovni profil?",
         "description": "Elektrotehničar računara je idealan izbor za učenike koji žele da se bave radom sa računarima, bilo na softverskom ili hardverskom nivou, i koji žele da budu deo dinamične i stalno rastuće IT industrije. Ovaj obrazovni profil je takođe odlična osnova za dalji nastavak školovanja na fakultetima tehničkog i računarskog smera."
       }
+    },
+    "electricalAutomatics": {
+      "title": "Elektrotehničar automatike",
+      "descriptionOne": "Elektrotehničar automatike je obrazovni profil koji priprema učenike za rad u industriji, sa fokusom na automatske proizvodne procese i regulaciju fizičkih veličina kao što su temperatura, nivo, protok i slične. Učenici koji završe ovaj profil mogu se zaposliti u proizvodnji, projektovanju ili u trgovini, a budućnost ovog profila je veoma perspektivna u industriji koja se sve više automatizuje.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za montažu, nadzor i rukovanje sistemima mernih i regulacionih uređaja, rad sa računarskim sistemima za prikupljanje i obradu podataka, kao i za upravljanje industrijskim robotima i automatizovanim transportnim sistemima.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti automatskih sistema, računarskog upravljanja, industrijskih robota i regulacije fizičkih veličina. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "programming": {
+          "title": "Programiranje",
+          "description": "Rad sa industrijskim programskim jezicima i tehnologijama, kao što su PLC (Programmable Logic Controllers), SCADA sisteme, kao i rad sa mikrokontrolerima."
+        },
+        "automation": {
+          "title": "Automatizacija",
+          "description": "Razvijanje i implementacija sistema za automatizaciju u industrijskim procesima, uključujući sisteme za merenje i regulaciju, kao i upravljanje automatizovanim proizvodnim linijama."
+        },
+        "robotics": {
+          "title": "Industrijski roboti",
+          "description": "Učenje o industrijskim robotima, njihovom programiranju, kontroli i implementaciji u automatizovanim proizvodnim procesima."
+        },
+        "network": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje i konfiguracija računarskih mreža za automatizovane sisteme, rad sa komunikacijskim protokolima i održavanje sistema za prenos podataka."
+        },
+        "measurement": {
+          "title": "Merni sistemi",
+          "description": "Rad sa merama i uređajima za merenje fizičkih veličina kao što su temperatura, protok, nivo, i druge važne parametre u industriji."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad sa industrijskim sistemima za automatizaciju, robotikom i merama."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar automatike je idealan izbor za učenike koji žele da se bave radom u industriji sa automatizovanim proizvodnim procesima, merama i regulacijama, kao i za one koji žele da rade sa industrijskim robotima i računarskim sistemima za automatizaciju."
+      }
+    },
+    "electricalDevices": {
+      "title": "Elektromehaničar za rashladne i termičke uređaje",
+      "descriptionOne": "Elektromehaničar za rashladne i termičke uređaje je obrazovni profil trećeg stepena koji priprema učenike za rad na montaži, održavanju i popravci rashladnih, termičkih i klima uređaja. Ovaj profil omogućava učenicima da steknu potrebna znanja i veštine za rad u industriji i servisu električnih termičkih i rashladnih uređaja.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za projektovanje i čitanje elektrošema, dijagnostiku i popravku kvarova, montažu i servisiranje klima i rashladnih uređaja, kao i korišćenje odgovarajuće tehničke dokumentacije.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom trogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti električnih instalacija, termičkih i rashladnih sistema, kao i dijagnostike i servisiranja uređaja. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i preciznost u radu.",
+        "installations": {
+          "title": "Električne instalacije",
+          "description": "Osnovni elementi električnih instalacija i projektovanje pomoću računara, instalacije u termičkim i rashladnim uređajima, upoznavanje sa vrstama električnih pokretača."
+        },
+        "thermal": {
+          "title": "Termički uređaji",
+          "description": "Načini prenosa toplote, merenje temperature, regulatori temperature, principi rada termičkih uređaja i električni grejači."
+        },
+        "cooling": {
+          "title": "Rashladni uređaji",
+          "description": "Principi hlađenja, rad rashladnih uređaja, montaža i servisiranje klima i rashladnih sistema, otkrivanje i otklanjanje kvarova."
+        },
+        "diagnostics": {
+          "title": "Dijagnostika i popravka",
+          "description": "Samostalno obavljanje dijagnostike i popravki termičkih i rashladnih uređaja, pronalaženje i otklanjanje kvarova elektro pokretača."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad na realnim projektima i zadacima iz oblasti termičkih i rashladnih uređaja."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektromehaničar za rashladne i termičke uređaje je idealan izbor za učenike koji žele da se bave radom u servisima, industriji ili montaži rashladnih i termičkih uređaja, kao i za one koji žele da se usavrše u oblasti održavanja električnih sistema u domaćinstvu i industriji."
+      }
     }
   },
   "documents": {
