@@ -9,6 +9,8 @@
 
   overflow: hidden;
 
+  padding-top: 8rem;
+
   & > h1 {
     margin-top: 8rem;
 
@@ -45,16 +47,16 @@
         width: fit-content;
         height: fit-content;
         position: relative;
-        top: -3rem;
+        top: -1rem;
         left: 18%;
         transform: translate(-18%, -50%);
       }
 
       .button-right {
         position: relative;
-        top: -3rem;
-        left: 65%;
-        transform: translate(-65%, -50%);
+        top: -1rem;
+        left: 80%;
+        transform: translate(-80%, -50%);
 
         width: fit-content;
         height: fit-content;
@@ -64,7 +66,7 @@
         position: relative;
 
         width: 18rem;
-        height: 5rem;
+        height: 5.25rem;
         border-radius: 25rem;
         background-color: $accent;
 

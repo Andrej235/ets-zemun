@@ -16,7 +16,6 @@ export default function ProfilesPage() {
         url: "/profili",
       }}
     >
-      <h1>Obrazovni profili</h1>
       <ProfilesPageITSection layout="image-left"/>
       <ProfilesPageAdministratorSection layout="image-right"/>
       <ProfilesPageElectricalEngineerSection layout="image-left"/>
