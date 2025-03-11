@@ -220,6 +220,154 @@
         "title": "Who is this educational profile for?",
         "description": "The Information Technology Technician is an ideal choice for those who want to work with modern technologies, enjoy problem-solving, and want to be part of one of the fastest-growing sectors of today. Whether they plan to continue their studies or want to start a career in the IT industry right away, this educational profile provides a solid foundation for professional development and success."
       }
+    },
+    "administrator": {
+      "title": "Computer Network Administrator",
+      "descriptionOne": "The Computer Network Administrator is a specialized educational profile that provides comprehensive training in designing, configuring, administering, and maintaining computer networks. This program enables students to acquire both practical and theoretical skills necessary for managing and securing computer systems, network infrastructures, and databases—fundamental elements for success in a digital and interconnected business environment.",
+      "descriptionTwo": "Upon completing their education, students will be qualified to install, maintain, and configure computer networks, work with various operating systems, and implement security measures for computer systems and networks. Additionally, they will gain skills in database administration, security system implementation, and network problem diagnosis.",
+      "program": {
+        "title": "Educational Program and Acquired Skills",
+        "descriptionOne": "During the four-year education, students become familiar with the fundamentals of computer network design and implementation, network device configuration and maintenance, as well as operating system management. The program covers the following areas:",
+        "descriptionTwo": "In addition to technical skills, students develop key soft skills such as analytical thinking, problem-solving abilities, teamwork, and communication—essential qualities for a successful career in the IT sector.",
+        "networking": {
+          "title": "Computer Networks",
+          "description": "Designing, configuring, and administering computer networks, working with network devices, topologies, and network protocols"
+        },
+        "security": {
+          "title": "Network Security",
+          "description": "Implementing security measures to protect computer systems and networks, encryption, firewalls, VPNs, and defense against cyberattacks"
+        },
+        "hardware": {
+          "title": "Computer Hardware",
+          "description": "Installing and maintaining computer systems, working with network devices, servers, and other infrastructure components"
+        },
+        "operatingSystems": {
+          "title": "Operating Systems",
+          "description": "Installing, configuring, and maintaining operating systems such as Windows, Linux, and UNIX for network operations"
+        },
+        "database": {
+          "title": "Databases",
+          "description": "Designing, implementing, and administering databases, working with SQL and NoSQL database solutions"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Teaching Methods and Practical Application of Knowledge",
+        "description": "The teaching process combines theoretical lectures with practical exercises in modern laboratories, where students apply their acquired knowledge through real-world projects. By collaborating with industry partners and engaging in hands-on practice, students are well-prepared for professional work in the dynamic IT sector."
+      },
+      "target": {
+        "title": "Who is This Educational Profile For?",
+        "description": "This educational profile is ideal for students who want to specialize in network design, administration, and security, enjoy solving technical challenges, and aspire to be key members of teams that maintain digital infrastructure. It also provides a solid foundation for further education at technical colleges and universities focused on computing and networking."
+      }
+    },
+    "electricalEngineer": {
+      "title": "Computer Engineering Technician",
+      "descriptionOne": "The Computer Engineering Technician is an educational profile that prepares students for working with both computer hardware and software. This program enables students to acquire the necessary knowledge and skills for configuring, maintaining, diagnosing, and repairing computers, as well as developing and implementing software applications. Graduates of this program can find employment in a wide range of industries, as computers are used in almost every field of human activity.",
+      "descriptionTwo": "Upon completing their education, students will be qualified in programming with popular programming languages, developing desktop and web applications, working with databases, implementing and maintaining computer networks, as well as administering network operating systems.",
+      "program": {
+        "title": "Educational Program and Acquired Skills",
+        "descriptionOne": "Throughout the four-year education, students gain knowledge and skills in computer hardware, programming, databases, computer networks, and system software. These skills include:",
+        "descriptionTwo": "In addition to technical skills, students develop key soft skills such as analytical thinking, problem-solving abilities, teamwork, and the ability to quickly adapt to new technologies.",
+        "programming": {
+          "title": "Programming",
+          "description": "Working with programming languages C, C++, and C#, creating objects in C#, developing Windows applications, and working with databases using ADO.NET."
+        },
+        "web": {
+          "title": "Application Development",
+          "description": "Developing and implementing applications for desktop and web platforms using modern technologies and software development tools."
+        },
+        "database": {
+          "title": "Databases",
+          "description": "Design and administration of databases, working with SQL and NoSQL databases, and implementing database connections."
+        },
+        "network": {
+          "title": "Computer Networks",
+          "description": "Designing, configuring, and maintaining computer networks, working with network protocols, and administering network operating systems."
+        },
+        "hardware": {
+          "title": "Computer Hardware",
+          "description": "Configuring computers, working with computer components, testing, diagnosing, and troubleshooting computer hardware issues."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Teaching Methods and Practical Application of Knowledge",
+        "description": "The teaching process combines theoretical lectures with practical exercises in laboratories, where students have the opportunity to apply their knowledge by working on real-world projects and tasks. Practical training allows students to gain experience in working with computer systems, networks, and software tools."
+      },
+      "target": {
+        "title": "Who is This Educational Profile For?",
+        "description": "The Computer Engineering Technician program is an ideal choice for students interested in working with computers, whether at the software or hardware level, and who want to be part of the dynamic and constantly growing IT industry. This educational profile also provides an excellent foundation for further studies at technical and computer science faculties."
+      }
+    },
+    "electricalAutomatics": {
+      "title": "Automation Electrical Technician",
+      "descriptionOne": "The Automation Electrical Technician is an educational profile that prepares students for work in industry, focusing on automated production processes and the regulation of physical variables such as temperature, level, flow, and more. Graduates of this program can find employment in production, design, or commerce, and the future of this profession is highly promising as industries continue to automate.",
+      "descriptionTwo": "Upon completing their education, students will be qualified to assemble, supervise, and operate measurement and control systems, work with computer systems for data acquisition and processing, and manage industrial robots and automated transport systems.",
+      "program": {
+        "title": "Educational Program and Acquired Skills",
+        "descriptionOne": "Throughout the four-year education, students gain knowledge and skills in automatic systems, computer control, industrial robotics, and the regulation of physical variables. These skills include:",
+        "descriptionTwo": "In addition to technical skills, students develop key soft skills such as analytical thinking, problem-solving abilities, teamwork, and the ability to quickly adapt to new technologies.",
+        "programming": {
+          "title": "Programming",
+          "description": "Working with industrial programming languages and technologies, such as PLC (Programmable Logic Controllers), SCADA systems, and microcontroller programming."
+        },
+        "automation": {
+          "title": "Automation",
+          "description": "Developing and implementing automation systems in industrial processes, including measurement and control systems and the management of automated production lines."
+        },
+        "robotics": {
+          "title": "Industrial Robotics",
+          "description": "Learning about industrial robots, their programming, control, and implementation in automated production processes."
+        },
+        "network": {
+          "title": "Computer Networks",
+          "description": "Designing and configuring computer networks for automated systems, working with communication protocols, and maintaining data transmission systems."
+        },
+        "measurement": {
+          "title": "Measurement Systems",
+          "description": "Working with measurement instruments for physical variables such as temperature, flow, level, and other critical industrial parameters."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Teaching Methods and Practical Application of Knowledge",
+        "description": "The teaching process combines theoretical lectures with practical exercises in laboratories, where students have the opportunity to apply their knowledge by working with industrial automation systems, robotics, and measurement systems."
+      },
+      "target": {
+        "title": "Who is This Educational Profile For?",
+        "description": "The Automation Electrical Technician program is ideal for students interested in working in industries with automated production processes, measurement and control systems, and industrial robotics, as well as those who want to work with computer automation systems."
+      }
+    },
+    "electricalDevices": {
+      "title": "Electromechanical Technician for Cooling and Thermal Devices",
+      "descriptionOne": "The Electromechanical Technician for Cooling and Thermal Devices is a third-degree vocational education profile that prepares students for assembly, maintenance, and repair of cooling, thermal, and air conditioning devices. This program equips students with the necessary knowledge and skills to work in the industry and service sector for electrical thermal and cooling systems.",
+      "descriptionTwo": "Upon completing their education, students will be qualified to design and interpret electrical schematics, diagnose and repair faults, install and service air conditioning and cooling devices, and utilize appropriate technical documentation.",
+      "program": {
+        "title": "Educational Program and Acquired Skills",
+        "descriptionOne": "During the three-year education, students gain a broad range of knowledge and skills in electrical installations, thermal and cooling systems, as well as diagnostics and servicing of devices. These skills include:",
+        "descriptionTwo": "In addition to technical skills, students develop key soft skills such as analytical thinking, problem-solving abilities, teamwork, and precision in work.",
+        "installations": {
+          "title": "Electrical Installations",
+          "description": "Fundamentals of electrical installations and computer-aided design, installations in thermal and cooling devices, and introduction to different types of electrical actuators."
+        },
+        "thermal": {
+          "title": "Thermal Devices",
+          "description": "Heat transfer methods, temperature measurement, temperature regulators, principles of thermal device operation, and electric heaters."
+        },
+        "cooling": {
+          "title": "Cooling Devices",
+          "description": "Cooling principles, operation of cooling devices, installation and servicing of air conditioning and cooling systems, fault detection, and troubleshooting."
+        },
+        "diagnostics": {
+          "title": "Diagnostics and Repair",
+          "description": "Performing independent diagnostics and repairs of thermal and cooling devices, identifying and resolving issues with electrical actuators."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Teaching Methods and Practical Application of Knowledge",
+        "description": "The teaching process combines theoretical lectures with practical exercises in laboratories, allowing students to apply their knowledge through real-world projects and tasks related to thermal and cooling devices."
+      },
+      "target": {
+        "title": "Who is This Educational Profile For?",
+        "description": "The Electromechanical Technician for Cooling and Thermal Devices program is an ideal choice for students interested in working in service centers, industry, or installation of cooling and thermal systems, as well as those who want to specialize in maintaining electrical systems for households and industrial applications."
+      }
     }
   },
   "documents": {
