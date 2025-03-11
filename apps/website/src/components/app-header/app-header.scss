@@ -171,6 +171,16 @@
       height: 5rem;
       width: 100%;
       background-color: $secondary-background;
+
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      color: $text-primary;
+
+      .icon {
+        color: $accent !important;
+      }
     }
 
     .language-button,

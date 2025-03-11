@@ -1,14 +1,18 @@
 import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
+import Icon from "@components/icon/icon";
+import useOutsideClick from "@hooks/use-outside-click";
 import FocusTrap from "focus-trap-react";
-import { forwardRef, useState, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useRevalidator } from "react-router";
 import "./app-header.scss";
-import Icon from "@components/icon/icon";
-import useOutsideClick from "@hooks/use-outside-click";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
+  const [selectedTheme, setSelectedTheme] = useState<
+    "light" | "dark" | "system"
+  >("system");
+
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { t, i18n } = useTranslation();
@@ -26,11 +30,27 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
     i18n.changeLanguage(newLanguage);
     revalidator.revalidate();
   };
-  
+
   const popupRef = useRef<HTMLDivElement>(null);
   useOutsideClick(popupRef, () => {
     setIsPopupOpen(false);
   });
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+
+    if (theme) {
+      document.documentElement.dataset.theme = theme;
+      setSelectedTheme(theme as "light" | "dark");
+    } else {
+      if (!window.matchMedia) return;
+
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const theme = mediaQuery.matches ? "dark" : "light";
+      setSelectedTheme(theme);
+      localStorage.setItem("theme", theme);
+    }
+  }, []);
 
   return (
     <FocusTrap
@@ -111,7 +131,32 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
                 {languageOptions.en}
               </button>
             </div>
-            <button className="theme-button"></button>
+            <button
+              className="theme-button"
+              onClick={() => {
+                const newTheme = selectedTheme === "light" ? "dark" : "light";
+                setSelectedTheme(newTheme);
+
+                localStorage.setItem("theme", newTheme);
+                document.documentElement.dataset.theme = newTheme;
+              }}
+            >
+              <p>Tema</p>
+
+              {selectedTheme === "light" && (
+                <Icon
+                  name="sun"
+                  className={`sun ${selectedTheme === "light" ? "active" : ""}`}
+                />
+              )}
+
+              {selectedTheme === "dark" && (
+                <Icon
+                  name="moon"
+                  className={`moon ${selectedTheme === "dark" ? "active" : ""}`}
+                />
+              )}
+            </button>
           </div>
         </div>
         <div className="background" />
