@@ -1,5 +1,10 @@
 .single-profile-page {
-  padding: 2rem min(15rem, 5vw);
+  justify-self: center;
+  max-width: 100svw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .overlay {
     position: fixed;
@@ -22,8 +27,62 @@
     }
 
     .full-screen-subject-container {
-      width: 80%;
-      height: 80%;
+      width: 30%;
+      height: 30%;
+      padding: 5rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .subject-name {
+        padding: 0;
+
+        display: flex;
+
+        font-size: 3.2rem;
+        color: $accent-secondary;
+      }
+
+      .subject-general {
+        height: max-content;
+        width: 10rem;
+        margin-left: 2rem;
+        padding: 0.7rem 2rem;
+        border-radius: 5rem;
+        border: 2px solid wheat;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.7rem;
+        color: wheat;
+      }
+
+      .subject-vocational {
+        height: max-content;
+        width: 10rem;
+        margin-left: 2rem;
+        padding: 0.7rem 2rem;
+        border-radius: 5rem;
+        border: 2px solid aqua;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.7rem;
+        color: aqua;
+      }
+
+      .subject-description {
+        text-align: center;
+        font-size: 1.8rem;
+        color: $text-primary;
+        margin-top: 2rem;
+      }
     }
   }
 
@@ -46,36 +105,31 @@
   }
 
   .header {
+    max-width: 165rem;
+    width: 90%;
+    margin-top: 5rem;
+
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5rem;
 
     .image-container {
-      flex: 6;
-      height: fit-content;
-      position: relative;
+      width: 80rem;
+      aspect-ratio: 16/9;
+      border-radius: 2rem;
+      overflow: hidden;
 
       img {
         width: 100%;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          #00000000 0%,
-          #00000055 50%,
-          $background 95%
-        );
+        object-fit: cover;
       }
     }
 
     .info {
-      flex: 4;
-      padding: 5rem 0;
+      max-width: 80rem;
+      width: 70%;
 
       display: flex;
       flex-direction: column;
@@ -87,13 +141,14 @@
       }
 
       p {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
       }
     }
   }
 
   .body {
-    margin-top: 2rem;
+    max-width: 160rem;
+    width: 90%;
 
     display: flex;
     flex-direction: column;
@@ -103,29 +158,32 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      margin-top: 10rem;
 
       h2 {
-        font-size: 2.5rem;
-        color: $text-primary;
+        font-size: 3.2rem;
+        color: $accent-secondary;
         font-weight: 600;
       }
 
       p {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        max-width: 140rem;
       }
     }
 
     ul.skills {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding-left: 0;
-      gap: 1.5rem;
+      padding: 0 1rem;
+      gap: 2.5rem;
       margin-block: 2rem;
 
       li {
         padding: 2rem;
         border-radius: 1rem;
-        box-shadow: 0 0 10px 0.3px $secondary-background;
+        background-color: $secondary-background;
+        box-shadow: 0px 5px 15px $shadow;
 
         font-size: 1.6rem;
 
@@ -141,7 +199,9 @@
   }
 
   .subjects-container {
-    margin-top: 3rem;
+    width: 90%;
+    margin-top: 10rem;
+
     display: grid;
     grid-template-columns: 1fr max-content;
     grid-template-rows: 1fr;
@@ -236,46 +296,27 @@
 
   .subject-item {
     background-color: $secondary-background;
-    padding: 18px 15px 15px 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px $shadow;
+    box-shadow: 0px 5px 15px $shadow;
     box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 0.3rem;
+    cursor: pointer;
 
     .subject-name {
       position: relative;
-      font-size: 1.5rem;
+      font-size: 2.2rem;
       padding-left: 0.7rem;
       color: $text-primary;
-
-      &::before {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        width: 0.35rem;
-        height: 100%;
-        transform: translate(-0.7rem, 0);
-      }
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      color: $text-primary;
-      margin-bottom: 1rem;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       color: $text-secondary;
-    }
-
-    &.general {
-      .subject-name::before {
-        background-color: $accent-secondary;
-      }
     }
 
     &.vocational {
@@ -286,7 +327,7 @@
 
     .subject-count {
       color: $text-secondary;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
     }
 
     @media screen and (max-width: 768px) {
@@ -306,14 +347,15 @@
     }
   }
 
-  @media screen and (max-width: 1024.98px) {
+  @media screen and (max-width: 1100px) {
     padding: 0;
 
     .header {
       flex-direction: column;
+      align-items: center;
 
       .image-container {
-        flex: unset;
+        width: 100%;
 
         &::after {
           background: linear-gradient(
@@ -326,8 +368,8 @@
       }
 
       .info {
-        flex: unset;
-        padding: 0 2rem;
+        max-width: none;
+        width: 100%;
         margin-top: 1rem;
 
         h1 {
@@ -341,8 +383,6 @@
     }
 
     .body {
-      padding: 0 2rem;
-
       h2,
       h3,
       p {
@@ -356,3 +396,45 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+
+    .image-container {
+      width: 100%;
+
+      &::after {
+        background: linear-gradient(
+          180deg,
+          #00000000 0%,
+          #00000055 50%,
+          $background 95%
+        );
+      }
+    }
+
+    .info {
+      max-width: none;
+      width: 100%;
+      padding: 0rem !important;
+      margin-top: 1rem;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
+
+    ul.skills {
+      padding: 0 !important;
+    }
+  }
+}

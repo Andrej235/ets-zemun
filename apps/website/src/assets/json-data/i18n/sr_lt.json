@@ -179,6 +179,201 @@
       "button": "Prijavi se"
     }
   },
+  "educationalProfiles": {
+    "subjects": {
+      "types": {
+        "general": "Opšti",
+        "vocational": "Stručni",
+        "weeks": "nedeljno"
+      }
+    },
+    "it": {
+      "title": "Elektrotehničar informacionih tehnologija",
+      "descriptionOne": "Elektrotehničar informacionih tehnologija je savremeni obrazovni profil osmišljen za učenike koji žele da se specijalizuju u oblasti informacionih tehnologija.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za učešće u izradi softverskih aplikacija, kreiranje i razvijanje baza podataka, statičkih i dinamičkih veb prezentacija, kao i održavanje i proveru sigurnosti informacionih sistema.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznavaju sa širokim spektrom znanja i veština iz oblasti programiranja, mrežnih tehnologija, baza podataka i računarskog hardvera. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih znanja, učenici razvijaju ključnesoft skills veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i prilagodljivost – osobine koje su izuzetno važne za uspeh u dinamičnom svetu informacionih tehnologija.",
+        "programming": {
+          "title": "Programiranje i razvoj softvera",
+          "description": "Rad sa savremenim programskim jezicima, izrada desktop i web aplikacija, objektno orijentisano programiranje"
+        },
+        "web": {
+          "title": "Veb tehnologije",
+          "description": "Kreiranje statičkih i dinamičkih veb stranica, korišćenje HTML, CSS, JavaScript i naprednih frontend i backend tehnologija"
+        },
+        "database": {
+          "title": "Baza podataka",
+          "description": "Dizajn, implementacija i administracija baza podataka, rad sa SQL i NoSQL bazama"
+        },
+        "network": {
+          "title": "Mrežne tehnologije",
+          "description": "Projektovanje, konfiguracija i održavanje računarskih mreža, rad sa mrežnim protokolima i sigurnosnim sistemima"
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Konfiguracija i održavanje računarskih mreža, rad sa operativnim sistemima i softverom"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastavni proces kombinuje teorijska predavanja i praktičan rad u savremeno opremljenim kabinetima i laboratorijama, čime se učenicima omogućava da stečeno znanje odmah primenjuju kroz realne projekte i zadatke. Praktična nastava i stručna praksa dodatno pripremaju učenike za rad u realnom okruženju, kroz saradnju sa IT kompanijama i institucijama."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar informacionih tehnologija je idealan izbor za sve one koji žele da se bave modernim tehnologijama, vole rešavanje problema i žele da budu deo jednog od najbrže rastućih sektora današnjice. Bilo da planiraju nastavak studija ili žele da odmah započnu karijeru u IT industriji, ovaj obrazovni profil pruža stabilnu osnovu za profesionalni razvoj i uspeh."
+      }
+    },
+    "administrator": {
+      "title": "Administrator računarskih mreža",
+      "descriptionOne": "Administrator računarskih mreža je specijalizovani obrazovni profil koji pruža sveobuhvatnu obuku u oblasti projektovanja, konfiguracije, administracije i održavanja računarskih mreža.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za rad na instalaciji, održavanju i konfiguraciji računarskih mreža, rad sa različitim operativnim sistemima, kao i za primenu mera zaštite računarskih sistema i mreža.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa osnovama projektovanja i implementacije računarskih mreža, konfiguracije i održavanja mrežnih uređaja, kao i sa radom u operativnim sistemima. Program obuhvata sledeće oblasti:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i komunikacija, koje su ključne za uspešan rad u IT sektoru.",
+        "networking": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje, konfiguracija i administracija računarskih mreža, rad sa mrežnim uređajima, topologijama i mrežnim protokolima"
+        },
+        "security": {
+          "title": "Sigurnost mreža",
+          "description": "Primena sigurnosnih mera za zaštitu računarskih sistema i mreža, enkripcija, firewall-i, VPN-ovi i zaštita od napada"
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Instalacija i održavanje računarskih sistema, rad sa mrežnim uređajima, serverima i ostalim infrastrukturnim komponentama"
+        },
+        "operatingSystems": {
+          "title": "Operativni sistemi",
+          "description": "Instalacija, konfiguracija i održavanje operativnih sistema, kao što su Windows, Linux, i UNIX, za mrežni rad"
+        },
+        "database": {
+          "title": "Baze podataka",
+          "description": "Dizajn, implementacija i administracija baza podataka, rad sa SQL bazama podataka i NoSQL rešenjima"
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastavni proces kombinuje teorijska predavanja i praktične vežbe u modernim laboratorijama, gde učenici primenjuju stečena znanja kroz realne projekte. Kroz saradnju sa industrijskim partnerima i primenu naučenih veština u praksi, učenici se pripremaju za profesionalni rad u dinamičnom okruženju IT sektora."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Ovaj obrazovni profil je idealan za učenike koji žele da se bave dizajnom, administracijom i sigurnošću računarskih mreža, uživaju u rešavanju tehničkih problema i žele da budu ključni članovi timova koji održavaju digitalnu infrastrukturu. Takođe, pruža osnovu za dalje školovanje na visokim školama i fakultetima tehničkog i računarstva usmerenja."
+      }
+    },
+    "electricalEngineer": {
+      "title": "Elektrotehničar računara",
+      "descriptionOne": "Elektrotehničar računara je obrazovni profil koji omogućava učenicima da steknu potrebna znanja i veštine za konfiguraciju, održavanje, dijagnostiku i popravku računara, kao i za razvoj i implementaciju softverskih aplikacija.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za programiranje na popularnim programskim jezicima, razvoj desktop i web aplikacija, rad sa bazama podataka, implementaciju i održavanje računarskih mreža, kao i za administraciju mrežnih operativnih sistema.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti računarskog hardvera, programiranja, baza podataka, računarskih mreža i sistemskog softvera. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "programming": {
+          "title": "Programiranje",
+          "description": "Rad sa programskim jezicima C, C++ i C#, kreiranje objekata u C#, razvoj Windows aplikacija, rad sa bazama podataka putem ADO.NET."
+        },
+        "web": {
+          "title": "Razvoj aplikacija",
+          "description": "Razvijanje i implementacija aplikacija za desktop i web platforme koristeći savremene tehnologije i alatke za razvoj softvera."
+        },
+        "database": {
+          "title": "Baze podataka",
+          "description": "Dizajn i administracija baza podataka, rad sa SQL i NoSQL bazama podataka, kao i implementacija veza sa bazama podataka."
+        },
+        "network": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje, konfiguracija i održavanje računarskih mreža, rad sa mrežnim protokolima i administracija mrežnih operativnih sistema."
+        },
+        "hardware": {
+          "title": "Računarski hardver",
+          "description": "Konfiguracija računara, rad sa računalnim komponentama, testiranje, dijagnostika i otklanjanje kvarova na računarskom hardveru."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad na realnim projektima i zadacima. Praktična nastava omogućava učenicima da steknu iskustvo u radu sa računarskim sistemima, mrežama i softverskim alatima."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar računara je idealan izbor za učenike koji žele da se bave radom sa računarima, bilo na softverskom ili hardverskom nivou, i koji žele da budu deo dinamične i stalno rastuće IT industrije. Ovaj obrazovni profil je takođe odlična osnova za dalji nastavak školovanja na fakultetima tehničkog i računarskog smera."
+      }
+    },
+    "electricalAutomatics": {
+      "title": "Elektrotehničar automatike",
+      "descriptionOne": "Elektrotehničar automatike je obrazovni profil koji priprema učenike za rad u industriji, sa fokusom na automatske proizvodne procese i regulaciju fizičkih veličina kao što su temperatura, nivo, protok i slične.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za montažu, nadzor i rukovanje sistemima mernih i regulacionih uređaja, rad sa računarskim sistemima za prikupljanje i obradu podataka.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti automatskih sistema, računarskog upravljanja, industrijskih robota i regulacije fizičkih veličina. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "programming": {
+          "title": "Programiranje",
+          "description": "Rad sa industrijskim programskim jezicima i tehnologijama, kao što su PLC (Programmable Logic Controllers), SCADA sisteme, kao i rad sa mikrokontrolerima."
+        },
+        "automation": {
+          "title": "Automatizacija",
+          "description": "Razvijanje i implementacija sistema za automatizaciju u industrijskim procesima, uključujući sisteme za merenje i regulaciju, kao i upravljanje automatizovanim proizvodnim linijama."
+        },
+        "robotics": {
+          "title": "Industrijski roboti",
+          "description": "Učenje o industrijskim robotima, njihovom programiranju, kontroli i implementaciji u automatizovanim proizvodnim procesima."
+        },
+        "network": {
+          "title": "Računarske mreže",
+          "description": "Projektovanje i konfiguracija računarskih mreža za automatizovane sisteme, rad sa komunikacijskim protokolima i održavanje sistema za prenos podataka."
+        },
+        "measurement": {
+          "title": "Merni sistemi",
+          "description": "Rad sa merama i uređajima za merenje fizičkih veličina kao što su temperatura, protok, nivo, i druge važne parametre u industriji."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad sa industrijskim sistemima za automatizaciju, robotikom i merama."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektrotehničar automatike je idealan izbor za učenike koji žele da se bave radom u industriji sa automatizovanim proizvodnim procesima, merama i regulacijama, kao i za one koji žele da rade sa industrijskim robotima i računarskim sistemima za automatizaciju."
+      }
+    },
+    "electricalDevices": {
+      "title": "Elektromehaničar za rashladne i termičke uređaje",
+      "descriptionOne": "Elektromehaničar za rashladne i termičke uređaje je obrazovni profil trećeg stepena koji priprema učenike za rad na montaži, održavanju i popravci rashladnih, termičkih i klima uređaja.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za projektovanje i čitanje elektrošema, dijagnostiku i popravku kvarova, montažu i servisiranje klima i rashladnih uređaja.",
+      "program": {
+        "title": "Obrazovni program i stečene veštine",
+        "descriptionOne": "Tokom trogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti električnih instalacija, termičkih i rashladnih sistema, kao i dijagnostike i servisiranja uređaja. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i preciznost u radu.",
+        "installations": {
+          "title": "Električne instalacije",
+          "description": "Osnovni elementi električnih instalacija i projektovanje pomoću računara, instalacije u termičkim i rashladnim uređajima, upoznavanje sa vrstama električnih pokretača."
+        },
+        "thermal": {
+          "title": "Termički uređaji",
+          "description": "Načini prenosa toplote, merenje temperature, regulatori temperature, principi rada termičkih uređaja i električni grejači."
+        },
+        "cooling": {
+          "title": "Rashladni uređaji",
+          "description": "Principi hlađenja, rad rashladnih uređaja, montaža i servisiranje klima i rashladnih sistema, otkrivanje i otklanjanje kvarova."
+        },
+        "diagnostics": {
+          "title": "Dijagnostika i popravka",
+          "description": "Samostalno obavljanje dijagnostike i popravki termičkih i rashladnih uređaja, pronalaženje i otklanjanje kvarova elektro pokretača."
+        }
+      },
+      "knowledgeApplication": {
+        "title": "Nastava i praktična primena znanja",
+        "description": "Nastava se bazira na kombinaciji teorijskih predavanja i praktičnih vežbi u laboratorijama, gde učenici imaju priliku da primene naučeno kroz rad na realnim projektima i zadacima iz oblasti termičkih i rashladnih uređaja."
+      },
+      "target": {
+        "title": "Za koga je ovaj obrazovni profil?",
+        "description": "Elektromehaničar za rashladne i termičke uređaje je idealan izbor za učenike koji žele da se bave radom u servisima, industriji ili montaži rashladnih i termičkih uređaja, kao i za one koji žele da se usavrše u oblasti održavanja električnih sistema u domaćinstvu i industriji."
+      }
+    }
+  },
   "documents": {
     "groups": [
       {

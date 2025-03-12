@@ -1,5 +1,9 @@
 import "./profiles-page.scss";
-import ProfilesPageSection from "./profiles-page-section";
+import ProfilesPageITSection from "./profiles-page-it-section";
+import ProfilesPageAdministratorSection from "./profiles-page-administrator-section";
+import ProfilesPageElectricalEngineerSection from "./profiles-page-electrical-engineer-section";
+import ProfilesPageElectricalAutomaticsSection from "./profiles-page-electrical-automatics-section";
+import ProfilesPageElectricalDevicesSection from "./profiles-page-electrical-devices-section";
 
 export default function ProfilesPage() {
   return (
@@ -12,9 +16,11 @@ export default function ProfilesPage() {
         url: "/profili",
       }}
     >
-      <h1>Obrazovni profili</h1>
-      <ProfilesPageSection layout="image-left"/>
-      <ProfilesPageSection layout="image-right"/>
+      <ProfilesPageITSection layout="image-left"/>
+      <ProfilesPageAdministratorSection layout="image-right"/>
+      <ProfilesPageElectricalEngineerSection layout="image-left"/>
+      <ProfilesPageElectricalAutomaticsSection layout="image-right"/>
+      <ProfilesPageElectricalDevicesSection layout="image-left"/>
     </div>
   );
 }

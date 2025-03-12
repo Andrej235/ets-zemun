@@ -1,15 +1,56 @@
 import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
+import Icon from "@components/icon/icon";
+import useOutsideClick from "@hooks/use-outside-click";
 import FocusTrap from "focus-trap-react";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useRevalidator } from "react-router";
 import "./app-header.scss";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
+  const [selectedTheme, setSelectedTheme] = useState<
+    "light" | "dark" | "system"
+  >("system");
+
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const revalidator = useRevalidator();
+
+  const languageOptions = {
+    sr_lt: "Latinica",
+    sr_cr: "Ћирилица",
+    en: "English",
+  };
+
+  const currentLanguage = i18n.language as keyof typeof languageOptions;
+
+  const handleLanguageChange = (newLanguage: keyof typeof languageOptions) => {
+    i18n.changeLanguage(newLanguage);
+    revalidator.revalidate();
+  };
+
+  const popupRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(popupRef, () => {
+    setIsPopupOpen(false);
+  });
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+
+    if (theme) {
+      document.documentElement.dataset.theme = theme;
+      setSelectedTheme(theme as "light" | "dark");
+    } else {
+      if (!window.matchMedia) return;
+
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const theme = mediaQuery.matches ? "dark" : "light";
+      setSelectedTheme(theme);
+      localStorage.setItem("theme", theme);
+    }
+  }, []);
 
   return (
     <FocusTrap
@@ -27,7 +68,6 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           onRequestOpen={() => setIsHamburgerMenuOpen(true)}
           onRequestClose={() => setIsHamburgerMenuOpen(false)}
         />
-
         <Link
           to="/"
           className="logo"
@@ -36,7 +76,6 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
         >
           <img src="/logo.png" alt="Logo" />
         </Link>
-
         <div className="app-header-navigation">
           <div className="nav-bar">
             <Link to="/">{t("header.links.0")}</Link>
@@ -49,17 +88,73 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <HeaderSearchBar />
 
           <button
-            onClick={() => {
-              i18n.changeLanguage(i18n.language === "sr_lt" ? "en" : "sr_lt");
-              revalidator.revalidate();
-            }}
-            className="language-button"
-            aria-label="Promeni jezik"
+            onClick={() => setIsPopupOpen(!isPopupOpen)}
+            className="settings-button"
+            aria-label="Open settings"
           >
-            {i18n.language === "sr_lt" ? <p>Srpski</p> : <p>English</p>}
+            <Icon
+              name="gear"
+              className={`gear ${isPopupOpen ? "active" : ""}`}
+            ></Icon>
           </button>
-        </div>
 
+          <div
+            ref={popupRef}
+            className={`settings-popup ${isPopupOpen ? "" : "closed"}`}
+          >
+            <div className="language-options">
+              <button
+                onClick={() => handleLanguageChange("sr_lt")}
+                tabIndex={isPopupOpen ? 0 : -1}
+                className={`language-button ${
+                  currentLanguage === "sr_lt" ? "active-language" : ""
+                }`}
+              >
+                {languageOptions.sr_lt}
+              </button>
+              <button
+                onClick={() => handleLanguageChange("sr_cr")}
+                tabIndex={isPopupOpen ? 0 : -1}
+                className={`language-button ${
+                  currentLanguage === "sr_cr" ? "active-language" : ""
+                }`}
+              >
+                {languageOptions.sr_cr}
+              </button>
+              <button
+                onClick={() => handleLanguageChange("en")}
+                tabIndex={isPopupOpen ? 0 : -1}
+                className={`language-button ${
+                  currentLanguage === "en" ? "active-language" : ""
+                }`}
+              >
+                {languageOptions.en}
+              </button>
+            </div>
+            <button
+              className="theme-button"
+              onClick={() => {
+                const newTheme = selectedTheme === "light" ? "dark" : "light";
+                setSelectedTheme(newTheme);
+
+                localStorage.setItem("theme", newTheme);
+                document.documentElement.dataset.theme = newTheme;
+              }}
+            >
+              <div className={`theme-icons-container ${selectedTheme === "dark" && "dark-theme-active"}`}>
+                <Icon
+                  name="lightbulb"
+                  className={`sun ${selectedTheme === "light" ? "active" : ""}`}
+                />
+
+                <Icon
+                  name="moon"
+                  className={`moon ${selectedTheme === "dark" ? "active" : ""}`}
+                />
+              </div>
+            </button>
+          </div>
+        </div>
         <div className="background" />
       </div>
     </FocusTrap>

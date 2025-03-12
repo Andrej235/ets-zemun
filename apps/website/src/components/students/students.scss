@@ -48,17 +48,17 @@
         h1 {
           font-size: 6rem;
           font-weight: 600;
-          color: $text-primary;
+          color: #fff;
           text-align: center;
-          text-shadow: $accent-secondary 0px 0px 10px;
+          text-shadow: $text-secondary 0px 0px 10px;
         }
 
         h2 {
           font-size: 3rem;
           font-weight: 400;
-          color: $text-primary;
+          color: #fff;
           text-align: center;
-          text-shadow: $accent-secondary 0px 0px 10px;
+          text-shadow: $text-secondary 0px 0px 10px;
         }
       }
       img {
@@ -142,6 +142,11 @@
             align-items: flex-end;
 
             font-size: 5rem;
+            color: $text-primary;
+
+            @media (prefers-color-scheme: light) {
+              color: $accent;
+            }
           }
 
           .hero-block-info {
@@ -157,6 +162,10 @@
               font-weight: 600;
               margin: 3rem 0;
               transition: 200ms ease-out;
+
+              @media (prefers-color-scheme: light) {
+                color: $accent;
+              }
             }
           }
 
@@ -203,7 +212,7 @@
         margin-bottom: 8rem;
 
         font-size: 4rem;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: center;
       }
     }
@@ -219,7 +228,7 @@
         margin-bottom: 8rem;
 
         font-size: 4rem;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: center;
       }
 
@@ -235,8 +244,8 @@
         & > h2 {
           margin-bottom: 3rem;
           font-size: 3rem;
-          font-weight: 500;
-          color: $text-primary;
+          font-weight: 600;
+          color: $accent-secondary;
           text-align: center;
         }
 
@@ -275,8 +284,8 @@
           margin-bottom: 3rem;
 
           font-size: 3rem;
-          font-weight: 500;
-          color: $text-primary;
+          font-weight: 600;
+          color: $accent-secondary;
           text-align: center;
         }
 
@@ -301,7 +310,7 @@
         margin-bottom: 8rem;
 
         font-size: 4rem;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: center;
       }
 
@@ -310,8 +319,8 @@
         margin-bottom: 3rem;
 
         font-size: 3rem;
-        font-weight: 500;
-        color: $text-primary;
+        font-weight: 600;
+        color: $accent-secondary;
         text-align: start;
       }
 
@@ -347,7 +356,7 @@
       a {
         width: fit-content;
         border: none;
-        color: #fff;
+        color: $text-primary;
         background: none;
         position: relative;
         cursor: pointer;
@@ -397,7 +406,7 @@
         margin-bottom: 8rem;
 
         font-size: 4rem;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: center;
       }
 
@@ -406,8 +415,8 @@
         margin-bottom: 3rem;
 
         font-size: 3rem;
-        font-weight: 500;
-        color: $text-primary;
+        font-weight: 600;
+        color: $accent-secondary;
         text-align: start;
       }
 
@@ -445,7 +454,7 @@
         margin-bottom: 8rem;
 
         font-size: 4rem;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: center;
       }
 
@@ -455,7 +464,7 @@
 
         font-size: 3rem;
         font-weight: 500;
-        color: $text-primary;
+        color: $accent-secondary;
         text-align: start;
       }
 
@@ -468,8 +477,8 @@
           margin-bottom: 3rem;
 
           font-size: 3rem;
-          font-weight: 500;
-          color: $text-primary;
+          font-weight: 600;
+          color: $accent-secondary;
           text-align: start;
         }
 
@@ -533,8 +542,8 @@
       caption {
         margin-bottom: 3rem;
         font-size: 3rem;
-        font-weight: 500;
-        color: $text-primary;
+        font-weight: 600;
+        color: $accent-secondary;
       }
 
       th,

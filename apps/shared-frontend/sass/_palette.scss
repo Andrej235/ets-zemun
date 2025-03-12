@@ -8,6 +8,8 @@ $secondary-background: light-dark(
 );
 $outline: light-dark(#24c9df, #fff);
 
+$background-hover: light-dark($light-background-hover, $dark-background-hover);
+
 $accent: light-dark($light-accent, $dark-accent);
 $accent-highlight: light-dark(
   color.adjust($light-accent, $lightness: 10%),
@@ -31,4 +33,3 @@ $text-accent: light-dark(
 );
 
 $shadow: light-dark(#b9b9b9, #0b0b0b);
-
