@@ -141,21 +141,17 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
                 document.documentElement.dataset.theme = newTheme;
               }}
             >
-              <p>Tema</p>
-
-              {selectedTheme === "light" && (
+              <div className={`theme-icons-container ${selectedTheme === "dark" && "dark-theme-active"}`}>
                 <Icon
-                  name="sun"
+                  name="lightbulb"
                   className={`sun ${selectedTheme === "light" ? "active" : ""}`}
                 />
-              )}
 
-              {selectedTheme === "dark" && (
                 <Icon
                   name="moon"
                   className={`moon ${selectedTheme === "dark" ? "active" : ""}`}
                 />
-              )}
+              </div>
             </button>
           </div>
         </div>

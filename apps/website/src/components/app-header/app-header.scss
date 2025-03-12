@@ -168,6 +168,7 @@
     }
 
     .theme-button {
+      position: relative;
       height: 5rem;
       width: 100%;
       background-color: $secondary-background;
@@ -179,8 +180,25 @@
       color: $text-primary;
 
       .icon {
-        color: $accent !important;
+        color: $text-primary;
       }
+    }
+
+    .theme-icons-container {
+      position: absolute;
+      bottom: -2.5rem;
+
+      width: 6rem;
+      height: 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      transition: 0.3s;
+    }
+
+    .dark-theme-active {
+      transform: rotate(180deg);
     }
 
     .language-button,
@@ -193,12 +211,17 @@
       border-radius: 0;
 
       &:hover,
-      &:focus-within {
-        background-color: $accent-secondary-highlight;
+      &:focus-visible {
+        background-color: $shadow;
       }
     }
     .active-language {
       background-color: $accent-secondary;
+
+      &:hover,
+      &:focus-visible {
+        background-color: $accent-secondary;
+      }
     }
   }
 
