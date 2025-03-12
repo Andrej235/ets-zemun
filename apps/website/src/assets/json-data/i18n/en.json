@@ -185,7 +185,7 @@
     },
     "it": {
       "title": "Information Technology Technician",
-      "descriptionOne": "The Information Technology Technician is a modern educational profile designed for students who want to specialize in the field of information technology, which is the foundation of the modern digital society and one of the most promising sectors in the contemporary world. This educational profile allows students to acquire a wide range of knowledge and practical skills necessary for work in the IT industry, as well as for continuing education at higher technical institutions.",
+      "descriptionOne": "The Information Technology Technician is a modern educational profile designed for students who want to specialize in the field of information technology.",
       "descriptionTwo": "After completing their studies, students are equipped to participate in the development of software applications, creating and developing databases, static and dynamic web presentations, as well as maintaining and verifying the security of information systems.",
       "program": {
         "title": "Educational Program and Acquired Skills",
@@ -223,8 +223,8 @@
     },
     "administrator": {
       "title": "Computer Network Administrator",
-      "descriptionOne": "The Computer Network Administrator is a specialized educational profile that provides comprehensive training in designing, configuring, administering, and maintaining computer networks. This program enables students to acquire both practical and theoretical skills necessary for managing and securing computer systems, network infrastructures, and databases—fundamental elements for success in a digital and interconnected business environment.",
-      "descriptionTwo": "Upon completing their education, students will be qualified to install, maintain, and configure computer networks, work with various operating systems, and implement security measures for computer systems and networks. Additionally, they will gain skills in database administration, security system implementation, and network problem diagnosis.",
+      "descriptionOne": "The Computer Network Administrator is a specialized educational profile that provides comprehensive training in designing, configuring, administering, and maintaining computer networks.",
+      "descriptionTwo": "Upon completing their education, students will be qualified to install, maintain, and configure computer networks, work with various operating systems, and implement security measures for computer systems and networks.",
       "program": {
         "title": "Educational Program and Acquired Skills",
         "descriptionOne": "During the four-year education, students become familiar with the fundamentals of computer network design and implementation, network device configuration and maintenance, as well as operating system management. The program covers the following areas:",
@@ -261,7 +261,7 @@
     },
     "electricalEngineer": {
       "title": "Computer Engineering Technician",
-      "descriptionOne": "The Computer Engineering Technician is an educational profile that prepares students for working with both computer hardware and software. This program enables students to acquire the necessary knowledge and skills for configuring, maintaining, diagnosing, and repairing computers, as well as developing and implementing software applications. Graduates of this program can find employment in a wide range of industries, as computers are used in almost every field of human activity.",
+      "descriptionOne": "The Computer Engineering Technician is an educational profile that enables students to acquire the necessary knowledge and skills for configuring, maintaining, diagnosing, and repairing computers, as well as for developing and implementing software applications.",
       "descriptionTwo": "Upon completing their education, students will be qualified in programming with popular programming languages, developing desktop and web applications, working with databases, implementing and maintaining computer networks, as well as administering network operating systems.",
       "program": {
         "title": "Educational Program and Acquired Skills",
@@ -299,8 +299,8 @@
     },
     "electricalAutomatics": {
       "title": "Automation Electrical Technician",
-      "descriptionOne": "The Automation Electrical Technician is an educational profile that prepares students for work in industry, focusing on automated production processes and the regulation of physical variables such as temperature, level, flow, and more. Graduates of this program can find employment in production, design, or commerce, and the future of this profession is highly promising as industries continue to automate.",
-      "descriptionTwo": "Upon completing their education, students will be qualified to assemble, supervise, and operate measurement and control systems, work with computer systems for data acquisition and processing, and manage industrial robots and automated transport systems.",
+      "descriptionOne": "The Automation Engineering Technician is an educational profile that prepares students for work in the industry, focusing on automated production processes and the regulation of physical quantities such as temperature, level, flow, and similar parameters.",
+      "descriptionTwo": "Upon completing their education, students will be qualified for the installation, supervision, and operation of measurement and control systems, as well as working with computer systems for data collection and processing.",
       "program": {
         "title": "Educational Program and Acquired Skills",
         "descriptionOne": "Throughout the four-year education, students gain knowledge and skills in automatic systems, computer control, industrial robotics, and the regulation of physical variables. These skills include:",
@@ -337,8 +337,8 @@
     },
     "electricalDevices": {
       "title": "Electromechanical Technician for Cooling and Thermal Devices",
-      "descriptionOne": "The Electromechanical Technician for Cooling and Thermal Devices is a third-degree vocational education profile that prepares students for assembly, maintenance, and repair of cooling, thermal, and air conditioning devices. This program equips students with the necessary knowledge and skills to work in the industry and service sector for electrical thermal and cooling systems.",
-      "descriptionTwo": "Upon completing their education, students will be qualified to design and interpret electrical schematics, diagnose and repair faults, install and service air conditioning and cooling devices, and utilize appropriate technical documentation.",
+      "descriptionOne": "The Electromechanical Technician for Cooling and Thermal Devices is a third-degree educational profile that prepares students for work in the installation, maintenance, and repair of refrigeration, thermal, and air conditioning devices.",
+      "descriptionTwo": "Upon completing their education, students will be qualified for designing and reading electrical schematics, diagnosing and repairing faults, as well as installing and servicing air conditioning and refrigeration devices.",
       "program": {
         "title": "Educational Program and Acquired Skills",
         "descriptionOne": "During the three-year education, students gain a broad range of knowledge and skills in electrical installations, thermal and cooling systems, as well as diagnostics and servicing of devices. These skills include:",
