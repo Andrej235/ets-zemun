@@ -31,10 +31,9 @@ services:
     image: andrejnenadic/ets-zemun-backend
     volumes:
       - aspnet-data:/app/keys
-    secrets:
-      - google-auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=${CONN_STRING}
     build:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
@@ -53,10 +52,6 @@ services:
       POSTGRES_DB: ets-zemun
     ports:
       - "5432:5432"
-
-secrets:
-  google-auth:
-    file: secrets.json
 
 volumes:
   aspnet-data:

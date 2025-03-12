@@ -107,3 +107,5 @@ secrets.json
 api-docs/
 
 .vite/
+
+.env
