@@ -2,59 +2,36 @@
 
 ## Overview
 
-**ETS Zemun** is a web application designed for Elektrotehnička Škola Zemun, providing students and faculty with an intuitive platform to access important school-related resources, including schedules, announcements, school related news and more. The app aims to enhance communication and streamline administrative tasks for the school community.
+**ETS Zemun** is a web-based platform tailored for **Elektrotehnička Škola Zemun**, designed to enhance communication and streamline administrative tasks. The app serves as a central hub for students and faculty, providing easy access to essential school resources, including schedules, announcements, assignments, and news. With an intuitive interface and seamless functionality, the platform improves the daily experience of the school community.
 
-## Features
+## Key Features
 
-- **Student Dashboard:** Students can view their schedules, and assignments in a user-friendly interface.
-- **Teacher Access:** Teachers can manage class schedules, grades, and communicate with students through the platform.
-- **Announcements:** Stay up-to-date with school-wide announcements from administration.
-- **Event And News:** View upcoming school events, news, exams, and deadlines.
+- **Student Dashboard**  
+  Students can easily access and view their schedules, assignments, and important updates in a centralized dashboard.
+
+- **Teacher Access**  
+  Teachers can manage class schedules, track grades, and communicate directly with students.
+
+- **Announcements**  
+  Stay informed with real-time announcements from the school administration.
+
+- **Events & News**  
+  View upcoming school events, news, exam schedules, and important deadlines.
 
 ## Technologies Used
 
 - **Frontend:**
-  - [React](https://reactjs.org/)
-  - [TypeScript](https://www.typescriptlang.org/)
-  - [SCSS](https://sass-lang.com/)
-  - [Vite](https://vitejs.dev/)
+  - [React](https://reactjs.org/) for building the user interface.
+  - [TypeScript](https://www.typescriptlang.org/) for type-safe development.
+  - [SCSS](https://sass-lang.com/) for styling.
+  - [Vite](https://vitejs.dev/) for fast development and build tooling.
 
-## Installation
+## License
 
-To set up the Fitness Tracker locally, follow these steps:
+This project is licensed under the **MIT License**.
 
-1. **Prerequisites:**
-   - Ensure you have [Node.js](https://nodejs.org/) and npm installed.
-   - Clone the frontend repository:
+## Contributors
 
-     ```bash
-     git clone https://github.com/your-username/ets-zemun.git
-     cd ets-zemun
-     ```
-
-2. **Install Dependencies:**
-
-   ```bash
-   npm install
-   ```
-   
-3. **Start the Development Server:**
-   
-   The project uses [Vite](https://vitejs.dev/) to run the development server:
-
-   ```bash
-   npm run dev
-   ```
-   
-## Usage:
-   - Navigate to the website and sign up or log in as a student or teacher.
-   - View your schedule, and assignments on the dashboard.
-   - Check out school announcements and event details.
-     
-## License:
-   This project is licensed under the MIT License.
-
-## Contributors:
-This project is developed and maintained by:
-   - [Andrej235](https://github.com/andrej235)
-   - [andjelic-a](https://github.com/andjelic-a)
+The **ETS Zemun** project is developed and maintained by:
+- [Andrej235](https://github.com/andrej235)
+- [andjelic-a](https://github.com/andjelic-a)
