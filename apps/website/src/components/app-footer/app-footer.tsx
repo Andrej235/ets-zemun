@@ -35,29 +35,39 @@ export default function AppFooter() {
 
             <p>
               <Icon name="envelope" />
-              <span>{"skola@ets-zemun.edu.rs"}</span>
+              <a href="mailto:skola@ets-zemun.edu.rs">
+                <span>{"skola@ets-zemun.edu.rs"}</span>
+              </a>
             </p>
           </div>
 
           <div className="column">
             <p>
               <Icon name="user-tie" />
-              <span>{"direktor@ets-zemun.edu.rs"}</span>
+              <a href="mailto:direktor@ets-zemun.edu.rs">
+                <span>{"direktor@ets-zemun.edu.rs"}</span>
+              </a>
             </p>
 
             <p>
               <Icon name="user-edit" />
-              <span>{"sekretar@ets-zemun.edu.rs"}</span>
+              <a href="mailto:sekretar@ets-zemun.edu.rs">
+                <span>{"sekretar@ets-zemun.edu.rs"}</span>
+              </a>
             </p>
 
             <p>
               <Icon name="calculator" />
-              <span>{"rac@ets-zemun.edu.rs"}</span>
+              <a href="mailto:rac@ets-zemun.edu.rs">
+                <span>{"rac@ets-zemun.edu.rs"}</span>
+              </a>
             </p>
 
             <p>
               <Icon name="users" />
-              <span>{"ppsluzba@ets-zemun.edu.rs"}</span>
+              <a href="mailto:ppsluzba@ets-zemun.edu.rs">
+                <span>{"ppsluzba@ets-zemun.edu.rs"}</span>
+              </a>
             </p>
           </div>
         </div>

@@ -135,7 +135,7 @@ export default function About() {
                 <Icon name="arrow-right" className="button-icon" />
               </button>
             </Link>
-            <a href="mailto:direktor@ets-zemun.edu.rs">
+            <a href="mailto:skola@ets-zemun.edu.rs">
               <button className="secondary">
                 <p>{t("about.callToAction.buttons.2")}</p>
                 <Icon name="arrow-right" className="button-icon" />
