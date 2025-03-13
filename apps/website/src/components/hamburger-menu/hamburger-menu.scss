@@ -47,6 +47,137 @@
   }
 }
 
+@media screen and (min-width: 1074.98px) {
+  .settings-button-hamburger {
+    display: none;
+    background-color: red;
+  }
+}
+
+.language-button {
+  width: max-content;
+  min-width: 8rem;
+  background-color: transparent;
+  color: $text-primary;
+
+  font-size: 1.6rem;
+}
+
+.settings-button-hamburger {
+  background: none !important;
+  border: none;
+  margin-right: 5rem;
+  cursor: pointer;
+  font-size: 24px;
+
+  .gear {
+    color: $text-primary;
+    transition: 0.25s ease-out;
+  }
+
+  .active {
+    color: $accent-secondary;
+    transform: rotate(90deg);
+  }
+
+  &:hover,
+  &:focus-within {
+    .gear {
+      color: $accent-secondary;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.closed {
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+
+.settings-popup {
+  position: absolute;
+  z-index: 9999;
+  top: 3rem;
+  right: 3rem;
+  overflow: hidden;
+
+  width: 25rem;
+  height: 20rem;
+  background: $background;
+  border: $secondary-background 2px solid;
+  box-shadow: 0 2px 15px $shadow;
+  border-radius: 1rem;
+  transition: 0.2s ease-out;
+
+  display: flex;
+  flex-direction: column;
+
+  .language-options {
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .theme-button {
+    position: relative;
+    height: 5rem;
+    width: 100%;
+    background-color: $secondary-background;
+
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    color: $text-primary;
+
+    .icon {
+      color: $text-primary;
+    }
+  }
+
+  .theme-icons-container {
+    position: absolute;
+    bottom: -2.5rem;
+
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: 0.5s;
+  }
+
+  .dark-theme-active {
+    transform: rotate(180deg);
+  }
+
+  .language-button,
+  .theme-button {
+    width: 100%;
+    height: 5rem;
+    background: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 0;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $shadow;
+    }
+  }
+  .active-language {
+    background-color: $accent-secondary;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $accent-secondary;
+    }
+  }
+}
+
 .hamburger-menu-language {
   position: relative;
   cursor: pointer;
