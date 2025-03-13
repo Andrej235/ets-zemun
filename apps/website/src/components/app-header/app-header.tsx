@@ -92,12 +92,12 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             onClick={() => {
               setIsPopupOpen((prevState) => !prevState);
             }}
-            className="settings-button"
+            className="settings-button ignore-use-outside-click"
             aria-label="Open settings"
           >
             <Icon
               name="gear"
-              className={`gear ${isPopupOpen ? "active" : ""}`}
+              className={`gear ${isPopupOpen ? "active" : ""} ignore-use-outside-click`}
             ></Icon>
           </button>
 

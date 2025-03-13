@@ -15,6 +15,8 @@ export default function useOutsideClick(
       const target = event.target as HTMLElement;
       if (target.classList.contains("drag-overlay")) return;
 
+      if (target.classList.contains("ignore-use-outside-click")) return;
+
       if (!ref.current.contains(target as Node)) callback();
     },
     [ref, callback, type]
