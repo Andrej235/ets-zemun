@@ -140,6 +140,8 @@
 
   .closed {
     opacity: 0;
+    pointer-events: none;
+    touch-action: none;
   }
 
   .settings-popup {
