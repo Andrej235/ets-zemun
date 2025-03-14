@@ -9,6 +9,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: localStorage.getItem("i18nextLng") ?? "sr",
     fallbackLng: "sr",
     supportedLngs: ["sr", "sr_lt", "en"],
     interpolation: {
@@ -25,7 +26,15 @@ i18n
         translation: en,
       },
     },
+    detection: {
+      order: ["localStorage", "cookie", "header", "path", "subdomain"],
+      caches: ["localStorage"],
+    },
   });
+
+i18n.on("languageChanged", (lng) => {
+  localStorage.setItem("i18nextLng", lng);
+});
 
 export default i18n;
 
