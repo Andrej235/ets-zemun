@@ -152,14 +152,24 @@ function translate(value) {
   // Handle special cases for digraphs first
   const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
   digraphs.forEach((digraph) => {
-    const cyrillic = latinToCyrillicMap[digraph];
+    const cyrillic = `|-__${latinToCyrillicMap[digraph]}__-|`;
     const regex = new RegExp(digraph, "g");
     value = value.replace(regex, cyrillic);
   });
 
   // Convert the rest of the characters
-  return value
+  value = value
     .split("")
     .map((char) => latinToCyrillicMap[char] || cyrillicToLatinMap[char] || char)
     .join("");
+
+  digraphs.forEach((digraph) => {
+    const cyrillic = latinToCyrillicMap[digraph];
+    const regex = new RegExp(digraph, "g");
+    value = value.replace(regex, cyrillic);
+  });
+
+  value = value.replace(/\|-__/g, "");
+  value = value.replace(/__-\|/g, "");
+  return value;
 }
