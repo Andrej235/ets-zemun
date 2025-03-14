@@ -1,53 +1,33 @@
-import { redirect } from "react-router";
-import profilePreviewData from "@data/profiles.json";
-import itData from "@data/profiles/elektrotehničar-informacionih-tehnologija.json";
-import armData from "@data/profiles/administrator-računarskih-mreža.json";
-import erData from "@data/profiles/elektrotehničar-računara.json";
-import euData from "@data/profiles/elektrotehničar-automatike.json";
-import klimeData from "@data/profiles/elektromehaničar-za-rashladne-i-termičke-uredjaje.json";
-import { LoaderArgs } from "src/types/utility/react-router-loader-args";
-import ProfileSchema from "@assets/json-data/ts-schemas/profile.schema";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import i18n from "@i18n";
 import createLoader from "@better-router/create-loader";
+import i18n from "@i18n";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 
-const SingleProfilePageLoader = createLoader(
-  ({ params: { profileName } }: LoaderArgs) => {
-    if (!profileName) return redirect("/profili");
+export type SingleProfilePageLoader = ReturnType<
+  typeof singleProfilePageLoaderCreator
+>;
 
-    const jsonData = getJSON(profileName);
-    if (!jsonData) return redirect("/profili");
-
+const singleProfilePageLoaderCreator = (id: number) =>
+  createLoader(() => {
     return sendAPIRequest("/profile/{id}", {
       method: "get",
       parameters: {
-        id: jsonData.backendId,
+        id,
         languageCode: i18n.language,
       },
     });
-  }
-);
+  });
 
-function getJSON(profileName: string): ProfileSchema | null {
-  const preview = profilePreviewData.profiles.find((x) =>
-    x.profileURL.includes(profileName)
-  );
+const singleProfilePageLoaderIT = singleProfilePageLoaderCreator(1);
+const singleProfilePageLoaderAdministrator = singleProfilePageLoaderCreator(2);
+const singleProfilePageLoaderEngineer = singleProfilePageLoaderCreator(3);
+const singleProfilePageLoaderAutomatics = singleProfilePageLoaderCreator(4);
+const singleProfilePageLoaderACs = singleProfilePageLoaderCreator(5);
 
-  switch (preview?.abbreviation) {
-    case "it":
-      return itData;
-    case "arm":
-      return armData;
-    case "er":
-      return erData;
-    case "eu":
-      return euData;
-    case "klime":
-      return klimeData;
-    default:
-      return null;
-  }
-}
-
-export default SingleProfilePageLoader;
+export {
+  singleProfilePageLoaderACs,
+  singleProfilePageLoaderAdministrator,
+  singleProfilePageLoaderAutomatics,
+  singleProfilePageLoaderEngineer,
+  singleProfilePageLoaderIT,
+};
 
