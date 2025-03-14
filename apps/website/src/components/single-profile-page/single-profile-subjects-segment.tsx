@@ -5,10 +5,10 @@ import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import SingleProfilePageLoader from "./single-profile-page-loader";
 import SubjectOverlay from "./subject-overlay";
+import { SingleProfilePageLoader } from "./single-profile-page-loader";
 export default function SingleProfileSubjectsSegment() {
-  const loaderData = useLoader<typeof SingleProfilePageLoader>();
+  const loaderData = useLoader<SingleProfilePageLoader>();
   const { t } = useTranslation();
 
   const [selectedYear, setSelectedYear] = useState(1);

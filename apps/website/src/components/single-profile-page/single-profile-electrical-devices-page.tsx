@@ -4,13 +4,13 @@ import useOutsideClick from "@hooks/use-outside-click";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
-import SingleProfilePageLoader from "./single-profile-page-loader";
+import {SingleProfilePageLoader }from "./single-profile-page-loader";
 import "./single-profile-page.scss";
 import SubjectOverlay from "./subject-overlay";
 import { useTranslation } from "react-i18next";
 
 export default function SingleProfileElectricalDevicesPage() {
-  const loaderData = useLoader<typeof SingleProfilePageLoader>();
+  const loaderData = useLoader<SingleProfilePageLoader>();
 
   const { t } = useTranslation();
 
