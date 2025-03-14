@@ -44,7 +44,7 @@
         background: $background-hover;
         top: 0;
         left: 0;
-        opacity: .1;
+        opacity: 0.1;
       }
 
       .text {
@@ -543,6 +543,10 @@
         .overview-info {
           padding-top: 2rem;
         }
+
+        .overview-image {
+          margin-top: 2rem;
+        }
       }
     }
   }
@@ -560,6 +564,7 @@
 
     .overview-image {
       width: 90% !important;
+      margin-top: 2rem;
 
       img {
         max-height: 40rem;

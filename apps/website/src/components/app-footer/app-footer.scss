@@ -39,6 +39,14 @@
           width: 2em;
           text-align: center;
         }
+
+        span {
+          color: $text-primary;
+
+          &:hover {
+            color: $text-primary;
+          }
+        }
       }
     }
 

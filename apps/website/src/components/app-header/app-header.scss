@@ -137,9 +137,11 @@
       }
     }
   }
-
+  
   .closed {
     opacity: 0;
+    pointer-events: none;
+    touch-action: none;
   }
 
   .settings-popup {
@@ -194,7 +196,7 @@
       flex-direction: column;
       justify-content: space-between;
 
-      transition: 0.3s;
+      transition: 0.5s;
     }
 
     .dark-theme-active {

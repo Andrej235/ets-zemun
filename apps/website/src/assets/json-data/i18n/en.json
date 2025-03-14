@@ -229,7 +229,7 @@
         "title": "Educational Program and Acquired Skills",
         "descriptionOne": "During the four-year education, students become familiar with the fundamentals of computer network design and implementation, network device configuration and maintenance, as well as operating system management. The program covers the following areas:",
         "descriptionTwo": "In addition to technical skills, students develop key soft skills such as analytical thinking, problem-solving abilities, teamwork, and communication—essential qualities for a successful career in the IT sector.",
-        "networking": {
+        "network": {
           "title": "Computer Networks",
           "description": "Designing, configuring, and administering computer networks, working with network devices, topologies, and network protocols"
         },

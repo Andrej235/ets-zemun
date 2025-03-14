@@ -66,7 +66,7 @@
     "subjects": "Predmeti:"
   },
   "awards": {
-    "title": "Takmicenja i nagrade"
+    "title": "Takmičenja i nagrade"
   },
   "heroInfoCard": {
     "button": "Saznaj vise"
@@ -233,7 +233,7 @@
         "title": "Obrazovni program i stečene veštine",
         "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa osnovama projektovanja i implementacije računarskih mreža, konfiguracije i održavanja mrežnih uređaja, kao i sa radom u operativnim sistemima. Program obuhvata sledeće oblasti:",
         "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i komunikacija, koje su ključne za uspešan rad u IT sektoru.",
-        "networking": {
+        "network": {
           "title": "Računarske mreže",
           "description": "Projektovanje, konfiguracija i administracija računarskih mreža, rad sa mrežnim uređajima, topologijama i mrežnim protokolima"
         },

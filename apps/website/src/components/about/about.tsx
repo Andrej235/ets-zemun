@@ -129,14 +129,18 @@ export default function About() {
           <p>{t("about.callToAction.description")}</p>
 
           <div className="call-to-action-buttons">
-            <button className="primary">
-              <p>{t("about.callToAction.buttons.1")}</p>
-              <Icon name="arrow-right" className="button-icon" />
-            </button>
-            <button className="secondary">
-              <p>{t("about.callToAction.buttons.2")}</p>
-              <Icon name="arrow-right" className="button-icon" />
-            </button>
+            <Link to="/upis">
+              <button className="primary">
+                <p>{t("about.callToAction.buttons.1")}</p>
+                <Icon name="arrow-right" className="button-icon" />
+              </button>
+            </Link>
+            <a href="mailto:skola@ets-zemun.edu.rs">
+              <button className="secondary">
+                <p>{t("about.callToAction.buttons.2")}</p>
+                <Icon name="arrow-right" className="button-icon" />
+              </button>
+            </a>
           </div>
         </div>
       </section>

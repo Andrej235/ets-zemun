@@ -32,6 +32,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   const popupRef = useRef<HTMLDivElement>(null);
+
   useOutsideClick(popupRef, () => {
     setIsPopupOpen(false);
   });
@@ -88,13 +89,15 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <HeaderSearchBar />
 
           <button
-            onClick={() => setIsPopupOpen(!isPopupOpen)}
-            className="settings-button"
+            onClick={() => {
+              setIsPopupOpen((prevState) => !prevState);
+            }}
+            className="settings-button ignore-use-outside-click"
             aria-label="Open settings"
           >
             <Icon
               name="gear"
-              className={`gear ${isPopupOpen ? "active" : ""}`}
+              className={`gear ${isPopupOpen ? "active" : ""} ignore-use-outside-click`}
             ></Icon>
           </button>
 
@@ -141,7 +144,11 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
                 document.documentElement.dataset.theme = newTheme;
               }}
             >
-              <div className={`theme-icons-container ${selectedTheme === "dark" && "dark-theme-active"}`}>
+              <div
+                className={`theme-icons-container ${
+                  selectedTheme === "dark" && "dark-theme-active"
+                }`}
+              >
                 <Icon
                   name="lightbulb"
                   className={`sun ${selectedTheme === "light" ? "active" : ""}`}
