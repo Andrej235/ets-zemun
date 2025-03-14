@@ -6,6 +6,14 @@ import fullNewsArticleLoader from "@components/full-news-article/full-news-artic
 import FullNewsArticle from "@components/full-news-article/full-news-article.tsx";
 import HistoryPage from "@components/history/history-page.tsx";
 import newsPageLoader from "@components/news/news-page-loader.ts";
+import SingleProfileElectricalDevicesPage from "@components/single-profile-page/single-profile-electrical-devices-page.tsx";
+import {
+  singleProfilePageLoaderACs,
+  singleProfilePageLoaderAdministrator,
+  singleProfilePageLoaderAutomatics,
+  singleProfilePageLoaderEngineer,
+  singleProfilePageLoaderIT,
+} from "@components/single-profile-page/single-profile-page-loader.ts";
 import teacherLoader from "@components/teachers/teachers-loader.ts";
 import Teachers from "@components/teachers/teachers.tsx";
 import React from "react";
@@ -17,12 +25,10 @@ import Awards from "./components/awards/awards.tsx";
 import Documents from "./components/documents/documents.tsx";
 import News from "./components/news/news.tsx";
 import ProfilesPage from "./components/profiles-page/profiles-page.tsx";
-import SingleProfilePageITLoader from "./components/single-profile-page/single-profile-it-page-loader.ts";
-import SingleProfileITPage from "./components/single-profile-page/single-profile-it-page.tsx";
 import SingleProfileAdministratorPage from "./components/single-profile-page/single-profile-administrator-page.tsx";
-import SingleProfileElectricalEngineerPage from "./components/single-profile-page/single-profile-electrical-engineer-page.tsx";
 import SingleProfileElectricalAutomaticsPage from "./components/single-profile-page/single-profile-electrical-automatics-page.tsx";
-import SingleProfileElectricalDevicesPage from "@components/single-profile-page/single-profile-electrical-devices-page.tsx";
+import SingleProfileElectricalEngineerPage from "./components/single-profile-page/single-profile-electrical-engineer-page.tsx";
+import SingleProfileITPage from "./components/single-profile-page/single-profile-it-page.tsx";
 import Students from "./components/students/students.tsx";
 import "./i18n.ts";
 import "./index.scss";
@@ -45,27 +51,27 @@ const router = createBrowserRouter([
       {
         path: "profili/elektrotehnicar-informacionih-tehnologija",
         element: <SingleProfileITPage />,
-        loader: SingleProfilePageITLoader,
+        loader: singleProfilePageLoaderIT,
       },
       {
         path: "profili/administrator-racunarskih-mreza",
         element: <SingleProfileAdministratorPage />,
-        loader: SingleProfilePageITLoader,
+        loader: singleProfilePageLoaderAdministrator,
       },
       {
         path: "profili/elektrotehnicar-racunara",
         element: <SingleProfileElectricalEngineerPage />,
-        loader: SingleProfilePageITLoader,
+        loader: singleProfilePageLoaderEngineer,
       },
       {
         path: "profili/elektrotehnicar-automatike",
         element: <SingleProfileElectricalAutomaticsPage />,
-        loader: SingleProfilePageITLoader,
+        loader: singleProfilePageLoaderAutomatics,
       },
       {
         path: "profili/elektromehanicar-za-rashladne-i-termicke-uredjaje",
         element: <SingleProfileElectricalDevicesPage />,
-        loader: SingleProfilePageITLoader,
+        loader: singleProfilePageLoaderACs,
       },
       {
         path: "/ucenici",
