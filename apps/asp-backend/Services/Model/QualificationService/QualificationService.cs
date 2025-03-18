@@ -17,7 +17,7 @@ public partial class QualificationService(
     IReadSingleService<Qualification> readQualificationService,
     IReadRangeService<Qualification> readRangeService,
     ICountService<Qualification> countQualificationService,
-    IUpdateSingleService<QualificationTranslation> updateSingleQualificationTranslationService,
+    IExecuteUpdateService<QualificationTranslation> updateQualificationTranslationService,
     IDeleteService<Qualification> deleteQualificationService,
     IDeleteService<QualificationTranslation> deleteQualificationTranslationService,
     IRequestMapper<CreateQualificationRequestDto, Qualification> createRequestMapper,
@@ -38,8 +38,8 @@ public partial class QualificationService(
     private readonly IReadRangeService<Qualification> readRangeService = readRangeService;
     private readonly ICountService<Qualification> countQualificationService =
         countQualificationService;
-    private readonly IUpdateSingleService<QualificationTranslation> updateSingleQualificationTranslationService =
-        updateSingleQualificationTranslationService;
+    private readonly IExecuteUpdateService<QualificationTranslation> updateQualificationTranslationService =
+        updateQualificationTranslationService;
     private readonly IDeleteService<Qualification> deleteQualificationService =
         deleteQualificationService;
     private readonly IDeleteService<QualificationTranslation> deleteQualificationTranslationService =
