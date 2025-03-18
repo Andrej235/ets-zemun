@@ -9,7 +9,7 @@
 
   overflow: hidden;
 
-  padding-top: 8rem;
+  padding-top: 5rem;
 
   & > h1 {
     margin-top: 8rem;
@@ -17,10 +17,6 @@
     font-size: 4rem;
     color: $text-primary;
     text-align: center;
-  }
-
-  @media screen and (max-width: 1440px) {
-    padding: 0;
   }
 
   .profiles-page-section {
