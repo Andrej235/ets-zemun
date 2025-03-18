@@ -228,7 +228,7 @@ builder.Services.AddScoped<IReadSingleService<Qualification>, ReadService<Qualif
 builder.Services.AddScoped<IReadRangeService<Qualification>, ReadService<Qualification>>();
 builder.Services.AddScoped<ICountService<Qualification>, ReadService<Qualification>>();
 builder.Services.AddScoped<
-    IExecuteUpdateService<QualificationTranslation>,
+    IUpdateSingleService<QualificationTranslation>,
     UpdateService<QualificationTranslation>
 >();
 builder.Services.AddScoped<IDeleteService<Qualification>, DeleteService<Qualification>>();
