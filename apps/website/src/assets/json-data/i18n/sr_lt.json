@@ -63,7 +63,9 @@
   },
   "teachers": {
     "title": "Nastavnici",
-    "subjects": "Predmeti:"
+    "subjects": "Predmeti:",
+    "bio": "Biografija",
+    "qualifications": "Kvalifikacije"
   },
   "awards": {
     "title": "Takmičenja i nagrade"
