@@ -63,7 +63,9 @@
   },
   "teachers": {
     "title": "Teachers",
-    "subjects": "Subjects:"
+    "subjects": "Subjects:",
+    "bio": "Biography",
+    "qualifications": "Qualifications"
   },
   "awards": {
     "title": "Competitions and Awards"
