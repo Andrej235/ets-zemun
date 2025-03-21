@@ -97,8 +97,6 @@ export default function FullEducationalProfile() {
     subject: Schema<"SimpleSubjectResponseDto">,
     type: "general" | "vocational" | null
   ) {
-    console.log(subject, type, selectedYear, selectedSubjects);
-
     setSelectedSubjects((prev) => {
       const index = prev.findIndex((x) => x.year === selectedYear);
       if (index < 0) return prev;
