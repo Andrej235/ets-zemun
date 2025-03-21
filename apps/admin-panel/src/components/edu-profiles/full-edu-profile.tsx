@@ -305,7 +305,7 @@ export default function FullEducationalProfile() {
               .filter((x) => x.year === selectedYear)[0]
               ?.subjects.map((x) => (
                 <div
-                  key={x.subjectId}
+                  key={`${x.subjectId}-year-${selectedYear}`}
                   className="flex flex-col gap-4 border-2 border-slate-700 rounded-md p-4"
                 >
                   <div className="flex justify-between">
