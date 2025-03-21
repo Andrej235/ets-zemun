@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import { useQuill } from "react-quilljs";
+import NewsPreview from "@/components/news/news-preview";
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import Toolbar from "quill/modules/toolbar";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { DatePicker } from "@/components/ui/date-picker";
-import NewsPreview from "@/components/news/news-preview";
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { useNavigate } from "react-router";
+import JoditEditor from "jodit-react";
+import "jodit/es2021/jodit.min.css";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 export type PreviewData = {
   title: string;
@@ -24,7 +24,6 @@ export type PreviewData = {
 };
 
 export default function NewNewsArticle() {
-  const { quillRef, quill } = useQuill();
   const { i18n } = useTranslation();
 
   const [previewData, setPreviewData] = useState<PreviewData>({
@@ -35,6 +34,8 @@ export default function NewNewsArticle() {
   });
 
   const navigate = useNavigate();
+  const editorContainerRef = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState<string>("");
 
   function handlePreviewDataChange(
     callback: (prev: PreviewData) => PreviewData
@@ -47,22 +48,15 @@ export default function NewNewsArticle() {
   }
 
   const compressImage = async (file: File, quality = 1) => {
-    // Get as image data
     const imageBitmap = await createImageBitmap(file);
-
-    // Draw to canvas
     const canvas = document.createElement("canvas");
     canvas.width = imageBitmap.width;
     canvas.height = imageBitmap.height;
     const ctx = canvas.getContext("2d")!;
     ctx.drawImage(imageBitmap, 0, 0);
-
-    // Turn into Blob
     const blob = await new Promise<Blob | null>((resolve) =>
       canvas.toBlob(resolve, "image/jpeg", quality)
     );
-
-    // Turn Blob into File
     return new File([blob!], file.name, {
       type: blob!.type,
     });
@@ -78,74 +72,64 @@ export default function NewNewsArticle() {
   }, []);
 
   useEffect(() => {
-    if (!quill) return;
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
+    const draftData = drafts ? JSON.parse(drafts)["new-article"] : null;
 
-    const draft = localStorage.getItem("draft");
-    if (draft) quill.root.innerHTML = draft;
+    if (!draftData) {
+      setValue("");
+    } else {
+      setValue(draftData);
+    }
+  }, [i18n.language]);
 
-    const insertToEditor = (url: string) => {
-      const range = quill.getSelection();
-      if (!range) return;
-      quill.insertEmbed(range.index, "image", url);
+  function debounce(
+    func: (arg: string) => void,
+    wait: number
+  ): (arg: string) => void {
+    let timeout: NodeJS.Timeout | null = null;
+
+    return (arg: string) => {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => func(arg), wait);
     };
+  }
 
-    const addImage = async (file: File) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(await compressImage(file, 0.5));
-      reader.onload = () => {
-        const imageDataUrl = reader.result as string;
-        insertToEditor(imageDataUrl);
-      };
-    };
+  const updateDraft = debounce((editorValue: string) => {
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
+    if (!drafts) {
+      localStorage.setItem(
+        `editor-drafts-${i18n.language}`,
+        JSON.stringify({
+          "new-article": editorValue,
+        })
+      );
+      return;
+    }
 
-    const toolbar = quill.getModule("toolbar") as Toolbar;
-    toolbar.addHandler("image", () => {
-      const input = document.createElement("input");
-      input.setAttribute("type", "file");
-      input.setAttribute("accept", "image/*");
-      input.click();
-
-      input.onchange = () => {
-        const file = input.files![0];
-        addImage(file);
-      };
-    });
-
-    quill.on("text-change", () => {
-      if (quill) localStorage.setItem("draft", quill.root.innerHTML);
-    });
-  }, [quill]);
+    const draftsData = JSON.parse(drafts);
+    draftsData["new-article"] = editorValue;
+    localStorage.setItem(
+      `editor-drafts-${i18n.language}`,
+      JSON.stringify(draftsData)
+    );
+  }, 300);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   async function handleSave() {
-    if (!quill) return;
+    const root = editorContainerRef.current?.querySelector(
+      ".jodit-wysiwyg"
+    ) as HTMLElement;
 
-    const root = quill.root;
-    const images = root.querySelectorAll("img");
-    const imageSources: {
-      source: string;
-      id: number;
-    }[] = [];
-
-    images.forEach((image, i) => {
-      const src = image.getAttribute("src");
-      if (src)
-        imageSources.push({
-          id: i + 1,
-          source: src,
-        });
-      image.setAttribute("src", "");
-      image.id = `image-${i + 1}`;
-    });
+    if (!root) {
+      alert("Greska prilikom cuvanja");
+      return;
+    }
 
     const payload: Schema<"CreateNewsRequestDto"> = {
       date: previewData.date.toISOString().replace(/[:.]/g, "").split("T")[0],
       previewImage: previewData.previewImage,
-      images: imageSources.map((x) => ({
-        id: x.id,
-        image: x.source,
-      })),
+      images: [],
       translation: {
         languageCode: i18n.language,
         newsId: -1,
@@ -164,6 +148,7 @@ export default function NewNewsArticle() {
 
     localStorage.removeItem("draft");
     localStorage.removeItem("preview");
+    localStorage.removeItem(`editor-drafts-${i18n.language}`);
     setIsModalOpen(false);
     navigate("/vesti");
   }
@@ -229,14 +214,28 @@ export default function NewNewsArticle() {
             ...previewData,
             id: -1,
             date: previewData.date.toDateString(),
-            isApproved: true
+            isApproved: true,
           }}
           disabledLink
         />
       </div>
 
       <div className="w-full min-h-[100vh]">
-        <div ref={quillRef} />
+        <div ref={editorContainerRef}>
+          <JoditEditor
+            config={{
+              theme: "dark",
+              uploader: {
+                imagesExtensions: ["jpg", "png", "jpeg", "gif"],
+                insertImageAsBase64URI: true,
+              },
+            }}
+            value={value}
+            onChange={(x) => {
+              updateDraft(x);
+            }}
+          />
+        </div>
 
         <Popover open={isModalOpen} onOpenChange={setIsModalOpen}>
           <PopoverTrigger
