@@ -29,7 +29,6 @@
     "jodit-react": "^5.2.15",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.7",
-    "quill": "^2.0.3",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
