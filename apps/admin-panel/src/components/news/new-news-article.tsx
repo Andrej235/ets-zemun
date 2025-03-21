@@ -82,15 +82,15 @@ export default function NewNewsArticle() {
     }
   }, [i18n.language]);
 
-  function debounce<T extends (...args: any[]) => void>(
-    func: T,
+  function debounce(
+    func: (arg: string) => void,
     wait: number
-  ): (...args: Parameters<T>) => void {
+  ): (arg: string) => void {
     let timeout: NodeJS.Timeout | null = null;
 
-    return (...args: Parameters<T>) => {
+    return (arg: string) => {
       if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
+      timeout = setTimeout(() => func(arg), wait);
     };
   }
 
