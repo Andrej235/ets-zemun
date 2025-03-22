@@ -10,6 +10,7 @@
 
   .awards-list {
     max-width: 140rem;
+    width: 90%;
     padding: 0 2rem;
     margin: 0 auto;
 
@@ -17,6 +18,15 @@
     grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
     gap: 5rem;
 
+    justify-items: center;
+
+    @media screen and (max-width: 425px) {
+      padding: 0;
+    }
+
+    .award-card-link {
+      max-width: 45rem;
+    }
     .award-card {
       height: 55rem;
       background-color: $secondary-background;
@@ -61,6 +71,8 @@
       }
 
       .award-card-header {
+        padding: 0 1rem;
+        
         h2 {
           margin-top: 1rem;
           text-align: center;
@@ -81,6 +93,16 @@
           color: $text-secondary;
           font-size: 1.8rem;
           font-weight: 500;
+        }
+
+        .award-card-header-line {
+          width: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          flex-wrap: wrap;
         }
       }
 
@@ -117,13 +139,13 @@
         }
       }
     }
+  }
 
-    .skeleton {
-      cursor: default;
+  .skeleton {
+    cursor: default;
 
-      &::after {
-        display: none;
-      }
+    &::after {
+      display: none;
     }
   }
 }
