@@ -3,7 +3,7 @@ import useLoader from "@better-router/use-loader";
 import useOutsideClick from "@hooks/use-outside-click";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SubjectOverlay from "./subject-overlay";
 import { SingleProfilePageLoader } from "./single-profile-page-loader";
@@ -16,6 +16,18 @@ export default function SingleProfileSubjectsSegment() {
     subject: Schema<"ProfileSubjectResponseDto">;
     type: "general" | "vocational";
   } | null>(null);
+
+  useEffect(() => {
+    if (selectedSubject) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [selectedSubject]);
 
   const handleYearChange = (year: number) => {
     setSelectedYear(year);
