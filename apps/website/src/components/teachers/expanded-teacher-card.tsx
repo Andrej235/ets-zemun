@@ -46,11 +46,11 @@ export default function ExpandedTeacherCard({
         </div>
         <div className="expanded-info-container">
           <div className="bio">
-            <p className="bio-h">Bio:</p>
+            <p className="bio-h">{t("teachers.bio")}</p>
             <p>{teacher.bio}</p>
           </div>
           <div className="qualification">
-            <p className="qualification-h">Qualification:</p>
+            <p className="qualification-h">{t("teachers.qualifications")}</p>
             {teacher.qualifications.map((qualification) => (
               <p key={qualification.id}>{qualification.name}</p>
             ))}

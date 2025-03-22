@@ -97,7 +97,7 @@
 
 .settings-popup {
   position: absolute;
-  z-index: 9999;
+  z-index: 9999 !important;
   top: 3rem;
   right: 3rem;
   overflow: hidden;

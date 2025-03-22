@@ -27,8 +27,19 @@ export default function HamburgerNavigationSearchBar({
   const fuse = useMemo(
     () =>
       new Fuse(searchMap.entries as SearchEntry[], {
-        keys: ["title", "keywords"],
-        getFn: (entry, path) => t(entry[path as keyof SearchEntry]),
+        keys: [
+          {
+            name: "title",
+            getFn: (entry) => t(entry.title),
+          },
+          {
+            name: "keywords",
+            getFn: (entry) =>
+              t(entry.keywords, {
+                returnObjects: true,
+              }) as string[],
+          },
+        ],
       }),
     [t]
   );

@@ -14,7 +14,7 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
     return (
       <div className={"full-screen-subject-container subject-item"} ref={ref}>
         <p className={`subject-name`}>
-          <div>{subject.subject.name}</div>
+          <div className="subject-name-text">{subject.subject.name}</div>
           <div className={`subject-${type}`}>
             {type === "general"
               ? t("educationalProfiles.subjects.types.general")
