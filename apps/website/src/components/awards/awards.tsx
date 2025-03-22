@@ -42,14 +42,16 @@ export default function Awards() {
           ))}
         >
           {(award) => (
-            <Link to={award.externalLink ?? "/takmicenja"} key={award.id}>
+            <Link className="award-card-link" to={award.externalLink ?? "/takmicenja"} key={award.id}>
               <div className="award-card" onPointerMove={handleMouseMove}>
                 <img src={award.image} alt={award.title} />
                 <div className="award-card-header">
                   <h2>{award.title}</h2>
-                  <p>
-                    {award.competition} - {award.dayOfAward}
-                  </p>
+                  <div className="award-card-header-line">
+                    <p>{award.competition}</p>
+                    <p>&nbsp;-&nbsp;</p>
+                    <p>{award.dayOfAward}</p>
+                  </div>
                 </div>
 
                 <div className="content">
