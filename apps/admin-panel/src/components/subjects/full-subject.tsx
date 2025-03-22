@@ -266,8 +266,6 @@ export default function FullSubject() {
             if (data.code !== "200") return null;
 
             const teachers = data.content.teachers;
-            console.log(teachers.nextCursor);
-
             return (
               <>
                 <AlertDialog>
