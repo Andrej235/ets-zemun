@@ -4,19 +4,19 @@ import NewsPreview from "@/components/news/news-preview";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
 import compressImage from "@/lib/compress-image";
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
-import { useCallback, useEffect, useState } from "react";
-import { useQuill } from "react-quilljs";
+import JoditEditor from "jodit-react";
+import "jodit/es2021/jodit.min.css";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import editNewsArticleLoader from "./edit-news-article-loader";
 import { PreviewData } from "./new-news-article";
-import { recursivelyLazyLoad } from "@/hooks/use-lazy-load";
-import Toolbar from "quill/modules/toolbar";
-import { useNavigate } from "react-router";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { useTranslation } from "react-i18next";
 
 type EditNewsArticleProps = {
   readonly createTranslation?: boolean;
@@ -30,7 +30,8 @@ export default function EditNewsArticle({
   return (
     <Async await={loaderData}>
       {(data) => {
-        if (data.preview.code !== "200" || data.full.code !== "200") return null;
+        if (data.preview.code !== "200" || data.full.code !== "200")
+          return null;
 
         return (
           <Editor
@@ -51,8 +52,8 @@ type EditorProps = {
 };
 
 function Editor({ preview, full: news, createTranslation }: EditorProps) {
-  const { quillRef, quill } = useQuill();
   const navigate = useNavigate();
+  const editorContainerRef = useRef<HTMLDivElement>(null);
 
   const { i18n } = useTranslation();
 
@@ -98,10 +99,80 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
     }
   }, [preview, handlePreviewDataChange, i18n.language]);
 
-  async function handleSave() {
-    if (!quill) return;
+  const [value, setValue] = useState<string>("");
+  useEffect(() => {
+    const editorRoot =
+      editorContainerRef.current?.querySelector(".jodit-wysiwyg");
+    if (!editorRoot) return;
 
-    const root = quill.root;
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
+    const draftData = drafts ? JSON.parse(drafts)[news.id] : null;
+
+    if (!draftData) {
+      setValue(news.markup);
+      recursivelyLazyLoad(news.images, (images) => {
+        images.forEach((image) => {
+          const imageRef = editorRoot.querySelector(`img#image-${image.id}`);
+          imageRef?.setAttribute("src", image.image);
+        });
+      });
+    } else {
+      setValue(draftData);
+    }
+  }, [news, i18n.language]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function debounce<T extends (...args: any[]) => void>(
+    func: T,
+    wait: number
+  ): (...args: Parameters<T>) => void {
+    let timeout: NodeJS.Timeout | null = null;
+
+    return (...args: Parameters<T>) => {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  }
+
+  const updateDraft = debounce((editorValue: string) => {
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
+    if (!drafts) {
+      localStorage.setItem(
+        `editor-drafts-${i18n.language}`,
+        JSON.stringify({
+          [news.id]: editorValue,
+        })
+      );
+      return;
+    }
+
+    const draftsData = JSON.parse(drafts);
+    draftsData[news.id] = editorValue;
+    localStorage.setItem(
+      `editor-drafts-${i18n.language}`,
+      JSON.stringify(draftsData)
+    );
+  }, 300);
+
+  const [isInDraftMode, setIsInDraftMode] = useState(false);
+  useEffect(() => {
+    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
+    if (!drafts) return;
+
+    const draftsData = JSON.parse(drafts);
+    if (draftsData[news.id]) setIsInDraftMode(true);
+  }, [news.id, i18n.language]);
+
+  async function handleSave() {
+    const root = editorContainerRef.current?.querySelector(
+      ".jodit-wysiwyg"
+    ) as HTMLElement;
+
+    if (!root) {
+      alert("Greska prilikom cuvanja");
+      return;
+    }
+
     const images = root.querySelectorAll("img");
     const imageSources: {
       source: string;
@@ -110,13 +181,25 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
 
     images.forEach((image, i) => {
       const src = image.getAttribute("src");
-      if (src)
+      if (src) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx?.drawImage(image, 0, 0, image.width, image.height);
+
+        const compressedSrc = canvas.toDataURL("image/jpeg", 0.25); // Compress to 25% quality
         imageSources.push({
           id: i + 1,
-          source: src,
+          source: compressedSrc,
         });
-      image.setAttribute("src", "");
-      image.id = `image-${i + 1}`;
+
+        image.setAttribute("src", "");
+        image.id = `image-${i + 1}`;
+
+        image.src = src;
+      }
     });
 
     if (!createTranslation) {
@@ -175,83 +258,6 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
     setIsModalOpen(false);
     navigate("/vesti");
   }
-
-  useEffect(() => {
-    if (!quill) return;
-
-    const insertToEditor = (url: string) => {
-      const range = quill.getSelection();
-      if (!range) return;
-      quill.insertEmbed(range.index, "image", url);
-    };
-
-    const addImage = async (file: File) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(await compressImage(file, 0.5));
-      reader.onload = () => {
-        const imageDataUrl = reader.result as string;
-        insertToEditor(imageDataUrl);
-      };
-    };
-
-    const toolbar = quill.getModule("toolbar") as Toolbar;
-    toolbar.addHandler("image", () => {
-      const input = document.createElement("input");
-      input.setAttribute("type", "file");
-      input.setAttribute("accept", "image/*");
-      input.click();
-
-      input.onchange = () => {
-        const file = input.files![0];
-        addImage(file);
-      };
-    });
-
-    quill.on("text-change", () => {
-      const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
-      if (!drafts) {
-        localStorage.setItem(
-          `editor-drafts-${i18n.language}`,
-          JSON.stringify({
-            [news.id]: quill.root.innerHTML,
-          })
-        );
-        return;
-      }
-
-      const draftsData = JSON.parse(drafts);
-      draftsData[news.id] = quill.root.innerHTML;
-      localStorage.setItem(
-        `editor-drafts-${i18n.language}`,
-        JSON.stringify(draftsData)
-      );
-    });
-
-    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
-    const draftData = drafts ? JSON.parse(drafts)[news.id] : null;
-
-    if (!draftData) {
-      quill.root.innerHTML = news.markup;
-
-      recursivelyLazyLoad(news.images, (images) => {
-        images.forEach((image) => {
-          const imageRef = quill.root.querySelector(`img#image-${image.id}`);
-          imageRef?.setAttribute("src", image.image);
-        });
-      });
-    } else {
-      quill.root.innerHTML = draftData;
-    }
-  }, [quill, news, i18n.language]);
-
-  const [isInDraftMode, setIsInDraftMode] = useState(false);
-  useEffect(() => {
-    const drafts = localStorage.getItem(`editor-drafts-${i18n.language}`);
-    if (!drafts) return;
-
-    const draftsData = JSON.parse(drafts);
-    if (draftsData[news.id]) setIsInDraftMode(true);
-  }, [news.id, i18n.language]);
 
   return (
     <div className="w-full h-max p-20 flex flex-col gap-16">
@@ -358,7 +364,21 @@ function Editor({ preview, full: news, createTranslation }: EditorProps) {
       </div>
 
       <div className="w-full min-h-[100vh]">
-        <div ref={quillRef} />
+        <div ref={editorContainerRef}>
+          <JoditEditor
+            config={{
+              theme: "dark",
+              uploader: {
+                imagesExtensions: ["jpg", "png", "jpeg", "gif"],
+                insertImageAsBase64URI: true,
+              },
+            }}
+            value={value}
+            onChange={(x) => {
+              updateDraft(x);
+            }}
+          />
+        </div>
 
         <Popover open={isModalOpen} onOpenChange={setIsModalOpen}>
           <PopoverTrigger

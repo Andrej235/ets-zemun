@@ -61,7 +61,6 @@ export default function FloatieOverlay({
           );
 
           active.node.classList.remove("dragging");
-          console.log(active.node);
         },
       }}
     >

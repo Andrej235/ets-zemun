@@ -21,8 +21,20 @@ public partial class QualificationService : IQualificationService
         );
 
         if (updateResult.IsFailed)
-            return Result.Fail(updateResult.Errors);
+        {
+            var result = await CreateTranslation(
+                new()
+                {
+                    LanguageCode = request.LanguageCode,
+                    QualificationId = request.QualificationId,
+                    Name = request.Name,
+                    Description = request.Description,
+                }
+            );
 
+            if (result.IsFailed)
+                return result;
+        }
         return Result.Ok();
     }
 }
