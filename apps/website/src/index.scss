@@ -1,101 +1,112 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: $text-primary;
-  background-color: $background;
+    color-scheme: light dark;
+    color: $text-primary;
+    background-color: $background;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  font-size: 10px;
+    font-size: 10px;
 
-  &[data-theme="dark"] {
-    color-scheme: dark !important;
-  }
+    &[data-theme="dark"] {
+        color-scheme: dark !important;
+    }
 
-  &[data-theme="light"] {
-    color-scheme: light !important;
-  }
+    &[data-theme="light"] {
+        color-scheme: light !important;
+    }
 }
 html {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  place-items: center;
-  max-width: 100svw;
-  min-height: 100svh;
-  max-height: 100svh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    place-items: center;
+    max-width: 100svw;
+    min-height: 100svh;
+    max-height: 100svh;
 }
 
 #root {
-  position: absolute;
-  width: 100%;
-  min-height: 100svh;
+    position: absolute;
+    width: 100%;
+    min-height: 100svh;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 button {
-  @include button;
+    @include button;
 }
 
 i.icon {
-  color: $text-primary;
+    color: $text-primary;
 }
 
 button i.icon {
-  color: $text-accent;
+    color: $text-accent;
 }
 
 a {
-  color: $text-primary;
-  text-decoration: none;
-  transition: all 0.1s ease-out;
-  outline: none;
+    color: $text-primary;
+    text-decoration: none;
+    transition: all 0.1s ease-out;
+    outline: none;
 
-  &:hover,
-  &:focus-visible {
-    color: $accent;
-  }
+    &:hover,
+    &:focus-visible {
+        color: $accent;
+    }
 }
 
 .os-theme-dark,
 .os-theme-light {
-  --os-handle-bg: #{$accent-secondary} !important;
-  --os-handle-bg-hover: #{$accent-secondary-highlight} !important;
-  --os-handle-bg-active: #{$accent-secondary-highlight} !important;
+    --os-handle-bg: #{$accent-secondary} !important;
+    --os-handle-bg-hover: #{$accent-secondary-highlight} !important;
+    --os-handle-bg-active: #{$accent-secondary-highlight} !important;
 }
 
 @media screen and (max-width: 768.98px) {
-  :root {
-    font-size: 8px;
-  }
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-height: 750px) {
+    :root {
+        font-size: 7px;
+    }
 }
 
 .dg.ac {
-  z-index: 10000000 !important;
+    z-index: 10000000 !important;
 }
 
 .search-target-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  & > * {
-    width: 100%;
-    height: 100%;
-  }
+    & > * {
+        width: 100%;
+        height: 100%;
+    }
 }
-
