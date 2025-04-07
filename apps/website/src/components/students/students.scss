@@ -1,692 +1,692 @@
 .students-page-container {
-  justify-self: center;
-  width: 100vw;
-  max-width: 100vw;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  overflow: hidden;
-
-  @media screen and (max-width: 1440px) {
-    padding: 0;
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-self: center;
     width: 100vw;
-  }
-
-  .hero-space {
-    max-width: 100%;
-    min-width: 100%;
-    width: 100%;
+    max-width: 100vw;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .hero-image {
-      position: relative;
+    overflow: hidden;
 
-      width: 100%;
-      height: calc(60svh - 10rem);
-
-      .text {
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        width: 100%;
-        padding-inline: 2rem;
-
-        h1 {
-          font-size: 6rem;
-          font-weight: 600;
-          color: #fff;
-          text-align: center;
-          text-shadow: $text-secondary 0px 0px 10px;
-        }
-
-        h2 {
-          font-size: 3rem;
-          font-weight: 400;
-          color: #fff;
-          text-align: center;
-          text-shadow: $text-secondary 0px 0px 10px;
-        }
-      }
-      img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    @media screen and (max-width: 1440px) {
+        padding: 0;
     }
 
-    .hero-block {
-      position: relative;
-      width: 100%;
-      min-height: 100%;
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+    }
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .hero-space {
+        max-width: 100%;
+        min-width: 100%;
+        width: 100%;
 
-      .hero-cards {
-        position: absolute;
-        top: 0%;
-        transform: translate(0, -50%);
-        max-width: 160rem;
-        width: 90%;
-        box-shadow: 0px 5px 15px $shadow;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        display: grid;
-        grid-template-columns: repeat(6, minmax(18rem, 1fr));
-        justify-items: center;
+        .hero-image {
+            position: relative;
 
-        @media screen and (max-width: 1200px) {
-          grid-template-columns: repeat(3, minmax(18rem, 1fr));
-        }
-
-        @media screen and (max-width: 480px) {
-          position: relative;
-
-          width: 100%;
-          box-shadow: none;
-          transform: none;
-
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        & > :nth-child(even) {
-          background-color: $secondary-background;
-
-          .hero-block-button::before {
-            background-color: $secondary-background;
-          }
-        }
-
-        & > :nth-child(odd) {
-          background-color: $background;
-
-          .hero-block-button::before {
-            background-color: $background;
-          }
-        }
-
-        .hero-block-element {
-          width: 100%;
-          height: 20rem;
-          overflow: clip;
-          transition: 200ms ease-out;
-
-          text-align: center;
-
-          cursor: pointer;
-
-          .hero-block-icon {
             width: 100%;
-            height: 50%;
-            transition: 200ms ease-out;
+            height: calc(60svh - 10rem);
 
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+            .text {
+                position: absolute;
+                top: 35%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+                width: 100%;
+                padding-inline: 2rem;
 
-            font-size: 5rem;
-            color: $text-primary;
+                h1 {
+                    font-size: 6rem;
+                    font-weight: 600;
+                    color: #fff;
+                    text-align: center;
+                    text-shadow: $text-secondary 0px 0px 10px;
+                }
 
-            @media (prefers-color-scheme: light) {
-              color: $accent;
+                h2 {
+                    font-size: 3rem;
+                    font-weight: 400;
+                    color: #fff;
+                    text-align: center;
+                    text-shadow: $text-secondary 0px 0px 10px;
+                }
             }
-          }
+            img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
 
-          .hero-block-info {
+        .hero-block {
+            position: relative;
             width: 100%;
-            padding: 0 2rem;
+            min-height: 100%;
 
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            .hero-block-header {
-              font-size: 2rem;
-              font-weight: 600;
-              margin: 3rem 0;
-              transition: 200ms ease-out;
+            .hero-cards {
+                position: absolute;
+                top: 0%;
+                transform: translate(0, -50%);
+                max-width: 160rem;
+                width: 80%;
+                box-shadow: 0px 5px 15px $shadow;
 
-              @media (prefers-color-scheme: light) {
-                color: $accent;
-              }
-            }
-          }
+                display: grid;
+                grid-template-columns: repeat(6, minmax(18rem, 1fr));
+                justify-items: center;
 
-          &:hover,
-          &:focus-within {
-            .hero-block-icon {
-              transform: translateY(-2rem);
+                @media screen and (max-width: 1350px) {
+                    max-width: 100rem;
+                    grid-template-columns: repeat(3, minmax(18rem, 1fr));
+                }
+
+                @media screen and (max-width: 550px) {
+                    position: relative;
+
+                    width: 100%;
+                    box-shadow: none;
+                    transform: none;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                & > :nth-child(even) {
+                    background-color: $secondary-background;
+
+                    .hero-block-button::before {
+                        background-color: $secondary-background;
+                    }
+                }
+
+                & > :nth-child(odd) {
+                    background-color: $background;
+
+                    .hero-block-button::before {
+                        background-color: $background;
+                    }
+                }
+
+                .hero-block-element {
+                    width: 100%;
+                    height: 20rem;
+                    overflow: clip;
+                    transition: 200ms ease-out;
+
+                    text-align: center;
+
+                    cursor: pointer;
+
+                    .hero-block-icon {
+                        width: 100%;
+                        height: 50%;
+                        transition: 200ms ease-out;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-end;
+
+                        font-size: 5rem;
+                        color: $text-primary;
+
+                        @media (prefers-color-scheme: light) {
+                            color: $accent;
+                        }
+                    }
+
+                    .hero-block-info {
+                        width: 100%;
+                        padding: 0 2rem;
+
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .hero-block-header {
+                            font-size: 2rem;
+                            font-weight: 600;
+                            margin: 3rem 0;
+                            transition: 200ms ease-out;
+
+                            @media (prefers-color-scheme: light) {
+                                color: $accent;
+                            }
+                        }
+                    }
+
+                    &:hover,
+                    &:focus-within {
+                        .hero-block-icon {
+                            transform: translateY(-2rem);
+                        }
+                        .hero-block-header {
+                            transform: translateY(-2rem);
+                        }
+                    }
+                }
             }
-            .hero-block-header {
-              transform: translateY(-2rem);
-            }
-          }
         }
-      }
-    }
-  }
-
-  .content-container {
-    max-width: 100vw;
-    width: 100vw;
-    overflow: hidden;
-    padding-top: 20rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    @media screen and (max-width: 1200px) {
-      padding-top: 25rem;
     }
 
-    @media screen and (max-width: 480px) {
-      padding-top: 10rem;
+    .content-container {
+        max-width: 100vw;
+        width: 100vw;
+        overflow: hidden;
+        padding-top: 20rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (max-width: 1200px) {
+            padding-top: 25rem;
+        }
+
+        @media screen and (max-width: 480px) {
+            padding-top: 10rem;
+        }
+
+        .parliament-container {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & > h1 {
+                margin-bottom: 8rem;
+
+                font-size: 4rem;
+                color: $accent-secondary;
+                text-align: center;
+            }
+        }
+
+        .part-time-container {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & > h1 {
+                margin-bottom: 8rem;
+
+                font-size: 4rem;
+                color: $accent-secondary;
+                text-align: center;
+            }
+
+            .price-list {
+                max-width: 120rem;
+                width: 80%;
+                margin-bottom: 8rem;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                & > h2 {
+                    margin-bottom: 3rem;
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: $accent-secondary;
+                    text-align: center;
+                }
+
+                .price-list-item {
+                    width: 100%;
+                    max-width: 80rem;
+                    padding: 1rem 2rem;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .item-name {
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                        color: $text-primary;
+                    }
+
+                    .item-price {
+                        font-size: 1.6rem;
+                        font-weight: 300;
+                        color: $text-primary;
+                    }
+                }
+            }
+
+            .payment-method {
+                width: 100%;
+                margin-bottom: 8rem;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                & > h2 {
+                    margin-bottom: 3rem;
+
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: $accent-secondary;
+                    text-align: center;
+                }
+
+                & > p {
+                    font-size: 1.6rem;
+                    color: $text-primary;
+                    text-align: center;
+                }
+            }
+        }
+
+        .pp-service {
+            align-self: center;
+            width: 80%;
+            max-width: 120rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & > h1 {
+                margin-bottom: 8rem;
+
+                font-size: 4rem;
+                color: $accent-secondary;
+                text-align: center;
+            }
+
+            & > h2 {
+                width: 100%;
+                margin-bottom: 3rem;
+
+                font-size: 3rem;
+                font-weight: 600;
+                color: $accent-secondary;
+                text-align: start;
+            }
+
+            .pp-service-description {
+                width: 100;
+                margin-bottom: 8rem;
+
+                p {
+                    font-size: 1.8rem;
+                    color: $text-primary;
+                }
+            }
+
+            ul {
+                font-size: 1.6rem;
+                margin-bottom: 8rem;
+            }
+        }
+
+        .anti-bullying {
+            align-self: center;
+            width: 80%;
+            max-width: 120rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .anti-bullying-link {
+                margin-top: 3rem;
+            }
+
+            a {
+                width: fit-content;
+                border: none;
+                color: $text-primary;
+                background: none;
+                position: relative;
+                cursor: pointer;
+
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                p {
+                    width: fit-content;
+                    font-size: 1em;
+                }
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    height: 2px;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    transform: scaleX(0);
+                    transform-origin: bottom right;
+                    background: currentColor;
+                    transition: transform 0.25s ease-out;
+                }
+
+                &:hover:before,
+                &:focus-visible::before {
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                }
+
+                .icon {
+                    transition: 200ms;
+                    font-size: 1.65rem;
+                    width: max-content;
+                    height: max-content;
+                }
+
+                &:hover .icon,
+                &:focus-visible .icon {
+                    transform: rotate(-90deg);
+                }
+            }
+
+            & > h1 {
+                margin-bottom: 8rem;
+
+                font-size: 4rem;
+                color: $accent-secondary;
+                text-align: center;
+            }
+
+            & > h2 {
+                width: 100%;
+                margin-bottom: 3rem;
+
+                font-size: 3rem;
+                font-weight: 600;
+                color: $accent-secondary;
+                text-align: start;
+            }
+
+            .anti-bullying-description {
+                width: 100;
+                margin-bottom: 8rem;
+
+                p {
+                    font-size: 1.8rem;
+                    color: $text-primary;
+                }
+            }
+
+            ul {
+                width: 100%;
+                align-self: start;
+                margin-bottom: 8rem;
+
+                align-items: flex-start;
+
+                font-size: 1.6rem;
+            }
+        }
+
+        .mental-health {
+            align-self: center;
+            width: 80%;
+            max-width: 120rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & > h1 {
+                margin-bottom: 8rem;
+
+                font-size: 4rem;
+                color: $accent-secondary;
+                text-align: center;
+            }
+
+            & > h2 {
+                width: 100%;
+                margin-bottom: 3rem;
+
+                font-size: 3rem;
+                font-weight: 500;
+                color: $accent-secondary;
+                text-align: start;
+            }
+
+            .mental-health-description {
+                width: 100;
+                margin-bottom: 8rem;
+
+                & > h2 {
+                    width: 100%;
+                    margin-bottom: 3rem;
+
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: $accent-secondary;
+                    text-align: start;
+                }
+
+                p {
+                    font-size: 1.8rem;
+                    color: $text-primary;
+                }
+            }
+
+            .mental-health-description-item {
+                width: 100;
+                margin-bottom: 4rem;
+
+                & > h3 {
+                    width: 100%;
+                    margin-bottom: 2rem;
+                    margin-top: 2rem;
+
+                    font-size: 2.6rem;
+                    font-weight: 400;
+                    color: $text-primary;
+                    text-align: start;
+                }
+
+                p {
+                    font-size: 1.8rem;
+                    color: $text-primary;
+                }
+            }
+
+            ul {
+                width: 100%;
+                align-self: start;
+                margin-bottom: 8rem;
+
+                align-items: flex-start;
+
+                font-size: 1.6rem;
+            }
+        }
     }
 
-    .parliament-container {
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      & > h1 {
-        margin-bottom: 8rem;
-
-        font-size: 4rem;
-        color: $accent-secondary;
-        text-align: center;
-      }
-    }
-
-    .part-time-container {
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      & > h1 {
-        margin-bottom: 8rem;
-
-        font-size: 4rem;
-        color: $accent-secondary;
-        text-align: center;
-      }
-
-      .price-list {
+    .table-container {
         max-width: 120rem;
         width: 80%;
         margin-bottom: 8rem;
 
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
 
-        & > h2 {
-          margin-bottom: 3rem;
-          font-size: 3rem;
-          font-weight: 600;
-          color: $accent-secondary;
-          text-align: center;
-        }
-
-        .price-list-item {
-          width: 100%;
-          max-width: 80rem;
-          padding: 1rem 2rem;
-
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          .item-name {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: $text-primary;
-          }
-
-          .item-price {
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: $text-primary;
-          }
-        }
-      }
-
-      .payment-method {
-        width: 100%;
-        margin-bottom: 8rem;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        & > h2 {
-          margin-bottom: 3rem;
-
-          font-size: 3rem;
-          font-weight: 600;
-          color: $accent-secondary;
-          text-align: center;
-        }
-
-        & > p {
-          font-size: 1.6rem;
-          color: $text-primary;
-          text-align: center;
-        }
-      }
-    }
-
-    .pp-service {
-      align-self: center;
-      width: 80%;
-      max-width: 120rem;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      & > h1 {
-        margin-bottom: 8rem;
-
-        font-size: 4rem;
-        color: $accent-secondary;
-        text-align: center;
-      }
-
-      & > h2 {
-        width: 100%;
-        margin-bottom: 3rem;
-
-        font-size: 3rem;
-        font-weight: 600;
-        color: $accent-secondary;
-        text-align: start;
-      }
-
-      .pp-service-description {
-        width: 100;
-        margin-bottom: 8rem;
-
-        p {
-          font-size: 1.8rem;
-          color: $text-primary;
-        }
-      }
-
-      ul {
-        font-size: 1.6rem;
-        margin-bottom: 8rem;
-      }
-    }
-
-    .anti-bullying {
-      align-self: center;
-      width: 80%;
-      max-width: 120rem;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .anti-bullying-link {
-        margin-top: 3rem;
-      }
-
-      a {
-        width: fit-content;
-        border: none;
-        color: $text-primary;
-        background: none;
-        position: relative;
-        cursor: pointer;
-
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        p {
-          width: fit-content;
-          font-size: 1em;
-        }
-
-        &:before {
-          content: "";
-          position: absolute;
-          height: 2px;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          transform: scaleX(0);
-          transform-origin: bottom right;
-          background: currentColor;
-          transition: transform 0.25s ease-out;
-        }
-
-        &:hover:before,
-        &:focus-visible::before {
-          transform: scaleX(1);
-          transform-origin: bottom left;
-        }
-
-        .icon {
-          transition: 200ms;
-          font-size: 1.65rem;
-          width: max-content;
-          height: max-content;
-        }
-
-        &:hover .icon,
-        &:focus-visible .icon {
-          transform: rotate(-90deg);
-        }
-      }
-
-      & > h1 {
-        margin-bottom: 8rem;
-
-        font-size: 4rem;
-        color: $accent-secondary;
-        text-align: center;
-      }
-
-      & > h2 {
-        width: 100%;
-        margin-bottom: 3rem;
-
-        font-size: 3rem;
-        font-weight: 600;
-        color: $accent-secondary;
-        text-align: start;
-      }
-
-      .anti-bullying-description {
-        width: 100;
-        margin-bottom: 8rem;
-
-        p {
-          font-size: 1.8rem;
-          color: $text-primary;
-        }
-      }
-
-      ul {
-        width: 100%;
-        align-self: start;
-        margin-bottom: 8rem;
-
-        align-items: flex-start;
-
-        font-size: 1.6rem;
-      }
-    }
-
-    .mental-health {
-      align-self: center;
-      width: 80%;
-      max-width: 120rem;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      & > h1 {
-        margin-bottom: 8rem;
-
-        font-size: 4rem;
-        color: $accent-secondary;
-        text-align: center;
-      }
-
-      & > h2 {
-        width: 100%;
-        margin-bottom: 3rem;
-
-        font-size: 3rem;
-        font-weight: 500;
-        color: $accent-secondary;
-        text-align: start;
-      }
-
-      .mental-health-description {
-        width: 100;
-        margin-bottom: 8rem;
-
-        & > h2 {
-          width: 100%;
-          margin-bottom: 3rem;
-
-          font-size: 3rem;
-          font-weight: 600;
-          color: $accent-secondary;
-          text-align: start;
-        }
-
-        p {
-          font-size: 1.8rem;
-          color: $text-primary;
-        }
-      }
-
-      .mental-health-description-item {
-        width: 100;
-        margin-bottom: 4rem;
-
-        & > h3 {
-          width: 100%;
-          margin-bottom: 2rem;
-          margin-top: 2rem;
-
-          font-size: 2.6rem;
-          font-weight: 400;
-          color: $text-primary;
-          text-align: start;
-        }
-
-        p {
-          font-size: 1.8rem;
-          color: $text-primary;
-        }
-      }
-
-      ul {
-        width: 100%;
-        align-self: start;
-        margin-bottom: 8rem;
-
-        align-items: flex-start;
-
-        font-size: 1.6rem;
-      }
-    }
-  }
-
-  .table-container {
-    max-width: 120rem;
-    width: 80%;
-    margin-bottom: 8rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    overflow: visible;
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      box-shadow: 0px 5px 15px $shadow;
-      border: 2px solid $background;
-      overflow: hidden;
-
-      caption {
-        margin-bottom: 3rem;
-        font-size: 3rem;
-        font-weight: 600;
-        color: $accent-secondary;
-      }
-
-      th,
-      td {
-        width: 20%;
-        padding: 2rem;
-        font-size: 1.6rem;
-        text-align: center;
-      }
-
-      th {
-        color: $text-primary;
-        background-color: $secondary-background;
-        border-bottom: 2px solid $background;
-      }
-
-      td {
-        color: $text-primary;
-        border-bottom: 1px solid $background;
-      }
-
-      tr:nth-child(even) {
-        background-color: $secondary-background;
-      }
-
-      tr:nth-child(odd) {
-        background-color: $secondary-background;
-      }
-
-      tr:hover {
-        background-color: $background;
-      }
-    }
-  }
-
-  @media (max-width: 651px) {
-    .content-container {
-      .part-time-container {
-        .price-list {
-          & > h2 {
-            font-size: 2rem;
-          }
-
-          .item-name {
-            font-size: 1.4rem;
-          }
-
-          .item-price {
-            font-size: 1.4rem;
-          }
-        }
-
-        .payment-method {
-          & > h2 {
-            font-size: 2rem;
-          }
-
-          & > p {
-            font-size: 1.4rem;
-          }
-        }
-      }
-
-      .table-container {
-        width: 100%;
-
-        caption {
-          font-size: 2rem;
-        }
+        overflow: visible;
 
         table {
-          margin-top: 1rem;
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0px 5px 15px $shadow;
+            border: 2px solid $background;
+            overflow: hidden;
 
-          th,
-          td {
-            font-size: 1.4rem;
-            padding: 1rem;
-          }
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .hero-space {
-      .hero-image {
-        height: 40svh;
-
-        &::after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          background: linear-gradient(
-            180deg,
-            transparent 0%,
-            transparent 85%,
-            $secondary-background 100%
-          );
-          top: 0;
-          left: 0;
-          opacity: 1;
-        }
-
-        @media screen and (max-width: 550px) {
-          .text {
-            top: 50%;
-
-            h1 {
-              font-size: 3.7rem;
+            caption {
+                margin-bottom: 3rem;
+                font-size: 3rem;
+                font-weight: 600;
+                color: $accent-secondary;
             }
 
-            h2 {
-              font-size: 2.5rem;
+            th,
+            td {
+                width: 20%;
+                padding: 2rem;
+                font-size: 1.6rem;
+                text-align: center;
             }
-          }
+
+            th {
+                color: $text-primary;
+                background-color: $secondary-background;
+                border-bottom: 2px solid $background;
+            }
+
+            td {
+                color: $text-primary;
+                border-bottom: 1px solid $background;
+            }
+
+            tr:nth-child(even) {
+                background-color: $secondary-background;
+            }
+
+            tr:nth-child(odd) {
+                background-color: $secondary-background;
+            }
+
+            tr:hover {
+                background-color: $background;
+            }
         }
-      }
     }
-  }
 
-  @media (max-width: 425px) {
-    .content-container {
-      .table-container {
-        width: 100%;
+    @media (max-width: 651px) {
+        .content-container {
+            .part-time-container {
+                .price-list {
+                    & > h2 {
+                        font-size: 2rem;
+                    }
 
-        table {
-          margin-top: 1rem;
+                    .item-name {
+                        font-size: 1.4rem;
+                    }
 
-          caption {
-            font-size: 2rem;
-          }
+                    .item-price {
+                        font-size: 1.4rem;
+                    }
+                }
+
+                .payment-method {
+                    & > h2 {
+                        font-size: 2rem;
+                    }
+
+                    & > p {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+
+            .table-container {
+                width: 100%;
+
+                caption {
+                    font-size: 2rem;
+                }
+
+                table {
+                    margin-top: 1rem;
+
+                    th,
+                    td {
+                        font-size: 1.4rem;
+                        padding: 1rem;
+                    }
+                }
+            }
         }
-
-        .part-time-table {
-          th,
-          td {
-            padding: 0rem;
-          }
-        }
-      }
     }
-  }
+
+    @media screen and (max-width: 768px) {
+        .hero-space {
+            .hero-image {
+                height: 40svh;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: transparent;
+                    background: linear-gradient(
+                        180deg,
+                        transparent 0%,
+                        transparent 85%,
+                        $secondary-background 100%
+                    );
+                    top: 0;
+                    left: 0;
+                    opacity: 1;
+                }
+
+                @media screen and (max-width: 550px) {
+                    .text {
+                        top: 50%;
+
+                        h1 {
+                            font-size: 3.7rem;
+                        }
+
+                        h2 {
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 425px) {
+        .content-container {
+            .table-container {
+                width: 100%;
+
+                table {
+                    margin-top: 1rem;
+
+                    caption {
+                        font-size: 2rem;
+                    }
+                }
+
+                .part-time-table {
+                    th,
+                    td {
+                        padding: 0rem;
+                    }
+                }
+            }
+        }
+    }
 }
-
