@@ -632,6 +632,16 @@
         .hero-space {
             .hero-image {
                 height: 40svh;
+                .text {
+                    h1 {
+                        font-size: 5rem;
+                        transform: translateY(-5rem);
+                    }
+
+                    h2 {
+                        transform: translateY(-5rem);
+                    }
+                }
 
                 &::after {
                     content: "";

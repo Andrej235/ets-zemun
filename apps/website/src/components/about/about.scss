@@ -439,6 +439,12 @@
         .hero-image {
             height: 40svh;
 
+            .text {
+                h1 {
+                    font-size: 5rem;
+                }
+            }
+
             &::after {
                 content: "";
                 position: absolute;
