@@ -90,6 +90,12 @@ a {
     }
 }
 
+@media screen and (max-height: 750px) {
+    :root {
+        font-size: 7px;
+    }
+}
+
 .dg.ac {
     z-index: 10000000 !important;
 }

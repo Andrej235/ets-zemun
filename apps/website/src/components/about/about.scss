@@ -124,7 +124,7 @@
                 .hero-block-element {
                     width: 25%;
                     min-width: 18rem;
-                    max-height: 25rem;
+                    height: 25rem;
                     overflow: clip;
 
                     text-align: center;
@@ -272,7 +272,7 @@
     .overview {
         position: relative;
         z-index: 1;
-        transform: translateY(calc(-231.5px / 2));
+        transform: translateY(calc(-23rem / 2));
         top: -1rem;
 
         max-width: 120rem;
