@@ -159,8 +159,18 @@ function translate(value) {
 
   // Convert the rest of the characters
   value = value
-    .split("")
-    .map((char) => latinToCyrillicMap[char] || cyrillicToLatinMap[char] || char)
+    .split(/\b/)
+    .map((word) => {
+      if (/^[I]+$/.test(word)) {
+        return word;
+      }
+      return word
+        .split("")
+        .map(
+          (char) => latinToCyrillicMap[char] || cyrillicToLatinMap[char] || char
+        )
+        .join("");
+    })
     .join("");
 
   digraphs.forEach((digraph) => {
