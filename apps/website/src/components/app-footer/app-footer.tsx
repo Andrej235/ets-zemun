@@ -84,7 +84,7 @@ export default function AppFooter() {
             <span className="separator" />
             <span>{t("footer.credits.createdBy")}</span>
             <a
-              href={"https://github.com/andrej235"}
+              href={"https://www.nenadic.dev"}
               target="_blank"
               aria-label={t("footer.credits.prefix")}
             >
