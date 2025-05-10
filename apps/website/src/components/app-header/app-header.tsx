@@ -41,7 +41,9 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
     const theme = localStorage.getItem("theme");
 
     if (theme) {
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add(theme);
       setSelectedTheme(theme as "light" | "dark");
     } else {
       if (!window.matchMedia) return;
@@ -97,7 +99,9 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           >
             <Icon
               name="gear"
-              className={`gear ${isPopupOpen ? "active" : ""} ignore-use-outside-click`}
+              className={`gear ${
+                isPopupOpen ? "active" : ""
+              } ignore-use-outside-click`}
             ></Icon>
           </button>
 
@@ -138,10 +142,11 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
               className="theme-button"
               onClick={() => {
                 const newTheme = selectedTheme === "light" ? "dark" : "light";
-                setSelectedTheme(newTheme);
+                document.documentElement.classList.add(newTheme);
+                document.documentElement.classList.remove(selectedTheme);
 
+                setSelectedTheme(newTheme);
                 localStorage.setItem("theme", newTheme);
-                document.documentElement.dataset.theme = newTheme;
               }}
             >
               <div
