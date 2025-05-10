@@ -1,6 +1,3 @@
-@use "./private/palette.private" as *;
-@use "sass:color";
-
 $background: var(--background);
 $secondary-background: var(--secondary-background);
 $outline: var(--outline);
