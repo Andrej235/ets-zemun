@@ -1,35 +1,17 @@
-@use "./private/palette.private" as *;
-@use "sass:color";
+$background: var(--background);
+$secondary-background: var(--secondary-background);
+$outline: var(--outline);
 
-$background: light-dark($light-primary-background, $dark-primary-background);
-$secondary-background: light-dark(
-  $light-secondary-background,
-  $dark-secondary-background
-);
-$outline: light-dark(#24c9df, #fff);
+$background-hover: var(--background-hover);
 
-$background-hover: light-dark($light-background-hover, $dark-background-hover);
+$accent: var(--accent);
+$accent-highlight: var(--accent-highlight);
 
-$accent: light-dark($light-accent, $dark-accent);
-$accent-highlight: light-dark(
-  color.adjust($light-accent, $lightness: 10%),
-  color.adjust($dark-accent, $lightness: 10%)
-);
+$accent-secondary: var(--accent-secondary);
+$accent-secondary-highlight: var(--accent-secondary-highlight);
 
-$accent-secondary: light-dark($light-secondary-accent, $dark-secondary-accent);
-$accent-secondary-highlight: light-dark(
-  color.adjust($light-secondary-accent, $lightness: -7%),
-  color.adjust($dark-secondary-accent, $lightness: -7%)
-);
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-accent: var(--text-accent);
 
-$text-primary: light-dark($light-primary-text-color, $dark-primary-text-color);
-$text-secondary: light-dark(
-  color.adjust($light-secondary-text-color, $lightness: 20%),
-  color.adjust($dark-secondary-text-color, $lightness: -20%)
-);
-$text-accent: light-dark(
-  $light-text-on-accent-color,
-  $dark-text-on-accent-color
-);
-
-$shadow: light-dark(#b9b9b9, #0b0b0b);
+$shadow: var(--shadow);
