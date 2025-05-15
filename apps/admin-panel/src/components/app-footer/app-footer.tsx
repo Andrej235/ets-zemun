@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator";
 
 export default function AppFooter() {
   return (
-    <footer className="bg-card absolute bottom-0 w-full gap-8 space-y-4 border-t-2 px-32 py-12">
+    <footer className="bg-card w-full gap-8 space-y-4 border-t-2 px-32 py-12">
       <div className="grid grid-cols-5 gap-8">
         <div className="col-span-3">
           <h1 className="text-primary mb-2 text-3xl">Admin Panel</h1>
