@@ -8,11 +8,12 @@ import netlifyPlugin from "@netlify/vite-plugin-react-router";
 export default defineConfig({
   base: "/",
   preview: {
-    port: 5173,
+    port: 3000,
     strictPort: true,
   },
   server: {
     host: true,
+    port: 3000,
     watch: {
       usePolling: true,
     },
