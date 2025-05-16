@@ -77,20 +77,12 @@ builder.Services.AddDbContext<DataContext>(options =>
         options.EnableSensitiveDataLogging();
 });
 
-builder.Services.AddDbContext<IdentityDataContext>(options =>
-{
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-
-    if (builder.Environment.IsDevelopment())
-        options.EnableSensitiveDataLogging();
-});
-
 builder
     .Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     {
         options.Password.RequireUppercase = false;
     })
-    .AddEntityFrameworkStores<IdentityDataContext>()
+    .AddEntityFrameworkStores<DataContext>()
     .AddApiEndpoints()
     .AddDefaultTokenProviders();
 
