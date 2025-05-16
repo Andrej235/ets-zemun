@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Award;
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos.Request.Award;
+using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;

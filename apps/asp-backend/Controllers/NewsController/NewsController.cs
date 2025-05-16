@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.News;
-using EtsZemun.DTOs.Response.News;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.News;
+using EtsZemun.Dtos.Response.News;
 using EtsZemun.Services.Model.NewsService;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;

@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Auth;
+using EtsZemun.Dtos.Response.Auth;
 using Microsoft.AspNetCore.Identity;
 
 namespace EtsZemun.Services.Mapping.Response.UserMappers;

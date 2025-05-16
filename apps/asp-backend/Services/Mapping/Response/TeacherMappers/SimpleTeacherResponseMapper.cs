@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.TeacherMappers;

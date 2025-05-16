@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.EducationalProfile;
-using EtsZemun.DTOs.Response.EducationalProfile;
+using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Response.EducationalProfile;
 using EtsZemun.Services.Model.EducationalProfileService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

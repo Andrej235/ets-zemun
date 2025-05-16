@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Subject;
-using EtsZemun.DTOs.Response.Subject;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Subject;
+using EtsZemun.Dtos.Response.Subject;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.SubjectService;

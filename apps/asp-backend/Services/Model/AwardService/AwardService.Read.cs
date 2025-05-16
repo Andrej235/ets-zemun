@@ -1,5 +1,5 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Services.Read;
 using FluentResults;
 

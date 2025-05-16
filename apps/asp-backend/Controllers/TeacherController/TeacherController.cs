@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Errors;
 using EtsZemun.Services.Model.TeacherService;
 using Microsoft.AspNetCore.Authorization;

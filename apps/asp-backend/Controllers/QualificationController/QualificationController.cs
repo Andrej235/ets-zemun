@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Qualification;
-using EtsZemun.DTOs.Response.Qualification;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Qualification;
+using EtsZemun.Dtos.Response.Qualification;
 using EtsZemun.Errors;
 using EtsZemun.Services.Model.QualificationService;
 using Microsoft.AspNetCore.Authorization;

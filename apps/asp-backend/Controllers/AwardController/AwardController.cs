@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Award;
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Award;
+using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Services.Model.AwardService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

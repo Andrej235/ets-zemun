@@ -1,19 +1,19 @@
 using System.Threading.RateLimiting;
 using EtsZemun.Data;
-using EtsZemun.DTOs.Request.Award;
-using EtsZemun.DTOs.Request.EducationalProfile;
-using EtsZemun.DTOs.Request.Language;
-using EtsZemun.DTOs.Request.News;
-using EtsZemun.DTOs.Request.Qualification;
-using EtsZemun.DTOs.Request.Subject;
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Auth;
-using EtsZemun.DTOs.Response.Award;
-using EtsZemun.DTOs.Response.EducationalProfile;
-using EtsZemun.DTOs.Response.News;
-using EtsZemun.DTOs.Response.Qualification;
-using EtsZemun.DTOs.Response.Subject;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Request.Award;
+using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Request.Language;
+using EtsZemun.Dtos.Request.News;
+using EtsZemun.Dtos.Request.Qualification;
+using EtsZemun.Dtos.Request.Subject;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Auth;
+using EtsZemun.Dtos.Response.Award;
+using EtsZemun.Dtos.Response.EducationalProfile;
+using EtsZemun.Dtos.Response.News;
+using EtsZemun.Dtos.Response.Qualification;
+using EtsZemun.Dtos.Response.Subject;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Exceptions;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
@@ -43,6 +43,7 @@ using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -416,14 +417,14 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    var roles = new[] { "Admin", "Mod", "Teacher", "User" };
+    var roles = new[] { Roles.Admin, Roles.Mod, Roles.Teacher, Roles.User };
+
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
-        {
             await roleManager.CreateAsync(new IdentityRole(role));
-        }
     }
 }
 

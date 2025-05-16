@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.EducationalProfile;
+using EtsZemun.Dtos.Response.EducationalProfile;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.EducationalProfileMappers;

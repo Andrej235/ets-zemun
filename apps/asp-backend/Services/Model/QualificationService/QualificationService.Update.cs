@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Qualification;
+using EtsZemun.Dtos.Request.Qualification;
 using EtsZemun.Errors;
 using FluentResults;
 

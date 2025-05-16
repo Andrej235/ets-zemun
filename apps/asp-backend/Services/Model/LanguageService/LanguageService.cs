@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Language;
-using EtsZemun.DTOs.Response.Language;
+using EtsZemun.Dtos.Request.Language;
+using EtsZemun.Dtos.Response.Language;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;

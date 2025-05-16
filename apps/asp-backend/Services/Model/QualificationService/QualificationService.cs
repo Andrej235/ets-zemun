@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Qualification;
-using EtsZemun.DTOs.Response.Qualification;
+using EtsZemun.Dtos.Request.Qualification;
+using EtsZemun.Dtos.Response.Qualification;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;

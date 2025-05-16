@@ -1,5 +1,5 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Response.News;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Response.News;
 using EtsZemun.Errors;
 using EtsZemun.Services.Read;
 using FluentResults;

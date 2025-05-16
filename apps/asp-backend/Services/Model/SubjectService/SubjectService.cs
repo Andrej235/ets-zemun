@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Subject;
-using EtsZemun.DTOs.Response.Subject;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Subject;
+using EtsZemun.Dtos.Response.Subject;
 using EtsZemun.Errors;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;

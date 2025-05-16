@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.AwardMappers;

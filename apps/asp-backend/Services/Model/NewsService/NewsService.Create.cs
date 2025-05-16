@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.News;
+using EtsZemun.Dtos.Request.News;
 using EtsZemun.Models;
 using FluentResults;
 

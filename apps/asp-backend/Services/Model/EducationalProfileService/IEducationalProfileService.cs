@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.EducationalProfile;
-using EtsZemun.DTOs.Response.EducationalProfile;
+using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Response.EducationalProfile;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.EducationalProfileService;

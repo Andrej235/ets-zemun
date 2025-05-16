@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Auth;
-using EtsZemun.DTOs.Response.Auth;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Auth;
+using EtsZemun.Dtos.Response.Auth;
 using EtsZemun.Services.Mapping.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

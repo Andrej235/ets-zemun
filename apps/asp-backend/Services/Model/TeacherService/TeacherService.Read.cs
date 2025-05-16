@@ -1,5 +1,5 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Services.Read;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;

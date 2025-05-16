@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;

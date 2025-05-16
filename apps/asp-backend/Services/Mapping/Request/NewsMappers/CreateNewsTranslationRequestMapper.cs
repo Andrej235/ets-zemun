@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.News;
+using EtsZemun.Dtos.Request.News;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.NewsMappers;

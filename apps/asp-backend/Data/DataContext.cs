@@ -1,9 +1,12 @@
 using EtsZemun.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EtsZemun.Data
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+    public class DataContext(DbContextOptions<DataContext> options)
+        : IdentityDbContext<User, IdentityRole, string>(options)
     {
         public DbSet<Award> Awards { get; set; }
         public DbSet<AwardTranslation> AwardTranslations { get; set; }
@@ -24,6 +27,8 @@ namespace EtsZemun.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Award>(award =>
             {
                 award.HasKey(a => a.Id);
