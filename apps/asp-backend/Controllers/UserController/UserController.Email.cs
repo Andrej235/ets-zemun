@@ -1,7 +1,7 @@
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using EtsZemun.Utilities;
 
 namespace EtsZemun.Controllers.UserController;
 

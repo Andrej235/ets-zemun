@@ -9,7 +9,7 @@ export default function App() {
       <AppHeader />
       <ScrollRestoration />
 
-      <div id="page-content">
+      <div id="page-content min-h-screen">
         <Outlet />
       </div>
 

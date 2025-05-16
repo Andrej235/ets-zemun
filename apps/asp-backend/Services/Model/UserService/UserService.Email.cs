@@ -1,6 +1,7 @@
 using System.Security.Claims;
-using FluentResults;
+using System.Web;
 using EtsZemun.Errors;
+using FluentResults;
 
 namespace EtsZemun.Services.ModelServices.UserService;
 
@@ -13,7 +14,6 @@ public partial class UserService
             return Result.Fail(new Unauthorized());
 
         var result = await userManager.ConfirmEmailAsync(user, token);
-
         if (!result.Succeeded)
             return Result.Fail(
                 new BadRequest(string.Join(", ", result.Errors.Select(x => x.Description)))
@@ -38,7 +38,7 @@ public partial class UserService
         await emailSender.SendConfirmationLinkAsync(
             user,
             user.Email,
-            $"{configuration["FrontendUrl"]}/confirm-email?token={emailToken}"
+            $"{configuration["FrontendUrl"]}/confirm-email?token={HttpUtility.UrlEncode(emailToken)}"
         );
 
         return Result.Ok();

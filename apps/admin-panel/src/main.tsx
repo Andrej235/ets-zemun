@@ -39,6 +39,8 @@ import Users from "./components/users/users";
 import userLoader from "./components/users/users-loader";
 import "./globals.css";
 import "./i18n";
+import EmailConfirmation from "./components/email-confirmation/email-confirmation";
+import emailConfirmationLoader from "./components/email-confirmation/email-confirmation-loader";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,11 @@ const router = createBrowserRouter([
         path: "/",
         element: <About />,
         loader: aboutLoader,
+      },
+      {
+        path: "confirm-email",
+        element: <EmailConfirmation />,
+        loader: emailConfirmationLoader,
       },
       {
         path: "auth",

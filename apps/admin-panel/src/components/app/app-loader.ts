@@ -11,6 +11,8 @@ const appLoader = async (args: LoaderFunctionArgs) => {
 
   if (userStatus.code !== "200") return redirect("/auth");
 
+  if (opened === "/confirm-email") return;
+
   const hasAccess = userStatus.content.role !== "User";
   if (!hasAccess) return redirect("/forbidden");
 
