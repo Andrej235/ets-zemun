@@ -7,7 +7,6 @@ using EtsZemun.Dtos.Request.News;
 using EtsZemun.Dtos.Request.Qualification;
 using EtsZemun.Dtos.Request.Subject;
 using EtsZemun.Dtos.Request.Teacher;
-using EtsZemun.Dtos.Response.Auth;
 using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Dtos.Response.EducationalProfile;
 using EtsZemun.Dtos.Response.News;
@@ -33,7 +32,6 @@ using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
-using EtsZemun.Services.Mapping.Response.UserMappers;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
@@ -41,6 +39,7 @@ using EtsZemun.Services.Model.NewsService;
 using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
+using EtsZemun.Services.ModelServices.UserService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using EtsZemun.Utilities;
@@ -78,7 +77,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder
-    .Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    .Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.Password.RequireUppercase = false;
     })
@@ -376,20 +375,22 @@ builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseM
 #endregion
 
 #region User
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICountService<User>, ReadService<User>>();
 builder.Services.AddScoped<
-    IResponseMapper<IdentityUser, FullUserResponseDto>,
-    FullUserResponseMapper
+    ICountService<IdentityUserRole<string>>,
+    ReadService<IdentityUserRole<string>>
 >();
+builder.Services.AddScoped<IDeleteService<User>, DeleteService<User>>();
 #endregion
 
 #endregion
 
 #region Rate limiting
-var tokenPolicy = "token";
-
 builder.Services.AddRateLimiter(x =>
+{
     x.AddTokenBucketLimiter(
-        policyName: tokenPolicy,
+        policyName: RateLimitingPolicies.Global,
         options =>
         {
             options.TokenLimit = 10;
@@ -399,8 +400,20 @@ builder.Services.AddRateLimiter(x =>
             options.TokensPerPeriod = 2;
             options.AutoReplenishment = true;
         }
-    )
-);
+    );
+
+    x.AddTokenBucketLimiter(
+        policyName: RateLimitingPolicies.EmailConfirmation,
+        options =>
+        {
+            options.TokenLimit = 1;
+            options.QueueLimit = 0;
+            options.ReplenishmentPeriod = TimeSpan.FromSeconds(60);
+            options.TokensPerPeriod = 1;
+            options.AutoReplenishment = true;
+        }
+    );
+});
 
 #endregion
 
@@ -420,15 +433,12 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-var authGroup = app.MapGroup("/auth");
-authGroup.MapIdentityApi<IdentityUser>();
-
 app.UseRateLimiter();
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers().RequireRateLimiting(tokenPolicy);
+app.MapControllers().RequireRateLimiting(RateLimitingPolicies.Global);
 
 if (app.Environment.IsDevelopment())
 {
