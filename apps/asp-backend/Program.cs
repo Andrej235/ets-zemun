@@ -131,7 +131,13 @@ builder.Services.AddCors(options =>
         {
             if (builder.Environment.IsDevelopment())
                 policyBuilder
-                    .WithOrigins("http://0.0.0.0:3000", "http://192.168.1.100:5174")
+                    .WithOrigins(
+                        "http://localhost:5173",
+                        "http://localhost:3000",
+                        "http://localhost:5174",
+                        "http://192.168.1.100:3000",
+                        "http://192.168.1.100:5174"
+                    )
                     .AllowCredentials()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
