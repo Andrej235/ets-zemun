@@ -3,14 +3,16 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { LoginForm } from "./login-form";
 import { SignUpForm } from "./sign-up-form";
+import { useNavigate } from "react-router";
 
 export default function Auth() {
   const [selected, setSelected] = useState<"login" | "register">("login");
   const isWaitingForResponse = useRef(false);
+  const navigate = useNavigate();
 
   async function handleLogin(email: string, password: string) {
     if (isWaitingForResponse.current) {
-      toast.info("Please wait...", {
+      toast.info("Molimo sačekajte...", {
         duration: 3000,
       });
       return;
@@ -31,11 +33,14 @@ export default function Auth() {
     toast.promise(
       promise.then((response) => {
         if (response.code !== "200")
-          throw new Error(response?.content?.title ?? "Failed to login");
+          throw new Error(
+            response?.content?.title ??
+              "Neuspešna prijava, molimo pokušajte ponovo",
+          );
       }),
       {
-        loading: "Logging in...",
-        success: "Successfully logged in! Welcome!",
+        loading: "Molimo sačekajte...",
+        success: "Uspešno ste se prijavili! Dobrodošli!",
         error: (x) => (x as Error).message,
       },
     );
@@ -44,7 +49,7 @@ export default function Auth() {
     isWaitingForResponse.current = false;
 
     if (code !== "200") return;
-    window.location.reload();
+    navigate("/");
   }
 
   async function handleRegister(
@@ -53,7 +58,7 @@ export default function Auth() {
     password: string,
   ) {
     if (isWaitingForResponse.current) {
-      toast.info("Please wait...", {
+      toast.info("Molimo sačekajte...", {
         duration: 3000,
       });
       return;
@@ -72,11 +77,14 @@ export default function Auth() {
     toast.promise(
       promise.then((response) => {
         if (response.code !== "201")
-          throw new Error(response?.content?.title ?? "Failed to register");
+          throw new Error(
+            response?.content?.title ??
+              "Neuspešna registracija, molimo pokušajte ponovo",
+          );
       }),
       {
-        loading: "Registering...",
-        success: "Successfully registered! Please log in.",
+        loading: "Molimo sačekajte...",
+        success: "Uspešno ste se registrovali! Molimo ulogujte se.",
         error: (x) => (x as Error).message,
       },
     );

@@ -1,30 +1,40 @@
 import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export default function Forbidden() {
   const navigate = useNavigate();
 
   async function handleLogout() {
-    const response = await sendAPIRequest("/auth/logout", {
-      method: "delete",
+    const response = await sendAPIRequest("/users/logout", {
+      method: "post",
     });
 
-    if (response.code !== "204") return;
+    if (response.code !== "200") {
+      toast.error("Odjavljivanje nije uspelo, molimo pokušajte ponovo");
+      return;
+    }
+
     navigate("/auth");
+    toast.success("Uspešno ste se odjavili");
   }
 
   return (
-    <div className="w-full h-full p-16 flex flex-col gap-8 justify-center items-center font-bold">
-      <p className="text-5xl">Zabranjen pristup</p>
+    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-2 p-16 font-bold">
+      <p className="text-4xl">Zabranjen pristup</p>
 
-      <p className="text-2xl"> 
+      <p className="text-muted-foreground mb-8 text-xl">
         Zatrazite pristup od administratora kako biste mogli da pristupite admin
         panelu
       </p>
-      <p className="text-2xl">Nakon odobrenja, izlogujte se i ponovo ulogujte</p>
-      <Button onClick={handleLogout} className="w-96 h-16 text-2xl">Izloguj se</Button>
+
+      <Button onClick={handleLogout} className="w-96">
+        Izloguj se
+      </Button>
+      <p className="text-muted-foreground text-sm">
+        Nakon odobrenja, ponovo se ulogujte
+      </p>
     </div>
   );
 }
-
