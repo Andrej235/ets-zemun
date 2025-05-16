@@ -1,14 +1,12 @@
+import sendAPIRequest from "@shared/api-dsl/send-api-request";
 import { useRef, useState } from "react";
-import { useNavigate, useRevalidator } from "react-router";
 import { toast } from "sonner";
 import { LoginForm } from "./login-form";
 import { SignUpForm } from "./sign-up-form";
 
 export default function Auth() {
-  const revalidator = useRevalidator();
   const [selected, setSelected] = useState<"login" | "register">("login");
   const isWaitingForResponse = useRef(false);
-  const navigate = useNavigate();
 
   async function handleLogin(email: string, password: string) {
     if (isWaitingForResponse.current) {
@@ -19,7 +17,7 @@ export default function Auth() {
     }
     isWaitingForResponse.current = true;
 
-    /*     const promise = sendAPIRequest("/users/login", {
+    const promise = sendAPIRequest("/users/login", {
       method: "post",
       payload: {
         username: email,
@@ -32,20 +30,20 @@ export default function Auth() {
 
     toast.promise(
       promise.then((response) => {
-        if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to login");
+        if (response.code !== "200")
+          throw new Error(response?.content?.title ?? "Failed to login");
       }),
       {
         loading: "Logging in...",
         success: "Successfully logged in! Welcome!",
         error: (x) => (x as Error).message,
       },
-    ); */
+    );
 
-    const { isOk } = await promise;
+    const { code } = await promise;
     isWaitingForResponse.current = false;
 
-    if (!isOk) return;
+    if (code !== "200") return;
     window.location.reload();
   }
 
@@ -62,7 +60,7 @@ export default function Auth() {
     }
     isWaitingForResponse.current = true;
 
-    /*     const promise = sendAPIRequest("/users/register", {
+    const promise = sendAPIRequest("/users/register", {
       method: "post",
       payload: {
         username,
@@ -73,8 +71,8 @@ export default function Auth() {
 
     toast.promise(
       promise.then((response) => {
-        if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to register");
+        if (response.code !== "201")
+          throw new Error(response?.content?.title ?? "Failed to register");
       }),
       {
         loading: "Registering...",
@@ -83,11 +81,11 @@ export default function Auth() {
       },
     );
 
-    const { isOk } = await promise;
+    const { code } = await promise;
     isWaitingForResponse.current = false;
 
-    if (!isOk) return;
-    setSelected("login"); */
+    if (code !== "201") return;
+    setSelected("login");
   }
 
   return (

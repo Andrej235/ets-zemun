@@ -109,3 +109,4 @@ api-docs/
 .vite/
 
 .env
+keys/

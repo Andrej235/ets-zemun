@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using brevo_csharp.Client;
 using EtsZemun.Data;
 using EtsZemun.Dtos.Request.Award;
 using EtsZemun.Dtos.Request.EducationalProfile;
@@ -17,6 +18,7 @@ using EtsZemun.Exceptions;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
+using EtsZemun.Services.EmailSender;
 using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.AwardMappers;
 using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
@@ -43,19 +45,28 @@ using EtsZemun.Services.ModelServices.UserService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
 using EtsZemun.Utilities;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var googleAuthFile = "/run/secrets/google-auth";
-if (File.Exists(googleAuthFile))
-    builder.Configuration.AddJsonFile(googleAuthFile);
-else
-    builder.Configuration.AddJsonFile("secrets.json", optional: true);
+if (File.Exists("./secrets.json"))
+    builder.Configuration.AddJsonFile("./secrets.json");
+
+var env = builder.Environment;
+var keysPath = Path.Combine(env.ContentRootPath, "keys");
+Directory.CreateDirectory(keysPath);
+
+builder
+    .Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(keysPath))
+    .SetApplicationName("TennisPhreak");
 
 var configuration = builder.Configuration;
+builder.Services.AddSingleton(configuration);
+Configuration.Default.ApiKey.Add("api-key", configuration["Brevo:ApiKey"]);
 
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
@@ -68,9 +79,13 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddControllers();
 builder.Services.AddHybridCache();
 
+var connectionString = configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+    throw new MissingConfigException("Connection string is null or empty");
+
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(connectionString);
 
     if (builder.Environment.IsDevelopment())
         options.EnableSensitiveDataLogging();
@@ -85,12 +100,15 @@ builder
     .AddApiEndpoints()
     .AddDefaultTokenProviders();
 
+builder.Services.AddTransient<IEmailSender<User>, EmailSender>();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = null;
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    options.SlidingExpiration = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = SameSiteMode.Lax;
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -113,12 +131,7 @@ builder.Services.AddCors(options =>
         {
             if (builder.Environment.IsDevelopment())
                 policyBuilder
-                    .WithOrigins(
-                        "http://localhost:5173",
-                        "http://localhost:3000",
-                        "http://localhost:5174",
-                        "http://192.168.1.100:3000"
-                    )
+                    .WithOrigins("http://0.0.0.0:3000", "http://192.168.1.100:5174")
                     .AllowCredentials()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
