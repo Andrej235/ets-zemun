@@ -20,6 +20,7 @@ import { TeacherSelector } from "@/components/teacher-selector";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useLanguageStore } from "@/stores/language-store";
 import sendApiRequest from "@/api-dsl/send-api-request";
+import FullPageLoadingIndicator from "@/components/full-page-loading-indicator";
 
 type Teacher = Schema<"SimpleTeacherResponseDto">;
 type Subject = {
@@ -157,11 +158,7 @@ export default function CreateSubjectPage() {
   };
 
   if (loading) {
-    return (
-      <div className="flex h-full items-center justify-center">
-        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-primary"></div>
-      </div>
-    );
+    return <FullPageLoadingIndicator />;
   }
 
   return (

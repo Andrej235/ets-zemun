@@ -21,6 +21,7 @@ public partial class SubjectService(
     ICountService<Subject> countService,
     IReadRangeService<Subject> readRangeService,
     IReadRangeSelectedService<Subject> readRangeSelectedService,
+    IUpdateRangeService<SubjectTranslation> updateRangeTranslationService,
     IExecuteUpdateService<SubjectTranslation> updateTranslationService,
     IDeleteService<Subject> deleteService,
     IDeleteService<SubjectTranslation> deleteTranslationService,

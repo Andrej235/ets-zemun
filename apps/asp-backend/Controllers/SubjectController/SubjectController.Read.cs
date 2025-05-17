@@ -69,10 +69,7 @@ public partial class SubjectController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<AdminFullSubjectResponseDto>> AdminGetSingle(
-        int id,
-        [FromQuery] string languageCode
-    )
+    public async Task<ActionResult<AdminFullSubjectResponseDto>> AdminGetSingle(int id)
     {
         var result = await subjectService.AdminGetSingle(id);
 

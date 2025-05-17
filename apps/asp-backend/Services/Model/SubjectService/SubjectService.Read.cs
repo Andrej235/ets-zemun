@@ -100,7 +100,7 @@ public partial class SubjectService
             {
                 Id = x.Id,
                 Name = x.Translations.First().Name,
-                Description = x.Translations.First().Name,
+                Description = x.Translations.First().Description,
                 TeachersCount = x.Teachers.Count,
                 Translations = x.Translations.Select(x => x.LanguageCode),
             },

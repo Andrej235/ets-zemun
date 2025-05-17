@@ -868,6 +868,28 @@ export type APIMap = {
           },
           '503': { description: 'Service Unavailable' }
         }
+      },
+      put: {
+        tags: [ 'Subject' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/UpdateSubjectRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/UpdateSubjectRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/UpdateSubjectRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
       }
     },
     '/subject/translation': {
@@ -1003,7 +1025,7 @@ export type APIMap = {
     '/subject/admin/{id}': {
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -1690,6 +1712,11 @@ export type APIMap = {
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
       UpdateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      UpdateSubjectRequestDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/UpdateSubjectTranslationRequestDto' } }, teachers: { type: 'array', items: { type: 'integer', format: 'int32' } } },
+        additionalProperties: false
+      },
       UpdateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       UpdateTeacherRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true } }, additionalProperties: false },
       UpdateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },

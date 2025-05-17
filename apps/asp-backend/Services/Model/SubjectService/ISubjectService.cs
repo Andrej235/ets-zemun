@@ -17,6 +17,7 @@ public interface ISubjectService
     );
     Task<Result<SubjectResponseDto>> GetSingle(int id, string languageCode);
 
+    Task<Result> Update(UpdateSubjectRequestDto request);
     Task<Result> UpdateTranslation(UpdateSubjectTranslationRequestDto request);
 
     Task<Result> Delete(int id);
