@@ -1,26 +1,30 @@
 "use client";
-
 import sendApiRequest from "@/api-dsl/send-api-request";
-import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { useLanguageStore } from "@/stores/language-store";
 import { useUserStore } from "@/stores/user-store";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export default function FetchData() {
   const setUser = useUserStore((x) => x.setUser);
+  const setLanguages = useLanguageStore((x) => x.setLanguages);
 
-  const currentPromise =
-    useRef<Promise<Schema<"UserResponseDto"> | null> | null>(null);
+  const currentPromise = useRef<Promise<void> | null>(null);
+
+  const fetch = useCallback(async () => {
+    const user = await sendApiRequest("/users/me/role", {
+      method: "get",
+    });
+    setUser(user.response);
+
+    const languages = await sendApiRequest("/language", {
+      method: "get",
+    });
+    setLanguages(languages.response!.map((x) => x.code));
+  }, [setUser, setLanguages]);
 
   useEffect(() => {
-    currentPromise.current ??= sendApiRequest("/users/me/role", {
-      method: "get",
-    }).then(({ response }) => response);
-
-    (async () => {
-      const user = await currentPromise.current;
-      setUser(user);
-    })();
-  }, [setUser]);
+    currentPromise.current ??= fetch();
+  }, [fetch]);
 
   return <></>;
 }

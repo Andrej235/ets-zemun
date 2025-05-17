@@ -178,6 +178,7 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IReadSingleService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadRangeService<Subject>, ReadService<Subject>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<ICountService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<SubjectTranslation>,

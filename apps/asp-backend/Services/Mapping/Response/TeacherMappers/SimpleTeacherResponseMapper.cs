@@ -9,7 +9,7 @@ public class SimpleTeacherResponseMapper : IResponseMapper<Teacher, SimpleTeache
         new()
         {
             Id = from.Id,
-            Image = from.Image,
             Name = from.Translations.FirstOrDefault()?.Name ?? "",
+            TItle = from.Translations.FirstOrDefault()?.Title ?? "",
         };
 }

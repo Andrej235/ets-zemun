@@ -31,7 +31,9 @@ export function NavMain({ items }: { items: NavItem[] }) {
                 tooltip={item.title}
                 className={cn(
                   "flex items-center gap-2",
-                  pathname.startsWith(item.href) && "bg-primary/25",
+                  ((item.href.length > 1 && pathname.startsWith(item.href)) ||
+                    pathname === item.href) &&
+                    "bg-primary/25",
                 )}
               >
                 <item.Icon className="size-5" />
