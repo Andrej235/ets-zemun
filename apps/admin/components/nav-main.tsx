@@ -6,6 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,15 +26,18 @@ export function NavMain({ items }: { items: NavItem[] }) {
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.href}>
-            <SidebarMenuButton
-              tooltip={item.title}
-              className={pathname.startsWith(item.href) ? "bg-primary/25" : ""}
-            >
-              <Link href={item.href} className="flex items-center gap-2">
+            <Link href={item.href}>
+              <SidebarMenuButton
+                tooltip={item.title}
+                className={cn(
+                  "flex items-center gap-2",
+                  pathname.startsWith(item.href) && "bg-primary/25",
+                )}
+              >
                 <item.Icon className="size-5" />
                 <span>{item.title}</span>
-              </Link>
-            </SidebarMenuButton>
+              </SidebarMenuButton>
+            </Link>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
