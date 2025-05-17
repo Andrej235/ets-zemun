@@ -64,8 +64,8 @@ public partial class UserController
         return Ok();
     }
 
-    [Authorize(Roles = "Admin,Premium")]
-    [HttpGet("premium-only")]
+    [Authorize]
+    [HttpGet("logged-in-only")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

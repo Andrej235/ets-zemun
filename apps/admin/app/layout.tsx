@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import FetchData from "@/components/fetch-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +37,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+
+          <FetchData />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
