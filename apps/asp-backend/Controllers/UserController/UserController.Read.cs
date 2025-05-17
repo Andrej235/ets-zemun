@@ -1,6 +1,6 @@
+using EtsZemun.Dtos.Response.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using EtsZemun.Dtos.Response.User;
 
 namespace EtsZemun.Controllers.UserController;
 
