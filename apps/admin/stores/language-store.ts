@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 type LanguageStore = {
-  languages: string[];
-  setLanguages: (languages: string[]) => void;
+  languages: { code: string; fullName: string }[];
+  setLanguages: (languages: { code: string; fullName: string }[]) => void;
 };
 
 export const useLanguageStore = create<LanguageStore>((set) => ({

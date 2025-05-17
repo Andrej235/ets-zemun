@@ -1636,7 +1636,11 @@ export type APIMap = {
       CreateProfileSubjectRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       CreateQualificationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, translation: { '$ref': '#/components/schemas/CreateQualificationTranslationRequestDto' } }, additionalProperties: false },
       CreateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
-      CreateSubjectRequestDto: { type: 'object', properties: { languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
+      CreateSubjectRequestDto: {
+        type: 'object',
+        properties: { translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateSubjectTranslationRequestDto' } }, teachers: { type: 'array', items: { type: 'integer', format: 'int32' } } },
+        additionalProperties: false
+      },
       CreateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       CreateTeacherRequestDto: { type: 'object', properties: { email: { type: 'string' }, image: { type: 'string' }, translation: { '$ref': '#/components/schemas/CreateTeacherTranslationRequestDto' } }, additionalProperties: false },
       CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },

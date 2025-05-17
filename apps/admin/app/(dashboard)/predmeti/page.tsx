@@ -109,7 +109,7 @@ export default function SubjectsPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/admin/subjects/create">
+          <Link href="/predmeti/novi">
             <Plus className="mr-2 h-4 w-4" />
             Add Subject
           </Link>
@@ -155,7 +155,7 @@ export default function SubjectsPage() {
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
-                <Link href="/admin/subjects/create">
+                <Link href="/predmeti/novi">
                   <Plus className="mr-2 h-4 w-4" />
                   Add Subject
                 </Link>
@@ -191,7 +191,7 @@ export default function SubjectsPage() {
                   {filteredSubjects.map((subject) => {
                     const translationStatus = getTranslationStatus(
                       subject.translations,
-                      languages,
+                      languages.map((lang) => lang.code),
                     );
 
                     return (
@@ -225,7 +225,7 @@ export default function SubjectsPage() {
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-2">
                             <Button asChild variant="outline" size="sm">
-                              <Link href={`/admin/subjects/${subject.id}`}>
+                              <Link href={`/predmeti/${subject.id}`}>
                                 Edit
                               </Link>
                             </Button>

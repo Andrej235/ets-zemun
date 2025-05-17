@@ -175,6 +175,10 @@ builder.Services.AddScoped<
     ICreateSingleService<SubjectTranslation>,
     CreateService<SubjectTranslation>
 >();
+builder.Services.AddScoped<
+    ICreateRangeService<SubjectTranslation>,
+    CreateService<SubjectTranslation>
+>();
 builder.Services.AddScoped<IReadSingleService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadRangeService<Subject>, ReadService<Subject>>();

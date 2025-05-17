@@ -19,7 +19,7 @@ export default function FetchData() {
     const languages = await sendApiRequest("/language", {
       method: "get",
     });
-    setLanguages(languages.response!.map((x) => x.code));
+    setLanguages(languages.response!);
   }, [setUser, setLanguages]);
 
   useEffect(() => {
