@@ -15,7 +15,7 @@
   --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
-  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar: hsl(var(--sidebar-background));
   --color-chart-5: hsl(var(--chart-5));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-3: hsl(var(--chart-3));
@@ -72,6 +72,7 @@
   --sidebar-accent-foreground: 0 0% 0%;
   --sidebar-border: 258, 25%, 63%;
   --sidebar-ring: 248, 98%, 45%;
+  --sidebar: hsl(0 0% 98%);
 }
 
 .dark {
@@ -103,6 +104,7 @@
   --sidebar-accent-foreground: 0 0% 100%;
   --sidebar-border: 258, 25%, 32%;
   --sidebar-ring: 248, 98%, 45%;
+  --sidebar: hsl(240 5.9% 10%);
 }
 
 @layer base {

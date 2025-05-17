@@ -19,7 +19,7 @@ export default function Page() {
 
   useEffect(() => {
     if (user) {
-      router.replace(user.role === "User" ? "/forbidden" : "/");
+      router.replace(!user.emailConfirmed ? "/confirm-email" : "/");
       return;
     }
 
