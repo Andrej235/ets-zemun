@@ -13,7 +13,7 @@ namespace EtsZemun.Services.Model.EducationalProfileService;
 
 public class EducationalProfileService(
     ICreateSingleService<EducationalProfile> createSingle,
-    IReadRangeService<EducationalProfile> readRangeService,
+    IReadRangeSelectedService<EducationalProfile> readRangeService,
     IReadSingleService<EducationalProfile> readSingleService,
     IUpdateSingleService<EducationalProfile> updateSingle,
     IDeleteService<EducationalProfile> deleteService,
@@ -21,36 +21,9 @@ public class EducationalProfileService(
     IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
-    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper,
-    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto> simpleResponseMapper
+    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
 ) : IEducationalProfileService
 {
-    private readonly ICreateSingleService<EducationalProfile> createSingle = createSingle;
-    private readonly IReadRangeService<EducationalProfile> readRangeService = readRangeService;
-    private readonly IReadSingleService<EducationalProfile> readSingleService = readSingleService;
-    private readonly IUpdateSingleService<EducationalProfile> updateSingle = updateSingle;
-    private readonly IDeleteService<EducationalProfile> deleteService = deleteService;
-    private readonly IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService =
-        deleteGeneralSubjectService;
-    private readonly IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService =
-        deleteVocationalSubjectService;
-    private readonly IRequestMapper<
-        CreateEducationalProfileRequestDto,
-        EducationalProfile
-    > createRequestMapper = createRequestMapper;
-    private readonly IRequestMapper<
-        UpdateEducationalProfileRequestDto,
-        EducationalProfile
-    > updateRequestMapper = updateRequestMapper;
-    private readonly IResponseMapper<
-        EducationalProfile,
-        EducationalProfileResponseDto
-    > responseMapper = responseMapper;
-    private readonly IResponseMapper<
-        EducationalProfile,
-        SimpleEducationalProfileResponseDto
-    > simpleResponseMapper = simpleResponseMapper;
-
     public async Task<Result> Create(CreateEducationalProfileRequestDto request)
     {
         var result = await createSingle.Add(createRequestMapper.Map(request));
@@ -62,26 +35,23 @@ public class EducationalProfileService(
         return deleteService.Delete(x => x.Id == id);
     }
 
-    public async Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
-        string languageCode
-    )
+    public Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll()
     {
-        var result = await readRangeService.Get(
+        return readRangeService.Get(
+            x => new SimpleEducationalProfileResponseDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                YearsCount = x
+                    .GeneralSubjects.Select(x => x.Year)
+                    .Concat(x.VocationalSubjects.Select(x => x.Year))
+                    .Distinct()
+                    .Count(),
+            },
             null,
             null,
-            null,
-            q =>
-                q.Include(x => x.GeneralSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.VocationalSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+            -1
         );
-
-        return result.IsFailed
-            ? Result.Fail<IEnumerable<SimpleEducationalProfileResponseDto>>(result.Errors)
-            : Result.Ok(result.Value.Select(simpleResponseMapper.Map));
     }
 
     public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode)

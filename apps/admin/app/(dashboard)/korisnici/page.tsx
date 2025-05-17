@@ -252,7 +252,7 @@ export default function UsersPage() {
                               <AlertDialogTrigger asChild>
                                 <Button
                                   variant="ghost"
-                                  className="text-destructive gap-0"
+                                  className="gap-0 text-destructive"
                                 >
                                   <Trash2 className="mr-2 h-4 w-4" />
                                   Delete User

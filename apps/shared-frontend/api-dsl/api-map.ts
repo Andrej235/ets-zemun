@@ -193,7 +193,6 @@ export type APIMap = {
       },
       get: {
         tags: [ 'EducationalProfiles' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -1685,7 +1684,7 @@ export type APIMap = {
       RegisterRequestDto: { type: 'object', properties: { username: { type: 'string' }, email: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
       ResetPasswordRequestDto: { type: 'object', properties: { email: { type: 'string' }, token: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
       SendResetPasswordEmailRequestDto: { type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
-      SimpleEducationalProfileResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' } }, additionalProperties: false },
+      SimpleEducationalProfileResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, yearsCount: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       SimpleSubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       SimpleSubjectResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       SimpleTeacherResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, tItle: { type: 'string' } }, additionalProperties: false },

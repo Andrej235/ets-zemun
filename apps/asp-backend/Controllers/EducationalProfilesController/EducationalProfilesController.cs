@@ -33,11 +33,9 @@ public class EducationalProfilesController(IEducationalProfileService profileSer
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
-        [FromQuery] string languageCode
-    )
+    public async Task<ActionResult<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll()
     {
-        var result = await profileService.GetAll(languageCode);
+        var result = await profileService.GetAll();
 
         if (result.IsFailed)
             return BadRequest();

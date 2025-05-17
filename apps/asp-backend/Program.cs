@@ -282,7 +282,7 @@ builder.Services.AddScoped<
     CreateService<EducationalProfile>
 >();
 builder.Services.AddScoped<
-    IReadRangeService<EducationalProfile>,
+    IReadRangeSelectedService<EducationalProfile>,
     ReadService<EducationalProfile>
 >();
 builder.Services.AddScoped<
@@ -313,10 +313,6 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto>,
     EducationalProfileResponseMapper
->();
-builder.Services.AddScoped<
-    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto>,
-    SimpleEducationalProfilesResponseMapper
 >();
 builder.Services.AddScoped<
     IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
