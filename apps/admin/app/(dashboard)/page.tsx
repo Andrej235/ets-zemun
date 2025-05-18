@@ -1,3 +1,4 @@
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import { RoleBadge } from "@/components/role-badge";
 import {
   Card,
@@ -16,7 +17,20 @@ import {
   Users,
 } from "lucide-react";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const {
+    isOk,
+    error,
+    response: overviewData,
+  } = await sendApiRequestSSR("/admin/overview", {
+    method: "get",
+  });
+
+  if (!isOk || !overviewData) {
+    console.log(error);
+    return null;
+  }
+
   return (
     <div className="grid gap-6">
       <div>
@@ -27,72 +41,81 @@ export default function Dashboard() {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">News Articles</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">24</div>
-            <p className="text-xs text-muted-foreground">3 pending approval</p>
+            <div className="text-2xl font-bold">{overviewData.newsCount}</div>
+            <p className="text-xs text-muted-foreground">
+              {overviewData.unapprovedNewsCount} pending approval
+            </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Languages</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4</div>
+            <div className="text-2xl font-bold">
+              {overviewData.languagesCount}
+            </div>
             <p className="text-xs text-muted-foreground">
-              English, Serbian, German, French
+              {overviewData.languages.join(", ")}
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Subjects</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">32</div>
-            <p className="text-xs text-muted-foreground">1 unused</p>
+            <div className="text-2xl font-bold">
+              {overviewData.subjectsCount}
+            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Profiles</CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5</div>
-            <p className="text-xs text-muted-foreground">4 4 years, 1 3 year</p>
+            <div className="text-2xl font-bold">
+              {overviewData.profilesCount}
+            </div>
+            <p className="text-xs text-muted-foreground"></p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Teachers</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">48</div>
+            <div className="text-2xl font-bold">
+              {overviewData.teachersCount}
+            </div>
             <p className="text-xs text-muted-foreground">
               Across all departments
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Awards</CardTitle>
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3</div>
+            <div className="text-2xl font-bold">{overviewData.awardsCount}</div>
             <p className="text-xs text-muted-foreground">Won by our students</p>
           </CardContent>
         </Card>

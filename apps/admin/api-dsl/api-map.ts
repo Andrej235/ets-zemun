@@ -2,6 +2,26 @@ export type APIMap = {
   openapi: '3.0.1',
   info: { title: 'EtsZemun', version: '1.0' },
   paths: {
+    '/admin/overview': {
+      get: {
+        tags: [ 'Admin' ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminOverviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminOverviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminOverviewResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/award': {
       post: {
         tags: [ 'Award' ],
@@ -1740,6 +1760,7 @@ export type APIMap = {
       },
       AdminFullSubjectTranslationDto: { type: 'object', properties: { name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       AdminFullSubjectTranslationDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullSubjectTranslationDto' } }, additionalProperties: false },
+      AdminOverviewResponseDto: { type: 'object', properties: { newsCount: { type: 'integer', format: 'int32' }, unapprovedNewsCount: { type: 'integer', format: 'int32' }, languagesCount: { type: 'integer', format: 'int32' }, languages: { type: 'array', items: { type: 'string' } }, subjectsCount: { type: 'integer', format: 'int32' }, profilesCount: { type: 'integer', format: 'int32' }, teachersCount: { type: 'integer', format: 'int32' }, awardsCount: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       AdminSubjectResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachersCount: { type: 'integer', format: 'int32' }, translations: { type: 'array', items: { type: 'string' } } },

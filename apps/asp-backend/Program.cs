@@ -36,6 +36,7 @@ using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
+using EtsZemun.Services.Model.AdminService;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
@@ -171,10 +172,13 @@ builder.Services.AddCors(options =>
 
 #region Model Services
 
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 #region Language
 builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<ICountService<Language>, ReadService<Language>>();
 builder.Services.AddScoped<IExecuteUpdateService<Language>, UpdateService<Language>>();
 builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
 builder.Services.AddScoped<
@@ -312,6 +316,7 @@ builder.Services.AddScoped<
     IReadSingleService<EducationalProfile>,
     ReadService<EducationalProfile>
 >();
+builder.Services.AddScoped<ICountService<EducationalProfile>, ReadService<EducationalProfile>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<EducationalProfileGeneralSubject>,
     UpdateService<EducationalProfileGeneralSubject>
