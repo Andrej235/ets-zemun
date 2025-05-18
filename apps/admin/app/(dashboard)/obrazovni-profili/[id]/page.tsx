@@ -13,11 +13,13 @@ import {
 } from "@/components/ui/card";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -249,12 +251,84 @@ export default function CurriculumDetailPage({
           <h1 className="text-3xl font-bold">{curriculum.name}</h1>
         </div>
         <div className="flex gap-2">
-          <Link href={`/obrazovni-profili/${curriculum.id}/edit`}>
-            <Button size="sm" variant="outline">
-              <Pencil className="mr-2 h-4 w-4" />
-              Edit Curriculum
-            </Button>
-          </Link>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm" variant="outline">
+                <Pencil className="mr-2 h-4 w-4" />
+                Edit Curriculum
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[400px]">
+              <DialogHeader>
+                <DialogTitle>Edit Curriculum Name</DialogTitle>
+                <DialogDescription>
+                  Enter a new name for this curriculum. Note this will only
+                  affect the name on the admin panel.
+                </DialogDescription>
+              </DialogHeader>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const newName = formData
+                    .get("curriculumName")
+                    ?.toString()
+                    .trim();
+
+                  if (!newName) {
+                    toast.error("Name cannot be empty");
+                    return;
+                  }
+
+                  const promise = sendApiRequest("/profile/update-name", {
+                    method: "patch",
+                    payload: {
+                      profileId: +profileId,
+                      newName,
+                    },
+                  });
+
+                  toast.promise(
+                    promise.then((response) => {
+                      if (!response.isOk)
+                        throw new Error(
+                          response.error?.message ??
+                            "Failed to update curriculum name",
+                        );
+                    }),
+                    {
+                      loading: "Updating curriculum name...",
+                      success: "Curriculum name updated successfully",
+                      error: (x) => (x as Error).message,
+                    },
+                  );
+
+                  const { isOk } = await promise;
+                  if (!isOk) return;
+                  refreshData();
+                }}
+                className="space-y-4"
+              >
+                <Input
+                  name="curriculumName"
+                  defaultValue={curriculum.name}
+                  placeholder="Enter new curriculum name"
+                  required
+                  autoFocus
+                />
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button type="button" variant="outline">
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button type="submit">Save</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 

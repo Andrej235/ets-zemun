@@ -20,6 +20,7 @@ public partial class EducationalProfileService(
     IExecuteUpdateService<EducationalProfileGeneralSubject> updateGeneralSubject,
     IExecuteUpdateService<EducationalProfileVocationalSubject> updateVocationalSubject,
     IUpdateSingleService<EducationalProfile> updateSingle,
+    IExecuteUpdateService<EducationalProfile> updateService,
     IDeleteService<EducationalProfile> deleteService,
     IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService,
     IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,

@@ -45,6 +45,7 @@ public partial class EducationalProfilesController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> RemoveSubject([FromBody] RemoveSubjectRequestDto request)
     {
         var result = await profileService.RemoveSubject(request);
@@ -66,9 +67,34 @@ public partial class EducationalProfilesController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> UpdateSubject([FromBody] UpdateProfileSubjectRequestDto request)
     {
         var result = await profileService.UpdateSubject(request);
+
+        if (result.IsFailed)
+        {
+            if (result.HasError<NotFound>())
+                return NotFound();
+
+            return BadRequest();
+        }
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpPatch("update-name")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> UpdateName(
+        [FromBody] UpdateEducationalProfileNameRequestDto request
+    )
+    {
+        var result = await profileService.UpdateName(request);
 
         if (result.IsFailed)
         {

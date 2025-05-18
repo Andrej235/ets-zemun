@@ -11,6 +11,7 @@ public interface IEducationalProfileService
     Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll();
     Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode);
 
+    Task<Result> UpdateName(UpdateEducationalProfileNameRequestDto request);
     Task<Result> Update(UpdateEducationalProfileRequestDto request);
 
     Task<Result> AddSubject(AddSubjectRequestDto request);

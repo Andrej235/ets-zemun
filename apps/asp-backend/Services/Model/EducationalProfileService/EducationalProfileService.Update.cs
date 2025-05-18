@@ -127,4 +127,12 @@ public partial class EducationalProfileService
             }
         );
     }
+
+    public Task<Result> UpdateName(UpdateEducationalProfileNameRequestDto request)
+    {
+        return updateService.Update(
+            x => x.Id == request.ProfileId,
+            x => x.SetProperty(x => x.Name, request.NewName)
+        );
+    }
 }

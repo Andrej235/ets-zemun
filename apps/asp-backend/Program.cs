@@ -324,6 +324,10 @@ builder.Services.AddScoped<
     IUpdateSingleService<EducationalProfile>,
     UpdateService<EducationalProfile>
 >();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfile>,
+    UpdateService<EducationalProfile>
+>();
 builder.Services.AddScoped<IDeleteService<EducationalProfile>, DeleteService<EducationalProfile>>();
 builder.Services.AddScoped<
     IDeleteService<EducationalProfileGeneralSubject>,
