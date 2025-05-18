@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import compressImage from "@/lib/compress-image";
 import { useLanguageStore } from "@/stores/language-store";
 import { motion } from "framer-motion";
 import {
@@ -181,6 +182,24 @@ export default function CreateTeacherPage() {
     });
   };
 
+  async function handleSelectImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const compressed = await compressImage(file, 0.2);
+    const imageBase64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(compressed);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+
+    setTeacherData({
+      ...teacherData,
+      image: imageBase64,
+    });
+  }
+
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center">
@@ -253,9 +272,23 @@ export default function CreateTeacherPage() {
                         </div>
                       )}
                     </div>
-                    <Button variant="outline" className="w-full">
+
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={(e) =>
+                        (e.target as HTMLButtonElement)
+                          .querySelector("input")
+                          ?.click()
+                      }
+                    >
                       <Upload className="mr-2 h-4 w-4" />
                       Upload Photo
+                      <Input
+                        type="file"
+                        className="pointer-events-none absolute size-full opacity-0"
+                        onChange={handleSelectImage}
+                      />
                     </Button>
                   </div>
 
