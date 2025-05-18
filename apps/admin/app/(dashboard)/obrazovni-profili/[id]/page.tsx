@@ -143,33 +143,53 @@ export default function CurriculumDetailPage({
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
-    try {
-      const formData = new FormData();
-      formData.append("subjectId", values.subjectId);
-      formData.append("year", values.year.toString());
-      formData.append("perWeek", values.perWeek.toString());
-      formData.append("type", values.type);
+    const formData = new FormData();
+    formData.append("subjectId", values.subjectId);
+    formData.append("year", values.year.toString());
+    formData.append("perWeek", values.perWeek.toString());
+    formData.append("type", values.type);
 
-      //   await addSubjectToCurriculum(profileId, formData);
-      toast.success("Subject added to curriculum successfully");
-      handleCloseDialog();
-      router.refresh();
+    const promise = sendApiRequest("/profile/add-subject", {
+      method: "patch",
+      payload: {
+        perWeek: values.perWeek,
+        subjectId: +values.subjectId,
+        profileId: +profileId,
+        year: values.year,
+        type: values.type === "general" ? "General" : "Vocational",
+      },
+    });
 
-      // Refresh the data
-      const updatedCurriculum = await sendApiRequest("/profile/{id}", {
-        method: "get",
-        parameters: {
-          id: +profileId,
-          languageCode: "sr_lt",
-        },
-      });
-      setCurriculum(updatedCurriculum.response!);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to add subject to curriculum");
-    } finally {
-      setIsSubmitting(false);
-    }
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(
+            response.error?.message ?? "Failed to add subject to curriculum",
+          );
+      }),
+      {
+        loading: "Adding subject to curriculum...",
+        success: "Subject added to curriculum successfully",
+        error: (x) => (x as Error).message,
+      },
+    );
+
+    const response = await promise;
+    setIsSubmitting(false);
+    if (!response.isOk) return;
+
+    handleCloseDialog();
+    router.refresh();
+
+    // Refresh the data
+    const updatedCurriculum = await sendApiRequest("/profile/{id}", {
+      method: "get",
+      parameters: {
+        id: +profileId,
+        languageCode: "sr_lt",
+      },
+    });
+    setCurriculum(updatedCurriculum.response!);
   }
 
   if (loading || !curriculum) {

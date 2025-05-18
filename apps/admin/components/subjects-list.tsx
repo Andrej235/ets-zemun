@@ -35,6 +35,7 @@ import { Pencil, Save, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import sendApiRequest from "@/api-dsl/send-api-request";
 
 type Subject = Schema<"AdminSubjectResponseDto">;
 type CurriculumSubject = Schema<"ProfileSubjectResponseDto"> & {
@@ -77,15 +78,32 @@ export function SubjectsList({
   };
 
   const handleDelete = async (subject: CurriculumSubject) => {
-    try {
-      //   const { removeCurriculumSubject } = await import("@/lib/actions");
-      //   await removeCurriculumSubject(profileId, subject);
-      toast.success("Subject removed from curriculum");
-      router.refresh();
-    } catch (error) {
-      toast.error("Failed to remove subject");
-      console.error(error);
-    }
+    const promise = sendApiRequest("/profile/remove-subject", {
+      method: "patch",
+      payload: {
+        profileId: profileId,
+        subjectId: subject.subject.id,
+        type: subject.type === "general" ? "General" : "Vocational",
+      },
+    });
+
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(
+            response.error?.message ?? "Failed to remove subject",
+          );
+      }),
+      {
+        loading: "Removing subject...",
+        success: "Subject removed successfully",
+        error: (x) => (x as Error).message,
+      },
+    );
+
+    const response = await promise;
+    if (!response.isOk) return;
+    router.refresh();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

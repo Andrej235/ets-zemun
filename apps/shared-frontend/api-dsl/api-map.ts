@@ -233,21 +233,6 @@ export type APIMap = {
       }
     },
     '/profile/{id}': {
-      get: {
-        tags: [ 'EducationalProfiles' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '503': { description: 'Service Unavailable' }
-        }
-      },
       delete: {
         tags: [ 'EducationalProfiles' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -263,6 +248,69 @@ export type APIMap = {
           },
           '404': {
             description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      },
+      get: {
+        tags: [ 'EducationalProfiles' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/EducationalProfileResponseDto' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
+    '/profile/add-subject': {
+      patch: {
+        tags: [ 'EducationalProfiles' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/AddSubjectRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AddSubjectRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/AddSubjectRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
+    '/profile/remove-subject': {
+      patch: {
+        tags: [ 'EducationalProfiles' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/RemoveSubjectRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/RemoveSubjectRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/RemoveSubjectRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
           '503': { description: 'Service Unavailable' }
@@ -1619,6 +1667,7 @@ export type APIMap = {
   },
   components: {
     schemas: {
+      AddSubjectRequestDto: { type: 'object', properties: { profileId: { type: 'integer', format: 'int32' }, subjectId: { type: 'integer', format: 'int32' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' }, type: { '$ref': '#/components/schemas/SubjectType' } }, additionalProperties: false },
       AddSubjectsToTeacherRequestDto: {
         type: 'object',
         properties: { teacherId: { type: 'integer', format: 'int32' }, subjectIds: { type: 'array', items: { type: 'integer', format: 'int32' } } },
@@ -1682,6 +1731,7 @@ export type APIMap = {
       QualificationResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       QualificationResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       RegisterRequestDto: { type: 'object', properties: { username: { type: 'string' }, email: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
+      RemoveSubjectRequestDto: { type: 'object', properties: { profileId: { type: 'integer', format: 'int32' }, subjectId: { type: 'integer', format: 'int32' }, type: { '$ref': '#/components/schemas/SubjectType' } }, additionalProperties: false },
       ResetPasswordRequestDto: { type: 'object', properties: { email: { type: 'string' }, token: { type: 'string' }, newPassword: { type: 'string' } }, additionalProperties: false },
       SendResetPasswordEmailRequestDto: { type: 'object', properties: { email: { type: 'string' } }, additionalProperties: false },
       SimpleEducationalProfileResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, yearsCount: { type: 'integer', format: 'int32' } }, additionalProperties: false },
@@ -1690,6 +1740,7 @@ export type APIMap = {
       SimpleTeacherResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, tItle: { type: 'string' } }, additionalProperties: false },
       SimpleTeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/SimpleTeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       SubjectResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, description: { type: 'string' }, teachers: { '$ref': '#/components/schemas/TeacherResponseDtoLazyLoadResponse' } }, additionalProperties: false },
+      SubjectType: { enum: [ 'Vocational', 'General' ], type: 'string' },
       TeacherResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },

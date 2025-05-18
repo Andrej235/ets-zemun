@@ -11,8 +11,10 @@ using FluentResults;
 
 namespace EtsZemun.Services.Model.EducationalProfileService;
 
-public class EducationalProfileService(
+public partial class EducationalProfileService(
     ICreateSingleService<EducationalProfile> createSingle,
+    ICreateSingleService<EducationalProfileGeneralSubject> createGeneralSubjectService,
+    ICreateSingleService<EducationalProfileVocationalSubject> createVocationalSubjectService,
     IReadRangeSelectedService<EducationalProfile> readRangeService,
     IReadSingleService<EducationalProfile> readSingleService,
     IUpdateSingleService<EducationalProfile> updateSingle,
@@ -22,71 +24,4 @@ public class EducationalProfileService(
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
-) : IEducationalProfileService
-{
-    public async Task<Result> Create(CreateEducationalProfileRequestDto request)
-    {
-        var result = await createSingle.Add(createRequestMapper.Map(request));
-        return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
-    }
-
-    public Task<Result> Delete(int id)
-    {
-        return deleteService.Delete(x => x.Id == id);
-    }
-
-    public Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll()
-    {
-        return readRangeService.Get(
-            x => new SimpleEducationalProfileResponseDto
-            {
-                Id = x.Id,
-                Name = x.Name,
-                YearsCount = x
-                    .GeneralSubjects.Select(x => x.Year)
-                    .Concat(x.VocationalSubjects.Select(x => x.Year))
-                    .Distinct()
-                    .Count(),
-            },
-            null,
-            null,
-            -1
-        );
-    }
-
-    public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode)
-    {
-        var result = await readSingleService.Get(
-            x => x.Id == id,
-            q =>
-                q.Include(x => x.GeneralSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.VocationalSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-        );
-
-        return result.IsFailed
-            ? Result.Fail<EducationalProfileResponseDto>(result.Errors)
-            : Result.Ok(responseMapper.Map(result.Value));
-    }
-
-    public async Task<Result> Update(UpdateEducationalProfileRequestDto request)
-    {
-        var deleteResult1 = await deleteGeneralSubjectService.Delete(
-            x => x.EducationalProfileId == request.Id,
-            false
-        );
-        var deleteResult2 = await deleteVocationalSubjectService.Delete(
-            x => x.EducationalProfileId == request.Id,
-            false
-        );
-
-        if (deleteResult1.IsFailed || deleteResult2.IsFailed)
-            return Result.Fail([.. deleteResult1.Errors, .. deleteResult2.Errors]);
-
-        var result = await updateSingle.Update(updateRequestMapper.Map(request));
-        return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
-    }
-}
+) : IEducationalProfileService;

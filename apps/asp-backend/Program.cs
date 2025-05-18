@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using brevo_csharp.Client;
 using EtsZemun.Data;
@@ -62,7 +63,7 @@ Directory.CreateDirectory(keysPath);
 builder
     .Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(keysPath))
-    .SetApplicationName("TennisPhreak");
+    .SetApplicationName("EtsZemun");
 
 var configuration = builder.Configuration;
 builder.Services.AddSingleton(configuration);
@@ -76,7 +77,20 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
 });
-builder.Services.AddControllers();
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.SerializerOptions.RespectNullableAnnotations = true;
+});
+
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.RespectNullableAnnotations = true;
+    });
 builder.Services.AddHybridCache();
 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -280,6 +294,14 @@ builder.Services.AddScoped<IEducationalProfileService, EducationalProfileService
 builder.Services.AddScoped<
     ICreateSingleService<EducationalProfile>,
     CreateService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    ICreateSingleService<EducationalProfileGeneralSubject>,
+    CreateService<EducationalProfileGeneralSubject>
+>();
+builder.Services.AddScoped<
+    ICreateSingleService<EducationalProfileVocationalSubject>,
+    CreateService<EducationalProfileVocationalSubject>
 >();
 builder.Services.AddScoped<
     IReadRangeSelectedService<EducationalProfile>,
