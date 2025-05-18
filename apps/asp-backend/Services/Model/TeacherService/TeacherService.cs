@@ -17,6 +17,7 @@ public partial class TeacherService(
     ICreateRangeService<TeacherSubject> createTeacherSubjectService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
+    IReadRangeSelectedService<Teacher> readRangeSelectedService,
     ICountService<Teacher> countService,
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
@@ -31,32 +32,4 @@ public partial class TeacherService(
     IResponseMapper<Teacher, TeacherResponseDto> responseMapper,
     IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper,
     HybridCache hybridCache
-) : ITeacherService
-{
-    private readonly ICreateSingleService<Teacher> createSingleService = createSingleService;
-    private readonly ICreateSingleService<TeacherTranslation> createSingleTranslationService =
-        createSingleTranslationService;
-    private readonly ICreateRangeService<TeacherSubject> createTeacherSubjectService =
-        createTeacherSubjectService;
-    private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
-    private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
-    private readonly ICountService<Teacher> countService = countService;
-    private readonly IUpdateSingleService<Teacher> updateService = updateService;
-    private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
-        updateTranslationService;
-    private readonly IDeleteService<Teacher> deleteService = deleteService;
-    private readonly IDeleteService<TeacherSubject> deleteTeacherSubjectService =
-        deleteTeacherSubjectService;
-    private readonly IDeleteService<TeacherTranslation> deleteTranslationService =
-        deleteTranslationService;
-    private readonly IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper =
-        createRequestMapper;
-    private readonly IRequestMapper<
-        CreateTeacherTranslationRequestDto,
-        TeacherTranslation
-    > createTranslationRequestMapper = createTranslationRequestMapper;
-    private readonly IResponseMapper<Teacher, TeacherResponseDto> responseMapper = responseMapper;
-    private readonly IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper =
-        simpleResponseMapper;
-    private readonly HybridCache hybridCache = hybridCache;
-}
+) : ITeacherService;

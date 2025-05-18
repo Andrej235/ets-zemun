@@ -100,7 +100,7 @@ export function TeacherSelector({
                           <div className="flex flex-col">
                             <span>{teacher.name}</span>
                             <span className="text-xs text-muted-foreground">
-                              {teacher.tItle}
+                              {teacher.title}
                             </span>
                           </div>
                           <Check

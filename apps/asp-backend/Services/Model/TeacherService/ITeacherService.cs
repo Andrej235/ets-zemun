@@ -29,6 +29,7 @@ public interface ITeacherService
         int? limit
     );
     Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode);
+    Task<Result<IEnumerable<AdminTeacherResponseDto>>> AdminGetAll();
 
     Task<Result> Update(UpdateTeacherRequestDto request);
     Task<Result> UpdateTranslation(UpdateTeacherTranslationRequestDto request);

@@ -120,7 +120,7 @@ public partial class SubjectService
                 {
                     Id = x.Id,
                     Name = x.Translations.First().Name,
-                    TItle = x.Translations.First().Title,
+                    Title = x.Translations.First().Title,
                 }),
                 Translations = x.Translations.Select(
                     t => new Dtos.Response.Translations.TranslationWrapper<AdminFullSubjectTranslationDto>()

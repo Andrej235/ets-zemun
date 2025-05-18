@@ -10,6 +10,6 @@ public class SimpleTeacherResponseMapper : IResponseMapper<Teacher, SimpleTeache
         {
             Id = from.Id,
             Name = from.Translations.FirstOrDefault()?.Name ?? "",
-            TItle = from.Translations.FirstOrDefault()?.Title ?? "",
+            Title = from.Translations.FirstOrDefault()?.Title ?? "",
         };
 }

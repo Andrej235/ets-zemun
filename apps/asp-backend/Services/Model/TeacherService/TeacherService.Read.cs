@@ -172,4 +172,19 @@ public partial class TeacherService : ITeacherService
 
         return Result.Ok(responseMapper.Map(result.Value));
     }
+
+    public Task<Result<IEnumerable<AdminTeacherResponseDto>>> AdminGetAll()
+    {
+        return readRangeSelectedService.Get(
+            x => new AdminTeacherResponseDto()
+            {
+                Id = x.Id,
+                Name = x.Translations.First().Name,
+                Title = x.Translations.First().Title,
+                Translations = x.Translations.Select(x => x.LanguageCode),
+                Email = x.Email,
+            },
+            null
+        );
+    }
 }
