@@ -24,13 +24,12 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Calendar,
-  Eye,
   Loader2,
   MoreHorizontal,
   Pencil,
   PlusCircle,
   Search,
-  Trash2,
+  Trash2
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -200,16 +199,6 @@ export default function CurriculumPage() {
                               onClick={() =>
                                 router.push(
                                   `/obrazovni-profili/${curriculum.id}`,
-                                )
-                              }
-                            >
-                              <Eye className="mr-2 h-4 w-4" />
-                              View Details
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() =>
-                                router.push(
-                                  `/obrazovni-profili/${curriculum.id}/edit`,
                                 )
                               }
                             >

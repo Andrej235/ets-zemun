@@ -272,13 +272,29 @@ export default function CurriculumDetailPage({
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Total Subjects</CardTitle>
+            <CardTitle className="text-lg">General Subjects</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
               <BookOpen className="mr-2 h-5 w-5 text-muted-foreground" />
               <span className="text-3xl font-bold">
-                {curriculumSubjects.length}
+                {curriculumSubjects.filter((x) => x.type === "general").length}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg">Vocational Subjects</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <BookOpen className="mr-2 h-5 w-5 text-muted-foreground" />
+              <span className="text-3xl font-bold">
+                {
+                  curriculumSubjects.filter((x) => x.type === "vocational")
+                    .length
+                }
               </span>
             </div>
           </CardContent>
