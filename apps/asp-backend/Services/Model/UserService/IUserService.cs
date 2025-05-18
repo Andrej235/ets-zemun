@@ -23,4 +23,6 @@ public interface IUserService
 
     Task<Result> SendResetPasswordEmail(SendResetPasswordEmailRequestDto request);
     Task<Result> ResetPassword(ResetPasswordRequestDto request);
+
+    Task<Result> SaveLoginEvent(string userName);
 }

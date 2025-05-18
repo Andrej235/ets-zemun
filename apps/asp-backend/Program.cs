@@ -446,6 +446,8 @@ builder.Services.AddScoped<
     ReadService<IdentityUserRole<string>>
 >();
 builder.Services.AddScoped<IDeleteService<User>, DeleteService<User>>();
+
+builder.Services.AddScoped<ICreateSingleService<UserLoginEvent>, CreateService<UserLoginEvent>>();
 #endregion
 
 #endregion

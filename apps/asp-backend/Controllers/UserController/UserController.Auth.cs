@@ -61,6 +61,8 @@ public partial class UserController
         if (!result.Succeeded)
             return Unauthorized(new { Message = "Invalid username or password" });
 
+        await userService.SaveLoginEvent(request.Username);
+
         return Ok();
     }
 

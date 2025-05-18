@@ -52,4 +52,34 @@ public partial class UserService
 
         return Result.Ok();
     }
+
+    public async Task<Result> SaveLoginEvent(string userName)
+    {
+        var user = await userManager.FindByNameAsync(userName);
+        if (user is null)
+            return Result.Fail(new NotFound("User not found"));
+
+        var loginHistory = new UserLoginEvent
+        {
+            UserId = user.Id,
+            LoginTime = DateTime.UtcNow,
+            IpAddress =
+                httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString()
+                ?? "Unknown",
+            UserAgent =
+                httpContextAccessor.HttpContext?.Request != null
+                && httpContextAccessor.HttpContext.Request.Headers.TryGetValue(
+                    "User-Agent",
+                    out Microsoft.Extensions.Primitives.StringValues value
+                )
+                    ? value.ToString()
+                    : "Unknown",
+        };
+
+        var result = await createLoginEventService.Add(loginHistory);
+        if (result.IsFailed)
+            return Result.Fail(result.Errors);
+
+        return Result.Ok();
+    }
 }

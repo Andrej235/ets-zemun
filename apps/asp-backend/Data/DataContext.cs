@@ -24,10 +24,25 @@ namespace EtsZemun.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
+        public DbSet<UserLoginEvent> UserLoginEvent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserLoginEvent>(loginEvent =>
+            {
+                loginEvent.HasKey(le => le.Id);
+
+                loginEvent
+                    .HasOne(le => le.User)
+                    .WithMany()
+                    .HasForeignKey(le => le.UserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                loginEvent.HasIndex(le => le.LoginTime);
+                loginEvent.HasIndex(le => le.UserId);
+            });
 
             modelBuilder.Entity<Award>(award =>
             {
