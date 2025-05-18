@@ -100,4 +100,25 @@ public partial class TeacherController
 
         return Ok(result.Value);
     }
+
+    [Authorize(Roles = Roles.BasicPerms)]
+    [HttpGet("admin/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult<AdminFullTeacherResponseDto>> AdminGet(int id)
+    {
+        var result = await teacherService.AdminGet(id);
+
+        if (result.IsFailed)
+        {
+            if (result.HasError<NotFound>())
+                return NotFound();
+
+            return BadRequest();
+        }
+
+        return Ok(result.Value);
+    }
 }

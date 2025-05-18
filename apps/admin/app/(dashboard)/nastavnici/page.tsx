@@ -106,7 +106,7 @@ export default function TeachersPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/admin/teachers/create">
+          <Link href="/nastavnici/novi">
             <Plus className="mr-2 h-4 w-4" />
             Add Teacher
           </Link>
@@ -158,7 +158,7 @@ export default function TeachersPage() {
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
-                <Link href="/admin/teachers/create">
+                <Link href="/nastavnici/novi">
                   <Plus className="mr-2 h-4 w-4" />
                   Add Teacher
                 </Link>
@@ -220,7 +220,7 @@ export default function TeachersPage() {
 
                     <div className="mt-4 flex justify-between">
                       <Button asChild variant="outline" size="sm">
-                        <Link href={`/admin/teachers/${teacher.id}`}>
+                        <Link href={`/nastavnici/${teacher.id}`}>
                           View & Edit
                         </Link>
                       </Button>

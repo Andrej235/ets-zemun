@@ -1,5 +1,6 @@
 using EtsZemun.Dtos;
 using EtsZemun.Dtos.Response.Teacher;
+using EtsZemun.Dtos.Response.Translations;
 using EtsZemun.Services.Read;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
@@ -183,8 +184,53 @@ public partial class TeacherService : ITeacherService
                 Title = x.Translations.First().Title,
                 Translations = x.Translations.Select(x => x.LanguageCode),
                 Email = x.Email,
+                Image = x.Image,
             },
             null
         );
+    }
+
+    public async Task<Result<AdminFullTeacherResponseDto>> AdminGet(int id)
+    {
+        var result = await readSingleSelectedService.Get(
+            x => new
+            {
+                Teacher = x,
+                Translations = x.Translations.Select(
+                    t => new TranslationWrapper<AdminFullTeacherTranslationResponseDto>()
+                    {
+                        LanguageCode = t.LanguageCode,
+                        Value = new AdminFullTeacherTranslationResponseDto()
+                        {
+                            Name = t.Name,
+                            Title = t.Title,
+                            Bio = t.Bio,
+                        },
+                    }
+                ),
+            },
+            x => x.Id == id,
+            q =>
+                q.Include(x => x.Translations.First())
+                    .Include(x => x.Subjects)
+                    .ThenInclude(x => x.Translations.First())
+                    .Include(x => x.Qualifications)
+                    .ThenInclude(x => x.Translations.First())
+        );
+
+        if (result.IsFailed)
+            return Result.Fail(result.Errors);
+
+        var mapped = responseMapper.Map(result.Value.Teacher);
+
+        return new AdminFullTeacherResponseDto()
+        {
+            Id = mapped.Id,
+            Email = mapped.Email,
+            Image = mapped.Image,
+            Translations = result.Value.Translations,
+            Qualifications = mapped.Qualifications,
+            Subjects = mapped.Subjects,
+        };
     }
 }

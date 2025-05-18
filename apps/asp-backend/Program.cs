@@ -232,6 +232,7 @@ builder.Services.AddScoped<
     CreateService<TeacherTranslation>
 >();
 builder.Services.AddScoped<IReadSingleService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IReadSingleSelectedService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IReadRangeService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<ICountService<Teacher>, ReadService<Teacher>>();

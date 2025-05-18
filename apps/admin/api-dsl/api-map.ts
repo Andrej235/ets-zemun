@@ -1406,6 +1406,31 @@ export type APIMap = {
         }
       }
     },
+    '/teacher/admin/{id}': {
+      get: {
+        tags: [ 'Teacher' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminFullTeacherResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminFullTeacherResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminFullTeacherResponseDto' } } }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/teacher/subject': {
       post: {
         tags: [ 'Teacher' ],
@@ -1788,6 +1813,13 @@ export type APIMap = {
       },
       AdminFullSubjectTranslationDto: { type: 'object', properties: { name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       AdminFullSubjectTranslationDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullSubjectTranslationDto' } }, additionalProperties: false },
+      AdminFullTeacherResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDtoTranslationWrapper' } }, email: { type: 'string' }, image: { type: 'string' }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
+        additionalProperties: false
+      },
+      AdminFullTeacherTranslationResponseDto: { type: 'object', properties: { name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
+      AdminFullTeacherTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDto' } }, additionalProperties: false },
       AdminOverviewResponseDto: {
         type: 'object',
         properties: { newsCount: { type: 'integer', format: 'int32' }, unapprovedNewsCount: { type: 'integer', format: 'int32' }, languagesCount: { type: 'integer', format: 'int32' }, languages: { type: 'array', items: { type: 'string' } }, subjectsCount: { type: 'integer', format: 'int32' }, profilesCount: { type: 'integer', format: 'int32' }, teachersCount: { type: 'integer', format: 'int32' }, awardsCount: { type: 'integer', format: 'int32' }, logins: { type: 'array', items: { '$ref': '#/components/schemas/AdminUserLoginOverviewResponseDto' } } },
@@ -1800,7 +1832,7 @@ export type APIMap = {
       },
       AdminTeacherResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, email: { type: 'string' }, translations: { type: 'array', items: { type: 'string' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, image: { type: 'string' }, email: { type: 'string' }, translations: { type: 'array', items: { type: 'string' } } },
         additionalProperties: false
       },
       AdminUserLoginOverviewResponseDto: { type: 'object', properties: { name: { type: 'string' }, role: { type: 'string' }, loginTime: { type: 'string', format: 'date-time' } }, additionalProperties: false },
@@ -1831,7 +1863,11 @@ export type APIMap = {
         additionalProperties: false
       },
       CreateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
-      CreateTeacherRequestDto: { type: 'object', properties: { email: { type: 'string' }, image: { type: 'string' }, translation: { '$ref': '#/components/schemas/CreateTeacherTranslationRequestDto' } }, additionalProperties: false },
+      CreateTeacherRequestDto: {
+        type: 'object',
+        properties: { email: { type: 'string' }, image: { type: 'string' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateTeacherTranslationRequestDto' } } },
+        additionalProperties: false
+      },
       CreateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       EducationalProfileResponseDto: {
         type: 'object',

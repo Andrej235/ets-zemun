@@ -19,7 +19,7 @@ public class CreateTeacherRequestMapper(
             Email = request.Email,
             StartOfOpenOfficeHoursFirstShift = null,
             StartOfOpenOfficeHoursSecondShift = null,
-            Translations = [translationMapper.Map(request.Translation)],
+            Translations = [.. request.Translations.Select(translationMapper.Map)],
             Qualifications = [],
             Subjects = [],
         };

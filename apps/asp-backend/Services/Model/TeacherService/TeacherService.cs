@@ -15,6 +15,7 @@ public partial class TeacherService(
     ICreateSingleService<Teacher> createSingleService,
     ICreateSingleService<TeacherTranslation> createSingleTranslationService,
     ICreateRangeService<TeacherSubject> createTeacherSubjectService,
+    IReadSingleSelectedService<Teacher> readSingleSelectedService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
     IReadRangeSelectedService<Teacher> readRangeSelectedService,
