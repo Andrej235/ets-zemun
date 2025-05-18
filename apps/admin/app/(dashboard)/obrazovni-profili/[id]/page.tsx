@@ -141,6 +141,17 @@ export default function CurriculumDetailPage({
     form.reset();
   };
 
+  async function refreshData() {
+    const updatedCurriculum = await sendApiRequest("/profile/{id}", {
+      method: "get",
+      parameters: {
+        id: +profileId,
+        languageCode: "sr_lt",
+      },
+    });
+    setCurriculum(updatedCurriculum.response!);
+  }
+
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     const formData = new FormData();
@@ -180,16 +191,7 @@ export default function CurriculumDetailPage({
 
     handleCloseDialog();
     router.refresh();
-
-    // Refresh the data
-    const updatedCurriculum = await sendApiRequest("/profile/{id}", {
-      method: "get",
-      parameters: {
-        id: +profileId,
-        languageCode: "sr_lt",
-      },
-    });
-    setCurriculum(updatedCurriculum.response!);
+    refreshData();
   }
 
   if (loading || !curriculum) {
@@ -400,6 +402,7 @@ export default function CurriculumDetailPage({
                   curriculumSubjects={subjectsByYear.get(year)!}
                   subjectMap={subjectMap}
                   year={year}
+                  refresh={refreshData}
                 />
               </CardContent>
             </Card>

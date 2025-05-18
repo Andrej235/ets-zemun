@@ -36,6 +36,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import sendApiRequest from "@/api-dsl/send-api-request";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 type Subject = Schema<"AdminSubjectResponseDto">;
 type CurriculumSubject = Schema<"ProfileSubjectResponseDto"> & {
@@ -48,6 +59,7 @@ type SubjectsListProps = {
   curriculumSubjects: CurriculumSubject[];
   subjectMap: Map<number, Subject>;
   year: number;
+  refresh: () => void;
 };
 
 export function SubjectsList({
@@ -55,6 +67,7 @@ export function SubjectsList({
   curriculumSubjects,
   subjectMap,
   year,
+  refresh,
 }: SubjectsListProps) {
   const router = useRouter();
   const [editingSubject, setEditingSubject] =
@@ -104,6 +117,7 @@ export function SubjectsList({
     const response = await promise;
     if (!response.isOk) return;
     router.refresh();
+    refresh();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -184,15 +198,41 @@ export function SubjectsList({
                             <Pencil className="h-4 w-4" />
                             <span className="sr-only">Edit</span>
                           </Button>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="text-red-500"
-                            onClick={() => handleDelete(subject)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
-                          </Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button
+                                variant="outline"
+                                size="icon"
+                                className="text-red-500"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                                <span className="sr-only">Delete</span>
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  Are you sure you want to remove{" "}
+                                  {subject.subject.name || "this subject"} from
+                                  the profile?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will
+                                  permanently remove the subject from the
+                                  profile.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                  className="bg-red-500 hover:bg-red-600"
+                                  onClick={() => handleDelete(subject)}
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </div>
                       </TableCell>
                     </TableRow>
