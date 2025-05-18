@@ -15,4 +15,6 @@ public class AdminOverviewResponseDto
     public int TeachersCount { get; set; }
 
     public int AwardsCount { get; set; }
+
+    public IEnumerable<AdminUserLoginOverviewResponseDto> Logins { get; set; } = null!;
 }

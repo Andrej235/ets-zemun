@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { formatDistance } from "date-fns";
 import {
   Award,
   BookOpen,
@@ -19,16 +20,22 @@ import {
 
 export default async function Dashboard() {
   const {
-    isOk,
-    error,
+    isOk: isOverviewOk,
+    error: overviewError,
     response: overviewData,
   } = await sendApiRequestSSR("/admin/overview", {
     method: "get",
   });
 
-  if (!isOk || !overviewData) {
-    console.log(error);
+  if (!isOverviewOk || !overviewData) {
+    console.log(overviewError);
     return null;
+  }
+
+  function formatDate(date: string) {
+    return formatDistance(new Date(date), new Date(), {
+      addSuffix: true,
+    });
   }
 
   return (
@@ -131,16 +138,23 @@ export default async function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-muted/50">
-                  <LogIn className="h-6 w-6 text-primary" />
+              {overviewData.logins.toReversed().map((x) => (
+                <div
+                  className="flex items-center gap-4"
+                  key={`login-${x.name}-${x.loginTime}`}
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-muted/50">
+                    <LogIn className="h-6 w-6 text-primary" />
+                  </div>
+                  <div className="flex-[1]">
+                    <p className="font-medium">{x.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {formatDate(x.loginTime)}
+                    </p>
+                  </div>
+                  <RoleBadge role={x.role.toLowerCase()} />
                 </div>
-                <div className="flex-[1]">
-                  <p className="font-medium">John Doe</p>
-                  <p className="text-sm text-muted-foreground">1 hour ago</p>
-                </div>
-                <RoleBadge role="admin" />
-              </div>
+              ))}
             </div>
           </CardContent>
         </Card>
