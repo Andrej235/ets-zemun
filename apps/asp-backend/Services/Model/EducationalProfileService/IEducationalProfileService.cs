@@ -14,6 +14,7 @@ public interface IEducationalProfileService
     Task<Result> Update(UpdateEducationalProfileRequestDto request);
 
     Task<Result> AddSubject(AddSubjectRequestDto request);
+    Task<Result> UpdateSubject(UpdateProfileSubjectRequestDto request);
     Task<Result> RemoveSubject(RemoveSubjectRequestDto request);
 
     Task<Result> Delete(int id);

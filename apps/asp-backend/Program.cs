@@ -1,3 +1,4 @@
+using System.Security.Principal;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using brevo_csharp.Client;
@@ -310,6 +311,14 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IReadSingleService<EducationalProfile>,
     ReadService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfileGeneralSubject>,
+    UpdateService<EducationalProfileGeneralSubject>
+>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfileVocationalSubject>,
+    UpdateService<EducationalProfileVocationalSubject>
 >();
 builder.Services.AddScoped<
     IUpdateSingleService<EducationalProfile>,

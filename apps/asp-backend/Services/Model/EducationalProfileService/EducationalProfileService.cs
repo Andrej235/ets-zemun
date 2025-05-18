@@ -17,6 +17,8 @@ public partial class EducationalProfileService(
     ICreateSingleService<EducationalProfileVocationalSubject> createVocationalSubjectService,
     IReadRangeSelectedService<EducationalProfile> readRangeService,
     IReadSingleService<EducationalProfile> readSingleService,
+    IExecuteUpdateService<EducationalProfileGeneralSubject> updateGeneralSubject,
+    IExecuteUpdateService<EducationalProfileVocationalSubject> updateVocationalSubject,
     IUpdateSingleService<EducationalProfile> updateSingle,
     IDeleteService<EducationalProfile> deleteService,
     IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService,

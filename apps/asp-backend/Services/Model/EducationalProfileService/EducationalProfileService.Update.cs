@@ -75,4 +75,56 @@ public partial class EducationalProfileService
             return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
         }
     }
+
+    public async Task<Result> UpdateSubject(UpdateProfileSubjectRequestDto request)
+    {
+        if (request.CurrentType == request.NewType)
+        {
+            if (request.CurrentType == AddSubjectRequestDto.SubjectType.General)
+            {
+                return await updateGeneralSubject.Update(
+                    x =>
+                        x.SubjectId == request.SubjectId
+                        && x.EducationalProfileId == request.ProfileId,
+                    x =>
+                        x.SetProperty(x => x.PerWeek, request.NewPerWeek)
+                            .SetProperty(x => x.Year, request.NewYear)
+                );
+            }
+            else
+            {
+                return await updateVocationalSubject.Update(
+                    x =>
+                        x.SubjectId == request.SubjectId
+                        && x.EducationalProfileId == request.ProfileId,
+                    x =>
+                        x.SetProperty(x => x.PerWeek, request.NewPerWeek)
+                            .SetProperty(x => x.Year, request.NewYear)
+                );
+            }
+        }
+
+        var result = await RemoveSubject(
+            new RemoveSubjectRequestDto()
+            {
+                ProfileId = request.ProfileId,
+                SubjectId = request.SubjectId,
+                Type = request.CurrentType,
+            }
+        );
+
+        if (result.IsFailed)
+            return Result.Fail(result.Errors);
+
+        return await AddSubject(
+            new AddSubjectRequestDto()
+            {
+                ProfileId = request.ProfileId,
+                SubjectId = request.SubjectId,
+                PerWeek = request.NewPerWeek,
+                Year = request.NewYear,
+                Type = request.NewType,
+            }
+        );
+    }
 }

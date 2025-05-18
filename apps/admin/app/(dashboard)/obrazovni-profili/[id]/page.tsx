@@ -154,12 +154,6 @@ export default function CurriculumDetailPage({
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
-    const formData = new FormData();
-    formData.append("subjectId", values.subjectId);
-    formData.append("year", values.year.toString());
-    formData.append("perWeek", values.perWeek.toString());
-    formData.append("type", values.type);
-
     const promise = sendApiRequest("/profile/add-subject", {
       method: "patch",
       payload: {
@@ -215,10 +209,6 @@ export default function CurriculumDetailPage({
       type: "vocational" as const,
     })) ?? []),
   ];
-
-  const availableSubjects = allSubjects.filter(
-    (subject) => !curriculumSubjects!.some((s) => s.subjectId === subject.id),
-  );
 
   const subjectsByYear = new Map<number, CurriculumSubject[]>();
   curriculumSubjects.forEach((subject) => {
@@ -438,8 +428,8 @@ export default function CurriculumDetailPage({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {availableSubjects.length > 0 ? (
-                          availableSubjects.map((subject) => (
+                        {allSubjects.length > 0 ? (
+                          allSubjects.map((subject) => (
                             <SelectItem
                               key={subject.id}
                               value={subject.id.toString()}
@@ -547,7 +537,7 @@ export default function CurriculumDetailPage({
                 </Button>
                 <Button
                   type="submit"
-                  disabled={isSubmitting || availableSubjects.length === 0}
+                  disabled={isSubmitting || allSubjects.length === 0}
                 >
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

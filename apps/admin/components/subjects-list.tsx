@@ -125,24 +125,40 @@ export function SubjectsList({
     if (!editingSubject) return;
 
     setIsSubmitting(true);
-    try {
-      const formDataObj = new FormData();
-      formDataObj.append("year", formData.year.toString());
-      formDataObj.append("perWeek", formData.perWeek.toString());
-      formDataObj.append("type", formData.type);
+    const promise = sendApiRequest("/profile/update-subject", {
+      method: "patch",
+      payload: {
+        currentType:
+          editingSubject.type === "general" ? "General" : "Vocational",
+        newType: formData.type === "general" ? "General" : "Vocational",
+        profileId: profileId,
+        subjectId: editingSubject.subject.id,
+        newPerWeek: formData.perWeek,
+        newYear: formData.year,
+      },
+    });
 
-      //   const { updateCurriculumSubject } = await import("@/lib/actions");
-      //   await updateCurriculumSubject(profileId, editingSubject.id, formDataObj);
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(
+            response.error?.message ?? "Failed to update subject",
+          );
+      }),
+      {
+        loading: "Updating subject...",
+        success: "Subject updated successfully",
+        error: (x) => (x as Error).message,
+      },
+    );
 
-      toast.success("Subject updated successfully");
-      setIsDialogOpen(false);
-      router.refresh();
-    } catch (error) {
-      toast.error("Failed to update subject");
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    const response = await promise;
+    setIsSubmitting(false);
+    if (!response.isOk) return;
+
+    setIsDialogOpen(false);
+    router.refresh();
+    refresh();
   };
 
   return (

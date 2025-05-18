@@ -59,4 +59,25 @@ public partial class EducationalProfilesController
 
         return NoContent();
     }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpPatch("update-subject")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult> UpdateSubject([FromBody] UpdateProfileSubjectRequestDto request)
+    {
+        var result = await profileService.UpdateSubject(request);
+
+        if (result.IsFailed)
+        {
+            if (result.HasError<NotFound>())
+                return NotFound();
+
+            return BadRequest();
+        }
+
+        return NoContent();
+    }
 }

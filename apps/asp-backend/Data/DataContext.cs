@@ -96,6 +96,10 @@ namespace EtsZemun.Data
                     .WithMany()
                     .HasForeignKey(v => v.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                vocationalSubject.HasIndex(g => new { g.Year, g.EducationalProfileId });
+
+                vocationalSubject.HasIndex(g => g.Year);
             });
 
             modelBuilder.Entity<Language>(language =>

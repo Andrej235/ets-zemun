@@ -317,6 +317,30 @@ export type APIMap = {
         }
       }
     },
+    '/profile/update-subject': {
+      patch: {
+        tags: [ 'EducationalProfiles' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/UpdateProfileSubjectRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/UpdateProfileSubjectRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/UpdateProfileSubjectRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/language': {
       post: {
         tags: [ 'Language' ],
@@ -1761,6 +1785,7 @@ export type APIMap = {
         additionalProperties: false
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
+      UpdateProfileSubjectRequestDto: { type: 'object', properties: { profileId: { type: 'integer', format: 'int32' }, subjectId: { type: 'integer', format: 'int32' }, currentType: { '$ref': '#/components/schemas/SubjectType' }, newPerWeek: { type: 'integer', format: 'int32' }, newYear: { type: 'integer', format: 'int32' }, newType: { '$ref': '#/components/schemas/SubjectType' } }, additionalProperties: false },
       UpdateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       UpdateSubjectRequestDto: {
         type: 'object',
