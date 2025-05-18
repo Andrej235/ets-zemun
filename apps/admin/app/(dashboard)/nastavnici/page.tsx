@@ -25,7 +25,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import getTranslationStatus from "@/lib/get-translation-status";
 import { useLanguageStore } from "@/stores/language-store";
 import { motion } from "framer-motion";
-import { Mail, Plus, Search, Trash2, Users } from "lucide-react";
+import { Mail, Plus, Search, Trash2, User2, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -188,7 +189,16 @@ export default function TeachersPage() {
                 <Card>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
-                      <div className="relative h-16 w-16 overflow-hidden rounded-full bg-muted/50"></div>
+                      <div className="relative h-16 w-16 overflow-hidden rounded-full">
+                        <Image
+                          src={teacher.image}
+                          alt={teacher.name || "Teacher"}
+                          fill
+                          className="object-cover text-transparent"
+                        />
+
+                        <User2 className="size-full bg-muted/50" />
+                      </div>
                       <div>
                         <h3 className="font-medium">
                           {teacher.name || "Unnamed Teacher"}
