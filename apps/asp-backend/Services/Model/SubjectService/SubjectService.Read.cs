@@ -93,7 +93,7 @@ public partial class SubjectService
         return Result.Ok(mapped);
     }
 
-    public Task<Result<IEnumerable<AdminSubjectResponseDto>>> AdminGetAll(int? offset)
+    public Task<Result<IEnumerable<AdminSubjectResponseDto>>> AdminGetAll(int? offset, int? limit)
     {
         return readRangeSelectedService.Get(
             x => new AdminSubjectResponseDto
@@ -105,8 +105,8 @@ public partial class SubjectService
                 Translations = x.Translations.Select(x => x.LanguageCode),
             },
             null,
-            offset,
-            10
+            offset ?? 0,
+            limit ?? -1
         );
     }
 

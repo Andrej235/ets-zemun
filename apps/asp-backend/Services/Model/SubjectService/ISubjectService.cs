@@ -23,6 +23,6 @@ public interface ISubjectService
     Task<Result> Delete(int id);
     Task<Result> DeleteTranslation(int subjectId, string languageCode);
 
-    Task<Result<IEnumerable<AdminSubjectResponseDto>>> AdminGetAll(int? offset);
+    Task<Result<IEnumerable<AdminSubjectResponseDto>>> AdminGetAll(int? offset, int? limit);
     Task<Result<AdminFullSubjectResponseDto>> AdminGetSingle(int id);
 }

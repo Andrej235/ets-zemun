@@ -1003,7 +1003,7 @@ export type APIMap = {
     '/subject/admin': {
       get: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',

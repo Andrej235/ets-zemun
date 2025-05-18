@@ -53,10 +53,11 @@ public partial class SubjectController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<AdminSubjectResponseDto>>> AdminGetAll(
-        [FromQuery] int? offset
+        [FromQuery] int? offset,
+        [FromQuery] int? limit
     )
     {
-        var result = await subjectService.AdminGetAll(offset);
+        var result = await subjectService.AdminGetAll(offset, limit);
 
         if (result.IsFailed)
             return BadRequest();

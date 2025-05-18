@@ -115,7 +115,7 @@ export default function CurriculumPage() {
               Manage curriculum profiles and their subjects
             </p>
           </div>
-          <Link href="/admin/curriculum/create">
+          <Link href="/obrazovni-profili/create">
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
               Add New Curriculum
@@ -199,7 +199,7 @@ export default function CurriculumPage() {
                             <DropdownMenuItem
                               onClick={() =>
                                 router.push(
-                                  `/admin/curriculum/${curriculum.id}`,
+                                  `/obrazovni-profili/${curriculum.id}`,
                                 )
                               }
                             >
@@ -209,7 +209,7 @@ export default function CurriculumPage() {
                             <DropdownMenuItem
                               onClick={() =>
                                 router.push(
-                                  `/admin/curriculum/${curriculum.id}/edit`,
+                                  `/obrazovni-profili/${curriculum.id}/edit`,
                                 )
                               }
                             >
@@ -252,7 +252,7 @@ export default function CurriculumPage() {
                         <p className="mb-2 text-sm text-muted-foreground">
                           No curriculums found
                         </p>
-                        <Link href="/admin/curriculum/create">
+                        <Link href="/obrazovni-profili/create">
                           <Button size="sm">
                             <PlusCircle className="mr-2 h-4 w-4" />
                             Add Curriculum
