@@ -99,6 +99,8 @@ export default function CurriculumDetailPage({
     },
   });
 
+  const [currentTab, setCurrentTab] = useState<string | undefined>(undefined);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -149,6 +151,17 @@ export default function CurriculumDetailPage({
         languageCode: "sr_lt",
       },
     });
+
+    if (currentTab && !isNaN(+currentTab)) {
+      const yearStillExists = [
+        ...updatedCurriculum.response!.generalSubjects,
+        ...updatedCurriculum.response!.vocationalSubjects,
+      ].some((x) => x.year === +currentTab);
+
+      console.log(yearStillExists);
+      if (!yearStillExists) setCurrentTab("overview");
+    }
+
     setCurriculum(updatedCurriculum.response!);
   }
 
@@ -272,7 +285,11 @@ export default function CurriculumDetailPage({
         </Card>
       </div>
 
-      <Tabs defaultValue={years.length > 0 ? years[0].toString() : "overview"}>
+      <Tabs
+        defaultValue={years.length > 0 ? years[0].toString() : "overview"}
+        value={currentTab}
+        onValueChange={setCurrentTab}
+      >
         <TabsList className="mb-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           {years.map((year) => (
