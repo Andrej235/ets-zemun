@@ -18,6 +18,7 @@ public interface IQualificationService
     );
     Task<Result<QualificationResponseDto>> GetSingle(int id, string languageCode);
 
+    Task<Result> Update(UpdateQualificationRequestDto request);
     Task<Result> UpdateTranslation(UpdateQualificationTranslationRequestDto request);
 
     Task<Result> Delete(int id);

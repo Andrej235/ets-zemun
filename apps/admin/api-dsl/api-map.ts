@@ -847,6 +847,28 @@ export type APIMap = {
           },
           '503': { description: 'Service Unavailable' }
         }
+      },
+      put: {
+        tags: [ 'Qualification' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/UpdateQualificationRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/UpdateQualificationRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/UpdateQualificationRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
       }
     },
     '/qualification/translation': {
@@ -896,25 +918,6 @@ export type APIMap = {
       }
     },
     '/qualification/{id}': {
-      get: {
-        tags: [ 'Qualification' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } } }
-          },
-          '400': {
-            description: 'Bad Request',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '503': { description: 'Service Unavailable' }
-        }
-      },
       delete: {
         tags: [ 'Qualification' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -926,6 +929,25 @@ export type APIMap = {
           },
           '403': {
             description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      },
+      get: {
+        tags: [ 'Qualification' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/QualificationResponseDto' } } }
+          },
+          '400': {
+            description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           },
           '404': {
@@ -1956,6 +1978,11 @@ export type APIMap = {
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
       UpdateProfileSubjectRequestDto: { type: 'object', properties: { profileId: { type: 'integer', format: 'int32' }, subjectId: { type: 'integer', format: 'int32' }, currentType: { '$ref': '#/components/schemas/SubjectType' }, newPerWeek: { type: 'integer', format: 'int32' }, newYear: { type: 'integer', format: 'int32' }, newType: { '$ref': '#/components/schemas/SubjectType' } }, additionalProperties: false },
+      UpdateQualificationRequestDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/UpdateQualificationTranslationRequestDto' } } },
+        additionalProperties: false
+      },
       UpdateQualificationTranslationRequestDto: { type: 'object', properties: { qualificationId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       UpdateSubjectRequestDto: {
         type: 'object',

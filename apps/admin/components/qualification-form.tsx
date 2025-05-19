@@ -122,6 +122,37 @@ export function QualificationForm({
     }
 
     if (isEditing && "id" in qualificationData) {
+      const promise = sendApiRequest(`/qualification`, {
+        method: "put",
+        payload: {
+          id: qualificationData.id,
+          dateObtained: qualificationData.dateObtained,
+          translations: qualificationData.translations.map((x) => ({
+            qualificationId: qualificationData.id,
+            languageCode: x.languageCode,
+            name: x.value.name,
+            description: x.value.description,
+          })),
+        },
+      });
+
+      toast.promise(
+        promise.then((response) => {
+          if (!response.isOk)
+            throw new Error(
+              response.error?.message ?? "Failed to update qualification",
+            );
+        }),
+        {
+          loading: "Updating qualification...",
+          success: "Qualification updated successfully",
+          error: "Failed to update qualification",
+        },
+      );
+
+      const { isOk } = await promise;
+      if (isOk) onSuccess(qualificationData as Qualification);
+
       return;
     }
 
