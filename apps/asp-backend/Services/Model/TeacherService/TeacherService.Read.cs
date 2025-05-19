@@ -190,12 +190,42 @@ public partial class TeacherService : ITeacherService
         );
     }
 
-    public async Task<Result<AdminFullTeacherResponseDto>> AdminGet(int id)
+    public Task<Result<AdminFullTeacherResponseDto>> AdminGet(int id)
     {
-        var result = await readSingleSelectedService.Get(
-            x => new
+        return readSingleSelectedService.Get(
+            x => new AdminFullTeacherResponseDto()
             {
-                Teacher = x,
+                Id = x.Id,
+                Email = x.Email,
+                Image = x.Image,
+                Qualifications = x.Qualifications.Select(
+                    q => new Dtos.Response.Qualification.AdminQualificationResponseDto()
+                    {
+                        Id = q.Id,
+                        TeacherId = q.TeacherId,
+                        DateObtained = q.DateObtained,
+                        Translations = q.Translations.Select(
+                            x => new TranslationWrapper<Dtos.Response.Qualification.AdminQualificationTranslationResponseDto>()
+                            {
+                                LanguageCode = x.LanguageCode,
+                                Value =
+                                    new Dtos.Response.Qualification.AdminQualificationTranslationResponseDto()
+                                    {
+                                        Name = x.Name,
+                                        Description = x.Description,
+                                    },
+                            }
+                        ),
+                    }
+                ),
+                Subjects = x.Subjects.Select(
+                    s => new Dtos.Response.Subject.SimpleSubjectResponseDto()
+                    {
+                        Id = s.Id,
+                        Name = s.Translations.First().Name,
+                        Description = s.Translations.First().Description,
+                    }
+                ),
                 Translations = x.Translations.Select(
                     t => new TranslationWrapper<AdminFullTeacherTranslationResponseDto>()
                     {
@@ -209,28 +239,7 @@ public partial class TeacherService : ITeacherService
                     }
                 ),
             },
-            x => x.Id == id,
-            q =>
-                q.Include(x => x.Translations)
-                    .Include(x => x.Subjects)
-                    .ThenInclude(x => x.Translations)
-                    .Include(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations)
+            x => x.Id == id
         );
-
-        if (result.IsFailed)
-            return Result.Fail(result.Errors);
-
-        var mapped = responseMapper.Map(result.Value.Teacher);
-
-        return new AdminFullTeacherResponseDto()
-        {
-            Id = mapped.Id,
-            Email = mapped.Email,
-            Image = mapped.Image,
-            Translations = result.Value.Translations,
-            Qualifications = mapped.Qualifications,
-            Subjects = mapped.Subjects,
-        };
     }
 }

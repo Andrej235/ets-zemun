@@ -20,6 +20,6 @@ public class CreateQualificationRequestMapper(
         {
             DateObtained = DateTime.SpecifyKind(from.DateObtained, DateTimeKind.Utc),
             TeacherId = from.TeacherId,
-            Translations = [translationMapper.Map(from.Translation)],
+            Translations = [.. from.Translations.Select(translationMapper.Map)],
         };
 }

@@ -110,7 +110,7 @@ export default function TeacherDetailPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to update user role",
+            response.error?.message ?? "Failed to save subject assignments",
           );
       }),
       {
@@ -186,9 +186,7 @@ export default function TeacherDetailPage() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(
-            response.error?.message ?? "Failed to update user role",
-          );
+          throw new Error(response.error?.message ?? "Failed to upload image");
       }),
       {
         loading: "Uploading image...",
@@ -329,7 +327,7 @@ export default function TeacherDetailPage() {
                                     if (!response.isOk)
                                       throw new Error(
                                         response.error?.message ??
-                                          "Failed to update user role",
+                                          "Failed to update teacher's email",
                                       );
                                   }),
                                   {
@@ -384,7 +382,7 @@ export default function TeacherDetailPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Professional Qualifications</CardTitle>
-              <Link href={`/nastavnici/${teacherId}/qualifications`}>
+              <Link href={`/nastavnici/${teacherId}/kvalifikacije`}>
                 <Button size="sm">Manage Qualifications</Button>
               </Link>
             </CardHeader>

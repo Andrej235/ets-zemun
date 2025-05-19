@@ -12,6 +12,6 @@ public class AdminFullTeacherResponseDto
     > Translations { get; set; } = [];
     public string Email { get; set; } = null!;
     public string Image { get; set; } = null!;
-    public IEnumerable<QualificationResponseDto> Qualifications { get; set; } = [];
+    public IEnumerable<AdminQualificationResponseDto> Qualifications { get; set; } = [];
     public IEnumerable<SimpleSubjectResponseDto> Subjects { get; set; } = [];
 }
