@@ -1,10 +1,16 @@
 "use client";
 import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { SubjectSelector } from "@/components/subject-selector";
 import { TeacherTranslations } from "@/components/teacher-translations";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogClose,
@@ -89,6 +95,32 @@ export default function TeacherDetailPage() {
     currentPromise.current ??= fetchData();
   }, [teacherId]);
 
+  async function handleSaveSubjectAssignments() {
+    if (!teacher) return;
+
+    const promise = sendApiRequest("/teacher/subject", {
+      method: "put",
+      payload: {
+        teacherId: +teacherId,
+        subjectIds: teacher.subjects.map((x) => x.id),
+      },
+    });
+
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(
+            response.error?.message ?? "Failed to update user role",
+          );
+      }),
+      {
+        loading: "Saving subject assignments...",
+        success: "Subject assignments saved successfully",
+        error: "Failed to save subject assignments",
+      },
+    );
+  }
+
   // Handle loading state
   if (loading) {
     return <TeacherDetailSkeleton />;
@@ -125,10 +157,6 @@ export default function TeacherDetailPage() {
       </div>
     );
   }
-
-  const teacherSubjects = subjects.filter((subject) =>
-    teacher.subjects.some((x) => x.id === subject.id),
-  );
 
   async function handleSelectImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -326,28 +354,28 @@ export default function TeacherDetailPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="subjects">
+        <TabsContent value="subjects" className="mt-4 space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Assigned Subjects</CardTitle>
+              <CardTitle>Assign Subjects</CardTitle>
+              <CardDescription>
+                Select subjects that this teacher will teach
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              {teacherSubjects.length > 0 ? (
-                <ul className="space-y-2">
-                  {teacherSubjects.map((subject) => (
-                    <li key={subject.id} className="flex items-center gap-2">
-                      <Badge variant="secondary">{subject.name}</Badge>
-                      <span className="text-sm text-muted-foreground">
-                        ({subject.name})
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-muted-foreground">
-                  No subjects assigned to this teacher.
-                </p>
-              )}
+            <CardContent className="space-y-4">
+              <SubjectSelector
+                subjects={subjects}
+                selectedSubjects={teacher.subjects}
+                onChange={(x) =>
+                  setTeacher((prev) => ({ ...prev!, subjects: x }))
+                }
+              />
+
+              <div className="flex justify-end">
+                <Button onClick={handleSaveSubjectAssignments}>
+                  Save Subject Assignments
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>

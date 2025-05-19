@@ -40,4 +40,5 @@ public interface ITeacherService
 
     Task<Result> AddSubject(AddSubjectsToTeacherRequestDto request);
     Task<Result> RemoveSubject(int teacherId, int subjectId);
+    Task<Result> ReplaceSubjects(ReplaceTeacherSubjectsRequestDto request);
 }

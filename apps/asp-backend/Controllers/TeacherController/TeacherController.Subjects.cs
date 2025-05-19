@@ -37,4 +37,22 @@ public partial class TeacherController
 
         return NoContent();
     }
+
+    [Authorize(Roles = "Mod,Admin")]
+    [HttpPut("subject")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> ReplaceSubjects(
+        [FromBody] ReplaceTeacherSubjectsRequestDto request
+    )
+    {
+        var result = await teacherService.ReplaceSubjects(request);
+
+        if (result.IsFailed)
+            return NotFound();
+
+        return NoContent();
+    }
 }
