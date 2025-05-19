@@ -26,7 +26,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import compressImage from "@/lib/compress-image";
 import { useLanguageStore } from "@/stores/language-store";
-import { ArrowLeft, Globe, Loader2 } from "lucide-react";
+import { ArrowLeft, Calendar, Globe, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -380,16 +380,57 @@ export default function TeacherDetailPage() {
 
         <TabsContent value="qualifications">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Professional Qualifications</CardTitle>
-              <Link href={`/nastavnici/${teacherId}/kvalifikacije`}>
-                <Button size="sm">Manage Qualifications</Button>
-              </Link>
-            </CardHeader>
-            <CardContent>
+            <CardHeader className="gap-y-0">
+              <div className="flex flex-row items-center justify-between">
+                <CardTitle>Professional Qualifications</CardTitle>
+                <Link href={`/nastavnici/${teacherId}/kvalifikacije`}>
+                  <Button size="sm">Manage Qualifications</Button>
+                </Link>
+              </div>
+
               <p className="text-muted-foreground">
                 View and manage professional qualifications and certifications.
               </p>
+            </CardHeader>
+            <CardContent>
+              {teacher.qualifications.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-8">
+                  <div className="rounded-full bg-muted p-3">
+                    <Calendar className="h-6 w-6 text-muted-foreground" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-medium">
+                    No qualifications added
+                  </h3>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {teacher.qualifications.map((qualification) => {
+                    const mainTranslation =
+                      qualification.translations[0]?.value;
+
+                    return (
+                      <div
+                        key={qualification.id}
+                        className="flex flex-col justify-between gap-4 rounded-lg border p-4 sm:flex-row sm:items-center"
+                      >
+                        <div>
+                          <h4 className="font-medium">
+                            {mainTranslation?.name || "Unnamed Qualification"}
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            {new Date(
+                              qualification.dateObtained,
+                            ).toLocaleDateString()}
+                          </p>
+                          <p className="mt-1 text-sm">
+                            {mainTranslation?.description || "No description"}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
