@@ -71,7 +71,7 @@ export function QualificationForm({
     }
   }, [languages, isEditing]);
 
-  const handleAddTranslation = () => {
+  const handleAddTranslation = async () => {
     if (!currentTranslation.languageCode || !currentTranslation.value.name) {
       toast.error("Please fill in all required fields");
       return;
@@ -91,7 +91,39 @@ export function QualificationForm({
         ...qualificationData,
         translations: updatedTranslations,
       });
+      toast.success("Translation added successfully");
     } else {
+      if (isEditing) {
+        const promise = sendApiRequest("/qualification/translation", {
+          method: "put",
+          payload: {
+            qualificationId: qualification.id,
+            languageCode: currentTranslation.languageCode,
+            name: currentTranslation.value.name,
+            description: currentTranslation.value.description,
+          },
+        });
+
+        toast.promise(
+          promise.then((response) => {
+            if (!response.isOk)
+              throw new Error(
+                response.error?.message ?? "Failed to add translation",
+              );
+          }),
+          {
+            loading: "Adding translation...",
+            success: "Translation added successfully",
+            error: "Failed to add translation",
+          },
+        );
+
+        const response = await promise;
+        if (!response.isOk) return;
+      } else {
+        toast.success("Translation added successfully");
+      }
+
       // Add new translation
       setQualificationData({
         ...qualificationData,
@@ -112,7 +144,6 @@ export function QualificationForm({
     });
 
     setActiveTab("details");
-    toast.success("Translation added successfully");
   };
 
   const handleSave = async () => {
