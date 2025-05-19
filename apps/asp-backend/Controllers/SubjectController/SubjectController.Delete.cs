@@ -22,7 +22,7 @@ public partial class SubjectController
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{subjectId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{subjectId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

@@ -22,7 +22,7 @@ public partial class TeacherController
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{teacherId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{teacherId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

@@ -169,7 +169,7 @@ export type APIMap = {
     '/award/{awardId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Award' ],
-        parameters: [ { name: 'awardId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
+        parameters: [ { name: 'awardId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -792,7 +792,7 @@ export type APIMap = {
     '/news/{newsId}/translation/{languageCode}': {
       delete: {
         tags: [ 'News' ],
-        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
+        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -939,7 +939,7 @@ export type APIMap = {
     '/qualification/{qualificationId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Qualification' ],
-        parameters: [ { name: 'qualificationId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
+        parameters: [ { name: 'qualificationId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -1109,7 +1109,7 @@ export type APIMap = {
     '/subject/{subjectId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Subject' ],
-        parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
+        parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -1325,7 +1325,7 @@ export type APIMap = {
     '/teacher/{teacherId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Teacher' ],
-        parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'integer' } } ],
+        parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {

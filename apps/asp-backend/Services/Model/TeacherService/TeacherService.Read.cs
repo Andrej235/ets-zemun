@@ -211,11 +211,11 @@ public partial class TeacherService : ITeacherService
             },
             x => x.Id == id,
             q =>
-                q.Include(x => x.Translations.First())
+                q.Include(x => x.Translations)
                     .Include(x => x.Subjects)
-                    .ThenInclude(x => x.Translations.First())
+                    .ThenInclude(x => x.Translations)
                     .Include(x => x.Qualifications)
-                    .ThenInclude(x => x.Translations.First())
+                    .ThenInclude(x => x.Translations)
         );
 
         if (result.IsFailed)

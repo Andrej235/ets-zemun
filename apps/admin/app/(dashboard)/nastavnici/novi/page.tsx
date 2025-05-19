@@ -46,7 +46,7 @@ export default function CreateTeacherPage() {
 
   const [teacherData, setTeacherData] = useState<Omit<Teacher, "id">>({
     email: "",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/placeholder.svg",
     translations: [],
     qualifications: [],
     subjects: [],

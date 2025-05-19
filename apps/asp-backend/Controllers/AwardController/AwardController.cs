@@ -132,7 +132,7 @@ public class AwardController(IAwardService awardService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{awardId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{awardId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

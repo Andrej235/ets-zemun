@@ -124,7 +124,7 @@ public class QualificationController(IQualificationService qualificationService)
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{qualificationId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{qualificationId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

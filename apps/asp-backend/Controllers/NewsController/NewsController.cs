@@ -273,7 +273,7 @@ public class NewsController(INewsService newsService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{newsId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{newsId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
