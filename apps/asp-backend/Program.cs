@@ -152,7 +152,9 @@ builder.Services.AddCors(options =>
                         "http://localhost:3000",
                         "http://localhost:5174",
                         "http://192.168.1.100:3000",
-                        "http://192.168.1.100:5174"
+                        "http://192.168.1.100:5174",
+                        "http://192.168.0.24:3000",
+                        "http://192.168.0.24:5174"
                     )
                     .AllowCredentials()
                     .AllowAnyMethod()
