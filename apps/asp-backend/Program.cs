@@ -139,35 +139,21 @@ builder.Services.ConfigureApplicationCookie(options =>
     };
 });
 
+var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>();
+if (allowedOrigins is null || allowedOrigins.Length == 0)
+    throw new MissingConfigException("AllowedOrigins is null or empty");
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "WebsitePolicy",
         policyBuilder =>
         {
-            if (builder.Environment.IsDevelopment())
-                policyBuilder
-                    .WithOrigins(
-                        "http://localhost:5173",
-                        "http://localhost:3000",
-                        "http://localhost:5174",
-                        "http://192.168.1.100:3000",
-                        "http://192.168.1.100:5174",
-                        "http://192.168.0.24:3000",
-                        "http://192.168.0.24:5174"
-                    )
-                    .AllowCredentials()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            else
-                policyBuilder
-                    .WithOrigins(
-                        "https://ets-zemun.netlify.app",
-                        "https://admin-ets-zemun.netlify.app"
-                    )
-                    .AllowCredentials()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+            policyBuilder
+                .WithOrigins(allowedOrigins)
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
         }
     );
 });
