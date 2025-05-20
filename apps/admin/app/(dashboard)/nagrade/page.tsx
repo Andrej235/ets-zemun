@@ -61,6 +61,35 @@ export default function Nagrade() {
       award.student.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  async function handleDeleteAward() {
+    if (!awardToDelete) return;
+
+    const promise = sendApiRequest("/award/{id}", {
+      method: "delete",
+      parameters: {
+        id: awardToDelete.id,
+      },
+    });
+
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(response.error?.message ?? "Failed to delete award");
+      }),
+      {
+        loading: "Deleting award...",
+        success: "Award deleted successfully",
+        error: (x) => (x as Error).message,
+      },
+    );
+
+    const response = await promise;
+    if (!response.isOk) return;
+
+    setAwards(awards.filter((award) => award.id !== awardToDelete.id));
+    setAwardToDelete(null);
+  }
+
   return (
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -92,7 +121,7 @@ export default function Nagrade() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[...Array(6)].map((_, i) => (
             <Card key={i} className="overflow-hidden p-0">
               <Skeleton className="h-64 w-full" />
@@ -125,7 +154,7 @@ export default function Nagrade() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredAwards.map((award) => (
             <Card key={award.id} className="overflow-hidden p-0">
               <div className="relative h-64">
@@ -210,7 +239,7 @@ export default function Nagrade() {
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => {}}
+                            onClick={handleDeleteAward}
                             className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                           >
                             Delete
