@@ -58,4 +58,23 @@ public partial class AwardService
 
         return Result.Ok(responseMapper.Map(result.Value));
     }
+
+    public Task<Result<IEnumerable<AdminAwardResponseDto>>> AdminGetAll()
+    {
+        return readRangeSelectedService.Get(
+            x => new AdminAwardResponseDto()
+            {
+                Id = x.Id,
+                DayOfAward = x.DayOfAward,
+                ExternalLink = x.ExternalLink,
+                Image = x.Image,
+                Translations = x.Translations.Select(x => x.LanguageCode),
+                Competition = x.Translations.First().Competition,
+                Description = x.Translations.First().Description,
+                Student = x.Translations.First().Student,
+                Title = x.Translations.First().Title,
+            },
+            null
+        );
+    }
 }

@@ -390,6 +390,7 @@ builder.Services.AddScoped<
 >();
 builder.Services.AddScoped<IReadSingleService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IReadRangeService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<ICountService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IUpdateSingleService<Award>, UpdateService<Award>>();
 builder.Services.AddScoped<
