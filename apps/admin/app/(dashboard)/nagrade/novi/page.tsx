@@ -37,6 +37,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import sendApiRequest from "@/api-dsl/send-api-request";
 
 type Award = Schema<"AdminFullAwardResponseDto">;
 type AwardTranslation =
@@ -65,7 +66,53 @@ export default function NewAwardPage() {
       },
     });
 
-  async function handleCreateAward() {}
+  async function handleCreateAward() {
+    if (!awardData.dayOfAward) {
+      toast.error("Please select a date");
+      return;
+    }
+
+    if (!awardData.image) {
+      toast.error("Please select an image");
+      return;
+    }
+
+    if (awardData.translations.length === 0) {
+      toast.error("Please add at least one translation");
+      return;
+    }
+
+    const promise = sendApiRequest("/award", {
+      method: "post",
+      payload: {
+        dayOfAward: awardData.dayOfAward,
+        image: awardData.image,
+        translations: awardData.translations.map((x) => ({
+          awardId: 0,
+          languageCode: x.languageCode,
+          ...x.value,
+        })),
+        externalLink: awardData.externalLink,
+      },
+    });
+
+    toast.promise(
+      promise.then((response) => {
+        if (!response.isOk)
+          throw new Error(response.error?.message ?? "Failed to create award");
+      }),
+      {
+        loading: "Creating award...",
+        success: "Award created successfully",
+        error: (x) => (x as Error).message,
+      },
+    );
+
+    const response = await promise;
+    if (!response.isOk) return;
+
+    router.push("/nagrade");
+  }
 
   async function handleSelectImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -180,9 +227,9 @@ export default function NewAwardPage() {
           <TabsContent value="details" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Teacher Details</CardTitle>
+                <CardTitle>Award Details</CardTitle>
                 <CardDescription>
-                  Basic information about the teacher
+                  Basic information about the award
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -192,7 +239,7 @@ export default function NewAwardPage() {
                       {awardData.image ? (
                         <Image
                           src={awardData.image || "/placeholder.svg"}
-                          alt="Teacher"
+                          alt="award"
                           className="h-full w-full object-cover"
                           fill
                         />
@@ -335,7 +382,7 @@ export default function NewAwardPage() {
                     }
                   >
                     <Save className="mr-2 h-4 w-4" />
-                    Create Teacher
+                    Create Award
                   </Button>
                 </div>
               </CardContent>

@@ -18,6 +18,6 @@ public class CreateAwardRequestMapper(
             Image = from.Image,
             ExternalLink = from.ExternalLink,
             DayOfAward = from.DayOfAward,
-            Translations = [translationMapper.Map(from.Translation)],
+            Translations = [.. from.Translations.Select(translationMapper.Map)],
         };
 }
