@@ -55,4 +55,19 @@ public partial class AwardController
 
         return Ok(result.Value);
     }
+
+    [Authorize(Roles = Roles.BasicPerms)]
+    [HttpGet("admin/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<AdminFullAwardResponseDto>> AdminGetSingle(int id)
+    {
+        var result = await awardService.AdminGetSingle(id);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return Ok(result.Value);
+    }
 }

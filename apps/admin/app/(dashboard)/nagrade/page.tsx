@@ -100,7 +100,7 @@ export default function Nagrade() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/nastavnici/novi">
+          <Link href="/nagrade/novi">
             <Plus className="mr-2 h-4 w-4" />
             Add award
           </Link>
@@ -112,7 +112,7 @@ export default function Nagrade() {
           <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search teachers..."
+            placeholder="Search awards..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -124,7 +124,7 @@ export default function Nagrade() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[...Array(6)].map((_, i) => (
             <Card key={i} className="overflow-hidden p-0">
-              <Skeleton className="h-64 w-full" />
+              <Skeleton className="h-48 w-full" />
 
               <CardContent>
                 <div className="mb-2 flex justify-between text-sm text-muted-foreground">
@@ -157,12 +157,12 @@ export default function Nagrade() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredAwards.map((award) => (
             <Card key={award.id} className="overflow-hidden p-0">
-              <div className="relative h-64">
+              <div className="relative h-48">
                 <Image
                   src={award.image}
                   alt={award.title}
                   fill
-                  className="h-64 w-full object-cover"
+                  className="h-48 w-full object-cover"
                 />
               </div>
 

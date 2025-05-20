@@ -389,6 +389,7 @@ builder.Services.AddScoped<
     CreateService<AwardTranslation>
 >();
 builder.Services.AddScoped<IReadSingleService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IReadSingleSelectedService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IReadRangeService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<ICountService<Award>, ReadService<Award>>();

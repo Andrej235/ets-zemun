@@ -77,4 +77,31 @@ public partial class AwardService
             null
         );
     }
+
+    public Task<Result<AdminFullAwardResponseDto>> AdminGetSingle(int id)
+    {
+        return readSingleSelectedService.Get(
+            x => new AdminFullAwardResponseDto()
+            {
+                Id = x.Id,
+                DayOfAward = x.DayOfAward,
+                ExternalLink = x.ExternalLink,
+                Image = x.Image,
+                Translations = x.Translations.Select(
+                    x => new Dtos.Response.Translations.TranslationWrapper<AdminAwardTranslationResponseDto>()
+                    {
+                        LanguageCode = x.LanguageCode,
+                        Value = new AdminAwardTranslationResponseDto()
+                        {
+                            Competition = x.Competition,
+                            Description = x.Description,
+                            Student = x.Student,
+                            Title = x.Title,
+                        },
+                    }
+                ),
+            },
+            x => x.Id == id
+        );
+    }
 }

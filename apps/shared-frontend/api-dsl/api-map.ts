@@ -212,6 +212,27 @@ export type APIMap = {
         }
       }
     },
+    '/award/admin/{id}': {
+      get: {
+        tags: [ 'Award' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminFullAwardResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminFullAwardResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminFullAwardResponseDto' } } }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/profile': {
       post: {
         tags: [ 'EducationalProfiles' ],
@@ -1877,6 +1898,13 @@ export type APIMap = {
       AdminAwardResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' }, translations: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false
+      },
+      AdminAwardTranslationResponseDto: { type: 'object', properties: { title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
+      AdminAwardTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminAwardTranslationResponseDto' } }, additionalProperties: false },
+      AdminFullAwardResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminAwardTranslationResponseDtoTranslationWrapper' } } },
         additionalProperties: false
       },
       AdminFullSubjectResponseDto: {

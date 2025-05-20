@@ -15,6 +15,7 @@ public partial class AwardService(
     ICreateSingleService<Award> createSingleService,
     ICreateSingleService<AwardTranslation> createSingleTranslationService,
     IReadSingleService<Award> readSingleService,
+    IReadSingleSelectedService<Award> readSingleSelectedService,
     IReadRangeService<Award> readRangeService,
     IReadRangeSelectedService<Award> readRangeSelectedService,
     ICountService<Award> countService,

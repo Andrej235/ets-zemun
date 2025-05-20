@@ -17,6 +17,7 @@ public interface IAwardService
     );
     Task<Result<AwardResponseDto>> GetSingle(int id, string languageCode);
     Task<Result<IEnumerable<AdminAwardResponseDto>>> AdminGetAll();
+    Task<Result<AdminFullAwardResponseDto>> AdminGetSingle(int id);
 
     Task<Result> Update(UpdateAwardRequestDto request);
     Task<Result> UpdateTranslation(UpdateAwardTranslationRequestDto request);
