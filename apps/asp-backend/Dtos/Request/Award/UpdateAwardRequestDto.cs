@@ -6,4 +6,5 @@ public class UpdateAwardRequestDto
     public string Image { get; set; } = null!;
     public DateOnly DayOfAward { get; set; }
     public string? ExternalLink { get; set; }
+    public IEnumerable<UpdateAwardTranslationRequestDto> Translations { get; set; } = null!;
 }

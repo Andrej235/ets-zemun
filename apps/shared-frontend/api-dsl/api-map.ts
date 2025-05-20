@@ -2023,7 +2023,11 @@ export type APIMap = {
         additionalProperties: false
       },
       TeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/TeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      UpdateAwardRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true } }, additionalProperties: false },
+      UpdateAwardRequestDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, translations: { type: 'array', items: { '$ref': '#/components/schemas/UpdateAwardTranslationRequestDto' } } },
+        additionalProperties: false
+      },
       UpdateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       UpdateEducationalProfileNameRequestDto: { type: 'object', properties: { profileId: { type: 'integer', format: 'int32' }, newName: { type: 'string' } }, additionalProperties: false },
       UpdateEducationalProfileRequestDto: {

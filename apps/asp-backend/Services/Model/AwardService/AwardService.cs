@@ -21,6 +21,7 @@ public partial class AwardService(
     ICountService<Award> countService,
     IUpdateSingleService<Award> updateSingleService,
     IUpdateSingleService<AwardTranslation> updateTranslationSingleService,
+    IUpdateRangeService<AwardTranslation> updateTranslationRangeService,
     IDeleteService<Award> deleteService,
     IDeleteService<AwardTranslation> deleteTranslationService,
     IRequestMapper<CreateAwardRequestDto, Award> createRequestMapper,

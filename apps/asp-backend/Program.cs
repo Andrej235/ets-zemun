@@ -398,6 +398,10 @@ builder.Services.AddScoped<
     IUpdateSingleService<AwardTranslation>,
     UpdateService<AwardTranslation>
 >();
+builder.Services.AddScoped<
+    IUpdateRangeService<AwardTranslation>,
+    UpdateService<AwardTranslation>
+>();
 builder.Services.AddScoped<IDeleteService<Award>, DeleteService<Award>>();
 builder.Services.AddScoped<IDeleteService<AwardTranslation>, DeleteService<AwardTranslation>>();
 builder.Services.AddScoped<

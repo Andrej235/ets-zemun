@@ -196,7 +196,9 @@ export default function Nagrade() {
                 </div>
 
                 <div className="mb-6 flex justify-between">
-                  <Button variant="outline">Edit</Button>
+                  <Button variant="outline" asChild>
+                    <Link href={`/nagrade/${award.id}`}>Edit</Link>
+                  </Button>
 
                   <div className="space-x-2">
                     {award.externalLink && (
