@@ -3,6 +3,7 @@ import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { SubjectSelector } from "@/components/subject-selector";
 import { TeacherTranslations } from "@/components/teacher-translations";
+import { TranslationStatusBadge } from "@/components/translation-status-badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import compressImage from "@/lib/compress-image";
+import getTranslationStatus from "@/lib/get-translation-status";
 import { useLanguageStore } from "@/stores/language-store";
 import { ArrowLeft, Calendar, Globe, Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -255,97 +257,116 @@ export default function TeacherDetailPage() {
                 />
               </div>
 
-              <div className="flex items-center gap-2">
-                <div>
-                  <h3 className="text-sm font-medium text-muted-foreground">
-                    Email
-                  </h3>
-                  <p>{teacher.email}</p>
+              {/* TODO: Add translation badges / status */}
+
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2">
+                  {Object.entries(
+                    getTranslationStatus(
+                      teacher.translations.map((x) => x.languageCode),
+                      languages.map((l) => l.code),
+                    ),
+                  ).map(([lang, status]) => (
+                    <TranslationStatusBadge
+                      key={lang}
+                      language={lang}
+                      status={status}
+                    />
+                  ))}
                 </div>
 
-                <div className="mt-4">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="w-full justify-center"
-                        type="button"
-                      >
-                        Edit Email
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Edit Email</DialogTitle>
-                        <DialogDescription>
-                          Please enter the new email address for the teacher.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="space-y-4">
-                        <Input type="email" defaultValue={teacher.email} />
-                        <DialogFooter className="grid grid-cols-2">
-                          <DialogClose asChild>
-                            <Button
-                              variant="outline"
-                              className="w-full justify-center"
-                              type="button"
-                            >
-                              Cancel
-                            </Button>
-                          </DialogClose>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <h3 className="text-sm font-medium text-muted-foreground">
+                      Email
+                    </h3>
+                    <p>{teacher.email}</p>
+                  </div>
 
-                          <DialogClose asChild>
-                            <Button
-                              className="w-full justify-center"
-                              type="submit"
-                              onClick={async (e) => {
-                                const editedEmail = (
-                                  e.target as HTMLElement
-                                ).parentElement?.parentElement?.querySelector(
-                                  "input",
-                                )?.value;
-                                if (!editedEmail) return;
+                  <div className="mt-4">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-center"
+                          type="button"
+                        >
+                          Edit Email
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Edit Email</DialogTitle>
+                          <DialogDescription>
+                            Please enter the new email address for the teacher.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <Input type="email" defaultValue={teacher.email} />
+                          <DialogFooter className="grid grid-cols-2">
+                            <DialogClose asChild>
+                              <Button
+                                variant="outline"
+                                className="w-full justify-center"
+                                type="button"
+                              >
+                                Cancel
+                              </Button>
+                            </DialogClose>
 
-                                const promise = sendApiRequest(`/teacher`, {
-                                  method: "put",
-                                  payload: {
-                                    id: teacher.id,
-                                    image: teacher.image,
+                            <DialogClose asChild>
+                              <Button
+                                className="w-full justify-center"
+                                type="submit"
+                                onClick={async (e) => {
+                                  const editedEmail = (
+                                    e.target as HTMLElement
+                                  ).parentElement?.parentElement?.querySelector(
+                                    "input",
+                                  )?.value;
+                                  if (!editedEmail) return;
+
+                                  const promise = sendApiRequest(`/teacher`, {
+                                    method: "put",
+                                    payload: {
+                                      id: teacher.id,
+                                      image: teacher.image,
+                                      email: editedEmail,
+                                      startOfOpenOfficeHoursFirstShift: null,
+                                      startOfOpenOfficeHoursSecondShift: null,
+                                    },
+                                  });
+
+                                  setTeacher((prev) => ({
+                                    ...prev!,
                                     email: editedEmail,
-                                    startOfOpenOfficeHoursFirstShift: null,
-                                    startOfOpenOfficeHoursSecondShift: null,
-                                  },
-                                });
+                                  }));
 
-                                setTeacher((prev) => ({
-                                  ...prev!,
-                                  email: editedEmail,
-                                }));
-
-                                toast.promise(
-                                  promise.then((response) => {
-                                    if (!response.isOk)
-                                      throw new Error(
-                                        response.error?.message ??
-                                          "Failed to update teacher's email",
-                                      );
-                                  }),
-                                  {
-                                    loading: "Updating teacher email...",
-                                    success:
-                                      "Teacher email updated successfully",
-                                    error: "Failed to update teacher email",
-                                  },
-                                );
-                              }}
-                            >
-                              Update
-                            </Button>
-                          </DialogClose>
-                        </DialogFooter>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                                  toast.promise(
+                                    promise.then((response) => {
+                                      if (!response.isOk)
+                                        throw new Error(
+                                          response.error?.message ??
+                                            "Failed to update teacher's email",
+                                        );
+                                    }),
+                                    {
+                                      loading: "Updating teacher email...",
+                                      success:
+                                        "Teacher email updated successfully",
+                                      error: "Failed to update teacher email",
+                                    },
+                                  );
+                                }}
+                              >
+                                Update
+                              </Button>
+                            </DialogClose>
+                          </DialogFooter>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
               </div>
             </CardContent>
