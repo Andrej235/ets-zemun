@@ -10,6 +10,9 @@ public partial class SubjectService
         if (id < 1)
             return Result.Fail(new BadRequest("Invalid request"));
 
+        await vocationalDeleteService.Delete(x => x.SubjectId == id, false);
+        await generalDeleteService.Delete(x => x.SubjectId == id, false);
+
         var deleteResult = await deleteTeacherSubjectService.Delete(x => x.SubjectId == id, false);
         if (deleteResult.IsFailed)
             return deleteResult;

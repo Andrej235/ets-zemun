@@ -24,6 +24,8 @@ public partial class SubjectService(
     IUpdateRangeService<SubjectTranslation> updateRangeTranslationService,
     IExecuteUpdateService<SubjectTranslation> updateTranslationService,
     IDeleteService<Subject> deleteService,
+    IDeleteService<EducationalProfileVocationalSubject> vocationalDeleteService,
+    IDeleteService<EducationalProfileGeneralSubject> generalDeleteService,
     IDeleteService<SubjectTranslation> deleteTranslationService,
     IDeleteService<TeacherSubject> deleteTeacherSubjectService,
     IRequestMapper<CreateSubjectTranslationRequestDto, SubjectTranslation> createTranslationMapper,

@@ -23,6 +23,7 @@ public partial class TeacherService(
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
     IDeleteService<Teacher> deleteService,
+    IDeleteService<Qualification> qualificationDeleteService,
     IDeleteService<TeacherSubject> deleteTeacherSubjectService,
     IDeleteService<TeacherTranslation> deleteTranslationService,
     IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper,
