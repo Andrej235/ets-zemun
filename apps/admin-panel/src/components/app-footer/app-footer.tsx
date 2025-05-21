@@ -1,109 +1,80 @@
-import Icon from "@components/icon/icon";
-import "./app-footer.scss";
+import { Button } from "../ui/button";
+import { Link } from "react-router";
+import { Separator } from "../ui/separator";
 
 export default function AppFooter() {
   return (
-    <footer id="app-footer">
-      <div className="info">
-        <div className="about">
-          <h1>O nama</h1>
+    <footer className="bg-card w-full gap-8 space-y-4 border-t-2 px-32 py-12">
+      <div className="grid grid-cols-5 gap-8">
+        <div className="col-span-3">
+          <h1 className="text-primary mb-2 text-3xl">Admin Panel</h1>
 
-          <p>
-            Sa ciljom da obezbedimo kvalitetno obrazovanje i podstaknemo
-            samostalno učenje i razvoj učenika težimo tome da oni izrastu u
-            odgovorne i preduzimljive ličnosti u sigurnom i podsticajnom
-            okruženju
+          <p className="text-muted-foreground text-1xl">
+            CMS platforma napravljena za upravljanje sadržajem sajta. Omogucava
+            kreiranje i izmenu vesti, predmeta, obrazovnih profila, nastavnika i
+            nagrada. Administratori takodje mogu upravljati i pristupom ovom
+            sajtu.
           </p>
         </div>
 
-        <div className="contact">
-          <h1>Kontakt</h1>
+        <div className="flex flex-col *:justify-start *:p-6 *:text-xl">
+          <Button asChild variant="ghost">
+            <Link to="/">Pocetna</Link>
+          </Button>
 
-          <div className="column">
-            <p>
-              <Icon name="location-dot" />
-              <span>Beograd – Zemun, Nade Dimić 4</span>
-            </p>
+          <Button asChild variant="ghost">
+            <Link to="/vesti">Vesti</Link>
+          </Button>
 
-            <p>
-              <Icon name="phone" />
-              <span>+381 11 316 1849</span>
-            </p>
+          <Button asChild variant="ghost">
+            <Link to="/jezici">Jezici</Link>
+          </Button>
 
-            <p>
-              <Icon name="phone" />
-              <span>+381 11 261 8155</span>
-            </p>
+          <Button asChild variant="ghost">
+            <Link to="/predmeti">Predmeti</Link>
+          </Button>
+        </div>
 
-            <p>
-              <Icon name="envelope" />
-              <span>{"skola@ets-zemun.edu.rs"}</span>
-            </p>
-          </div>
+        <div className="flex flex-col *:justify-start *:p-6 *:text-xl">
+          <Button asChild variant="ghost">
+            <Link to="/profili">Profili</Link>
+          </Button>
 
-          <div className="column">
-            <p>
-              <Icon name="user-tie" />
-              <span>{"direktor@ets-zemun.edu.rs"}</span>
-            </p>
+          <Button asChild variant="ghost">
+            <Link to="/nastavnici">Nastavnici</Link>
+          </Button>
 
-            <p>
-              <Icon name="user-edit" />
-              <span>{"sekretar@ets-zemun.edu.rs"}</span>
-            </p>
+          <Button asChild variant="ghost">
+            <Link to="/nagrade">Nagrade</Link>
+          </Button>
 
-            <p>
-              <Icon name="calculator" />
-              <span>{"rac@ets-zemun.edu.rs"}</span>
-            </p>
-
-            <p>
-              <Icon name="users" />
-              <span>{"ppsluzba@ets-zemun.edu.rs"}</span>
-            </p>
-          </div>
+          <Button asChild variant="ghost">
+            <Link to="/korisnici">Korisnici</Link>
+          </Button>
         </div>
       </div>
 
-      <div className="copyright">
+      <Separator orientation="horizontal" />
+
+      <div className="flex h-8 items-center gap-4">
         <p className="copy">
-          &copy; {" " + new Date().getFullYear() + " "} Elektrotehnička škola
-          "Zemun"
+          &copy; {new Date().getFullYear()} Elektrotehnička škola "Zemun"
         </p>
+
+        <Separator orientation="vertical" className="max-h-6" />
 
         <p className="credits">
-          <span className="separator" />
-          <span>{"Made by: "}</span>
-          <a href={"https://github.com/andrej235"} target="_blank">
-            {"Andrej Nenadić"}
-          </a>
-          <span>{"&"}</span>
-          <a href={"https://github.com/andjelic-a"} target="_blank">
-            {"Aleksa Andjelić"}
+          <span>Sajt napravio: </span>
+          <a
+            href="https://www.nenadic.dev"
+            target="_blank"
+            className="hover:text-primary focus-visible:text-primary font-semibold transition-colors"
+            rel="noreferrer"
+          >
+            Andrej Nenadić
           </a>
         </p>
-
-        <div className="social-media-links">
-          <a
-            href={"https://www.linkedin.com"}
-            aria-label="Školski linkedin nalog"
-          >
-            <Icon name="linkedin" />
-          </a>
-
-          <a href={"https://www.x.com"} aria-label="Školski twitter nalog">
-            <Icon name="twitter" />
-          </a>
-
-          <a
-            href={"https://www.instagram.com"}
-            aria-label="Školski instagram nalog"
-          >
-            <Icon name="instagram" />
-          </a>
-        </div>
       </div>
     </footer>
   );
 }
-

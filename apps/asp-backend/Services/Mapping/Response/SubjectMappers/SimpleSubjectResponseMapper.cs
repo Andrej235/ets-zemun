@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Subject;
+using EtsZemun.Dtos.Response.Subject;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.SubjectMappers;

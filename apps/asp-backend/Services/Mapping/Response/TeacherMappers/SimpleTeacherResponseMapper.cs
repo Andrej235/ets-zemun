@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.TeacherMappers;
@@ -9,7 +9,7 @@ public class SimpleTeacherResponseMapper : IResponseMapper<Teacher, SimpleTeache
         new()
         {
             Id = from.Id,
-            Image = from.Image,
             Name = from.Translations.FirstOrDefault()?.Name ?? "",
+            Title = from.Translations.FirstOrDefault()?.Title ?? "",
         };
 }

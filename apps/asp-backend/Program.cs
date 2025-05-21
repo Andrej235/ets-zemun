@@ -1,23 +1,26 @@
+using System.Security.Principal;
+using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
+using brevo_csharp.Client;
 using EtsZemun.Data;
-using EtsZemun.DTOs.Request.Award;
-using EtsZemun.DTOs.Request.EducationalProfile;
-using EtsZemun.DTOs.Request.Language;
-using EtsZemun.DTOs.Request.News;
-using EtsZemun.DTOs.Request.Qualification;
-using EtsZemun.DTOs.Request.Subject;
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Auth;
-using EtsZemun.DTOs.Response.Award;
-using EtsZemun.DTOs.Response.EducationalProfile;
-using EtsZemun.DTOs.Response.News;
-using EtsZemun.DTOs.Response.Qualification;
-using EtsZemun.DTOs.Response.Subject;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Request.Award;
+using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Request.Language;
+using EtsZemun.Dtos.Request.News;
+using EtsZemun.Dtos.Request.Qualification;
+using EtsZemun.Dtos.Request.Subject;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Award;
+using EtsZemun.Dtos.Response.EducationalProfile;
+using EtsZemun.Dtos.Response.News;
+using EtsZemun.Dtos.Response.Qualification;
+using EtsZemun.Dtos.Response.Subject;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Exceptions;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
+using EtsZemun.Services.EmailSender;
 using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.AwardMappers;
 using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
@@ -33,7 +36,7 @@ using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
 using EtsZemun.Services.Mapping.Response.TeacherMappers;
-using EtsZemun.Services.Mapping.Response.UserMappers;
+using EtsZemun.Services.Model.AdminService;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
 using EtsZemun.Services.Model.LanguageService;
@@ -41,21 +44,32 @@ using EtsZemun.Services.Model.NewsService;
 using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
+using EtsZemun.Services.ModelServices.UserService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
+using EtsZemun.Utilities;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var googleAuthFile = "/run/secrets/google-auth";
-if (File.Exists(googleAuthFile))
-    builder.Configuration.AddJsonFile(googleAuthFile);
-else
-    builder.Configuration.AddJsonFile("secrets.json", optional: true);
+if (File.Exists("./secrets.json"))
+    builder.Configuration.AddJsonFile("./secrets.json");
+
+var env = builder.Environment;
+var keysPath = Path.Combine(env.ContentRootPath, "keys");
+Directory.CreateDirectory(keysPath);
+
+builder
+    .Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(keysPath))
+    .SetApplicationName("EtsZemun");
 
 var configuration = builder.Configuration;
+builder.Services.AddSingleton(configuration);
+Configuration.Default.ApiKey.Add("api-key", configuration["Brevo:ApiKey"]);
 
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
@@ -65,40 +79,52 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
 });
-builder.Services.AddControllers();
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.SerializerOptions.RespectNullableAnnotations = true;
+});
+
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.RespectNullableAnnotations = true;
+    });
 builder.Services.AddHybridCache();
+
+var connectionString = configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+    throw new MissingConfigException("Connection string is null or empty");
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-
-    if (builder.Environment.IsDevelopment())
-        options.EnableSensitiveDataLogging();
-});
-
-builder.Services.AddDbContext<IdentityDataContext>(options =>
-{
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(connectionString);
 
     if (builder.Environment.IsDevelopment())
         options.EnableSensitiveDataLogging();
 });
 
 builder
-    .Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    .Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.Password.RequireUppercase = false;
     })
-    .AddEntityFrameworkStores<IdentityDataContext>()
+    .AddEntityFrameworkStores<DataContext>()
     .AddApiEndpoints()
     .AddDefaultTokenProviders();
+
+builder.Services.AddTransient<IEmailSender<User>, EmailSender>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.Domain = null;
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    options.SlidingExpiration = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = SameSiteMode.Lax;
 
     options.Events.OnRedirectToLogin = context =>
     {
@@ -113,42 +139,34 @@ builder.Services.ConfigureApplicationCookie(options =>
     };
 });
 
+var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>();
+if (allowedOrigins is null || allowedOrigins.Length == 0)
+    throw new MissingConfigException("AllowedOrigins is null or empty");
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "WebsitePolicy",
         policyBuilder =>
         {
-            if (builder.Environment.IsDevelopment())
-                policyBuilder
-                    .WithOrigins(
-                        "http://localhost:5173",
-                        "http://localhost:3000",
-                        "http://localhost:5174",
-                        "http://192.168.1.100:3000"
-                    )
-                    .AllowCredentials()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            else
-                policyBuilder
-                    .WithOrigins(
-                        "https://ets-zemun.netlify.app",
-                        "https://admin-ets-zemun.netlify.app"
-                    )
-                    .AllowCredentials()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+            policyBuilder
+                .WithOrigins(allowedOrigins)
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
         }
     );
 });
 
 #region Model Services
 
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 #region Language
 builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<ICreateSingleService<Language>, CreateService<Language>>();
 builder.Services.AddScoped<IReadRangeSelectedService<Language>, ReadService<Language>>();
+builder.Services.AddScoped<ICountService<Language>, ReadService<Language>>();
 builder.Services.AddScoped<IExecuteUpdateService<Language>, UpdateService<Language>>();
 builder.Services.AddScoped<IDeleteService<Language>, DeleteService<Language>>();
 builder.Services.AddScoped<
@@ -164,10 +182,19 @@ builder.Services.AddScoped<
     ICreateSingleService<SubjectTranslation>,
     CreateService<SubjectTranslation>
 >();
+builder.Services.AddScoped<
+    ICreateRangeService<SubjectTranslation>,
+    CreateService<SubjectTranslation>
+>();
 builder.Services.AddScoped<IReadSingleService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<IReadRangeService<Subject>, ReadService<Subject>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Subject>, ReadService<Subject>>();
 builder.Services.AddScoped<ICountService<Subject>, ReadService<Subject>>();
+builder.Services.AddScoped<
+    IUpdateRangeService<SubjectTranslation>,
+    UpdateService<SubjectTranslation>
+>();
 builder.Services.AddScoped<
     IExecuteUpdateService<SubjectTranslation>,
     UpdateService<SubjectTranslation>
@@ -193,7 +220,9 @@ builder.Services.AddScoped<
     CreateService<TeacherTranslation>
 >();
 builder.Services.AddScoped<IReadSingleService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IReadSingleSelectedService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IReadRangeService<Teacher>, ReadService<Teacher>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<ICountService<Teacher>, ReadService<Teacher>>();
 builder.Services.AddScoped<IUpdateSingleService<Teacher>, UpdateService<Teacher>>();
 builder.Services.AddScoped<
@@ -232,8 +261,13 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IReadSingleService<Qualification>, ReadService<Qualification>>();
 builder.Services.AddScoped<IReadRangeService<Qualification>, ReadService<Qualification>>();
 builder.Services.AddScoped<ICountService<Qualification>, ReadService<Qualification>>();
+builder.Services.AddScoped<IExecuteUpdateService<Qualification>, UpdateService<Qualification>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<QualificationTranslation>,
+    UpdateService<QualificationTranslation>
+>();
+builder.Services.AddScoped<
+    IUpdateRangeService<QualificationTranslation>,
     UpdateService<QualificationTranslation>
 >();
 builder.Services.AddScoped<IDeleteService<Qualification>, DeleteService<Qualification>>();
@@ -262,15 +296,36 @@ builder.Services.AddScoped<
     CreateService<EducationalProfile>
 >();
 builder.Services.AddScoped<
-    IReadRangeService<EducationalProfile>,
+    ICreateSingleService<EducationalProfileGeneralSubject>,
+    CreateService<EducationalProfileGeneralSubject>
+>();
+builder.Services.AddScoped<
+    ICreateSingleService<EducationalProfileVocationalSubject>,
+    CreateService<EducationalProfileVocationalSubject>
+>();
+builder.Services.AddScoped<
+    IReadRangeSelectedService<EducationalProfile>,
     ReadService<EducationalProfile>
 >();
 builder.Services.AddScoped<
     IReadSingleService<EducationalProfile>,
     ReadService<EducationalProfile>
 >();
+builder.Services.AddScoped<ICountService<EducationalProfile>, ReadService<EducationalProfile>>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfileGeneralSubject>,
+    UpdateService<EducationalProfileGeneralSubject>
+>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfileVocationalSubject>,
+    UpdateService<EducationalProfileVocationalSubject>
+>();
 builder.Services.AddScoped<
     IUpdateSingleService<EducationalProfile>,
+    UpdateService<EducationalProfile>
+>();
+builder.Services.AddScoped<
+    IExecuteUpdateService<EducationalProfile>,
     UpdateService<EducationalProfile>
 >();
 builder.Services.AddScoped<IDeleteService<EducationalProfile>, DeleteService<EducationalProfile>>();
@@ -293,10 +348,6 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto>,
     EducationalProfileResponseMapper
->();
-builder.Services.AddScoped<
-    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto>,
-    SimpleEducationalProfilesResponseMapper
 >();
 builder.Services.AddScoped<
     IRequestMapper<CreateProfileSubjectRequestDto, EducationalProfileGeneralSubject>,
@@ -324,11 +375,17 @@ builder.Services.AddScoped<
     CreateService<AwardTranslation>
 >();
 builder.Services.AddScoped<IReadSingleService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IReadSingleSelectedService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IReadRangeService<Award>, ReadService<Award>>();
+builder.Services.AddScoped<IReadRangeSelectedService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<ICountService<Award>, ReadService<Award>>();
 builder.Services.AddScoped<IUpdateSingleService<Award>, UpdateService<Award>>();
 builder.Services.AddScoped<
     IUpdateSingleService<AwardTranslation>,
+    UpdateService<AwardTranslation>
+>();
+builder.Services.AddScoped<
+    IUpdateRangeService<AwardTranslation>,
     UpdateService<AwardTranslation>
 >();
 builder.Services.AddScoped<IDeleteService<Award>, DeleteService<Award>>();
@@ -383,20 +440,24 @@ builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseM
 #endregion
 
 #region User
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICountService<User>, ReadService<User>>();
 builder.Services.AddScoped<
-    IResponseMapper<IdentityUser, FullUserResponseDto>,
-    FullUserResponseMapper
+    ICountService<IdentityUserRole<string>>,
+    ReadService<IdentityUserRole<string>>
 >();
+builder.Services.AddScoped<IDeleteService<User>, DeleteService<User>>();
+
+builder.Services.AddScoped<ICreateSingleService<UserLoginEvent>, CreateService<UserLoginEvent>>();
 #endregion
 
 #endregion
 
 #region Rate limiting
-var tokenPolicy = "token";
-
 builder.Services.AddRateLimiter(x =>
+{
     x.AddTokenBucketLimiter(
-        policyName: tokenPolicy,
+        policyName: RateLimitingPolicies.Global,
         options =>
         {
             options.TokenLimit = 10;
@@ -406,8 +467,20 @@ builder.Services.AddRateLimiter(x =>
             options.TokensPerPeriod = 2;
             options.AutoReplenishment = true;
         }
-    )
-);
+    );
+
+    x.AddTokenBucketLimiter(
+        policyName: RateLimitingPolicies.EmailConfirmation,
+        options =>
+        {
+            options.TokenLimit = 1;
+            options.QueueLimit = 0;
+            options.ReplenishmentPeriod = TimeSpan.FromSeconds(60);
+            options.TokensPerPeriod = 1;
+            options.AutoReplenishment = true;
+        }
+    );
+});
 
 #endregion
 
@@ -416,26 +489,23 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    var roles = new[] { "Admin", "Mod", "Teacher", "User" };
+    var roles = new[] { Roles.Admin, Roles.Mod, Roles.Teacher, Roles.User };
+
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
-        {
             await roleManager.CreateAsync(new IdentityRole(role));
-        }
     }
 }
-
-var authGroup = app.MapGroup("/auth");
-authGroup.MapIdentityApi<IdentityUser>();
 
 app.UseRateLimiter();
 app.UseExceptionHandler("/error");
 app.UseCors("WebsitePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers().RequireRateLimiting(tokenPolicy);
+app.MapControllers().RequireRateLimiting(RateLimitingPolicies.Global);
 
 if (app.Environment.IsDevelopment())
 {

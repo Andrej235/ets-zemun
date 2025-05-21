@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.Dtos.Request.Teacher;
 using EtsZemun.Models;
 using FluentResults;
 
@@ -19,4 +19,23 @@ public partial class TeacherService
         deleteTeacherSubjectService.Delete(x =>
             x.TeacherId == teacherId && x.SubjectId == subjectId
         );
+
+    public async Task<Result> ReplaceSubjects(ReplaceTeacherSubjectsRequestDto request)
+    {
+        var deleteResult = await deleteTeacherSubjectService.Delete(
+            x => x.TeacherId == request.TeacherId,
+            false
+        );
+
+        if (deleteResult.IsFailed)
+            return Result.Fail(deleteResult.Errors);
+
+        return await createTeacherSubjectService.Add(
+            request.SubjectIds.Select(x => new TeacherSubject
+            {
+                SubjectId = x,
+                TeacherId = request.TeacherId,
+            })
+        );
+    }
 }

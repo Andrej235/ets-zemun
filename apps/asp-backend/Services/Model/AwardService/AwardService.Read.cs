@@ -1,5 +1,5 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Services.Read;
 using FluentResults;
 
@@ -57,5 +57,51 @@ public partial class AwardService
             return Result.Fail<AwardResponseDto>(result.Errors);
 
         return Result.Ok(responseMapper.Map(result.Value));
+    }
+
+    public Task<Result<IEnumerable<AdminAwardResponseDto>>> AdminGetAll()
+    {
+        return readRangeSelectedService.Get(
+            x => new AdminAwardResponseDto()
+            {
+                Id = x.Id,
+                DayOfAward = x.DayOfAward,
+                ExternalLink = x.ExternalLink,
+                Image = x.Image,
+                Translations = x.Translations.Select(x => x.LanguageCode),
+                Competition = x.Translations.First().Competition,
+                Description = x.Translations.First().Description,
+                Student = x.Translations.First().Student,
+                Title = x.Translations.First().Title,
+            },
+            null
+        );
+    }
+
+    public Task<Result<AdminFullAwardResponseDto>> AdminGetSingle(int id)
+    {
+        return readSingleSelectedService.Get(
+            x => new AdminFullAwardResponseDto()
+            {
+                Id = x.Id,
+                DayOfAward = x.DayOfAward,
+                ExternalLink = x.ExternalLink,
+                Image = x.Image,
+                Translations = x.Translations.Select(
+                    x => new Dtos.Response.Translations.TranslationWrapper<AdminAwardTranslationResponseDto>()
+                    {
+                        LanguageCode = x.LanguageCode,
+                        Value = new AdminAwardTranslationResponseDto()
+                        {
+                            Competition = x.Competition,
+                            Description = x.Description,
+                            Student = x.Student,
+                            Title = x.Title,
+                        },
+                    }
+                ),
+            },
+            x => x.Id == id
+        );
     }
 }

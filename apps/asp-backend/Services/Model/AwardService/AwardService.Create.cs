@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Award;
+using EtsZemun.Dtos.Request.Award;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.AwardService;

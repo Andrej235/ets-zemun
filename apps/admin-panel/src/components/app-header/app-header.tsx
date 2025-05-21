@@ -1,4 +1,4 @@
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import "./app-header.scss";
+import { Button } from "../ui/button";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
@@ -32,12 +32,16 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
         onDeactivate: () => setIsHamburgerMenuOpen(false),
       }}
     >
-      <div id="app-header" ref={ref}>
+      <div
+        id="app-header"
+        ref={ref}
+        className="bg-card text-foreground fixed top-0 z-10 flex h-24 w-full items-center justify-between px-8 text-center text-2xl shadow-[0_2px_15px_var(--tw-shadow-color)]"
+      >
         <Select
           defaultValue={i18n.language}
           onValueChange={handleLanguageChange}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-64">
             <SelectValue placeholder="Izaberite jezik" />
           </SelectTrigger>
           <SelectContent>
@@ -49,24 +53,42 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           </SelectContent>
         </Select>
 
-        <div className="app-header-navigation">
-          <div className="nav-bar">
+        <div className="flex *:p-6 *:text-xl">
+          <Button asChild variant="ghost">
             <Link to="/">Pocetna</Link>
-            <Link to="/vesti">Vesti</Link>
-            <Link to="/jezici">Jezici</Link>
-            <Link to="/predmeti">Predmeti</Link>
-            <Link to="/profili">Profili</Link>
-            <Link to="/nastavnici">Nastavnici</Link>
-            <Link to="/nagrade">Nagrade</Link>
-            <Link to="/korisnici">Korisnici</Link>
-          </div>
-        </div>
+          </Button>
 
-        <div className="background" />
+          <Button asChild variant="ghost">
+            <Link to="/vesti">Vesti</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/jezici">Jezici</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/predmeti">Predmeti</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/profili">Profili</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/nastavnici">Nastavnici</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/nagrade">Nagrade</Link>
+          </Button>
+
+          <Button asChild variant="ghost">
+            <Link to="/korisnici">Korisnici</Link>
+          </Button>
+        </div>
       </div>
     </FocusTrap>
   );
 });
 
 export default AppHeader;
-

@@ -1,5 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Response.Teacher;
+using EtsZemun.Dtos.Response.Translations;
 using EtsZemun.Services.Read;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
@@ -171,5 +172,74 @@ public partial class TeacherService : ITeacherService
             return Result.Fail<TeacherResponseDto>(result.Errors);
 
         return Result.Ok(responseMapper.Map(result.Value));
+    }
+
+    public Task<Result<IEnumerable<AdminTeacherResponseDto>>> AdminGetAll()
+    {
+        return readRangeSelectedService.Get(
+            x => new AdminTeacherResponseDto()
+            {
+                Id = x.Id,
+                Name = x.Translations.First().Name,
+                Title = x.Translations.First().Title,
+                Translations = x.Translations.Select(x => x.LanguageCode),
+                Email = x.Email,
+                Image = x.Image,
+            },
+            null
+        );
+    }
+
+    public Task<Result<AdminFullTeacherResponseDto>> AdminGet(int id)
+    {
+        return readSingleSelectedService.Get(
+            x => new AdminFullTeacherResponseDto()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                Image = x.Image,
+                Qualifications = x.Qualifications.Select(
+                    q => new Dtos.Response.Qualification.AdminQualificationResponseDto()
+                    {
+                        Id = q.Id,
+                        TeacherId = q.TeacherId,
+                        DateObtained = q.DateObtained,
+                        Translations = q.Translations.Select(
+                            x => new TranslationWrapper<Dtos.Response.Qualification.AdminQualificationTranslationResponseDto>()
+                            {
+                                LanguageCode = x.LanguageCode,
+                                Value =
+                                    new Dtos.Response.Qualification.AdminQualificationTranslationResponseDto()
+                                    {
+                                        Name = x.Name,
+                                        Description = x.Description,
+                                    },
+                            }
+                        ),
+                    }
+                ),
+                Subjects = x.Subjects.Select(
+                    s => new Dtos.Response.Subject.SimpleSubjectResponseDto()
+                    {
+                        Id = s.Id,
+                        Name = s.Translations.First().Name,
+                        Description = s.Translations.First().Description,
+                    }
+                ),
+                Translations = x.Translations.Select(
+                    t => new TranslationWrapper<AdminFullTeacherTranslationResponseDto>()
+                    {
+                        LanguageCode = t.LanguageCode,
+                        Value = new AdminFullTeacherTranslationResponseDto()
+                        {
+                            Name = t.Name,
+                            Title = t.Title,
+                            Bio = t.Bio,
+                        },
+                    }
+                ),
+            },
+            x => x.Id == id
+        );
     }
 }

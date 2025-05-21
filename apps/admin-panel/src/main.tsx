@@ -4,7 +4,19 @@ import News from "@components/news/news";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import aboutLoader from "./components/about/about-loader";
 import App from "./components/app/app";
+import appLoader from "./components/app/app-loader";
+import Auth from "./components/auth/auth";
+import { Awards } from "./components/awards/awards";
+import awardsLoader from "./components/awards/awards-loader";
+import FullAward from "./components/awards/full-award";
+import fullAwardLoader from "./components/awards/full-award-loader";
+import EducationalProfiles from "./components/edu-profiles/edu-profiles";
+import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-loader";
+import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
+import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
+import Forbidden from "./components/forbidden/forbidden";
 import languageLoader from "./components/languages/language-loader";
 import Languages from "./components/languages/languages";
 import AllNews from "./components/news/all-news";
@@ -19,26 +31,16 @@ import FullSubject from "./components/subjects/full-subject";
 import fullSubjectLoader from "./components/subjects/full-subject-loader";
 import Subjects from "./components/subjects/subjects";
 import subjectsLoader from "./components/subjects/subjects-loader";
-import Users from "./components/users/users";
-import userLoader from "./components/users/users-loader";
-import "./i18n";
-import "./index.scss";
+import FullTeacher from "./components/teachers/full-teacher";
+import fullTeacherLoader from "./components/teachers/full-teacher-loader";
 import Teachers from "./components/teachers/teachers";
 import teachersLoader from "./components/teachers/teachers-loader";
-import fullTeacherLoader from "./components/teachers/full-teacher-loader";
-import FullTeacher from "./components/teachers/full-teacher";
-import { Awards } from "./components/awards/awards";
-import awardsLoader from "./components/awards/awards-loader";
-import FullAward from "./components/awards/full-award";
-import fullAwardLoader from "./components/awards/full-award-loader";
-import EducationalProfiles from "./components/edu-profiles/edu-profiles";
-import educationalProfilesLoader from "./components/edu-profiles/edu-profiles-loader";
-import FullEducationalProfile from "./components/edu-profiles/full-edu-profile";
-import fullEducationalProfileLoader from "./components/edu-profiles/full-edu-profile-loader";
-import appLoader from "./components/app/app-loader";
-import Auth from "./components/auth/auth";
-import Forbidden from "./components/forbidden/forbidden";
-import aboutLoader from "./components/about/about-loader";
+import Users from "./components/users/users";
+import userLoader from "./components/users/users-loader";
+import "./globals.css";
+import "./i18n";
+import EmailConfirmation from "./components/email-confirmation/email-confirmation";
+import emailConfirmationLoader from "./components/email-confirmation/email-confirmation-loader";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,11 @@ const router = createBrowserRouter([
         path: "/",
         element: <About />,
         loader: aboutLoader,
+      },
+      {
+        path: "confirm-email",
+        element: <EmailConfirmation />,
+        loader: emailConfirmationLoader,
       },
       {
         path: "auth",
@@ -149,6 +156,5 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );
-

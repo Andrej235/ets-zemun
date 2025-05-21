@@ -1,9 +1,12 @@
 using EtsZemun.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EtsZemun.Data
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+    public class DataContext(DbContextOptions<DataContext> options)
+        : IdentityDbContext<User, IdentityRole, string>(options)
     {
         public DbSet<Award> Awards { get; set; }
         public DbSet<AwardTranslation> AwardTranslations { get; set; }
@@ -21,9 +24,26 @@ namespace EtsZemun.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
+        public DbSet<UserLoginEvent> UserLoginEvent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserLoginEvent>(loginEvent =>
+            {
+                loginEvent.HasKey(le => le.Id);
+
+                loginEvent
+                    .HasOne(le => le.User)
+                    .WithMany()
+                    .HasForeignKey(le => le.UserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                loginEvent.HasIndex(le => le.LoginTime);
+                loginEvent.HasIndex(le => le.UserId);
+            });
+
             modelBuilder.Entity<Award>(award =>
             {
                 award.HasKey(a => a.Id);
@@ -91,6 +111,10 @@ namespace EtsZemun.Data
                     .WithMany()
                     .HasForeignKey(v => v.SubjectId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+                vocationalSubject.HasIndex(g => new { g.Year, g.EducationalProfileId });
+
+                vocationalSubject.HasIndex(g => g.Year);
             });
 
             modelBuilder.Entity<Language>(language =>

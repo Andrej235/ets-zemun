@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Qualification;
-using EtsZemun.DTOs.Response.Qualification;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Qualification;
+using EtsZemun.Dtos.Response.Qualification;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.QualificationService;
@@ -18,6 +18,7 @@ public interface IQualificationService
     );
     Task<Result<QualificationResponseDto>> GetSingle(int id, string languageCode);
 
+    Task<Result> Update(UpdateQualificationRequestDto request);
     Task<Result> UpdateTranslation(UpdateQualificationTranslationRequestDto request);
 
     Task<Result> Delete(int id);

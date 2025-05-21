@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.News;
-using EtsZemun.DTOs.Response.News;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.News;
+using EtsZemun.Dtos.Response.News;
 using EtsZemun.Services.Model.NewsService;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
@@ -273,7 +273,7 @@ public class NewsController(INewsService newsService) : ControllerBase
     }
 
     [Authorize(Roles = "Mod,Admin")]
-    [HttpDelete("{newsId:int}/translation/{languageCode:int}")]
+    [HttpDelete("{newsId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

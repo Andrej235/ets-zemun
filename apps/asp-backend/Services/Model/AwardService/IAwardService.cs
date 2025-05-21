@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Award;
-using EtsZemun.DTOs.Response.Award;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Award;
+using EtsZemun.Dtos.Response.Award;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.AwardService;
@@ -16,6 +16,8 @@ public interface IAwardService
         int? limit
     );
     Task<Result<AwardResponseDto>> GetSingle(int id, string languageCode);
+    Task<Result<IEnumerable<AdminAwardResponseDto>>> AdminGetAll();
+    Task<Result<AdminFullAwardResponseDto>> AdminGetSingle(int id);
 
     Task<Result> Update(UpdateAwardRequestDto request);
     Task<Result> UpdateTranslation(UpdateAwardTranslationRequestDto request);

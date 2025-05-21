@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.EducationalProfile;
-using EtsZemun.DTOs.Response.EducationalProfile;
+using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Response.EducationalProfile;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
@@ -11,112 +11,20 @@ using FluentResults;
 
 namespace EtsZemun.Services.Model.EducationalProfileService;
 
-public class EducationalProfileService(
+public partial class EducationalProfileService(
     ICreateSingleService<EducationalProfile> createSingle,
-    IReadRangeService<EducationalProfile> readRangeService,
+    ICreateSingleService<EducationalProfileGeneralSubject> createGeneralSubjectService,
+    ICreateSingleService<EducationalProfileVocationalSubject> createVocationalSubjectService,
+    IReadRangeSelectedService<EducationalProfile> readRangeService,
     IReadSingleService<EducationalProfile> readSingleService,
+    IExecuteUpdateService<EducationalProfileGeneralSubject> updateGeneralSubject,
+    IExecuteUpdateService<EducationalProfileVocationalSubject> updateVocationalSubject,
     IUpdateSingleService<EducationalProfile> updateSingle,
+    IExecuteUpdateService<EducationalProfile> updateService,
     IDeleteService<EducationalProfile> deleteService,
     IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService,
     IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,
     IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
-    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper,
-    IResponseMapper<EducationalProfile, SimpleEducationalProfileResponseDto> simpleResponseMapper
-) : IEducationalProfileService
-{
-    private readonly ICreateSingleService<EducationalProfile> createSingle = createSingle;
-    private readonly IReadRangeService<EducationalProfile> readRangeService = readRangeService;
-    private readonly IReadSingleService<EducationalProfile> readSingleService = readSingleService;
-    private readonly IUpdateSingleService<EducationalProfile> updateSingle = updateSingle;
-    private readonly IDeleteService<EducationalProfile> deleteService = deleteService;
-    private readonly IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService =
-        deleteGeneralSubjectService;
-    private readonly IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService =
-        deleteVocationalSubjectService;
-    private readonly IRequestMapper<
-        CreateEducationalProfileRequestDto,
-        EducationalProfile
-    > createRequestMapper = createRequestMapper;
-    private readonly IRequestMapper<
-        UpdateEducationalProfileRequestDto,
-        EducationalProfile
-    > updateRequestMapper = updateRequestMapper;
-    private readonly IResponseMapper<
-        EducationalProfile,
-        EducationalProfileResponseDto
-    > responseMapper = responseMapper;
-    private readonly IResponseMapper<
-        EducationalProfile,
-        SimpleEducationalProfileResponseDto
-    > simpleResponseMapper = simpleResponseMapper;
-
-    public async Task<Result> Create(CreateEducationalProfileRequestDto request)
-    {
-        var result = await createSingle.Add(createRequestMapper.Map(request));
-        return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
-    }
-
-    public Task<Result> Delete(int id)
-    {
-        return deleteService.Delete(x => x.Id == id);
-    }
-
-    public async Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll(
-        string languageCode
-    )
-    {
-        var result = await readRangeService.Get(
-            null,
-            null,
-            null,
-            q =>
-                q.Include(x => x.GeneralSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.VocationalSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-        );
-
-        return result.IsFailed
-            ? Result.Fail<IEnumerable<SimpleEducationalProfileResponseDto>>(result.Errors)
-            : Result.Ok(result.Value.Select(simpleResponseMapper.Map));
-    }
-
-    public async Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode)
-    {
-        var result = await readSingleService.Get(
-            x => x.Id == id,
-            q =>
-                q.Include(x => x.GeneralSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .Include(x => x.VocationalSubjects)
-                    .ThenInclude(x => x.Subject)
-                    .ThenInclude(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-        );
-
-        return result.IsFailed
-            ? Result.Fail<EducationalProfileResponseDto>(result.Errors)
-            : Result.Ok(responseMapper.Map(result.Value));
-    }
-
-    public async Task<Result> Update(UpdateEducationalProfileRequestDto request)
-    {
-        var deleteResult1 = await deleteGeneralSubjectService.Delete(
-            x => x.EducationalProfileId == request.Id,
-            false
-        );
-        var deleteResult2 = await deleteVocationalSubjectService.Delete(
-            x => x.EducationalProfileId == request.Id,
-            false
-        );
-
-        if (deleteResult1.IsFailed || deleteResult2.IsFailed)
-            return Result.Fail([.. deleteResult1.Errors, .. deleteResult2.Errors]);
-
-        var result = await updateSingle.Update(updateRequestMapper.Map(request));
-        return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
-    }
-}
+    IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
+) : IEducationalProfileService;

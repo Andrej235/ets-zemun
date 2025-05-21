@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.News;
-using EtsZemun.DTOs.Response.News;
+using EtsZemun.Dtos.Request.News;
+using EtsZemun.Dtos.Response.News;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;

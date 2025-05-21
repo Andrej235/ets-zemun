@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.Qualification;
+using EtsZemun.Dtos.Response.Qualification;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.QualificationMappers;

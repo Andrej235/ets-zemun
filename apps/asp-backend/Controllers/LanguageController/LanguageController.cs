@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Language;
-using EtsZemun.DTOs.Response.Language;
+using EtsZemun.Dtos.Request.Language;
+using EtsZemun.Dtos.Response.Language;
 using EtsZemun.Services.Model.LanguageService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

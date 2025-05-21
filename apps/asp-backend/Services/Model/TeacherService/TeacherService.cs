@@ -1,5 +1,5 @@
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using EtsZemun.Models;
 using EtsZemun.Services.Create;
 using EtsZemun.Services.Delete;
@@ -15,12 +15,15 @@ public partial class TeacherService(
     ICreateSingleService<Teacher> createSingleService,
     ICreateSingleService<TeacherTranslation> createSingleTranslationService,
     ICreateRangeService<TeacherSubject> createTeacherSubjectService,
+    IReadSingleSelectedService<Teacher> readSingleSelectedService,
     IReadSingleService<Teacher> readSingleService,
     IReadRangeService<Teacher> readRangeService,
+    IReadRangeSelectedService<Teacher> readRangeSelectedService,
     ICountService<Teacher> countService,
     IUpdateSingleService<Teacher> updateService,
     IExecuteUpdateService<TeacherTranslation> updateTranslationService,
     IDeleteService<Teacher> deleteService,
+    IDeleteService<Qualification> qualificationDeleteService,
     IDeleteService<TeacherSubject> deleteTeacherSubjectService,
     IDeleteService<TeacherTranslation> deleteTranslationService,
     IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper,
@@ -31,32 +34,4 @@ public partial class TeacherService(
     IResponseMapper<Teacher, TeacherResponseDto> responseMapper,
     IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper,
     HybridCache hybridCache
-) : ITeacherService
-{
-    private readonly ICreateSingleService<Teacher> createSingleService = createSingleService;
-    private readonly ICreateSingleService<TeacherTranslation> createSingleTranslationService =
-        createSingleTranslationService;
-    private readonly ICreateRangeService<TeacherSubject> createTeacherSubjectService =
-        createTeacherSubjectService;
-    private readonly IReadSingleService<Teacher> readSingleService = readSingleService;
-    private readonly IReadRangeService<Teacher> readRangeService = readRangeService;
-    private readonly ICountService<Teacher> countService = countService;
-    private readonly IUpdateSingleService<Teacher> updateService = updateService;
-    private readonly IExecuteUpdateService<TeacherTranslation> updateTranslationService =
-        updateTranslationService;
-    private readonly IDeleteService<Teacher> deleteService = deleteService;
-    private readonly IDeleteService<TeacherSubject> deleteTeacherSubjectService =
-        deleteTeacherSubjectService;
-    private readonly IDeleteService<TeacherTranslation> deleteTranslationService =
-        deleteTranslationService;
-    private readonly IRequestMapper<CreateTeacherRequestDto, Teacher> createRequestMapper =
-        createRequestMapper;
-    private readonly IRequestMapper<
-        CreateTeacherTranslationRequestDto,
-        TeacherTranslation
-    > createTranslationRequestMapper = createTranslationRequestMapper;
-    private readonly IResponseMapper<Teacher, TeacherResponseDto> responseMapper = responseMapper;
-    private readonly IResponseMapper<Teacher, SimpleTeacherResponseDto> simpleResponseMapper =
-        simpleResponseMapper;
-    private readonly HybridCache hybridCache = hybridCache;
-}
+) : ITeacherService;

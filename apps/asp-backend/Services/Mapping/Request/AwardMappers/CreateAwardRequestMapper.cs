@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Award;
+using EtsZemun.Dtos.Request.Award;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.AwardMappers;
@@ -18,6 +18,6 @@ public class CreateAwardRequestMapper(
             Image = from.Image,
             ExternalLink = from.ExternalLink,
             DayOfAward = from.DayOfAward,
-            Translations = [translationMapper.Map(from.Translation)],
+            Translations = [.. from.Translations.Select(translationMapper.Map)],
         };
 }

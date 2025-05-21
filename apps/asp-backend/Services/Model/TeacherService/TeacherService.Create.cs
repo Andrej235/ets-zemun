@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.Dtos.Request.Teacher;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.TeacherService;

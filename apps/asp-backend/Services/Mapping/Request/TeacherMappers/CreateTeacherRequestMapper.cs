@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Teacher;
+using EtsZemun.Dtos.Request.Teacher;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.TeacherMappers;
@@ -19,7 +19,7 @@ public class CreateTeacherRequestMapper(
             Email = request.Email,
             StartOfOpenOfficeHoursFirstShift = null,
             StartOfOpenOfficeHoursSecondShift = null,
-            Translations = [translationMapper.Map(request.Translation)],
+            Translations = [.. request.Translations.Select(translationMapper.Map)],
             Qualifications = [],
             Subjects = [],
         };

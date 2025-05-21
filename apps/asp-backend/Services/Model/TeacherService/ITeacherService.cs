@@ -1,6 +1,6 @@
-using EtsZemun.DTOs;
-using EtsZemun.DTOs.Request.Teacher;
-using EtsZemun.DTOs.Response.Teacher;
+using EtsZemun.Dtos;
+using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Dtos.Response.Teacher;
 using FluentResults;
 
 namespace EtsZemun.Services.Model.TeacherService;
@@ -29,6 +29,8 @@ public interface ITeacherService
         int? limit
     );
     Task<Result<TeacherResponseDto>> GetSingle(int id, string languageCode);
+    Task<Result<IEnumerable<AdminTeacherResponseDto>>> AdminGetAll();
+    Task<Result<AdminFullTeacherResponseDto>> AdminGet(int id);
 
     Task<Result> Update(UpdateTeacherRequestDto request);
     Task<Result> UpdateTranslation(UpdateTeacherTranslationRequestDto request);
@@ -38,4 +40,5 @@ public interface ITeacherService
 
     Task<Result> AddSubject(AddSubjectsToTeacherRequestDto request);
     Task<Result> RemoveSubject(int teacherId, int subjectId);
+    Task<Result> ReplaceSubjects(ReplaceTeacherSubjectsRequestDto request);
 }

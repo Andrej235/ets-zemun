@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Response.News;
+using EtsZemun.Dtos.Response.News;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Response.NewsMappers;

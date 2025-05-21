@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Language;
+using EtsZemun.Dtos.Request.Language;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.LanguageMappers;

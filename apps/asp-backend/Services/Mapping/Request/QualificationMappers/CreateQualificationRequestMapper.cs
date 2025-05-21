@@ -1,4 +1,4 @@
-using EtsZemun.DTOs.Request.Qualification;
+using EtsZemun.Dtos.Request.Qualification;
 using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.QualificationMappers;
@@ -20,6 +20,6 @@ public class CreateQualificationRequestMapper(
         {
             DateObtained = DateTime.SpecifyKind(from.DateObtained, DateTimeKind.Utc),
             TeacherId = from.TeacherId,
-            Translations = [translationMapper.Map(from.Translation)],
+            Translations = [.. from.Translations.Select(translationMapper.Map)],
         };
 }
