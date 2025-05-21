@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useDroppable } from "@dnd-kit/core";
 import { motion } from "motion/react";
 

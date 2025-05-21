@@ -1,5 +1,5 @@
-import useLoader from "@better-router/use-loader";
-import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
+import useLoader from "@/better-router/use-loader";
+import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
 import { PointerEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";

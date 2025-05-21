@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { Link } from "react-router";
 import "./hero-info-card.scss";
 import { useTranslation } from "react-i18next";

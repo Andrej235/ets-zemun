@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from "react";
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import "./hamburger-navigation-search-bar.scss";
-import searchMap from "@data/search-map.json";
+import searchMap from "@/assets/json-data/data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
-import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
+import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
 import SearchEntry from "src/types/search/search-entry";
 import { useTranslation } from "react-i18next";
 

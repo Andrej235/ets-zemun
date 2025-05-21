@@ -1,5 +1,5 @@
 import DocumentGroupSchema from "@/assets/json-data/ts-schemas/document-group.schema";
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useTranslation } from "react-i18next";
 
 type DocumentGroupProps = {

@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import "./wip-wall.scss";
 
 export default function WipWall() {

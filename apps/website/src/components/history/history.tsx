@@ -7,10 +7,10 @@ import React, {
   useState,
 } from "react";
 import "./history.scss";
-import createCirclePath from "@utility/svg/create-circle-path";
+import createCirclePath from "@/utility/svg/create-circle-path";
 import { inView } from "motion/react";
-import getPathTotalLength from "@utility/svg/get-path-length";
-import createRoundedCornerPath from "@utility/svg/create-rounded-path";
+import getPathTotalLength from "@/utility/svg/get-path-length";
+import createRoundedCornerPath from "@/utility/svg/create-rounded-path";
 
 type TimelineStyle = "alternating" | "left" | "right" | "center";
 

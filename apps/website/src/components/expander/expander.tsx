@@ -1,5 +1,5 @@
 import "./expander.scss";
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useState } from "react";
 
 type ExpanderProps = {

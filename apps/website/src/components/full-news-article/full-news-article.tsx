@@ -1,9 +1,9 @@
-import useLoader from "@better-router/use-loader";
+import useLoader from "@/better-router/use-loader";
 import fullNewsArticleLoader from "./full-news-article-loader";
 import "./full-news-article.scss";
-import Async from "@better-router/async";
+import Async from "@/better-router/async";
 import { useRef } from "react";
-import useLazyLoad from "@hooks/use-lazy-load";
+import useLazyLoad from "@/hooks/use-lazy-load";
 
 export default function FullNewsArticle() {
   const loaderData = useLoader<typeof fullNewsArticleLoader>();

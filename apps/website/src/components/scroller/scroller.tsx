@@ -1,5 +1,5 @@
-import Floatie from "@components/floatie/floatie";
-import Icon from "@components/icon/icon";
+import Floatie from "@/components/floatie/floatie";
+import Icon from "@/components/icon/icon";
 import {
   motion,
   useMotionValueEvent,

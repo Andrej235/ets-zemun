@@ -26,15 +26,6 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@api/*": ["api-dsl/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@/assets/*": ["src/assets/*"],
-      "@data/*": ["src/assets/json-data/data/*"],
-      "@utility/*": ["src/utility/*"],
-      "@better-router/*": ["src/better-router/*"],
-      "@i18n": ["src/i18n"],
       "@/*": ["./src/*"]
     }
   },

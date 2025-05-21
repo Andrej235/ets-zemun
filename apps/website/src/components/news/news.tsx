@@ -1,6 +1,6 @@
-import useLoader from "@better-router/use-loader";
-import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
-import NewsPreview from "@components/news-preview/news-preview";
+import useLoader from "@/better-router/use-loader";
+import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
+import NewsPreview from "@/components/news-preview/news-preview";
 import newsPageLoader from "./news-page-loader";
 import "./news.scss";
 import "../news-preview/news-preview.scss";

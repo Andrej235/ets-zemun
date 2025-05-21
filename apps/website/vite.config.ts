@@ -30,15 +30,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@styles": path.resolve(__dirname, "./sass"),
-      "@api": path.resolve(__dirname, "../shared-frontend/api-dsl"),
-      "@/assets": path.resolve(__dirname, "src/assets"),
-      "@data": path.resolve(__dirname, "src/assets/json-data/data"),
-      "@contexts": path.resolve(__dirname, "src/contexts"),
-      "@hooks": path.resolve(__dirname, "src/hooks"),
-      "@components": path.resolve(__dirname, "src/components"),
-      "@utility": path.resolve(__dirname, "src/utility"),
-      "@better-router": path.resolve(__dirname, "src/better-router"),
-      "@i18n": path.resolve(__dirname, "src/i18n.ts"),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   css: {

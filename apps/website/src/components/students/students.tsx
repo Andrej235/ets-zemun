@@ -1,4 +1,4 @@
-import HeroInfoCard from "@components/hero-info-card/hero-info-card";
+import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
