@@ -1,5 +1,5 @@
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { Endpoints } from "@shared/api-dsl/types/endpoints/endpoints";
+import sendAPIRequest from "@/api-dsl/send-api-request";
+import { Endpoints } from "@/api-dsl/types/endpoints/endpoints";
 import {
   useCallback,
   useEffect,

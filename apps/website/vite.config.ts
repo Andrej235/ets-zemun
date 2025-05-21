@@ -29,10 +29,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@shared": path.resolve(__dirname, "../shared-frontend"),
-      "@styles": path.resolve(__dirname, "../shared-frontend/sass"),
+      "@styles": path.resolve(__dirname, "./sass"),
       "@api": path.resolve(__dirname, "../shared-frontend/api-dsl"),
-      "@assets": path.resolve(__dirname, "src/assets"),
+      "@/assets": path.resolve(__dirname, "src/assets"),
       "@data": path.resolve(__dirname, "src/assets/json-data/data"),
       "@contexts": path.resolve(__dirname, "src/contexts"),
       "@hooks": path.resolve(__dirname, "src/hooks"),

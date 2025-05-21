@@ -1,4 +1,4 @@
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 

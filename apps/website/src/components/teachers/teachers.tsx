@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useLoader from "@better-router/use-loader";
 import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
 import teacherLoader from "@components/teachers/teachers-loader";
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useTranslation } from "react-i18next";
 import ExpandedTeacherCard from "./expanded-teacher-card";
 import TeacherCard from "./teacher-card";

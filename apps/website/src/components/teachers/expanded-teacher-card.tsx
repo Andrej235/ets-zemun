@@ -1,5 +1,5 @@
 import useOutsideClick from "@hooks/use-outside-click";
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
