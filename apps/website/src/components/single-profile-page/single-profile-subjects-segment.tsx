@@ -127,7 +127,7 @@ export default function SingleProfileSubjectsSegment() {
                   <AnimatePresence mode="popLayout">
                     {data
                       .filter((x) => x.year === selectedYear)[0]
-                      .subjects.map((x) => (
+                      ?.subjects?.map((x) => (
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
