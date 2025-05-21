@@ -22,7 +22,7 @@ export type APIMap = {
         }
       }
     },
-    '/award': {
+    '/awards': {
       post: {
         tags: [ 'Award' ],
         requestBody: {
@@ -83,7 +83,7 @@ export type APIMap = {
         }
       }
     },
-    '/award/translation': {
+    '/awards/translation': {
       post: {
         tags: [ 'Award' ],
         requestBody: {
@@ -129,7 +129,7 @@ export type APIMap = {
         }
       }
     },
-    '/award/{id}': {
+    '/awards/{id}': {
       delete: {
         tags: [ 'Award' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -166,7 +166,7 @@ export type APIMap = {
         }
       }
     },
-    '/award/{awardId}/translation/{languageCode}': {
+    '/awards/{awardId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Award' ],
         parameters: [ { name: 'awardId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
@@ -188,7 +188,7 @@ export type APIMap = {
         }
       }
     },
-    '/award/admin': {
+    '/awards/admin': {
       get: {
         tags: [ 'Award' ],
         responses: {
@@ -212,7 +212,7 @@ export type APIMap = {
         }
       }
     },
-    '/award/admin/{id}': {
+    '/awards/admin/{id}': {
       get: {
         tags: [ 'Award' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -233,7 +233,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile': {
+    '/profiles': {
       post: {
         tags: [ 'EducationalProfiles' ],
         requestBody: {
@@ -297,7 +297,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile/{id}': {
+    '/profiles/{id}': {
       delete: {
         tags: [ 'EducationalProfiles' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -334,7 +334,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile/add-subject': {
+    '/profiles/add-subject': {
       patch: {
         tags: [ 'EducationalProfiles' ],
         requestBody: {
@@ -358,7 +358,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile/remove-subject': {
+    '/profiles/remove-subject': {
       patch: {
         tags: [ 'EducationalProfiles' ],
         requestBody: {
@@ -386,7 +386,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile/update-subject': {
+    '/profiles/update-subject': {
       patch: {
         tags: [ 'EducationalProfiles' ],
         requestBody: {
@@ -414,7 +414,7 @@ export type APIMap = {
         }
       }
     },
-    '/profile/update-name': {
+    '/profiles/update-name': {
       patch: {
         tags: [ 'EducationalProfiles' ],
         requestBody: {
@@ -442,7 +442,7 @@ export type APIMap = {
         }
       }
     },
-    '/language': {
+    '/languages': {
       post: {
         tags: [ 'Language' ],
         requestBody: {
@@ -505,7 +505,7 @@ export type APIMap = {
         }
       }
     },
-    '/language/{code}': {
+    '/languages/{code}': {
       delete: {
         tags: [ 'Language' ],
         parameters: [ { name: 'code', in: 'path', required: true, schema: { pattern: '^[A-Za-z]*$', type: 'string' } } ],
@@ -855,7 +855,7 @@ export type APIMap = {
         }
       }
     },
-    '/qualification': {
+    '/qualifications': {
       post: {
         tags: [ 'Qualification' ],
         requestBody: {
@@ -916,7 +916,7 @@ export type APIMap = {
         }
       }
     },
-    '/qualification/translation': {
+    '/qualifications/translation': {
       post: {
         tags: [ 'Qualification' ],
         requestBody: {
@@ -962,7 +962,7 @@ export type APIMap = {
         }
       }
     },
-    '/qualification/{id}': {
+    '/qualifications/{id}': {
       delete: {
         tags: [ 'Qualification' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -1003,7 +1003,7 @@ export type APIMap = {
         }
       }
     },
-    '/qualification/{qualificationId}/translation/{languageCode}': {
+    '/qualifications/{qualificationId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Qualification' ],
         parameters: [ { name: 'qualificationId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
@@ -1025,7 +1025,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject': {
+    '/subjects': {
       post: {
         tags: [ 'Subject' ],
         requestBody: {
@@ -1086,7 +1086,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject/translation': {
+    '/subjects/translation': {
       post: {
         tags: [ 'Subject' ],
         requestBody: {
@@ -1132,7 +1132,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject/{id}': {
+    '/subjects/{id}': {
       delete: {
         tags: [ 'Subject' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -1173,7 +1173,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject/{subjectId}/translation/{languageCode}': {
+    '/subjects/{subjectId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Subject' ],
         parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
@@ -1195,7 +1195,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject/admin': {
+    '/subjects/admin': {
       get: {
         tags: [ 'Subject' ],
         parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
@@ -1216,7 +1216,7 @@ export type APIMap = {
         }
       }
     },
-    '/subject/admin/{id}': {
+    '/subjects/admin/{id}': {
       get: {
         tags: [ 'Subject' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -1237,7 +1237,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher': {
+    '/teachers': {
       post: {
         tags: [ 'Teacher' ],
         requestBody: {
@@ -1302,7 +1302,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/translation': {
+    '/teachers/translation': {
       post: {
         tags: [ 'Teacher' ],
         requestBody: {
@@ -1348,7 +1348,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/{id}': {
+    '/teachers/{id}': {
       delete: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -1389,7 +1389,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/{teacherId}/translation/{languageCode}': {
+    '/teachers/{teacherId}/translation/{languageCode}': {
       delete: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
@@ -1411,7 +1411,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/simple': {
+    '/teachers/simple': {
       get: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'q', in: 'query', schema: { type: 'string' } } ],
@@ -1428,7 +1428,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/simple/for-subject/{subjectId}': {
+    '/teachers/simple/for-subject/{subjectId}': {
       get: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
@@ -1445,7 +1445,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/admin': {
+    '/teachers/admin': {
       get: {
         tags: [ 'Teacher' ],
         responses: {
@@ -1473,7 +1473,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/admin/{id}': {
+    '/teachers/admin/{id}': {
       get: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
@@ -1498,7 +1498,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/subject': {
+    '/teachers/subject': {
       post: {
         tags: [ 'Teacher' ],
         requestBody: {
@@ -1544,7 +1544,7 @@ export type APIMap = {
         }
       }
     },
-    '/teacher/{teacherId}/subject/{subjectId}': {
+    '/teachers/{teacherId}/subject/{subjectId}': {
       delete: {
         tags: [ 'Teacher' ],
         parameters: [ { name: 'teacherId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'subjectId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],

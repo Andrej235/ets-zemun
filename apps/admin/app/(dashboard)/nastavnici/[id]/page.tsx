@@ -61,13 +61,13 @@ export default function TeacherDetailPage() {
         // Fetch all data in parallel
         const [{ response: teacherData }, { response: subjectsData }] =
           await Promise.all([
-            await sendApiRequest("/teacher/admin/{id}", {
+            await sendApiRequest("/teachers/admin/{id}", {
               method: "get",
               parameters: {
                 id: +teacherId,
               },
             }),
-            await sendApiRequest("/subject/admin", {
+            await sendApiRequest("/subjects/admin", {
               method: "get",
               parameters: {
                 limit: -1,
@@ -100,7 +100,7 @@ export default function TeacherDetailPage() {
   async function handleSaveSubjectAssignments() {
     if (!teacher) return;
 
-    const promise = sendApiRequest("/teacher/subject", {
+    const promise = sendApiRequest("/teachers/subject", {
       method: "put",
       payload: {
         teacherId: +teacherId,
@@ -174,7 +174,7 @@ export default function TeacherDetailPage() {
 
     if (!teacher) return;
 
-    const promise = sendApiRequest("/teacher", {
+    const promise = sendApiRequest("/teachers", {
       method: "put",
       payload: {
         id: teacher.id,

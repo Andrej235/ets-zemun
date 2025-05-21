@@ -58,7 +58,7 @@ export default function LanguagesPage() {
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const data = await sendApiRequest("/language", {
+        const data = await sendApiRequest("/languages", {
           method: "get",
         });
         setLanguages(data.response!);
@@ -78,7 +78,7 @@ export default function LanguagesPage() {
       return;
     }
 
-    const promise = sendApiRequest("/language", {
+    const promise = sendApiRequest("/languages", {
       method: "post",
       payload: {
         code: newLanguage.code,
@@ -110,7 +110,7 @@ export default function LanguagesPage() {
   };
 
   const handleDeleteLanguage = async (code: string) => {
-    const promise = sendApiRequest("/language/{code}", {
+    const promise = sendApiRequest("/languages/{code}", {
       method: "delete",
       parameters: {
         code,

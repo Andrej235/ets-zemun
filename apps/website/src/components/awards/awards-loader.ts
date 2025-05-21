@@ -3,7 +3,7 @@ import i18n from "@/i18n.ts";
 import sendAPIRequest from "@/api-dsl/send-api-request";
 
 const awardsLoader = createLoader(() =>
-  sendAPIRequest("/award", {
+  sendAPIRequest("/awards", {
     method: "get",
     parameters: {
       languageCode: i18n.language,

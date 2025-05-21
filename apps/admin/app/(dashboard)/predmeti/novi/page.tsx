@@ -56,7 +56,7 @@ export default function CreateSubjectPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const teachersData = await sendApiRequest("/teacher/simple", {
+        const teachersData = await sendApiRequest("/teachers/simple", {
           method: "get",
           parameters: {
             languageCode: "sr_lt",
@@ -120,7 +120,7 @@ export default function CreateSubjectPage() {
       return;
     }
 
-    const promise = sendApiRequest("/subject", {
+    const promise = sendApiRequest("/subjects", {
       method: "post",
       payload: {
         translations: subjectData.translations.map((x) => ({

@@ -55,13 +55,13 @@ export default function EditSubjectPage({
     const fetchData = async () => {
       try {
         const [subjectData, teachersData] = await Promise.all([
-          sendApiRequest("/subject/admin/{id}", {
+          sendApiRequest("/subjects/admin/{id}", {
             method: "get",
             parameters: {
               id: +id,
             },
           }),
-          sendApiRequest("/teacher/simple", {
+          sendApiRequest("/teachers/simple", {
             method: "get",
             parameters: {
               languageCode: "sr_lt",
@@ -92,7 +92,7 @@ export default function EditSubjectPage({
   const handleUpdateSubject = async () => {
     if (!subject) return;
 
-    const promise = sendApiRequest("/subject", {
+    const promise = sendApiRequest("/subjects", {
       method: "put",
       payload: {
         id: subject.id,
@@ -134,7 +134,7 @@ export default function EditSubjectPage({
       ...newTranslation,
     };
 
-    const promise = sendApiRequest("/subject/translation", {
+    const promise = sendApiRequest("/subjects/translation", {
       method: "post",
       payload: {
         subjectId: subject.id,

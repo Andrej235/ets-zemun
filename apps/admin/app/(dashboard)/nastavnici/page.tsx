@@ -43,7 +43,7 @@ export default function TeachersPage() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const data = await sendApiRequest("/teacher/admin", {
+        const data = await sendApiRequest("/teachers/admin", {
           method: "get",
         });
         setTeachers(data.response!);
@@ -60,7 +60,7 @@ export default function TeachersPage() {
   const handleDeleteTeacher = async () => {
     if (teacherToDelete === null) return;
 
-    const promise = sendApiRequest("/teacher/{id}", {
+    const promise = sendApiRequest("/teachers/{id}", {
       method: "delete",
       parameters: {
         id: teacherToDelete,

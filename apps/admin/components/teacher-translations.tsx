@@ -116,7 +116,7 @@ export function TeacherTranslations({
 
   const handleAddTranslation = async (values: TranslationFormValues) => {
     setIsSubmitting(true);
-    const promise = sendApiRequest("/teacher/translation", {
+    const promise = sendApiRequest("/teachers/translation", {
       method: "post",
       payload: {
         teacherId: teacher.id,
@@ -166,7 +166,7 @@ export function TeacherTranslations({
     if (!currentTranslation) return;
 
     setIsSubmitting(true);
-    const promise = sendApiRequest("/teacher/translation", {
+    const promise = sendApiRequest("/teachers/translation", {
       method: "put",
       payload: {
         teacherId: teacher.id,

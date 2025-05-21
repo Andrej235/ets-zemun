@@ -8,7 +8,7 @@ export type SingleProfilePageLoader = ReturnType<
 
 const singleProfilePageLoaderCreator = (id: number) =>
   createLoader(() => {
-    return sendAPIRequest("/profile/{id}", {
+    return sendAPIRequest("/profiles/{id}", {
       method: "get",
       parameters: {
         id,

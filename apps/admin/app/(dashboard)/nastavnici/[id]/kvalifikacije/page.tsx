@@ -81,7 +81,7 @@ export default function TeacherQualificationsPage({
     if (!teacher || qualificationToDelete === null) return;
 
     try {
-      const promise = sendApiRequest("/qualification/{id}", {
+      const promise = sendApiRequest("/qualifications/{id}", {
         method: "delete",
         parameters: {
           id: qualificationToDelete,

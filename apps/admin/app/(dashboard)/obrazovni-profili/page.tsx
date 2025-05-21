@@ -50,7 +50,7 @@ export default function CurriculumPage() {
     const fetchCurriculums = async () => {
       try {
         setIsLoading(true);
-        const data = await sendApiRequest("/profile", {
+        const data = await sendApiRequest("/profiles", {
           method: "get",
         });
         setCurriculums(data.response!);
@@ -72,7 +72,7 @@ export default function CurriculumPage() {
 
   const handleDelete = async (id: number) => {
     setIsDeleting(id);
-    const promise = sendApiRequest(`/profile/{id}`, {
+    const promise = sendApiRequest(`/profiles/{id}`, {
       method: "delete",
       parameters: {
         id,
