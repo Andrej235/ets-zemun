@@ -64,6 +64,7 @@ export default async function sendApiRequest<
 
   try {
     data = await response.json();
+    // eslint-disable-next-line no-empty
   } catch {}
 
   return isOk
