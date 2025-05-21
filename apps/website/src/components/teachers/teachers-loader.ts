@@ -9,8 +9,7 @@ const teacherLoader = createLoader(() =>
       languageCode: i18n.language,
       limit: 9,
     },
-  })
+  }),
 );
 
 export default teacherLoader;
-

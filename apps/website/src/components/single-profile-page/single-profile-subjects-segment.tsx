@@ -76,7 +76,7 @@ export default function SingleProfileSubjectsSegment() {
             [
               ...response.content.generalSubjects,
               ...response.content.vocationalSubjects,
-            ].map((x) => x.year)
+            ].map((x) => x.year),
           ),
         ];
 
@@ -94,12 +94,12 @@ export default function SingleProfileSubjectsSegment() {
                 .map((x) => ({
                   ...x,
                   type: "vocational",
-                }))
+                })),
             ),
         }));
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [loaderData, t]
+    [loaderData, t],
   );
 
   return (
@@ -170,4 +170,3 @@ export default function SingleProfileSubjectsSegment() {
     </>
   );
 }
-

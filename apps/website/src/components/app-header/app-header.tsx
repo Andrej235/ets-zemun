@@ -174,4 +174,3 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
 });
 
 export default AppHeader;
-

@@ -32,4 +32,3 @@
   "include": ["src", "../shared-frontend", "api-dsl"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
-

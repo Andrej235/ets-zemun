@@ -9,8 +9,8 @@ type AsyncProps<T> = {
     data: unknown extends T
       ? unknown
       : T extends Promise<infer U>
-      ? U
-      : Awaited<AwaitedObject<T>>
+        ? U
+        : Awaited<AwaitedObject<T>>,
   ) => ReactNode;
 };
 
@@ -38,14 +38,13 @@ export default function Async<T>({
 
 type AwaitedObject<T> = Promise<{ [K in keyof T]: Awaited<T[K]> }>;
 async function awaitObject<T extends Record<string, unknown>>(
-  obj: T
+  obj: T,
 ): AwaitedObject<T> {
   const entries = Object.entries(obj);
   const resolvedEntries = await Promise.all(
-    entries.map(async ([key, value]) => [key, await value] as const)
+    entries.map(async ([key, value]) => [key, await value] as const),
   );
   return Object.fromEntries(resolvedEntries) as {
     [K in keyof T]: Awaited<T[K]>;
   };
 }
-

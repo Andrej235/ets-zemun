@@ -41,7 +41,7 @@ export default function HamburgerNavigationSearchBar({
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
@@ -112,4 +112,3 @@ export default function HamburgerNavigationSearchBar({
     </FocusTrap>
   );
 }
-

@@ -7,7 +7,7 @@ const baseAPIUrl = (import.meta as unknown as { env: { VITE_API_URL: string } })
 
 type Response<
   Endpoint extends Endpoints,
-  T extends Request<Endpoint>
+  T extends Request<Endpoint>,
 > = T extends {
   method: infer Method;
 }
@@ -18,11 +18,11 @@ type Response<
 
 export default async function sendAPIRequest<
   T extends Request<Endpoint>,
-  Endpoint extends Endpoints
+  Endpoint extends Endpoints,
 >(
   endpoint: Endpoint,
   request: T,
-  includeCredentials: boolean = true
+  includeCredentials: boolean = true,
 ): Promise<Response<Endpoint, T>> {
   const url = new URL(baseAPIUrl + endpoint);
   const requestCopy = structuredClone(request);
@@ -39,7 +39,7 @@ export default async function sendAPIRequest<
     }
 
     url.search = new URLSearchParams(
-      requestCopy.parameters as Record<string, string>
+      requestCopy.parameters as Record<string, string>,
     ).toString();
   }
 

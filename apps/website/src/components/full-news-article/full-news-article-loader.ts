@@ -9,8 +9,7 @@ const fullNewsArticleLoader = createLoader(({ params: { newsId } }) =>
       languageCode: i18n.language,
       id: +newsId,
     },
-  })
+  }),
 );
 
 export default fullNewsArticleLoader;
-

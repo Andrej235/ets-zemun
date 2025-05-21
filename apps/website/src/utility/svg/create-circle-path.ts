@@ -3,18 +3,18 @@ import Vector2 from "./vector2";
 export default function createCirclePath(
   radius: number,
   centerX: number,
-  centerY: number
+  centerY: number,
 ): string;
 
 export default function createCirclePath(
   radius: number,
-  center: Vector2
+  center: Vector2,
 ): string;
 
 export default function createCirclePath(
   radius: number,
   centerX: number | Vector2,
-  centerY?: number
+  centerY?: number,
 ): string {
   centerY ??= 0;
   if (typeof centerX === "object") {
@@ -57,4 +57,3 @@ export default function createCirclePath(
     `${format(centerX)} ${format(centerY + radius)}`,
   ].join(" ");
 }
-

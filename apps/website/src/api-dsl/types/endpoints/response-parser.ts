@@ -4,7 +4,7 @@ import { ParseSchemaProperty } from "./property-parser";
 
 export type APIResponse<
   Endpoint extends Endpoints,
-  Method extends Methods<Endpoint>
+  Method extends Methods<Endpoint>,
 > = Paths[Endpoint][Method] extends {
   responses: infer Responses;
 }
@@ -16,7 +16,7 @@ export type APIResponse<
 
 type ParseAllResponses<
   Codes extends unknown[],
-  Responses extends unknown[]
+  Responses extends unknown[],
 > = Codes extends [infer FirstCode, ...infer RestCode]
   ? Responses extends [infer First, ...infer Rest]
     ?

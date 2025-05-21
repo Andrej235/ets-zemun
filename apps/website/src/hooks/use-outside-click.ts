@@ -3,7 +3,7 @@ import { RefObject, useCallback, useEffect } from "react";
 export default function useOutsideClick(
   ref: RefObject<HTMLElement>,
   callback: () => void,
-  type: "left" | "all" = "all"
+  type: "left" | "all" = "all",
 ) {
   const handleClick = useCallback(
     (event: MouseEvent) => {
@@ -19,7 +19,7 @@ export default function useOutsideClick(
 
       if (!ref.current.contains(target as Node)) callback();
     },
-    [ref, callback, type]
+    [ref, callback, type],
   );
 
   useEffect(() => {
@@ -27,4 +27,3 @@ export default function useOutsideClick(
     return () => document.body.removeEventListener("mousedown", handleClick);
   }, [ref, callback, handleClick]);
 }
-

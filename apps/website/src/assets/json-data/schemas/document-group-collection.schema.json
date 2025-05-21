@@ -13,4 +13,3 @@
   "required": ["documentGroups"],
   "additionalProperties": false
 }
-

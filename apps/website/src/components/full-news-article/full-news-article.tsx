@@ -16,12 +16,12 @@ export default function FullNewsArticle() {
 
       x.forEach((image) => {
         const imageRef = containerRef.current!.querySelector(
-          `img#image-${image.id}`
+          `img#image-${image.id}`,
         );
 
         imageRef?.setAttribute("src", image.image);
       });
-    }
+    },
   );
 
   return (
@@ -42,4 +42,3 @@ export default function FullNewsArticle() {
     </Async>
   );
 }
-

@@ -13,7 +13,7 @@ function App() {
     if (!searchKey) return;
 
     const element = document.querySelector(
-      `[data-search-key="${searchKey}"]`
+      `[data-search-key="${searchKey}"]`,
     ) as HTMLElement;
     if (!element) return;
 
@@ -45,4 +45,3 @@ function App() {
 }
 
 export default App;
-

@@ -5,7 +5,7 @@ export default function createRoundedCornerPath(
     type: "horizontal" | "vertical";
     value: number;
   }[],
-  radius: number
+  radius: number,
 ) {
   let path = ``;
   let currentX = startX;
@@ -20,7 +20,7 @@ export default function createRoundedCornerPath(
       nextSegment,
       currentX,
       currentY,
-      radius
+      radius,
     );
 
     path += newPath;
@@ -35,7 +35,7 @@ export default function createRoundedCornerPath(
     nextSegment: { type: "horizontal" | "vertical"; value: number } | undefined,
     currentX: number,
     currentY: number,
-    radius: number
+    radius: number,
   ) {
     let path = "";
     let newX = currentX;
@@ -46,7 +46,7 @@ export default function createRoundedCornerPath(
         currentSegment,
         nextSegment,
         currentX,
-        radius
+        radius,
       );
       path += newPath;
       newX = adjustedX;
@@ -55,7 +55,7 @@ export default function createRoundedCornerPath(
         currentSegment,
         nextSegment,
         currentY,
-        radius
+        radius,
       );
       path += newPath;
       newY = adjustedY;
@@ -67,7 +67,7 @@ export default function createRoundedCornerPath(
         nextSegment,
         newX,
         newY,
-        radius
+        radius,
       );
       path += newPath;
       newX = arcX;
@@ -81,7 +81,7 @@ export default function createRoundedCornerPath(
     currentSegment: { type: "horizontal" | "vertical"; value: number },
     nextSegment: { type: "horizontal" | "vertical"; value: number } | undefined,
     currentX: number,
-    radius: number
+    radius: number,
   ) {
     const targetX = currentSegment.value;
     const dx = targetX - currentX;
@@ -97,7 +97,7 @@ export default function createRoundedCornerPath(
     currentSegment: { type: "horizontal" | "vertical"; value: number },
     nextSegment: { type: "horizontal" | "vertical"; value: number } | undefined,
     currentY: number,
-    radius: number
+    radius: number,
   ) {
     const targetY = currentSegment.value;
     const dy = targetY - currentY;
@@ -114,7 +114,7 @@ export default function createRoundedCornerPath(
     nextSegment: { type: "horizontal" | "vertical"; value: number },
     currentX: number,
     currentY: number,
-    radius: number
+    radius: number,
   ) {
     let path = "";
     let arcX = currentX;

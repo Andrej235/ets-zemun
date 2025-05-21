@@ -37,7 +37,7 @@ export default function SingleProfileNetworkAdminPage() {
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.network.description"
+                  "educationalProfiles.administrator.program.network.description",
                 )}
               </p>
             </li>
@@ -48,7 +48,7 @@ export default function SingleProfileNetworkAdminPage() {
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.security.description"
+                  "educationalProfiles.administrator.program.security.description",
                 )}
               </p>
             </li>
@@ -59,7 +59,7 @@ export default function SingleProfileNetworkAdminPage() {
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.hardware.description"
+                  "educationalProfiles.administrator.program.hardware.description",
                 )}
               </p>
             </li>
@@ -67,12 +67,12 @@ export default function SingleProfileNetworkAdminPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.administrator.program.operatingSystems.title"
+                  "educationalProfiles.administrator.program.operatingSystems.title",
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.operatingSystems.description"
+                  "educationalProfiles.administrator.program.operatingSystems.description",
                 )}
               </p>
             </li>
@@ -83,7 +83,7 @@ export default function SingleProfileNetworkAdminPage() {
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.database.description"
+                  "educationalProfiles.administrator.program.database.description",
                 )}
               </p>
             </li>
@@ -99,7 +99,7 @@ export default function SingleProfileNetworkAdminPage() {
 
           <p>
             {t(
-              "educationalProfiles.administrator.knowledgeApplication.description"
+              "educationalProfiles.administrator.knowledgeApplication.description",
             )}
           </p>
         </section>
@@ -115,4 +115,3 @@ export default function SingleProfileNetworkAdminPage() {
     </div>
   );
 }
-

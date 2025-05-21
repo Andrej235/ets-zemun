@@ -9,8 +9,7 @@ const aboutPageNewsLoader = createLoader(() =>
       languageCode: i18n.language,
       limit: 3,
     },
-  })
+  }),
 );
 
 export default aboutPageNewsLoader;
-

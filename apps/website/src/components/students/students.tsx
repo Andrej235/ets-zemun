@@ -14,7 +14,8 @@ export default function Students() {
   const { t } = useTranslation();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("ucenicki-parlament");
+  const [activeSection, setActiveSection] =
+    useState<string>("ucenicki-parlament");
   const [searchParams] = useSearchParams();
 
   const sections = [
@@ -40,7 +41,7 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   )?.component;
 
   return (
@@ -117,4 +118,3 @@ export default function Students() {
     </div>
   );
 }
-

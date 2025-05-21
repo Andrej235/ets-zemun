@@ -23,7 +23,10 @@ export default function News() {
           data={loaderData}
           success="200"
           skeleton={Array.from({ length: 9 }).map((_, i) => (
-            <div className="news-article-preview skeleton" key={"skeleton_" + i}></div>
+            <div
+              className="news-article-preview skeleton"
+              key={"skeleton_" + i}
+            ></div>
           ))}
         >
           {(data) => <NewsPreview key={data.id} news={data} />}
@@ -32,4 +35,3 @@ export default function News() {
     </div>
   );
 }
-

@@ -10,7 +10,7 @@ export type Request<Endpoint extends Endpoints> = RequestHelper<
 
 export type RequestHelper<
   Path extends keyof Paths,
-  T extends unknown[]
+  T extends unknown[],
 > = T extends [infer First, ...infer Rest]
   ? First extends keyof Paths[Path]
     ?
@@ -24,7 +24,7 @@ export type RequestHelper<
 
 type Parameters<
   Path extends keyof Paths,
-  Method extends keyof Paths[Path]
+  Method extends keyof Paths[Path],
 > = "parameters" extends keyof Paths[Path][Method]
   ? Paths[Path][Method]["parameters"] extends object[]
     ? {
@@ -35,7 +35,7 @@ type Parameters<
 
 type Payload<
   Path extends keyof Paths,
-  Method extends keyof Paths[Path]
+  Method extends keyof Paths[Path],
 > = Paths[Path][Method] extends {
   requestBody: {
     content: {

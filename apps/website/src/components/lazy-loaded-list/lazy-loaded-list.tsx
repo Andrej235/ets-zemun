@@ -53,7 +53,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
       ("/" + currentResponse.nextCursor) as Endpoints,
       {
         method: "get",
-      } as never
+      } as never,
     ).then((x) => x as unknown);
 
     if (
@@ -68,7 +68,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
     const newResponseContent = newResponse.content as LazyLoadResponse<unknown>;
 
     newResponseContent.items = currentResponse.items.concat(
-      newResponseContent.items
+      newResponseContent.items,
     );
     preserveScroll.current = true;
     setCurrentResponse(newResponseContent);
@@ -94,7 +94,7 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
         root: null,
         rootMargin: "0px",
         threshold: 0.5,
-      }
+      },
     );
 
     observer.observe(markerRef.current);
@@ -120,12 +120,12 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
         }}
       />
     ),
-    [loadMoreOn]
+    [loadMoreOn],
   );
 
   const memoizedChildren = useMemo(
     () => (currentResponse.items as EntityType<T>[]).map(children),
-    [children, currentResponse.items]
+    [children, currentResponse.items],
   );
 
   return (
@@ -135,4 +135,3 @@ export default function LazyLoadedList<T extends LazyLoadResponse<unknown>>({
     </>
   );
 }
-

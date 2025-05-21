@@ -12,7 +12,7 @@ export type FloatieOverlayProps = {
     duration?: number;
     additionalDropAnimations?: (
       animate: typeof import("motion/react").animate,
-      container: HTMLDivElement
+      container: HTMLDivElement,
     ) => void;
   };
 };
@@ -52,12 +52,12 @@ export default function FloatieOverlay({
             {
               duration: (dropAnimationDuration - 50) / 1000,
               onComplete: endDrag,
-            }
+            },
           );
 
           dropAnimation?.additionalDropAnimations?.(
             animate,
-            containerRef.current
+            containerRef.current,
           );
 
           active.node.classList.remove("dragging");
@@ -84,4 +84,3 @@ export default function FloatieOverlay({
     </DragOverlay>
   );
 }
-

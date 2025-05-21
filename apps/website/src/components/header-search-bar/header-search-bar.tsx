@@ -31,7 +31,7 @@ export default function HeaderSearchBar() {
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
@@ -191,4 +191,3 @@ export default function HeaderSearchBar() {
     </FocusTrap>
   );
 }
-

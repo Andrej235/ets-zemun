@@ -30,7 +30,7 @@ export type EntityType<T extends LazyLoadResponse<unknown>> =
 type LazyLoadedListProps<
   R extends Promise<ResponseLike<string, T>>,
   C extends Awaited<R>["code"],
-  T
+  T,
 > = {
   readonly data: R;
   readonly children: (
@@ -38,7 +38,7 @@ type LazyLoadedListProps<
       ? U extends LazyLoadResponse<infer V>
         ? V
         : never
-      : never
+      : never,
   ) => React.ReactNode;
   readonly success: C;
   readonly loadMoreOn?: `${number}%`;
@@ -51,7 +51,7 @@ const LazyAwaitedList = genericMemo(
   <
     R extends Promise<ResponseLike<string, T>>,
     C extends Awaited<R>["code"],
-    T
+    T,
   >({
     data,
     children,
@@ -108,14 +108,14 @@ const LazyAwaitedList = genericMemo(
         ("/" + currentAwaitedResponse.nextCursor) as Endpoints,
         {
           method: "get",
-        } as never
+        } as never,
       ).then((x: Awaited<R>) => {
         if (x.code === success) {
           sentCursor.current = null;
           isWaiting.current = false;
           const newResponse = x.content as LazyLoadResponse<unknown>;
           newResponse.items = currentAwaitedResponse.items.concat(
-            newResponse.items
+            newResponse.items,
           );
           setLoadedResponse(newResponse);
           setShowSkeleton(false);
@@ -147,7 +147,7 @@ const LazyAwaitedList = genericMemo(
           root: null,
           rootMargin: "0px",
           threshold: 0.5,
-        }
+        },
       );
 
       observer.observe(markerRef.current);
@@ -167,7 +167,7 @@ const LazyAwaitedList = genericMemo(
           }}
         />
       ),
-      [loadMoreOn]
+      [loadMoreOn],
     );
 
     const memoizedChildren = useMemo(
@@ -182,7 +182,7 @@ const LazyAwaitedList = genericMemo(
               : never
             : never)[]
         ).map(children),
-      [loadedResponse, children]
+      [loadedResponse, children],
     );
 
     const { scrollY } = useScroll();
@@ -198,7 +198,6 @@ const LazyAwaitedList = genericMemo(
         {showSkeleton && skeleton}
       </>
     );
-  }
+  },
 );
 export default LazyAwaitedList;
-

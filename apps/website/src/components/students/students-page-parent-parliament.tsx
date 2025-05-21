@@ -17,7 +17,7 @@ export default function StudentsPageParentParliament() {
       t("students.sections.parentParliament.data", {
         returnObjects: true,
       }) as ParentData,
-    [t]
+    [t],
   );
 
   return (
@@ -56,4 +56,3 @@ export default function StudentsPageParentParliament() {
     </div>
   );
 }
-

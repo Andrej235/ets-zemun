@@ -26,4 +26,3 @@
   "required": ["documents", "title", "accentColor", "iconName"],
   "additionalProperties": false
 }
-
