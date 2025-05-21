@@ -1,8 +1,5 @@
-import "./preview-card.scss";
 import { motion } from "motion/react";
-import scrollAnimationFlyInLeft from "../../motion-animation-presets/scroll-animation-fly-in-left";
-import scrollAnimationFlyInRight from "../../motion-animation-presets/scroll-animation-fly-in-right";
-import scrollAnimationFlyInTop from "../../motion-animation-presets/scroll-animation-fly-in-top";
+import "./preview-card.scss";
 
 export type PreviewCardLayout = "image-left" | "image-right" | "vertical";
 
@@ -19,26 +16,26 @@ export default function PreviewCard({
   children,
   imageAlt,
 }: PreviewCardProps) {
-  function getAnimation(layout: PreviewCardLayout) {
-    switch (layout) {
-      case "image-left":
-        return scrollAnimationFlyInLeft;
-      case "image-right":
-        return scrollAnimationFlyInRight;
-      case "vertical":
-      default:
-        return scrollAnimationFlyInTop;
-    }
-  }
-
   return (
     <motion.div
-      {...getAnimation(layout)}
-      className={"preview-card " + layout}
+      initial={{
+        opacity: 0,
+        x: layout === "vertical" ? 0 : layout === "image-left" ? -100 : 100,
+        y: layout === "vertical" ? -30 : 0,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
       viewport={{
         once: true,
         amount: 0.3,
       }}
+      className={"preview-card " + layout}
     >
       <div className="image-container">
         <img src={imagePath} alt={imageAlt} />
