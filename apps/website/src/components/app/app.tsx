@@ -1,6 +1,7 @@
 import AppFooter from "@components/app-footer/app-footer";
 import AppHeader from "@components/app-header/app-header";
 import Scroller from "@components/scroller/scroller";
+import { Analytics } from "@vercel/analytics/react";
 import { useEffect, useRef } from "react";
 import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
 import "./app.scss";
@@ -37,6 +38,8 @@ function App() {
       <Scroller />
 
       <AppFooter />
+
+      <Analytics />
     </div>
   );
 }
