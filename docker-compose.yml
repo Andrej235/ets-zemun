@@ -1,16 +1,10 @@
 services:
   asp-backend:
     image: andrejnenadic/ets-zemun-backend
-    volumes:
-      - aspnet-data:/app/keys
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=${CONN_STRING}
+      - ASPNETCORE_ENVIRONMENT=Production
     build:
       context: .
       dockerfile: apps/asp-backend/Dockerfile
     ports:
       - 5000:5000
-
-volumes:
-  aspnet-data:

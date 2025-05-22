@@ -1,4 +1,4 @@
-import { APIMap as ApiMap } from "../../api-map";
+import { ApiMap as ApiMap } from "../../api-map";
 
 export type Paths = ApiMap["paths"];
 export type Endpoints = keyof Paths;

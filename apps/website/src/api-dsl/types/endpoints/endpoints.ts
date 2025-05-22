@@ -1,7 +1,7 @@
-import { APIMap } from "../../api-map";
+import { ApiMap } from "../../api-map";
 
-export type Paths = APIMap["paths"];
+export type Paths = ApiMap["paths"];
 export type Endpoints = keyof Paths;
 export type Methods<Endpoint extends Endpoints> = keyof Paths[Endpoint];
-export type AllSchemaInformation = APIMap["components"]["schemas"];
+export type AllSchemaInformation = ApiMap["components"]["schemas"];
 export type SchemaNames = keyof AllSchemaInformation;

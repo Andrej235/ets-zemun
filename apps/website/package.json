@@ -46,6 +46,12 @@
     "sass-embedded": "^1.82.0",
     "typescript": "~5.6.2",
     "vite": "^6.3.5",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "@eslint/js": "^9.17.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript-eslint": "^8.18.2"
   }
 }

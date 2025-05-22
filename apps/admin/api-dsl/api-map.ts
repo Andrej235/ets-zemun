@@ -1,4 +1,4 @@
-export type APIMap = {
+export type ApiMap = {
   openapi: '3.0.1',
   info: { title: 'EtsZemun', version: '1.0' },
   paths: {
