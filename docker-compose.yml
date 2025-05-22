@@ -1,32 +1,4 @@
 services:
-  website:
-    image: andrejnenadic/ets-zemun-website
-    build:
-      context: .
-      dockerfile: apps/website/Dockerfile
-    volumes:
-      - ./apps/website:/app
-      - /app/node_modules
-    ports:
-      - 3000:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - VITE_API_URL=http://localhost:5000
-
-  admin-panel:
-    image: andrejnenadic/ets-zemun-admin-panel
-    build:
-      context: .
-      dockerfile: apps/admin-panel/Dockerfile
-    volumes:
-      - ./apps/admin-panel:/app
-      - /app/node_modules
-    ports:
-      - 5174:5174
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - VITE_API_URL=http://localhost:5000
-
   asp-backend:
     image: andrejnenadic/ets-zemun-backend
     volumes:
@@ -39,19 +11,6 @@ services:
       dockerfile: apps/asp-backend/Dockerfile
     ports:
       - 5000:5000
-    develop:
-      watch:
-        - action: rebuild
-          path: .
-
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: ets-zemun
-      POSTGRES_PASSWORD: jfcm09iu43f85fjdskcnxmn
-      POSTGRES_DB: ets-zemun
-    ports:
-      - "5432:5432"
 
 volumes:
   aspnet-data:
