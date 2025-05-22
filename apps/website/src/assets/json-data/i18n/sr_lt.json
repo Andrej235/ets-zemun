@@ -4,7 +4,7 @@
       "title": "Elektrotehnička škola \"Zemun\"",
       "tagLine": "Mi ne čekamo budućnost, mi joj idemo u susret!",
       "heroCards": {
-        "button": "Saznaj vise",
+        "button": "Saznaj više",
         "history": {
           "title": "Istorija",
           "description": "Pregled istorije naše škole i značajnih trenutaka."
@@ -24,27 +24,27 @@
       }
     },
     "overview": {
-      "title": "Misija i Vizija",
+      "title": "Misija i vizija",
       "description": {
-        "1": "Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake i naučne radnike iz oblasti koje obuhvata naš školski program. Nastojimo da kod učenika probudimo želju za usavršavanjem i sticanjem znanja, da su u stanju da samostalno istražuju i obrađuju informacije do kojih dolaze uz korišćenje svih dostupnih izvora.",
-        "2": "Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne aktivnosti. Stvorili smo takvo okruženje da je učenik u centru nastavnog procesa i učenja. Želimo da naša deca postanu preduzimljive i savesne ličnosti. Pozivamo Vas da zajedno sa nama menjamo sadašnjost i stvaramo svetliju budućnost."
+        "1": "Naša misija je da omogućimo obrazovanje i stvorimo buduće stručnjake i naučne radnike iz oblasti koje obuhvata naš školski program. Nastojimo da kod učenika probudimo želju za usavršavanjem i sticanjem znanja, da budu u stanju da samostalno istražuju i obrađuju informacije do kojih dolaze uz korišćenje svih dostupnih izvora.",
+        "2": "Njihovo zadovoljstvo u sticanju znanja i bezbednost su nam najveći prioriteti. Podstičemo kreativnost učenika kroz razne vannastavne aktivnosti. Stvorili smo takvo okruženje da je učenik u centru nastavnog procesa i učenja. Želimo da naša deca postanu preduzimljive i savesne ličnosti. Pozivamo vas da zajedno sa nama menjamo sadašnjost i stvaramo svetliju budućnost."
       }
     },
     "schoolPreviewCards": {
       "teachers": {
-        "title": "Iskusnih nastavnika",
-        "description": "Naš tim čine preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
+        "title": "Iskusni nastavnici",
+        "description": "Naš tim čini preko 100 stručnih nastavnika sa bogatim iskustvom i visokim kvalifikacijama. Kroz individualni pristup, interaktivne metode i stalno usavršavanje, oni podstiču kritičko razmišljanje i ljubav prema učenju. Svaki nastavnik radi na tome da učenici postanu samouvereni, kreativni i spremni za izazove 21. veka."
       },
       "students": {
-        "title": "Učenika u dinamičnoj zajednici",
-        "description": "Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volontirske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
+        "title": "Učenici u dinamičnoj zajednici",
+        "description": "Škola okuplja preko 750 učenika različitih interesa i potencijala. Kroz timske projekte, umetničke radionice, sportske aktivnosti i volonterske programe, gradimo zajednicu gde svako nalazi svoje mesto. Podržavamo učenike da razviju ne samo znanje već i emocionalnu inteligenciju i društvene veštine."
       },
       "classrooms": {
-        "title": "Moderno opremljenih kabineta",
+        "title": "Moderno opremljeni kabineti",
         "description": "Raspolažemo sa više od 40 specijalizovanih kabineta opremljenih digitalnim tablama, laboratorijskim instrumentima i inovativnim softverom. Prostorije su dizajnirane da podrže timski rad, eksperimente i multidisciplinarne projekte, omogućavajući učenicima da istražuju i stvaraju u inspirativnom okruženju."
       },
       "awards": {
-        "title": "Osvojenih nagrada",
+        "title": "Osvojene nagrade",
         "description": "Naši učenici su osvojili preko 25 priznanja na regionalnim, nacionalnim i međunarodnim takmičenjima. Dominiraju u STEM projektima, umetničkim izazovima, sportu i debatama, pokazujući izuzetan kreativni potencijal. Kroz mentorstvo nastavnika i prilagođene programe, podstičemo ih da istražuju, razvijaju ideje i postanu ambasadori znanja. Svaka nagrada je priča o njihovoj posvećenosti i upornosti."
       }
     },
@@ -58,7 +58,7 @@
     },
     "news": {
       "title": "Novosti",
-      "viewAll": "Sve Novosti"
+      "viewAll": "Sve novosti"
     }
   },
   "teachers": {
@@ -71,7 +71,7 @@
     "title": "Takmičenja i nagrade"
   },
   "heroInfoCard": {
-    "button": "Saznaj vise"
+    "button": "Saznaj više"
   },
   "history": {
     "segments": [
@@ -79,7 +79,7 @@
         "title": "Osnivanje prve tehničke škole u Zemunu",
         "description": [
           "Osnivanje prve stručne škole u Zemunu predstavlja početak obrazovanja u specijalizovanim tehničkim disciplinama.",
-          "Ova škola je dala je značajan doprinos obrazovanju budućih inženjera i tehničara u regionu. U ovom periodu, škola je započela sa učenjem tehničkih veština koje su bile potrebne za industrijski razvoj tog vremena."
+          "Ova škola je dala značajan doprinos obrazovanju budućih inženjera i tehničara u regionu. U ovom periodu, škola je započela sa učenjem tehničkih veština koje su bile potrebne za industrijski razvoj tog vremena."
         ]
       },
       {
@@ -100,7 +100,7 @@
       {
         "title": "Promena naziva u \"Metaloprerađivačka škola za učenike u privredi\"",
         "description": [
-          "Godine 1960. škola menja naziv u \"Metaloprerađivačku školu za učenike u privredi\", čime je postala još specijalizovanija u obrazovanju učenika za industrijske sektore.",
+          "Godine 1960. škola menja naziv u \"Metaloprerađivačka škola za učenike u privredi\", čime je postala još specijalizovanija u obrazovanju učenika za industrijske sektore.",
           "Škola je tada upisivala 600 učenika, čime je postala ključna obrazovna institucija u regionu.",
           "Nastavni plan i program obuhvatao je ne samo metalnu industriju, već i elektrotehniku i druge tehničke oblasti, što je omogućilo učenicima da steknu širok spektar veština."
         ]
@@ -130,7 +130,7 @@
     ]
   },
   "enrollment": {
-    "title": "Upis i Prijemni ispit",
+    "title": "Upis i prijemni ispit",
     "description": "Postanite deo naše zajednice budućih elektrotehničara!",
     "timeline": [
       {
@@ -143,7 +143,7 @@
       },
       {
         "date": "24.06. i 25.06.2025.",
-        "event": "Popunjavanje liste određenja (želje) za upis u srednju školu"
+        "event": "Popunjavanje liste odabira (želja) za upis u srednju školu"
       },
       {
         "date": "28.06.2025.",
@@ -195,18 +195,18 @@
       "descriptionTwo": "Nakon završetka školovanja, učenici su osposobljeni za učešće u izradi softverskih aplikacija, kreiranje i razvijanje baza podataka, statičkih i dinamičkih veb prezentacija, kao i održavanje i proveru sigurnosti informacionih sistema.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
-        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznavaju sa širokim spektrom znanja i veština iz oblasti programiranja, mrežnih tehnologija, baza podataka i računarskog hardvera. Ova znanja uključuju:",
-        "descriptionTwo": "Osim tehničkih znanja, učenici razvijaju ključnesoft skills veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i prilagodljivost – osobine koje su izuzetno važne za uspeh u dinamičnom svetu informacionih tehnologija.",
+        "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti programiranja, mrežnih tehnologija, baza podataka i računarskog hardvera. Ova znanja uključuju:",
+        "descriptionTwo": "Osim tehničkih znanja, učenici razvijaju ključne soft veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i prilagodljivost – osobine koje su izuzetno važne za uspeh u dinamičnom svetu informacionih tehnologija.",
         "programming": {
           "title": "Programiranje i razvoj softvera",
-          "description": "Rad sa savremenim programskim jezicima, izrada desktop i web aplikacija, objektno orijentisano programiranje"
+          "description": "Rad sa savremenim programskim jezicima, izrada desktop i veb aplikacija, objektno orijentisano programiranje"
         },
         "web": {
           "title": "Veb tehnologije",
           "description": "Kreiranje statičkih i dinamičkih veb stranica, korišćenje HTML, CSS, JavaScript i naprednih frontend i backend tehnologija"
         },
         "database": {
-          "title": "Baza podataka",
+          "title": "Baze podataka",
           "description": "Dizajn, implementacija i administracija baza podataka, rad sa SQL i NoSQL bazama"
         },
         "network": {
@@ -234,14 +234,14 @@
       "program": {
         "title": "Obrazovni program i stečene veštine",
         "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa osnovama projektovanja i implementacije računarskih mreža, konfiguracije i održavanja mrežnih uređaja, kao i sa radom u operativnim sistemima. Program obuhvata sledeće oblasti:",
-        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i komunikacija, koje su ključne za uspešan rad u IT sektoru.",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i komunikacija, koje su ključne za uspešan rad u IT sektoru.",
         "network": {
           "title": "Računarske mreže",
           "description": "Projektovanje, konfiguracija i administracija računarskih mreža, rad sa mrežnim uređajima, topologijama i mrežnim protokolima"
         },
         "security": {
           "title": "Sigurnost mreža",
-          "description": "Primena sigurnosnih mera za zaštitu računarskih sistema i mreža, enkripcija, firewall-i, VPN-ovi i zaštita od napada"
+          "description": "Primena sigurnosnih mera za zaštitu računarskih sistema i mreža, enkripcija, fajrvoli, VPN-ovi i zaštita od napada"
         },
         "hardware": {
           "title": "Računarski hardver",
@@ -249,7 +249,7 @@
         },
         "operatingSystems": {
           "title": "Operativni sistemi",
-          "description": "Instalacija, konfiguracija i održavanje operativnih sistema, kao što su Windows, Linux, i UNIX, za mrežni rad"
+          "description": "Instalacija, konfiguracija i održavanje operativnih sistema, kao što su Windows, Linux i UNIX, za mrežni rad"
         },
         "database": {
           "title": "Baze podataka",
@@ -262,24 +262,24 @@
       },
       "target": {
         "title": "Za koga je ovaj obrazovni profil?",
-        "description": "Ovaj obrazovni profil je idealan za učenike koji žele da se bave dizajnom, administracijom i sigurnošću računarskih mreža, uživaju u rešavanju tehničkih problema i žele da budu ključni članovi timova koji održavaju digitalnu infrastrukturu. Takođe, pruža osnovu za dalje školovanje na visokim školama i fakultetima tehničkog i računarstva usmerenja."
+        "description": "Ovaj obrazovni profil je idealan za učenike koji žele da se bave dizajnom, administracijom i sigurnošću računarskih mreža, uživaju u rešavanju tehničkih problema i žele da budu ključni članovi timova koji održavaju digitalnu infrastrukturu. Takođe, pruža osnovu za dalje školovanje na visokim školama i fakultetima tehničkog i računarskog usmerenja."
       }
     },
     "electricalEngineer": {
       "title": "Elektrotehničar računara",
       "descriptionOne": "Elektrotehničar računara je obrazovni profil koji omogućava učenicima da steknu potrebna znanja i veštine za konfiguraciju, održavanje, dijagnostiku i popravku računara, kao i za razvoj i implementaciju softverskih aplikacija.",
-      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za programiranje na popularnim programskim jezicima, razvoj desktop i web aplikacija, rad sa bazama podataka, implementaciju i održavanje računarskih mreža, kao i za administraciju mrežnih operativnih sistema.",
+      "descriptionTwo": "Nakon završetka školovanja, učenici će biti osposobljeni za programiranje na popularnim programskim jezicima, razvoj desktop i veb aplikacija, rad sa bazama podataka, implementaciju i održavanje računarskih mreža, kao i za administraciju mrežnih operativnih sistema.",
       "program": {
         "title": "Obrazovni program i stečene veštine",
         "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti računarskog hardvera, programiranja, baza podataka, računarskih mreža i sistemskog softvera. Ova znanja uključuju:",
-        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
         "programming": {
           "title": "Programiranje",
           "description": "Rad sa programskim jezicima C, C++ i C#, kreiranje objekata u C#, razvoj Windows aplikacija, rad sa bazama podataka putem ADO.NET."
         },
         "web": {
           "title": "Razvoj aplikacija",
-          "description": "Razvijanje i implementacija aplikacija za desktop i web platforme koristeći savremene tehnologije i alatke za razvoj softvera."
+          "description": "Razvijanje i implementacija aplikacija za desktop i veb platforme koristeći savremene tehnologije i alatke za razvoj softvera."
         },
         "database": {
           "title": "Baze podataka",
@@ -291,7 +291,7 @@
         },
         "hardware": {
           "title": "Računarski hardver",
-          "description": "Konfiguracija računara, rad sa računalnim komponentama, testiranje, dijagnostika i otklanjanje kvarova na računarskom hardveru."
+          "description": "Konfiguracija računara, rad sa računarskim komponentama, testiranje, dijagnostika i otklanjanje kvarova na računarskom hardveru."
         }
       },
       "knowledgeApplication": {
@@ -310,10 +310,10 @@
       "program": {
         "title": "Obrazovni program i stečene veštine",
         "descriptionOne": "Tokom četvorogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti automatskih sistema, računarskog upravljanja, industrijskih robota i regulacije fizičkih veličina. Ova znanja uključuju:",
-        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i sposobnost brze adaptacije na nove tehnologije.",
         "programming": {
           "title": "Programiranje",
-          "description": "Rad sa industrijskim programskim jezicima i tehnologijama, kao što su PLC (Programmable Logic Controllers), SCADA sisteme, kao i rad sa mikrokontrolerima."
+          "description": "Rad sa industrijskim programskim jezicima i tehnologijama, kao što su PLC (Programmable Logic Controllers), SCADA sistemi, kao i rad sa mikrokontrolerima."
         },
         "automation": {
           "title": "Automatizacija",
@@ -329,7 +329,7 @@
         },
         "measurement": {
           "title": "Merni sistemi",
-          "description": "Rad sa merama i uređajima za merenje fizičkih veličina kao što su temperatura, protok, nivo, i druge važne parametre u industriji."
+          "description": "Rad sa merama i uređajima za merenje fizičkih veličina kao što su temperatura, protok, nivo i druge važne parametre u industriji."
         }
       },
       "knowledgeApplication": {
@@ -348,7 +348,7 @@
       "program": {
         "title": "Obrazovni program i stečene veštine",
         "descriptionOne": "Tokom trogodišnjeg školovanja, učenici se upoznaju sa širokim spektrom znanja i veština iz oblasti električnih instalacija, termičkih i rashladnih sistema, kao i dijagnostike i servisiranja uređaja. Ova znanja uključuju:",
-        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft skills, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i preciznost u radu.",
+        "descriptionTwo": "Osim tehničkih veština, učenici razvijaju ključne soft veštine, kao što su analitičko razmišljanje, sposobnost rešavanja problema, timski rad i preciznost u radu.",
         "installations": {
           "title": "Električne instalacije",
           "description": "Osnovni elementi električnih instalacija i projektovanje pomoću računara, instalacije u termičkim i rashladnim uređajima, upoznavanje sa vrstama električnih pokretača."
@@ -363,7 +363,7 @@
         },
         "diagnostics": {
           "title": "Dijagnostika i popravka",
-          "description": "Samostalno obavljanje dijagnostike i popravki termičkih i rashladnih uređaja, pronalaženje i otklanjanje kvarova elektro pokretača."
+          "description": "Samostalno obavljanje dijagnostike i popravki termičkih i rashladnih uređaja, pronalaženje i otklanjanje kvarova elektropokretača."
         }
       },
       "knowledgeApplication": {
@@ -397,7 +397,7 @@
       {
         "title": "Bezbednosni protokoli",
         "documents": [
-          "Pravilnik bezbednosti i zdravlja na radu",
+          "Pravilnik o bezbednosti i zdravlju na radu",
           "Pravilnik o merama, načinu i postupku zaštite i bezbednosti učenika za vreme boravka u školi i svih aktivnosti koje organizuje"
         ]
       },
@@ -406,13 +406,13 @@
         "documents": [
           "Pravilnik o bankama",
           "Pravilnik o organizaciji budžetskog računovodstva",
-          "Pravilnik o organizaciji i sistematizaciji radnih mesta u elektrotehničkoj školi \"Zemun\""
+          "Pravilnik o organizaciji i sistematizaciji radnih mesta u Elektrotehničkoj školi \"Zemun\""
         ]
       },
       {
         "title": "Politika zaposlenih",
         "documents": [
-          "Pravilnik o pravima obavezama i odgovornostima zaposlenih",
+          "Pravilnik o pravima, obavezama i odgovornostima zaposlenih",
           "Pravilnik o radu"
         ]
       },
@@ -429,7 +429,7 @@
   "footer": {
     "about": {
       "title": "O nama",
-      "description": "Sa ciljom da obezbedimo kvalitetno obrazovanje i podstaknemo samostalno učenje i razvoj učenika težimo tome da oni izrastu u odgovorne i preduzimljive ličnosti u sigurnom i podsticajnom okruženju"
+      "description": "Sa ciljem da obezbedimo kvalitetno obrazovanje i podstaknemo samostalno učenje i razvoj učenika, težimo tome da oni izrastu u odgovorne i preduzimljive ličnosti u sigurnom i podsticajnom okruženju"
     },
     "contact": {
       "title": "Kontakt",
@@ -437,9 +437,9 @@
     },
     "copyright": "Elektrotehnička škola \"Zemun\"",
     "socialMedia": [
-      "Školski linkedin nalog",
-      "Školski twitter nalog",
-      "Školski instagram nalog"
+      "Školski LinkedIn nalog",
+      "Školski Twitter nalog",
+      "Školski Instagram nalog"
     ],
     "credits": {
       "createdBy": "Napravili:",
@@ -451,30 +451,30 @@
   "errorPage": {
     "routeError": {
       "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
-      "buttons": ["Početna strana", "Prošla strana"]
+      "buttons": ["Početna strana", "Prethodna strana"]
     },
     "asyncError": {
       "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
-      "buttons": ["Početna strana", "Prošla strana"]
+      "buttons": ["Početna strana", "Prethodna strana"]
     }
   },
   "students": {
     "hero": {
-      "title": "Sve informacije za ucenike",
+      "title": "Sve informacije za učenike",
       "tagLine": "Pronađite sve informacije i resurse za vaš uspeh.",
       "cards": [
-        "Ucenicki parlament",
+        "Učenički parlament",
         "Savet roditelja",
         "Vanredni učenici",
         "PP služba",
         "Nasilje",
-        "Mentalno Zdravlje"
+        "Mentalno zdravlje"
       ]
     },
     "sections": {
       "studentsParliament": {
         "title": "Učenički parlament",
-        "headers": ["Razred", "Ucenik 1", "Ucenik 2"],
+        "headers": ["Razred", "Učenik 1", "Učenik 2"],
         "data": [
           {
             "grade": "PRVI RAZRED",
@@ -518,11 +518,11 @@
             "classes": [
               {
                 "className": "2/1",
-                "students": ["Anđela Cvejtić", "Ana Simonović"]
+                "students": ["Anđela Cvejić", "Ana Simonović"]
               },
               {
                 "className": "2/2",
-                "students": ["Aleksandra Ćuksanovski", "Filip Kovačević"]
+                "students": ["Aleksandra Ćukšanovski", "Filip Kovačević"]
               },
               {
                 "className": "2/3",
@@ -534,7 +534,7 @@
               },
               {
                 "className": "2/5",
-                "students": ["Dinić Branko", "Aleksa Andželić"]
+                "students": ["Dinić Branko", "Aleksa Anđelić"]
               },
               {
                 "className": "2/6",
@@ -592,15 +592,15 @@
             "classes": [
               {
                 "className": "4/1",
-                "students": ["Uroš Nikolić", "Nikola Štrk"]
+                "students": ["Uroš Nikolić", "Nikola Štrbac"]
               },
               {
                 "className": "4/2",
-                "students": ["Jovan Bogdanović", "Ivana Jeina"]
+                "students": ["Jovan Bogdanović", "Ivana Jejna"]
               },
               {
                 "className": "4/3",
-                "students": ["Anđela Dimitrijević", "Nikolija Sofornijević"]
+                "students": ["Anđela Dimitrijević", "Nikolija Sofronijević"]
               },
               {
                 "className": "4/4",
@@ -608,11 +608,11 @@
               },
               {
                 "className": "4/5",
-                "students": ["Uroš Mićunović", "Aleksa Ob etković"]
+                "students": ["Uroš Mićunović", "Aleksa Obetković"]
               },
               {
                 "className": "4/6",
-                "students": ["Veljki Grujičić", "Milošević Aleksandar"]
+                "students": ["Veljko Grujičić", "Milošević Aleksandar"]
               },
               {
                 "className": "4/7",
@@ -629,52 +629,52 @@
           {
             "grade": "PRVI RAZRED",
             "classes": [
-              { "className": "I1", "parent": "Ćosović Dragana" },
-              { "className": "I2", "parent": "Dalibor Samardžić" },
-              { "className": "I3", "parent": "Bajkić Dušan" },
-              { "className": "I4", "parent": "Zoran Branković" },
-              { "className": "I5", "parent": "Vladimir Rašović" },
-              { "className": "I6", "parent": "Vesna Vuković" },
-              { "className": "I7", "parent": "Neda Milanović" },
-              { "className": "I8", "parent": "Stefanović Zlatko" }
+              { "className": "1/1", "parent": "Ćosović Dragana" },
+              { "className": "1/2", "parent": "Dalibor Samardžić" },
+              { "className": "1/3", "parent": "Bajkić Dušan" },
+              { "className": "1/4", "parent": "Zoran Branković" },
+              { "className": "1/5", "parent": "Vladimir Rašović" },
+              { "className": "1/6", "parent": "Vesna Vuković" },
+              { "className": "1/7", "parent": "Neda Milanović" },
+              { "className": "1/8", "parent": "Stefanović Zlatko" }
             ]
           },
           {
             "grade": "DRUGI RAZRED",
             "classes": [
-              { "className": "II1", "parent": "Marunić Zorica" },
-              { "className": "II2", "parent": "Siniša Bazina" },
-              { "className": "II3", "parent": "Goran Radović" },
-              { "className": "II4", "parent": "Dejan Dragović" },
-              { "className": "II5", "parent": "Olja Lazarac" },
-              { "className": "II6", "parent": "Goran Živanović" },
-              { "className": "II7", "parent": "Mitrović Aleksandar" },
-              { "className": "II8", "parent": "Blagojević Dragi" }
+              { "className": "2/1", "parent": "Marunić Zorica" },
+              { "className": "2/2", "parent": "Siniša Bazina" },
+              { "className": "2/3", "parent": "Goran Radović" },
+              { "className": "2/4", "parent": "Dejan Dragović" },
+              { "className": "2/5", "parent": "Olja Lazarac" },
+              { "className": "2/6", "parent": "Goran Živanović" },
+              { "className": "2/7", "parent": "Mitrović Aleksandar" },
+              { "className": "2/8", "parent": "Blagojević Dragi" }
             ]
           },
           {
             "grade": "TREĆI RAZRED",
             "classes": [
-              { "className": "III1", "parent": "Bekrić Ljubica" },
-              { "className": "III2", "parent": "Milena Lužija" },
-              { "className": "III3", "parent": "Tatjana Ivanović" },
-              { "className": "III4", "parent": "Dinić Nenad" },
-              { "className": "III5", "parent": "Branko Ivošević" },
-              { "className": "III6", "parent": "Bajunović Ivana" },
-              { "className": "III7", "parent": "Jasmina Manigodić" },
-              { "className": "III8", "parent": "Spasić Dragan" }
+              { "className": "3/1", "parent": "Bekrić Ljubica" },
+              { "className": "3/2", "parent": "Milena Lužija" },
+              { "className": "3/3", "parent": "Tatjana Ivanović" },
+              { "className": "3/4", "parent": "Dinić Nenad" },
+              { "className": "3/5", "parent": "Branko Ivošević" },
+              { "className": "3/6", "parent": "Bajunović Ivana" },
+              { "className": "3/7", "parent": "Jasmina Manigodić" },
+              { "className": "3/8", "parent": "Spasić Dragan" }
             ]
           },
           {
             "grade": "ČETVRTI RAZRED",
             "classes": [
-              { "className": "IV1", "parent": "Mihajlović Aleksandar" },
-              { "className": "IV2", "parent": "Jeina Mirjana" },
-              { "className": "IV3", "parent": "Dimitrijević Ljiljana" },
-              { "className": "IV4", "parent": "Galić Biljana" },
-              { "className": "IV5", "parent": "Andreja Crnogorac" },
-              { "className": "IV6", "parent": "Andrijana Perić Đurđević" },
-              { "className": "IV7", "parent": "Stuparušić Marija" }
+              { "className": "4/1", "parent": "Mihajlović Aleksandar" },
+              { "className": "4/2", "parent": "Jejna Mirjana" },
+              { "className": "4/3", "parent": "Dimitrijević Ljiljana" },
+              { "className": "4/4", "parent": "Galić Biljana" },
+              { "className": "4/5", "parent": "Andreja Crnogorac" },
+              { "className": "4/6", "parent": "Andrijana Perić Đurđević" },
+              { "className": "4/7", "parent": "Stuparušić Marija" }
             ]
           }
         ]
@@ -726,7 +726,7 @@
         ],
         "examData": [
           {
-            "subject": "SRPSKI JEZIK-maturski",
+            "subject": "SRPSKI JEZIK - maturski",
             "commission": [
               "Srđan Gagić",
               "Nada Đurić",
@@ -735,70 +735,70 @@
               "Radmila Vidović"
             ],
             "date": "Utorak, 28.01.2025.",
-            "time": "14.45, 10.30",
+            "time": "14:45, 10:30",
             "cabinet": "17 ili 18"
           },
           {
-            "subject": "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+            "subject": "STRUČNO-TEORIJSKI ISPIT (ARM, IT, ER)",
             "commission": ["Bogdan Luković", "Anđela Pavlović"],
             "date": "Sreda, 29.01.2025.",
-            "time": "10.00",
+            "time": "10:00",
             "cabinet": "14"
           },
           {
-            "subject": "STRUČNO TEORIJSKI ISPIT (ARM, IT, ER)",
+            "subject": "STRUČNO-TEORIJSKI ISPIT (ARM, IT, ER)",
             "commission": ["Slavica Per", "Relja Ćurčin", "Vesna Janjić"],
             "date": "Sreda, 29.01.2025.",
-            "time": "15.35",
+            "time": "15:35",
             "cabinet": "14"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-ARM-A",
+            "subject": "PRAKTIČNI ISPIT - ARM-A",
             "commission": ["Slavica Per", "Saša Stošić"],
             "date": "Četvrtak, 30.01.2025.",
-            "time": "11.15",
+            "time": "11:15",
             "cabinet": "44"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-ARM-B",
+            "subject": "PRAKTIČNI ISPIT - ARM-B",
             "commission": ["Slavica Per", "Saša Stošić"],
-            "date": "petak, 31.01.2025.",
-            "time": "13.00",
+            "date": "Petak, 31.01.2025.",
+            "time": "13:00",
             "cabinet": "43"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-er-A",
+            "subject": "PRAKTIČNI ISPIT - ER-A",
             "commission": ["Radovan Đurić", "Saviša Nikolić"],
             "date": "Četvrtak, 30.01.2025.",
-            "time": "14.00",
+            "time": "14:00",
             "cabinet": "43"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-er-B",
+            "subject": "PRAKTIČNI ISPIT - ER-B",
             "commission": ["Radovan Đurić", "Slaviša Nikolić"],
-            "date": "petak, 31.01.2025.",
-            "time": "14.45",
+            "date": "Petak, 31.01.2025.",
+            "time": "14:45",
             "cabinet": "43"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-IT-A",
+            "subject": "PRAKTIČNI ISPIT - IT-A",
             "commission": ["Galina Bojović", "Relja Ćurčin"],
             "date": "Četvrtak, 30.01.2025.",
-            "time": "11.25",
+            "time": "11:25",
             "cabinet": "50"
           },
           {
-            "subject": "PRAKTIČNI ISPIT-IT-B",
+            "subject": "PRAKTIČNI ISPIT - IT-B",
             "commission": ["Galina Bojović", "Relja Ćurčin"],
-            "date": "petak, 31.01.2025.",
-            "time": "12.10",
+            "date": "Petak, 31.01.2025.",
+            "time": "12:10",
             "cabinet": "50"
           },
           {
             "subject": "SERVISER TERMIČKIH I RASHLADNIH UREĐAJA",
             "commission": ["Branko Lončar", "Mavrak Milenko"],
             "date": "31.01.2025.",
-            "time": "14.00",
+            "time": "14:00",
             "cabinet": "73"
           },
           {
@@ -809,7 +809,7 @@
               "Branislav Siljković"
             ],
             "date": "30.01.2025., 31.01.2025.",
-            "time": "13.00, 14.00",
+            "time": "13:00, 14:00",
             "cabinet": "40"
           }
         ],
@@ -817,15 +817,15 @@
           "title": "RAČUN ZA UPLATU ZA VANREDNE UČENIKE",
           "description": ["OBAVEZNO:", "POZIV NA BROJ:"]
         },
-        "deadlinesCaption": "ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025.GODINI",
+        "deadlinesCaption": "ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2024/2025. GODINI",
         "deadlinesHeaders": ["ROKOVI", "POLAGANJA", "PRIJAVLJIVANJA"],
-        "priceListTitle": "CENOVNIK VANREDNOG ŠKOLOVANjA ZA ŠKOLSKU 2024/2025.GODINU",
-        "examDataCaption": "MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO/JANUARSKOM ROKU",
+        "priceListTitle": "CENOVNIK VANREDNOG ŠKOLOVANJA ZA ŠKOLSKU 2024/2025. GODINU",
+        "examDataCaption": "MATURSKI/ZAVRŠNI ISPIT U DECEMBARSKO-JANUARSKOM ROKU",
         "examDataHeaders": [
           "PREDMET",
           "KOMISIJA",
-          "DATUM POLAGANjA",
-          "VREME POLAGANjA",
+          "DATUM POLAGANJA",
+          "VREME POLAGANJA",
           "KABINET"
         ]
       },
@@ -846,11 +846,11 @@
           ],
           [
             "Emocionalni problemi",
-            "(stres, anksioznost i slično, psihološki pritisak usled problema u porodici ili ličnim odnosima, teškoće u kontrolisanju emocija – tuga, ljutnja, frustracija…, problemi sa samopoštovanjem ili samopuzdanjem)"
+            "(stres, anksioznost i slično, psihološki pritisak usled problema u porodici ili ličnim odnosima, teškoće u kontrolisanju emocija – tuga, ljutnja, frustracija…, problemi sa samopoštovanjem ili samopouzdanjem)"
           ],
           [
             "Međuljudski odnosi",
-            "(problemi u odnosu sa vršnjacima – npr.uznemiravanje, nerazumevanje, konflikti i sl., izolacija ili osećaj usamljenosti, poteškoće u pravljenju i održavanju prijateljstava, sukobi sa nastavnicima ili drugim zaposlenima u školi)"
+            "(problemi u odnosu sa vršnjacima – npr. uznemiravanje, nerazumevanje, konflikti i sl., izolacija ili osećaj usamljenosti, poteškoće u pravljenju i održavanju prijateljstava, sukobi sa nastavnicima ili drugim zaposlenima u školi)"
           ],
           [
             "Problemi sa samodisciplinom i ponašanjem",
@@ -873,14 +873,14 @@
           ],
           ["Pomoć u prevenciji zavisnosti i drugih rizičnih ponašanja"]
         ],
-        "moreInfo": "Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja, prihvatanja i podsticanja. Slušamo, razgovaramo i ohrabrujemo – nema optuživanja, etiketiranja, omalovažavanja ili moralisanja. Ukoliko problem prevazivali naše kompetencije, uputićemo vas kome da se obratite za dalju podršku. Razgovore sa psihologom ili pedagogom možete zakazati uz posredovanje odeljenjskog starešine ili samostalno.",
+        "moreInfo": "Trudimo se da zajedno sagledavamo svaku konkretnu situaciju i pomažemo da sami dođete do rešenja. Zajedno izgrađujemo odnos poverenja, prihvatanja i podsticanja. Slušamo, razgovaramo i ohrabrujemo – nema optuživanja, etiketiranja, omalovažavanja ili moralisanja. Ukoliko problem prevazilazi naše kompetencije, uputićemo vas kome da se obratite za dalju podršku. Razgovore sa psihologom ili pedagogom možete zakazati uz posredovanje odeljenjskog starešine ili samostalno.",
         "helpOutsideOfSchool": {
           "title": "POMOĆ VAN ŠKOLE",
           "options": [
             "Savetovalište za mlade, Dom zdravlja Zemun, Toplička 8, savetovaliste.za.mlade@dzzemun.org.rs 011/2616-288",
             "NADEL (Nacionalna dečja linija) broj 116111 ili ih kontaktirati putem sajta www.116111.rs preko kojeg je moguće anonimno pisati stručnjacima za mentalno zdravlje.",
-            "Institut za mentalno zdravlje: broj telefona 063/868 1757 i 063/868 2217",
-            "Klinika za psihijatriju UKCS: Tim za podršku 066/8300854, 011/3662 124, 063/310 723",
+            "Institut za mentalno zdravlje: broj telefona 063/8681757 i 063/8682217",
+            "Klinika za psihijatriju UKCS: Tim za podršku 066/8300854, 011/3662124, 063/310723",
             "Onlajn podrška Društva psihologa www.dps.org.rs",
             "Zakazati onlajn savetovanje ili pronaći informacije o drugom vidu podrške na stranici svejeok.rs/mladi/podrska"
           ]
@@ -889,28 +889,28 @@
       "bullying": {
         "title": "Nasilje",
         "description": [
-          "Ukoliko ti trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi ga odeljenskom starešini, PP službi ili Timu za zaštitu učenika i, naravno, svojim roditeljima.",
-          "U našoj školi postoji Tim za zaštitu učenika od diskriminacije, nasilja, zlostavljanja, zanemarivanja. Od nastavnika koji čine ovaj Tim u svakom trenutku u školi možete dobiti savet i uput šta da uradite ukoliko trpite nasilje ili ste svedok nasilja.",
+          "Ukoliko trpiš vršnjačko nasilje, ili neko iz tvoje okoline, prijavi ga odeljenjskom starešini, PP službi ili Timu za zaštitu učenika i, naravno, svojim roditeljima.",
+          "U našoj školi postoji Tim za zaštitu učenika od diskriminacije, nasilja, zlostavljanja i zanemarivanja. Od nastavnika koji čine ovaj tim u svakom trenutku u školi možete dobiti savet i uput šta da uradite ukoliko trpite nasilje ili ste svedok nasilja.",
           "Prijava nasilja PDF"
         ],
         "sos": {
           "title": "SOS telefoni",
           "data": [
             "Prijava digitalnog nasilja – Nacionalni kontakt centar za bezbednost dece na internetu – 19833",
-            "Nacionalna SOS linija za prevenciju suicida – 011 7777 000",
-            "Prijava nasilja u porodici – 0800 100 600",
-            "Nacionalna dečija linija Srbije NADEL – 116111",
-            "SOS telefonska linija za psihosocijalnu podršku – 0800-200-201",
-            "Centar za zaštitu žrtava trgovine ljudima – broj telefona: +381 63 610 590."
+            "Nacionalna SOS linija za prevenciju suicida – 011/7777000",
+            "Prijava nasilja u porodici – 0800/100600",
+            "Nacionalna dečja linija Srbije NADEL – 116111",
+            "SOS telefonska linija za psihosocijalnu podršku – 0800/200201",
+            "Centar za zaštitu žrtava trgovine ljudima – broj telefona: +38163610590"
           ]
         },
         "antiBullying": {
           "title": "Šta je to školsko nasilje",
           "data": [
-            "Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se namerno nanese šteta drugome. Međutim, nasilje se može dešavati i izvan škole a da se i dalje smatra školskim. Ono se može dešavati u školskom dvorištu nakon nastave ili na putu od kuće do škole, ali i onlajn, preko društvenih mreža na kojima su deca iz istih ili različitih škola međusobno povezana.",
+            "Školsko nasilje je nasilje koje se dešava u školi, s ciljem da se namerno nanese šteta drugome. Međutim, nasilje se može dešavati i izvan škole, a da se i dalje smatra školskim. Ono se može dešavati u školskom dvorištu nakon nastave ili na putu od kuće do škole, ali i onlajn, preko društvenih mreža na kojima su deca iz istih ili različitih škola međusobno povezana.",
             "Najčešći oblici nasilja u školama su verbalno nasilje (psovanje, ismevanje, ogovaranje, pretnje), društveno isključivanje (vršenje pritiska na vršnjake da se ne druže i ne komuniciraju sa nekim konkretnim detetom iz škole), ali i fizičko nasilje (udaranja, tuče) i seksualno nasilje (davanje lascivnih nadimaka, nedozvoljena dodirivanja između vršnjaka, nedozvoljeno deljenje fotografija sa društvenih mreža i njihovo komentarisanje u seksualnom smislu). Nažalost, izloženost nasilju ne prestaje odlaskom iz škole, već se nastavlja i onlajn – digitalno nasilje.",
             "U školi nasilje učenici mogu da trpe i od svojih vršnjaka i od nastavnika, kao što i učenici mogu da vrše nasilje i nad vršnjacima i nad nastavnicima (najčešće su u pitanju provokacije i vređanja od strane učenika, ali ima i pretnji, pa i fizičkih napada na nastavnike).",
-            "Osnov za vršenje nasilja počinioci nasilja najčešće vide u materijalnom i intelektualnom statusu, u nacionalnoj i seksualnoj pripadnosti žrtve – dakle u osnovi nasilja je skoro uvek diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)"
+            "Osnov za vršenje nasilja počinioci nasilja najčešće vide u materijalnom i intelektualnom statusu, u nacionalnoj i seksualnoj pripadnosti žrtve – dakle, u osnovi nasilja je skoro uvek diskriminacija, po kojoj se vršnjaci i nastavnici nužno ne moraju mnogo razlikovati. (tekst preuzet sa sajta Čuvam te)"
           ]
         },
         "platforms": {
@@ -918,18 +918,18 @@
           "data": [
             "Nacionalni kontakt centar za bezbednost dece na internetu",
             "Nacionalna platforma za prevenciju nasilja koje uključuje decu",
-            "Čuvam te Platforma"
+            "Čuvam te platforma"
           ]
         },
         "support": {
-          "title": "PODRŠKA ŠKOLAMA U KRIZNIM INERVENCIJAMA",
+          "title": "PODRŠKA ŠKOLAMA U KRIZNIM INTERVENCIJAMA",
           "data": [
             "Kako se suočiti sa događajem u kojem je više osoba povređeno ili ubijeno",
             "Kako pomoći deci da se vrate u školu nakon tragičnog događaja",
             "Kako brinuti o sebi tokom kriznih situacija",
             "Delotvorna komunikacija sa decom tokom kriznih situacija",
             "Razgovor sa decom o terorističkim napadima i pucnjavi u školama i zajednici o kojima se izveštava u vestima",
-            "Uobičajeni znakovi psihosocijalnog distresa dece"
+            "Uobičajeni znakovi psihosoc ­socijalnog distresa dece"
           ]
         }
       },
@@ -966,15 +966,15 @@
             },
             {
               "item": "Problemi u porodici: Konflikti u porodici, razvodi, bolesti ili promene u porodici mogu uticati na emocionalno blagostanje adolescenata.",
-              "advice": "Traži podršku i pomoć od odrasle osobe od poverenja ili drugara koji može da te sasluša. Mnogi oko nas prolaze kroz slične dileme i „krize“ i tek kada se otvorimo i kažemo, možemo da dobijemo pomoć. Nisu svi ljudi oko nas, ma koliko bili bliski, senzibilisani da „čitaju“ naše misli ili osećanja…"
+              "advice": "Traži podršku i pomoć od odrasle osobe od poverenja ili drugara koji može da te sasluša. Mnogi oko nas prolaze kroz slične dileme i „krize“ i tek kada se otvorimo i kažemo, možemo da dobijemo pomoć. Nisu svi ljudi oko nas, ma koliko bili bliski, senzibilisani da „čitaju“ naše misli ili osećanja..."
             },
             {
               "item": "Formiranje identiteta i samorazumevanje: Proces otkrivanja sopstvenog identiteta može biti zbunjujući i emocionalno izazovan, što može dovesti do osećaja usamljenosti ili nesigurnosti.",
-              "advice": "Otkrivanje ko smo, šta volimo, čemu težimo… u nekim segmentima će trajati ceo život J. Prava je mudrost zavoleti sebe onakvima kakvi jesmo! To je proces."
+              "advice": "Otkrivanje ko smo, šta volimo, čemu težimo... u nekim segmentima će trajati ceo život. Prava je mudrost zavoleti sebe onakvima kakvi jesmo! To je proces."
             },
             {
               "item": "Tehnološki uticaji: Upotreba društvenih medija može biti dvostruki mač, pružajući podršku, ali i donoseći poređenja i opterećenje, što može uticati na samopoštovanje.",
-              "advice": "Budite kritični prema informacijama koje pronađete na internetu. Proveravajte iz više izvora, upoređujte, vežbajte moć svoj zdravog razuma J Nezaboravite da i oni koji na društvene mreže postavljaju svoje fotografije u „najboljim“ i „najsrećnijim“ izdanjima, takođe imaju „teške“ dane, trenutke i krize, samo što je malo onih koji to podele na društvenim mrežama…"
+              "advice": "Budite kritični prema informacijama koje pronađete na internetu. Proveravajte iz više izvora, upoređujte, vežbajte moć svog zdravog razuma. Ne zaboravite da i oni koji na društvene mreže postavljaju svoje fotografije u „najboljim“ i „najsrećnijim“ izdanjima, takođe imaju „teške“ dane, trenutke i krize, samo što je malo onih koji to podele na društvenim mrežama..."
             }
           ],
           "conclusion": "Upravo su ove promene i izazovi u adolescenciji kritični za razvoj mentalnog zdravlja i mogu imati dugoročne posledice na život mladih. Podrška iz okruženja – roditelja, nastavnika i vršnjaka – može značajno uticati na prevazilaženje ovih izazova."
@@ -992,8 +992,8 @@
           "title": "Prepoznavanje problema mentalnog zdravlja kod adolescenata može biti izazovno, ali postoje znakovi na koje treba obratiti pažnju:",
           "list": [
             "Promene u ponašanju: Iznenadne promene u ponašanju, kao što su povlačenje iz društvenih aktivnosti, gubitak interesovanja za hobije ili aktivnosti koje su nekada voleli, mogu ukazivati na probleme.",
-            "Promene u raspoloženju: Česte oscilacije, kao što su prekidi raspoloženja, bes, ili konstantna tuga, mogu biti znak problema.",
-            "Lošiji uspah u školi: problemi s koncentracijom i opšta nezainteresovanost za učenje mogu ukazivati na dublje probleme.",
+            "Promene u raspoloženju: Česte oscilacije, kao što su prekidi raspoloženja, bes ili konstantna tuga, mogu biti znak problema.",
+            "Lošiji uspeh u školi: Problemi s koncentracijom i opšta nezainteresovanost za učenje mogu ukazivati na dublje probleme.",
             "Fizički simptomi: Česti fizički problemi bez medicinskog objašnjenja, kao što su glavobolje, stomačni bolovi ili umor, mogu biti znaci stresa ili anksioznosti.",
             "Izolacija: Izolacija od prijatelja i porodice, izbegavanje društvenih situacija i osećaj usamljenosti mogu ukazivati na probleme mentalnog zdravlja.",
             "Govor o samoubilačkim mislima ili samopovređivanju: Svaka izjava o samoubilačkim mislima ili samopovređivanju zahteva hitnu pažnju i pomoć."
@@ -1016,7 +1016,7 @@
               "description": "Mentalno zdravlje adolescenata u velikoj meri utiče i na njihove odnose s vršnjacima i članovima porodice.",
               "items": [
                 "Odnosi s vršnjacima: Adolescenti koji se suočavaju s anksioznošću, depresijom ili drugim problemima mogu imati poteškoća u održavanju odnosa s vršnjacima. Oni mogu izbegavati društvene interakcije, što može dovesti do osećaja usamljenosti i izolacije. Ova izolacija može pogoršati simptome, stvarajući začarani krug. Takođe, mogu se osećati nesigurno u socijalnim situacijama, što može dovesti do konfliktnih situacija ili problema s prijateljima.",
-                "Odnosi s porodicom: Stres i problemi mentalnog zdravlja mogu prouzrokovati konflikte u porodici. Adolescenti mogu biti razdražljivi ili povučeni, što može stvoriti distancu između njih i roditelja. Nepravilna komunikacija i nedostatak razumevanja mogu dovesti do nedorazumevanja i sukoba. Međutim, otvorena komunikacija i podrška od strane članova porodice mogu pomoći u prevazilaženju ovih problema i ojačati odnose."
+                "Odnosi s porodicom: Stres i problemi mentalnog zdravlja mogu prouzrokovati konflikte u porodici. Adolescenti mogu biti razdražljivi ili povučeni, što može stvoriti distancu između njih i roditelja. Nepravilna komunikacija i nedostatak razumevanja mogu dovesti do nesporazuma i sukoba. Međutim, otvorena komunikacija i podrška od strane članova porodice mogu pomoći u prevazilaženju ovih problema i ojačati odnose."
               ]
             }
           ],
@@ -1041,7 +1041,7 @@
               "description": "Roditelji bi trebalo da budu svesni znakova koji mogu ukazivati na probleme mentalnog zdravlja kod adolescenata:",
               "list": [
                 "Obratite pažnju na promene: Budite oprezni na značajne promene u ponašanju, raspoloženju ili školskim postignućima. Ovo može uključivati povlačenje, razdražljivost ili pad u učenju.",
-                "Reagovanje na znake: Ako primetite znakove problema, važno je da reagujete odmah. Pogovorite s adolescentom o vašim zabrinutostima i ohrabrite ih da potraže stručnu pomoć ako je potrebno.",
+                "Reagovanje na znake: Ako primetite znakove problema, važno je da reagujete odmah. Razgovarajte s adolescentom o vašim zabrinutostima i ohrabrite ih da potraže stručnu pomoć ako je potrebno.",
                 "Podrška: Informišite se o dostupnim resursima, kao što su školski psiholozi ili terapeuti, savetovališta za mlade i sl."
               ]
             },
@@ -1067,12 +1067,12 @@
           "description": "Kada se adolescenti suočavaju s problemima mentalnog zdravlja, važno je znati gde mogu potražiti pomoć. Neke od mogućih opcija uključuju:",
           "list": [
             "Školski psiholozi i pedagozi: Mogu pomoći u rešavanju problema ili uputiti na dalje resurse.",
-            "Lekari i terapeuti: Pedijatri u Domu zdravlja lekari mogu biti prva tačka kontakta. Oni mogu uputiti na specijaliste za mentalno zdravlje, kao što su psihijatri, psiholozi, psihoterapeuti.",
+            "Lekari i terapeuti: Pedijatri u Domu zdravlja mogu biti prva tačka kontakta. Oni mogu uputiti na specijaliste za mentalno zdravlje, kao što su psihijatri, psiholozi, psihoterapeuti.",
             "Institut za mentalno zdravlje – Savetovalište za mlade, Milana Kašanina 3, 11000 Beograd (poznatija kao Palmotićeva)",
-            "Klinika za neurologiju, Klinički Centar Srbije, Dr. Subotića Starijeg 6",
-            "NADEL – Nacionalna dečija linija 166111"
+            "Klinika za neurologiju, Klinički Centar Srbije, Dr Subotića Starijeg 6",
+            "NADEL – Nacionalna dečja linija 116111"
           ],
-          "conclusion": "Svi činioci — roditelji, nastavnici, vršnjaci i zajednica u celini — imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
+          "conclusion": "Svi činioci – roditelji, nastavnici, vršnjaci i zajednica u celini – imaju važnu ulogu u stvaranju podržavajućeg okruženja za adolescente. Kroz otvorenu komunikaciju, aktivnu podršku i dostupnost resursa, možemo zajedno pomoći mladima da se osećaju prihvaćeno. Pružanjem podrške i razumevanja, stvara se prostor u kojem adolescenti mogu uspešno da upravljaju izazovima i razvijaju svoje mentalno zdravlje."
         }
       }
     }
@@ -1258,8 +1258,8 @@
         "politika zaposlenih",
         "politika",
         "zaposlenih",
-        "instinktualna fondacija",
-        "instinktualna",
+        "institucionalna fondacija",
+        "institucionalna",
         "fondacija",
         "документа",
         "документа школе",
@@ -1278,8 +1278,8 @@
         "политика запослених",
         "политика",
         "запослених",
-        "инстинктуална фондација",
-        "инстинктуална",
+        "институционална фондација",
+        "институционална",
         "фондација"
       ],
       "title": "Dokumenta"
