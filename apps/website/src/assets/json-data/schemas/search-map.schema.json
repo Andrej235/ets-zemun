@@ -32,4 +32,3 @@
   "required": ["entries"],
   "additionalProperties": false
 }
-

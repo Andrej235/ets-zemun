@@ -1,9 +1,9 @@
-import HamburgerNavigation from "@components/hamburger-navigation/hamburger-navigation";
+import HamburgerNavigation from "@/components/hamburger-navigation/hamburger-navigation";
 import "./hamburger-menu.scss";
 
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useState, useEffect, useRef } from "react";
-import useOutsideClick from "@hooks/use-outside-click";
+import useOutsideClick from "@/hooks/use-outside-click";
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 
@@ -177,4 +177,3 @@ function HamburgerMenu({
 }
 
 export default HamburgerMenu;
-

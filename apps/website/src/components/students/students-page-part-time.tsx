@@ -28,7 +28,7 @@ export default function StudentsPagePartTime() {
       t("students.sections.partTime.deadlines", {
         returnObjects: true,
       }) as Deadlines,
-    [t]
+    [t],
   );
 
   const priceList: PriceLists = useMemo(
@@ -36,7 +36,7 @@ export default function StudentsPagePartTime() {
       t("students.sections.partTime.priceList", {
         returnObjects: true,
       }) as PriceLists,
-    [t]
+    [t],
   );
 
   const examData: ExamData = useMemo(
@@ -44,7 +44,7 @@ export default function StudentsPagePartTime() {
       t("students.sections.partTime.examData", {
         returnObjects: true,
       }) as ExamData,
-    [t]
+    [t],
   );
 
   return (
@@ -127,4 +127,3 @@ export default function StudentsPagePartTime() {
     </div>
   );
 }
-

@@ -82,7 +82,7 @@ export default function NewAwardPage() {
       return;
     }
 
-    const promise = sendApiRequest("/award", {
+    const promise = sendApiRequest("/awards", {
       method: "post",
       payload: {
         dayOfAward: awardData.dayOfAward,

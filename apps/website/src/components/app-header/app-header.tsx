@@ -1,7 +1,7 @@
-import HamburgerMenu from "@components/hamburger-menu/hamburger-menu";
-import HeaderSearchBar from "@components/header-search-bar/header-search-bar";
-import Icon from "@components/icon/icon";
-import useOutsideClick from "@hooks/use-outside-click";
+import HamburgerMenu from "@/components/hamburger-menu/hamburger-menu";
+import HeaderSearchBar from "@/components/header-search-bar/header-search-bar";
+import Icon from "@/components/icon/icon";
+import useOutsideClick from "@/hooks/use-outside-click";
 import FocusTrap from "focus-trap-react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -174,4 +174,3 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
 });
 
 export default AppHeader;
-

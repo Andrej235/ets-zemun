@@ -37,7 +37,7 @@ export default function Nagrade() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const awards = await sendApiRequest("/award/admin", {
+      const awards = await sendApiRequest("/awards/admin", {
         method: "get",
       });
 
@@ -64,7 +64,7 @@ export default function Nagrade() {
   async function handleDeleteAward() {
     if (!awardToDelete) return;
 
-    const promise = sendApiRequest("/award/{id}", {
+    const promise = sendApiRequest("/awards/{id}", {
       method: "delete",
       parameters: {
         id: awardToDelete.id,

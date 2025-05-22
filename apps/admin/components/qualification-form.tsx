@@ -94,7 +94,7 @@ export function QualificationForm({
       toast.success("Translation added successfully");
     } else {
       if (isEditing) {
-        const promise = sendApiRequest("/qualification/translation", {
+        const promise = sendApiRequest("/qualifications/translation", {
           method: "put",
           payload: {
             qualificationId: qualification.id,
@@ -187,7 +187,7 @@ export function QualificationForm({
       return;
     }
 
-    const promise = sendApiRequest("/qualification", {
+    const promise = sendApiRequest("/qualifications", {
       method: "post",
       payload: {
         dateObtained: qualificationData.dateObtained,

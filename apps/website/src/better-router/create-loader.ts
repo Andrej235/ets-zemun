@@ -8,18 +8,15 @@ type LoaderInit<T extends { [key: string]: object } | Promise<P>, P> = (args: {
 type LoaderInitData<T> = T | ReturnType<typeof redirect> | null;
 
 export type Loader<T> = (
-  x: LoaderFunctionArgs
+  x: LoaderFunctionArgs,
 ) => Promise<T | ReturnType<typeof redirect> | null>;
 
-export type LoaderReturnType<C extends Loader<unknown>> = C extends Loader<
-  infer T
->
-  ? T
-  : unknown;
+export type LoaderReturnType<C extends Loader<unknown>> =
+  C extends Loader<infer T> ? T : unknown;
 
 export default function createLoader<
   T extends { [key: string]: object } | Promise<P>,
-  P
+  P,
 >(loader: LoaderInit<T, P>): Loader<T> {
   return async (x: LoaderFunctionArgs) => {
     try {
@@ -37,4 +34,3 @@ export default function createLoader<
     }
   };
 }
-

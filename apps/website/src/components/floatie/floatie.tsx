@@ -1,5 +1,5 @@
 import "./floatie.scss";
-import FloatieDiscardArea from "@components/floatie/floatie-discard-area";
+import FloatieDiscardArea from "@/components/floatie/floatie-discard-area";
 import {
   DndContext,
   pointerWithin,
@@ -106,4 +106,3 @@ export default function Floatie({
     </DndContext>
   );
 }
-

@@ -1,5 +1,5 @@
-import Floatie from "@components/floatie/floatie";
-import Icon from "@components/icon/icon";
+import Floatie from "@/components/floatie/floatie";
+import Icon from "@/components/icon/icon";
 import {
   motion,
   useMotionValueEvent,
@@ -27,12 +27,12 @@ export default function Scroller() {
 
   const enterTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.7,
-    []
+    [],
   );
 
   const exitTopThreashold = useMemo(
     () => document.scrollingElement!.clientHeight * 0.6,
-    []
+    [],
   );
 
   const { scrollY } = useScroll();
@@ -111,4 +111,3 @@ export default function Scroller() {
     </>
   );
 }
-

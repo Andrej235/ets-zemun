@@ -17,7 +17,7 @@ export default function StudentsPageStudentParliament() {
       t("students.sections.studentsParliament.data", {
         returnObjects: true,
       }) as StudentsData,
-    [t]
+    [t],
   );
 
   return (
@@ -58,4 +58,3 @@ export default function StudentsPageStudentParliament() {
     </div>
   );
 }
-

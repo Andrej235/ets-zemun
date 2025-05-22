@@ -26,19 +26,9 @@
     /* Paths */
     "baseUrl": "./",
     "paths": {
-      "@shared/*": ["../shared-frontend/*"],
-      "@api/*": ["../shared-frontend/api-dsl/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@data/*": ["src/assets/json-data/data/*"],
-      "@utility/*": ["src/utility/*"],
-      "@better-router/*": ["src/better-router/*"],
-      "@i18n": ["src/i18n"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "../shared-frontend"],
+  "include": ["src", "../shared-frontend", "api-dsl"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
-

@@ -1,5 +1,5 @@
-import AppHeader from "@components/app-header/app-header";
-import Icon from "@components/icon/icon";
+import AppHeader from "@/components/app-header/app-header";
+import Icon from "@/components/icon/icon";
 import { Link, useAsyncError, useRouteError } from "react-router";
 import "./error-component.scss";
 import { useTranslation } from "react-i18next";
@@ -104,4 +104,3 @@ function AsyncError({ error }: AsyncErrorProps) {
     </div>
   );
 }
-

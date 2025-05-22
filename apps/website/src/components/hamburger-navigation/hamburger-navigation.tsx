@@ -1,7 +1,7 @@
 import "./hamburger-navigation.scss";
 import { Link } from "react-router";
-import Icon from "@components/icon/icon";
-import HamburgerNavigationSearchBar from "@components/hamburger-navigation-search-bar/hamburger-navigation-search-bar";
+import Icon from "@/components/icon/icon";
+import HamburgerNavigationSearchBar from "@/components/hamburger-navigation-search-bar/hamburger-navigation-search-bar";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -93,4 +93,3 @@ export default function HamburgerNavigation({
     </AnimatePresence>
   );
 }
-

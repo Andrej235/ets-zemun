@@ -29,7 +29,7 @@ export default function getPathTotalLength(pathString: string): number {
     y2: number,
     x3: number,
     y3: number,
-    steps = 100
+    steps = 100,
   ): number => {
     let length = 0;
     let prevX = x0;
@@ -62,7 +62,7 @@ export default function getPathTotalLength(pathString: string): number {
     y1: number,
     x2: number,
     y2: number,
-    steps = 100
+    steps = 100,
   ): number => {
     let length = 0;
     let prevX = x0;
@@ -90,7 +90,7 @@ export default function getPathTotalLength(pathString: string): number {
     phi: number,
     largeArcFlag: boolean,
     sweepFlag: boolean,
-    steps = 100
+    steps = 100,
   ): number => {
     if (rx === 0 || ry === 0) return Math.hypot(x - x0, y - y0);
 
@@ -109,7 +109,7 @@ export default function getPathTotalLength(pathString: string): number {
 
     const denominator = Math.sqrt(
       (rx ** 2 * ry ** 2 - rx ** 2 * y0p ** 2 - ry ** 2 * x0p ** 2) /
-        (rx ** 2 * y0p ** 2 + ry ** 2 * x0p ** 2)
+        (rx ** 2 * y0p ** 2 + ry ** 2 * x0p ** 2),
     );
     const cxp =
       (largeArcFlag === sweepFlag ? -1 : 1) * denominator * ((rx * y0p) / ry);
@@ -222,7 +222,7 @@ export default function getPathTotalLength(pathString: string): number {
               cx2,
               cy2,
               cx,
-              cy
+              cy,
             );
             currentX = cx;
             currentY = cy;
@@ -250,7 +250,7 @@ export default function getPathTotalLength(pathString: string): number {
               cx2,
               cy2,
               cx,
-              cy
+              cy,
             );
             currentX = cx;
             currentY = cy;
@@ -272,7 +272,7 @@ export default function getPathTotalLength(pathString: string): number {
               cx1,
               cy1,
               cx,
-              cy
+              cy,
             );
             currentX = cx;
             currentY = cy;
@@ -296,7 +296,7 @@ export default function getPathTotalLength(pathString: string): number {
               cx1,
               cy1,
               cx,
-              cy
+              cy,
             );
             currentX = cx;
             currentY = cy;
@@ -319,7 +319,7 @@ export default function getPathTotalLength(pathString: string): number {
               ry,
               (phi * Math.PI) / 180,
               largeArc !== 0,
-              sweep !== 0
+              sweep !== 0,
             );
             currentX = cx;
             currentY = cy;
@@ -333,4 +333,3 @@ export default function getPathTotalLength(pathString: string): number {
   }
   return totalLength;
 }
-

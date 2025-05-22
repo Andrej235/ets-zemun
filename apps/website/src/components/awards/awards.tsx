@@ -1,5 +1,5 @@
-import useLoader from "@better-router/use-loader";
-import LazyAwaitedList from "@components/lazy-loaded-list/lazy-awaited-list";
+import useLoader from "@/better-router/use-loader";
+import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
 import { PointerEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
@@ -42,7 +42,11 @@ export default function Awards() {
           ))}
         >
           {(award) => (
-            <Link className="award-card-link" to={award.externalLink ?? "/takmicenja"} key={award.id}>
+            <Link
+              className="award-card-link"
+              to={award.externalLink ?? "/takmicenja"}
+              key={award.id}
+            >
               <div className="award-card" onPointerMove={handleMouseMove}>
                 <img src={award.image} alt={award.title} />
                 <div className="award-card-header">
@@ -66,4 +70,3 @@ export default function Awards() {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import { Schema } from "@shared/api-dsl/types/endpoints/schema-parser";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,12 +21,13 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
               : t("educationalProfiles.subjects.types.vocational")}
           </div>
         </p>
-        <p className="subject-count">{subject.perWeek}x {t("educationalProfiles.subjects.types.weeks")}</p>
+        <p className="subject-count">
+          {subject.perWeek}x {t("educationalProfiles.subjects.types.weeks")}
+        </p>
         <p className="subject-description">{subject.subject.description}</p>
       </div>
     );
-  }
+  },
 );
 
 export default SubjectOverlay;
-

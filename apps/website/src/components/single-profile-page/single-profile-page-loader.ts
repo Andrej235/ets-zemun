@@ -1,6 +1,6 @@
-import createLoader from "@better-router/create-loader";
-import i18n from "@i18n";
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
+import createLoader from "@/better-router/create-loader";
+import i18n from "@/i18n.ts";
+import sendAPIRequest from "@/api-dsl/send-api-request";
 
 export type SingleProfilePageLoader = ReturnType<
   typeof singleProfilePageLoaderCreator
@@ -8,7 +8,7 @@ export type SingleProfilePageLoader = ReturnType<
 
 const singleProfilePageLoaderCreator = (id: number) =>
   createLoader(() => {
-    return sendAPIRequest("/profile/{id}", {
+    return sendAPIRequest("/profiles/{id}", {
       method: "get",
       parameters: {
         id,
@@ -30,4 +30,3 @@ export {
   singleProfilePageLoaderEngineer,
   singleProfilePageLoaderIT,
 };
-

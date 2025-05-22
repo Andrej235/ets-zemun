@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useTranslation } from "react-i18next";
 import "./app-footer.scss";
 
@@ -124,4 +124,3 @@ export default function AppFooter() {
     </footer>
   );
 }
-

@@ -1,11 +1,11 @@
 import "./header-search-bar.scss";
 import { useEffect, useMemo, useRef, useState } from "react";
-import Icon from "@components/icon/icon";
-import searchMap from "@data/search-map.json";
+import Icon from "@/components/icon/icon";
+import searchMap from "@/assets/json-data/data/search-map.json";
 import Fuse, { FuseResult } from "fuse.js";
 import { useNavigate } from "react-router";
 import FocusTrap from "focus-trap-react";
-import AutoCompleteSuggestions from "@components/auto-complete-suggestions/auto-complete-suggestions";
+import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
 import SearchEntry from "src/types/search/search-entry";
 import { useTranslation } from "react-i18next";
 
@@ -31,7 +31,7 @@ export default function HeaderSearchBar() {
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
@@ -191,4 +191,3 @@ export default function HeaderSearchBar() {
     </FocusTrap>
   );
 }
-

@@ -6,4 +6,3 @@ type SearchEntry = {
 };
 
 export default SearchEntry;
-

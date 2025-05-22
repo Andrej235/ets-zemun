@@ -1,5 +1,5 @@
-import sendAPIRequest from "@shared/api-dsl/send-api-request";
-import { Endpoints } from "@shared/api-dsl/types/endpoints/endpoints";
+import sendAPIRequest from "@/api-dsl/send-api-request";
+import { Endpoints } from "@/api-dsl/types/endpoints/endpoints";
 import { useEffect, useRef } from "react";
 
 type LazyLoadResponse<T> = {
@@ -11,7 +11,7 @@ type LazyLoadResponse<T> = {
 
 export default function useLazyLoad<T>(
   response: Promise<LazyLoadResponse<T> | null>,
-  onLoad: (loadedData: T[]) => void
+  onLoad: (loadedData: T[]) => void,
 ) {
   const startedCycle = useRef(false);
 
@@ -30,7 +30,7 @@ export default function useLazyLoad<T>(
 
 export async function recursivelyLazyLoad<T>(
   current: LazyLoadResponse<T>,
-  onLoad: (loadedData: T[]) => void
+  onLoad: (loadedData: T[]) => void,
 ) {
   if (!current.nextCursor) return;
 
@@ -38,7 +38,7 @@ export async function recursivelyLazyLoad<T>(
     ("/" + current.nextCursor) as Endpoints,
     {
       method: "get",
-    } as never
+    } as never,
   )) as unknown;
 
   if (
@@ -55,4 +55,3 @@ export async function recursivelyLazyLoad<T>(
   recursivelyLazyLoad(content, onLoad);
   onLoad(content.items);
 }
-

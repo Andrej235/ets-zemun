@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EtsZemun.Controllers.LanguageController;
 
-[Route("language")]
+[Route("languages")]
 [ApiController]
 [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 public partial class LanguageController(ILanguageService languageService) : ControllerBase

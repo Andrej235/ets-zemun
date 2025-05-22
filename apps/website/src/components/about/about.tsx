@@ -1,10 +1,10 @@
-import Async from "@better-router/async";
-import useLoader from "@better-router/use-loader";
-import aboutPageNewsLoader from "@components/about/about-page-news-loader";
-import HeroInfoCard from "@components/hero-info-card/hero-info-card";
-import Icon from "@components/icon/icon";
-import NewsPreview from "@components/news-preview/news-preview";
-import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import Async from "@/better-router/async";
+import useLoader from "@/better-router/use-loader";
+import aboutPageNewsLoader from "@/components/about/about-page-news-loader";
+import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
+import Icon from "@/components/icon/icon";
+import NewsPreview from "@/components/news-preview/news-preview";
+import SchoolPreviewCard from "@/components/school-preview-card/school-preview-card";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";

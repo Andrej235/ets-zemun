@@ -1,5 +1,5 @@
-import Icon from "@components/icon/icon";
-import SchoolPreviewCard from "@components/school-preview-card/school-preview-card";
+import Icon from "@/components/icon/icon";
+import SchoolPreviewCard from "@/components/school-preview-card/school-preview-card";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
@@ -41,4 +41,3 @@ export default function ProfilesPageElectricalAutomaticsSection({
     </div>
   );
 }
-

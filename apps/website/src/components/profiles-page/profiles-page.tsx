@@ -16,12 +16,11 @@ export default function ProfilesPage() {
         url: "/profili",
       }}
     >
-      <ProfilesPageITSection layout="image-left"/>
-      <ProfilesPageAdministratorSection layout="image-right"/>
-      <ProfilesPageElectricalEngineerSection layout="image-left"/>
-      <ProfilesPageElectricalAutomaticsSection layout="image-right"/>
-      <ProfilesPageElectricalDevicesSection layout="image-left"/>
+      <ProfilesPageITSection layout="image-left" />
+      <ProfilesPageAdministratorSection layout="image-right" />
+      <ProfilesPageElectricalEngineerSection layout="image-left" />
+      <ProfilesPageElectricalAutomaticsSection layout="image-right" />
+      <ProfilesPageElectricalDevicesSection layout="image-left" />
     </div>
   );
 }
-

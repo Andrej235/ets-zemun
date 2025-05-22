@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import "./enrollment.scss";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -113,4 +113,3 @@ export default function Enrollment() {
     </div>
   );
 }
-

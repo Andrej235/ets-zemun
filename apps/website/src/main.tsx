@@ -1,21 +1,21 @@
-import aboutPageNewsLoader from "@components/about/about-page-news-loader.ts";
-import awardsLoader from "@components/awards/awards-loader.ts";
-import Enrollment from "@components/enrollment/enrollment.tsx";
-import ErrorComponent from "@components/error-component/error-component.tsx";
-import fullNewsArticleLoader from "@components/full-news-article/full-news-article-loader.ts";
-import FullNewsArticle from "@components/full-news-article/full-news-article.tsx";
-import HistoryPage from "@components/history/history-page.tsx";
-import newsPageLoader from "@components/news/news-page-loader.ts";
-import SingleProfileElectricalDevicesPage from "@components/single-profile-page/single-profile-electrical-devices-page.tsx";
+import aboutPageNewsLoader from "@/components/about/about-page-news-loader.ts";
+import awardsLoader from "@/components/awards/awards-loader.ts";
+import Enrollment from "@/components/enrollment/enrollment.tsx";
+import ErrorComponent from "@/components/error-component/error-component.tsx";
+import fullNewsArticleLoader from "@/components/full-news-article/full-news-article-loader.ts";
+import FullNewsArticle from "@/components/full-news-article/full-news-article.tsx";
+import HistoryPage from "@/components/history/history-page.tsx";
+import newsPageLoader from "@/components/news/news-page-loader.ts";
+import SingleProfileElectricalDevicesPage from "@/components/single-profile-page/single-profile-electrical-devices-page.tsx";
 import {
   singleProfilePageLoaderACs,
   singleProfilePageLoaderAdministrator,
   singleProfilePageLoaderAutomatics,
   singleProfilePageLoaderEngineer,
   singleProfilePageLoaderIT,
-} from "@components/single-profile-page/single-profile-page-loader.ts";
-import teacherLoader from "@components/teachers/teachers-loader.ts";
-import Teachers from "@components/teachers/teachers.tsx";
+} from "@/components/single-profile-page/single-profile-page-loader.ts";
+import teacherLoader from "@/components/teachers/teachers-loader.ts";
+import Teachers from "@/components/teachers/teachers.tsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -117,6 +117,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-

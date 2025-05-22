@@ -66,7 +66,7 @@ export default function CreateTeacherPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const subjects = await sendApiRequest("/subject/admin", {
+        const subjects = await sendApiRequest("/subjects/admin", {
           method: "get",
           parameters: {
             limit: -1,
@@ -141,7 +141,7 @@ export default function CreateTeacherPage() {
       return;
     }
 
-    const promise = sendApiRequest("/teacher", {
+    const promise = sendApiRequest("/teachers", {
       method: "post",
       payload: {
         email: teacherData.email,

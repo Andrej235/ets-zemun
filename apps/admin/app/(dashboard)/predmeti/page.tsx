@@ -51,7 +51,7 @@ export default function SubjectsPage() {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const { response: data } = await sendApiRequest("/subject/admin", {
+        const { response: data } = await sendApiRequest("/subjects/admin", {
           method: "get",
           parameters: {},
         });
@@ -70,7 +70,7 @@ export default function SubjectsPage() {
   const handleDeleteSubject = async () => {
     if (subjectToDelete === null) return;
 
-    const promise = sendApiRequest("/subject/{id}", {
+    const promise = sendApiRequest("/subjects/{id}", {
       method: "delete",
       parameters: {
         id: subjectToDelete,

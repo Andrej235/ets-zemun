@@ -1,6 +1,6 @@
-import AppFooter from "@components/app-footer/app-footer";
-import AppHeader from "@components/app-header/app-header";
-import Scroller from "@components/scroller/scroller";
+import AppFooter from "@/components/app-footer/app-footer";
+import AppHeader from "@/components/app-header/app-header";
+import Scroller from "@/components/scroller/scroller";
 import { Analytics } from "@vercel/analytics/react";
 import { useEffect, useRef } from "react";
 import { Outlet, ScrollRestoration, useSearchParams } from "react-router";
@@ -13,7 +13,7 @@ function App() {
     if (!searchKey) return;
 
     const element = document.querySelector(
-      `[data-search-key="${searchKey}"]`
+      `[data-search-key="${searchKey}"]`,
     ) as HTMLElement;
     if (!element) return;
 
@@ -45,4 +45,3 @@ function App() {
 }
 
 export default App;
-

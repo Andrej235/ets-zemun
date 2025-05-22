@@ -1,4 +1,4 @@
-import HeroInfoCard from "@components/hero-info-card/hero-info-card";
+import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
@@ -14,7 +14,8 @@ export default function Students() {
   const { t } = useTranslation();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("ucenicki-parlament");
+  const [activeSection, setActiveSection] =
+    useState<string>("ucenicki-parlament");
   const [searchParams] = useSearchParams();
 
   const sections = [
@@ -40,7 +41,7 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   )?.component;
 
   return (
@@ -117,4 +118,3 @@ export default function Students() {
     </div>
   );
 }
-

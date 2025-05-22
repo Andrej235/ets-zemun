@@ -91,7 +91,7 @@ export function SubjectsList({
   };
 
   const handleDelete = async (subject: CurriculumSubject) => {
-    const promise = sendApiRequest("/profile/remove-subject", {
+    const promise = sendApiRequest("/profiles/remove-subject", {
       method: "patch",
       payload: {
         profileId: profileId,
@@ -125,7 +125,7 @@ export function SubjectsList({
     if (!editingSubject) return;
 
     setIsSubmitting(true);
-    const promise = sendApiRequest("/profile/update-subject", {
+    const promise = sendApiRequest("/profiles/update-subject", {
       method: "patch",
       payload: {
         currentType:

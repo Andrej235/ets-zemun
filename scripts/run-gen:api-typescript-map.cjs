@@ -10,6 +10,6 @@ const objectString = util.inspect(parsedData, {
   maxStringLength: null,
 });
 
-const tsDefinition = `export type APIMap = ${objectString}`;
+const tsDefinition = `export type ApiMap = ${objectString}`;
 fs.writeFileSync(process.argv[3], tsDefinition);
 fs.writeFileSync(process.argv[4], tsDefinition);

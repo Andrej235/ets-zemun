@@ -1,4 +1,4 @@
-import Icon from "@components/icon/icon";
+import Icon from "@/components/icon/icon";
 import { useTranslation } from "react-i18next";
 
 export default function StudentsPageAntiBullying() {
@@ -114,4 +114,3 @@ export default function StudentsPageAntiBullying() {
     </div>
   );
 }
-

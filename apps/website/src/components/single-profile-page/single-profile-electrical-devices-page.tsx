@@ -36,12 +36,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.title"
+                  "educationalProfiles.electricalDevices.program.installations.title",
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.description"
+                  "educationalProfiles.electricalDevices.program.installations.description",
                 )}
               </p>
             </li>
@@ -49,12 +49,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.title"
+                  "educationalProfiles.electricalDevices.program.thermal.title",
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.description"
+                  "educationalProfiles.electricalDevices.program.thermal.description",
                 )}
               </p>
             </li>
@@ -62,12 +62,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.title"
+                  "educationalProfiles.electricalDevices.program.cooling.title",
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.description"
+                  "educationalProfiles.electricalDevices.program.cooling.description",
                 )}
               </p>
             </li>
@@ -75,12 +75,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.title"
+                  "educationalProfiles.electricalDevices.program.diagnostics.title",
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.description"
+                  "educationalProfiles.electricalDevices.program.diagnostics.description",
                 )}
               </p>
             </li>
@@ -94,13 +94,13 @@ export default function SingleProfileElectricalDevicesPage() {
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.title"
+              "educationalProfiles.electricalDevices.knowledgeApplication.title",
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.description"
+              "educationalProfiles.electricalDevices.knowledgeApplication.description",
             )}
           </p>
         </section>
@@ -111,9 +111,8 @@ export default function SingleProfileElectricalDevicesPage() {
           <p>{t("educationalProfiles.electricalDevices.target.description")}</p>
         </section>
       </div>
-      
+
       <SingleProfileSubjectsSegment />
     </div>
   );
 }
-

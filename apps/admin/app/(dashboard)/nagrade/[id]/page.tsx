@@ -70,7 +70,7 @@ export default function EditAwardPage({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await sendApiRequest("/award/admin/{id}", {
+        const response = await sendApiRequest("/awards/admin/{id}", {
           method: "get",
           parameters: { id: +id },
         });
@@ -126,7 +126,7 @@ export default function EditAwardPage({
       return;
     }
 
-    const promise = sendApiRequest("/award", {
+    const promise = sendApiRequest("/awards", {
       method: "put",
       payload: {
         id: award.id,
@@ -208,7 +208,7 @@ export default function EditAwardPage({
 
       toast.success("Translation added successfully");
     } else {
-      const promise = sendApiRequest("/award/translation", {
+      const promise = sendApiRequest("/awards/translation", {
         method: "post",
         payload: {
           awardId: award.id,

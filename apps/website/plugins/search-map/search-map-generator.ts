@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 async function getTSXFiles(
   dir: string,
-  fileList: { path: string; content: string }[] = []
+  fileList: { path: string; content: string }[] = [],
 ): Promise<{ path: string; content: string }[]> {
   const files = await fs.readdir(dir, { withFileTypes: true });
 
@@ -68,7 +68,7 @@ async function run() {
                       obj[prop.key.name] = prop.value.value;
                     } else if (types.isArrayExpression(prop.value)) {
                       obj[prop.key.name] = mapArrayElements(
-                        prop.value.elements
+                        prop.value.elements,
                       );
                     }
                   }
@@ -104,7 +104,7 @@ async function run() {
     path.resolve(__dirname, "../../src/assets/json-data/data/search-map.json"),
     JSON.stringify({
       entries: searchKeys,
-    })
+    }),
   );
 }
 
@@ -122,4 +122,3 @@ function mapArrayElements(elements: unknown[]): (string | number)[] {
 }
 
 run();
-

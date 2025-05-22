@@ -106,14 +106,14 @@ export default function CurriculumDetailPage({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const curriculumData = await sendApiRequest("/profile/{id}", {
+        const curriculumData = await sendApiRequest("/profiles/{id}", {
           method: "get",
           parameters: {
             id: +profileId,
             languageCode: "sr_lt",
           },
         });
-        const subjectsData = await sendApiRequest("/subject/admin", {
+        const subjectsData = await sendApiRequest("/subjects/admin", {
           method: "get",
           parameters: {
             limit: -1,
@@ -146,7 +146,7 @@ export default function CurriculumDetailPage({
   };
 
   async function refreshData() {
-    const updatedCurriculum = await sendApiRequest("/profile/{id}", {
+    const updatedCurriculum = await sendApiRequest("/profiles/{id}", {
       method: "get",
       parameters: {
         id: +profileId,
@@ -169,7 +169,7 @@ export default function CurriculumDetailPage({
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
-    const promise = sendApiRequest("/profile/add-subject", {
+    const promise = sendApiRequest("/profiles/add-subject", {
       method: "patch",
       payload: {
         perWeek: values.perWeek,
@@ -280,7 +280,7 @@ export default function CurriculumDetailPage({
                     return;
                   }
 
-                  const promise = sendApiRequest("/profile/update-name", {
+                  const promise = sendApiRequest("/profiles/update-name", {
                     method: "patch",
                     payload: {
                       profileId: +profileId,

@@ -13,7 +13,9 @@
     fill: transparent;
     cursor: pointer;
     padding: 0.2rem;
-    transition: background-color 150ms ease-out, border 150ms ease-out;
+    transition:
+      background-color 150ms ease-out,
+      border 150ms ease-out;
     touch-action: none;
 
     display: flex;
@@ -102,4 +104,3 @@
     }
   }
 }
-

@@ -9,7 +9,7 @@ export default function searchMapTransformer(): PluginObj {
         const searchKeyAttribute = attributes.find(
           (attr) =>
             types.isJSXAttribute(attr) &&
-            types.isJSXIdentifier(attr.name, { name: "searchKey" })
+            types.isJSXIdentifier(attr.name, { name: "searchKey" }),
         );
 
         if (!searchKeyAttribute || !types.isJSXAttribute(searchKeyAttribute))
@@ -26,7 +26,7 @@ export default function searchMapTransformer(): PluginObj {
           (x) =>
             types.isObjectProperty(x) &&
             types.isIdentifier(x.key) &&
-            x.key.name === "id"
+            x.key.name === "id",
         ) as types.ObjectProperty;
 
         if (!idProp) throw new Error("searchKey must have an id");
@@ -46,18 +46,18 @@ export default function searchMapTransformer(): PluginObj {
               types.jsxOpeningElement(types.jsxIdentifier("div"), [
                 types.jsxAttribute(
                   types.jsxIdentifier("data-search-key"),
-                  idProp.value
+                  idProp.value,
                 ),
                 types.jsxAttribute(
                   types.jsxIdentifier("className"),
-                  types.stringLiteral("search-target-container")
+                  types.stringLiteral("search-target-container"),
                 ),
               ]),
               types.jsxClosingElement(types.jsxIdentifier("div")),
-              [jsxElement]
+              [jsxElement],
             );
             path.node.attributes = attributes.filter(
-              (attr) => attr !== searchKeyAttribute
+              (attr) => attr !== searchKeyAttribute,
             );
             parentPath.replaceWith(divElement);
             parentPath.skip();
@@ -71,4 +71,3 @@ export default function searchMapTransformer(): PluginObj {
     },
   };
 }
-

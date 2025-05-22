@@ -1,22 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "dev": "docker-compose up --build",
+    "lint": "cd apps/website && npm run lint && cd ../admin && npm run lint",
     "deps": "./scripts/run-deps.sh",
-    "update-db": "./scripts/run-update-db.sh",
-    "stop": "./scripts/run-stop.sh",
-    "kill": "./scripts/run-kill.sh",
     "gen:api-map": "./scripts/run-gen:api-map.sh",
     "gen:sr_cr": "./scripts/run-gen:sr_cr.sh"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript-eslint": "^8.18.2"
   }
 }

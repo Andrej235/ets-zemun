@@ -1,4 +1,4 @@
-import data from "@assets/json-data/data/documents.json";
+import data from "@/assets/json-data/data/documents.json";
 import DocumentGroup from "./document-group";
 import "./documents.scss";
 
@@ -21,4 +21,3 @@ export default function Documents() {
     </div>
   );
 }
-

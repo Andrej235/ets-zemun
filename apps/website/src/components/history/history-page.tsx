@@ -77,9 +77,8 @@ export default function HistoryPage() {
         </HistorySegment>
       </History>
     ),
-    [t]
+    [t],
   );
 
   return history;
 }
-

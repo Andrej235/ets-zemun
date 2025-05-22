@@ -1,6 +1,6 @@
 import PreviewCard, {
   PreviewCardLayout,
-} from "@components/preview-card/preview-card";
+} from "@/components/preview-card/preview-card";
 import "./school-preview-card.scss";
 import { useEffect, useRef, useState } from "react";
 import { animate } from "motion";
@@ -59,4 +59,3 @@ export default function SchoolPreviewCard({
     </PreviewCard>
   );
 }
-

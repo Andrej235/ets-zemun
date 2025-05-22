@@ -27,33 +27,33 @@ export default function StudentsPageMentalHealth() {
         <p>
           <strong>
             {t(
-              "students.sections.mentalHealth.understandingMentalHealth.list.0.0"
+              "students.sections.mentalHealth.understandingMentalHealth.list.0.0",
             )}
           </strong>{" "}
           {t(
-            "students.sections.mentalHealth.understandingMentalHealth.list.0.1"
+            "students.sections.mentalHealth.understandingMentalHealth.list.0.1",
           )}
         </p>
 
         <p>
           <strong>
             {t(
-              "students.sections.mentalHealth.understandingMentalHealth.list.1.0"
+              "students.sections.mentalHealth.understandingMentalHealth.list.1.0",
             )}
           </strong>{" "}
           {t(
-            "students.sections.mentalHealth.understandingMentalHealth.list.1.1"
+            "students.sections.mentalHealth.understandingMentalHealth.list.1.1",
           )}
         </p>
 
         <p>
           <strong>
             {t(
-              "students.sections.mentalHealth.understandingMentalHealth.list.2.0"
+              "students.sections.mentalHealth.understandingMentalHealth.list.2.0",
             )}
           </strong>{" "}
           {t(
-            "students.sections.mentalHealth.understandingMentalHealth.list.2.1"
+            "students.sections.mentalHealth.understandingMentalHealth.list.2.1",
           )}
         </p>
       </div>
@@ -175,31 +175,31 @@ export default function StudentsPageMentalHealth() {
 
           <h3>
             {t(
-              "students.sections.mentalHealth.support.parent.communicating.title"
+              "students.sections.mentalHealth.support.parent.communicating.title",
             )}
           </h3>
           <p>
             {t(
-              "students.sections.mentalHealth.support.parent.communicating.description"
+              "students.sections.mentalHealth.support.parent.communicating.description",
             )}
           </p>
 
           <ul>
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.communicating.list.0"
+                "students.sections.mentalHealth.support.parent.communicating.list.0",
               )}
             </li>
 
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.communicating.list.1"
+                "students.sections.mentalHealth.support.parent.communicating.list.1",
               )}
             </li>
 
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.communicating.list.2"
+                "students.sections.mentalHealth.support.parent.communicating.list.2",
               )}
             </li>
           </ul>
@@ -210,26 +210,26 @@ export default function StudentsPageMentalHealth() {
 
           <p>
             {t(
-              "students.sections.mentalHealth.support.parent.awareness.description"
+              "students.sections.mentalHealth.support.parent.awareness.description",
             )}
           </p>
 
           <ul>
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.awareness.list.0"
+                "students.sections.mentalHealth.support.parent.awareness.list.0",
               )}
             </li>
 
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.awareness.list.1"
+                "students.sections.mentalHealth.support.parent.awareness.list.1",
               )}
             </li>
 
             <li>
               {t(
-                "students.sections.mentalHealth.support.parent.awareness.list.2"
+                "students.sections.mentalHealth.support.parent.awareness.list.2",
               )}
             </li>
           </ul>
@@ -284,4 +284,3 @@ export default function StudentsPageMentalHealth() {
     </div>
   );
 }
-
