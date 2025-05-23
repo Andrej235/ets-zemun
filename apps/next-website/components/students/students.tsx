@@ -10,6 +10,7 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
+import Image from "next/image";
 
 export default function Students() {
   const t = useTranslations();
@@ -54,7 +55,7 @@ export default function Students() {
             <h2>{t("students.hero.tagLine")}</h2>
           </div>
 
-          <img src="/hero-image.jpg" alt="student" />
+          <Image src="/hero-image.jpg" alt="student" fill/>
         </div>
 
         <div className="hero-block">

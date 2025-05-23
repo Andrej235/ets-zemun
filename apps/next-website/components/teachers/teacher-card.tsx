@@ -1,5 +1,6 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 type TeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -22,7 +23,9 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
 
   return (
     <button className="teacher-card" onClick={onSelect}>
-      <img src={teacher.image} alt={teacher.name} className="teacher-image" />
+      <div className="teacher-image">
+        <Image src={teacher.image} alt={teacher.name} fill />
+      </div>
 
       <div className="teacher-card-header">
         <h2>{teacher.name}</h2>

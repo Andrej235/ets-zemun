@@ -3,6 +3,7 @@ import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { PointerEvent } from "react";
 import "./news-preview.scss";
 import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 
 type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;
@@ -30,7 +31,7 @@ export default function NewsPreview({
       onPointerMove={handleMouseMove}
     >
       <div className="image-container">
-        <img src={image} alt={title} />
+        <Image src={image} alt={title} fill />
       </div>
       <div className="info">
         <h1 className="title">{title}</h1>

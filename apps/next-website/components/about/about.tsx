@@ -6,6 +6,7 @@ import SchoolPreviewCard from "@/components/school-preview-card/school-preview-c
 import { Link } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import "./about.scss";
+import Image from "next/image";
 
 export default async function About() {
   const locale = await getLocale();
@@ -31,7 +32,7 @@ export default async function About() {
             <h2>{t("about.hero.tagLine")}</h2>
           </div>
 
-          <img src="/hero-image.jpg" alt="student" />
+          <Image src="/hero-image.jpg" alt="student" fill />
         </div>
 
         <div className="hero-block">
@@ -73,7 +74,12 @@ export default async function About() {
             </div>
 
             <div className="overview-image">
-              <img src="/images/mission.jpg" alt="" />
+              <Image
+                src="/images/mission.jpg"
+                alt="Misija i vizija"
+                height={300}
+                width={300}
+              />
             </div>
           </div>
         </div>

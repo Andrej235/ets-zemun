@@ -3,6 +3,7 @@ import useOutsideClick from "@/hooks/use-outside-click";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 type ExpandedTeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -21,11 +22,9 @@ export default function ExpandedTeacherCard({
     <div className="overlay">
       <div className="teacher-card-expanded-wrapper" ref={containerRef}>
         <div className="teacher-card-expanded" key={teacher.id}>
-          <img
-            src={teacher.image}
-            alt={teacher.name}
-            className="teacher-image"
-          />
+          <div className="teacher-image">
+            <Image src={teacher.image} alt={teacher.name} fill />
+          </div>
 
           <div className="teacher-card-header">
             <h2>{teacher.name}</h2>

@@ -1,3 +1,3 @@
-import { singleProfilePageLoaderAdministrator } from "@/components/single-profile-page/single-profile-page-loader";
+import SingleProfileNetworkAdminPage from "@/components/single-profile-page/single-profile-administrator-page";
 
-export default singleProfilePageLoaderAdministrator;
+export default SingleProfileNetworkAdminPage;

@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { PointerEvent } from "react";
 import "./awards.scss";
+import Image from "next/image";
 
 type AwardsProps = {
   awards: Schema<"AwardResponseDto">[];
@@ -35,7 +36,9 @@ export default function Awards({ awards }: AwardsProps) {
             key={award.id}
           >
             <div className="award-card" onPointerMove={handleMouseMove}>
-              <img src={award.image} alt={award.title} />
+              <div className="img">
+                <Image src={award.image} alt={award.title} fill />
+              </div>
               <div className="award-card-header">
                 <h2>{award.title}</h2>
                 <div className="award-card-header-line">

@@ -2,6 +2,7 @@ import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import { getLocale, getTranslations } from "next-intl/server";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import Image from "next/image";
 
 export default async function SingleProfileNetworkAdminPage() {
   const locale = await getLocale();
@@ -21,9 +22,10 @@ export default async function SingleProfileNetworkAdminPage() {
     <div className="single-profile-page">
       <div className="header">
         <div className="image-container">
-          <img
+          <Image
             src="/images/profiles/administrator-racunarskih-mreza.jpg"
             alt="Administrator računarskih mreža"
+            fill
           />
         </div>
 

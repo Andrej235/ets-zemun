@@ -2,6 +2,7 @@ import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
 import { getLocale, getTranslations } from "next-intl/server";
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import Image from "next/image";
 
 export default async function SingleProfileElectricalAutomaticsPage() {
   const locale = await getLocale();
@@ -21,9 +22,10 @@ export default async function SingleProfileElectricalAutomaticsPage() {
     <div className="single-profile-page">
       <div className="header">
         <div className="image-container">
-          <img
+          <Image
             src="/images/profiles/elektrotehnicar-automatike.jpg"
             alt="Elektrotehničar automatike"
+            fill
           />
         </div>
 
@@ -130,7 +132,7 @@ export default async function SingleProfileElectricalAutomaticsPage() {
         </section>
       </div>
 
-      <SingleProfileSubjectsSegment data={profileData.response!}/>
+      <SingleProfileSubjectsSegment data={profileData.response!} />
     </div>
   );
 }

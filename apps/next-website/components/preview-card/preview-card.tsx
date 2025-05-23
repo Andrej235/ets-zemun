@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import "./preview-card.scss";
+import Image from "next/image";
 
 export type PreviewCardLayout = "image-left" | "image-right" | "vertical";
 
@@ -38,7 +39,7 @@ export default function PreviewCard({
       className={"preview-card " + layout}
     >
       <div className="image-container">
-        <img src={imagePath} alt={imageAlt} />
+        <Image src={imagePath} alt={imageAlt} fill />
       </div>
 
       {children}

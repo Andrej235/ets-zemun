@@ -59,13 +59,17 @@
     translate: 0 -5px;
   }
 
-  img {
+  .teacher-image {
     align-self: center;
     width: 20rem;
     aspect-ratio: 1;
-    object-fit: fill;
-    border-radius: 1rem;
     margin: 1rem 0;
+    position: relative;
+
+    img {
+      object-fit: fill;
+      border-radius: 1rem;
+    }
   }
 
   .teacher-card-header {
@@ -174,13 +178,17 @@
     display: flex;
     flex-direction: column;
 
-    img {
+    .teacher-image {
       align-self: center;
       width: 20rem;
       aspect-ratio: 1;
-      object-fit: fill;
-      border-radius: 1rem;
       margin: 1rem 0;
+      position: relative;
+
+      img {
+        object-fit: fill;
+        border-radius: 1rem;
+      }
     }
 
     .teacher-card-header {
