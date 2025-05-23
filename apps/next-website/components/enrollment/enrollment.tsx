@@ -1,51 +1,45 @@
 import Icon from "@/components/icon/icon";
+import { getTranslations } from "next-intl/server";
 import "./enrollment.scss";
-import { useMemo } from "react";
-import { useTranslations } from "next-intl";
 
-export default function Enrollment() {
-  const t = useTranslations();
+export default async function Enrollment() {
+  const t = await getTranslations();
 
-  const courses = useMemo(() => {
-    return [
-      {
-        name: t("enrollment.courses.0.name"),
-        duration: t("enrollment.courses.0.duration"),
-        students: 60,
-        requiredPoints: 80.04,
-      },
-      {
-        name: t("enrollment.courses.1.name"),
-        duration: t("enrollment.courses.1.duration"),
-        students: 60,
-        requiredPoints: 69.86,
-      },
-      {
-        name: t("enrollment.courses.2.name"),
-        duration: t("enrollment.courses.2.duration"),
-        students: 30,
-        requiredPoints: 66.86,
-      },
-      {
-        name: t("enrollment.courses.3.name"),
-        duration: t("enrollment.courses.3.duration"),
-        students: 30,
-        requiredPoints: 70.69,
-      },
-      {
-        name: t("enrollment.courses.4.name"),
-        duration: t("enrollment.courses.4.duration"),
-        students: 30,
-        requiredPoints: 47.64,
-      },
-    ];
-  }, [t]);
+  const courses = [
+    {
+      name: t("enrollment.courses.0.name"),
+      duration: t("enrollment.courses.0.duration"),
+      students: 60,
+      requiredPoints: 80.04,
+    },
+    {
+      name: t("enrollment.courses.1.name"),
+      duration: t("enrollment.courses.1.duration"),
+      students: 60,
+      requiredPoints: 69.86,
+    },
+    {
+      name: t("enrollment.courses.2.name"),
+      duration: t("enrollment.courses.2.duration"),
+      students: 30,
+      requiredPoints: 66.86,
+    },
+    {
+      name: t("enrollment.courses.3.name"),
+      duration: t("enrollment.courses.3.duration"),
+      students: 30,
+      requiredPoints: 70.69,
+    },
+    {
+      name: t("enrollment.courses.4.name"),
+      duration: t("enrollment.courses.4.duration"),
+      students: 30,
+      requiredPoints: 47.64,
+    },
+  ];
 
   return (
-    <div
-      className="enrollment-page"
-      data-search-key="upis-i-prijem"
-    >
+    <div className="enrollment-page" data-search-key="upis-i-prijem">
       <h1>{t("enrollment.title")}</h1>
       <h2>{t("enrollment.description")}</h2>
 
