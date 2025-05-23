@@ -44,12 +44,7 @@ export default function Enrollment() {
   return (
     <div
       className="enrollment-page"
-      searchKey={{
-        id: "upis-i-prijem",
-        keywords: "searchKeys.enrollment.keywords",
-        title: "searchKeys.enrollment.title",
-        url: "/upis",
-      }}
+      data-search-key="upis-i-prijem"
     >
       <h1>{t("enrollment.title")}</h1>
       <h2>{t("enrollment.description")}</h2>

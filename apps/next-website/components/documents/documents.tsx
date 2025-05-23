@@ -6,12 +6,7 @@ export default function Documents() {
   return (
     <div
       className="documents-container"
-      searchKey={{
-        id: "dokumenta",
-        keywords: "searchKeys.documents.keywords",
-        title: "searchKeys.documents.title",
-        url: "/dokumenta",
-      }}
+      data-search-key="dokumenta"
     >
       <div className="document-group-wrapper">
         {data.documentGroups.map((group) => {

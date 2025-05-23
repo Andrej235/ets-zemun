@@ -24,39 +24,22 @@ export default function StudentsPagePartTime() {
   const t = useTranslations();
 
   const deadlines: Deadlines = useMemo(
-    () =>
-      t("students.sections.partTime.deadlines", {
-        returnObjects: true,
-      }) as Deadlines,
-    [t],
+    () => t.raw("students.sections.partTime.deadlines") as Deadlines,
+    [t]
   );
 
   const priceList: PriceLists = useMemo(
-    () =>
-      t("students.sections.partTime.priceList", {
-        returnObjects: true,
-      }) as PriceLists,
-    [t],
+    () => t.raw("students.sections.partTime.priceList") as PriceLists,
+    [t]
   );
 
   const examData: ExamData = useMemo(
-    () =>
-      t("students.sections.partTime.examData", {
-        returnObjects: true,
-      }) as ExamData,
-    [t],
+    () => t.raw("students.sections.partTime.examData") as ExamData,
+    [t]
   );
 
   return (
-    <div
-      className="part-time-container"
-      searchKey={{
-        id: "vanredni-ucenici",
-        keywords: "searchKeys.partTimeStundents.keywords",
-        title: "searchKeys.partTimeStundents.title",
-        url: "/ucenici",
-      }}
-    >
+    <div className="part-time-container" data-search-key="vanredni-ucenici">
       <h1>{t("students.sections.partTime.title")}</h1>
 
       <div className="table-container">

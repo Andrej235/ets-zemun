@@ -6,12 +6,7 @@ export default function StudentsPagePPService() {
   return (
     <div
       className="pp-service"
-      searchKey={{
-        id: "pp-sluzba",
-        keywords: "searchKeys.ppService.keywords",
-        title: "searchKeys.ppService.title",
-        url: "/ucenici",
-      }}
+      data-search-key="pp-sluzba"
     >
       <h1>{t("students.sections.ppService.title")}</h1>
       <div className="pp-service-description">

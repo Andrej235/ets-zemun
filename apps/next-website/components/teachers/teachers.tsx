@@ -31,12 +31,7 @@ export default function Teachers() {
     <>
       <div
         className="teachers-page"
-        searchKey={{
-          id: "nastavnici",
-          keywords: "searchKeys.teachers.keywords",
-          title: "searchKeys.teachers.title",
-          url: "/nastavnici",
-        }}
+        data-search-key="nastavnici"
       >
         <h1>{t("teachers.title")}</h1>
 

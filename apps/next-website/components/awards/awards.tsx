@@ -2,7 +2,7 @@ import useLoader from "@/better-router/use-loader";
 import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
 import { PointerEvent } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";;
+import { Link } from "@/i18n/navigation";
 import awardsLoader from "./awards-loader";
 import "./awards.scss";
 
@@ -23,15 +23,7 @@ export default function Awards() {
   };
 
   return (
-    <div
-      className="awards-pages"
-      searchKey={{
-        id: "takmicenja-i-nagrade",
-        keywords: "searchKeys.awards.keywords",
-        title: "searchKeys.awards.title",
-        url: "/takmicenja",
-      }}
-    >
+    <div className="awards-pages" data-search-key="takmicenja-i-nagrade">
       <h1>{t("awards.title")}</h1>
       <div className="awards-list">
         <LazyAwaitedList

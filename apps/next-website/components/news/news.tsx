@@ -11,12 +11,7 @@ export default function News() {
   return (
     <div
       className="news-page-container"
-      searchKey={{
-        id: "novosti",
-        keywords: "searchKeys.news.keywords",
-        title: "searchKeys.news.title",
-        url: "/novosti",
-      }}
+      data-search-key="novosti"
     >
       <div className="articles-container">
         <LazyAwaitedList

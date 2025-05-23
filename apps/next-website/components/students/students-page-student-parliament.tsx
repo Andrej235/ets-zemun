@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { useMemo } from "react";
 
 type StudentsData = {
   grade: string;
@@ -13,23 +13,12 @@ export default function StudentsPageStudentParliament() {
   const t = useTranslations();
 
   const studentsData: StudentsData = useMemo(
-    () =>
-      t("students.sections.studentsParliament.data", {
-        returnObjects: true,
-      }) as StudentsData,
-    [t],
+    () => t.raw("students.sections.studentsParliament.data") as StudentsData,
+    [t]
   );
 
   return (
-    <div
-      className="parliament-container"
-      searchKey={{
-        id: "ucenicki-parlament",
-        keywords: "searchKeys.studentsParliament.keywords",
-        title: "searchKeys.studentsParliament.title",
-        url: "/ucenici",
-      }}
-    >
+    <div className="parliament-container" data-search-key="ucenicki-parlament">
       <h1>{t("students.sections.studentsParliament.title")}</h1>
 
       {studentsData.map((gradeData) => (

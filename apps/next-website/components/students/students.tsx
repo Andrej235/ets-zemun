@@ -1,7 +1,8 @@
+"use client";
 import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
-import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
 import StudentsPageParentParliament from "./students-page-parent-parliament";
@@ -12,11 +13,11 @@ import "./students.scss";
 
 export default function Students() {
   const t = useTranslations();
+  const searchParams = useSearchParams();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] =
     useState<string>("ucenicki-parlament");
-  const [searchParams] = useSearchParams();
 
   const sections = [
     { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
@@ -41,19 +42,11 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection,
+    (section) => section.id === activeSection
   )?.component;
 
   return (
-    <div
-      className="students-page-container"
-      searchKey={{
-        id: "ucenici",
-        keywords: "searchKeys.students.keywords",
-        title: "searchKeys.students.title",
-        url: "/ucenici",
-      }}
-    >
+    <div className="students-page-container" data-search-key="ucenici">
       <section className="hero-space">
         <div className="hero-image">
           <div className="text">

@@ -6,12 +6,7 @@ export default function StudentsPageMentalHealth() {
   return (
     <div
       className="mental-health"
-      searchKey={{
-        id: "mentalno-zdravlje",
-        keywords: "searchKeys.mentalHealth.keywords",
-        title: "searchKeys.mentalHealth.title",
-        url: "/ucenici",
-      }}
+      data-search-key="mentalno-zdravlje"
     >
       <h1>{t("students.sections.mentalHealth.title")}</h1>
 

@@ -7,12 +7,7 @@ export default function StudentsPageAntiBullying() {
   return (
     <div
       className="anti-bullying"
-      searchKey={{
-        id: "nasilje",
-        keywords: "searchKeys.bullying.keywords",
-        title: "searchKeys.bullying.title",
-        url: "/ucenici",
-      }}
+      data-search-key="nasilje"
     >
       <h1>{t("students.sections.bullying.title")}</h1>
 

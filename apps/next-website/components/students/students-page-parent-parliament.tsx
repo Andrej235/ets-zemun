@@ -13,23 +13,12 @@ export default function StudentsPageParentParliament() {
   const t = useTranslations();
 
   const parentData: ParentData = useMemo(
-    () =>
-      t("students.sections.parentParliament.data", {
-        returnObjects: true,
-      }) as ParentData,
-    [t],
+    () => t.raw("students.sections.parentParliament.data") as ParentData,
+    [t]
   );
 
   return (
-    <div
-      className="parliament-container"
-      searchKey={{
-        id: "savet-roditelja",
-        keywords: "searchKeys.parentParliament.keywords",
-        title: "searchKeys.parentParliament.title",
-        url: "/ucenici",
-      }}
-    >
+    <div className="parliament-container" data-search-key="savet-roditelja">
       <h1>{t("students.sections.parentParliament.title")}</h1>
 
       {parentData.map((gradeData) => (
