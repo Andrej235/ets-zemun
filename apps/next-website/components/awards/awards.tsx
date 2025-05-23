@@ -1,13 +1,15 @@
-import useLoader from "@/better-router/use-loader";
-import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
-import { PointerEvent } from "react";
-import { useTranslations } from "next-intl";
+"use client";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { Link } from "@/i18n/navigation";
-import awardsLoader from "./awards-loader";
+import { useTranslations } from "next-intl";
+import { PointerEvent } from "react";
 import "./awards.scss";
 
-export default function Awards() {
-  const loaderData = useLoader<typeof awardsLoader>();
+type AwardsProps = {
+  awards: Schema<"AwardResponseDto">[];
+};
+
+export default function Awards({ awards }: AwardsProps) {
   const t = useTranslations();
 
   const handleMouseMove = (e: PointerEvent) => {
@@ -26,38 +28,30 @@ export default function Awards() {
     <div className="awards-pages" data-search-key="takmicenja-i-nagrade">
       <h1>{t("awards.title")}</h1>
       <div className="awards-list">
-        <LazyAwaitedList
-          data={loaderData}
-          success="200"
-          skeleton={Array.from({ length: 9 }).map((_, i) => (
-            <div className="award-card skeleton" key={"skeleton_" + i}></div>
-          ))}
-        >
-          {(award) => (
-            <Link
-              className="award-card-link"
-              href={award.externalLink ?? "/takmicenja"}
-              key={award.id}
-            >
-              <div className="award-card" onPointerMove={handleMouseMove}>
-                <img src={award.image} alt={award.title} />
-                <div className="award-card-header">
-                  <h2>{award.title}</h2>
-                  <div className="award-card-header-line">
-                    <p>{award.competition}</p>
-                    <p>&nbsp;-&nbsp;</p>
-                    <p>{award.dayOfAward}</p>
-                  </div>
-                </div>
-
-                <div className="content">
-                  <h3>Ucenik: {" " + award.student}</h3>
-                  {award.description && <p>{award.description}</p>}
+        {awards.map((award) => (
+          <Link
+            className="award-card-link"
+            href={award.externalLink ?? "/takmicenja"}
+            key={award.id}
+          >
+            <div className="award-card" onPointerMove={handleMouseMove}>
+              <img src={award.image} alt={award.title} />
+              <div className="award-card-header">
+                <h2>{award.title}</h2>
+                <div className="award-card-header-line">
+                  <p>{award.competition}</p>
+                  <p>&nbsp;-&nbsp;</p>
+                  <p>{award.dayOfAward}</p>
                 </div>
               </div>
-            </Link>
-          )}
-        </LazyAwaitedList>
+
+              <div className="content">
+                <h3>Ucenik: {" " + award.student}</h3>
+                {award.description && <p>{award.description}</p>}
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
