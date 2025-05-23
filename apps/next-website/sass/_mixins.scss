@@ -1,0 +1,70 @@
+@use "./palette" as *;
+
+@mixin button {
+  outline: none;
+  border: none;
+  background: $accent;
+  color: $text-accent;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  white-space: nowrap;
+
+  display: grid;
+  place-items: center;
+
+  &:hover,
+  &:focus-visible {
+    background: $accent-highlight;
+  }
+}
+
+@mixin input-field-container($color: $text-accent) {
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 1rem;
+  background-color: $accent-secondary;
+  padding: 0 1.5rem;
+  transition: 250ms ease-out;
+
+  input {
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    width: 100%;
+    color: $color;
+
+    &::placeholder {
+      color: $color;
+      opacity: 0.5;
+    }
+
+    &:focus-within::placeholder {
+      opacity: 0.8;
+    }
+  }
+
+  &:has(:focus-within) {
+    background-color: $accent-secondary-highlight;
+  }
+
+  /*   &:has(:focus-within)::before {
+    width: 100%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    background-color: $accent-secondary-highlight;
+    height: 2px;
+    transition: 250ms ease-out;
+    transform: translate(-50%, 50%);
+  } */
+}

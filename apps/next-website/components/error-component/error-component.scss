@@ -1,0 +1,177 @@
+.error-component-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: $background;
+
+  .route-error,
+  .async-error {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .route-error-info {
+    position: relative;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & > p {
+      margin-top: 1rem;
+      margin-bottom: 4rem;
+      font-size: 2rem;
+      color: #aaa;
+    }
+
+    .error-status {
+      position: absolute;
+      top: -1rem;
+      font-size: 2rem;
+      font-weight: 400;
+      color: $accent;
+    }
+
+    .error-status-text {
+      position: relative;
+      font-size: 8rem;
+      font-weight: 500;
+    }
+
+    .error-buttons {
+      display: flex;
+      gap: 3rem;
+
+      button {
+        position: relative;
+        width: 18rem;
+        height: 5rem;
+        border-radius: 25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s background-color;
+
+        p {
+          transition: 0.3s;
+          font-size: 1.6rem;
+          font-weight: 500;
+        }
+
+        .error-icon {
+          position: absolute;
+          right: 2rem;
+          opacity: 0;
+          transition: 0.3s;
+          font-size: 1.8rem;
+          color: black;
+        }
+
+        &:hover {
+          p {
+            transform: translateX(-1rem);
+          }
+
+          .error-icon {
+            right: 1rem;
+            opacity: 1;
+          }
+        }
+      }
+
+      .error-homepage:hover {
+        background-color: white;
+        color: black;
+      }
+
+      .error-return {
+        background-color: transparent;
+        color: $accent;
+        border: 1px solid $accent;
+        transition: 0.2s linear;
+
+        &:hover {
+          background-color: #fff;
+          border: none;
+          color: black;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .route-error-info {
+      width: 80%;
+
+      & > p {
+        font-size: 1.8rem;
+      }
+
+      .error-status {
+        font-size: 1.8rem;
+      }
+
+      .error-status-text {
+        font-size: 7rem;
+      }
+
+      .error-buttons {
+        gap: 2rem;
+
+        button {
+          width: 100%;
+          height: 4.5rem;
+          padding: 0 2rem;
+
+          p {
+            font-size: 1.5rem;
+          }
+
+          .error-icon {
+            font-size: 1.7rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .route-error-info {
+      width: 90%;
+
+      .error-status {
+        font-size: 1.5rem;
+      }
+
+      .error-status-text {
+        font-size: 5rem;
+      }
+
+      .error-buttons {
+        button {
+          height: 4rem;
+          padding: 0 2rem;
+
+          p {
+            font-size: 1.4rem;
+          }
+
+          .error-icon {
+            font-size: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+}

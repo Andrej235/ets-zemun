@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Geist, Geist_Mono } from "next/font/google";
+import "../index.scss";
+import Script from "next/script";
+import AppFooter from "@/components/app-footer/app-footer";
+import AppHeader from "@/components/app-header/app-header";
+import Scroller from "@/components/scroller/scroller";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +39,18 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <div id="root">
+            <AppHeader />
+
+            <div id="page-content">{children} </div>
+
+            <Scroller />
+
+            <AppFooter />
+          </div>
         </NextIntlClientProvider>
+
+        <Script src="https://kit.fontawesome.com/053e158ed1.js"></Script>
       </body>
     </html>
   );
