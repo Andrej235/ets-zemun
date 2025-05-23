@@ -3,9 +3,9 @@ import AppHeader from "@/components/app-header/app-header";
 import Scroller from "@/components/scroller/scroller";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import Script from "next/script";
-import "../index.scss";
+import "./index.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,12 +14,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
+  const locale = await getLocale();
   const messages = await getMessages({ locale });
 
   return (

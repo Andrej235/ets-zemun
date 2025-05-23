@@ -1,24 +1,37 @@
-import "@/app/index.scss";
-import AppHeader from "@/components/app-header/app-header";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
-import Script from "next/script";
-import ErrorComponentContent from "./error-component-content";
+"use client";
+import Icon from "@/components/icon/icon";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import "./error-component.scss";
 
-export default async function ErrorComponent() {
-  const locale = await getLocale();
-  const messages = await getMessages({ locale });
+export default function ErrorComponent() {
+  const t = useTranslations();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <AppHeader />
+    <div className="error-component-container">
+      <div className="route-error">
+        <div className="route-error-info">
+          <div className="error-status-text">
+            <div className="error-status">404</div>
+            Not Found
+          </div>
 
-      <div className="error-component-container">
-        <ErrorComponentContent />
+          <p>{t("errorPage.routeError.title")}</p>
 
-        <Script src="https://kit.fontawesome.com/053e158ed1.js"></Script>
+          <div className="error-buttons">
+            <Link href="/">
+              <button className="error-homepage">
+                <p>{t("errorPage.routeError.buttons.0")}</p>
+                <Icon name="arrow-right" className="error-icon" />
+              </button>
+            </Link>
+            <button className="error-return">
+              <p>{t("errorPage.routeError.buttons.1")}</p>
+              <Icon name="arrow-right" className="error-icon" />
+            </button>
+          </div>
+        </div>
       </div>
-    </NextIntlClientProvider>
+    </div>
   );
 }
