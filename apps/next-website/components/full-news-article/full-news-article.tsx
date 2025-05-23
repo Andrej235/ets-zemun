@@ -1,44 +1,30 @@
-import useLoader from "@/better-router/use-loader";
-import fullNewsArticleLoader from "./full-news-article-loader";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import { getLocale } from "next-intl/server";
 import "./full-news-article.scss";
-import Async from "@/better-router/async";
-import { useRef } from "react";
-import useLazyLoad from "@/hooks/use-lazy-load";
 
-export default function FullNewsArticle() {
-  const loaderData = useLoader<typeof fullNewsArticleLoader>();
-  const containerRef = useRef<HTMLDivElement>(null);
+export default async function FullNewsArticle({
+  params,
+}: {
+  params: Promise<{ newsId: number }>;
+}) {
+  const locale = await getLocale();
+  const { newsId } = await params;
 
-  useLazyLoad(
-    loaderData.then((x) => (x.code === "200" ? x.content.images : null)),
-    (x) => {
-      if (!containerRef.current) return;
-
-      x.forEach((image) => {
-        const imageRef = containerRef.current!.querySelector(
-          `img#image-${image.id}`,
-        );
-
-        imageRef?.setAttribute("src", image.image);
-      });
+  const { isOk, response } = await sendApiRequestSSR("/news/{id}", {
+    method: "get",
+    parameters: {
+      id: newsId,
+      languageCode: locale === "srl" ? "sr_lt" : locale,
     },
-  );
+  });
+
+  if (!isOk) throw new Error("Failed to fetch news");
 
   return (
-    <Async await={loaderData}>
-      {(data) => {
-        if (data.code !== "200") return null;
-
-        return (
-          <div
-            className="border-2 rounded-4xl p-8"
-            ref={containerRef}
-            dangerouslySetInnerHTML={{
-              __html: data.content.markup,
-            }}
-          />
-        );
+    <div
+      dangerouslySetInnerHTML={{
+        __html: response!.markup,
       }}
-    </Async>
+    />
   );
 }
