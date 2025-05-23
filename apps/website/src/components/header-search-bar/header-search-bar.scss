@@ -7,8 +7,10 @@
     border-radius: 1rem;
     overflow: clip;
     height: 50vh;
+    min-width: 5rem;
     pointer-events: none;
     touch-action: none;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
@@ -26,8 +28,11 @@
         touch-action: auto;
         position: relative;
         min-width: 5rem;
+        width: max-content;
         aspect-ratio: 1;
         background-color: $accent-secondary;
+
+        transition: 0.25s;
 
         &:hover,
         &:focus-visible {
@@ -69,7 +74,9 @@
     }
 
     &.search-bar-not-active .search-bar-input-container {
-      transform: translate(100%);
+      width: 0;
+      height: 0;
+      padding: 0;
     }
   }
 }
