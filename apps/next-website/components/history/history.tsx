@@ -1,3 +1,4 @@
+"use client";
 import React, {
   memo,
   useCallback,
@@ -7,10 +8,10 @@ import React, {
   useState,
 } from "react";
 import "./history.scss";
-import createCirclePath from "@/utility/svg/create-circle-path";
+import createCirclePath from "@/svg/create-circle-path";
 import { inView } from "motion/react";
-import getPathTotalLength from "@/utility/svg/get-path-length";
-import createRoundedCornerPath from "@/utility/svg/create-rounded-path";
+import getPathTotalLength from "@/svg/get-path-length";
+import createRoundedCornerPath from "@/svg/create-rounded-path";
 
 type TimelineStyle = "alternating" | "left" | "right" | "center";
 
@@ -49,7 +50,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   const [currentSegment, setCurrentSegment] = useState(-1);
   const segmentPointRadius = useMemo(
     () => timelineConfig?.pointRadius ?? 25,
-    [timelineConfig],
+    [timelineConfig]
   );
 
   const pathRef = useRef<SVGPathElement>(null);
@@ -64,7 +65,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
     adjustPathLength(
       historyContainerRef.current!.children[0].children[0] as SVGPathElement,
       totalPathLength,
-      (individualSegmentPathLengths[currentSegment] ?? 0) - 10, //? -10 accounts for rounding errors
+      (individualSegmentPathLengths[currentSegment] ?? 0) - 10 //? -10 accounts for rounding errors
     );
   }, [pathRef, currentSegment, individualSegmentPathLengths, totalPathLength]);
 
@@ -112,8 +113,8 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           },
           {
             amount: 0.3,
-          },
-        ),
+          }
+        )
       );
 
       segments.push({
@@ -159,7 +160,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
     svg.setAttribute(
       "viewBox",
-      `0 0 ${container.clientWidth} ${container.clientHeight}`,
+      `0 0 ${container.clientWidth} ${container.clientHeight}`
     );
 
     switch (style) {
@@ -198,12 +199,12 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         const pointPosition: Vector2 = getPointPositionForSegment(
           segment,
-          even,
+          even
         );
         const segmentHeaderCleanup = createHeaderForSegment(
           segment,
           pointPosition,
-          even,
+          even
         );
         abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
@@ -215,7 +216,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           path += currentPath;
 
           pathLengths.push(
-            getPathTotalLength(currentPathStartMoveCommand + currentPath),
+            getPathTotalLength(currentPathStartMoveCommand + currentPath)
           );
 
           startingPoint = {
@@ -253,14 +254,14 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
               value: pointPosition.y - segmentPointRadius,
             },
           ],
-          timelineConfig?.corderArcRadius ?? 15,
+          timelineConfig?.corderArcRadius ?? 15
         );
 
         currentPath += createCirclePath(segmentPointRadius, pointPosition);
         path += currentPath;
 
         pathLengths.push(
-          getPathTotalLength(currentPathStartMoveCommand + currentPath),
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
 
         startingPoint = {
@@ -294,7 +295,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       function createHeaderForSegment(
         segment: Segment,
         pointPosition: Vector2,
-        even: boolean,
+        even: boolean
       ): () => void {
         const minimunDistanceToPoint =
           timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
@@ -353,7 +354,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
           },
           {
             amount: 0.3,
-          },
+          }
         );
 
         function onEnterViewport() {
@@ -374,7 +375,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
       function getPointPositionForSegment(
         segment: Segment,
-        even: boolean,
+        even: boolean
       ): Vector2 {
         const padding = getPaddingForSegment(segment, even);
 
@@ -416,7 +417,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
           segment,
-          pointPosition,
+          pointPosition
         );
         abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
@@ -427,7 +428,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         path += currentPath;
 
         pathLengths.push(
-          getPathTotalLength(currentPathStartMoveCommand + currentPath),
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
 
         startingPointY = pointPosition.y + segmentPointRadius;
@@ -479,7 +480,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
           segment,
-          pointPosition,
+          pointPosition
         );
         abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
@@ -490,7 +491,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         path += currentPath;
 
         pathLengths.push(
-          getPathTotalLength(currentPathStartMoveCommand + currentPath),
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
 
         startingPointY = pointPosition.y + segmentPointRadius;
@@ -540,7 +541,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
         const segmentHeaderCleanup = createHeaderAboveSegmentPoint(
           segment,
-          pointPosition,
+          pointPosition
         );
         abortController.signal.addEventListener("abort", segmentHeaderCleanup);
 
@@ -551,7 +552,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         path += currentPath;
 
         pathLengths.push(
-          getPathTotalLength(currentPathStartMoveCommand + currentPath),
+          getPathTotalLength(currentPathStartMoveCommand + currentPath)
         );
 
         startingPointY = pointPosition.y + segmentPointRadius;
@@ -574,7 +575,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
 
     function createHeaderAboveSegmentPoint(
       segment: Segment,
-      pointPosition: Vector2,
+      pointPosition: Vector2
     ): () => void {
       const minimunDistanceToPoint =
         timelineConfig?.minimumDistanceBetweenPointAndHeading ?? 15;
@@ -609,7 +610,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         },
         {
           amount: 0.3,
-        },
+        }
       );
 
       function onEnterViewport() {
@@ -638,7 +639,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       if (timelineConfig?.animateOnlyOnce) return;
 
       setCurrentSegment((currentSegment) =>
-        currentSegment === i ? currentSegment - 1 : currentSegment,
+        currentSegment === i ? currentSegment - 1 : currentSegment
       );
 
       segment.style.opacity = "0";
@@ -671,7 +672,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
         timer = setTimeout(() => func(...args), time);
       };
     },
-    [],
+    []
   );
 
   useEffect(() => {
@@ -711,7 +712,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
       },
       {
         signal: abortController.signal,
-      },
+      }
     );
 
     setupTimeline();
@@ -731,7 +732,7 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   function adjustPathLength(
     element: SVGPathElement,
     totalLength: number,
-    desiredLength: number,
+    desiredLength: number
   ): void {
     let dashArray: string;
 
@@ -769,4 +770,5 @@ const History = memo<HistoryProps>(({ children, timelineConfig }) => {
   );
 });
 
+History.displayName = "History";
 export default History;

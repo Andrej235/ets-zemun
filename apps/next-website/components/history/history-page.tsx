@@ -1,3 +1,4 @@
+"use client";
 import { useMemo } from "react";
 import History from "./history";
 import HistorySegment from "./history-segment";
@@ -77,7 +78,7 @@ export default function HistoryPage() {
         </HistorySegment>
       </History>
     ),
-    [t],
+    [t]
   );
 
   return history;
