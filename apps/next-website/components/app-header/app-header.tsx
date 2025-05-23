@@ -5,9 +5,11 @@ import Icon from "@/components/icon/icon";
 import useOutsideClick from "@/hooks/use-outside-click";
 import FocusTrap from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import "./app-header.scss";
-import Link from "next/link";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [selectedTheme, setSelectedTheme] = useState<
@@ -18,16 +20,19 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const t = useTranslations();
   const currentLanguage = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const languageOptions = {
-    sr_lt: "Latinica",
-    sr_cr: "Ћирилица",
+    srl: "Latinica",
+    sr: "Ћирилица",
     en: "English",
   };
 
-  const handleLanguageChange = (
-    newLanguage: keyof typeof languageOptions
-  ) => {};
+  const handleLanguageChange = (newLanguage: keyof typeof languageOptions) => {
+    console.log("newLanguage", newLanguage);
+    router.replace(pathname, { locale: newLanguage });
+  };
 
   const popupRef = useRef<HTMLDivElement>(null!);
 
@@ -75,7 +80,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           tabIndex={isHamburgerMenuOpen ? -1 : undefined}
           aria-hidden={isHamburgerMenuOpen}
         >
-          <img src="/logo.png" alt="Logo" />
+          <Image src="/logo.png" alt="Logo" width={96} height={96} />
         </Link>
         <div className="app-header-navigation">
           <div className="nav-bar">
@@ -109,22 +114,22 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           >
             <div className="language-options">
               <button
-                onClick={() => handleLanguageChange("sr_lt")}
+                onClick={() => handleLanguageChange("srl")}
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
                   currentLanguage === "srl" ? "active-language" : ""
                 }`}
               >
-                {languageOptions.sr_lt}
+                {languageOptions.srl}
               </button>
               <button
-                onClick={() => handleLanguageChange("sr_cr")}
+                onClick={() => handleLanguageChange("sr")}
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
                   currentLanguage === "sr" ? "active-language" : ""
                 }`}
               >
-                {languageOptions.sr_cr}
+                {languageOptions.sr}
               </button>
               <button
                 onClick={() => handleLanguageChange("en")}
