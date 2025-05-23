@@ -1,22 +1,11 @@
-import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../index.scss";
-import Script from "next/script";
 import AppFooter from "@/components/app-footer/app-footer";
 import AppHeader from "@/components/app-header/app-header";
 import Scroller from "@/components/scroller/scroller";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import Script from "next/script";
+import "../index.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,9 +24,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div id="root">
             <AppHeader />

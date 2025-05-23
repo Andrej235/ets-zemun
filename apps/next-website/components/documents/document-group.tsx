@@ -1,9 +1,9 @@
-import DocumentGroupSchema from "@/assets/json-data/ts-schemas/document-group.schema";
 import Icon from "@/components/icon/icon";
 import { useTranslations } from "next-intl";
+import { DocumentGroupType } from "./documents";
 
 type DocumentGroupProps = {
-  readonly group: DocumentGroupSchema;
+  readonly group: DocumentGroupType;
 };
 
 export default function DocumentGroup({

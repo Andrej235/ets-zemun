@@ -27,7 +27,8 @@ const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
         <p className="subject-description">{subject.subject.description}</p>
       </div>
     );
-  },
+  }
 );
 
+SubjectOverlay.displayName = "SubjectOverlay";
 export default SubjectOverlay;

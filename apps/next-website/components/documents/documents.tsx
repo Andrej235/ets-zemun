@@ -1,7 +1,21 @@
 import DocumentGroup from "./document-group";
 import "./documents.scss";
 
-const data = {
+type Document = {
+  title: string;
+  url: string;
+};
+
+export type DocumentGroupType = {
+  title: string;
+  iconName: string;
+  accentColor: string;
+  documents: Document[];
+};
+
+const data: {
+  documentGroups: DocumentGroupType[];
+} = {
   documentGroups: [
     {
       title: "documents.groups.0.title",

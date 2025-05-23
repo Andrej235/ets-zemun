@@ -1,5 +1,11 @@
-import { forwardRef } from "react";
-import { HTMLProps } from "../../types/utility/html-props";
+import { DetailedHTMLProps, forwardRef, HtmlHTMLAttributes } from "react";
+
+type HTMLProps<T extends HTMLElement> = DetailedHTMLProps<
+  HtmlHTMLAttributes<T>,
+  T
+> & {
+  [key: `data-${string}`]: string;
+};
 
 type IconProps = {
   readonly className?: string;
@@ -16,7 +22,8 @@ const Icon = forwardRef<HTMLElement, IconProps>(
         {...attributes}
       />
     );
-  },
+  }
 );
 
+Icon.displayName = "Icon";
 export default Icon;

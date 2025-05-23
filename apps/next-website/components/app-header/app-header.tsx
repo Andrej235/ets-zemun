@@ -3,12 +3,12 @@ import HamburgerMenu from "@/components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@/components/header-search-bar/header-search-bar";
 import Icon from "@/components/icon/icon";
 import useOutsideClick from "@/hooks/use-outside-click";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import FocusTrap from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import "./app-header.scss";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [selectedTheme, setSelectedTheme] = useState<
