@@ -153,7 +153,7 @@ export function QualificationForm({
     }
 
     if (isEditing && "id" in qualificationData) {
-      const promise = sendApiRequest(`/qualification`, {
+      const promise = sendApiRequest(`/qualifications`, {
         method: "put",
         payload: {
           id: qualificationData.id,

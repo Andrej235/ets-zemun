@@ -326,7 +326,7 @@ export default function TeacherDetailPage() {
                                   )?.value;
                                   if (!editedEmail) return;
 
-                                  const promise = sendApiRequest(`/teacher`, {
+                                  const promise = sendApiRequest(`/teachers`, {
                                     method: "put",
                                     payload: {
                                       id: teacher.id,

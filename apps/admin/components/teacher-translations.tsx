@@ -219,7 +219,7 @@ export function TeacherTranslations({
 
     setIsSubmitting(true);
     const promise = sendApiRequest(
-      "/teacher/{teacherId}/translation/{languageCode}",
+      "/teachers/{teacherId}/translation/{languageCode}",
       {
         method: "delete",
         parameters: {
