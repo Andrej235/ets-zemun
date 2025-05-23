@@ -1,3 +1,4 @@
+"use client";
 import useOutsideClick from "@/hooks/use-outside-click";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useRef } from "react";

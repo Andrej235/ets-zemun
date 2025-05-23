@@ -1,11 +1,11 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
-import Awards from "@/components/awards/awards";
+import Teachers from "@/components/teachers/teachers";
 import { getLocale } from "next-intl/server";
 
 export default async function Page() {
   const locale = await getLocale();
 
-  const { isOk, response } = await sendApiRequestSSR("/awards", {
+  const { isOk, response } = await sendApiRequestSSR("/teachers", {
     method: "get",
     parameters: {
       languageCode: locale === "srl" ? "sr_lt" : locale,
@@ -13,7 +13,7 @@ export default async function Page() {
     },
   });
 
-  if (!isOk) throw new Error("Failed to fetch awards");
+  if (!isOk) throw new Error("Failed to fetch teachers");
 
-  return <Awards awards={response!.items} />;
+  return <Teachers teachers={response!.items} />;
 }
