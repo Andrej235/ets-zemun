@@ -1,31 +1,27 @@
-import useLoader from "@/better-router/use-loader";
-import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import NewsPreview from "@/components/news-preview/news-preview";
-import newsPageLoader from "./news-page-loader";
-import "./news.scss";
+import { getLocale } from "next-intl/server";
 import "../news-preview/news-preview.scss";
+import "./news.scss";
 
-export default function News() {
-  const loaderData = useLoader<typeof newsPageLoader>();
+export default async function News() {
+  const locale = await getLocale();
+  const { isOk, response } = await sendApiRequestSSR("/news", {
+    method: "get",
+    parameters: {
+      languageCode: locale === "srl" ? "sr_lt" : locale,
+      limit: -1,
+    },
+  });
+
+  if (!isOk) throw new Error("Failed to fetch news");
 
   return (
-    <div
-      className="news-page-container"
-      data-search-key="novosti"
-    >
+    <div className="news-page-container" data-search-key="novosti">
       <div className="articles-container">
-        <LazyAwaitedList
-          data={loaderData}
-          success="200"
-          skeleton={Array.from({ length: 9 }).map((_, i) => (
-            <div
-              className="news-article-preview skeleton"
-              key={"skeleton_" + i}
-            ></div>
-          ))}
-        >
-          {(data) => <NewsPreview key={data.id} news={data} />}
-        </LazyAwaitedList>
+        {response!.items.map((data) => (
+          <NewsPreview key={data.id} news={data} />
+        ))}
       </div>
     </div>
   );
