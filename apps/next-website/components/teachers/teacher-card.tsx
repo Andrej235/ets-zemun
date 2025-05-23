@@ -1,5 +1,5 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type TeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -7,7 +7,7 @@ type TeacherCardProps = {
 };
 
 function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   function truncateBio(bio: string): string {
     const words = bio.split(" ");

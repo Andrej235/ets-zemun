@@ -3,14 +3,14 @@ import useLoader from "@/better-router/use-loader";
 import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
 import teacherLoader from "@/components/teachers/teachers-loader";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import ExpandedTeacherCard from "./expanded-teacher-card";
 import TeacherCard from "./teacher-card";
 import "./teachers.scss";
 
 export default function Teachers() {
   const loaderData = useLoader<typeof teacherLoader>();
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const [selectedTeacher, setSelectedTeacher] =
     useState<Schema<"TeacherResponseDto"> | null>(null);

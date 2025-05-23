@@ -1,8 +1,8 @@
 import Icon from "@/components/icon/icon";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export default function StudentsPageAntiBullying() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div

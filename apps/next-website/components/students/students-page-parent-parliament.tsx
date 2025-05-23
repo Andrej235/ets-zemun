@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type ParentData = {
   grade: string;
@@ -10,7 +10,7 @@ type ParentData = {
 }[];
 
 export default function StudentsPageParentParliament() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const parentData: ParentData = useMemo(
     () =>

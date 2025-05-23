@@ -1,7 +1,7 @@
 import Icon from "@/components/icon/icon";
 import SchoolPreviewCard from "@/components/school-preview-card/school-preview-card";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";;
 
 type SchoolPreviewCardProps = {
   readonly layout: string;
@@ -10,7 +10,7 @@ type SchoolPreviewCardProps = {
 export default function ProfilesPageAdministratorSection({
   layout,
 }: SchoolPreviewCardProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="profiles-page-section">
@@ -31,7 +31,7 @@ export default function ProfilesPageAdministratorSection({
         >
           <Link
             className="button-link"
-            to={"/profili/administrator-racunarskih-mreza"}
+            href={"/profili/administrator-racunarskih-mreza"}
           >
             <p>Saznaj vise</p>
             <Icon className="learn-icon" name="arrow-right" />

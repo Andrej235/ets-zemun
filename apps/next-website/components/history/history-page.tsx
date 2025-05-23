@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import History from "./history";
 import HistorySegment from "./history-segment";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export default function HistoryPage() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const history = useMemo(
     () => (

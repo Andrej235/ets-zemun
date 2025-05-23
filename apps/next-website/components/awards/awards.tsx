@@ -1,14 +1,14 @@
 import useLoader from "@/better-router/use-loader";
 import LazyAwaitedList from "@/components/lazy-loaded-list/lazy-awaited-list";
 import { PointerEvent } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";;
 import awardsLoader from "./awards-loader";
 import "./awards.scss";
 
 export default function Awards() {
   const loaderData = useLoader<typeof awardsLoader>();
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const handleMouseMove = (e: PointerEvent) => {
     if (e.pointerType !== "mouse") return;
@@ -44,7 +44,7 @@ export default function Awards() {
           {(award) => (
             <Link
               className="award-card-link"
-              to={award.externalLink ?? "/takmicenja"}
+              href={award.externalLink ?? "/takmicenja"}
               key={award.id}
             >
               <div className="award-card" onPointerMove={handleMouseMove}>

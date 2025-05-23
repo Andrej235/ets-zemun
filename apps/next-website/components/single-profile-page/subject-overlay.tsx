@@ -1,6 +1,6 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { forwardRef } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type SubjectItemProps = {
   readonly subject: Schema<"ProfileSubjectResponseDto">;
@@ -9,7 +9,7 @@ type SubjectItemProps = {
 
 const SubjectOverlay = forwardRef<HTMLDivElement, SubjectItemProps>(
   ({ subject, type }, ref) => {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     return (
       <div className={"full-screen-subject-container subject-item"} ref={ref}>

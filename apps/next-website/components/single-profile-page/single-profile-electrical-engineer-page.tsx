@@ -1,9 +1,21 @@
-import { useTranslation } from "react-i18next";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import { getLocale, getTranslations } from "next-intl/server";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
 
-export default function SingleProfileElectricalEngineerPage() {
-  const { t } = useTranslation();
+export default async function SingleProfileElectricalEngineerPage() {
+  const locale = await getLocale();
+  const profileData = await sendApiRequestSSR("/profiles/{id}", {
+    method: "get",
+    parameters: {
+      id: 3,
+      languageCode: locale === "srl" ? "sr_lt" : locale,
+    },
+  });
+
+  if (!profileData.isOk) throw new Error("Failed to load profile data");
+
+  const t = await getTranslations();
 
   return (
     <div className="single-profile-page">
@@ -36,12 +48,12 @@ export default function SingleProfileElectricalEngineerPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.programming.title",
+                  "educationalProfiles.electricalEngineer.program.programming.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.programming.description",
+                  "educationalProfiles.electricalEngineer.program.programming.description"
                 )}
               </p>
             </li>
@@ -52,7 +64,7 @@ export default function SingleProfileElectricalEngineerPage() {
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.web.description",
+                  "educationalProfiles.electricalEngineer.program.web.description"
                 )}
               </p>
             </li>
@@ -60,12 +72,12 @@ export default function SingleProfileElectricalEngineerPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.database.title",
+                  "educationalProfiles.electricalEngineer.program.database.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.database.description",
+                  "educationalProfiles.electricalEngineer.program.database.description"
                 )}
               </p>
             </li>
@@ -73,12 +85,12 @@ export default function SingleProfileElectricalEngineerPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.network.title",
+                  "educationalProfiles.electricalEngineer.program.network.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.network.description",
+                  "educationalProfiles.electricalEngineer.program.network.description"
                 )}
               </p>
             </li>
@@ -86,12 +98,12 @@ export default function SingleProfileElectricalEngineerPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.hardware.title",
+                  "educationalProfiles.electricalEngineer.program.hardware.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.hardware.description",
+                  "educationalProfiles.electricalEngineer.program.hardware.description"
                 )}
               </p>
             </li>
@@ -105,13 +117,13 @@ export default function SingleProfileElectricalEngineerPage() {
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalEngineer.knowledgeApplication.title",
+              "educationalProfiles.electricalEngineer.knowledgeApplication.title"
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalEngineer.knowledgeApplication.description",
+              "educationalProfiles.electricalEngineer.knowledgeApplication.description"
             )}
           </p>
         </section>
@@ -125,7 +137,7 @@ export default function SingleProfileElectricalEngineerPage() {
         </section>
       </div>
 
-      <SingleProfileSubjectsSegment />
+      <SingleProfileSubjectsSegment data={profileData.response!} />
     </div>
   );
 }

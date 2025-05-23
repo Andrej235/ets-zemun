@@ -6,10 +6,9 @@ import useOutsideClick from "@/hooks/use-outside-click";
 import FocusTrap from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import "./app-header.scss";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [selectedTheme, setSelectedTheme] = useState<

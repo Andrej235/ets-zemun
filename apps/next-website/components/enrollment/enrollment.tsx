@@ -1,10 +1,10 @@
 import Icon from "@/components/icon/icon";
 import "./enrollment.scss";
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export default function Enrollment() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const courses = useMemo(() => {
     return [

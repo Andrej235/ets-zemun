@@ -1,9 +1,21 @@
-import { useTranslation } from "react-i18next";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import { getLocale, getTranslations } from "next-intl/server";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
 
-export default function SingleProfileElectricalDevicesPage() {
-  const { t } = useTranslation();
+export default async function SingleProfileElectricalDevicesPage() {
+  const locale = await getLocale();
+  const profileData = await sendApiRequestSSR("/profiles/{id}", {
+    method: "get",
+    parameters: {
+      id: 5,
+      languageCode: locale === "srl" ? "sr_lt" : locale,
+    },
+  });
+
+  if (!profileData.isOk) throw new Error("Failed to load profile data");
+
+  const t = await getTranslations();
 
   return (
     <div className="single-profile-page">
@@ -36,12 +48,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.title",
+                  "educationalProfiles.electricalDevices.program.installations.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.description",
+                  "educationalProfiles.electricalDevices.program.installations.description"
                 )}
               </p>
             </li>
@@ -49,12 +61,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.title",
+                  "educationalProfiles.electricalDevices.program.thermal.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.description",
+                  "educationalProfiles.electricalDevices.program.thermal.description"
                 )}
               </p>
             </li>
@@ -62,12 +74,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.title",
+                  "educationalProfiles.electricalDevices.program.cooling.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.description",
+                  "educationalProfiles.electricalDevices.program.cooling.description"
                 )}
               </p>
             </li>
@@ -75,12 +87,12 @@ export default function SingleProfileElectricalDevicesPage() {
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.title",
+                  "educationalProfiles.electricalDevices.program.diagnostics.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.description",
+                  "educationalProfiles.electricalDevices.program.diagnostics.description"
                 )}
               </p>
             </li>
@@ -94,13 +106,13 @@ export default function SingleProfileElectricalDevicesPage() {
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.title",
+              "educationalProfiles.electricalDevices.knowledgeApplication.title"
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.description",
+              "educationalProfiles.electricalDevices.knowledgeApplication.description"
             )}
           </p>
         </section>
@@ -112,7 +124,7 @@ export default function SingleProfileElectricalDevicesPage() {
         </section>
       </div>
 
-      <SingleProfileSubjectsSegment />
+      <SingleProfileSubjectsSegment data={profileData.response!} />
     </div>
   );
 }

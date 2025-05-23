@@ -2,7 +2,7 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { PointerEvent } from "react";
 import "./news-preview.scss";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type NewsPreviewProps = {
   readonly news: Schema<"NewsPreviewResponseDto">;

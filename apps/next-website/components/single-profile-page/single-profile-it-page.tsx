@@ -1,9 +1,21 @@
-import { useTranslation } from "react-i18next";
+import { getLocale, getTranslations } from "next-intl/server";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 
-export default function SingleProfileITPage() {
-  const { t } = useTranslation();
+export default async function SingleProfileITPage() {
+  const locale = await getLocale();
+  const profileData = await sendApiRequestSSR("/profiles/{id}", {
+    method: "get",
+    parameters: {
+      id: 1,
+      languageCode: locale === "srl" ? "sr_lt" : locale,
+    },
+  });
+
+  if (!profileData.isOk) throw new Error("Failed to load profile data");
+
+  const t = await getTranslations();
 
   return (
     <div className="single-profile-page">
@@ -75,7 +87,7 @@ export default function SingleProfileITPage() {
         </section>
       </div>
 
-      <SingleProfileSubjectsSegment />
+      <SingleProfileSubjectsSegment data={profileData.response!} />
     </div>
   );
 }

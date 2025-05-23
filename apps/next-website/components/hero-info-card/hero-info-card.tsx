@@ -1,7 +1,7 @@
 import Icon from "@/components/icon/icon";
 import "./hero-info-card.scss";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type HeroInfoCardProps = {
   readonly icon: string;

@@ -4,7 +4,7 @@ import HamburgerNavigationSearchBar from "@/components/hamburger-navigation-sear
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type HamburgerNavigationProps = {
   readonly isMenuActive: boolean;

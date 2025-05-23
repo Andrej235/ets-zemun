@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type Deadlines = {
   term: string;
@@ -21,7 +21,7 @@ type ExamData = {
 }[];
 
 export default function StudentsPagePartTime() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const deadlines: Deadlines = useMemo(
     () =>

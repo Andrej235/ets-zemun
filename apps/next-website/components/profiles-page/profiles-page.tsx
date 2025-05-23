@@ -7,15 +7,7 @@ import ProfilesPageElectricalDevicesSection from "./profiles-page-electrical-dev
 
 export default function ProfilesPage() {
   return (
-    <div
-      className="profiles-page"
-      searchKey={{
-        id: "obrazovni-profili",
-        keywords: "searchKeys.educationProfiles.keywords",
-        title: "searchKeys.educationProfiles.title",
-        url: "/profili",
-      }}
-    >
+    <div className="profiles-page" data-search-key="obrazovni-profili">
       <ProfilesPageITSection layout="image-left" />
       <ProfilesPageAdministratorSection layout="image-right" />
       <ProfilesPageElectricalEngineerSection layout="image-left" />

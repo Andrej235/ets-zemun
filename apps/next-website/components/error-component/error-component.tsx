@@ -2,7 +2,7 @@ import AppHeader from "@/components/app-header/app-header";
 import Icon from "@/components/icon/icon";
 import { Link, useAsyncError, useRouteError } from "react-router";
 import "./error-component.scss";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type RouteError = {
   status: number;
@@ -42,7 +42,7 @@ export default function ErrorComponent() {
 }
 
 function RouteError({ error }: RouteErrorProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="route-error">
@@ -61,7 +61,7 @@ function RouteError({ error }: RouteErrorProps) {
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
-          <Link to={-1 as unknown as string}>
+          <Link href={-1 as unknown as string}>
             <button className="error-return">
               <p>{t("errorPage.routeError.buttons.1")}</p>
               <Icon name="arrow-right" className="error-icon" />
@@ -74,7 +74,7 @@ function RouteError({ error }: RouteErrorProps) {
 }
 
 function AsyncError({ error }: AsyncErrorProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="async-error">
@@ -93,7 +93,7 @@ function AsyncError({ error }: AsyncErrorProps) {
               <Icon name="arrow-right" className="error-icon" />
             </button>
           </Link>
-          <Link to={-1 as unknown as string}>
+          <Link href={-1 as unknown as string}>
             <button className="error-return">
               <p>{t("errorPage.asyncError.buttons.1")}</p>
               <Icon name="arrow-right" className="error-icon" />

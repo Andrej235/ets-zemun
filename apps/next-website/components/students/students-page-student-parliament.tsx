@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type StudentsData = {
   grade: string;
@@ -10,7 +10,7 @@ type StudentsData = {
 }[];
 
 export default function StudentsPageStudentParliament() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const studentsData: StudentsData = useMemo(
     () =>

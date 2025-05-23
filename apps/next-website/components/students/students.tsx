@@ -1,6 +1,6 @@
 import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "react-router";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
 import StudentsPageMentalHealth from "./students-page-mental-health";
@@ -11,7 +11,7 @@ import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
 
 export default function Students() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] =

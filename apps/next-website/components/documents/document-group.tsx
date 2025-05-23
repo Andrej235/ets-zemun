@@ -1,6 +1,6 @@
 import DocumentGroupSchema from "@/assets/json-data/ts-schemas/document-group.schema";
 import Icon from "@/components/icon/icon";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type DocumentGroupProps = {
   readonly group: DocumentGroupSchema;
@@ -9,7 +9,7 @@ type DocumentGroupProps = {
 export default function DocumentGroup({
   group: { title, iconName, accentColor, documents },
 }: DocumentGroupProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="document-group-container">

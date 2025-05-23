@@ -1,7 +1,7 @@
 import useOutsideClick from "@/hooks/use-outside-click";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useRef } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type ExpandedTeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -12,7 +12,7 @@ export default function ExpandedTeacherCard({
   teacher,
   onRequestClose,
 }: ExpandedTeacherCardProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   useOutsideClick(containerRef, onRequestClose);
 
