@@ -3,7 +3,7 @@ import HamburgerMenu from "@/components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@/components/header-search-bar/header-search-bar";
 import Icon from "@/components/icon/icon";
 import useOutsideClick from "@/hooks/use-outside-click";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { FocusTrap } from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -18,18 +18,12 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const t = useTranslations();
   const currentLanguage = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
 
   const languageOptions = {
     srl: "Latinica",
     sr: "Ћирилица",
     en: "English",
-  };
-
-  const handleLanguageChange = (newLanguage: keyof typeof languageOptions) => {
-    console.log("newLanguage", newLanguage);
-    router.replace(pathname, { locale: newLanguage });
   };
 
   const popupRef = useRef<HTMLDivElement>(null!);
@@ -93,49 +87,55 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             className={`settings-popup ${isPopupOpen ? "" : "closed"}`}
           >
             <div className="language-options">
-              <button
-                onClick={() => handleLanguageChange("srl")}
+              <Link
+                href={pathname}
+                locale="srl"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
                   currentLanguage === "srl" ? "active-language" : ""
                 }`}
               >
                 {languageOptions.srl}
-              </button>
-              <button
-                onClick={() => handleLanguageChange("sr")}
+              </Link>
+              <Link
+                href={pathname}
+                locale="sr"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
                   currentLanguage === "sr" ? "active-language" : ""
                 }`}
               >
                 {languageOptions.sr}
-              </button>
-              <button
-                onClick={() => handleLanguageChange("en")}
+              </Link>
+              <Link
+                href={pathname}
+                locale="en"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
                   currentLanguage === "en" ? "active-language" : ""
                 }`}
               >
                 {languageOptions.en}
-              </button>
+              </Link>
             </div>
             <button
               className="theme-button"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
               <div
+                suppressHydrationWarning
                 className={`theme-icons-container ${
                   theme === "dark" && "dark-theme-active"
                 }`}
               >
                 <Icon
+                  suppressHydrationWarning
                   name="lightbulb"
                   className={`sun ${theme === "light" ? "active" : ""}`}
                 />
 
                 <Icon
+                  suppressHydrationWarning
                   name="moon"
                   className={`moon ${theme === "dark" ? "active" : ""}`}
                 />

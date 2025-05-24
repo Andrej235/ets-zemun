@@ -66,7 +66,7 @@ export default async function RootLocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"
