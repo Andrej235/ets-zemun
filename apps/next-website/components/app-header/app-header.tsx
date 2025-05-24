@@ -4,16 +4,15 @@ import HeaderSearchBar from "@/components/header-search-bar/header-search-bar";
 import Icon from "@/components/icon/icon";
 import useOutsideClick from "@/hooks/use-outside-click";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import Image from "next/image";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import "./app-header.scss";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
-  const [selectedTheme, setSelectedTheme] = useState<
-    "light" | "dark" | "system"
-  >("system");
+  const { setTheme, theme } = useTheme();
 
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -38,24 +37,6 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   useOutsideClick(popupRef, () => {
     setIsPopupOpen(false);
   });
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-
-    if (theme) {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add(theme);
-      setSelectedTheme(theme as "light" | "dark");
-    } else {
-      if (!window.matchMedia) return;
-
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const theme = mediaQuery.matches ? "dark" : "light";
-      setSelectedTheme(theme);
-      localStorage.setItem("theme", theme);
-    }
-  }, []);
 
   return (
     <FocusTrap
@@ -142,28 +123,21 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
             <button
               className="theme-button"
-              onClick={() => {
-                const newTheme = selectedTheme === "light" ? "dark" : "light";
-                document.documentElement.classList.add(newTheme);
-                document.documentElement.classList.remove(selectedTheme);
-
-                setSelectedTheme(newTheme);
-                localStorage.setItem("theme", newTheme);
-              }}
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
               <div
                 className={`theme-icons-container ${
-                  selectedTheme === "dark" && "dark-theme-active"
+                  theme === "dark" && "dark-theme-active"
                 }`}
               >
                 <Icon
                   name="lightbulb"
-                  className={`sun ${selectedTheme === "light" ? "active" : ""}`}
+                  className={`sun ${theme === "light" ? "active" : ""}`}
                 />
 
                 <Icon
                   name="moon"
-                  className={`moon ${selectedTheme === "dark" ? "active" : ""}`}
+                  className={`moon ${theme === "dark" ? "active" : ""}`}
                 />
               </div>
             </button>

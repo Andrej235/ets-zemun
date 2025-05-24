@@ -10,6 +10,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 
 export async function generateMetadata({
@@ -67,17 +68,24 @@ export default async function RootLocaleLayout({
   return (
     <html lang={locale}>
       <body>
-        <div id="root">
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <AppHeader />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div id="root">
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <AppHeader />
 
-            <div id="page-content">{children} </div>
+              <div id="page-content">{children} </div>
 
-            <Scroller />
+              <Scroller />
 
-            <AppFooter />
-          </NextIntlClientProvider>
-        </div>
+              <AppFooter />
+            </NextIntlClientProvider>
+          </div>
+        </ThemeProvider>
 
         <Script src="https://kit.fontawesome.com/053e158ed1.js"></Script>
       </body>
