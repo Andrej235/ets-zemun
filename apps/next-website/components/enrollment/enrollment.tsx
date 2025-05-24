@@ -2,8 +2,15 @@ import Icon from "@/components/icon/icon";
 import { getTranslations } from "next-intl/server";
 import "./enrollment.scss";
 
-export default async function Enrollment() {
-  const t = await getTranslations();
+export default async function Enrollment({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
+  const t = await getTranslations({
+    locale,
+  });
 
   const courses = [
     {

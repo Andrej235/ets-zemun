@@ -22,8 +22,6 @@ export default async function About({
     },
   });
 
-  console.log("a");
-
   if (!news) return <div className="error">Error loading news</div>;
 
   const t = await getTranslations();

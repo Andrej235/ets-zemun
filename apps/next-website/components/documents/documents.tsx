@@ -1,4 +1,5 @@
-import DocumentGroup from "./document-group";
+import Icon from "@/components/icon/icon";
+import { getTranslations } from "next-intl/server";
 import "./documents.scss";
 
 type Document = {
@@ -118,13 +119,45 @@ const data: {
   ],
 };
 
-export default function Documents() {
+export default async function Documents({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
+  const t = await getTranslations({ locale });
+
   return (
     <div className="documents-container" data-search-key="dokumenta">
       <div className="document-group-wrapper">
-        {data.documentGroups.map((group) => {
-          return <DocumentGroup key={group.title} group={group} />;
-        })}
+        {data.documentGroups.map(
+          ({ accentColor, documents, iconName, title }) => (
+            <div className="document-group-container" key={title}>
+              <div
+                className="group-header"
+                style={{
+                  backgroundColor: accentColor,
+                }}
+              >
+                <h2 className="group-title">{t(title)}</h2>
+                <Icon name={iconName} className="icon" />
+              </div>
+              <div className="documents-list">
+                {documents.map((document) => (
+                  <a
+                    href={document.url}
+                    target="_blank"
+                    key={document.title}
+                    className="document-link"
+                  >
+                    <p>{t(document.title)}</p>
+                    <Icon name="download" className="download" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        )}
       </div>
     </div>
   );
