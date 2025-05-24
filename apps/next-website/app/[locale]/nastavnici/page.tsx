@@ -1,9 +1,12 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import Teachers from "@/components/teachers/teachers";
-import { getLocale } from "next-intl/server";
 
-export default async function Page() {
-  const locale = await getLocale();
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
 
   const { isOk, response } = await sendApiRequestSSR("/teachers", {
     method: "get",

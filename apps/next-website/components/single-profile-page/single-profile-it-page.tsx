@@ -1,11 +1,15 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
-import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
-import Image from "next/image";
 
-export default async function SingleProfileITPage() {
-  const locale = await getLocale();
+export default async function SingleProfileITPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
   const profileData = await sendApiRequestSSR("/profiles/{id}", {
     method: "get",
     parameters: {

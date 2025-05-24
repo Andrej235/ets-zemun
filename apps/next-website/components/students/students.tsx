@@ -1,6 +1,7 @@
 "use client";
 import HeroInfoCard from "@/components/hero-info-card/hero-info-card";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import StudentsPageAntiBullying from "./students-page-anti-bullying";
@@ -10,7 +11,6 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
-import Image from "next/image";
 
 export default function Students() {
   const t = useTranslations();
@@ -55,7 +55,7 @@ export default function Students() {
             <h2>{t("students.hero.tagLine")}</h2>
           </div>
 
-          <Image src="/hero-image.jpg" alt="student" fill/>
+          <Image src="/hero-image.jpg" alt="student" fill />
         </div>
 
         <div className="hero-block">

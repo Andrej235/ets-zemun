@@ -1,7 +1,6 @@
-import { cookies } from "next/headers";
 import { Endpoints, Methods } from "./types/endpoints/endpoints";
-import { ApiResponse } from "./types/endpoints/response-parser";
 import { Request } from "./types/endpoints/request-parser";
+import { ApiResponse } from "./types/endpoints/response-parser";
 
 const baseApiUrl = process.env.NEXT_PUBLIC_API_URL!;
 if (!baseApiUrl) throw new Error("NEXT_PUBLIC_API_URL not defined");
@@ -20,13 +19,7 @@ type Response<
 export default async function sendApiRequestSSR<
   T extends Request<Endpoint>,
   Endpoint extends Endpoints
->(
-  endpoint: Endpoint,
-  request: T,
-  includeCookies: boolean = true,
-  includeApiKey: boolean = false,
-  abortSignal?: AbortSignal
-): Promise<Response<Endpoint, T>> {
+>(endpoint: Endpoint, request: T): Promise<Response<Endpoint, T>> {
   const url = new URL(baseApiUrl + endpoint);
   const requestCopy = structuredClone(request);
 
@@ -49,22 +42,18 @@ export default async function sendApiRequestSSR<
   const body =
     "payload" in requestCopy ? JSON.stringify(requestCopy.payload) : null;
 
-  const cookieStore = includeCookies ? await cookies() : null;
-  const allCookies = cookieStore
-    ?.getAll()
-    ?.map((cookie) => `${cookie.name}=${cookie.value}`)
-    ?.join("; ");
-
   const requestInit: RequestInit = {
     method: requestCopy.method as string,
-    signal: abortSignal,
     body: body,
     headers: {
       "Content-Type": "application/json",
-      Cookie: allCookies ?? "",
-      ...(includeApiKey ? { "x-api-key": process.env.API_KEY! } : {}),
+    },
+    next: {
+      revalidate: 86400,
     },
   };
+
+  console.log("-->", url.href);
 
   const response = await fetch(url, requestInit);
   const code = response.status.toString();

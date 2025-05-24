@@ -1,11 +1,15 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
-import Image from "next/image";
 
-export default async function SingleProfileElectricalEngineerPage() {
-  const locale = await getLocale();
+export default async function SingleProfileElectricalEngineerPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
   const profileData = await sendApiRequestSSR("/profiles/{id}", {
     method: "get",
     parameters: {

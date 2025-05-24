@@ -1,11 +1,14 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import NewsPreview from "@/components/news-preview/news-preview";
-import { getLocale } from "next-intl/server";
 import "../news-preview/news-preview.scss";
 import "./news.scss";
 
-export default async function News() {
-  const locale = await getLocale();
+export default async function News({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
   const { isOk, response } = await sendApiRequestSSR("/news", {
     method: "get",
     parameters: {

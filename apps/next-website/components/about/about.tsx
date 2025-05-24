@@ -14,19 +14,15 @@ export default async function About({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  const { response: news } = await sendApiRequestSSR(
-    "/news",
-    {
-      method: "get",
-      parameters: {
-        languageCode: locale === "srl" ? "sr_lt" : locale,
-        limit: 3,
-      },
+  const { response: news } = await sendApiRequestSSR("/news", {
+    method: "get",
+    parameters: {
+      languageCode: locale === "srl" ? "sr_lt" : locale,
+      limit: 3,
     },
-    false,
-    false
-  );
+  });
+
+  console.log("a");
 
   if (!news) return <div className="error">Error loading news</div>;
 
