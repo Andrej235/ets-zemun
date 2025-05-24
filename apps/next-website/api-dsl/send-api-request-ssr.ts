@@ -53,8 +53,6 @@ export default async function sendApiRequestSSR<
     },
   };
 
-  console.log("-->", url.href);
-
   const response = await fetch(url, requestInit);
   const code = response.status.toString();
   const isOk = response.ok;

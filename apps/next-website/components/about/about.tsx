@@ -22,7 +22,7 @@ export default async function About({
     },
   });
 
-  if (!news) return <div className="error">Error loading news</div>;
+  if (!news) throw new Error("Failed to fetch news");
 
   const t = await getTranslations();
 
