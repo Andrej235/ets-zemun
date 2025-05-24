@@ -52,7 +52,7 @@ export default function TeacherQualificationsPage({
     const fetchData = async () => {
       try {
         const { response: teacherData } = await sendApiRequest(
-          "/teacher/admin/{id}",
+          "/teachers/admin/{id}",
           {
             method: "get",
             parameters: {
