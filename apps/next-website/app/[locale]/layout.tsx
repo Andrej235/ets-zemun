@@ -26,7 +26,7 @@ export async function generateMetadata({
   return {
     title: {
       default: t("root.title"),
-      template: t("titleTemplate"),
+      template: "%s | " + t("titleTemplate"),
     },
     description: t("root.description"),
     openGraph: {

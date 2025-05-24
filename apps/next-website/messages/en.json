@@ -1182,7 +1182,7 @@
   },
   "metadata": {
     "siteName": "Electrotechnical School of Zemun",
-    "titleTemplate": "%s | ETŠ Zemun",
+    "titleTemplate": "ETŠ Zemun",
     "root": {
       "title": "Electrotechnical School of Zemun",
       "description": "Learn about enrollment, education profiles, and benefits of studying at the Electrotechnical School of Zemun - a choice that opens the doors to a successful future."
@@ -1218,6 +1218,26 @@
     "enrollment": {
       "title": "Enrollment and Admission",
       "description": "Everything you need to know about enrolling in the Electrotechnical School of Zemun - courses, points, conditions, required documents, and a guide through the application process."
+    },
+    "it": {
+      "title": "Electrotechnician of Information Technology",
+      "description": "Modern education profile for students who want to acquire knowledge in programming, databases, web technologies, and software development."
+    },
+    "admin": {
+      "title": "Computer Network Administrator",
+      "description": "Profile focused on installation, maintenance, and security of computer networks - ideal for students interested in IT infrastructure and system administration."
+    },
+    "pc": {
+      "title": "Electrotechnician of Computer Engineering",
+      "description": "Education profile that combines knowledge of electronics, digital technology, and hardware support - an excellent choice for students who want to understand and repair computer systems."
+    },
+    "auto": {
+      "title": "Electrotechnician of Automation",
+      "description": "Profile that covers automation of processes, programmable logic controllers (PLC), and modern control systems - a combination of electrical engineering and industrial automation."
+    },
+    "ac": {
+      "title": "Electromechanic for Cooling and Thermal Devices",
+      "description": "Practical profile that enables students to acquire skills for assembly, maintenance, and repair of cooling and heating devices."
     }
   }
 }

@@ -1287,7 +1287,7 @@
   },
   "metadata": {
     "siteName": "Elektrotehnička škola Zemun",
-    "titleTemplate": "%s | ETŠ Zemun",
+    "titleTemplate": "ETŠ Zemun",
     "root": {
       "title": "Elektrotehnička škola \"Zemun\"",
       "description": "Saznajte sve o upisu, smerovima i prednostima školovanja u Elektrotehničkoj školi Zemun – izbor koji otvara vrata uspešne budućnosti."
@@ -1323,6 +1323,26 @@
     "enrollment": {
       "title": "Upis i prijem",
       "description": "Sve što treba da znate o upisu u Elektrotehničku školu Zemun – smerovi, bodovi, uslovi, potrebna dokumenta i vodič kroz proces prijave."
+    },
+    "it": {
+      "title": "Elektrotehničar informacionih tehnologija",
+      "description": "Savremeni obrazovni profil namenjen učenicima koji žele da steknu znanja iz programiranja, baza podataka, web tehnologija i razvoja softvera."
+    },
+    "admin": {
+      "title": "Administrator računarskih mreža",
+      "description": "Profil fokusiran na instalaciju, održavanje i bezbednost računarskih mreža – idealan za učenike zainteresovane za IT infrastrukturu i sistemsku administraciju."
+    },
+    "pc": {
+      "title": "Elektrotehničar računara",
+      "description": "Obrazovni profil koji objedinjuje znanja iz elektronike, digitalne tehnike i hardverske podrške – odličan izbor za učenike koji žele da razumeju i popravljaju računarske sisteme."
+    },
+    "auto": {
+      "title": "Elektrotehničar automatike",
+      "description": "Usmerenje koje obuhvata automatizaciju procesa, programabilne logičke kontrolere (PLC) i savremene sisteme upravljanja – spoj elektrotehnike i industrijske automatike."
+    },
+    "ac": {
+      "title": "Elektromehaničar za rashladne i termičke uređaje",
+      "description": "Praktično orijentisan profil koji omogućava učenicima da steknu veštine za montažu, održavanje i popravku rashladnih i grejnih uređaja."
     }
   }
 }

@@ -15,10 +15,7 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
   return {
-    title: {
-      default: t("teachers.title"),
-      template: t("titleTemplate"),
-    },
+    title: t("teachers.title"),
     description: t("teachers.description"),
     openGraph: {
       title: t("teachers.title"),
