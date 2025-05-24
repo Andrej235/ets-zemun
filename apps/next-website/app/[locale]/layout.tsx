@@ -20,27 +20,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const locale = (await params).locale;
 
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale, namespace: "metadata" });
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
 
   return {
     title: {
-      default: t("metadata.root.title"),
-      template: t("metadata.titleTemplate"),
+      default: t("root.title"),
+      template: t("titleTemplate"),
     },
-    description: t("metadata.root.description"),
+    description: t("root.description"),
     openGraph: {
-      title: t("metadata.root.title"),
-      description: t("metadata.root.description"),
+      title: t("root.title"),
+      description: t("root.description"),
       url: `${baseUrl}/${locale}`,
-      siteName: t("metadata.siteName"),
+      siteName: t("siteName"),
       locale,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: t("metadata.root.title"),
-      description: t("metadata.root.description"),
+      title: t("root.title"),
+      description: t("root.description"),
     },
     alternates: generateAlternateUrls(locale, ""),
   };
