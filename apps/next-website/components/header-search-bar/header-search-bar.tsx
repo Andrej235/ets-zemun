@@ -1,7 +1,7 @@
 import { SearchEntry, searchMap } from "@/assets/search-map";
 import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
 import Icon from "@/components/icon/icon";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import Fuse, { FuseResult } from "fuse.js";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -130,7 +130,7 @@ export default function HeaderSearchBar() {
       }}
     >
       <div
-        className={`search-bar-container${
+        className={`search-bar-container header-search-bar${
           !isSearchBarVisible ? " search-bar-not-active" : ""
         }`}
         ref={containerRef}

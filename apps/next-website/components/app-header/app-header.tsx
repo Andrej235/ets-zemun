@@ -57,7 +57,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <Image src="/logo.png" alt="Logo" width={96} height={96} />
         </Link>
         <div className="app-header-navigation">
-          <div className="nav-bar">
+          <div className="nav-bar header-nav-bar">
             <Link href="/">{t("header.links.0")}</Link>
             <Link href="/profili">{t("header.links.1")}</Link>
             <Link href="/ucenici">{t("header.links.2")}</Link>

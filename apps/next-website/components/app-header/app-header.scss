@@ -250,8 +250,23 @@
       transform: translate(-50%, -50%);
     }
 
-    .app-header-navigation {
+    .nav-bar.header-nav-bar,
+    .search-bar-container.header-search-bar {
       display: none;
+    }
+
+    .settings-button {
+      opacity: 0;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    padding: 1rem 5rem 1rem 5rem;
+
+    &:has(:first-child.hamburger-menu.open) .settings-button {
+      opacity: 1;
+      pointer-events: all;
+      touch-action: all;
     }
   }
 }
