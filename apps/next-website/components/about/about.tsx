@@ -4,20 +4,29 @@ import Icon from "@/components/icon/icon";
 import NewsPreview from "@/components/news-preview/news-preview";
 import SchoolPreviewCard from "@/components/school-preview-card/school-preview-card";
 import { Link } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
-import "./about.scss";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import "./about.scss";
 
-export default async function About() {
-  const locale = await getLocale();
+export default async function About({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
 
-  const { response: news } = await sendApiRequestSSR("/news", {
-    method: "get",
-    parameters: {
-      languageCode: locale === "srl" ? "sr_lt" : locale,
-      limit: 3,
+  const { response: news } = await sendApiRequestSSR(
+    "/news",
+    {
+      method: "get",
+      parameters: {
+        languageCode: locale === "srl" ? "sr_lt" : locale,
+        limit: 3,
+      },
     },
-  });
+    false,
+    false
+  );
 
   if (!news) return <div className="error">Error loading news</div>;
 

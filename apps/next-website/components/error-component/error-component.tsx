@@ -1,11 +1,13 @@
 "use client";
 import Icon from "@/components/icon/icon";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import "./error-component.scss";
 
 export default function ErrorComponent() {
   const t = useTranslations();
+  const router = useRouter();
 
   return (
     <div className="error-component-container">
@@ -25,7 +27,7 @@ export default function ErrorComponent() {
                 <Icon name="arrow-right" className="error-icon" />
               </button>
             </Link>
-            <button className="error-return">
+            <button className="error-return" onClick={() => router.back()}>
               <p>{t("errorPage.routeError.buttons.1")}</p>
               <Icon name="arrow-right" className="error-icon" />
             </button>

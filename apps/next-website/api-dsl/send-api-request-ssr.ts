@@ -8,7 +8,7 @@ if (!baseApiUrl) throw new Error("NEXT_PUBLIC_API_URL not defined");
 
 type Response<
   Endpoint extends Endpoints,
-  T extends Request<Endpoint>,
+  T extends Request<Endpoint>
 > = T extends {
   method: infer Method;
 }
@@ -19,13 +19,13 @@ type Response<
 
 export default async function sendApiRequestSSR<
   T extends Request<Endpoint>,
-  Endpoint extends Endpoints,
+  Endpoint extends Endpoints
 >(
   endpoint: Endpoint,
   request: T,
   includeCookies: boolean = true,
   includeApiKey: boolean = false,
-  abortSignal?: AbortSignal,
+  abortSignal?: AbortSignal
 ): Promise<Response<Endpoint, T>> {
   const url = new URL(baseApiUrl + endpoint);
   const requestCopy = structuredClone(request);
@@ -42,7 +42,7 @@ export default async function sendApiRequestSSR<
     }
 
     url.search = new URLSearchParams(
-      requestCopy.parameters as Record<string, string>,
+      requestCopy.parameters as Record<string, string>
     ).toString();
   }
 
