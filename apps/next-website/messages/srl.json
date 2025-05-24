@@ -1284,5 +1284,45 @@
       ],
       "title": "Dokumenta"
     }
+  },
+  "metadata": {
+    "siteName": "Elektrotehnička škola Zemun",
+    "titleTemplate": "%s | ETŠ Zemun",
+    "root": {
+      "title": "Elektrotehnička škola \"Zemun\"",
+      "description": "Saznajte sve o upisu, smerovima i prednostima školovanja u Elektrotehničkoj školi Zemun – izbor koji otvara vrata uspešne budućnosti."
+    },
+    "documents": {
+      "title": "Dokumenta",
+      "description": "Pogledajte i preuzmite važne školske dokumente – pravilnike, planove, obrasce i druga zvanična akta Elektrotehničke škole Zemun."
+    },
+    "history": {
+      "title": "Istorija škole",
+      "description": "Upoznajte se sa bogatom tradicijom Elektrotehničke škole Zemun i ključnim momentima u njenom razvoju kroz decenije."
+    },
+    "teachers": {
+      "title": "Nastavnici",
+      "description": "Predstavljen tim stručnih i posvećenih nastavnika koji prenose znanje i oblikuju buduće stručnjake iz oblasti elektrotehnike i informatike."
+    },
+    "news": {
+      "title": "Novosti",
+      "description": "Najnovije vesti, obaveštenja i dešavanja iz Elektrotehničke škole Zemun – ostanite u toku sa svim važnim informacijama."
+    },
+    "profiles": {
+      "title": "Obrazovni profili",
+      "description": "Pregled dostupnih obrazovnih profila i smerova – saznajte šta svaki profil nudi i koji su uslovi i mogućnosti školovanja."
+    },
+    "awards": {
+      "title": "Takmičenja i osvojene nagrade",
+      "description": "Pogledajte uspehe naših učenika na školskim, opštinskim i republičkim takmičenjima iz stručnih i opštih predmeta."
+    },
+    "students": {
+      "title": "Učenici",
+      "description": "Informacije namenjene učenicima – rasporedi, vannastavne aktivnosti, saveti i podrška za svakodnevni školski život."
+    },
+    "enrollment": {
+      "title": "Upis i prijem",
+      "description": "Sve što treba da znate o upisu u Elektrotehničku školu Zemun – smerovi, bodovi, uslovi, potrebna dokumenta i vodič kroz proces prijave."
+    }
   }
 }

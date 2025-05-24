@@ -1175,5 +1175,45 @@
       ],
       "title": "Documents"
     }
+  },
+  "metadata": {
+    "siteName": "Electrotechnical School of Zemun",
+    "titleTemplate": "%s | ETŠ Zemun",
+    "root": {
+      "title": "Electrotechnical School of Zemun",
+      "description": "Learn about enrollment, education profiles, and benefits of studying at the Electrotechnical School of Zemun - a choice that opens the doors to a successful future."
+    },
+    "documents": {
+      "title": "Documents",
+      "description": "View and download important school documents - rules, plans, forms, and other official acts of the Electrotechnical School of Zemun."
+    },
+    "history": {
+      "title": "School History",
+      "description": "Get familiar with the rich tradition of the Electrotechnical School of Zemun and its key milestones throughout the decades."
+    },
+    "teachers": {
+      "title": "Teachers",
+      "description": "Meet the team of skilled and dedicated teachers who pass on their knowledge and shape future experts in the field of electrical engineering and computer science."
+    },
+    "news": {
+      "title": "News",
+      "description": "The latest news, announcements, and events from the Electrotechnical School of Zemun - stay informed about all important information."
+    },
+    "profiles": {
+      "title": "Education Profiles",
+      "description": "Overview of available education profiles and courses - learn what each profile offers and what are the conditions and opportunities for studying."
+    },
+    "awards": {
+      "title": "Competitions and Awards",
+      "description": "Check out the achievements of our students at school, municipal, and national competitions in vocational and general subjects."
+    },
+    "students": {
+      "title": "Students",
+      "description": "Information for students - timetables, extracurricular activities, tips, and support for daily school life."
+    },
+    "enrollment": {
+      "title": "Enrollment and Admission",
+      "description": "Everything you need to know about enrolling in the Electrotechnical School of Zemun - courses, points, conditions, required documents, and a guide through the application process."
+    }
   }
 }
