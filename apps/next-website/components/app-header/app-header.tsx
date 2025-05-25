@@ -8,11 +8,24 @@ import { FocusTrap } from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import "./app-header.scss";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const { setTheme, theme } = useTheme();
+  const themeRef = useRef<HTMLDivElement>(null!);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      themeRef.current.classList.add("dark-theme-active");
+      themeRef.current.children[0].classList.add("active");
+      themeRef.current.children[1].classList.remove("active");
+    } else {
+      themeRef.current.classList.remove("dark-theme-active");
+      themeRef.current.children[0].classList.remove("active");
+      themeRef.current.children[1].classList.add("active");
+    }
+  }, [theme]);
 
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -125,8 +138,9 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
               <div
                 suppressHydrationWarning
                 className={`theme-icons-container ${
-                  theme === "dark" && "dark-theme-active"
+                  theme === "dark" ? "dark-theme-active" : ""
                 }`}
+                ref={themeRef}
               >
                 <Icon
                   suppressHydrationWarning
