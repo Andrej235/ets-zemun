@@ -8,10 +8,10 @@ import React, {
   useState,
 } from "react";
 import "./history.scss";
-import createCirclePath from "@/svg/create-circle-path";
+import createCirclePath from "@/lib/svg/create-circle-path";
 import { inView } from "motion/react";
-import getPathTotalLength from "@/svg/get-path-length";
-import createRoundedCornerPath from "@/svg/create-rounded-path";
+import getPathTotalLength from "@/lib/svg/get-path-length";
+import createRoundedCornerPath from "@/lib/svg/create-rounded-path";
 
 type TimelineStyle = "alternating" | "left" | "right" | "center";
 

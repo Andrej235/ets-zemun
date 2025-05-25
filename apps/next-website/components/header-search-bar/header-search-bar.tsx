@@ -1,12 +1,12 @@
-import { SearchEntry, searchMap } from "@/assets/search-map";
 import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
 import Icon from "@/components/icon/icon";
+import { useRouter } from "@/i18n/navigation";
+import { SearchEntry, searchMap } from "@/lib/search-map";
 import { FocusTrap } from "focus-trap-react";
 import Fuse, { FuseResult } from "fuse.js";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./header-search-bar.scss";
-import { useRouter } from "@/i18n/navigation";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);

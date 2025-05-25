@@ -2,7 +2,7 @@ import "./auto-complete-suggestions.scss";
 import { useEffect, useRef } from "react";
 import { FuseResult } from "fuse.js";
 import { AnimatePresence, motion } from "motion/react";
-import { SearchEntry } from "@/assets/search-map";
+import { SearchEntry } from "@/lib/search-map";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 

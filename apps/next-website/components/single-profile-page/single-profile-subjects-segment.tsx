@@ -1,6 +1,6 @@
 "use client";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
-import useOutsideClick from "@/hooks/use-outside-click";
+import useOutsideClick from "@/lib/hooks/use-outside-click";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
