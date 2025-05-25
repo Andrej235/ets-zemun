@@ -11,7 +11,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
-import Script from "next/script";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export async function generateMetadata({
   params,
@@ -86,8 +86,6 @@ export default async function RootLocaleLayout({
             </NextIntlClientProvider>
           </div>
         </ThemeProvider>
-
-        <Script src="https://kit.fontawesome.com/053e158ed1.js"></Script>
       </body>
     </html>
   );
