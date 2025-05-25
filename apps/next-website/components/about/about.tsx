@@ -30,12 +30,18 @@ export default async function About({
     <div id="about-page" data-search-key="o-nama">
       <section className="hero-space">
         <div className="hero-image">
+          <Image
+            src="/hero-image.webp"
+            alt="student"
+            fill
+            priority
+            fetchPriority="high"
+          />
+
           <div className="text">
             <h1>{t("about.hero.title")}</h1>
             <h2>{t("about.hero.tagLine")}</h2>
           </div>
-
-          <Image src="/hero-image.jpg" alt="student" fill />
         </div>
 
         <div className="hero-block">

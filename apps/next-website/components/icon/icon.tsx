@@ -20,6 +20,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
         className={`icon fa fa-${name}${className ? " " + className : ""}`}
         ref={ref}
         {...attributes}
+        suppressHydrationWarning
       />
     );
   }

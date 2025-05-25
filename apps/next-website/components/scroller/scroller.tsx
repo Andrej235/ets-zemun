@@ -1,5 +1,4 @@
 "use client";
-import Floatie from "@/components/floatie/floatie";
 import Icon from "@/components/icon/icon";
 import {
   motion,
@@ -9,13 +8,10 @@ import {
 } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import "./scroller.scss";
-import { usePathname } from "next/navigation";
 
 export default function Scroller() {
   const [isScrollerVisible, setIsScrollerVisible] = useState(false);
   const [isScrollerAvailable, setIsScrollerAvailable] = useState(false);
-
-  const location = usePathname(); //? Only needed to retrigger the useEffect which decides whether to show the scroller upon entering a new page
 
   useEffect(() => {
     const scrollScaleFactor =
@@ -26,7 +22,7 @@ export default function Scroller() {
 
     const showScroller = scrollScaleFactor > 2;
     setIsScrollerAvailable(showScroller);
-  }, [location]);
+  }, []);
 
   const enterTopThreashold = useMemo(
     () =>
@@ -87,38 +83,42 @@ export default function Scroller() {
     }
   });
 
+  if (!isScrollerAvailable) return null;
+
   return (
-    <>
-      {isScrollerAvailable && (
-        <Floatie
-          id="scroller"
-          className="scroller"
-          isFloatieVisible={isScrollerVisible && isScrollerAvailable}
-          onDiscardFloatie={() => setIsScrollerAvailable(false)}
-          onClick={() =>
-            document.scrollingElement?.scrollTo({
-              behavior: "smooth",
-              top: 0,
-            })
-          }
-          overlay={{
-            children: <Icon name="caret-up" className="scroller-icon" />,
-            className: "scroller-drag-overlay",
-          }}
-        >
-          <div className="scroller-inner-container">
-            <Icon name="caret-up" className="scroller-icon" />
-            <svg viewBox="0 0 100 100">
-              <motion.circle
-                style={{ pathLength: scrollYProgress }}
-                cx="50%"
-                cy="50%"
-                r="50%"
-              />
-            </svg>
-          </div>
-        </Floatie>
-      )}
-    </>
+    <motion.div
+      id="scroller"
+      className="scroller"
+      animate={{
+        y: isScrollerVisible && isScrollerAvailable ? 0 : 75,
+      }}
+    >
+      <motion.button
+        onClick={() =>
+          document.scrollingElement?.scrollTo({
+            behavior: "smooth",
+            top: 0,
+          })
+        }
+        animate={{
+          opacity: isScrollerVisible && isScrollerAvailable ? 1 : 0,
+        }}
+        className="draggable-floatie"
+        tabIndex={isScrollerVisible && isScrollerAvailable ? undefined : -1}
+      >
+        <div className="scroller-inner-container">
+          <Icon name="caret-up" className="scroller-icon" />
+
+          <svg viewBox="0 0 100 100">
+            <motion.circle
+              style={{ pathLength: scrollYProgress }}
+              cx="50%"
+              cy="50%"
+              r="50%"
+            />
+          </svg>
+        </div>
+      </motion.button>
+    </motion.div>
   );
 }
