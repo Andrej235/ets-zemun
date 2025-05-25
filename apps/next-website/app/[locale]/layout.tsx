@@ -12,6 +12,7 @@ import {
 } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import ScrollToSearchEntry from "@/components/scroll-to-seach-entry";
 
 export async function generateMetadata({
   params,
@@ -84,6 +85,8 @@ export default async function RootLocaleLayout({
 
               <AppFooter />
             </NextIntlClientProvider>
+
+            <ScrollToSearchEntry />
           </div>
         </ThemeProvider>
       </body>

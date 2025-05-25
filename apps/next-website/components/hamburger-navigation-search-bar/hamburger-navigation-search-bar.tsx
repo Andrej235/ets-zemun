@@ -6,7 +6,7 @@ import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
 import { useTranslations } from "next-intl";
 import { SearchEntry, searchMap } from "@/assets/search-map";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 type HamburgerNavigationSearchBarProps = {
   readonly onRequestCloseHamburgerNavigation: () => void;

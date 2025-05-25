@@ -4,7 +4,7 @@ import { FuseResult } from "fuse.js";
 import { AnimatePresence, motion } from "motion/react";
 import { SearchEntry } from "@/assets/search-map";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 type AutoCompleteSuggestions = {
   readonly containerRef: React.RefObject<HTMLDivElement>;

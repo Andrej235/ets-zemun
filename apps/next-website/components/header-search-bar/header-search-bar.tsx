@@ -4,9 +4,9 @@ import Icon from "@/components/icon/icon";
 import { FocusTrap } from "focus-trap-react";
 import Fuse, { FuseResult } from "fuse.js";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./header-search-bar.scss";
+import { useRouter } from "@/i18n/navigation";
 
 export default function HeaderSearchBar() {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
