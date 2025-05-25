@@ -13,7 +13,7 @@ export default function ScrollToSearchEntry() {
     if (!searchKey) return;
 
     const element = document.querySelector(
-      `[data-search-key="${searchKey}"]`
+      `[data-search-key="${searchKey}"]`,
     ) as HTMLElement;
     if (!element) return;
 

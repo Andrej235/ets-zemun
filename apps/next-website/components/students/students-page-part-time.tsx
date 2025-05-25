@@ -25,17 +25,17 @@ export default function StudentsPagePartTime() {
 
   const deadlines: Deadlines = useMemo(
     () => t.raw("students.sections.partTime.deadlines") as Deadlines,
-    [t]
+    [t],
   );
 
   const priceList: PriceLists = useMemo(
     () => t.raw("students.sections.partTime.priceList") as PriceLists,
-    [t]
+    [t],
   );
 
   const examData: ExamData = useMemo(
     () => t.raw("students.sections.partTime.examData") as ExamData,
-    [t]
+    [t],
   );
 
   return (

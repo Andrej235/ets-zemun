@@ -29,7 +29,7 @@ export default function Scroller() {
       typeof document === "undefined"
         ? 0
         : document.scrollingElement!.clientHeight * 0.7,
-    []
+    [],
   );
 
   const exitTopThreashold = useMemo(
@@ -37,7 +37,7 @@ export default function Scroller() {
       typeof document === "undefined"
         ? 0
         : document.scrollingElement!.clientHeight * 0.6,
-    []
+    [],
   );
 
   const { scrollY } = useScroll();

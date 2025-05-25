@@ -14,7 +14,7 @@ export default function StudentsPageStudentParliament() {
 
   const studentsData: StudentsData = useMemo(
     () => t.raw("students.sections.studentsParliament.data") as StudentsData,
-    [t]
+    [t],
   );
 
   return (

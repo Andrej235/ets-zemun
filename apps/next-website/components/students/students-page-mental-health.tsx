@@ -4,10 +4,7 @@ export default function StudentsPageMentalHealth() {
   const t = useTranslations();
 
   return (
-    <div
-      className="mental-health"
-      data-search-key="mentalno-zdravlje"
-    >
+    <div className="mental-health" data-search-key="mentalno-zdravlje">
       <h1>{t("students.sections.mentalHealth.title")}</h1>
 
       <div className="mental-health-description">

@@ -27,7 +27,7 @@ export default function HeaderSearchBar() {
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<

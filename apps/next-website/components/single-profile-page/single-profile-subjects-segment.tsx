@@ -73,8 +73,8 @@ export default function SingleProfileSubjectsSegment({
       const years = [
         ...new Set(
           [...data.generalSubjects, ...data.vocationalSubjects].map(
-            (x) => x.year
-          )
+            (x) => x.year,
+          ),
         ),
       ];
 
@@ -92,12 +92,12 @@ export default function SingleProfileSubjectsSegment({
               .map((x) => ({
                 ...x,
                 type: "vocational",
-              }))
+              })),
           ),
       }));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data, t]
+    [data, t],
   );
 
   return (

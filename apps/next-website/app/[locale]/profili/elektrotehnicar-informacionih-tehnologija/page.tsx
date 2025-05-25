@@ -31,7 +31,7 @@ export async function generateMetadata({
     },
     alternates: generateAlternateUrls(
       locale,
-      "elektrotehnicar-informacionih-tehnologija"
+      "elektrotehnicar-informacionih-tehnologija",
     ),
   };
 }

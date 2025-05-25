@@ -31,7 +31,7 @@ export async function generateMetadata({
     },
     alternates: generateAlternateUrls(
       locale,
-      "elektromehanicar-za-rashladne-i-termicke-uredjaje"
+      "elektromehanicar-za-rashladne-i-termicke-uredjaje",
     ),
   };
 }

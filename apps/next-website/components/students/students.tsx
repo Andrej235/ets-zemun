@@ -43,7 +43,7 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   )?.component;
 
   return (

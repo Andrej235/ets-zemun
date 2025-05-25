@@ -37,7 +37,7 @@ export default function HamburgerNavigationSearchBar({
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<
