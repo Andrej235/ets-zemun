@@ -27,7 +27,7 @@ export default async function SingleProfileElectricalDevicesPage({
       <div className="header">
         <div className="image-container">
           <Image
-            src="/images/profiles/elektromehanicar-za-rashladne-i-termicke-uredjaje.jpg"
+            src="/images/profiles/elektromehanicar-za-rashladne-i-termicke-uredjaje.webp"
             alt="Elektromehaničar za rashladne i termičke uređaje"
             fill
           />

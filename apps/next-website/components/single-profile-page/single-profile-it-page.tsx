@@ -27,7 +27,7 @@ export default async function SingleProfileITPage({
       <div className="header">
         <div className="image-container">
           <Image
-            src="/images/profiles/elektrotehnicar-informacionih-tehnologija.jpg"
+            src="/images/profiles/elektrotehnicar-informacionih-tehnologija.webp"
             alt="Placeholder"
             fill
           />

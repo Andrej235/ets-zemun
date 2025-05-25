@@ -27,7 +27,7 @@ export default async function SingleProfileElectricalAutomaticsPage({
       <div className="header">
         <div className="image-container">
           <Image
-            src="/images/profiles/elektrotehnicar-automatike.jpg"
+            src="/images/profiles/elektrotehnicar-automatike.webp"
             alt="Elektrotehničar automatike"
             fill
           />

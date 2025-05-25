@@ -27,7 +27,7 @@ export default async function SingleProfileNetworkAdminPage({
       <div className="header">
         <div className="image-container">
           <Image
-            src="/images/profiles/administrator-racunarskih-mreza.jpg"
+            src="/images/profiles/administrator-racunarskih-mreza.webp"
             alt="Administrator računarskih mreža"
             fill
           />

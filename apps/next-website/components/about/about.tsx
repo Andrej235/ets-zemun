@@ -96,7 +96,7 @@ export default async function About({
 
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
-          count={100}
+          count={75}
           image="/images/info-cards/teachers.webp"
           title={t("about.schoolPreviewCards.teachers.title")}
           description={t("about.schoolPreviewCards.teachers.description")}
@@ -112,7 +112,7 @@ export default async function About({
         />
 
         <SchoolPreviewCard
-          count={40}
+          count={60}
           title={t("about.schoolPreviewCards.classrooms.title")}
           image="/images/info-cards/samsung-classroom.webp"
           description={t("about.schoolPreviewCards.classrooms.description")}
@@ -122,7 +122,7 @@ export default async function About({
         <SchoolPreviewCard
           count={25}
           title={t("about.schoolPreviewCards.awards.title")}
-          image="/images/info-cards/trophy.jpg"
+          image="/images/info-cards/trophy.webp"
           description={t("about.schoolPreviewCards.awards.description")}
           layout="image-right"
         />
