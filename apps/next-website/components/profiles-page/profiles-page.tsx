@@ -17,7 +17,7 @@ export default async function ProfilesPage({
       <div className="profiles-page-section">
         <SchoolPreviewCard
           title={t("educationalProfiles.it.title")}
-          image="/images/profiles/elektrotehnicar-informacionih-tehnologija.jpg"
+          image="/images/profiles/elektrotehnicar-informacionih-tehnologija.webp"
           description={
             t("educationalProfiles.it.descriptionOne") +
             "</br>" +
@@ -41,7 +41,7 @@ export default async function ProfilesPage({
       <div className="profiles-page-section">
         <SchoolPreviewCard
           title={t("educationalProfiles.administrator.title")}
-          image="/images/profiles/administrator-racunarskih-mreza.jpg"
+          image="/images/profiles/administrator-racunarskih-mreza.webp"
           description={
             t("educationalProfiles.administrator.descriptionOne") +
             "</br>" +
@@ -66,7 +66,7 @@ export default async function ProfilesPage({
       <div className="profiles-page-section">
         <SchoolPreviewCard
           title={t("educationalProfiles.electricalEngineer.title")}
-          image="/images/profiles/elektrotehnicar-racunara.jpg"
+          image="/images/profiles/elektrotehnicar-racunara.webp"
           description={
             t("educationalProfiles.electricalEngineer.descriptionOne") +
             "</br>" +
@@ -90,7 +90,7 @@ export default async function ProfilesPage({
       <div className="profiles-page-section">
         <SchoolPreviewCard
           title={t("educationalProfiles.electricalAutomatics.title")}
-          image="/images/profiles/elektrotehnicar-automatike.jpg"
+          image="/images/profiles/elektrotehnicar-automatike.webp"
           description={
             t("educationalProfiles.electricalAutomatics.descriptionOne") +
             "</br>" +
@@ -115,7 +115,7 @@ export default async function ProfilesPage({
       <div className="profiles-page-section">
         <SchoolPreviewCard
           title={t("educationalProfiles.electricalDevices.title")}
-          image="/images/profiles/elektromehanicar-za-rashladne-i-termicke-uredjaje.jpg"
+          image="/images/profiles/elektromehanicar-za-rashladne-i-termicke-uredjaje.webp"
           description={
             t("educationalProfiles.electricalDevices.descriptionOne") +
             "</br>" +

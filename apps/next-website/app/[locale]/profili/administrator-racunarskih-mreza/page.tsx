@@ -31,7 +31,7 @@ export async function generateMetadata({
     },
     alternates: generateAlternateUrls(
       locale,
-      "administrator-racunarskih-mreza"
+      "administrator-racunarskih-mreza",
     ),
   };
 }

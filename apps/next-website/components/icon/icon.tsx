@@ -23,7 +23,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
         suppressHydrationWarning
       />
     );
-  }
+  },
 );
 
 Icon.displayName = "Icon";

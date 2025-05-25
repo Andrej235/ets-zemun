@@ -1,12 +1,12 @@
-import { useMemo, useRef, useState } from "react";
-import Icon from "@/components/icon/icon";
-import "./hamburger-navigation-search-bar.scss";
-import Fuse, { FuseResult } from "fuse.js";
-import FocusTrap from "focus-trap-react";
 import AutoCompleteSuggestions from "@/components/auto-complete-suggestions/auto-complete-suggestions";
+import Icon from "@/components/icon/icon";
+import { useRouter } from "@/i18n/navigation";
+import { SearchEntry, searchMap } from "@/lib/search-map";
+import FocusTrap from "focus-trap-react";
+import Fuse, { FuseResult } from "fuse.js";
 import { useTranslations } from "next-intl";
-import { SearchEntry, searchMap } from "@/assets/search-map";
-import { useRouter } from "next/navigation";
+import { useMemo, useRef, useState } from "react";
+import "./hamburger-navigation-search-bar.scss";
 
 type HamburgerNavigationSearchBarProps = {
   readonly onRequestCloseHamburgerNavigation: () => void;
@@ -37,7 +37,7 @@ export default function HamburgerNavigationSearchBar({
           },
         ],
       }),
-    [t]
+    [t],
   );
 
   const [searchAutoComplete, setSearchAutoComplete] = useState<

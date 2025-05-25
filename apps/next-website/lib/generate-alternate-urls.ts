@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export default function generateAlternateUrls(
   locale: string,
-  extension: string
+  extension: string,
 ): Metadata["alternates"] {
   const baseUrl = process.env.NEXT_PUBLIC_WEBSITE_URL;
   const otherLanguages: Record<string, string> = {

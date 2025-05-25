@@ -90,18 +90,6 @@
           background-color: $accent-secondary-highlight;
         }
       }
-
-      &:has(~ .search-bar-not-active) {
-        transform: translate(30rem);
-
-        @media screen and (max-width: 1440px) {
-          transform: translate(25rem);
-        }
-
-        @media screen and (max-width: 1120px) {
-          transform: translate(20rem);
-        }
-      }
     }
   }
 

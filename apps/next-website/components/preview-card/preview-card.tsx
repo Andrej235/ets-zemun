@@ -39,7 +39,7 @@ export default function PreviewCard({
       className={"preview-card " + layout}
     >
       <div className="image-container">
-        <Image src={imagePath} alt={imageAlt} fill />
+        <Image src={imagePath} alt={imageAlt} fill sizes="100%" />
       </div>
 
       {children}

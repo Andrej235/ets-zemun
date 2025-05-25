@@ -14,7 +14,7 @@ export default function StudentsPageParentParliament() {
 
   const parentData: ParentData = useMemo(
     () => t.raw("students.sections.parentParliament.data") as ParentData,
-    [t]
+    [t],
   );
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
-import useOutsideClick from "@/hooks/use-outside-click";
+import useOutsideClick from "@/lib/hooks/use-outside-click";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -73,8 +73,8 @@ export default function SingleProfileSubjectsSegment({
       const years = [
         ...new Set(
           [...data.generalSubjects, ...data.vocationalSubjects].map(
-            (x) => x.year
-          )
+            (x) => x.year,
+          ),
         ),
       ];
 
@@ -92,12 +92,12 @@ export default function SingleProfileSubjectsSegment({
               .map((x) => ({
                 ...x,
                 type: "vocational",
-              }))
+              })),
           ),
       }));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data, t]
+    [data, t],
   );
 
   return (

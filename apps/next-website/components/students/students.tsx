@@ -43,7 +43,7 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   )?.component;
 
   return (
@@ -82,7 +82,7 @@ export default function Students() {
               isActive={activeSection === "vanredni-ucenici"}
             />
             <HeroInfoCard
-              icon="pied-piper-pp"
+              icon="hands-helping"
               title={t("students.hero.cards.3")}
               onClick={handleCardClick}
               sectionName="pp-sluzba"

@@ -3,12 +3,13 @@
     align-self: start;
     position: relative;
     top: 0;
-    width: max-content;
     border-radius: 1rem;
     overflow: clip;
     height: 50vh;
+    min-width: 5rem;
     pointer-events: none;
     touch-action: none;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
@@ -19,6 +20,7 @@
       border-radius: 1rem;
 
       display: flex;
+      justify-content: space-between;
       overflow: clip;
 
       .search-button {
@@ -26,8 +28,11 @@
         touch-action: auto;
         position: relative;
         min-width: 5rem;
+        width: max-content;
         aspect-ratio: 1;
         background-color: $accent-secondary;
+
+        transition: 0.25s;
 
         &:hover,
         &:focus-visible {
@@ -38,11 +43,18 @@
       .search-bar-input-container {
         @include input-field-container;
         width: 30rem;
+        height: 5rem;
         border-end-end-radius: 0;
         border-start-end-radius: 0;
         pointer-events: all;
         touch-action: auto;
         font-size: 1.9rem;
+        background: $accent-secondary;
+        transition: 0.25s;
+
+        .search-bar {
+          width: 100%;
+        }
 
         @media screen and (max-width: 1440px) {
           width: 25rem;
@@ -59,7 +71,7 @@
           width: 1rem;
           height: 100%;
           background-color: $accent-secondary;
-          transition: 0.25s ease-out;
+          transition: 0.1s ease-in;
         }
 
         &:has(:focus-within) .filler {
@@ -69,7 +81,18 @@
     }
 
     &.search-bar-not-active .search-bar-input-container {
-      transform: translate(100%);
+      width: 0;
+      padding: 0;
+      transform: translate(2rem);
+
+      .search-bar {
+        width: 0;
+        height: 0;
+      }
+
+      .filler {
+        opacity: 0;
+      }
     }
   }
 }

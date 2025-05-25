@@ -1,6 +1,6 @@
 import Icon from "@/components/icon/icon";
-import "./app-footer.scss";
 import { useTranslations } from "next-intl";
+import "./app-footer.scss";
 
 export default function AppFooter() {
   const t = useTranslations();
@@ -99,26 +99,6 @@ export default function AppFooter() {
               {t("footer.credits.aleksa")}
             </a>
           </p>
-        </div>
-
-        <div className="social-media-links">
-          <a
-            href={"https://www.linkedin.com"}
-            aria-label={t("footer.socialMedia.0")}
-          >
-            <Icon name="linkedin" />
-          </a>
-
-          <a href={"https://www.x.com"} aria-label={t("footer.socialMedia.1")}>
-            <Icon name="twitter" />
-          </a>
-
-          <a
-            href={"https://www.instagram.com"}
-            aria-label={t("footer.socialMedia.2")}
-          >
-            <Icon name="instagram" />
-          </a>
         </div>
       </div>
     </footer>

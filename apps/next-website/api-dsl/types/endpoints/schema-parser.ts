@@ -3,7 +3,7 @@ import { IsPropertyNullable, ParseSchemaProperty } from "./property-parser";
 
 type Split<
   T extends string,
-  Separator extends string = " "
+  Separator extends string = " ",
 > = T extends `${infer L}${Separator}${infer R}`
   ? [...Split<L, Separator>, ...Split<R, Separator>]
   : [T];
@@ -29,10 +29,10 @@ export type ParseSchema<T extends SchemaInfo<SchemaNames>> =
       ? T["enum"][number]
       : never
     : "type" extends keyof T
-    ? T["type"] extends "object"
-      ? ParseSchemaObject<T>
-      : never
-    : never;
+      ? T["type"] extends "object"
+        ? ParseSchemaObject<T>
+        : never
+      : never;
 
 type ParseSchemaObject<T extends SchemaInfo<SchemaNames>> =
   "properties" extends keyof T

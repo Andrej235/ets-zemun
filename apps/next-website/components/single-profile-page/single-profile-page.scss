@@ -231,7 +231,10 @@
         color: $text-accent;
         cursor: pointer;
         border-radius: 5px;
-        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        transition:
+          background-color 0.3s,
+          transform 0.3s,
+          box-shadow 0.3s;
         aspect-ratio: 1;
         width: 5rem;
 

@@ -388,6 +388,16 @@
         ]
       },
       {
+        "title": "Curricula and Programs",
+        "documents": [
+          "Electrotechnician of Information Technology",
+          "Computer Network Administrator",
+          "Electrotechnician of Computer Engineering",
+          "Electrotechnician of Automation",
+          "Electromechanic for Cooling and Thermal Devices"
+        ]
+      },
+      {
         "title": "Behavior and Ethics",
         "documents": [
           "Code of Ethics",
@@ -419,6 +429,14 @@
       {
         "title": "Institutional Foundation",
         "documents": ["Statute"]
+      },
+      {
+        "title": "Annual Plans",
+        "documents": [
+          "Annual Plan 2024/2025",
+          "Annex 1 2024/2025",
+          "Annex 2 2024/2025"
+        ]
       }
     ]
   },

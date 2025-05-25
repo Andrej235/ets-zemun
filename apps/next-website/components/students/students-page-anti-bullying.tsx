@@ -5,10 +5,7 @@ export default function StudentsPageAntiBullying() {
   const t = useTranslations();
 
   return (
-    <div
-      className="anti-bullying"
-      data-search-key="nasilje"
-    >
+    <div className="anti-bullying" data-search-key="nasilje">
       <h1>{t("students.sections.bullying.title")}</h1>
 
       <div className="anti-bullying-description">

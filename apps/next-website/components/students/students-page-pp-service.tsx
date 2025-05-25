@@ -4,10 +4,7 @@ export default function StudentsPagePPService() {
   const t = useTranslations();
 
   return (
-    <div
-      className="pp-service"
-      data-search-key="pp-sluzba"
-    >
+    <div className="pp-service" data-search-key="pp-sluzba">
       <h1>{t("students.sections.ppService.title")}</h1>
       <div className="pp-service-description">
         <p>

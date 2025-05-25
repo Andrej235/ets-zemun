@@ -90,7 +90,7 @@ export default function About() {
 
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
-          count={100}
+          count={75}
           image="/images/info-cards/teachers.jpg"
           title={t("about.schoolPreviewCards.teachers.title")}
           description={t("about.schoolPreviewCards.teachers.description")}
@@ -106,7 +106,7 @@ export default function About() {
         />
 
         <SchoolPreviewCard
-          count={40}
+          count={60}
           title={t("about.schoolPreviewCards.classrooms.title")}
           image="/images/info-cards/samsung-classroom.jpg"
           description={t("about.schoolPreviewCards.classrooms.description")}

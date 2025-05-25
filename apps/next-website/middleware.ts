@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
 
   if (!locale || !hasLocale(supportedLocales, locale))
     return NextResponse.redirect(
-      new URL(`/${defaultLocale}/${segments.slice(2).join("/")}`, request.url)
+      new URL(`/${defaultLocale}/${segments.slice(2).join("/")}`, request.url),
     );
 
   const intlMiddleware = createMiddlewareClient({
