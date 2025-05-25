@@ -19,6 +19,52 @@ const data: {
 } = {
   documentGroups: [
     {
+      title: "documents.groups.6.title",
+      iconName: "calendar-check",
+      accentColor: "#2B7A78",
+      documents: [
+        {
+          title: "documents.groups.6.documents.0",
+          url: "/documents/gp-2024-25.docx",
+        },
+        {
+          title: "documents.groups.6.documents.1",
+          url: "/documents/aneks-1-2024-25.pdf",
+        },
+        {
+          title: "documents.groups.6.documents.2",
+          url: "/documents/aneks-2-2024-25.pdf",
+        },
+      ],
+    },
+    {
+      title: "documents.groups.7.title",
+      iconName: "book-open",
+      accentColor: "#A49271",
+      documents: [
+        {
+          title: "documents.groups.7.documents.0",
+          url: "/documents/planovi-nastave/elektrotehničar-informacionih-tehnologija.pdf",
+        },
+        {
+          title: "documents.groups.7.documents.1",
+          url: "/documents/planovi-nastave/administrator-računarskih-mreža.pdf",
+        },
+        {
+          title: "documents.groups.7.documents.2",
+          url: "/documents/planovi-nastave/elektrotehničar-računara.pdf",
+        },
+        {
+          title: "documents.groups.7.documents.3",
+          url: "/documents/planovi-nastave/elektrotehničar-automatike.pdf",
+        },
+        {
+          title: "documents.groups.7.documents.4",
+          url: "/documents/planovi-nastave/elektromehaničar-za-rashladne-i-termičke-uređaje.pdf",
+        },
+      ],
+    },
+    {
       title: "documents.groups.0.title",
       iconName: "users",
       accentColor: "#2A5DB0",
@@ -156,7 +202,7 @@ export default async function Documents({
                 ))}
               </div>
             </div>
-          ),
+          )
         )}
       </div>
     </div>

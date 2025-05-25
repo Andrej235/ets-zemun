@@ -419,6 +419,24 @@
       {
         "title": "Institucionalna fondacija",
         "documents": ["Statut"]
+      },
+      {
+        "title": "Godišnji planovi",
+        "documents": [
+          "Godišnji plan 2024/2025",
+          "Aneks 1 2024/2025",
+          "Aneks 2 2024/2025"
+        ]
+      },
+      {
+        "title": "Nastavni planovi i programi",
+        "documents": [
+          "Elektrotehničar informacionih tehnologija",
+          "Administrator računarskih mreža",
+          "Elektrotehničar računara",
+          "Elektrotehničar automatike",
+          "Elektromehaničar za rashladne i termičke uređaje"
+        ]
       }
     ]
   },
