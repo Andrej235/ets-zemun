@@ -1,0 +1,88 @@
+@mixin vertical {
+  .school-preview-card {
+    position: relative;
+
+    width: 100%;
+    height: 50%;
+    padding: 2rem 5rem;
+
+    justify-content: flex-start;
+
+    @media screen and (max-width: 768px) {
+      padding: 2rem 4rem;
+    }
+
+    @media screen and (max-width: 425px) {
+      padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+
+      .title {
+        font-size: 3rem;
+      }
+
+      .description {
+        font-size: 1.6rem;
+      }
+    }
+
+    .title {
+      font-size: 3rem;
+    }
+
+    .description {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.preview-card {
+  &.vertical {
+    @include vertical;
+  }
+
+  .school-preview-card {
+    position: absolute;
+    bottom: 0;
+
+    width: 54%;
+    height: 87%;
+    padding: 4rem;
+    background-color: $secondary-background;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+      font-size: 3rem;
+      text-align: left;
+      color: $accent-secondary;
+    }
+
+    .count {
+      font-size: 5rem;
+      color: $accent-secondary;
+    }
+
+    .description {
+      color: $text-secondary;
+      font-size: 1.6rem;
+      text-align: left;
+    }
+  }
+
+  .image-left {
+    right: 0;
+    padding-left: 13rem;
+    box-shadow: 5px 5px 15px $shadow;
+  }
+
+  .image-right {
+    left: 0;
+    padding-right: 13rem;
+    box-shadow: -5px 5px 15px $shadow;
+  }
+
+  @media screen and (max-width: 1024.98px) {
+    @include vertical;
+  }
+}
