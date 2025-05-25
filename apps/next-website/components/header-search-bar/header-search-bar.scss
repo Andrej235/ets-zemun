@@ -1,0 +1,75 @@
+#app-header .app-header-navigation {
+  .search-bar-container {
+    align-self: start;
+    position: relative;
+    top: 0;
+    width: max-content;
+    border-radius: 1rem;
+    overflow: clip;
+    height: 50vh;
+    pointer-events: none;
+    touch-action: none;
+
+    display: flex;
+    flex-direction: column;
+
+    .search-container {
+      position: relative;
+      z-index: 2;
+      border-radius: 1rem;
+
+      display: flex;
+      overflow: clip;
+
+      .search-button {
+        pointer-events: all;
+        touch-action: auto;
+        position: relative;
+        min-width: 5rem;
+        aspect-ratio: 1;
+        background-color: $accent-secondary;
+
+        &:hover,
+        &:focus-visible {
+          background-color: $accent-secondary-highlight;
+        }
+      }
+
+      .search-bar-input-container {
+        @include input-field-container;
+        width: 30rem;
+        border-end-end-radius: 0;
+        border-start-end-radius: 0;
+        pointer-events: all;
+        touch-action: auto;
+        font-size: 1.9rem;
+
+        @media screen and (max-width: 1440px) {
+          width: 25rem;
+        }
+
+        @media screen and (max-width: 1120px) {
+          width: 20rem;
+        }
+
+        .filler {
+          position: absolute;
+          top: 0;
+          right: -1rem;
+          width: 1rem;
+          height: 100%;
+          background-color: $accent-secondary;
+          transition: 0.25s ease-out;
+        }
+
+        &:has(:focus-within) .filler {
+          background-color: $accent-secondary-highlight;
+        }
+      }
+    }
+
+    &.search-bar-not-active .search-bar-input-container {
+      transform: translate(100%);
+    }
+  }
+}

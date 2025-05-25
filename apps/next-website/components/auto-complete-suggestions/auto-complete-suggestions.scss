@@ -1,0 +1,80 @@
+.search-bar-auto-complete-container {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  max-height: 100%;
+  background: $background;
+  overflow: auto;
+  padding: 6.5rem 1rem 1rem 1rem; // 7rem for the search bar (5rem) + 1.5rem for padding
+  border-radius: 0 0 1rem 1rem;
+  pointer-events: all;
+  touch-action: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  .search-bar-auto-complete-item {
+    position: relative;
+    min-height: max-content;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    font-size: 1rem;
+
+    .title {
+      max-width: 100%;
+      padding-right: 0.5rem;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .description {
+      max-width: 100%;
+      padding-right: 1rem;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 1.5rem;
+      font-weight: 100;
+    }
+
+    &:focus-visible {
+      color: $text-primary;
+      outline: 1px solid $outline;
+    }
+
+    &:hover {
+      color: $text-primary;
+      background-color: $secondary-background;
+    }
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 3px);
+      width: 95%;
+      height: 3px;
+      background-color: $outline;
+      opacity: 0.1;
+    }
+  }
+
+  .no-results {
+    color: $text-secondary;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 1rem;
+  }
+}
