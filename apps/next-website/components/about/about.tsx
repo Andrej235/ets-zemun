@@ -84,7 +84,7 @@ export default async function About({
 
             <div className="overview-image">
               <Image
-                src="/images/mission.jpg"
+                src="/images/mission.webp"
                 alt="Misija i vizija"
                 height={300}
                 width={300}
