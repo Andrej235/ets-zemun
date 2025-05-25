@@ -82,7 +82,7 @@ export default function Students() {
               isActive={activeSection === "vanredni-ucenici"}
             />
             <HeroInfoCard
-              icon="pied-piper-pp"
+              icon="hands-helping"
               title={t("students.hero.cards.3")}
               onClick={handleCardClick}
               sectionName="pp-sluzba"
