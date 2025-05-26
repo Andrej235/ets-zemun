@@ -527,6 +527,106 @@ export type ApiMap = {
         }
       }
     },
+    '/news/admin': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: {
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } }
+            }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/news/admin/{id}': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/news/admin/{id}/preview': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/news/admin/{id}/images': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/news': {
       post: {
         tags: [ 'News' ],
@@ -630,6 +730,25 @@ export type ApiMap = {
       }
     },
     '/news/{id}': {
+      delete: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '204': { description: 'No Content' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      },
       get: {
         tags: [ 'News' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
@@ -643,10 +762,12 @@ export type ApiMap = {
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           }
         }
-      },
+      }
+    },
+    '/news/{newsId}/translation/{languageCode}': {
       delete: {
         tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -696,106 +817,6 @@ export type ApiMap = {
         }
       }
     },
-    '/news/admin': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: {
-              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
-              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
-              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } }
-            }
-          },
-          '400': {
-            description: 'Bad Request',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}/preview': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}/images': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
     '/news/approve/{id}': {
       put: {
         tags: [ 'News' ],
@@ -821,27 +842,6 @@ export type ApiMap = {
       put: {
         tags: [ 'News' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '204': { description: 'No Content' },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/{newsId}/translation/{languageCode}': {
-      delete: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -1975,7 +1975,6 @@ export type ApiMap = {
         additionalProperties: false
       },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
-      CreateNewsImageRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
         properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' } } },
@@ -2054,7 +2053,7 @@ export type ApiMap = {
       UpdateLanguageRequestDto: { type: 'object', properties: { oldCode: { type: 'string' }, newCode: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       UpdateNewsRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/UpdateNewsTranslationRequestDto' } } },
         additionalProperties: false
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },

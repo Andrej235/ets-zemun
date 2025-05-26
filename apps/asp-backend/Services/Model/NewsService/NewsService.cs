@@ -13,7 +13,6 @@ namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService(
     ICreateSingleService<News> createService,
-    ICreateRangeService<NewsImage> createRangeImageService,
     ICreateSingleService<NewsTranslation> createTranslationService,
     IReadRangeService<News> readService,
     IReadRangeSelectedService<News> readSelectedService,
@@ -22,10 +21,10 @@ public partial class NewsService(
     IReadSingleSelectedService<News> readSingleSelectedService,
     ICountService<News> countService,
     ICountService<NewsImage> imageCountService,
+    IUpdateRangeService<NewsTranslation> translationUpdateRangeService,
     IExecuteUpdateService<News> updateService,
     IExecuteUpdateService<NewsTranslation> updateTranslationService,
     IDeleteService<News> deleteService,
-    IDeleteService<NewsImage> deleteImageService,
     IDeleteService<NewsTranslation> deleteTranslationService,
     IRequestMapper<CreateNewsRequestDto, News> createRequestMapper,
     IRequestMapper<CreateNewsTranslationRequestDto, NewsTranslation> createTranslationRequestMapper,

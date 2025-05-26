@@ -431,6 +431,7 @@ builder.Services.AddScoped<IReadSingleService<News>, ReadService<News>>();
 builder.Services.AddScoped<IReadSingleSelectedService<News>, ReadService<News>>();
 builder.Services.AddScoped<ICountService<News>, ReadService<News>>();
 builder.Services.AddScoped<ICountService<NewsImage>, ReadService<NewsImage>>();
+builder.Services.AddScoped<IUpdateRangeService<NewsTranslation>, UpdateService<NewsTranslation>>();
 builder.Services.AddScoped<IExecuteUpdateService<News>, UpdateService<News>>();
 builder.Services.AddScoped<
     IExecuteUpdateService<NewsTranslation>,

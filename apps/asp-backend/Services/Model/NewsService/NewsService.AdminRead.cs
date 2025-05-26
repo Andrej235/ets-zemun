@@ -31,7 +31,7 @@ public partial class NewsService
         );
     }
 
-    public Task<Result<AdminNewsResponseDto>> AdminGetById(int id, string languageCode)
+    public Task<Result<AdminNewsResponseDto>> AdminGetById(int id)
     {
         return readSingleSelectedService.Get(
             x => new AdminNewsResponseDto()

@@ -5,5 +5,5 @@ public class UpdateNewsRequestDto
     public int Id { get; set; }
     public string PreviewImage { get; set; } = null!;
     public DateOnly Date { get; set; }
-    public List<CreateNewsImageRequestDto> Images { get; set; } = null!;
+    public IEnumerable<UpdateNewsTranslationRequestDto> Translations { get; set; } = null!;
 }
