@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function SingleProfileElectricalAutomaticsPage({
   params,
@@ -14,7 +15,7 @@ export default async function SingleProfileElectricalAutomaticsPage({
     method: "get",
     parameters: {
       id: 4,
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
     },
   });
 
@@ -48,7 +49,7 @@ export default async function SingleProfileElectricalAutomaticsPage({
 
           <p>
             {t(
-              "educationalProfiles.electricalAutomatics.program.descriptionOne",
+              "educationalProfiles.electricalAutomatics.program.descriptionOne"
             )}
           </p>
 
@@ -56,12 +57,12 @@ export default async function SingleProfileElectricalAutomaticsPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.automation.title",
+                  "educationalProfiles.electricalAutomatics.program.automation.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.automation.description",
+                  "educationalProfiles.electricalAutomatics.program.automation.description"
                 )}
               </p>
             </li>
@@ -69,12 +70,12 @@ export default async function SingleProfileElectricalAutomaticsPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.robotics.title",
+                  "educationalProfiles.electricalAutomatics.program.robotics.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.robotics.description",
+                  "educationalProfiles.electricalAutomatics.program.robotics.description"
                 )}
               </p>
             </li>
@@ -82,12 +83,12 @@ export default async function SingleProfileElectricalAutomaticsPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.network.title",
+                  "educationalProfiles.electricalAutomatics.program.network.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.network.description",
+                  "educationalProfiles.electricalAutomatics.program.network.description"
                 )}
               </p>
             </li>
@@ -95,12 +96,12 @@ export default async function SingleProfileElectricalAutomaticsPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.measurement.title",
+                  "educationalProfiles.electricalAutomatics.program.measurement.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalAutomatics.program.measurement.description",
+                  "educationalProfiles.electricalAutomatics.program.measurement.description"
                 )}
               </p>
             </li>
@@ -108,7 +109,7 @@ export default async function SingleProfileElectricalAutomaticsPage({
 
           <p>
             {t(
-              "educationalProfiles.electricalAutomatics.program.descriptionTwo",
+              "educationalProfiles.electricalAutomatics.program.descriptionTwo"
             )}
           </p>
         </section>
@@ -116,13 +117,13 @@ export default async function SingleProfileElectricalAutomaticsPage({
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalAutomatics.knowledgeApplication.title",
+              "educationalProfiles.electricalAutomatics.knowledgeApplication.title"
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalAutomatics.knowledgeApplication.description",
+              "educationalProfiles.electricalAutomatics.knowledgeApplication.description"
             )}
           </p>
         </section>

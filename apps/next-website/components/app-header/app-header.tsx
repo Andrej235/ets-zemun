@@ -34,9 +34,9 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const pathname = usePathname();
 
   const languageOptions = {
-    srl: "Latinica",
-    sr: "Ћирилица",
-    en: "English",
+    srb: "Ћирилица",
+    lat: "Latinica",
+    eng: "English",
   };
 
   const popupRef = useRef<HTMLDivElement>(null!);
@@ -102,33 +102,35 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             <div className="language-options">
               <Link
                 href={pathname}
-                locale="srl"
+                locale="srb"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
-                  currentLanguage === "srl" ? "active-language" : ""
+                  currentLanguage === "srb" ? "active-language" : ""
                 }`}
               >
-                {languageOptions.srl}
+                {languageOptions.srb}
               </Link>
+
               <Link
                 href={pathname}
-                locale="sr"
+                locale="lat"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
-                  currentLanguage === "sr" ? "active-language" : ""
+                  currentLanguage === "lat" ? "active-language" : ""
                 }`}
               >
-                {languageOptions.sr}
+                {languageOptions.lat}
               </Link>
+
               <Link
                 href={pathname}
-                locale="en"
+                locale="eng"
                 tabIndex={isPopupOpen ? 0 : -1}
                 className={`language-button ${
-                  currentLanguage === "en" ? "active-language" : ""
+                  currentLanguage === "eng" ? "active-language" : ""
                 }`}
               >
-                {languageOptions.en}
+                {languageOptions.eng}
               </Link>
             </div>
             <button

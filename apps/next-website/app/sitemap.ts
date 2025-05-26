@@ -26,8 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }`;
 
     const otherLanguages: Record<string, string> = {
-      "sr-Latn": `${baseUrl}/srl${route}`,
-      en: `${baseUrl}/en${route}`,
+      "sr-Latn": `${baseUrl}/lat${route}`,
+      en: `${baseUrl}/eng${route}`,
     };
 
     return {

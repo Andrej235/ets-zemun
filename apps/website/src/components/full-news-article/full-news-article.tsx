@@ -26,3 +26,5 @@ export default function FullNewsArticle() {
     </Async>
   );
 }
+
+//todo: rename srl to lat, change the order of langs to sr,lat,en, remove /apps/website, rename /apps/next-website to /apps/website, change the build preset on vercel

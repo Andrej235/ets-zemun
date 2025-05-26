@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function SingleProfileElectricalDevicesPage({
   params,
@@ -14,7 +15,7 @@ export default async function SingleProfileElectricalDevicesPage({
     method: "get",
     parameters: {
       id: 5,
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
     },
   });
 
@@ -54,12 +55,12 @@ export default async function SingleProfileElectricalDevicesPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.title",
+                  "educationalProfiles.electricalDevices.program.installations.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.installations.description",
+                  "educationalProfiles.electricalDevices.program.installations.description"
                 )}
               </p>
             </li>
@@ -67,12 +68,12 @@ export default async function SingleProfileElectricalDevicesPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.title",
+                  "educationalProfiles.electricalDevices.program.thermal.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.thermal.description",
+                  "educationalProfiles.electricalDevices.program.thermal.description"
                 )}
               </p>
             </li>
@@ -80,12 +81,12 @@ export default async function SingleProfileElectricalDevicesPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.title",
+                  "educationalProfiles.electricalDevices.program.cooling.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.cooling.description",
+                  "educationalProfiles.electricalDevices.program.cooling.description"
                 )}
               </p>
             </li>
@@ -93,12 +94,12 @@ export default async function SingleProfileElectricalDevicesPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.title",
+                  "educationalProfiles.electricalDevices.program.diagnostics.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalDevices.program.diagnostics.description",
+                  "educationalProfiles.electricalDevices.program.diagnostics.description"
                 )}
               </p>
             </li>
@@ -112,13 +113,13 @@ export default async function SingleProfileElectricalDevicesPage({
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.title",
+              "educationalProfiles.electricalDevices.knowledgeApplication.title"
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalDevices.knowledgeApplication.description",
+              "educationalProfiles.electricalDevices.knowledgeApplication.description"
             )}
           </p>
         </section>

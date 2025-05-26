@@ -2,6 +2,7 @@ import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import NewsPreview from "@/components/news-preview/news-preview";
 import "../news-preview/news-preview.scss";
 import "./news.scss";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function News({
   params,
@@ -12,7 +13,7 @@ export default async function News({
   const { isOk, response } = await sendApiRequestSSR("/news", {
     method: "get",
     parameters: {
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
       limit: -1,
     },
   });

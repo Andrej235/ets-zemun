@@ -1,6 +1,7 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import Awards from "@/components/awards/awards";
 import generateAlternateUrls from "@/lib/generate-alternate-urls";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -44,7 +45,7 @@ export default async function Page({
   const { isOk, response } = await sendApiRequestSSR("/awards", {
     method: "get",
     parameters: {
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
       limit: -1,
     },
   });

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function SingleProfileElectricalEngineerPage({
   params,
@@ -14,7 +15,7 @@ export default async function SingleProfileElectricalEngineerPage({
     method: "get",
     parameters: {
       id: 3,
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
     },
   });
 
@@ -54,12 +55,12 @@ export default async function SingleProfileElectricalEngineerPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.programming.title",
+                  "educationalProfiles.electricalEngineer.program.programming.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.programming.description",
+                  "educationalProfiles.electricalEngineer.program.programming.description"
                 )}
               </p>
             </li>
@@ -70,7 +71,7 @@ export default async function SingleProfileElectricalEngineerPage({
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.web.description",
+                  "educationalProfiles.electricalEngineer.program.web.description"
                 )}
               </p>
             </li>
@@ -78,12 +79,12 @@ export default async function SingleProfileElectricalEngineerPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.database.title",
+                  "educationalProfiles.electricalEngineer.program.database.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.database.description",
+                  "educationalProfiles.electricalEngineer.program.database.description"
                 )}
               </p>
             </li>
@@ -91,12 +92,12 @@ export default async function SingleProfileElectricalEngineerPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.network.title",
+                  "educationalProfiles.electricalEngineer.program.network.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.network.description",
+                  "educationalProfiles.electricalEngineer.program.network.description"
                 )}
               </p>
             </li>
@@ -104,12 +105,12 @@ export default async function SingleProfileElectricalEngineerPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.hardware.title",
+                  "educationalProfiles.electricalEngineer.program.hardware.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.electricalEngineer.program.hardware.description",
+                  "educationalProfiles.electricalEngineer.program.hardware.description"
                 )}
               </p>
             </li>
@@ -123,13 +124,13 @@ export default async function SingleProfileElectricalEngineerPage({
         <section>
           <h2>
             {t(
-              "educationalProfiles.electricalEngineer.knowledgeApplication.title",
+              "educationalProfiles.electricalEngineer.knowledgeApplication.title"
             )}
           </h2>
 
           <p>
             {t(
-              "educationalProfiles.electricalEngineer.knowledgeApplication.description",
+              "educationalProfiles.electricalEngineer.knowledgeApplication.description"
             )}
           </p>
         </section>

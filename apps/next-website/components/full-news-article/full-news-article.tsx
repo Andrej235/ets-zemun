@@ -1,5 +1,6 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import "./full-news-article.scss";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function FullNewsArticle({
   params,
@@ -12,7 +13,7 @@ export default async function FullNewsArticle({
     method: "get",
     parameters: {
       id: newsId,
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
     },
   });
 

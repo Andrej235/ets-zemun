@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function SingleProfileNetworkAdminPage({
   params,
@@ -14,7 +15,7 @@ export default async function SingleProfileNetworkAdminPage({
     method: "get",
     parameters: {
       id: 2,
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
     },
   });
 
@@ -55,7 +56,7 @@ export default async function SingleProfileNetworkAdminPage({
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.network.description",
+                  "educationalProfiles.administrator.program.network.description"
                 )}
               </p>
             </li>
@@ -66,7 +67,7 @@ export default async function SingleProfileNetworkAdminPage({
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.security.description",
+                  "educationalProfiles.administrator.program.security.description"
                 )}
               </p>
             </li>
@@ -77,7 +78,7 @@ export default async function SingleProfileNetworkAdminPage({
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.hardware.description",
+                  "educationalProfiles.administrator.program.hardware.description"
                 )}
               </p>
             </li>
@@ -85,12 +86,12 @@ export default async function SingleProfileNetworkAdminPage({
             <li>
               <h2>
                 {t(
-                  "educationalProfiles.administrator.program.operatingSystems.title",
+                  "educationalProfiles.administrator.program.operatingSystems.title"
                 )}
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.operatingSystems.description",
+                  "educationalProfiles.administrator.program.operatingSystems.description"
                 )}
               </p>
             </li>
@@ -101,7 +102,7 @@ export default async function SingleProfileNetworkAdminPage({
               </h2>
               <p>
                 {t(
-                  "educationalProfiles.administrator.program.database.description",
+                  "educationalProfiles.administrator.program.database.description"
                 )}
               </p>
             </li>
@@ -117,7 +118,7 @@ export default async function SingleProfileNetworkAdminPage({
 
           <p>
             {t(
-              "educationalProfiles.administrator.knowledgeApplication.description",
+              "educationalProfiles.administrator.knowledgeApplication.description"
             )}
           </p>
         </section>

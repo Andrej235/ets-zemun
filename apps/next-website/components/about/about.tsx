@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./about.scss";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function About({
   params,
@@ -17,7 +18,7 @@ export default async function About({
   const { response: news } = await sendApiRequestSSR("/news", {
     method: "get",
     parameters: {
-      languageCode: locale === "srl" ? "sr_lt" : locale,
+      languageCode: localeToLangCode(locale),
       limit: 3,
     },
   });
