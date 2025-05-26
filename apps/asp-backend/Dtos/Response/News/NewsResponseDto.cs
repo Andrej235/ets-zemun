@@ -1,5 +1,3 @@
-using EtsZemun.Models;
-
 namespace EtsZemun.Dtos.Response.News;
 
 public class NewsResponseDto

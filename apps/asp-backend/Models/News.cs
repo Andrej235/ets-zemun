@@ -8,5 +8,4 @@ public class News
     public bool IsApproved { get; set; }
 
     public ICollection<NewsTranslation> Translations { get; set; } = [];
-    public ICollection<NewsImage> Images { get; set; } = [];
 }

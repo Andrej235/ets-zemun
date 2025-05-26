@@ -422,15 +422,12 @@ builder.Services.AddScoped<IResponseMapper<Award, AwardResponseDto>, AwardRespon
 #region News
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<ICreateSingleService<News>, CreateService<News>>();
-builder.Services.AddScoped<ICreateRangeService<NewsImage>, CreateService<NewsImage>>();
 builder.Services.AddScoped<ICreateSingleService<NewsTranslation>, CreateService<NewsTranslation>>();
 builder.Services.AddScoped<IReadRangeService<News>, ReadService<News>>();
 builder.Services.AddScoped<IReadRangeSelectedService<News>, ReadService<News>>();
-builder.Services.AddScoped<IReadRangeService<NewsImage>, ReadService<NewsImage>>();
 builder.Services.AddScoped<IReadSingleService<News>, ReadService<News>>();
 builder.Services.AddScoped<IReadSingleSelectedService<News>, ReadService<News>>();
 builder.Services.AddScoped<ICountService<News>, ReadService<News>>();
-builder.Services.AddScoped<ICountService<NewsImage>, ReadService<NewsImage>>();
 builder.Services.AddScoped<IUpdateRangeService<NewsTranslation>, UpdateService<NewsTranslation>>();
 builder.Services.AddScoped<IExecuteUpdateService<News>, UpdateService<News>>();
 builder.Services.AddScoped<
@@ -438,7 +435,6 @@ builder.Services.AddScoped<
     UpdateService<NewsTranslation>
 >();
 builder.Services.AddScoped<IDeleteService<News>, DeleteService<News>>();
-builder.Services.AddScoped<IDeleteService<NewsImage>, DeleteService<NewsImage>>();
 builder.Services.AddScoped<IDeleteService<NewsTranslation>, DeleteService<NewsTranslation>>();
 builder.Services.AddScoped<IRequestMapper<CreateNewsRequestDto, News>, CreateNewsRequestMapper>();
 builder.Services.AddScoped<

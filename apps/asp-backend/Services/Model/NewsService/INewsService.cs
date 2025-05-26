@@ -17,16 +17,10 @@ public interface INewsService
     );
     Task<Result<NewsResponseDto>> GetById(int id, string languageCode);
     Task<Result<NewsPreviewResponseDto>> GetPreviewById(int id, string languageCode);
-    Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(int id, int? offset, int? limit);
 
     Task<Result<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(int? offset, int? limit);
     Task<Result<AdminNewsResponseDto>> AdminGetById(int id);
     Task<Result<NewsPreviewResponseDto>> AdminGetPreviewById(int id, string languageCode);
-    Task<Result<LazyLoadResponse<NewsImageResponseDto>>> AdminGetImages(
-        int id,
-        int? offset,
-        int? limit
-    );
 
     Task<Result> Update(UpdateNewsRequestDto request);
     Task<Result> Approve(int id);
