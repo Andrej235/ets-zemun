@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import compressImage from "@/lib/compress-image";
 import { useLanguageStore } from "@/stores/language-store";
 import { ArrowLeft, Globe, Plus, Save, Upload } from "lucide-react";
 import Image from "next/image";
@@ -132,6 +133,26 @@ export default function CreateNewsPage() {
     router.push("/vesti");
   };
 
+  async function handleSelectImage(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!newsData) return;
+
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const compressed = await compressImage(file, 0.2);
+    const imageBase64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(compressed);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+
+    setNewsData({
+      ...newsData,
+      previewImage: imageBase64,
+    });
+  }
+
   return (
     <div className="grid gap-6">
       <div className="flex items-center gap-4">
@@ -203,9 +224,22 @@ export default function CreateNewsPage() {
                       <Upload className="h-8 w-8 text-muted-foreground" />
                     )}
                   </div>
-                  <Button variant="outline">
+                  <Button
+                    variant="outline"
+                    className="relative"
+                    onClick={(e) =>
+                      (e.target as HTMLButtonElement)
+                        .querySelector("input")
+                        ?.click()
+                    }
+                  >
                     <Upload className="mr-2 h-4 w-4" />
                     Upload Image
+                    <Input
+                      type="file"
+                      className="pointer-events-none absolute size-full opacity-0"
+                      onChange={handleSelectImage}
+                    />
                   </Button>
                 </div>
               </div>

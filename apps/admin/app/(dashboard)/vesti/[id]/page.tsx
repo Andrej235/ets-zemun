@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import compressImage from "@/lib/compress-image";
 import getTranslationStatus from "@/lib/get-translation-status";
 import { cn } from "@/lib/utils";
 import { useLanguageStore } from "@/stores/language-store";
@@ -190,6 +191,26 @@ export default function NewsEditPage({
       markup: "",
     });
   };
+
+  async function handleSelectImage(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!news) return;
+
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const compressed = await compressImage(file, 0.2);
+    const imageBase64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(compressed);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+
+    setNews({
+      ...news,
+      previewImage: imageBase64,
+    });
+  }
 
   const handleSave = async () => {
     if (!news) return;
@@ -404,9 +425,22 @@ export default function NewsEditPage({
                       className="object-cover"
                     />
                   </div>
-                  <Button variant="outline">
+                  <Button
+                    variant="outline"
+                    className="relative"
+                    onClick={(e) =>
+                      (e.target as HTMLButtonElement)
+                        .querySelector("input")
+                        ?.click()
+                    }
+                  >
                     <Upload className="mr-2 h-4 w-4" />
                     Change Image
+                    <Input
+                      type="file"
+                      className="pointer-events-none absolute size-full opacity-0"
+                      onChange={handleSelectImage}
+                    />
                   </Button>
                 </div>
               </div>
