@@ -1,7 +1,7 @@
 export default function localeToLangCode(locale: string): string {
   switch (locale) {
     case "srb":
-      return "sr_cr";
+      return "sr";
     case "lat":
       return "sr_lt";
     case "eng":

@@ -13,6 +13,7 @@ import {
 import { ThemeProvider } from "next-themes";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ScrollToSearchEntry from "@/components/scroll-to-seach-entry";
+import { Analytics } from "@vercel/analytics/next";
 
 export async function generateMetadata({
   params,
@@ -89,6 +90,8 @@ export default async function RootLocaleLayout({
             <ScrollToSearchEntry />
           </div>
         </ThemeProvider>
+
+        <Analytics />
       </body>
     </html>
   );
