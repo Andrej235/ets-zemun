@@ -3,6 +3,16 @@ import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import ApprovalStatusBadge from "@/components/approval-status-badge";
 import { TranslationStatusBadge } from "@/components/translation-status-badge";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,6 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import getTranslationStatus from "@/lib/get-translation-status";
+import { cn } from "@/lib/utils";
 import { useLanguageStore } from "@/stores/language-store";
 import { motion } from "framer-motion";
 import { CheckCircle, FileText, Plus, Trash2, XCircle } from "lucide-react";
@@ -113,6 +124,7 @@ export default function NewsPage() {
     );
   };
 
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
   const handleDelete = async (id: number) => {
     const promise = sendApiRequest("/news/{id}", {
       method: "delete",
@@ -134,6 +146,10 @@ export default function NewsPage() {
         error: (x) => (x as Error).message,
       },
     );
+
+    if (!(await promise).isOk) return;
+    setNews(news.filter((item) => item.id !== id));
+    setConfirmDeleteId(null);
   };
 
   const filteredNews = news.filter((item) => {
@@ -265,35 +281,111 @@ export default function NewsPage() {
                       <Link href={`/vesti/${item.id}`}>Edit</Link>
                     </Button>
                     <div className="flex gap-2">
-                      {!item.isApproved && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleApprove(item.id)}
-                        >
-                          <CheckCircle className="mr-1 h-4 w-4" />
-                          Approve
-                        </Button>
-                      )}
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className={cn(
+                              "flex items-center gap-1",
+                              item.isApproved
+                                ? "text-destructive"
+                                : "text-green-600",
+                            )}
+                          >
+                            {item.isApproved ? (
+                              <>
+                                <XCircle className="h-4 w-4" />
+                                Unapprove
+                              </>
+                            ) : (
+                              <>
+                                <CheckCircle className="h-4 w-4" />
+                                Approve
+                              </>
+                            )}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              {item.isApproved ? "Unapprove" : "Approve"} News
+                              Article
+                            </AlertDialogTitle>
+                          </AlertDialogHeader>
+                          <AlertDialogDescription asChild>
+                            {item.isApproved ? (
+                              <p>
+                                Are you sure you want to unapprove this news
+                                article? This will remove it from the public
+                                website.
+                              </p>
+                            ) : (
+                              <p>
+                                Are you sure you want to approve this news
+                                article? This will make it visible on the public
+                                website.
+                              </p>
+                            )}
+                          </AlertDialogDescription>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel asChild>
+                              <Button variant="outline">Cancel</Button>
+                            </AlertDialogCancel>
+                            <AlertDialogCancel
+                              onClick={() =>
+                                item.isApproved
+                                  ? handleUnapprove(item.id)
+                                  : handleApprove(item.id)
+                              }
+                              className={
+                                item.isApproved
+                                  ? "bg-destructive! text-white hover:bg-destructive/90"
+                                  : "bg-primary! text-white hover:bg-green-700"
+                              }
+                            >
+                              Confirm
+                            </AlertDialogCancel>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
 
-                      {item.isApproved && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleUnapprove(item.id)}
-                        >
-                          <XCircle className="mr-1 h-4 w-4" />
-                          Unapprove
-                        </Button>
-                      )}
-
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDelete(item.id)}
+                      <AlertDialog
+                        open={confirmDeleteId === item.id}
+                        onOpenChange={(open) =>
+                          open
+                            ? setConfirmDeleteId(item.id)
+                            : setConfirmDeleteId(null)
+                        }
                       >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline" size="sm">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Confirm delete</AlertDialogTitle>
+                          </AlertDialogHeader>
+                          <AlertDialogDescription>
+                            Are you sure you want to delete this post?
+                          </AlertDialogDescription>
+                          <AlertDialogFooter>
+                            <Button
+                              variant="outline"
+                              onClick={() => setConfirmDeleteId(null)}
+                            >
+                              Cancel
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              onClick={() => handleDelete(item.id)}
+                            >
+                              Delete
+                            </Button>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </div>
                 </CardContent>
