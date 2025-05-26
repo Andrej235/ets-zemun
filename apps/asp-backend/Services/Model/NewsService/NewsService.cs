@@ -16,6 +16,7 @@ public partial class NewsService(
     ICreateRangeService<NewsImage> createRangeImageService,
     ICreateSingleService<NewsTranslation> createTranslationService,
     IReadRangeService<News> readService,
+    IReadRangeSelectedService<News> readSelectedService,
     IReadRangeService<NewsImage> readImageService,
     IReadSingleService<News> readSingleService,
     ICountService<News> countService,
@@ -30,33 +31,4 @@ public partial class NewsService(
     IResponseMapper<News, NewsPreviewResponseDto> responsePreviewMapper,
     IResponseMapper<News, NewsResponseDto> responseMapper,
     HybridCache hybridCache
-) : INewsService
-{
-    private readonly ICreateSingleService<News> createService = createService;
-    private readonly ICreateRangeService<NewsImage> createRangeImageService =
-        createRangeImageService;
-    private readonly ICreateSingleService<NewsTranslation> createTranslationService =
-        createTranslationService;
-    private readonly IReadRangeService<News> readService = readService;
-    private readonly IReadRangeService<NewsImage> readImageService = readImageService;
-    private readonly IReadSingleService<News> readSingleService = readSingleService;
-    private readonly ICountService<News> countService = countService;
-    private readonly ICountService<NewsImage> imageCountService = imageCountService;
-    private readonly IExecuteUpdateService<News> updateService = updateService;
-    private readonly IExecuteUpdateService<NewsTranslation> updateTranslationService =
-        updateTranslationService;
-    private readonly IDeleteService<News> deleteService = deleteService;
-    private readonly IDeleteService<NewsImage> deleteImageService = deleteImageService;
-    private readonly IDeleteService<NewsTranslation> deleteTranslationService =
-        deleteTranslationService;
-    private readonly IRequestMapper<CreateNewsRequestDto, News> createRequestMapper =
-        createRequestMapper;
-    private readonly IRequestMapper<
-        CreateNewsTranslationRequestDto,
-        NewsTranslation
-    > createTranslationRequestMapper = createTranslationRequestMapper;
-    private readonly IResponseMapper<News, NewsPreviewResponseDto> responsePreviewMapper =
-        responsePreviewMapper;
-    private readonly IResponseMapper<News, NewsResponseDto> responseMapper = responseMapper;
-    private readonly HybridCache hybridCache = hybridCache;
-}
+) : INewsService;

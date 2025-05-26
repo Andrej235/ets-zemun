@@ -699,11 +699,15 @@ export type ApiMap = {
     '/news/admin': {
       get: {
         tags: [ 'News' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
         responses: {
           '200': {
             description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } } }
+            content: {
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } }
+            }
           },
           '400': {
             description: 'Bad Request',
@@ -1921,6 +1925,11 @@ export type ApiMap = {
       },
       AdminFullTeacherTranslationResponseDto: { type: 'object', properties: { name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       AdminFullTeacherTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDto' } }, additionalProperties: false },
+      AdminNewsPreviewResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' }, translations: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false
+      },
       AdminOverviewResponseDto: {
         type: 'object',
         properties: { newsCount: { type: 'integer', format: 'int32' }, unapprovedNewsCount: { type: 'integer', format: 'int32' }, languagesCount: { type: 'integer', format: 'int32' }, languages: { type: 'array', items: { type: 'string' } }, subjectsCount: { type: 'integer', format: 'int32' }, profilesCount: { type: 'integer', format: 'int32' }, teachersCount: { type: 'integer', format: 'int32' }, awardsCount: { type: 'integer', format: 'int32' }, logins: { type: 'array', items: { '$ref': '#/components/schemas/AdminUserLoginOverviewResponseDto' } } },

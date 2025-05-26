@@ -8,43 +8,26 @@ namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService
 {
-    public async Task<Result<LazyLoadResponse<NewsPreviewResponseDto>>> AdminGetAll(
-        string languageCode,
+    public async Task<Result<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(
         int? offset,
         int? limit
     )
     {
-        var news = await readService.Get(
+        return await readSelectedService.Get(
+            x => new AdminNewsPreviewResponseDto()
+            {
+                Id = x.Id,
+                Date = x.Date,
+                Title = x.Translations.First().Title,
+                Description = x.Translations.First().Description,
+                IsApproved = x.IsApproved,
+                PreviewImage = x.PreviewImage,
+                Translations = x.Translations.Select(t => t.LanguageCode),
+            },
             null,
             offset,
-            limit,
-            q =>
-                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
-                    .OrderByDescending(t => t.Date)
+            limit
         );
-
-        if (news.IsFailed)
-            return Result.Fail<LazyLoadResponse<NewsPreviewResponseDto>>(news.Errors);
-
-        var mapped = news.Value.Select(responsePreviewMapper.Map);
-
-        LazyLoadResponse<NewsPreviewResponseDto> result = new()
-        {
-            Items = mapped,
-            LoadedCount = mapped.Count(),
-            TotalCount = await hybridCache.GetOrCreateAsync(
-                "news-count-admin",
-                async (_) => (await countService.Count(null)).Value,
-                new() { Expiration = TimeSpan.FromHours(6) }
-            ),
-        };
-
-        result.NextCursor =
-            result.LoadedCount < (limit ?? 10)
-                ? null
-                : $"news?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}";
-
-        return Result.Ok(result);
     }
 
     public async Task<Result<NewsResponseDto>> AdminGetById(int id, string languageCode)

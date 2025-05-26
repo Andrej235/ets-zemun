@@ -118,13 +118,12 @@ public class NewsController(INewsService newsService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult<LazyLoadResponse<NewsPreviewResponseDto>>> AdminGetAll(
-        [FromQuery] string languageCode,
+    public async Task<ActionResult<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(
         [FromQuery] int? offset,
         [FromQuery] int? limit
     )
     {
-        var result = await newsService.AdminGetAll(languageCode, offset, limit);
+        var result = await newsService.AdminGetAll(offset, limit);
 
         if (result.IsFailed)
             return BadRequest();
