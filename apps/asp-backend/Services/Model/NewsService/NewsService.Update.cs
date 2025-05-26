@@ -22,25 +22,18 @@ public partial class NewsService
         if (updateResult.IsFailed)
             return updateResult;
 
-        var deleteImagesResult = await deleteImageService.Delete(
-            x => x.NewsId == request.Id,
-            false
-        );
-        if (deleteImagesResult.IsFailed)
-            return deleteImagesResult;
-
-        var createImagesResult = await createRangeImageService.Add(
-            request.Images.Select(x => new NewsImage
+        var translationUpdateResult = await translationUpdateRangeService.Update(
+            request.Translations.Select(x => new NewsTranslation()
             {
+                Title = x.Title,
+                Description = x.Description,
+                Markup = x.Markup,
+                LanguageCode = x.LanguageCode,
                 NewsId = request.Id,
-                ImageId = x.Id,
-                Image = x.Image,
             })
         );
-        if (createImagesResult.IsFailed)
-            return createImagesResult;
 
-        return Result.Ok();
+        return translationUpdateResult;
     }
 
     public Task<Result> UpdateTranslation(UpdateNewsTranslationRequestDto request)

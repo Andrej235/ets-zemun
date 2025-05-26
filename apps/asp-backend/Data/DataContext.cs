@@ -15,7 +15,6 @@ namespace EtsZemun.Data
         public DbSet<EducationalProfileVocationalSubject> EducationalProfileVocationalSubjects { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<NewsImage> NewsImages { get; set; }
         public DbSet<NewsTranslation> NewsTranslations { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
         public DbSet<QualificationTranslation> QualificationTranslations { get; set; }
@@ -161,19 +160,7 @@ namespace EtsZemun.Data
                     .HasForeignKey(n => n.NewsId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                news.HasMany(n => n.Images)
-                    .WithOne()
-                    .HasForeignKey(n => n.NewsId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
                 news.HasIndex(n => n.Date);
-            });
-
-            modelBuilder.Entity<NewsImage>(newsImage =>
-            {
-                newsImage.HasKey(n => new { n.NewsId, n.ImageId });
-
-                newsImage.HasIndex(n => n.NewsId);
             });
 
             modelBuilder.Entity<NewsTranslation>(newsTranslation =>

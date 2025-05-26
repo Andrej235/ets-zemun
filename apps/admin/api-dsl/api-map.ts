@@ -527,6 +527,82 @@ export type ApiMap = {
         }
       }
     },
+    '/news/admin': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: {
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsPreviewResponseDto' } } }
+            }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/news/admin/{id}': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
+    '/news/admin/{id}/preview': {
+      get: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/news': {
       post: {
         tags: [ 'News' ],
@@ -630,6 +706,25 @@ export type ApiMap = {
       }
     },
     '/news/{id}': {
+      delete: {
+        tags: [ 'News' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '204': { description: 'No Content' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      },
       get: {
         tags: [ 'News' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
@@ -643,10 +738,12 @@ export type ApiMap = {
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
           }
         }
-      },
+      }
+    },
+    '/news/{newsId}/translation/{languageCode}': {
       delete: {
         tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -680,118 +777,6 @@ export type ApiMap = {
         }
       }
     },
-    '/news/{id}/images': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDtoLazyLoadResponse' } } }
-          },
-          '400': {
-            description: 'Bad Request',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}/preview': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/admin/{id}/images': {
-      get: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '200': {
-            description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
     '/news/approve/{id}': {
       put: {
         tags: [ 'News' ],
@@ -817,27 +802,6 @@ export type ApiMap = {
       put: {
         tags: [ 'News' ],
         parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
-        responses: {
-          '204': { description: 'No Content' },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
-    '/news/{newsId}/translation/{languageCode}': {
-      delete: {
-        tags: [ 'News' ],
-        parameters: [ { name: 'newsId', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } }, { name: 'languageCode', in: 'path', required: true, schema: { type: 'string' } } ],
         responses: {
           '204': { description: 'No Content' },
           '401': {
@@ -1921,6 +1885,18 @@ export type ApiMap = {
       },
       AdminFullTeacherTranslationResponseDto: { type: 'object', properties: { name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       AdminFullTeacherTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDto' } }, additionalProperties: false },
+      AdminNewsPreviewResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' }, translations: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false
+      },
+      AdminNewsResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsTranslationResponseDtoTranslationWrapper' } } },
+        additionalProperties: false
+      },
+      AdminNewsTranslationResponseDto: { type: 'object', properties: { title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
+      AdminNewsTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminNewsTranslationResponseDto' } }, additionalProperties: false },
       AdminOverviewResponseDto: {
         type: 'object',
         properties: { newsCount: { type: 'integer', format: 'int32' }, unapprovedNewsCount: { type: 'integer', format: 'int32' }, languagesCount: { type: 'integer', format: 'int32' }, languages: { type: 'array', items: { type: 'string' } }, subjectsCount: { type: 'integer', format: 'int32' }, profilesCount: { type: 'integer', format: 'int32' }, teachersCount: { type: 'integer', format: 'int32' }, awardsCount: { type: 'integer', format: 'int32' }, logins: { type: 'array', items: { '$ref': '#/components/schemas/AdminUserLoginOverviewResponseDto' } } },
@@ -1959,10 +1935,9 @@ export type ApiMap = {
         additionalProperties: false
       },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
-      CreateNewsImageRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
-        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translation: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
+        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' } } },
         additionalProperties: false
       },
       CreateNewsTranslationRequestDto: { type: 'object', properties: { newsId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
@@ -1992,11 +1967,9 @@ export type ApiMap = {
       },
       LanguageResponseDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       LoginRequestDto: { type: 'object', properties: { username: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
-      NewsImageResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
-      NewsImageResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsImageResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
       NewsPreviewResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, markup: { type: 'string' }, images: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
+      NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, markup: { type: 'string' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
       ProblemDetails: { type: 'object', properties: { type: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, status: { type: 'integer', format: 'int32', nullable: true }, detail: { type: 'string', nullable: true }, instance: { type: 'string', nullable: true } }, additionalProperties: {} },
       ProfileSubjectResponseDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       QualificationResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
@@ -2038,7 +2011,7 @@ export type ApiMap = {
       UpdateLanguageRequestDto: { type: 'object', properties: { oldCode: { type: 'string' }, newCode: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       UpdateNewsRequestDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/UpdateNewsTranslationRequestDto' } } },
         additionalProperties: false
       },
       UpdateNewsTranslationRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },

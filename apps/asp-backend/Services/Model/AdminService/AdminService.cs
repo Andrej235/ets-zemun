@@ -70,39 +70,60 @@ public class AdminService(
     {
         try
         {
-            return await (
-                from login in context.UserLoginEvent
-                join user in context.Users on login.UserId equals user.Id
-                join userRole in context.UserRoles on user.Id equals userRole.UserId into userRoles
-                from userRole in userRoles.DefaultIfEmpty()
-                join role in context.Roles on userRole.RoleId equals role.Id into roles
-                from role in roles.DefaultIfEmpty()
-                orderby login.LoginTime descending
-                select new
-                {
-                    login.UserId,
-                    UserName = user.UserName,
-                    login.LoginTime,
-                    RoleName = role != null ? role.Name : null,
-                }
-            )
+            return await context
+                .UserLoginEvent.Join(
+                    context.Users,
+                    login => login.UserId,
+                    user => user.Id,
+                    (login, user) => new { login, user }
+                )
+                .GroupJoin(
+                    context.UserRoles,
+                    combined => combined.user.Id,
+                    userRole => userRole.UserId,
+                    (combined, userRoles) =>
+                        new
+                        {
+                            combined.login,
+                            combined.user,
+                            userRoles,
+                        }
+                )
+                .SelectMany(
+                    x => x.userRoles.DefaultIfEmpty(),
+                    (x, userRole) =>
+                        new
+                        {
+                            x.login,
+                            x.user,
+                            userRole,
+                        }
+                )
+                .GroupJoin(
+                    context.Roles,
+                    combined => combined.userRole!.RoleId,
+                    role => role.Id,
+                    (combined, roles) =>
+                        new
+                        {
+                            combined.login,
+                            combined.user,
+                            roles,
+                        }
+                )
+                .SelectMany(
+                    x => x.roles.DefaultIfEmpty(),
+                    (x, role) =>
+                        new AdminUserLoginOverviewResponseDto
+                        {
+                            Name = x.user.UserName ?? "Unknown",
+                            LoginTime = x.login.LoginTime,
+                            Role = role == null ? "No Role" : role.Name ?? "No Role",
+                        }
+                )
+                .OrderByDescending(x => x.LoginTime)
                 .Take(10)
-                .GroupBy(x => new
-                {
-                    x.UserId,
-                    x.UserName,
-                    x.LoginTime,
-                })
-                .Select(g => new AdminUserLoginOverviewResponseDto
-                {
-                    Name = g.Key.UserName,
-                    LoginTime = g.Key.LoginTime,
-                    Role =
-                        g.Where(x => x.RoleName != null)
-                            .Select(x => x.RoleName)
-                            .Distinct()
-                            .FirstOrDefault() ?? "No Role",
-                })
+                .Reverse()
                 .ToListAsync();
         }
         catch (Exception ex)

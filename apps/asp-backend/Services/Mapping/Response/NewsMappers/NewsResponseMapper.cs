@@ -10,6 +10,7 @@ public class NewsResponseMapper() : IResponseMapper<News, NewsResponseDto>
         {
             Id = from.Id,
             Markup = from.Translations.FirstOrDefault()?.Markup ?? "",
+            Title = from.Translations.FirstOrDefault()?.Title ?? "",
             IsApproved = from.IsApproved,
         };
 }
