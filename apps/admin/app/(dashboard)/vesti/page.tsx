@@ -155,7 +155,7 @@ export default function NewsPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/admin/news/create">
+          <Link href="/vesti/novi">
             <Plus className="mr-2 h-4 w-4" />
             Add News Article
           </Link>
@@ -205,7 +205,7 @@ export default function NewsPage() {
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
-                <Link href="/admin/news/create">
+                <Link href="/vesti/novi">
                   <Plus className="mr-2 h-4 w-4" />
                   Add News Article
                 </Link>
@@ -262,7 +262,7 @@ export default function NewsPage() {
                   </div>
                   <div className="flex justify-between">
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/admin/news/${item.id}`}>Edit</Link>
+                      <Link href={`/vesti/${item.id}`}>Edit</Link>
                     </Button>
                     <div className="flex gap-2">
                       {!item.isApproved && (

@@ -731,7 +731,7 @@ export type ApiMap = {
         responses: {
           '200': {
             description: 'OK',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/NewsResponseDto' } } }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/AdminNewsResponseDto' } } }
           },
           '401': {
             description: 'Unauthorized',
@@ -1930,6 +1930,13 @@ export type ApiMap = {
         properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' }, translations: { type: 'array', items: { type: 'string' } } },
         additionalProperties: false
       },
+      AdminNewsResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminNewsTranslationResponseDtoTranslationWrapper' } } },
+        additionalProperties: false
+      },
+      AdminNewsTranslationResponseDto: { type: 'object', properties: { title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
+      AdminNewsTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminNewsTranslationResponseDto' } }, additionalProperties: false },
       AdminOverviewResponseDto: {
         type: 'object',
         properties: { newsCount: { type: 'integer', format: 'int32' }, unapprovedNewsCount: { type: 'integer', format: 'int32' }, languagesCount: { type: 'integer', format: 'int32' }, languages: { type: 'array', items: { type: 'string' } }, subjectsCount: { type: 'integer', format: 'int32' }, profilesCount: { type: 'integer', format: 'int32' }, teachersCount: { type: 'integer', format: 'int32' }, awardsCount: { type: 'integer', format: 'int32' }, logins: { type: 'array', items: { '$ref': '#/components/schemas/AdminUserLoginOverviewResponseDto' } } },
@@ -1971,7 +1978,7 @@ export type ApiMap = {
       CreateNewsImageRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
-        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translation: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' }, images: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsImageRequestDto' } } },
+        properties: { previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateNewsTranslationRequestDto' } } },
         additionalProperties: false
       },
       CreateNewsTranslationRequestDto: { type: 'object', properties: { newsId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string' }, markup: { type: 'string' } }, additionalProperties: false },
@@ -2005,7 +2012,7 @@ export type ApiMap = {
       NewsImageResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsImageResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
       NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
       NewsPreviewResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/NewsPreviewResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
-      NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, markup: { type: 'string' }, images: { '$ref': '#/components/schemas/NewsImageResponseDtoLazyLoadResponse' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
+      NewsResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, markup: { type: 'string' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
       ProblemDetails: { type: 'object', properties: { type: { type: 'string', nullable: true }, title: { type: 'string', nullable: true }, status: { type: 'integer', format: 'int32', nullable: true }, detail: { type: 'string', nullable: true }, instance: { type: 'string', nullable: true } }, additionalProperties: {} },
       ProfileSubjectResponseDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, perWeek: { type: 'integer', format: 'int32' }, year: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       QualificationResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, teacherId: { type: 'integer', format: 'int32' }, dateObtained: { type: 'string', format: 'date-time' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },

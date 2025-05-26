@@ -57,20 +57,7 @@ public partial class NewsService
         if (result.IsFailed)
             return Result.Fail<NewsResponseDto>(result.Errors);
 
-        var mapped = responseMapper.Map(result.Value);
-        mapped.Images = new()
-        {
-            LoadedCount = 0,
-            TotalCount = await hybridCache.GetOrCreateAsync(
-                $"news-{id}-images-count",
-                async (_) => (await imageCountService.Count(x => x.NewsId == id)).Value,
-                new() { Expiration = TimeSpan.FromHours(6) }
-            ),
-            Items = [],
-            NextCursor = $"news/{id}/images?offset=0&limit=1",
-        };
-
-        return Result.Ok(mapped);
+        return responseMapper.Map(result.Value);
     }
 
     public async Task<Result<NewsPreviewResponseDto>> GetPreviewById(int id, string languageCode)

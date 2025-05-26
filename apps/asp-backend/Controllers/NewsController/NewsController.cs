@@ -137,7 +137,7 @@ public class NewsController(INewsService newsService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<NewsResponseDto>> AdminGetById(
+    public async Task<ActionResult<AdminNewsResponseDto>> AdminGetById(
         int id,
         [FromQuery] string languageCode
     )

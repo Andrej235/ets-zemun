@@ -20,7 +20,7 @@ public interface INewsService
     Task<Result<LazyLoadResponse<NewsImageResponseDto>>> GetImages(int id, int? offset, int? limit);
 
     Task<Result<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(int? offset, int? limit);
-    Task<Result<NewsResponseDto>> AdminGetById(int id, string languageCode);
+    Task<Result<AdminNewsResponseDto>> AdminGetById(int id, string languageCode);
     Task<Result<NewsPreviewResponseDto>> AdminGetPreviewById(int id, string languageCode);
     Task<Result<LazyLoadResponse<NewsImageResponseDto>>> AdminGetImages(
         int id,

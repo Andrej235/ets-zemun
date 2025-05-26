@@ -19,6 +19,7 @@ public partial class NewsService(
     IReadRangeSelectedService<News> readSelectedService,
     IReadRangeService<NewsImage> readImageService,
     IReadSingleService<News> readSingleService,
+    IReadSingleSelectedService<News> readSingleSelectedService,
     ICountService<News> countService,
     ICountService<NewsImage> imageCountService,
     IExecuteUpdateService<News> updateService,

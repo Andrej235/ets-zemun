@@ -1,5 +1,6 @@
 using EtsZemun.Dtos;
 using EtsZemun.Dtos.Response.News;
+using EtsZemun.Dtos.Response.Translations;
 using EtsZemun.Errors;
 using EtsZemun.Services.Read;
 using FluentResults;
@@ -8,12 +9,12 @@ namespace EtsZemun.Services.Model.NewsService;
 
 public partial class NewsService
 {
-    public async Task<Result<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(
+    public Task<Result<IEnumerable<AdminNewsPreviewResponseDto>>> AdminGetAll(
         int? offset,
         int? limit
     )
     {
-        return await readSelectedService.Get(
+        return readSelectedService.Get(
             x => new AdminNewsPreviewResponseDto()
             {
                 Id = x.Id,
@@ -30,30 +31,30 @@ public partial class NewsService
         );
     }
 
-    public async Task<Result<NewsResponseDto>> AdminGetById(int id, string languageCode)
+    public Task<Result<AdminNewsResponseDto>> AdminGetById(int id, string languageCode)
     {
-        var result = await readSingleService.Get(
-            x => x.Id == id,
-            q => q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+        return readSingleSelectedService.Get(
+            x => new AdminNewsResponseDto()
+            {
+                Id = x.Id,
+                IsApproved = x.IsApproved,
+                Date = x.Date,
+                PreviewImage = x.PreviewImage,
+                Translations = x.Translations.Select(
+                    t => new TranslationWrapper<AdminNewsTranslationResponseDto>()
+                    {
+                        LanguageCode = t.LanguageCode,
+                        Value = new AdminNewsTranslationResponseDto()
+                        {
+                            Title = t.Title,
+                            Description = t.Description,
+                            Markup = t.Markup,
+                        },
+                    }
+                ),
+            },
+            x => x.Id == id
         );
-
-        if (result.IsFailed)
-            return Result.Fail<NewsResponseDto>(result.Errors);
-
-        var mapped = responseMapper.Map(result.Value);
-        mapped.Images = new()
-        {
-            LoadedCount = 0,
-            TotalCount = await hybridCache.GetOrCreateAsync(
-                $"news-{id}-images-count",
-                async (_) => (await imageCountService.Count(x => x.NewsId == id)).Value,
-                new() { Expiration = TimeSpan.FromHours(6) }
-            ),
-            Items = [],
-            NextCursor = $"news/{id}/images?offset=0&limit=1",
-        };
-
-        return Result.Ok(mapped);
     }
 
     public async Task<Result<NewsPreviewResponseDto>> AdminGetPreviewById(
