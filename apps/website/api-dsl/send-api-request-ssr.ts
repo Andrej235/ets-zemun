@@ -19,7 +19,11 @@ type Response<
 export default async function sendApiRequestSSR<
   T extends Request<Endpoint>,
   Endpoint extends Endpoints,
->(endpoint: Endpoint, request: T): Promise<Response<Endpoint, T>> {
+>(
+  endpoint: Endpoint,
+  request: T,
+  revalidate?: number
+): Promise<Response<Endpoint, T>> {
   const url = new URL(baseApiUrl + endpoint);
   const requestCopy = structuredClone(request);
 
@@ -35,7 +39,7 @@ export default async function sendApiRequestSSR<
     }
 
     url.search = new URLSearchParams(
-      requestCopy.parameters as Record<string, string>,
+      requestCopy.parameters as Record<string, string>
     ).toString();
   }
 
@@ -49,7 +53,7 @@ export default async function sendApiRequestSSR<
       "Content-Type": "application/json",
     },
     next: {
-      revalidate: 86400,
+      revalidate: revalidate || 3600,
     },
   };
 
