@@ -64,6 +64,7 @@ public partial class UserService
         {
             UserId = user.Id,
             LoginTime = DateTime.UtcNow,
+            UserName = userName,
             IpAddress =
                 httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString()
                 ?? "Unknown",

@@ -37,7 +37,8 @@ namespace EtsZemun.Data
                     .HasOne(le => le.User)
                     .WithMany()
                     .HasForeignKey(le => le.UserId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .IsRequired(false);
 
                 loginEvent.HasIndex(le => le.LoginTime);
                 loginEvent.HasIndex(le => le.UserId);

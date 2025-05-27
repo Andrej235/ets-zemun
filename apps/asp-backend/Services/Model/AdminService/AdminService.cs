@@ -71,7 +71,8 @@ public class AdminService(
         try
         {
             return await context
-                .UserLoginEvent.Join(
+                .UserLoginEvent.Where(x => x.User != null)
+                .Join(
                     context.Users,
                     login => login.UserId,
                     user => user.Id,
