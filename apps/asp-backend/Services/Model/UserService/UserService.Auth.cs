@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Web;
 using EtsZemun.Dtos.Request.User;
 using EtsZemun.Dtos.Response.User;
 using EtsZemun.Errors;
@@ -47,7 +48,7 @@ public partial class UserService
         await emailSender.SendConfirmationLinkAsync(
             user,
             request.Email,
-            $"{configuration["FrontendUrl"]}/confirm-email?token={emailToken}"
+            $"{configuration["FrontendUrl"]}/confirm-email?token={HttpUtility.UrlEncode(emailToken)}&email={HttpUtility.UrlEncode(request.Email)}"
         );
 
         return Result.Ok();

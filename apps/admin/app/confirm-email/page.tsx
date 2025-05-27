@@ -26,12 +26,12 @@ import Link from "next/link";
 export default async function EmailConfirmationPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token: string }>;
+  searchParams: Promise<{ token: string; email: string }>;
 }) {
-  const { token } = await searchParams;
+  const { token, email } = await searchParams;
 
   //User got here without token, act as a normal page
-  if (!token)
+  if (!token || !email)
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-4">
         <ConfirmEmailInstructions />
@@ -41,7 +41,8 @@ export default async function EmailConfirmationPage({
   //User got here with token, confirm email and display results
   const { isOk } = await sendApiRequestSSR("/users/confirm-email", {
     method: "post",
-    parameters: {
+    payload: {
+      email,
       token,
     },
   });
@@ -177,13 +178,15 @@ export default async function EmailConfirmationPage({
           <CardHeader>
             <CardTitle>Šta dalje?</CardTitle>
             <CardDescription>
-              Spremni ste da počnete sa korišćenjem admin panela.
+              Zatražite pristup aplikaciji od administratora. Nakon što
+              administrator odobri vaš zahtev, moći ćete da se prijavite i
+              koristite admin panel.
             </CardDescription>
           </CardHeader>
           <CardFooter className="flex flex-col space-y-3">
             <Button asChild className="w-full">
-              <Link href="/">
-                Idite na početnu stranicu
+              <Link href="/login">
+                Idite na login stranicu
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

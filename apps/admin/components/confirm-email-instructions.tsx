@@ -16,17 +16,24 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CountdownTimer from "./countdown-timer";
 import FullPageLoadingIndicator from "./full-page-loading-indicator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 export default function ConfirmEmailInstructions() {
   const isLoading = useUserStore((x) => x.isLoading);
   const user = useUserStore((x) => x.user);
   const router = useRouter();
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if (isLoading) return;
-
-    if (!user) router.replace("/login");
-    else if (user.emailConfirmed) router.replace("/");
+    if (user) router.replace("/");
   }, [isLoading, user, router]);
 
   const [isCountdownActive, setIsCountdownActive] = useState(false);
@@ -44,9 +51,23 @@ export default function ConfirmEmailInstructions() {
 
   if (isLoading) return <FullPageLoadingIndicator />;
 
-  async function handleResendEmail() {
+  async function handleResendEmail(email: string) {
+    if (!email) {
+      toast.error("Molimo unesite email adresu");
+      return;
+    }
+
+    if (!email.includes("@")) {
+      toast.error("Molimo unesite validnu email adresu");
+      return;
+    }
+
+    setDialogOpen(false);
     const response = await sendApiRequest("/users/resend-confirmation-email", {
       method: "post",
+      parameters: {
+        email,
+      },
     });
 
     if (!response.isOk) {
@@ -93,24 +114,57 @@ export default function ConfirmEmailInstructions() {
       </CardContent>
       <CardFooter className="flex flex-col space-y-4">
         <div className="w-full">
-          <Button
-            onClick={handleResendEmail}
-            disabled={isCountdownActive}
-            className="w-full"
-            variant={isCountdownActive ? "outline" : "default"}
-          >
-            {isCountdownActive ? (
-              <span className="flex items-center">
-                Pošalji ponovo za{" "}
-                <CountdownTimer
-                  seconds={90}
-                  onComplete={() => setIsCountdownActive(false)}
+          <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button
+                disabled={isCountdownActive}
+                className="w-full"
+                variant={isCountdownActive ? "outline" : "default"}
+              >
+                {isCountdownActive ? (
+                  <span className="flex items-center">
+                    Pošalji ponovo za{" "}
+                    <CountdownTimer
+                      seconds={90}
+                      onComplete={() => setIsCountdownActive(false)}
+                    />
+                  </span>
+                ) : (
+                  <span>Ponovo pošalji verifikacioni email</span>
+                )}
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Unesite email adresu</DialogTitle>
+                <DialogDescription>
+                  Molimo unesite email adresu na koju želite da pošaljemo
+                  verifikacioni email.
+                </DialogDescription>
+              </DialogHeader>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const email = formData.get("email") as string;
+                  await handleResendEmail(email);
+                }}
+                className="space-y-4"
+              >
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  defaultValue={user?.email || ""}
+                  className="w-full rounded border px-3 py-2"
+                  placeholder="Email adresa"
                 />
-              </span>
-            ) : (
-              <span>Ponovo pošalji verifikacioni email</span>
-            )}
-          </Button>
+                <Button type="submit" className="w-full">
+                  Pošalji
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
       </CardFooter>
     </Card>
