@@ -79,13 +79,13 @@ export default function CurriculumDetailPage({
   const [loading, setLoading] = useState(true);
 
   const formSchema = z.object({
-    subjectId: z.string().min(1, "Subject is required"),
-    year: z.coerce.number().int().min(1, "Year level is required"),
+    subjectId: z.string().min(1, "Predmet je obavezan"),
+    year: z.coerce.number().int().min(1, "Godina je obavezna"),
     perWeek: z.coerce
       .number()
       .int()
-      .min(1, "Hours per week is required")
-      .max(20, "Cannot exceed 20 hours per week"),
+      .min(1, "Broj časova nedeljno je obavezan")
+      .max(20, "Ne može biti više od 20 časova nedeljno"),
     type: z.enum(["general", "vocational"] as const),
   });
 
@@ -127,7 +127,7 @@ export default function CurriculumDetailPage({
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Failed to load curriculum data");
+        toast.error("Neuspešno učitavanje podataka o kurikulumu");
       }
     };
 
@@ -160,7 +160,6 @@ export default function CurriculumDetailPage({
         ...updatedCurriculum.response!.vocationalSubjects,
       ].some((x) => x.year === +currentTab);
 
-      console.log(yearStillExists);
       if (!yearStillExists) setCurrentTab("overview");
     }
 
@@ -184,12 +183,13 @@ export default function CurriculumDetailPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to add subject to curriculum",
+            response.error?.message ??
+              "Neuspešno dodavanje predmeta u kurikulum",
           );
       }),
       {
-        loading: "Adding subject to curriculum...",
-        success: "Subject added to curriculum successfully",
+        loading: "Dodavanje predmeta u kurikulum...",
+        success: "Predmet je uspešno dodat u kurikulum",
         error: (x) => (x as Error).message,
       },
     );
@@ -205,7 +205,9 @@ export default function CurriculumDetailPage({
 
   if (loading || !curriculum) {
     return (
-      <div className="container mx-auto py-10">Loading curriculum data...</div>
+      <div className="container mx-auto py-10">
+        Učitavanje podataka o kurikulumu...
+      </div>
     );
   }
 
@@ -241,7 +243,7 @@ export default function CurriculumDetailPage({
         <Link href="/obrazovni-profili">
           <Button variant="ghost" className="gap-1">
             <ArrowLeft className="h-4 w-4" />
-            Back to Curriculums
+            Nazad na kurikulume
           </Button>
         </Link>
       </div>
@@ -255,15 +257,15 @@ export default function CurriculumDetailPage({
             <DialogTrigger asChild>
               <Button size="sm" variant="outline">
                 <Pencil className="mr-2 h-4 w-4" />
-                Edit Curriculum
+                Izmeni kurikulum
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[400px]">
               <DialogHeader>
-                <DialogTitle>Edit Curriculum Name</DialogTitle>
+                <DialogTitle>Izmeni naziv kurikuluma</DialogTitle>
                 <DialogDescription>
-                  Enter a new name for this curriculum. Note this will only
-                  affect the name on the admin panel.
+                  Unesite novi naziv za ovaj kurikulum. Ovo će uticati samo na
+                  prikaz u admin panelu.
                 </DialogDescription>
               </DialogHeader>
               <form
@@ -276,7 +278,7 @@ export default function CurriculumDetailPage({
                     .trim();
 
                   if (!newName) {
-                    toast.error("Name cannot be empty");
+                    toast.error("Naziv ne može biti prazan");
                     return;
                   }
 
@@ -293,12 +295,12 @@ export default function CurriculumDetailPage({
                       if (!response.isOk)
                         throw new Error(
                           response.error?.message ??
-                            "Failed to update curriculum name",
+                            "Neuspešno ažuriranje naziva kurikuluma",
                         );
                     }),
                     {
-                      loading: "Updating curriculum name...",
-                      success: "Curriculum name updated successfully",
+                      loading: "Ažuriranje naziva kurikuluma...",
+                      success: "Naziv kurikuluma je uspešno ažuriran",
                       error: (x) => (x as Error).message,
                     },
                   );
@@ -312,18 +314,18 @@ export default function CurriculumDetailPage({
                 <Input
                   name="curriculumName"
                   defaultValue={curriculum.name}
-                  placeholder="Enter new curriculum name"
+                  placeholder="Unesite novi naziv kurikuluma"
                   required
                   autoFocus
                 />
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button type="button" variant="outline">
-                      Cancel
+                      Otkaži
                     </Button>
                   </DialogClose>
                   <DialogClose asChild>
-                    <Button type="submit">Save</Button>
+                    <Button type="submit">Sačuvaj</Button>
                   </DialogClose>
                 </DialogFooter>
               </form>
@@ -335,7 +337,7 @@ export default function CurriculumDetailPage({
       <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Years Covered</CardTitle>
+            <CardTitle className="text-lg">Obuhvaćene godine</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
@@ -346,7 +348,7 @@ export default function CurriculumDetailPage({
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">General Subjects</CardTitle>
+            <CardTitle className="text-lg">Opšti predmeti</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
@@ -359,7 +361,7 @@ export default function CurriculumDetailPage({
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Vocational Subjects</CardTitle>
+            <CardTitle className="text-lg">Stručni predmeti</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center">
@@ -381,10 +383,10 @@ export default function CurriculumDetailPage({
         onValueChange={setCurrentTab}
       >
         <TabsList className="mb-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="overview">Pregled</TabsTrigger>
           {years.map((year) => (
             <TabsTrigger key={year} value={year.toString()}>
-              Year {year}
+              Godina {year}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -392,10 +394,8 @@ export default function CurriculumDetailPage({
         <TabsContent value="overview">
           <Card>
             <CardHeader>
-              <CardTitle>Curriculum Overview</CardTitle>
-              <CardDescription>
-                Summary of subjects across all years
-              </CardDescription>
+              <CardTitle>Pregled kurikuluma</CardTitle>
+              <CardDescription>Rezime predmeta kroz sve godine</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -403,7 +403,7 @@ export default function CurriculumDetailPage({
                   years.map((year) => (
                     <div key={year} className="border-b pb-4 last:border-0">
                       <div className="mb-2 flex items-center justify-between">
-                        <h3 className="text-lg font-medium">Year {year}</h3>
+                        <h3 className="text-lg font-medium">Godina {year}</h3>
                         <div className="flex items-center gap-2">
                           <Badge
                             variant="outline"
@@ -413,10 +413,10 @@ export default function CurriculumDetailPage({
                             {subjectsByYear
                               .get(year)
                               ?.reduce((a, b) => a + b.perWeek, 0)}{" "}
-                            classes/week
+                            časova/nedelji
                           </Badge>
                           <Badge variant="outline">
-                            {subjectsByYear.get(year)!.length} subjects
+                            {subjectsByYear.get(year)!.length} predmeta
                           </Badge>
                         </div>
                       </div>
@@ -432,14 +432,14 @@ export default function CurriculumDetailPage({
                             >
                               <div className="truncate">
                                 <span className="font-medium">
-                                  {subjectDetails?.name || "Unknown Subject"}
+                                  {subjectDetails?.name || "Nepoznat predmet"}
                                 </span>
                               </div>
                               <Badge
                                 variant="outline"
                                 className="ml-2 whitespace-nowrap"
                               >
-                                {subject.perWeek} classes
+                                {subject.perWeek} časova
                               </Badge>
                             </div>
                           );
@@ -451,17 +451,17 @@ export default function CurriculumDetailPage({
                   <div className="py-12 text-center">
                     <BookOpen className="mx-auto h-12 w-12 text-muted-foreground opacity-50" />
                     <h3 className="mt-4 text-lg font-medium">
-                      No Subjects Added
+                      Nema dodatih predmeta
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      Start adding subjects to this curriculum
+                      Počnite sa dodavanjem predmeta u ovaj kurikulum
                     </p>
                     <Button
                       className="mt-4"
                       onClick={() => handleOpenDialog(1)}
                     >
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      Add Subject
+                      Dodaj predmet
                     </Button>
                   </div>
                 )}
@@ -475,13 +475,13 @@ export default function CurriculumDetailPage({
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
-                  <CardTitle>Year {year} Subjects</CardTitle>
+                  <CardTitle>Predmeti za {year}. godinu</CardTitle>
                   <CardDescription>
-                    {subjectsByYear.get(year)!.length} subjects,{" "}
+                    {subjectsByYear.get(year)!.length} predmeta,{" "}
                     {subjectsByYear
                       .get(year)
                       ?.reduce((a, b) => a + b.perWeek, 0)}{" "}
-                    total hours per week
+                    ukupno časova nedeljno
                   </CardDescription>
                 </div>
                 <Button
@@ -490,7 +490,7 @@ export default function CurriculumDetailPage({
                   onClick={() => handleOpenDialog(year)}
                 >
                   <PlusCircle className="h-4 w-4" />
-                  Add Subject
+                  Dodaj predmet
                 </Button>
               </CardHeader>
               <CardContent>
@@ -507,14 +507,14 @@ export default function CurriculumDetailPage({
         ))}
       </Tabs>
 
-      {/* Add Subject Dialog */}
+      {/* Dijalog za dodavanje predmeta */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
-            <DialogTitle>Add Subject to Year {selectedyear}</DialogTitle>
+            <DialogTitle>Dodaj predmet za {selectedyear}. godinu</DialogTitle>
             <DialogDescription>
-              Add a new subject to this curriculum. Fill in all the required
-              information.
+              Dodajte novi predmet u ovaj kurikulum. Popunite sve obavezne
+              informacije.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -524,14 +524,14 @@ export default function CurriculumDetailPage({
                 name="subjectId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject</FormLabel>
+                    <FormLabel>Predmet</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a subject" />
+                          <SelectValue placeholder="Izaberite predmet" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -546,13 +546,13 @@ export default function CurriculumDetailPage({
                           ))
                         ) : (
                           <SelectItem value="none" disabled>
-                            No available subjects
+                            Nema dostupnih predmeta
                           </SelectItem>
                         )}
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Select a subject to add to this curriculum
+                      Izaberite predmet koji želite da dodate u kurikulum
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -564,7 +564,7 @@ export default function CurriculumDetailPage({
                 name="year"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Year Level</FormLabel>
+                    <FormLabel>Godina</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -575,7 +575,7 @@ export default function CurriculumDetailPage({
                       />
                     </FormControl>
                     <FormDescription>
-                      The year level this subject belongs to
+                      Godina kojoj predmet pripada
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -587,7 +587,7 @@ export default function CurriculumDetailPage({
                 name="perWeek"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Hours Per Week</FormLabel>
+                    <FormLabel>Časova nedeljno</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -598,7 +598,7 @@ export default function CurriculumDetailPage({
                       />
                     </FormControl>
                     <FormDescription>
-                      Number of hours per week allocated to this subject
+                      Broj časova nedeljno za ovaj predmet
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -610,23 +610,23 @@ export default function CurriculumDetailPage({
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject Type</FormLabel>
+                    <FormLabel>Tip predmeta</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a type" />
+                          <SelectValue placeholder="Izaberite tip" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="general">General</SelectItem>
-                        <SelectItem value="vocational">Vocational</SelectItem>
+                        <SelectItem value="general">Opšti</SelectItem>
+                        <SelectItem value="vocational">Stručni</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Categorize this subject as general or vocational
+                      Kategorizujte predmet kao opšti ili stručni
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -640,7 +640,7 @@ export default function CurriculumDetailPage({
                   onClick={handleCloseDialog}
                   disabled={isSubmitting}
                 >
-                  Cancel
+                  Otkaži
                 </Button>
                 <Button
                   type="submit"
@@ -649,7 +649,7 @@ export default function CurriculumDetailPage({
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Add Subject
+                  Dodaj predmet
                 </Button>
               </DialogFooter>
             </form>

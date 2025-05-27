@@ -104,12 +104,12 @@ export function SubjectsList({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to remove subject",
+            response.error?.message ?? "Neuspešno uklanjanje predmeta",
           );
       }),
       {
-        loading: "Removing subject...",
-        success: "Subject removed successfully",
+        loading: "Uklanjanje predmeta...",
+        success: "Predmet je uspešno uklonjen",
         error: (x) => (x as Error).message,
       },
     );
@@ -142,12 +142,12 @@ export function SubjectsList({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to update subject",
+            response.error?.message ?? "Neuspešno ažuriranje predmeta",
           );
       }),
       {
-        loading: "Updating subject...",
-        success: "Subject updated successfully",
+        loading: "Ažuriranje predmeta...",
+        success: "Predmet je uspešno ažuriran",
         error: (x) => (x as Error).message,
       },
     );
@@ -173,10 +173,10 @@ export function SubjectsList({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Subject</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Hours/Week</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead>Predmet</TableHead>
+                  <TableHead>Tip</TableHead>
+                  <TableHead>Sati/Nedelji</TableHead>
+                  <TableHead className="text-right">Akcije</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -187,7 +187,7 @@ export function SubjectsList({
                       <TableCell className="font-medium">
                         {subjectDetails
                           ? subjectDetails.name
-                          : "Unknown Subject"}
+                          : "Nepoznat predmet"}
                       </TableCell>
                       <TableCell>
                         <Badge
@@ -198,9 +198,7 @@ export function SubjectsList({
                               : "border-blue-200 bg-blue-50 text-blue-700"
                           }
                         >
-                          {subject.type === "vocational"
-                            ? "Vocational"
-                            : "General"}
+                          {subject.type === "vocational" ? "Stručni" : "Opšti"}
                         </Badge>
                       </TableCell>
                       <TableCell>{subject.perWeek}</TableCell>
@@ -212,7 +210,7 @@ export function SubjectsList({
                             onClick={() => handleEdit(subject)}
                           >
                             <Pencil className="h-4 w-4" />
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">Izmeni</span>
                           </Button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
@@ -222,29 +220,28 @@ export function SubjectsList({
                                 className="text-red-500"
                               >
                                 <Trash2 className="h-4 w-4" />
-                                <span className="sr-only">Delete</span>
+                                <span className="sr-only">Obriši</span>
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
                                 <AlertDialogTitle>
-                                  Are you sure you want to remove{" "}
-                                  {subject.subject.name || "this subject"} from
-                                  the profile?
+                                  Da li ste sigurni da želite da uklonite{" "}
+                                  {subject.subject.name || "ovaj predmet"} iz
+                                  profila?
                                 </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  This action cannot be undone. This will
-                                  permanently remove the subject from the
-                                  profile.
+                                  Ova akcija je nepovratna. Ovo će trajno
+                                  ukloniti predmet iz profila.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogCancel>Otkaži</AlertDialogCancel>
                                 <AlertDialogAction
                                   className="bg-red-500 hover:bg-red-600"
                                   onClick={() => handleDelete(subject)}
                                 >
-                                  Delete
+                                  Obriši
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
@@ -265,7 +262,7 @@ export function SubjectsList({
             className="py-8 text-center"
           >
             <p className="text-muted-foreground">
-              No subjects added to this year yet.
+              Još uvek nisu dodati predmeti za ovu godinu.
             </p>
           </motion.div>
         )}
@@ -274,18 +271,18 @@ export function SubjectsList({
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Subject</DialogTitle>
+            <DialogTitle>Izmena predmeta</DialogTitle>
             <DialogDescription>
-              Update the details for{" "}
+              Ažurirajte podatke za{" "}
               {(editingSubject &&
                 subjectMap.get(editingSubject.subjectId)?.name) ||
-                "this subject"}
+                "ovaj predmet"}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="year">Year Level</Label>
+                <Label htmlFor="year">Razred</Label>
                 <Input
                   id="year"
                   type="number"
@@ -302,7 +299,7 @@ export function SubjectsList({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="perWeek">Hours Per Week</Label>
+                <Label htmlFor="perWeek">Sati nedeljno</Label>
                 <Input
                   id="perWeek"
                   type="number"
@@ -319,7 +316,7 @@ export function SubjectsList({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="type">Subject Type</Label>
+                <Label htmlFor="type">Tip predmeta</Label>
                 <Select
                   value={formData.type}
                   onValueChange={(value) =>
@@ -331,11 +328,11 @@ export function SubjectsList({
                   disabled={isSubmitting}
                 >
                   <SelectTrigger id="type">
-                    <SelectValue placeholder="Select a type" />
+                    <SelectValue placeholder="Izaberite tip" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="general">General</SelectItem>
-                    <SelectItem value="vocational">Vocational</SelectItem>
+                    <SelectItem value="general">Opšti</SelectItem>
+                    <SelectItem value="vocational">Stručni</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -347,11 +344,11 @@ export function SubjectsList({
                 onClick={() => setIsDialogOpen(false)}
                 disabled={isSubmitting}
               >
-                Cancel
+                Otkaži
               </Button>
               <Button type="submit" disabled={isSubmitting}>
                 <Save className="h-4 w-4" />
-                Save Changes
+                Sačuvaj izmene
               </Button>
             </DialogFooter>
           </form>

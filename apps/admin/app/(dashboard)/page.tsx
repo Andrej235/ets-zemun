@@ -41,29 +41,29 @@ export default async function Dashboard() {
   return (
     <div className="grid gap-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Kontrolna tabla</h1>
         <p className="text-muted-foreground">
-          Welcome to the school administration panel.
+          Dobrodošli u administratorski panel škole.
         </p>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">News Articles</CardTitle>
+            <CardTitle className="text-sm font-medium">Vesti</CardTitle>
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{overviewData.newsCount}</div>
             <p className="text-xs text-muted-foreground">
-              {overviewData.unapprovedNewsCount} pending approval
+              {overviewData.unapprovedNewsCount} čeka odobrenje
             </p>
           </CardContent>
         </Card>
 
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Languages</CardTitle>
+            <CardTitle className="text-sm font-medium">Jezici</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -78,7 +78,7 @@ export default async function Dashboard() {
 
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Subjects</CardTitle>
+            <CardTitle className="text-sm font-medium">Predmeti</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -90,7 +90,7 @@ export default async function Dashboard() {
 
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Profiles</CardTitle>
+            <CardTitle className="text-sm font-medium">Profili</CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -103,27 +103,27 @@ export default async function Dashboard() {
 
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Teachers</CardTitle>
+            <CardTitle className="text-sm font-medium">Nastavnici</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
               {overviewData.teachersCount}
             </div>
-            <p className="text-xs text-muted-foreground">
-              Across all departments
-            </p>
+            <p className="text-xs text-muted-foreground">U svim odeljenjima</p>
           </CardContent>
         </Card>
 
         <Card className="gap-0">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Awards</CardTitle>
+            <CardTitle className="text-sm font-medium">Nagrade</CardTitle>
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{overviewData.awardsCount}</div>
-            <p className="text-xs text-muted-foreground">Won by our students</p>
+            <p className="text-xs text-muted-foreground">
+              Osvojili naši učenici
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -131,9 +131,9 @@ export default async function Dashboard() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
         <Card className="col-span-1 md:col-span-2 lg:col-span-1">
           <CardHeader>
-            <CardTitle>Recent Logins</CardTitle>
+            <CardTitle>Skorašnje prijave</CardTitle>
             <CardDescription>
-              Latest logins to the school&apos;s admin panel
+              Najnovije prijave na administratorski panel škole
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -161,15 +161,15 @@ export default async function Dashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle>System Status</CardTitle>
-            <CardDescription>Current system performance</CardDescription>
+            <CardTitle>Status sistema</CardTitle>
+            <CardDescription>Trenutne performanse sistema</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">Database</p>
-                  <p className="text-sm text-green-500">Operational</p>
+                  <p className="text-sm font-medium">Baza podataka</p>
+                  <p className="text-sm text-green-500">Radi</p>
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-muted">
                   <div className="h-2 w-[85%] rounded-full bg-green-500"></div>
@@ -177,8 +177,8 @@ export default async function Dashboard() {
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">Storage</p>
-                  <p className="text-sm text-amber-500">65% Used</p>
+                  <p className="text-sm font-medium">Skladište</p>
+                  <p className="text-sm text-amber-500">65% zauzeto</p>
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-muted">
                   <div className="h-2 w-[65%] rounded-full bg-amber-500"></div>
@@ -187,7 +187,7 @@ export default async function Dashboard() {
               <div>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium">API</p>
-                  <p className="text-sm text-green-500">Operational</p>
+                  <p className="text-sm text-green-500">Radi</p>
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-muted">
                   <div className="h-2 w-[95%] rounded-full bg-green-500"></div>

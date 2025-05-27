@@ -73,14 +73,14 @@ export default function EditSubjectPage({
         if (subjectData.isOk) {
           setSubject(subjectData.response!);
         } else {
-          toast.error("Subject not found");
+          toast.error("Predmet nije pronađen");
           router.push("/predmeti");
           return;
         }
 
         setAllTeachers(teachersData.response!.items);
       } catch {
-        toast.error("Failed to load data");
+        toast.error("Neuspešno učitavanje podataka");
       } finally {
         setLoading(false);
       }
@@ -109,12 +109,12 @@ export default function EditSubjectPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to update subject",
+            response.error?.message ?? "Neuspešno ažuriranje predmeta",
           );
       }),
       {
-        loading: "Updating subject...",
-        success: "Subject updated successfully",
+        loading: "Ažuriranje predmeta...",
+        success: "Predmet je uspešno sačuvan",
         error: (x) => (x as Error).message,
       },
     );
@@ -126,7 +126,7 @@ export default function EditSubjectPage({
       !newTranslation.languageCode ||
       !newTranslation.value.name
     ) {
-      toast.error("Please fill in all required fields");
+      toast.error("Popunite sva obavezna polja");
       return;
     }
 
@@ -147,12 +147,12 @@ export default function EditSubjectPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to add translation",
+            response.error?.message ?? "Neuspešno dodavanje prevoda",
           );
       }),
       {
-        loading: "Adding translation...",
-        success: "Translation added successfully",
+        loading: "Dodavanje prevoda...",
+        success: "Prevod je uspešno dodat",
         error: (x) => (x as Error).message,
       },
     );
@@ -223,9 +223,9 @@ export default function EditSubjectPage({
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Edit Subject</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Izmena predmeta</h1>
           <p className="text-muted-foreground">
-            {mainTranslation?.name || "Untitled Subject"}
+            {mainTranslation?.name || "Predmet bez naziva"}
           </p>
         </div>
       </div>
@@ -243,7 +243,7 @@ export default function EditSubjectPage({
       >
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
+            <TabsTrigger value="details">Detalji</TabsTrigger>
             {subject.translations.map((translation) => (
               <TabsTrigger
                 key={translation.languageCode}
@@ -255,24 +255,24 @@ export default function EditSubjectPage({
             ))}
             <TabsTrigger value="add-translation">
               <Plus className="mr-1 h-4 w-4" />
-              Add Translation
+              Dodaj prevod
             </TabsTrigger>
-            <TabsTrigger value="teachers">Teachers</TabsTrigger>
+            <TabsTrigger value="teachers">Nastavnici</TabsTrigger>
           </TabsList>
 
           <TabsContent value="details" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Subject Details</CardTitle>
+                <CardTitle>Detalji predmeta</CardTitle>
                 <CardDescription>
-                  Basic information about the subject
+                  Osnovne informacije o predmetu
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-muted-foreground" />
                   <span className="font-medium">
-                    {mainTranslation?.name || "Untitled Subject"}
+                    {mainTranslation?.name || "Predmet bez naziva"}
                   </span>
                 </div>
 
@@ -292,12 +292,13 @@ export default function EditSubjectPage({
 
                 <div>
                   <h3 className="mb-2 text-sm font-medium">
-                    Assigned Teachers
+                    Dodeljeni nastavnici
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {subject.teachers.length > 0 ? (
                       subject.teachers.map((teacher) => {
-                        const teacherName = teacher.name || "Unnamed Teacher";
+                        const teacherName =
+                          teacher.name || "Nastavnik bez imena";
                         return (
                           <div
                             key={teacher.id}
@@ -309,7 +310,7 @@ export default function EditSubjectPage({
                       })
                     ) : (
                       <span className="text-sm text-muted-foreground">
-                        No teachers assigned
+                        Nema dodeljenih nastavnika
                       </span>
                     )}
                   </div>
@@ -318,7 +319,7 @@ export default function EditSubjectPage({
                 <div className="flex justify-end pt-4">
                   <Button onClick={handleUpdateSubject}>
                     <Save className="mr-2 h-4 w-4" />
-                    Save Changes
+                    Sačuvaj izmene
                   </Button>
                 </div>
               </CardContent>
@@ -336,16 +337,14 @@ export default function EditSubjectPage({
                   <CardTitle>
                     {languages.find((l) => l.code === translation.languageCode)
                       ?.fullName || translation.languageCode}{" "}
-                    Translation
+                    prevod
                   </CardTitle>
-                  <CardDescription>
-                    Edit the translation details
-                  </CardDescription>
+                  <CardDescription>Izmenite detalje prevoda</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor={`name-${translation.languageCode}`}>
-                      Subject Name
+                      Naziv predmeta
                     </Label>
                     <Input
                       id={`name-${translation.languageCode}`}
@@ -372,7 +371,7 @@ export default function EditSubjectPage({
                   </div>
                   <div>
                     <Label htmlFor={`description-${translation.languageCode}`}>
-                      Description
+                      Opis
                     </Label>
                     <Textarea
                       id={`description-${translation.languageCode}`}
@@ -401,7 +400,7 @@ export default function EditSubjectPage({
                   <div className="flex justify-end">
                     <Button onClick={handleUpdateSubject}>
                       <Save className="mr-2 h-4 w-4" />
-                      Save Translation
+                      Sačuvaj prevod
                     </Button>
                   </div>
                 </CardContent>
@@ -412,14 +411,14 @@ export default function EditSubjectPage({
           <TabsContent value="add-translation" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Add New Translation</CardTitle>
+                <CardTitle>Dodaj novi prevod</CardTitle>
                 <CardDescription>
-                  Create a translation in another language
+                  Kreirajte prevod na drugom jeziku
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="language">Language</Label>
+                  <Label htmlFor="language">Jezik</Label>
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
                     <select
@@ -433,7 +432,7 @@ export default function EditSubjectPage({
                         })
                       }
                     >
-                      <option value="">Select language</option>
+                      <option value="">Izaberite jezik</option>
                       {availableLanguages.map((lang) => (
                         <option key={lang.code} value={lang.code}>
                           {lang.fullName}
@@ -443,7 +442,7 @@ export default function EditSubjectPage({
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="new-name">Subject Name</Label>
+                  <Label htmlFor="new-name">Naziv predmeta</Label>
                   <Input
                     id="new-name"
                     value={newTranslation.value.name}
@@ -456,11 +455,11 @@ export default function EditSubjectPage({
                         },
                       })
                     }
-                    placeholder="e.g., Mathematics"
+                    placeholder="npr. Matematika"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="new-description">Description</Label>
+                  <Label htmlFor="new-description">Opis</Label>
                   <Textarea
                     id="new-description"
                     value={newTranslation.value.description}
@@ -473,7 +472,7 @@ export default function EditSubjectPage({
                         },
                       })
                     }
-                    placeholder="Describe the subject..."
+                    placeholder="Opišite predmet..."
                     rows={4}
                   />
                 </div>
@@ -485,7 +484,7 @@ export default function EditSubjectPage({
                     }
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    Add Translation
+                    Dodaj prevod
                   </Button>
                 </div>
               </CardContent>
@@ -495,9 +494,9 @@ export default function EditSubjectPage({
           <TabsContent value="teachers" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Manage Teachers</CardTitle>
+                <CardTitle>Upravljanje nastavnicima</CardTitle>
                 <CardDescription>
-                  Assign teachers to this subject
+                  Dodelite nastavnike ovom predmetu
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -510,7 +509,7 @@ export default function EditSubjectPage({
                 <div className="flex justify-end">
                   <Button onClick={handleUpdateSubject}>
                     <Save className="mr-2 h-4 w-4" />
-                    Save Teacher Assignments
+                    Sačuvaj dodelu nastavnika
                   </Button>
                 </div>
               </CardContent>

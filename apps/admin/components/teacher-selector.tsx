@@ -66,8 +66,8 @@ export function TeacherSelector({
             className="w-full justify-between"
           >
             {selectedTeachers.length > 0
-              ? `${selectedTeachers.length} teacher${selectedTeachers.length !== 1 ? "s" : ""} selected`
-              : "Select teachers..."}
+              ? `${selectedTeachers.length} nastavnik${selectedTeachers.length !== 1 ? "a" : ""} izabrano`
+              : "Izaberite nastavnike..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -76,7 +76,7 @@ export function TeacherSelector({
             <div className="flex items-center border-b px-3">
               <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
               <CommandInput
-                placeholder="Search teachers..."
+                placeholder="Pretražite nastavnike..."
                 value={searchQuery}
                 onValueChange={setSearchQuery}
                 className="border-0 focus:ring-0"
@@ -115,7 +115,7 @@ export function TeacherSelector({
                   </CommandGroup>
                 </ScrollArea>
               ) : (
-                <CommandEmpty>No teachers found.</CommandEmpty>
+                <CommandEmpty>Nema pronađenih nastavnika.</CommandEmpty>
               )}
             </CommandList>
           </Command>

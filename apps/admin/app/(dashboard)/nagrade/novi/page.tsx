@@ -68,17 +68,17 @@ export default function NewAwardPage() {
 
   async function handleCreateAward() {
     if (!awardData.dayOfAward) {
-      toast.error("Please select a date");
+      toast.error("Molimo izaberite datum");
       return;
     }
 
     if (!awardData.image) {
-      toast.error("Please select an image");
+      toast.error("Molimo izaberite sliku");
       return;
     }
 
     if (awardData.translations.length === 0) {
-      toast.error("Please add at least one translation");
+      toast.error("Molimo dodajte bar jedan prevod");
       return;
     }
 
@@ -99,11 +99,13 @@ export default function NewAwardPage() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to create award");
+          throw new Error(
+            response.error?.message ?? "Neuspešno kreiranje nagrade",
+          );
       }),
       {
-        loading: "Creating award...",
-        success: "Award created successfully",
+        loading: "Kreiranje nagrade...",
+        success: "Nagrada je uspešno kreirana",
         error: (x) => (x as Error).message,
       },
     );
@@ -147,7 +149,7 @@ export default function NewAwardPage() {
       !currentTranslation.value.title ||
       !currentTranslation.value.student
     ) {
-      toast.error("Please fill in all required fields");
+      toast.error("Molimo popunite sva obavezna polja");
       return;
     }
 
@@ -185,7 +187,7 @@ export default function NewAwardPage() {
     });
 
     setActiveTab("details");
-    toast.success("Translation added successfully");
+    toast.success("Prevod je uspešno dodat");
   }
 
   return (
@@ -199,8 +201,8 @@ export default function NewAwardPage() {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Create Award</h1>
-          <p className="text-muted-foreground">Add a new award to the system</p>
+          <h1 className="text-3xl font-bold tracking-tight">Kreiraj nagradu</h1>
+          <p className="text-muted-foreground">Dodaj novu nagradu u sistem</p>
         </div>
       </div>
 
@@ -211,8 +213,8 @@ export default function NewAwardPage() {
       >
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="translation">Add Translation</TabsTrigger>
+            <TabsTrigger value="details">Detalji</TabsTrigger>
+            <TabsTrigger value="translation">Dodaj prevod</TabsTrigger>
             {awardData.translations.map((translation) => (
               <TabsTrigger
                 key={translation.languageCode}
@@ -227,10 +229,8 @@ export default function NewAwardPage() {
           <TabsContent value="details" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Award Details</CardTitle>
-                <CardDescription>
-                  Basic information about the award
-                </CardDescription>
+                <CardTitle>Detalji nagrade</CardTitle>
+                <CardDescription>Osnovne informacije o nagradi</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex flex-col gap-12 md:flex-row">
@@ -239,7 +239,7 @@ export default function NewAwardPage() {
                       {awardData.image ? (
                         <Image
                           src={awardData.image || "/placeholder.svg"}
-                          alt="award"
+                          alt="nagrada"
                           className="h-full w-full object-cover"
                           fill
                         />
@@ -260,7 +260,7 @@ export default function NewAwardPage() {
                       }
                     >
                       <Upload className="mr-2 h-4 w-4" />
-                      Upload Photo
+                      Dodaj fotografiju
                       <Input
                         type="file"
                         className="pointer-events-none absolute size-full opacity-0"
@@ -273,7 +273,7 @@ export default function NewAwardPage() {
                     <div className="space-y-4">
                       <div>
                         <Label htmlFor="link" className="mb-2">
-                          External Link
+                          Eksterni link
                         </Label>
                         <div className="flex items-center">
                           <ExternalLink className="mr-2 size-6 text-muted-foreground" />
@@ -286,7 +286,7 @@ export default function NewAwardPage() {
                                 externalLink: e.target.value || null,
                               })
                             }
-                            placeholder="competition.com"
+                            placeholder="takmicenje.com"
                           />
                         </div>
                       </div>
@@ -295,7 +295,7 @@ export default function NewAwardPage() {
                     <div className="w-full space-y-4">
                       <div>
                         <Label htmlFor="date" className="mb-2">
-                          Date
+                          Datum
                         </Label>
 
                         <Popover>
@@ -314,7 +314,7 @@ export default function NewAwardPage() {
                               {date ? (
                                 format(date, "PPP")
                               ) : (
-                                <span>Pick a date</span>
+                                <span>Izaberite datum</span>
                               )}
                             </Button>
                           </PopoverTrigger>
@@ -333,7 +333,7 @@ export default function NewAwardPage() {
                 </div>
 
                 <div className="pt-4">
-                  <h3 className="mb-2 text-sm font-medium">Translations</h3>
+                  <h3 className="mb-2 text-sm font-medium">Prevodi</h3>
                   <div className="flex flex-wrap gap-2">
                     {awardData.translations.length > 0 ? (
                       awardData.translations.map((translation) => (
@@ -349,7 +349,7 @@ export default function NewAwardPage() {
                       ))
                     ) : (
                       <span className="text-sm text-amber-500">
-                        Please add at least one translation
+                        Molimo dodajte bar jedan prevod
                       </span>
                     )}
                   </div>
@@ -359,17 +359,17 @@ export default function NewAwardPage() {
                   <div>
                     {!awardData.dayOfAward && (
                       <p className="text-sm text-amber-500">
-                        Please enter a date
+                        Molimo unesite datum
                       </p>
                     )}
                     {!awardData.image && (
                       <p className="text-sm text-amber-500">
-                        Please enter an image
+                        Molimo dodajte sliku
                       </p>
                     )}
                     {awardData.translations.length === 0 && (
                       <p className="text-sm text-amber-500">
-                        Please add at least one translation
+                        Molimo dodajte bar jedan prevod
                       </p>
                     )}
                   </div>
@@ -382,7 +382,7 @@ export default function NewAwardPage() {
                     }
                   >
                     <Save className="mr-2 h-4 w-4" />
-                    Create Award
+                    Kreiraj nagradu
                   </Button>
                 </div>
               </CardContent>
@@ -392,14 +392,14 @@ export default function NewAwardPage() {
           <TabsContent value="translation" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Add Translation</CardTitle>
+                <CardTitle>Dodaj prevod</CardTitle>
                 <CardDescription>
-                  Create a translation for the award&apos;s information
+                  Kreirajte prevod informacija o nagradi
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="language">Language</Label>
+                  <Label htmlFor="language">Jezik</Label>
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
                     <select
@@ -413,7 +413,7 @@ export default function NewAwardPage() {
                         })
                       }
                     >
-                      <option value="">Select language</option>
+                      <option value="">Izaberite jezik</option>
                       {languages.map((lang) => (
                         <option key={lang.code} value={lang.code}>
                           {lang.fullName}
@@ -424,7 +424,7 @@ export default function NewAwardPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">Naziv</Label>
                   <Input
                     id="title"
                     value={currentTranslation.value.title}
@@ -437,12 +437,12 @@ export default function NewAwardPage() {
                         },
                       })
                     }
-                    placeholder="e.g., Gold Medal in Mathematics"
+                    placeholder="npr. Zlatna medalja iz matematike"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="studentName">Student Name</Label>
+                  <Label htmlFor="studentName">Ime učenika</Label>
                   <Input
                     id="studentName"
                     value={currentTranslation.value.student}
@@ -455,12 +455,12 @@ export default function NewAwardPage() {
                         },
                       })
                     }
-                    placeholder="e.g., John Doe"
+                    placeholder="npr. Jovan Jovanović"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="competition">Competition</Label>
+                  <Label htmlFor="competition">Takmičenje</Label>
                   <Input
                     id="competition"
                     value={currentTranslation.value.competition}
@@ -473,12 +473,12 @@ export default function NewAwardPage() {
                         },
                       })
                     }
-                    placeholder="e.g., Mathematics Olympiad"
+                    placeholder="npr. Matematička olimpijada"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description">Opis</Label>
                   <Textarea
                     id="description"
                     value={currentTranslation.value.description ?? ""}
@@ -491,7 +491,7 @@ export default function NewAwardPage() {
                         },
                       })
                     }
-                    placeholder="Award description..."
+                    placeholder="Opis nagrade..."
                     rows={4}
                   />
                 </div>
@@ -507,7 +507,7 @@ export default function NewAwardPage() {
                     }
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    Add Translation
+                    Dodaj prevod
                   </Button>
                 </div>
               </CardContent>
@@ -525,16 +525,14 @@ export default function NewAwardPage() {
                   <CardTitle>
                     {languages.find((l) => l.code === translation.languageCode)
                       ?.fullName || translation.languageCode}{" "}
-                    Translation
+                    prevod
                   </CardTitle>
-                  <CardDescription>
-                    View or edit the translation
-                  </CardDescription>
+                  <CardDescription>Pregled ili izmena prevoda</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor={`title-${translation.languageCode}`}>
-                      Title
+                      Naziv
                     </Label>
                     <Input
                       id={`title-${translation.languageCode}`}
@@ -554,13 +552,13 @@ export default function NewAwardPage() {
                           translations: updatedTranslations,
                         });
                       }}
-                      placeholder="e.g., Gold Medal in Mathematics"
+                      placeholder="npr. Zlatna medalja iz matematike"
                     />
                   </div>
 
                   <div>
                     <Label htmlFor={`studentName-${translation.languageCode}`}>
-                      Student Name
+                      Ime učenika
                     </Label>
                     <Input
                       id={`studentName-${translation.languageCode}`}
@@ -583,13 +581,13 @@ export default function NewAwardPage() {
                           translations: updatedTranslations,
                         });
                       }}
-                      placeholder="e.g., John Doe"
+                      placeholder="npr. Jovan Jovanović"
                     />
                   </div>
 
                   <div>
                     <Label htmlFor={`competition-${translation.languageCode}`}>
-                      Competition
+                      Takmičenje
                     </Label>
                     <Input
                       id={`competition-${translation.languageCode}`}
@@ -612,13 +610,13 @@ export default function NewAwardPage() {
                           translations: updatedTranslations,
                         });
                       }}
-                      placeholder="e.g., Mathematics Olympiad"
+                      placeholder="npr. Matematička olimpijada"
                     />
                   </div>
 
                   <div>
                     <Label htmlFor={`description-${translation.languageCode}`}>
-                      Description
+                      Opis
                     </Label>
                     <Textarea
                       id={`description-${translation.languageCode}`}
@@ -641,7 +639,7 @@ export default function NewAwardPage() {
                           translations: updatedTranslations,
                         });
                       }}
-                      placeholder="Award description..."
+                      placeholder="Opis nagrade..."
                       rows={4}
                     />
                   </div>

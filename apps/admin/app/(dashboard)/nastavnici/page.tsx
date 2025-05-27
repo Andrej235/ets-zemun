@@ -48,7 +48,7 @@ export default function TeachersPage() {
         });
         setTeachers(data.response!);
       } catch {
-        toast.error("Failed to load teachers");
+        toast.error("Neuspešno učitavanje nastavnika");
       } finally {
         setLoading(false);
       }
@@ -71,12 +71,12 @@ export default function TeachersPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to delete teacher",
+            response.error?.message ?? "Neuspešno brisanje nastavnika",
           );
       }),
       {
-        loading: "Deleting teacher...",
-        success: "Teacher deleted successfully",
+        loading: "Brišem nastavnika...",
+        success: "Nastavnik je uspešno obrisan",
         error: (x) => (x as Error).message,
       },
     );
@@ -101,15 +101,15 @@ export default function TeachersPage() {
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Teachers</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Nastavnici</h1>
           <p className="text-muted-foreground">
-            Manage teacher profiles and their information
+            Upravljajte profilima nastavnika i njihovim informacijama
           </p>
         </div>
         <Button asChild>
           <Link href="/nastavnici/novi">
             <Plus className="mr-2 h-4 w-4" />
-            Add Teacher
+            Dodaj nastavnika
           </Link>
         </Button>
       </div>
@@ -119,7 +119,7 @@ export default function TeachersPage() {
           <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search teachers..."
+            placeholder="Pretraži nastavnike..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -151,17 +151,17 @@ export default function TeachersPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
             <Users className="mb-4 h-10 w-10 text-muted-foreground" />
-            <CardTitle className="mb-2">No teachers found</CardTitle>
+            <CardTitle className="mb-2">Nema pronađenih nastavnika</CardTitle>
             <CardDescription>
               {searchTerm
-                ? "Try a different search term"
-                : "Add your first teacher to get started"}
+                ? "Pokušajte sa drugačijim pojmom za pretragu"
+                : "Dodajte svog prvog nastavnika da biste započeli"}
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
                 <Link href="/nastavnici/novi">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Teacher
+                  Dodaj nastavnika
                 </Link>
               </Button>
             )}
@@ -192,7 +192,7 @@ export default function TeachersPage() {
                       <div className="relative h-16 w-16 overflow-hidden rounded-full">
                         <Image
                           src={teacher.image}
-                          alt={teacher.name || "Teacher"}
+                          alt={teacher.name || "Nastavnik"}
                           fill
                           className="object-cover text-transparent"
                         />
@@ -201,10 +201,10 @@ export default function TeachersPage() {
                       </div>
                       <div>
                         <h3 className="font-medium">
-                          {teacher.name || "Unnamed Teacher"}
+                          {teacher.name || "Nastavnik bez imena"}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          {teacher.title || "No title"}
+                          {teacher.title || "Bez titule"}
                         </p>
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export default function TeachersPage() {
                     <div className="mt-4 flex justify-between">
                       <Button asChild variant="outline" size="sm">
                         <Link href={`/nastavnici/${teacher.id}`}>
-                          View & Edit
+                          Pregledaj i izmeni
                         </Link>
                       </Button>
                       <AlertDialog
@@ -252,20 +252,22 @@ export default function TeachersPage() {
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogTitle>
+                              Da li ste sigurni?
+                            </AlertDialogTitle>
                             <AlertDialogDescription>
-                              This will permanently delete the teacher &quot;
-                              {teacher.name || "Unnamed Teacher"}&quot; and all
-                              their information. This action cannot be undone.
+                              Ovo će trajno obrisati nastavnika &quot;
+                              {teacher.name || "Nastavnik bez imena"}&quot; i
+                              sve njihove informacije. Ova akcija je nepovratna.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogCancel>Otkaži</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={handleDeleteTeacher}
                               className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                             >
-                              Delete
+                              Obriši
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>

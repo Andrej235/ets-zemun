@@ -53,7 +53,7 @@ export default function NewsPage() {
         });
         setNews(data.response!);
       } catch {
-        toast.error("Failed to load news articles");
+        toast.error("Neuspešno učitavanje vesti");
       } finally {
         setLoading(false);
       }
@@ -74,12 +74,12 @@ export default function NewsPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to approve news article",
+            response.error?.message ?? "Neuspešno odobravanje vesti",
           );
       }),
       {
-        loading: "Approving news article...",
-        success: "News article approved successfully",
+        loading: "Odobravanje vesti...",
+        success: "Vest je uspešno odobrena",
         error: (x) => (x as Error).message,
       },
     );
@@ -105,12 +105,12 @@ export default function NewsPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to unapprove news article",
+            response.error?.message ?? "Neuspešno povlačenje odobrenja vesti",
           );
       }),
       {
-        loading: "Unapproving news article...",
-        success: "News article unapproved successfully",
+        loading: "Povlačenje odobrenja vesti...",
+        success: "Vest je uspešno povučena",
         error: (x) => (x as Error).message,
       },
     );
@@ -137,12 +137,12 @@ export default function NewsPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to delete news article",
+            response.error?.message ?? "Neuspešno brisanje vesti",
           );
       }),
       {
-        loading: "Deleting news article...",
-        success: "News article deleted successfully",
+        loading: "Brisanje vesti...",
+        success: "Vest je uspešno obrisana",
         error: (x) => (x as Error).message,
       },
     );
@@ -165,15 +165,15 @@ export default function NewsPage() {
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">News Articles</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Vesti</h1>
           <p className="text-muted-foreground">
-            Manage news articles for the school website
+            Upravljajte vestima za sajt škole
           </p>
         </div>
         <Button asChild>
           <Link href="/vesti/novi">
             <Plus className="mr-2 h-4 w-4" />
-            Add News Article
+            Dodaj vest
           </Link>
         </Button>
       </div>
@@ -183,7 +183,7 @@ export default function NewsPage() {
           <FileText className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search news articles..."
+            placeholder="Pretraži vesti..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -213,17 +213,17 @@ export default function NewsPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
             <FileText className="mb-4 h-10 w-10 text-muted-foreground" />
-            <CardTitle className="mb-2">No news articles found</CardTitle>
+            <CardTitle className="mb-2">Nema pronađenih vesti</CardTitle>
             <CardDescription>
               {searchTerm
-                ? "Try a different search term"
-                : "Add your first news article to get started"}
+                ? "Pokušajte sa drugačijim pojmom za pretragu"
+                : "Dodajte svoju prvu vest da biste započeli"}
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
                 <Link href="/vesti/novi">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add News Article
+                  Dodaj vest
                 </Link>
               </Button>
             )}
@@ -246,7 +246,7 @@ export default function NewsPage() {
                 <div className="relative h-48">
                   <Image
                     src={item.previewImage || "/placeholder.svg"}
-                    alt={item.title || "News image"}
+                    alt={item.title || "Slika vesti"}
                     fill
                     className="object-cover"
                   />
@@ -278,7 +278,7 @@ export default function NewsPage() {
                   </div>
                   <div className="flex justify-between">
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/vesti/${item.id}`}>Edit</Link>
+                      <Link href={`/vesti/${item.id}`}>Izmeni</Link>
                     </Button>
                     <div className="flex gap-2">
                       <AlertDialog>
@@ -296,12 +296,12 @@ export default function NewsPage() {
                             {item.isApproved ? (
                               <>
                                 <XCircle className="h-4 w-4" />
-                                Unapprove
+                                Povuci odobrenje
                               </>
                             ) : (
                               <>
                                 <CheckCircle className="h-4 w-4" />
-                                Approve
+                                Odobri
                               </>
                             )}
                           </Button>
@@ -309,28 +309,27 @@ export default function NewsPage() {
                         <AlertDialogContent>
                           <AlertDialogHeader>
                             <AlertDialogTitle>
-                              {item.isApproved ? "Unapprove" : "Approve"} News
-                              Article
+                              {item.isApproved ? "Povuci odobrenje" : "Odobri"}{" "}
+                              vest
                             </AlertDialogTitle>
                           </AlertDialogHeader>
                           <AlertDialogDescription asChild>
                             {item.isApproved ? (
                               <p>
-                                Are you sure you want to unapprove this news
-                                article? This will remove it from the public
-                                website.
+                                Da li ste sigurni da želite da povučete
+                                odobrenje za ovu vest? Ona više neće biti
+                                vidljiva na sajtu.
                               </p>
                             ) : (
                               <p>
-                                Are you sure you want to approve this news
-                                article? This will make it visible on the public
-                                website.
+                                Da li ste sigurni da želite da odobrite ovu
+                                vest? Ona će biti vidljiva na sajtu.
                               </p>
                             )}
                           </AlertDialogDescription>
                           <AlertDialogFooter>
                             <AlertDialogCancel asChild>
-                              <Button variant="outline">Cancel</Button>
+                              <Button variant="outline">Otkaži</Button>
                             </AlertDialogCancel>
                             <AlertDialogCancel
                               onClick={() =>
@@ -344,7 +343,7 @@ export default function NewsPage() {
                                   : "bg-primary! text-white hover:bg-green-700"
                               }
                             >
-                              Confirm
+                              Potvrdi
                             </AlertDialogCancel>
                           </AlertDialogFooter>
                         </AlertDialogContent>
@@ -365,23 +364,25 @@ export default function NewsPage() {
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Confirm delete</AlertDialogTitle>
+                            <AlertDialogTitle>
+                              Potvrda brisanja
+                            </AlertDialogTitle>
                           </AlertDialogHeader>
                           <AlertDialogDescription>
-                            Are you sure you want to delete this post?
+                            Da li ste sigurni da želite da obrišete ovu vest?
                           </AlertDialogDescription>
                           <AlertDialogFooter>
                             <Button
                               variant="outline"
                               onClick={() => setConfirmDeleteId(null)}
                             >
-                              Cancel
+                              Otkaži
                             </Button>
                             <Button
                               variant="destructive"
                               onClick={() => handleDelete(item.id)}
                             >
-                              Delete
+                              Obriši
                             </Button>
                           </AlertDialogFooter>
                         </AlertDialogContent>

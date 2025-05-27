@@ -219,9 +219,9 @@ export default function CreateTeacherPage() {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Create Teacher</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Novi nastavnik</h1>
           <p className="text-muted-foreground">
-            Add a new teacher to the system
+            Dodajte novog nastavnika u sistem
           </p>
         </div>
       </div>
@@ -233,9 +233,9 @@ export default function CreateTeacherPage() {
       >
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="translation">Add Translation</TabsTrigger>
-            <TabsTrigger value="subjects">Assign Subjects</TabsTrigger>
+            <TabsTrigger value="details">Detalji</TabsTrigger>
+            <TabsTrigger value="translation">Dodaj prevod</TabsTrigger>
+            <TabsTrigger value="subjects">Dodeli predmete</TabsTrigger>
             {teacherData.translations.map((translation) => (
               <TabsTrigger
                 key={translation.languageCode}
@@ -250,9 +250,9 @@ export default function CreateTeacherPage() {
           <TabsContent value="details" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Teacher Details</CardTitle>
+                <CardTitle>Detalji nastavnika</CardTitle>
                 <CardDescription>
-                  Basic information about the teacher
+                  Osnovne informacije o nastavniku
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -262,7 +262,7 @@ export default function CreateTeacherPage() {
                       {teacherData.image ? (
                         <Image
                           src={teacherData.image || "/placeholder.svg"}
-                          alt="Teacher"
+                          alt="Nastavnik"
                           className="h-full w-full object-cover"
                           fill
                         />
@@ -283,7 +283,7 @@ export default function CreateTeacherPage() {
                       }
                     >
                       <Upload className="mr-2 h-4 w-4" />
-                      Upload Photo
+                      Dodaj fotografiju
                       <Input
                         type="file"
                         className="pointer-events-none absolute size-full opacity-0"
@@ -294,7 +294,7 @@ export default function CreateTeacherPage() {
 
                   <div className="space-y-4 md:w-2/3">
                     <div>
-                      <Label htmlFor="email">Email Address</Label>
+                      <Label htmlFor="email">Email adresa</Label>
                       <div className="flex items-center">
                         <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
                         <Input
@@ -307,7 +307,7 @@ export default function CreateTeacherPage() {
                               email: e.target.value,
                             })
                           }
-                          placeholder="teacher@school.edu"
+                          placeholder="nastavnik@skola.edu"
                         />
                       </div>
                     </div>
@@ -315,7 +315,7 @@ export default function CreateTeacherPage() {
                 </div>
 
                 <div className="pt-4">
-                  <h3 className="mb-2 text-sm font-medium">Translations</h3>
+                  <h3 className="mb-2 text-sm font-medium">Prevodi</h3>
                   <div className="flex flex-wrap gap-2">
                     {teacherData.translations.length > 0 ? (
                       teacherData.translations.map((translation) => (
@@ -331,7 +331,7 @@ export default function CreateTeacherPage() {
                       ))
                     ) : (
                       <span className="text-sm text-amber-500">
-                        Please add at least one translation
+                        Dodajte bar jedan prevod
                       </span>
                     )}
                   </div>
@@ -339,7 +339,7 @@ export default function CreateTeacherPage() {
 
                 <div>
                   <h3 className="mb-2 text-sm font-medium">
-                    Assigned Subjects
+                    Dodeljeni predmeti
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {teacherData.subjects.length > 0 ? (
@@ -353,7 +353,7 @@ export default function CreateTeacherPage() {
                       ))
                     ) : (
                       <span className="text-sm text-muted-foreground">
-                        No subjects assigned
+                        Nema dodeljenih predmeta
                       </span>
                     )}
                   </div>
@@ -363,12 +363,12 @@ export default function CreateTeacherPage() {
                   <div>
                     {!teacherData.email && (
                       <p className="text-sm text-amber-500">
-                        Please enter an email address
+                        Unesite email adresu
                       </p>
                     )}
                     {teacherData.translations.length === 0 && (
                       <p className="text-sm text-amber-500">
-                        Please add at least one translation
+                        Dodajte bar jedan prevod
                       </p>
                     )}
                   </div>
@@ -380,7 +380,7 @@ export default function CreateTeacherPage() {
                     }
                   >
                     <Save className="mr-2 h-4 w-4" />
-                    Create Teacher
+                    Kreiraj nastavnika
                   </Button>
                 </div>
               </CardContent>
@@ -390,14 +390,14 @@ export default function CreateTeacherPage() {
           <TabsContent value="translation" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Add Translation</CardTitle>
+                <CardTitle>Dodaj prevod</CardTitle>
                 <CardDescription>
-                  Create a translation for the teacher&apos;s information
+                  Kreirajte prevod informacija o nastavniku
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="language">Language</Label>
+                  <Label htmlFor="language">Jezik</Label>
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
                     <select
@@ -411,7 +411,7 @@ export default function CreateTeacherPage() {
                         })
                       }
                     >
-                      <option value="">Select language</option>
+                      <option value="">Izaberite jezik</option>
                       {languages.map((lang) => (
                         <option key={lang.code} value={lang.code}>
                           {lang.fullName}
@@ -421,7 +421,7 @@ export default function CreateTeacherPage() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="name">Teacher Name</Label>
+                  <Label htmlFor="name">Ime nastavnika</Label>
                   <Input
                     id="name"
                     value={currentTranslation.value.name}
@@ -434,11 +434,11 @@ export default function CreateTeacherPage() {
                         },
                       })
                     }
-                    placeholder="e.g., John Smith"
+                    placeholder="npr. Jovan Jovanović"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">Titula</Label>
                   <Input
                     id="title"
                     value={currentTranslation.value.title}
@@ -451,11 +451,11 @@ export default function CreateTeacherPage() {
                         },
                       })
                     }
-                    placeholder="e.g., Mathematics Professor"
+                    placeholder="npr. Profesor matematike"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="bio">Biography</Label>
+                  <Label htmlFor="bio">Biografija</Label>
                   <Textarea
                     id="bio"
                     value={currentTranslation.value.bio}
@@ -468,7 +468,7 @@ export default function CreateTeacherPage() {
                         },
                       })
                     }
-                    placeholder="Teacher's biography and background..."
+                    placeholder="Biografija i iskustvo nastavnika..."
                     rows={6}
                   />
                 </div>
@@ -482,7 +482,7 @@ export default function CreateTeacherPage() {
                     }
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    Add Translation
+                    Dodaj prevod
                   </Button>
                 </div>
               </CardContent>
@@ -492,9 +492,9 @@ export default function CreateTeacherPage() {
           <TabsContent value="subjects" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Assign Subjects</CardTitle>
+                <CardTitle>Dodeli predmete</CardTitle>
                 <CardDescription>
-                  Select subjects that this teacher will teach
+                  Izaberite predmete koje nastavnik predaje
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -506,7 +506,7 @@ export default function CreateTeacherPage() {
 
                 <div className="flex justify-end">
                   <Button onClick={() => setActiveTab("details")}>
-                    Save Subject Assignments
+                    Sačuvaj dodelu predmeta
                   </Button>
                 </div>
               </CardContent>
@@ -524,16 +524,14 @@ export default function CreateTeacherPage() {
                   <CardTitle>
                     {languages.find((l) => l.code === translation.languageCode)
                       ?.fullName || translation.languageCode}{" "}
-                    Translation
+                    prevod
                   </CardTitle>
-                  <CardDescription>
-                    View or edit the translation
-                  </CardDescription>
+                  <CardDescription>Pregled ili izmena prevoda</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor={`name-${translation.languageCode}`}>
-                      Teacher Name
+                      Ime nastavnika
                     </Label>
                     <Input
                       id={`name-${translation.languageCode}`}
@@ -557,7 +555,7 @@ export default function CreateTeacherPage() {
                   </div>
                   <div>
                     <Label htmlFor={`title-${translation.languageCode}`}>
-                      Title
+                      Titula
                     </Label>
                     <Input
                       id={`title-${translation.languageCode}`}
@@ -581,7 +579,7 @@ export default function CreateTeacherPage() {
                   </div>
                   <div>
                     <Label htmlFor={`bio-${translation.languageCode}`}>
-                      Biography
+                      Biografija
                     </Label>
                     <Textarea
                       id={`bio-${translation.languageCode}`}

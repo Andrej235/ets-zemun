@@ -63,7 +63,7 @@ export default function LanguagesPage() {
         });
         setLanguages(data.response!);
       } catch {
-        toast.error("Failed to load languages");
+        toast.error("Neuspešno učitavanje jezika");
       } finally {
         setLoading(false);
       }
@@ -74,7 +74,7 @@ export default function LanguagesPage() {
 
   const handleCreateLanguage = async () => {
     if (!newLanguage.code || !newLanguage.fullName) {
-      toast.error("Please fill in all fields");
+      toast.error("Popunite sva polja");
       return;
     }
 
@@ -90,12 +90,12 @@ export default function LanguagesPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to create language",
+            response.error?.message ?? "Neuspešno dodavanje jezika",
           );
       }),
       {
-        loading: "Creating language...",
-        success: "Language created successfully",
+        loading: "Dodavanje jezika...",
+        success: "Jezik je uspešno dodat",
         error: (x) => (x as Error).message,
       },
     );
@@ -121,12 +121,12 @@ export default function LanguagesPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to delete language",
+            response.error?.message ?? "Neuspešno brisanje jezika",
           );
       }),
       {
-        loading: "Deleting language...",
-        success: "Language deleted successfully",
+        loading: "Brisanje jezika...",
+        success: "Jezik je uspešno obrisan",
         error: (x) => (x as Error).message,
       },
     );
@@ -141,28 +141,28 @@ export default function LanguagesPage() {
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Languages</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Jezici</h1>
           <p className="text-muted-foreground">
-            Manage languages for the school website
+            Upravljajte jezicima za sajt škole
           </p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              Add Language
+              Dodaj jezik
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Add New Language</DialogTitle>
+              <DialogTitle>Dodaj novi jezik</DialogTitle>
               <DialogDescription>
-                Add a new language for translations on the website
+                Dodajte novi jezik za prevode na sajtu
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="code">Language Code</Label>
+                <Label htmlFor="code">Kod jezika</Label>
                 <Input
                   id="code"
                   placeholder="en"
@@ -172,14 +172,14 @@ export default function LanguagesPage() {
                   }
                 />
                 <p className="text-xs text-muted-foreground">
-                  Use standard language codes (e.g., en, fr, de)
+                  Koristite standardne kodove jezika (npr. en, fr, de)
                 </p>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="name">Language Name</Label>
+                <Label htmlFor="name">Naziv jezika</Label>
                 <Input
                   id="name"
-                  placeholder="English"
+                  placeholder="Engleski"
                   value={newLanguage.fullName}
                   onChange={(e) =>
                     setNewLanguage({ ...newLanguage, fullName: e.target.value })
@@ -189,9 +189,9 @@ export default function LanguagesPage() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setDialogOpen(false)}>
-                Cancel
+                Otkaži
               </Button>
-              <Button onClick={handleCreateLanguage}>Add Language</Button>
+              <Button onClick={handleCreateLanguage}>Dodaj jezik</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -209,27 +209,27 @@ export default function LanguagesPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
             <Globe className="mb-4 h-10 w-10 text-muted-foreground" />
-            <CardTitle className="mb-2">No languages found</CardTitle>
+            <CardTitle className="mb-2">Nema pronađenih jezika</CardTitle>
             <CardDescription>
-              Add your first language to get started with translations
+              Dodajte prvi jezik da biste započeli sa prevodima
             </CardDescription>
             <Dialog>
               <DialogTrigger asChild>
                 <Button className="mt-4">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Language
+                  Dodaj jezik
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Add New Language</DialogTitle>
+                  <DialogTitle>Dodaj novi jezik</DialogTitle>
                   <DialogDescription>
-                    Add a new language for translations on the website
+                    Dodajte novi jezik za prevode na sajtu
                   </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="code">Language Code</Label>
+                    <Label htmlFor="code">Kod jezika</Label>
                     <Input
                       id="code"
                       placeholder="en"
@@ -239,14 +239,14 @@ export default function LanguagesPage() {
                       }
                     />
                     <p className="text-xs text-muted-foreground">
-                      Use standard language codes (e.g., en, fr, de)
+                      Koristite standardne kodove jezika (npr. en, fr, de)
                     </p>
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="name">Language Name</Label>
+                    <Label htmlFor="name">Naziv jezika</Label>
                     <Input
                       id="name"
-                      placeholder="English"
+                      placeholder="Engleski"
                       value={newLanguage.fullName}
                       onChange={(e) =>
                         setNewLanguage({
@@ -262,9 +262,9 @@ export default function LanguagesPage() {
                     variant="outline"
                     onClick={() => setDialogOpen(false)}
                   >
-                    Cancel
+                    Otkaži
                   </Button>
-                  <Button onClick={handleCreateLanguage}>Add Language</Button>
+                  <Button onClick={handleCreateLanguage}>Dodaj jezik</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -274,18 +274,18 @@ export default function LanguagesPage() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <Card>
             <CardHeader>
-              <CardTitle>Available Languages</CardTitle>
+              <CardTitle>Dostupni jezici</CardTitle>
               <CardDescription>
-                Languages available for content translation
+                Jezici dostupni za prevod sadržaja
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Language Code</TableHead>
-                    <TableHead>Language Name</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead>Kod jezika</TableHead>
+                    <TableHead>Naziv jezika</TableHead>
+                    <TableHead className="text-right">Akcije</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -304,25 +304,23 @@ export default function LanguagesPage() {
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle>
-                                Delete Language
-                              </AlertDialogTitle>
+                              <AlertDialogTitle>Obriši jezik</AlertDialogTitle>
                               <AlertDialogDescription>
-                                Are you sure you want to delete the language
+                                Da li ste sigurni da želite da obrišete jezik
                                 &quot;{language.fullName}&quot; ({language.code}
-                                ) and all of it&apos;s translations? This action
-                                cannot be undone.
+                                ) i sve njegove prevode? Ova akcija je
+                                nepovratna.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogCancel>Otkaži</AlertDialogCancel>
                               <AlertDialogAction
                                 onClick={() =>
                                   handleDeleteLanguage(language.code)
                                 }
                                 className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                               >
-                                Delete
+                                Obriši
                               </AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
