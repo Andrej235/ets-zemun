@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
 
 type LoginFormProps = {
   readonly onRequestSwitch: () => void;
@@ -51,12 +50,12 @@ export function LoginForm({ onRequestSwitch, onSubmit }: LoginFormProps) {
               <div className="grid gap-3">
                 <div className="flex items-center">
                   <Label htmlFor="password">Lozinka</Label>
-                  <Link
+                  {/* <Link
                     href="/reset-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Zaboravili ste lozinku?
-                  </Link>
+                  </Link> */}
                 </div>
                 <Input id="password" type="password" name="password" required />
               </div>
