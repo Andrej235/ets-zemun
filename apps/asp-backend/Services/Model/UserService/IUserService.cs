@@ -14,7 +14,6 @@ public interface IUserService
     Task<Result> Delete(string id);
 
     Task<Result> SetAsUser(string id);
-    Task<Result> SetAsTeacher(string id);
     Task<Result> SetAsMod(string id);
     Task<Result> SetAsAdmin(string id);
 

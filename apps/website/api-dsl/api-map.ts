@@ -1791,31 +1791,6 @@ export type ApiMap = {
         }
       }
     },
-    '/users/{id}/set-as-teacher': {
-      patch: {
-        tags: [ 'User' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'string' } } ],
-        responses: {
-          '200': { description: 'OK' },
-          '400': {
-            description: 'Bad Request',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
     '/users/{id}/set-as-mod': {
       patch: {
         tags: [ 'User' ],

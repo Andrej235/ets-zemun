@@ -45,7 +45,7 @@ import {
 import { useUserStore } from "@/stores/user-store";
 
 type UserType = Schema<"AdminUserResponseDto">;
-type Role = "admin" | "mod" | "teacher" | "user";
+type Role = "admin" | "mod" | "user";
 
 export default function UsersPage() {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -224,14 +224,6 @@ export default function UsersPage() {
                               disabled={user.role === "user"}
                             >
                               Set as User
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() =>
-                                handleUpdateRole(user.id, "teacher")
-                              }
-                              disabled={user.role === "teacher"}
-                            >
-                              Set as Teacher
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() => handleUpdateRole(user.id, "mod")}

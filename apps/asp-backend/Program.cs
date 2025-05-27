@@ -502,7 +502,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    var roles = new[] { Roles.Admin, Roles.Mod, Roles.Teacher, Roles.User };
+    var roles = new[] { Roles.Admin, Roles.Mod, Roles.User };
 
     foreach (var role in roles)
     {
