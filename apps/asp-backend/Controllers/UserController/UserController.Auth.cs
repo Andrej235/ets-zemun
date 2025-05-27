@@ -81,7 +81,7 @@ public partial class UserController
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public Task<OkResult> GetPerms() => Task.FromResult(Ok());
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Roles.Admin)]
     [HttpGet("admin-only")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -1,4 +1,5 @@
 using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace EtsZemun.Controllers.EducationalProfilesController;
 
 public partial class EducationalProfilesController
 {
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

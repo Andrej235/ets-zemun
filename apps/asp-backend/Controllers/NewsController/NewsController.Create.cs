@@ -1,4 +1,5 @@
 using EtsZemun.Dtos.Request.News;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace EtsZemun.Controllers.NewsController;
 
 public partial class NewsController
 {
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -22,7 +23,7 @@ public partial class NewsController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPost("translation")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
