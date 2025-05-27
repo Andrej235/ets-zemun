@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using System.Web;
+using EtsZemun.Dtos.Request.User;
 using EtsZemun.Errors;
 using FluentResults;
 
@@ -7,13 +8,13 @@ namespace EtsZemun.Services.ModelServices.UserService;
 
 public partial class UserService
 {
-    public async Task<Result> ConfirmEmail(ClaimsPrincipal userClaim, string token)
+    public async Task<Result> ConfirmEmail(ConfirmEmailRequestDto request)
     {
-        var user = await userManager.GetUserAsync(userClaim);
+        var user = await userManager.FindByEmailAsync(HttpUtility.UrlDecode(request.Email));
         if (user is null)
-            return Result.Fail(new Unauthorized());
+            return Result.Fail(new NotFound("User not found"));
 
-        var result = await userManager.ConfirmEmailAsync(user, token);
+        var result = await userManager.ConfirmEmailAsync(user, request.Token);
         if (!result.Succeeded)
             return Result.Fail(
                 new BadRequest(string.Join(", ", result.Errors.Select(x => x.Description)))
@@ -22,9 +23,9 @@ public partial class UserService
         return Result.Ok();
     }
 
-    public async Task<Result> ResendConfirmationEmail(ClaimsPrincipal userClaim)
+    public async Task<Result> ResendConfirmationEmail(string email)
     {
-        var user = await userManager.GetUserAsync(userClaim);
+        var user = await userManager.FindByEmailAsync(email);
         if (user is null)
             return Result.Fail(new Unauthorized());
 
@@ -38,7 +39,7 @@ public partial class UserService
         await emailSender.SendConfirmationLinkAsync(
             user,
             user.Email,
-            $"{configuration["FrontendUrl"]}/confirm-email?token={HttpUtility.UrlEncode(emailToken)}"
+            $"{configuration["FrontendUrl"]}/confirm-email?token={HttpUtility.UrlEncode(emailToken)}&email={HttpUtility.UrlEncode(user.Email)}"
         );
 
         return Result.Ok();

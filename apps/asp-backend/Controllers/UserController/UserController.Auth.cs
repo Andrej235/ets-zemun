@@ -60,7 +60,7 @@ public partial class UserController
         );
 
         if (!result.Succeeded)
-            return Unauthorized(new { Message = "Invalid username or password" });
+            return Unauthorized(new { Message = "Neispravni podaci ili nemate pravo pristupa." });
 
         await userService.SaveLoginEvent(request.Username);
 

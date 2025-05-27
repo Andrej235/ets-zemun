@@ -1673,7 +1673,9 @@ export type ApiMap = {
     '/users/confirm-email': {
       post: {
         tags: [ 'User' ],
-        parameters: [ { name: 'token', in: 'query', schema: { type: 'string' } } ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/ConfirmEmailRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ConfirmEmailRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/ConfirmEmailRequestDto' } } }
+        },
         responses: {
           '200': { description: 'OK' },
           '400': {
@@ -1690,6 +1692,7 @@ export type ApiMap = {
     '/users/resend-confirmation-email': {
       post: {
         tags: [ 'User' ],
+        parameters: [ { name: 'email', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': { description: 'OK' },
           '400': {
@@ -1917,6 +1920,7 @@ export type ApiMap = {
       AdminUserResponseDto: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, email: { type: 'string' }, role: { type: 'string' }, verified: { type: 'boolean' }, joinedAt: { type: 'string', format: 'date-time' } }, additionalProperties: false },
       AwardResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       AwardResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/AwardResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
+      ConfirmEmailRequestDto: { type: 'object', properties: { email: { type: 'string' }, token: { type: 'string' } }, additionalProperties: false },
       CreateAwardRequestDto: {
         type: 'object',
         properties: { image: { type: 'string' }, dayOfAward: { type: 'string', format: 'date' }, externalLink: { type: 'string', nullable: true }, translations: { type: 'array', items: { '$ref': '#/components/schemas/CreateAwardTranslationRequestDto' } } },
