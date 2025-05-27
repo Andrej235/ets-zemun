@@ -1,5 +1,14 @@
 "use client";
-
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { useUserStore } from "@/stores/user-store";
 import {
   Award,
   BookOpen,
@@ -10,18 +19,8 @@ import {
   User,
   Users,
 } from "lucide-react";
-import * as React from "react";
-
-import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar";
 import Image from "next/image";
+import { useMemo } from "react";
 
 type NavItem = {
   title: string;
@@ -29,42 +28,57 @@ type NavItem = {
   Icon: React.ElementType;
 };
 
-const navItems: NavItem[] = [
-  { title: "Početna", href: "/", Icon: Home },
-  {
-    title: "Vesti",
-    href: "/vesti",
-    Icon: FileText,
-  },
-  {
-    title: "Jezici",
-    href: "/jezici",
-    Icon: Globe,
-  },
-  {
-    title: "Predmeti",
-    href: "/predmeti",
-    Icon: BookOpen,
-  },
-  {
-    title: "Obrazovni profili",
-    href: "/obrazovni-profili",
-    Icon: MessageSquare,
-  },
-  {
-    title: "Nastavnici",
-    href: "/nastavnici",
-    Icon: Users,
-  },
-  {
-    title: "Nagrade",
-    href: "/nagrade",
-    Icon: Award,
-  },
-  { title: "Korisnici", href: "/korisnici", Icon: User },
-];
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const isLoading = useUserStore((x) => x.isLoading);
+  const user = useUserStore((x) => x.user);
+
+  const navItems: NavItem[] = useMemo(() => {
+    if (isLoading) return [];
+
+    const items = [
+      { title: "Početna", href: "/", Icon: Home },
+      {
+        title: "Vesti",
+        href: "/vesti",
+        Icon: FileText,
+      },
+      {
+        title: "Jezici",
+        href: "/jezici",
+        Icon: Globe,
+      },
+      {
+        title: "Predmeti",
+        href: "/predmeti",
+        Icon: BookOpen,
+      },
+      {
+        title: "Obrazovni profili",
+        href: "/obrazovni-profili",
+        Icon: MessageSquare,
+      },
+      {
+        title: "Nastavnici",
+        href: "/nastavnici",
+        Icon: Users,
+      },
+      {
+        title: "Nagrade",
+        href: "/nagrade",
+        Icon: Award,
+      },
+      { title: "Korisnici", href: "/korisnici", Icon: User },
+    ];
+
+    if (user?.role !== "Admin") {
+      return items.filter(
+        (item) => item.title !== "Korisnici" && item.title !== "Jezici",
+      );
+    }
+
+    return items;
+  }, [isLoading, user]);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="flex-row items-center gap-4 px-4">

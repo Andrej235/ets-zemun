@@ -20,7 +20,6 @@ export const config = {
     /*
       Match all paths except:
       - /login
-      - /forbidden
       - /confirm-email
       - static files (/_next, /static, /favicon.ico, /robots.txt, /images, etc.)
     */
