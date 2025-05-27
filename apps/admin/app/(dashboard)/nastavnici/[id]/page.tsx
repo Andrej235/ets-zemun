@@ -76,7 +76,7 @@ export default function TeacherDetailPage() {
           ]);
 
         if (!teacherData) {
-          throw new Error("Teacher not found");
+          throw new Error("Nastavnik nije pronađen");
         }
 
         setTeacher(teacherData);
@@ -84,9 +84,11 @@ export default function TeacherDetailPage() {
       } catch (err) {
         console.error("Error fetching teacher data:", err);
         setError(
-          err instanceof Error ? err.message : "Failed to load teacher data",
+          err instanceof Error
+            ? err.message
+            : "Neuspešno učitavanje podataka o nastavniku",
         );
-        toast.error("Failed to load teacher data");
+        toast.error("Neuspešno učitavanje podataka o nastavniku");
       } finally {
         setLoading(false);
       }
@@ -112,13 +114,13 @@ export default function TeacherDetailPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to save subject assignments",
+            response.error?.message ?? "Neuspešno čuvanje predmeta",
           );
       }),
       {
-        loading: "Saving subject assignments...",
-        success: "Subject assignments saved successfully",
-        error: "Failed to save subject assignments",
+        loading: "Čuvanje predmeta...",
+        success: "Predmeti su uspešno sačuvani",
+        error: "Neuspešno čuvanje predmeta",
       },
     );
   }
@@ -136,23 +138,23 @@ export default function TeacherDetailPage() {
           <Link href="/nastavnici">
             <Button variant="ghost" className="gap-1">
               <ArrowLeft className="h-4 w-4" />
-              Back to Teachers
+              Nazad na nastavnike
             </Button>
           </Link>
         </div>
 
         <Card className="p-6">
           <div className="text-center">
-            <h2 className="mb-2 text-xl font-semibold text-red-600">Error</h2>
+            <h2 className="mb-2 text-xl font-semibold text-red-600">Greška</h2>
             <p className="text-muted-foreground">
-              {error || "Teacher not found"}
+              {error || "Nastavnik nije pronađen"}
             </p>
             <Button
               variant="outline"
               className="mt-4"
               onClick={() => router.push("/nastavnici")}
             >
-              Return to Teachers List
+              Povratak na listu nastavnika
             </Button>
           </div>
         </Card>
@@ -188,12 +190,14 @@ export default function TeacherDetailPage() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to upload image");
+          throw new Error(
+            response.error?.message ?? "Neuspešno otpremanje slike",
+          );
       }),
       {
-        loading: "Uploading image...",
-        success: "Image uploaded successfully",
-        error: "Failed to upload image",
+        loading: "Otpremanje slike...",
+        success: "Slika je uspešno otpremljena",
+        error: "Neuspešno otpremanje slike",
       },
     );
 
@@ -212,7 +216,7 @@ export default function TeacherDetailPage() {
         <Link href="/nastavnici">
           <Button variant="ghost" className="gap-1">
             <ArrowLeft className="h-4 w-4" />
-            Back to Teachers
+            Nazad na nastavnike
           </Button>
         </Link>
       </div>
@@ -223,13 +227,13 @@ export default function TeacherDetailPage() {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-4">
-          <TabsTrigger value="details">Details</TabsTrigger>
-          <TabsTrigger value="subjects">Subjects</TabsTrigger>
-          <TabsTrigger value="qualifications">Qualifications</TabsTrigger>
+          <TabsTrigger value="details">Detalji</TabsTrigger>
+          <TabsTrigger value="subjects">Predmeti</TabsTrigger>
+          <TabsTrigger value="qualifications">Kvalifikacije</TabsTrigger>
           <TabsTrigger value="translations">
             <div className="flex items-center gap-1">
               <Globe className="h-4 w-4" />
-              Translations
+              Prevodi
             </div>
           </TabsTrigger>
         </TabsList>
@@ -237,7 +241,7 @@ export default function TeacherDetailPage() {
         <TabsContent value="details">
           <Card>
             <CardHeader>
-              <CardTitle>Teacher Information</CardTitle>
+              <CardTitle>Informacije o nastavniku</CardTitle>
             </CardHeader>
 
             <CardContent className="flex items-start gap-16">
@@ -291,14 +295,14 @@ export default function TeacherDetailPage() {
                           className="w-full justify-center"
                           type="button"
                         >
-                          Edit Email
+                          Izmeni email
                         </Button>
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <DialogTitle>Edit Email</DialogTitle>
+                          <DialogTitle>Izmeni email</DialogTitle>
                           <DialogDescription>
-                            Please enter the new email address for the teacher.
+                            Unesite novu email adresu za nastavnika.
                           </DialogDescription>
                         </DialogHeader>
                         <div className="space-y-4">
@@ -310,7 +314,7 @@ export default function TeacherDetailPage() {
                                 className="w-full justify-center"
                                 type="button"
                               >
-                                Cancel
+                                Otkaži
                               </Button>
                             </DialogClose>
 
@@ -347,19 +351,20 @@ export default function TeacherDetailPage() {
                                       if (!response.isOk)
                                         throw new Error(
                                           response.error?.message ??
-                                            "Failed to update teacher's email",
+                                            "Neuspešno ažuriranje email adrese",
                                         );
                                     }),
                                     {
-                                      loading: "Updating teacher email...",
+                                      loading: "Ažuriranje email adrese...",
                                       success:
-                                        "Teacher email updated successfully",
-                                      error: "Failed to update teacher email",
+                                        "Email adresa je uspešno ažurirana",
+                                      error:
+                                        "Neuspešno ažuriranje email adrese",
                                     },
                                   );
                                 }}
                               >
-                                Update
+                                Ažuriraj
                               </Button>
                             </DialogClose>
                           </DialogFooter>
@@ -376,9 +381,9 @@ export default function TeacherDetailPage() {
         <TabsContent value="subjects" className="mt-4 space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Assign Subjects</CardTitle>
+              <CardTitle>Dodeli predmete</CardTitle>
               <CardDescription>
-                Select subjects that this teacher will teach
+                Izaberite predmete koje ovaj nastavnik predaje
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -392,7 +397,7 @@ export default function TeacherDetailPage() {
 
               <div className="flex justify-end">
                 <Button onClick={handleSaveSubjectAssignments}>
-                  Save Subject Assignments
+                  Sačuvaj predmete
                 </Button>
               </div>
             </CardContent>
@@ -403,14 +408,14 @@ export default function TeacherDetailPage() {
           <Card>
             <CardHeader className="gap-y-0">
               <div className="flex flex-row items-center justify-between">
-                <CardTitle>Professional Qualifications</CardTitle>
+                <CardTitle>Stručne kvalifikacije</CardTitle>
                 <Link href={`/nastavnici/${teacherId}/kvalifikacije`}>
-                  <Button size="sm">Manage Qualifications</Button>
+                  <Button size="sm">Upravljaj kvalifikacijama</Button>
                 </Link>
               </div>
 
               <p className="text-muted-foreground">
-                View and manage professional qualifications and certifications.
+                Pregled i upravljanje stručnim kvalifikacijama i sertifikatima.
               </p>
             </CardHeader>
             <CardContent>
@@ -420,7 +425,7 @@ export default function TeacherDetailPage() {
                     <Calendar className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <h3 className="mt-4 text-lg font-medium">
-                    No qualifications added
+                    Nema dodatih kvalifikacija
                   </h3>
                 </div>
               ) : (
@@ -436,7 +441,8 @@ export default function TeacherDetailPage() {
                       >
                         <div>
                           <h4 className="font-medium">
-                            {mainTranslation?.name || "Unnamed Qualification"}
+                            {mainTranslation?.name ||
+                              "Kvalifikacija bez naziva"}
                           </h4>
                           <p className="text-sm text-muted-foreground">
                             {new Date(
@@ -444,7 +450,7 @@ export default function TeacherDetailPage() {
                             ).toLocaleDateString()}
                           </p>
                           <p className="mt-1 text-sm">
-                            {mainTranslation?.description || "No description"}
+                            {mainTranslation?.description || "Bez opisa"}
                           </p>
                         </div>
                       </div>
@@ -470,7 +476,7 @@ export default function TeacherDetailPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-center">
                   <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-                  <span className="ml-2">Loading translations...</span>
+                  <span className="ml-2">Učitavanje prevoda...</span>
                 </div>
               </CardContent>
             </Card>
@@ -488,7 +494,7 @@ function TeacherDetailSkeleton() {
       <div className="mb-6">
         <Button variant="ghost" className="gap-1" disabled>
           <ArrowLeft className="h-4 w-4" />
-          Back to Teachers
+          Nazad na nastavnike
         </Button>
       </div>
 

@@ -17,11 +17,11 @@ export default function ApprovalStatusBadge({
     >
       {isApproved ? (
         <>
-          <CheckCircle2 className="mr-1 h-3 w-3" /> Approved
+          <CheckCircle2 className="mr-1 h-3 w-3" /> Odobreno
         </>
       ) : (
         <>
-          <AlertTriangle className="mr-1 h-3 w-3" /> Pending Approval
+          <AlertTriangle className="mr-1 h-3 w-3" /> Čeka odobrenje
         </>
       )}
     </div>

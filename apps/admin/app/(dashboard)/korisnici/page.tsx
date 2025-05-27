@@ -45,7 +45,7 @@ import {
 import { useUserStore } from "@/stores/user-store";
 
 type UserType = Schema<"AdminUserResponseDto">;
-type Role = "admin" | "mod" | "teacher" | "user";
+type Role = "admin" | "mod" | "user";
 
 export default function UsersPage() {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -64,7 +64,7 @@ export default function UsersPage() {
         });
         setUsers(data.response!);
       } catch {
-        toast.error("Failed to load users");
+        toast.error("Neuspešno učitavanje korisnika");
       } finally {
         setLoading(false);
       }
@@ -85,12 +85,12 @@ export default function UsersPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to update user role",
+            response.error?.message ?? "Neuspešno ažuriranje uloge korisnika",
           );
       }),
       {
-        loading: "Updating user role...",
-        success: "User role updated successfully",
+        loading: "Ažuriranje uloge korisnika...",
+        success: "Uloga korisnika je uspešno ažurirana",
         error: (x) => (x as Error).message,
       },
     );
@@ -116,11 +116,11 @@ export default function UsersPage() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to delete user");
+          throw new Error(response.error?.message ?? "Neuspešno brisanje korisnika");
       }),
       {
-        loading: "Deleting user...",
-        success: "User deleted successfully",
+        loading: "Brisanje korisnika...",
+        success: "Korisnik je uspešno obrisan",
         error: (x) => (x as Error).message,
       },
     );
@@ -143,9 +143,9 @@ export default function UsersPage() {
   return (
     <div className="grid gap-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Users</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Korisnici</h1>
         <p className="text-muted-foreground">
-          Manage user accounts and permissions
+          Upravljajte korisničkim nalozima i dozvolama
         </p>
       </div>
 
@@ -154,7 +154,7 @@ export default function UsersPage() {
           <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search users..."
+            placeholder="Pretraži korisnike..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -174,11 +174,11 @@ export default function UsersPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
             <User className="mb-4 h-10 w-10 text-muted-foreground" />
-            <CardTitle className="mb-2">No users found</CardTitle>
+            <CardTitle className="mb-2">Nema pronađenih korisnika</CardTitle>
             <CardDescription>
               {searchTerm
-                ? "Try a different search term"
-                : "No users are registered in the system"}
+                ? "Pokušajte sa drugim pojmom za pretragu"
+                : "Nema registrovanih korisnika u sistemu"}
             </CardDescription>
           </CardContent>
         </Card>
@@ -186,17 +186,17 @@ export default function UsersPage() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <Card>
             <CardHeader>
-              <CardTitle>Registered Users</CardTitle>
-              <CardDescription>Manage user accounts and roles</CardDescription>
+              <CardTitle>Registrovani korisnici</CardTitle>
+              <CardDescription>Upravljajte korisničkim nalozima i ulogama</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Username</TableHead>
+                    <TableHead>Korisničko ime</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead>Uloga</TableHead>
+                    <TableHead className="text-right">Akcije</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -217,33 +217,25 @@ export default function UsersPage() {
                             )}
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuLabel>Akcije</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                               onClick={() => handleUpdateRole(user.id, "user")}
                               disabled={user.role === "user"}
                             >
-                              Set as User
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() =>
-                                handleUpdateRole(user.id, "teacher")
-                              }
-                              disabled={user.role === "teacher"}
-                            >
-                              Set as Teacher
+                              Postavi kao korisnika
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() => handleUpdateRole(user.id, "mod")}
                               disabled={user.role === "moderator"}
                             >
-                              Set as Moderator
+                              Postavi kao moderatora
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() => handleUpdateRole(user.id, "admin")}
                               disabled={user.role === "admin"}
                             >
-                              Set as Admin
+                              Postavi kao administratora
                             </DropdownMenuItem>
 
                             <DropdownMenuSeparator />
@@ -255,27 +247,25 @@ export default function UsersPage() {
                                   className="gap-0 text-destructive"
                                 >
                                   <Trash2 className="mr-2 h-4 w-4" />
-                                  Delete User
+                                  Obriši korisnika
                                 </Button>
                               </AlertDialogTrigger>
                               <AlertDialogContent>
                                 <AlertDialogHeader>
                                   <AlertDialogTitle>
-                                    Are you sure you want to delete this user?
+                                    Da li ste sigurni da želite da obrišete ovog korisnika?
                                   </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    This action cannot be undone. This will
-                                    permanently delete the user and remove their
-                                    data from the system.
+                                    Ova akcija je nepovratna. Ovo će trajno obrisati korisnika i ukloniti njegove podatke iz sistema.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogCancel>Otkaži</AlertDialogCancel>
                                   <AlertDialogAction
                                     className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                                     onClick={() => handleDeleteUser(user.id)}
                                   >
-                                    Delete
+                                    Obriši
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>

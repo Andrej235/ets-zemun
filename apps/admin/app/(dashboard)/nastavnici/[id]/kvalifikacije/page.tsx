@@ -64,11 +64,11 @@ export default function TeacherQualificationsPage({
         if (teacherData) {
           setTeacher(teacherData);
         } else {
-          toast.error("Teacher not found");
+          toast.error("Nastavnik nije pronađen");
           router.push("/nastavnici");
         }
       } catch {
-        toast.error("Failed to load data");
+        toast.error("Neuspešno učitavanje podataka");
       } finally {
         setLoading(false);
       }
@@ -92,13 +92,13 @@ export default function TeacherQualificationsPage({
         promise.then((response) => {
           if (!response.isOk)
             throw new Error(
-              response.error?.message ?? "Failed to delete qualification",
+              response.error?.message ?? "Neuspešno brisanje kvalifikacije",
             );
         }),
         {
-          loading: "Deleting qualification...",
-          success: "Qualification deleted successfully",
-          error: "Failed to delete qualification",
+          loading: "Brisanje kvalifikacije...",
+          success: "Kvalifikacija je uspešno obrisana",
+          error: "Neuspešno brisanje kvalifikacije",
         },
       );
 
@@ -113,7 +113,7 @@ export default function TeacherQualificationsPage({
       });
       setQualificationToDelete(null);
     } catch {
-      toast.error("Failed to delete qualification");
+      toast.error("Neuspešno brisanje kvalifikacije");
     }
   };
 
@@ -170,10 +170,10 @@ export default function TeacherQualificationsPage({
         </Button>
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            Teacher Qualifications
+            Kvalifikacije nastavnika
           </h1>
           <p className="text-muted-foreground">
-            {mainTranslation?.value?.name || "Unnamed Teacher"}
+            {mainTranslation?.value?.name || "Nastavnik bez imena"}
           </p>
         </div>
       </div>
@@ -198,14 +198,14 @@ export default function TeacherQualificationsPage({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle>Qualifications</CardTitle>
+                <CardTitle>Kvalifikacije</CardTitle>
                 <CardDescription>
-                  Manage teacher&apos;s qualifications and certifications
+                  Upravljajte kvalifikacijama i sertifikatima nastavnika
                 </CardDescription>
               </div>
               <Button onClick={() => setShowAddForm(true)}>
                 <Plus className="mr-2 h-4 w-4" />
-                Add Qualification
+                Dodaj kvalifikaciju
               </Button>
             </CardHeader>
             <CardContent>
@@ -215,15 +215,15 @@ export default function TeacherQualificationsPage({
                     <Calendar className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <h3 className="mt-4 text-lg font-medium">
-                    No qualifications added
+                    Nema dodatih kvalifikacija
                   </h3>
                   <p className="mt-2 text-center text-sm text-muted-foreground">
-                    Add qualifications to showcase this teacher&apos;s expertise
-                    and credentials
+                    Dodajte kvalifikacije kako biste prikazali stručnost i
+                    reference ovog nastavnika
                   </p>
                   <Button className="mt-4" onClick={() => setShowAddForm(true)}>
                     <Plus className="mr-2 h-4 w-4" />
-                    Add Qualification
+                    Dodaj kvalifikaciju
                   </Button>
                 </div>
               ) : (
@@ -239,7 +239,8 @@ export default function TeacherQualificationsPage({
                       >
                         <div>
                           <h4 className="font-medium">
-                            {mainTranslation?.name || "Unnamed Qualification"}
+                            {mainTranslation?.name ||
+                              "Kvalifikacija bez naziva"}
                           </h4>
                           <p className="text-sm text-muted-foreground">
                             {new Date(
@@ -247,7 +248,7 @@ export default function TeacherQualificationsPage({
                             ).toLocaleDateString()}
                           </p>
                           <p className="mt-1 text-sm">
-                            {mainTranslation?.description || "No description"}
+                            {mainTranslation?.description || "Bez opisa"}
                           </p>
                         </div>
                         <div className="flex gap-2 self-end sm:self-center">
@@ -258,7 +259,7 @@ export default function TeacherQualificationsPage({
                               setEditingQualification(qualification)
                             }
                           >
-                            Edit
+                            Izmeni
                           </Button>
                           <AlertDialog
                             open={qualificationToDelete === qualification.id}
@@ -281,24 +282,23 @@ export default function TeacherQualificationsPage({
                             <AlertDialogContent>
                               <AlertDialogHeader>
                                 <AlertDialogTitle>
-                                  Are you sure?
+                                  Da li ste sigurni?
                                 </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  This will permanently delete the qualification
-                                  &quot;
+                                  Ovo će trajno obrisati kvalifikaciju &quot;
                                   {mainTranslation?.name ||
-                                    "Unnamed Qualification"}
-                                  &quot; and all its translations. This action
-                                  cannot be undone.
+                                    "Kvalifikacija bez naziva"}
+                                  &quot; i sve njene prevode. Ova akcija je
+                                  nepovratna.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogCancel>Otkaži</AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={handleDeleteQualification}
                                   className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                                 >
-                                  Delete
+                                  Obriši
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>

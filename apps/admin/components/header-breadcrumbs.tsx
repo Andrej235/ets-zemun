@@ -30,7 +30,7 @@ export function HeaderBreadcrumbs() {
       ? [
           {
             link: "/",
-            name: "Početna",
+            name: "Početna",
           },
         ]
       : pieces.reduce<BreadcrumbItem[]>(
@@ -74,7 +74,7 @@ export function HeaderBreadcrumbs() {
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center gap-1">
                   <BreadcrumbEllipsis className="h-4 w-4" />
-                  <span className="sr-only">Toggle menu</span>
+                  <span className="sr-only">Prikaži meni</span>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="start">

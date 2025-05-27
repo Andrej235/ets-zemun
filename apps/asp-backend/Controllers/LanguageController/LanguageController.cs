@@ -1,6 +1,7 @@
 using EtsZemun.Dtos.Request.Language;
 using EtsZemun.Dtos.Response.Language;
 using EtsZemun.Services.Model.LanguageService;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,7 @@ public partial class LanguageController(ILanguageService languageService) : Cont
 {
     private readonly ILanguageService languageService = languageService;
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Roles.Admin)]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,7 +44,7 @@ public partial class LanguageController(ILanguageService languageService) : Cont
         return Ok(result.Value);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Roles.Admin)]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,7 +62,7 @@ public partial class LanguageController(ILanguageService languageService) : Cont
         return NoContent();
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Roles.Admin)]
     [HttpDelete("{code:alpha}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

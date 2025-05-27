@@ -69,10 +69,22 @@ public partial class AwardService
                 ExternalLink = x.ExternalLink,
                 Image = x.Image,
                 Translations = x.Translations.Select(x => x.LanguageCode),
-                Competition = x.Translations.First().Competition,
-                Description = x.Translations.First().Description,
-                Student = x.Translations.First().Student,
-                Title = x.Translations.First().Title,
+                Competition = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Competition,
+                Description = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Description,
+                Student = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Student,
+                Title = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Title,
             },
             null
         );

@@ -54,7 +54,7 @@ export default function CreateNewsPage() {
       !currentTranslation.value.title ||
       !currentTranslation.value.description
     ) {
-      toast.error("Please fill in all required fields");
+      toast.error("Popunite sva obavezna polja");
       return;
     }
 
@@ -91,12 +91,12 @@ export default function CreateNewsPage() {
     });
 
     setActiveTab("details");
-    toast.success("Translation added successfully");
+    toast.success("Prevod je uspešno dodat");
   };
 
   const handleCreateNews = async () => {
     if (newsData.translations.length === 0) {
-      toast.error("Please add at least one translation");
+      toast.error("Dodajte bar jedan prevod");
       return;
     }
 
@@ -119,12 +119,12 @@ export default function CreateNewsPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to create news article",
+            response.error?.message ?? "Neuspešno kreiranje vesti",
           );
       }),
       {
-        loading: "Creating news article...",
-        success: "News article created successfully",
+        loading: "Kreiranje vesti...",
+        success: "Vest je uspešno kreirana",
         error: (x) => (x as Error).message,
       },
     );
@@ -164,19 +164,15 @@ export default function CreateNewsPage() {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            Create News Article
-          </h1>
-          <p className="text-muted-foreground">
-            Add a new news article to the website
-          </p>
+          <h1 className="text-3xl font-bold tracking-tight">Kreiraj vest</h1>
+          <p className="text-muted-foreground">Dodajte novu vest na sajt</p>
         </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="details">Details</TabsTrigger>
-          <TabsTrigger value="translation">Add Translation</TabsTrigger>
+          <TabsTrigger value="details">Detalji</TabsTrigger>
+          <TabsTrigger value="translation">Dodaj prevod</TabsTrigger>
           {newsData.translations.map((translation) => (
             <TabsTrigger
               key={translation.languageCode}
@@ -191,14 +187,12 @@ export default function CreateNewsPage() {
         <TabsContent value="details" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>News Details</CardTitle>
-              <CardDescription>
-                Basic information about the news article
-              </CardDescription>
+              <CardTitle>Detalji vesti</CardTitle>
+              <CardDescription>Osnovne informacije o vesti</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="date">Publication Date</Label>
+                <Label htmlFor="date">Datum objave</Label>
                 <Input
                   id="date"
                   type="date"
@@ -210,13 +204,13 @@ export default function CreateNewsPage() {
               </div>
 
               <div>
-                <Label htmlFor="preview-image">Preview Image</Label>
+                <Label htmlFor="preview-image">Naslovna slika</Label>
                 <div className="mt-2 flex items-center gap-4">
                   <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-md border bg-muted">
                     {newsData.previewImage ? (
                       <Image
                         src={newsData.previewImage || "/placeholder.svg"}
-                        alt="Preview"
+                        alt="Naslovna slika"
                         className="h-full w-full object-cover"
                         fill
                       />
@@ -234,7 +228,7 @@ export default function CreateNewsPage() {
                     }
                   >
                     <Upload className="mr-2 h-4 w-4" />
-                    Upload Image
+                    Dodaj sliku
                     <Input
                       type="file"
                       className="pointer-events-none absolute size-full opacity-0"
@@ -248,7 +242,7 @@ export default function CreateNewsPage() {
                 <div>
                   {newsData.translations.length === 0 && (
                     <p className="text-sm text-amber-500">
-                      Please add at least one translation
+                      Dodajte bar jedan prevod
                     </p>
                   )}
                 </div>
@@ -257,7 +251,7 @@ export default function CreateNewsPage() {
                   disabled={newsData.translations.length === 0}
                 >
                   <Save className="mr-2 h-4 w-4" />
-                  Create News Article
+                  Kreiraj vest
                 </Button>
               </div>
             </CardContent>
@@ -267,14 +261,12 @@ export default function CreateNewsPage() {
         <TabsContent value="translation" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Add Translation</CardTitle>
-              <CardDescription>
-                Create a translation for the news article
-              </CardDescription>
+              <CardTitle>Dodaj prevod</CardTitle>
+              <CardDescription>Kreirajte prevod za ovu vest</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="language">Language</Label>
+                <Label htmlFor="language">Jezik</Label>
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-muted-foreground" />
                   <select
@@ -288,7 +280,7 @@ export default function CreateNewsPage() {
                       })
                     }
                   >
-                    <option value="">Select language</option>
+                    <option value="">Izaberite jezik</option>
                     {languages.map((lang) => (
                       <option key={lang.code} value={lang.code}>
                         {lang.fullName}
@@ -298,7 +290,7 @@ export default function CreateNewsPage() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title">Naslov</Label>
                 <Input
                   id="title"
                   value={currentTranslation.value.title}
@@ -314,7 +306,7 @@ export default function CreateNewsPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">Opis</Label>
                 <Textarea
                   id="description"
                   value={currentTranslation.value.description}
@@ -330,7 +322,7 @@ export default function CreateNewsPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="markup">Content</Label>
+                <Label htmlFor="markup">Sadržaj</Label>
                 <Textarea
                   id="markup"
                   value={currentTranslation.value.markup}
@@ -356,7 +348,7 @@ export default function CreateNewsPage() {
                   }
                 >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Translation
+                  Dodaj prevod
                 </Button>
               </div>
             </CardContent>
@@ -374,14 +366,16 @@ export default function CreateNewsPage() {
                 <CardTitle>
                   {languages.find((l) => l.code === translation.languageCode)
                     ?.fullName || translation.languageCode}{" "}
-                  Translation
+                  prevod
                 </CardTitle>
-                <CardDescription>View or edit the translation</CardDescription>
+                <CardDescription>
+                  Pogledajte ili izmenite prevod
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <Label htmlFor={`title-${translation.languageCode}`}>
-                    Title
+                    Naslov
                   </Label>
                   <Input
                     id={`title-${translation.languageCode}`}
@@ -405,7 +399,7 @@ export default function CreateNewsPage() {
                 </div>
                 <div>
                   <Label htmlFor={`description-${translation.languageCode}`}>
-                    Description
+                    Opis
                   </Label>
                   <Textarea
                     id={`description-${translation.languageCode}`}
@@ -432,7 +426,7 @@ export default function CreateNewsPage() {
                 </div>
                 <div>
                   <Label htmlFor={`markup-${translation.languageCode}`}>
-                    Content
+                    Sadržaj
                   </Label>
                   <Textarea
                     id={`markup-${translation.languageCode}`}

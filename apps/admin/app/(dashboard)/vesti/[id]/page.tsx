@@ -80,11 +80,11 @@ export default function NewsEditPage({
         if (newsData.isOk) {
           setNews(newsData.response!);
         } else {
-          toast.error("News article not found");
+          toast.error("Vest nije pronađena");
           router.push("/vesti");
         }
       } catch {
-        toast.error("Failed to load data");
+        toast.error("Neuspešno učitavanje podataka");
       } finally {
         setLoading(false);
       }
@@ -105,12 +105,12 @@ export default function NewsEditPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to approve news article",
+            response.error?.message ?? "Neuspešno odobravanje vesti",
           );
       }),
       {
-        loading: "Approving news article...",
-        success: "News article approved successfully",
+        loading: "Odobravanje vesti...",
+        success: "Vest je uspešno odobrena",
         error: (x) => (x as Error).message,
       },
     );
@@ -132,12 +132,12 @@ export default function NewsEditPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to unapprove news article",
+            response.error?.message ?? "Neuspešno povlačenje odobrenja vesti",
           );
       }),
       {
-        loading: "Unapproving news article...",
-        success: "News article unapproved successfully",
+        loading: "Povlačenje odobrenja vesti...",
+        success: "Vest je uspešno povučena",
         error: (x) => (x as Error).message,
       },
     );
@@ -162,12 +162,12 @@ export default function NewsEditPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to add translation",
+            response.error?.message ?? "Neuspešno dodavanje prevoda",
           );
       }),
       {
-        loading: "Adding translation...",
-        success: "Translation added successfully",
+        loading: "Dodavanje prevoda...",
+        success: "Prevod je uspešno dodat",
         error: (x) => (x as Error).message,
       },
     );
@@ -234,11 +234,11 @@ export default function NewsEditPage({
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to save news");
+          throw new Error(response.error?.message ?? "Neuspešno čuvanje vesti");
       }),
       {
-        loading: "Saving news article...",
-        success: "News article saved successfully",
+        loading: "Čuvanje vesti...",
+        success: "Vest je uspešno sačuvana",
         error: (x) => (x as Error).message,
       },
     );
@@ -278,11 +278,9 @@ export default function NewsEditPage({
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            Edit News Article
-          </h1>
+          <h1 className="text-3xl font-bold tracking-tight">Izmena vesti</h1>
           <p className="text-muted-foreground">
-            Edit news article details and translations
+            Izmenite detalje vesti i prevode
           </p>
         </div>
       </div>
@@ -302,7 +300,7 @@ export default function NewsEditPage({
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="details">Details</TabsTrigger>
+          <TabsTrigger value="details">Detalji</TabsTrigger>
           {news.translations.map((translation) => (
             <TabsTrigger
               key={translation.languageCode}
@@ -314,22 +312,20 @@ export default function NewsEditPage({
           ))}
           <TabsTrigger value="add-translation">
             <Plus className="mr-1 h-4 w-4" />
-            Add Translation
+            Dodaj prevod
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="details" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>News Details</CardTitle>
-              <CardDescription>
-                Basic information about the news article
-              </CardDescription>
+              <CardTitle>Detalji vesti</CardTitle>
+              <CardDescription>Osnovne informacije o vesti</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <Label htmlFor="date">Publication Date</Label>
+                  <Label htmlFor="date">Datum objave</Label>
                   <Input
                     id="date"
                     type="date"
@@ -338,7 +334,7 @@ export default function NewsEditPage({
                   />
                 </div>
                 <div>
-                  <Label htmlFor="status">Approval Status</Label>
+                  <Label htmlFor="status">Status odobrenja</Label>
                   <div className="mt-2 flex items-center gap-4">
                     <ApprovalStatusBadge isApproved={news.isApproved} />
 
@@ -357,12 +353,12 @@ export default function NewsEditPage({
                           {news.isApproved ? (
                             <>
                               <XCircle className="h-4 w-4" />
-                              Unapprove
+                              Povuci odobrenje
                             </>
                           ) : (
                             <>
                               <CheckCircle className="h-4 w-4" />
-                              Approve
+                              Odobri
                             </>
                           )}
                         </Button>
@@ -370,28 +366,26 @@ export default function NewsEditPage({
                       <AlertDialogContent>
                         <AlertDialogHeader>
                           <AlertDialogTitle>
-                            {news.isApproved ? "Unapprove" : "Approve"} News
-                            Article
+                            {news.isApproved ? "Povuci odobrenje" : "Odobri"}{" "}
+                            vest
                           </AlertDialogTitle>
                         </AlertDialogHeader>
                         <AlertDialogDescription asChild>
                           {news.isApproved ? (
                             <p>
-                              Are you sure you want to unapprove this news
-                              article? This will remove it from the public
-                              website.
+                              Da li ste sigurni da želite da povučete odobrenje
+                              za ovu vest? Vest neće biti prikazana na sajtu.
                             </p>
                           ) : (
                             <p>
-                              Are you sure you want to approve this news
-                              article? This will make it visible on the public
-                              website.
+                              Da li ste sigurni da želite da odobrite ovu vest?
+                              Vest će biti prikazana na sajtu.
                             </p>
                           )}
                         </AlertDialogDescription>
                         <AlertDialogFooter>
                           <AlertDialogCancel asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline">Otkaži</Button>
                           </AlertDialogCancel>
                           <AlertDialogCancel
                             onClick={() =>
@@ -405,7 +399,7 @@ export default function NewsEditPage({
                                 : "bg-primary! text-white hover:bg-green-700"
                             }
                           >
-                            Confirm
+                            Potvrdi
                           </AlertDialogCancel>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -415,12 +409,12 @@ export default function NewsEditPage({
               </div>
 
               <div>
-                <Label htmlFor="preview-image">Preview Image</Label>
+                <Label htmlFor="preview-image">Naslovna slika</Label>
                 <div className="mt-2 flex items-center gap-4">
                   <div className="relative h-24 w-24 overflow-hidden rounded-md border">
                     <Image
                       src={news.previewImage || "/placeholder.svg"}
-                      alt="Preview"
+                      alt="Naslovna slika"
                       fill
                       className="object-cover"
                     />
@@ -435,7 +429,7 @@ export default function NewsEditPage({
                     }
                   >
                     <Upload className="mr-2 h-4 w-4" />
-                    Change Image
+                    Promeni sliku
                     <Input
                       type="file"
                       className="pointer-events-none absolute size-full opacity-0"
@@ -448,7 +442,7 @@ export default function NewsEditPage({
               <div className="flex justify-end">
                 <Button onClick={handleSave}>
                   <Save className="mr-2 h-4 w-4" />
-                  Save Changes
+                  Sačuvaj izmene
                 </Button>
               </div>
             </CardContent>
@@ -466,14 +460,14 @@ export default function NewsEditPage({
                 <CardTitle>
                   {languages.find((l) => l.code === translation.languageCode)
                     ?.fullName || translation.languageCode}{" "}
-                  Translation
+                  prevod
                 </CardTitle>
-                <CardDescription>Edit the translation details</CardDescription>
+                <CardDescription>Izmenite detalje prevoda</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <Label htmlFor={`title-${translation.languageCode}`}>
-                    Title
+                    Naslov
                   </Label>
                   <Input
                     id={`title-${translation.languageCode}`}
@@ -493,7 +487,7 @@ export default function NewsEditPage({
                 </div>
                 <div>
                   <Label htmlFor={`description-${translation.languageCode}`}>
-                    Description
+                    Opis
                   </Label>
                   <Textarea
                     id={`description-${translation.languageCode}`}
@@ -516,7 +510,7 @@ export default function NewsEditPage({
                 </div>
                 <div>
                   <Label htmlFor={`markup-${translation.languageCode}`}>
-                    Content
+                    Sadržaj
                   </Label>
                   <Textarea
                     id={`markup-${translation.languageCode}`}
@@ -543,14 +537,14 @@ export default function NewsEditPage({
         <TabsContent value="add-translation" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Add New Translation</CardTitle>
+              <CardTitle>Dodaj novi prevod</CardTitle>
               <CardDescription>
-                Create a translation in another language
+                Kreirajte prevod na drugom jeziku
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="language">Language</Label>
+                <Label htmlFor="language">Jezik</Label>
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-muted-foreground" />
                   <select
@@ -564,7 +558,7 @@ export default function NewsEditPage({
                       })
                     }
                   >
-                    <option value="">Select language</option>
+                    <option value="">Izaberite jezik</option>
                     {availableLanguages.map((lang) => (
                       <option key={lang.code} value={lang.code}>
                         {lang.fullName}
@@ -574,7 +568,7 @@ export default function NewsEditPage({
                 </div>
               </div>
               <div>
-                <Label htmlFor="new-title">Title</Label>
+                <Label htmlFor="new-title">Naslov</Label>
                 <Input
                   id="new-title"
                   value={newTranslation.title}
@@ -587,7 +581,7 @@ export default function NewsEditPage({
                 />
               </div>
               <div>
-                <Label htmlFor="new-description">Description</Label>
+                <Label htmlFor="new-description">Opis</Label>
                 <Textarea
                   id="new-description"
                   value={newTranslation.description}
@@ -600,7 +594,7 @@ export default function NewsEditPage({
                 />
               </div>
               <div>
-                <Label htmlFor="new-markup">Content</Label>
+                <Label htmlFor="new-markup">Sadržaj</Label>
                 <Textarea
                   id="new-markup"
                   value={newTranslation.markup}
@@ -623,7 +617,7 @@ export default function NewsEditPage({
                   }
                 >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Translation
+                  Dodaj prevod
                 </Button>
               </div>
             </CardContent>

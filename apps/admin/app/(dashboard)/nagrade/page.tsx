@@ -42,7 +42,7 @@ export default function Nagrade() {
       });
 
       if (!awards.isOk) {
-        toast.error("Failed to load awards");
+        toast.error("Neuspešno učitavanje nagrada");
         return;
       }
 
@@ -74,11 +74,13 @@ export default function Nagrade() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Failed to delete award");
+          throw new Error(
+            response.error?.message ?? "Neuspešno brisanje nagrade",
+          );
       }),
       {
-        loading: "Deleting award...",
-        success: "Award deleted successfully",
+        loading: "Brisanje nagrade...",
+        success: "Nagrada je uspešno obrisana",
         error: (x) => (x as Error).message,
       },
     );
@@ -94,15 +96,15 @@ export default function Nagrade() {
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Awards</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Nagrade</h1>
           <p className="text-muted-foreground">
-            Manage awards and their translations
+            Upravljajte nagradama i njihovim prevodima
           </p>
         </div>
         <Button asChild>
           <Link href="/nagrade/novi">
             <Plus className="mr-2 h-4 w-4" />
-            Add award
+            Dodaj nagradu
           </Link>
         </Button>
       </div>
@@ -112,7 +114,7 @@ export default function Nagrade() {
           <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search awards..."
+            placeholder="Pretraži nagrade..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -168,7 +170,7 @@ export default function Nagrade() {
 
               <CardContent>
                 <div className="mb-2 flex justify-between text-sm text-muted-foreground">
-                  <p>Won by: {award.student}</p>
+                  <p>Osvojio/la: {award.student}</p>
 
                   <p>{award.dayOfAward}</p>
                 </div>
@@ -197,7 +199,7 @@ export default function Nagrade() {
 
                 <div className="mb-6 flex justify-between">
                   <Button variant="outline" asChild>
-                    <Link href={`/nagrade/${award.id}`}>Edit</Link>
+                    <Link href={`/nagrade/${award.id}`}>Izmeni</Link>
                   </Button>
 
                   <div className="space-x-2">
@@ -209,7 +211,7 @@ export default function Nagrade() {
                           rel="noreferrer"
                         >
                           <ExternalLink className="size-4" />
-                          <p className="sr-only">External link</p>
+                          <p className="sr-only">Eksterni link</p>
                         </a>
                       </Button>
                     )}
@@ -231,20 +233,22 @@ export default function Nagrade() {
 
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                          <AlertDialogTitle>
+                            Da li ste sigurni?
+                          </AlertDialogTitle>
                           <AlertDialogDescription>
-                            This will permanently delete the award &quot;
-                            {award.competition || "Unnamed award"}&quot; and all
-                            it&apos;s information. This action cannot be undone.
+                            Ovo će trajno obrisati nagradu &quot;
+                            {award.competition || "Nagrada bez imena"}&quot; i
+                            sve njene informacije. Ova akcija je nepovratna.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogCancel>Otkaži</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={handleDeleteAward}
                             className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                           >
-                            Delete
+                            Obriši
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

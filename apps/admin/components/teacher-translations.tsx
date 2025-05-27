@@ -285,9 +285,9 @@ export function TeacherTranslations({
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>Teacher Translations</CardTitle>
+            <CardTitle>Prevodi nastavnika</CardTitle>
             <CardDescription>
-              Manage translations for this teacher&apos;s information
+              Upravljajte prevodima informacija o ovom nastavniku
             </CardDescription>
           </div>
           <Button
@@ -295,7 +295,7 @@ export function TeacherTranslations({
             disabled={availableLanguages.length === 0}
           >
             <Plus className="mr-2 h-4 w-4" />
-            Add Translation
+            Dodaj prevod
           </Button>
         </CardHeader>
         <CardContent>
@@ -303,10 +303,10 @@ export function TeacherTranslations({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Language</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead>Jezik</TableHead>
+                  <TableHead>Ime</TableHead>
+                  <TableHead>Titula</TableHead>
+                  <TableHead>Akcije</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -335,7 +335,7 @@ export function TeacherTranslations({
                             className="h-8 w-8 p-0"
                           >
                             <Pencil className="h-4 w-4" />
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">Izmeni</span>
                           </Button>
                           <Button
                             variant="ghost"
@@ -344,7 +344,7 @@ export function TeacherTranslations({
                             className="h-8 w-8 p-0 text-red-500 hover:text-red-600"
                           >
                             <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
+                            <span className="sr-only">Obriši</span>
                           </Button>
                         </div>
                       </TableCell>
@@ -357,11 +357,11 @@ export function TeacherTranslations({
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <Globe className="h-12 w-12 text-muted-foreground opacity-50" />
               <h3 className="mt-4 text-lg font-medium">
-                No translations available
+                Nema dostupnih prevoda
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Add translations to make this teacher&apos;s information
-                available in different languages.
+                Dodajte prevode kako bi informacije o nastavniku bile dostupne
+                na različitim jezicima.
               </p>
               <Button
                 onClick={() => setIsAddDialogOpen(true)}
@@ -369,7 +369,7 @@ export function TeacherTranslations({
                 disabled={availableLanguages.length === 0}
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Add Translation
+                Dodaj prevod
               </Button>
             </div>
           )}
@@ -380,9 +380,9 @@ export function TeacherTranslations({
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Add Translation</DialogTitle>
+            <DialogTitle>Dodaj prevod</DialogTitle>
             <DialogDescription>
-              Add a new translation for this teacher&apos;s information.
+              Dodajte novi prevod informacija o ovom nastavniku.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -395,14 +395,14 @@ export function TeacherTranslations({
                 name="languageCode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Language</FormLabel>
+                    <FormLabel>Jezik</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a language" />
+                          <SelectValue placeholder="Izaberite jezik" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -414,7 +414,7 @@ export function TeacherTranslations({
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Select the language for this translation.
+                      Izaberite jezik za ovaj prevod.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -425,15 +425,15 @@ export function TeacherTranslations({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Ime</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Teacher's name in selected language"
+                        placeholder="Ime nastavnika na izabranom jeziku"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s name in the selected language.
+                      Unesite ime nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -444,15 +444,15 @@ export function TeacherTranslations({
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Titula</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Teacher's title in selected language"
+                        placeholder="Titula nastavnika na izabranom jeziku"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s title in the selected language.
+                      Unesite titulu nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -463,17 +463,16 @@ export function TeacherTranslations({
                 name="bio"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Biography</FormLabel>
+                    <FormLabel>Biografija</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Teacher's biography in selected language"
+                        placeholder="Biografija nastavnika na izabranom jeziku"
                         {...field}
                         rows={5}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s biography in the selected
-                      language.
+                      Unesite biografiju nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -486,13 +485,13 @@ export function TeacherTranslations({
                   onClick={() => setIsAddDialogOpen(false)}
                   disabled={isSubmitting}
                 >
-                  Cancel
+                  Otkaži
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Add Translation
+                  Dodaj prevod
                 </Button>
               </DialogFooter>
             </form>
@@ -504,9 +503,9 @@ export function TeacherTranslations({
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Edit Translation</DialogTitle>
+            <DialogTitle>Izmeni prevod</DialogTitle>
             <DialogDescription>
-              Edit the translation for{" "}
+              Izmenite prevod za{" "}
               {languages.find(
                 (l) => l.code === currentTranslation?.languageCode,
               )?.fullName || currentTranslation?.languageCode}
@@ -523,15 +522,15 @@ export function TeacherTranslations({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Ime</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Teacher's name in selected language"
+                        placeholder="Ime nastavnika na izabranom jeziku"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s name in the selected language.
+                      Unesite ime nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -542,15 +541,15 @@ export function TeacherTranslations({
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Titula</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Teacher's title in selected language"
+                        placeholder="Titula nastavnika na izabranom jeziku"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s title in the selected language.
+                      Unesite titulu nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -561,17 +560,16 @@ export function TeacherTranslations({
                 name="bio"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Biography</FormLabel>
+                    <FormLabel>Biografija</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Teacher's biography in selected language"
+                        placeholder="Biografija nastavnika na izabranom jeziku"
                         {...field}
                         rows={5}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter the teacher&apos;s biography in the selected
-                      language.
+                      Unesite biografiju nastavnika na izabranom jeziku.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -584,13 +582,13 @@ export function TeacherTranslations({
                   onClick={() => setIsEditDialogOpen(false)}
                   disabled={isSubmitting}
                 >
-                  Cancel
+                  Otkaži
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Update Translation
+                  Sačuvaj izmene
                 </Button>
               </DialogFooter>
             </form>
@@ -605,18 +603,18 @@ export function TeacherTranslations({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>Da li ste sigurni?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the translation for{" "}
+              Ovo će trajno obrisati prevod za{" "}
               {languages.find(
                 (l) => l.code === currentTranslation?.languageCode,
               )?.fullName || currentTranslation?.languageCode}
-              . This action cannot be undone.
+              . Ova akcija je nepovratna.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isSubmitting}>
-              Cancel
+              Otkaži
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteTranslation}
@@ -627,7 +625,7 @@ export function TeacherTranslations({
               ) : (
                 <Trash2 className="mr-2 h-4 w-4" />
               )}
-              Delete
+              Obriši
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

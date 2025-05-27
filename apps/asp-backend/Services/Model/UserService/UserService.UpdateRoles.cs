@@ -18,21 +18,6 @@ public partial class UserService
         return Result.Ok();
     }
 
-    public async Task<Result> SetAsTeacher(string id)
-    {
-        var user = await userManager.FindByIdAsync(id);
-        if (user is null)
-            return Result.Fail(new NotFound("User not found"));
-
-        if (!user.EmailConfirmed)
-            return Result.Fail(new BadRequest("Email not confirmed"));
-
-        var roles = await userManager.GetRolesAsync(user);
-        await userManager.RemoveFromRolesAsync(user, roles);
-        await userManager.AddToRoleAsync(user, Roles.Teacher);
-        return Result.Ok();
-    }
-
     public async Task<Result> SetAsMod(string id)
     {
         var user = await userManager.FindByIdAsync(id);

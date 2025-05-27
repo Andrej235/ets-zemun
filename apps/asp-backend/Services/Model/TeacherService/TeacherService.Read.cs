@@ -180,8 +180,14 @@ public partial class TeacherService : ITeacherService
             x => new AdminTeacherResponseDto()
             {
                 Id = x.Id,
-                Name = x.Translations.First().Name,
-                Title = x.Translations.First().Title,
+                Name = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Name,
+                Title = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Title,
                 Translations = x.Translations.Select(x => x.LanguageCode),
                 Email = x.Email,
                 Image = x.Image,
@@ -222,8 +228,14 @@ public partial class TeacherService : ITeacherService
                     s => new Dtos.Response.Subject.SimpleSubjectResponseDto()
                     {
                         Id = s.Id,
-                        Name = s.Translations.First().Name,
-                        Description = s.Translations.First().Description,
+                        Name = s
+                            .Translations.OrderByDescending(s => s.LanguageCode == "sr_lt" ? 1 : 0)
+                            .First()
+                            .Name,
+                        Description = s
+                            .Translations.OrderByDescending(s => s.LanguageCode == "sr_lt" ? 1 : 0)
+                            .First()
+                            .Description,
                     }
                 ),
                 Translations = x.Translations.Select(

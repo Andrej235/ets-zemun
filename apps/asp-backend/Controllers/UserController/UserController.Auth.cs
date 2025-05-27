@@ -1,5 +1,6 @@
 using EtsZemun.Dtos.Request.User;
 using EtsZemun.Dtos.Response.User;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task = System.Threading.Tasks.Task;
@@ -73,7 +74,14 @@ public partial class UserController
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public Task<OkResult> Get() => Task.FromResult(Ok());
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
+    [HttpGet("perms-only")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public Task<OkResult> GetPerms() => Task.FromResult(Ok());
+
+    [Authorize(Roles = Roles.Admin)]
     [HttpGet("admin-only")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

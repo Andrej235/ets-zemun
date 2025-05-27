@@ -44,6 +44,7 @@ using EtsZemun.Services.Model.NewsService;
 using EtsZemun.Services.Model.QualificationService;
 using EtsZemun.Services.Model.SubjectService;
 using EtsZemun.Services.Model.TeacherService;
+using EtsZemun.Services.Model.UserService;
 using EtsZemun.Services.ModelServices.UserService;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
@@ -348,10 +349,6 @@ builder.Services.AddScoped<
     DeleteService<EducationalProfileVocationalSubject>
 >();
 builder.Services.AddScoped<
-    IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile>,
-    CreateEducationalProfileRequestMapper
->();
-builder.Services.AddScoped<
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile>,
     UpdateEducationalProfileRequestMapper
 >();
@@ -449,6 +446,7 @@ builder.Services.AddScoped<IResponseMapper<News, NewsResponseDto>, NewsResponseM
 #endregion
 
 #region User
+builder.Services.AddScoped<SignInManager>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICountService<User>, ReadService<User>>();
 builder.Services.AddScoped<
@@ -500,7 +498,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    var roles = new[] { Roles.Admin, Roles.Mod, Roles.Teacher, Roles.User };
+    var roles = new[] { Roles.Admin, Roles.Mod, Roles.User };
 
     foreach (var role in roles)
     {

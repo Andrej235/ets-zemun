@@ -1,3 +1,4 @@
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,7 +6,7 @@ namespace EtsZemun.Controllers.QualificationController;
 
 public partial class QualificationController
 {
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -21,7 +22,7 @@ public partial class QualificationController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpDelete("{qualificationId:int}/translation/{languageCode}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

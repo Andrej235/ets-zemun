@@ -53,7 +53,11 @@ export function SubjectSelector({
 
   const filteredSubjects = subjects.filter((subject) => {
     const searchLower = searchQuery.toLowerCase();
-    return subject.name.includes(searchLower);
+
+    return (
+      subject.name.toLowerCase().includes(searchLower) ||
+      subject.description.toLowerCase().includes(searchLower)
+    );
   });
 
   return (
@@ -67,8 +71,8 @@ export function SubjectSelector({
             className="w-full justify-between"
           >
             {selectedSubjects.length > 0
-              ? `${selectedSubjects.length} subject${selectedSubjects.length !== 1 ? "s" : ""} selected`
-              : "Select subjects..."}
+              ? `${selectedSubjects.length} predmet${selectedSubjects.length !== 1 ? "a" : ""} izabrano`
+              : "Izaberi predmete..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -80,7 +84,7 @@ export function SubjectSelector({
             <div className="flex items-center border-b px-3">
               <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
               <CommandInput
-                placeholder="Search subjects..."
+                placeholder="Pretraži predmete..."
                 value={searchQuery}
                 onValueChange={setSearchQuery}
                 className="border-0 focus:ring-0"
@@ -123,7 +127,7 @@ export function SubjectSelector({
                   </CommandGroup>
                 </ScrollArea>
               ) : (
-                <CommandEmpty>No subjects found.</CommandEmpty>
+                <CommandEmpty>Nema pronađenih predmeta.</CommandEmpty>
               )}
             </CommandList>
           </Command>

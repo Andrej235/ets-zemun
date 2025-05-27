@@ -1,4 +1,5 @@
 using EtsZemun.Dtos.Request.Teacher;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace EtsZemun.Controllers.TeacherController;
 
 public partial class TeacherController
 {
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPost("subject")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -22,7 +23,7 @@ public partial class TeacherController
         return Created();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpDelete("{teacherId:int}/subject/{subjectId:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -38,7 +39,7 @@ public partial class TeacherController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPut("subject")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

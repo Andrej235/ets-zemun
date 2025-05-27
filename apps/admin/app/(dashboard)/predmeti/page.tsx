@@ -58,7 +58,7 @@ export default function SubjectsPage() {
 
         setSubjects(data!);
       } catch {
-        toast.error("Failed to load subjects");
+        toast.error("Neuspešno učitavanje predmeta");
       } finally {
         setLoading(false);
       }
@@ -81,12 +81,12 @@ export default function SubjectsPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to delete subject",
+            response.error?.message ?? "Neuspešno brisanje predmeta",
           );
       }),
       {
-        loading: "Deleting subject...",
-        success: "Subject deleted successfully",
+        loading: "Brišem predmet...",
+        success: "Predmet je uspešno obrisan",
         error: (x) => (x as Error).message,
       },
     );
@@ -98,7 +98,14 @@ export default function SubjectsPage() {
     setSubjectToDelete(null);
   };
 
-  const filteredSubjects = subjects;
+  const filteredSubjects = subjects.filter((subject) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      subject.name.toLowerCase().includes(searchLower) ||
+      subject.description.toLowerCase().includes(searchLower)
+    );
+  });
+
   return (
     <div className="grid gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -111,7 +118,7 @@ export default function SubjectsPage() {
         <Button asChild>
           <Link href="/predmeti/novi">
             <Plus className="mr-2 h-4 w-4" />
-            Add Subject
+            Dodaj predmet
           </Link>
         </Button>
       </div>
@@ -121,7 +128,7 @@ export default function SubjectsPage() {
           <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search subjects..."
+            placeholder="Pretraži predmete..."
             className="w-full pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -147,17 +154,17 @@ export default function SubjectsPage() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-10">
             <BookOpen className="mb-4 h-10 w-10 text-muted-foreground" />
-            <CardTitle className="mb-2">No subjects found</CardTitle>
+            <CardTitle className="mb-2">Nema pronađenih predmeta</CardTitle>
             <CardDescription>
               {searchTerm
-                ? "Try a different search term"
-                : "Add your first subject to get started"}
+                ? "Pokušajte sa drugačijim pojmom za pretragu"
+                : "Dodajte prvi predmet da biste započeli"}
             </CardDescription>
             {!searchTerm && (
               <Button asChild className="mt-4">
                 <Link href="/predmeti/novi">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Subject
+                  Dodaj predmet
                 </Link>
               </Button>
             )}
@@ -171,20 +178,21 @@ export default function SubjectsPage() {
         >
           <Card>
             <CardHeader>
-              <CardTitle>All Subjects</CardTitle>
+              <CardTitle>Svi predmeti</CardTitle>
               <CardDescription>
-                Showing {filteredSubjects.length} of {subjects.length} subjects
+                Prikazano {filteredSubjects.length} od {subjects.length}{" "}
+                predmeta
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Description</TableHead>
-                    <TableHead>Translations</TableHead>
-                    <TableHead>Teachers</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead>Naziv</TableHead>
+                    <TableHead>Opis</TableHead>
+                    <TableHead>Prevodi</TableHead>
+                    <TableHead>Nastavnici</TableHead>
+                    <TableHead className="text-right">Akcije</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -197,10 +205,10 @@ export default function SubjectsPage() {
                     return (
                       <TableRow key={subject.id}>
                         <TableCell className="font-medium">
-                          {subject.name || "Untitled"}
+                          {subject.name || "Bez naziva"}
                         </TableCell>
                         <TableCell className="max-w-xs truncate">
-                          {subject.description || "No description"}
+                          {subject.description || "Nema opisa"}
                         </TableCell>
                         <TableCell>
                           <div className="flex flex-wrap gap-1">
@@ -226,7 +234,7 @@ export default function SubjectsPage() {
                           <div className="flex justify-end gap-2">
                             <Button asChild variant="outline" size="sm">
                               <Link href={`/predmeti/${subject.id}`}>
-                                Edit
+                                Uredi
                               </Link>
                             </Button>
                             <AlertDialog
@@ -251,18 +259,18 @@ export default function SubjectsPage() {
                                     Da li ste sigurni?
                                   </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Ova akcija će trajno obrisati &quot;
-                                    {subject.name || "Untitled"}
-                                    &quot; i sve njegove predmete.
+                                    Ova akcija će trajno obrisati &quot;
+                                    {subject.name || "Bez naziva"}
+                                    &quot; i sve njegove prevode.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                  <AlertDialogCancel>Otkaži</AlertDialogCancel>
+                                  <AlertDialogCancel>Otkaži</AlertDialogCancel>
                                   <AlertDialogAction
                                     onClick={handleDeleteSubject}
                                     className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                                   >
-                                    Obriši
+                                    Obriši
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>

@@ -73,7 +73,7 @@ export function QualificationForm({
 
   const handleAddTranslation = async () => {
     if (!currentTranslation.languageCode || !currentTranslation.value.name) {
-      toast.error("Please fill in all required fields");
+      toast.error("Molimo popunite sva obavezna polja");
       return;
     }
 
@@ -91,7 +91,7 @@ export function QualificationForm({
         ...qualificationData,
         translations: updatedTranslations,
       });
-      toast.success("Translation added successfully");
+      toast.success("Prevodi su uspešno dodati");
     } else {
       if (isEditing) {
         const promise = sendApiRequest("/qualifications/translation", {
@@ -108,20 +108,20 @@ export function QualificationForm({
           promise.then((response) => {
             if (!response.isOk)
               throw new Error(
-                response.error?.message ?? "Failed to add translation",
+                response.error?.message ?? "Neuspešno dodavanje prevoda",
               );
           }),
           {
-            loading: "Adding translation...",
-            success: "Translation added successfully",
-            error: "Failed to add translation",
+            loading: "Dodavanje prevoda...",
+            success: "Prevod je uspešno dodat",
+            error: "Neuspešno dodavanje prevoda",
           },
         );
 
         const response = await promise;
         if (!response.isOk) return;
       } else {
-        toast.success("Translation added successfully");
+        toast.success("Prevod je uspešno dodat");
       }
 
       // Add new translation
@@ -148,7 +148,7 @@ export function QualificationForm({
 
   const handleSave = async () => {
     if (qualificationData.translations.length === 0) {
-      toast.error("Please add at least one translation");
+      toast.error("Molimo dodajte bar jedan prevod");
       return;
     }
 
@@ -171,13 +171,13 @@ export function QualificationForm({
         promise.then((response) => {
           if (!response.isOk)
             throw new Error(
-              response.error?.message ?? "Failed to update qualification",
+              response.error?.message ?? "Neuspešno ažuriranje kvalifikacije",
             );
         }),
         {
-          loading: "Updating qualification...",
-          success: "Qualification updated successfully",
-          error: "Failed to update qualification",
+          loading: "Ažuriranje kvalifikacije...",
+          success: "Kvalifikacija je uspešno ažurirana",
+          error: "Neuspešno ažuriranje kvalifikacije",
         },
       );
 
@@ -205,13 +205,13 @@ export function QualificationForm({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to create qualification",
+            response.error?.message ?? "Neuspešno dodavanje kvalifikacije",
           );
       }),
       {
-        loading: "Adding qualification...",
-        success: "Qualification added successfully",
-        error: "Failed to add qualification",
+        loading: "Dodavanje kvalifikacije...",
+        success: "Kvalifikacija je uspešno dodata",
+        error: "Neuspešno dodavanje kvalifikacije",
       },
     );
 
@@ -228,19 +228,19 @@ export function QualificationForm({
     <Card>
       <CardHeader>
         <CardTitle>
-          {isEditing ? "Edit Qualification" : "Add Qualification"}
+          {isEditing ? "Izmeni kvalifikaciju" : "Dodaj kvalifikaciju"}
         </CardTitle>
         <CardDescription>
           {isEditing
-            ? "Update qualification details and translations"
-            : "Add a new qualification for this teacher"}
+            ? "Ažurirajte detalje i prevode kvalifikacije"
+            : "Dodajte novu kvalifikaciju za ovog nastavnika"}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="translation">Add Translation</TabsTrigger>
+            <TabsTrigger value="details">Detalji</TabsTrigger>
+            <TabsTrigger value="translation">Dodaj prevod</TabsTrigger>
             {qualificationData.translations.map((translation) => (
               <TabsTrigger
                 key={translation.languageCode}
@@ -254,7 +254,7 @@ export function QualificationForm({
 
           <TabsContent value="details" className="mt-4 space-y-4">
             <div>
-              <Label htmlFor="date-obtained">Date Obtained</Label>
+              <Label htmlFor="date-obtained">Datum sticanja</Label>
               <div className="flex items-center">
                 <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -274,7 +274,7 @@ export function QualificationForm({
             </div>
 
             <div>
-              <h3 className="mb-2 text-sm font-medium">Translations</h3>
+              <h3 className="mb-2 text-sm font-medium">Prevodi</h3>
               <div className="flex flex-wrap gap-2">
                 {qualificationData.translations.length > 0 ? (
                   qualificationData.translations.map((translation) => (
@@ -290,7 +290,7 @@ export function QualificationForm({
                   ))
                 ) : (
                   <span className="text-sm text-amber-500">
-                    Please add at least one translation
+                    Molimo dodajte bar jedan prevod
                   </span>
                 )}
               </div>
@@ -298,21 +298,21 @@ export function QualificationForm({
 
             <div className="flex justify-between pt-4">
               <Button variant="outline" onClick={onCancel}>
-                Cancel
+                Otkaži
               </Button>
               <Button
                 onClick={handleSave}
                 disabled={qualificationData.translations.length === 0}
               >
                 <Save className="mr-2 h-4 w-4" />
-                {isEditing ? "Update" : "Save"} Qualification
+                {isEditing ? "Ažuriraj" : "Sačuvaj"} kvalifikaciju
               </Button>
             </div>
           </TabsContent>
 
           <TabsContent value="translation" className="mt-4 space-y-4">
             <div>
-              <Label htmlFor="language">Language</Label>
+              <Label htmlFor="language">Jezik</Label>
               <div className="flex items-center gap-2">
                 <Globe className="h-4 w-4 text-muted-foreground" />
                 <select
@@ -326,7 +326,7 @@ export function QualificationForm({
                     })
                   }
                 >
-                  <option value="">Select language</option>
+                  <option value="">Izaberite jezik</option>
                   {availableLanguages.map((lang) => (
                     <option key={lang.code} value={lang.code}>
                       {lang.fullName}
@@ -336,7 +336,7 @@ export function QualificationForm({
               </div>
             </div>
             <div>
-              <Label htmlFor="name">Qualification Name</Label>
+              <Label htmlFor="name">Naziv kvalifikacije</Label>
               <Input
                 id="name"
                 value={currentTranslation.value.name}
@@ -349,11 +349,11 @@ export function QualificationForm({
                     },
                   })
                 }
-                placeholder="e.g., PhD in Mathematics"
+                placeholder="npr. Doktor nauka iz matematike"
               />
             </div>
             <div>
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">Opis</Label>
               <Textarea
                 id="description"
                 value={currentTranslation.value.description}
@@ -366,7 +366,7 @@ export function QualificationForm({
                     },
                   })
                 }
-                placeholder="Describe the qualification..."
+                placeholder="Opišite kvalifikaciju..."
                 rows={4}
               />
             </div>
@@ -379,7 +379,7 @@ export function QualificationForm({
                 }
               >
                 <Plus className="mr-2 h-4 w-4" />
-                Add Translation
+                Dodaj prevod
               </Button>
             </div>
           </TabsContent>
@@ -392,7 +392,7 @@ export function QualificationForm({
             >
               <div>
                 <Label htmlFor={`name-${translation.languageCode}`}>
-                  Qualification Name
+                  Naziv kvalifikacije
                 </Label>
                 <Input
                   id={`name-${translation.languageCode}`}
@@ -416,7 +416,7 @@ export function QualificationForm({
               </div>
               <div>
                 <Label htmlFor={`description-${translation.languageCode}`}>
-                  Description
+                  Opis
                 </Label>
                 <Textarea
                   id={`description-${translation.languageCode}`}

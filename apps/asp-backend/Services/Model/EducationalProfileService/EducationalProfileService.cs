@@ -7,7 +7,6 @@ using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Response;
 using EtsZemun.Services.Read;
 using EtsZemun.Services.Update;
-using FluentResults;
 
 namespace EtsZemun.Services.Model.EducationalProfileService;
 
@@ -24,7 +23,6 @@ public partial class EducationalProfileService(
     IDeleteService<EducationalProfile> deleteService,
     IDeleteService<EducationalProfileGeneralSubject> deleteGeneralSubjectService,
     IDeleteService<EducationalProfileVocationalSubject> deleteVocationalSubjectService,
-    IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile> createRequestMapper,
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile> updateRequestMapper,
     IResponseMapper<EducationalProfile, EducationalProfileResponseDto> responseMapper
 ) : IEducationalProfileService;

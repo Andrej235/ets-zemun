@@ -66,7 +66,7 @@ export default function CreateSubjectPage() {
 
         setTeachers(teachersData.response!.items);
       } catch {
-        toast.error("Failed to load data");
+        toast.error("Neuspešno učitavanje podataka");
       } finally {
         setLoading(false);
       }
@@ -77,7 +77,7 @@ export default function CreateSubjectPage() {
 
   const handleAddTranslation = () => {
     if (!currentTranslation.languageCode || !currentTranslation.name) {
-      toast.error("Please fill in all required fields");
+      toast.error("Popunite sva obavezna polja");
       return;
     }
 
@@ -111,12 +111,12 @@ export default function CreateSubjectPage() {
     });
 
     setActiveTab("details");
-    toast.success("Translation added successfully");
+    toast.success("Prevod je uspešno dodat");
   };
 
   const handleCreateSubject = async () => {
     if (subjectData.translations.length === 0) {
-      toast.error("Please add at least one translation");
+      toast.error("Dodajte bar jedan prevod");
       return;
     }
 
@@ -135,12 +135,12 @@ export default function CreateSubjectPage() {
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ?? "Failed to create subject",
+            response.error?.message ?? "Neuspešno kreiranje predmeta",
           );
       }),
       {
-        loading: "Creating subject...",
-        success: "Subject created successfully",
+        loading: "Kreiranje predmeta...",
+        success: "Predmet je uspešno kreiran",
         error: (x) => (x as Error).message,
       },
     );
@@ -172,9 +172,9 @@ export default function CreateSubjectPage() {
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Create Subject</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Kreiraj predmet</h1>
           <p className="text-muted-foreground">
-            Add a new subject to the curriculum
+            Dodajte novi predmet u nastavni plan
           </p>
         </div>
       </div>
@@ -186,9 +186,9 @@ export default function CreateSubjectPage() {
       >
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="translation">Add Translation</TabsTrigger>
-            <TabsTrigger value="teachers">Assign Teachers</TabsTrigger>
+            <TabsTrigger value="details">Detalji</TabsTrigger>
+            <TabsTrigger value="translation">Dodaj prevod</TabsTrigger>
+            <TabsTrigger value="teachers">Dodeli nastavnike</TabsTrigger>
             {subjectData.translations.map((translation) => (
               <TabsTrigger
                 key={translation.languageCode}
@@ -203,9 +203,9 @@ export default function CreateSubjectPage() {
           <TabsContent value="details" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Subject Details</CardTitle>
+                <CardTitle>Detalji predmeta</CardTitle>
                 <CardDescription>
-                  Basic information about the subject
+                  Osnovne informacije o predmetu
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -216,7 +216,7 @@ export default function CreateSubjectPage() {
                       ? subjectData.translations.find(
                           (t) => t.languageCode === "en",
                         )?.name || subjectData.translations[0].name
-                      : "New Subject"}
+                      : "Novi predmet"}
                   </span>
                 </div>
 
@@ -238,7 +238,7 @@ export default function CreateSubjectPage() {
                   {subjectData.teachers.length > 0 ? (
                     subjectData.teachers.map((teacher) => {
                       const teacherName =
-                        teacher.name || "Teacher " + teacher.id;
+                        teacher.name || "Nastavnik " + teacher.id;
                       return (
                         <div
                           key={teacher.id}
@@ -250,7 +250,7 @@ export default function CreateSubjectPage() {
                     })
                   ) : (
                     <span className="text-sm text-muted-foreground">
-                      No teachers assigned
+                      Nema dodeljenih nastavnika
                     </span>
                   )}
                 </div>
@@ -259,7 +259,7 @@ export default function CreateSubjectPage() {
                   <div>
                     {subjectData.translations.length === 0 && (
                       <p className="text-sm text-amber-500">
-                        Please add at least one translation
+                        Dodajte bar jedan prevod
                       </p>
                     )}
                   </div>
@@ -268,7 +268,7 @@ export default function CreateSubjectPage() {
                     disabled={subjectData.translations.length === 0}
                   >
                     <Save className="mr-2 h-4 w-4" />
-                    Create Subject
+                    Kreiraj predmet
                   </Button>
                 </div>
               </CardContent>
@@ -278,15 +278,13 @@ export default function CreateSubjectPage() {
           <TabsContent value="translation" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Add Translation</CardTitle>
-                <CardDescription>
-                  Create a translation for the subject
-                </CardDescription>
+                <CardTitle>Dodaj prevod</CardTitle>
+                <CardDescription>Kreirajte prevod za predmet</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <Label htmlFor="language" className="mb-2">
-                    Language
+                    Jezik
                   </Label>
 
                   <div className="flex items-center gap-2">
@@ -302,7 +300,7 @@ export default function CreateSubjectPage() {
                         })
                       }
                     >
-                      <option value="">Select language</option>
+                      <option value="">Izaberite jezik</option>
                       {languages.map((lang) => (
                         <option key={lang.code} value={lang.code}>
                           {lang.fullName}
@@ -312,7 +310,7 @@ export default function CreateSubjectPage() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="name">Subject Name</Label>
+                  <Label htmlFor="name">Naziv predmeta</Label>
                   <Input
                     id="name"
                     value={currentTranslation.name}
@@ -322,11 +320,11 @@ export default function CreateSubjectPage() {
                         name: e.target.value,
                       })
                     }
-                    placeholder="e.g., Mathematics"
+                    placeholder="npr. Matematika"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description">Opis</Label>
                   <Textarea
                     id="description"
                     value={currentTranslation.description}
@@ -336,7 +334,7 @@ export default function CreateSubjectPage() {
                         description: e.target.value,
                       })
                     }
-                    placeholder="Describe the subject..."
+                    placeholder="Opišite predmet..."
                     rows={4}
                   />
                 </div>
@@ -349,7 +347,7 @@ export default function CreateSubjectPage() {
                     }
                   >
                     <Plus className="mr-2 h-4 w-4" />
-                    Add Translation
+                    Dodaj prevod
                   </Button>
                 </div>
               </CardContent>
@@ -359,9 +357,9 @@ export default function CreateSubjectPage() {
           <TabsContent value="teachers" className="mt-4 space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Assign Teachers</CardTitle>
+                <CardTitle>Dodeli nastavnike</CardTitle>
                 <CardDescription>
-                  Select teachers who will teach this subject
+                  Izaberite nastavnike koji predaju ovaj predmet
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -373,7 +371,7 @@ export default function CreateSubjectPage() {
 
                 <div className="flex justify-end">
                   <Button onClick={() => setActiveTab("details")}>
-                    Save Teacher Assignments
+                    Sačuvaj dodelu nastavnika
                   </Button>
                 </div>
               </CardContent>
@@ -391,16 +389,14 @@ export default function CreateSubjectPage() {
                   <CardTitle>
                     {languages.find((l) => l.code === translation.languageCode)
                       ?.fullName || translation.languageCode}{" "}
-                    Translation
+                    prevod
                   </CardTitle>
-                  <CardDescription>
-                    View or edit the translation
-                  </CardDescription>
+                  <CardDescription>Pregled ili izmena prevoda</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor={`name-${translation.languageCode}`}>
-                      Subject Name
+                      Naziv predmeta
                     </Label>
                     <Input
                       id={`name-${translation.languageCode}`}
@@ -421,7 +417,7 @@ export default function CreateSubjectPage() {
                   </div>
                   <div>
                     <Label htmlFor={`description-${translation.languageCode}`}>
-                      Description
+                      Opis
                     </Label>
                     <Textarea
                       id={`description-${translation.languageCode}`}

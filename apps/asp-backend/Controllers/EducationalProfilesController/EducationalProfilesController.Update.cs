@@ -1,5 +1,6 @@
 using EtsZemun.Dtos.Request.EducationalProfile;
 using EtsZemun.Errors;
+using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace EtsZemun.Controllers.EducationalProfilesController;
 
 public partial class EducationalProfilesController
 {
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -23,7 +24,7 @@ public partial class EducationalProfilesController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPatch("add-subject")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +40,7 @@ public partial class EducationalProfilesController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPatch("remove-subject")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,7 +62,7 @@ public partial class EducationalProfilesController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPatch("update-subject")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,7 +84,7 @@ public partial class EducationalProfilesController
         return NoContent();
     }
 
-    [Authorize(Roles = "Mod,Admin")]
+    [Authorize(Roles = Roles.BasicPerms)]
     [HttpPatch("update-name")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

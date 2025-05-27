@@ -240,7 +240,10 @@ export type ApiMap = {
           content: { 'application/json': { schema: { '$ref': '#/components/schemas/CreateEducationalProfileRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/CreateEducationalProfileRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/CreateEducationalProfileRequestDto' } } }
         },
         responses: {
-          '201': { description: 'Created' },
+          '201': {
+            description: 'Created',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleEducationalProfileResponseDto' } } }
+          },
           '400': {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
@@ -1614,6 +1617,22 @@ export type ApiMap = {
         }
       }
     },
+    '/users/perms-only': {
+      get: {
+        tags: [ 'User' ],
+        responses: {
+          '200': { description: 'OK' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          }
+        }
+      }
+    },
     '/users/admin-only': {
       get: {
         tags: [ 'User' ],
@@ -1775,31 +1794,6 @@ export type ApiMap = {
         }
       }
     },
-    '/users/{id}/set-as-teacher': {
-      patch: {
-        tags: [ 'User' ],
-        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'string' } } ],
-        responses: {
-          '200': { description: 'OK' },
-          '400': {
-            description: 'Bad Request',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '401': {
-            description: 'Unauthorized',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '403': {
-            description: 'Forbidden',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          },
-          '404': {
-            description: 'Not Found',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
-          }
-        }
-      }
-    },
     '/users/{id}/set-as-mod': {
       patch: {
         tags: [ 'User' ],
@@ -1929,11 +1923,7 @@ export type ApiMap = {
         additionalProperties: false
       },
       CreateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
-      CreateEducationalProfileRequestDto: {
-        type: 'object',
-        properties: { name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
-        additionalProperties: false
-      },
+      CreateEducationalProfileRequestDto: { type: 'object', properties: { name: { type: 'string' } }, additionalProperties: false },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
