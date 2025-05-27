@@ -349,10 +349,6 @@ builder.Services.AddScoped<
     DeleteService<EducationalProfileVocationalSubject>
 >();
 builder.Services.AddScoped<
-    IRequestMapper<CreateEducationalProfileRequestDto, EducationalProfile>,
-    CreateEducationalProfileRequestMapper
->();
-builder.Services.AddScoped<
     IRequestMapper<UpdateEducationalProfileRequestDto, EducationalProfile>,
     UpdateEducationalProfileRequestMapper
 >();

@@ -6,7 +6,9 @@ namespace EtsZemun.Services.Model.EducationalProfileService;
 
 public interface IEducationalProfileService
 {
-    Task<Result> Create(CreateEducationalProfileRequestDto request);
+    Task<Result<SimpleEducationalProfileResponseDto>> Create(
+        CreateEducationalProfileRequestDto request
+    );
 
     Task<Result<IEnumerable<SimpleEducationalProfileResponseDto>>> GetAll();
     Task<Result<EducationalProfileResponseDto>> GetSingle(int id, string languageCode);

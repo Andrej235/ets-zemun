@@ -127,7 +127,7 @@ export default function CurriculumDetailPage({
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Neuspešno učitavanje podataka o kurikulumu");
+        toast.error("Neuspešno učitavanje podataka o profilu");
       }
     };
 
@@ -184,12 +184,12 @@ export default function CurriculumDetailPage({
         if (!response.isOk)
           throw new Error(
             response.error?.message ??
-              "Neuspešno dodavanje predmeta u kurikulum",
+              "Neuspešno dodavanje predmeta u profil",
           );
       }),
       {
-        loading: "Dodavanje predmeta u kurikulum...",
-        success: "Predmet je uspešno dodat u kurikulum",
+        loading: "Dodavanje predmeta u profil...",
+        success: "Predmet je uspešno dodat u profil",
         error: (x) => (x as Error).message,
       },
     );
@@ -206,7 +206,7 @@ export default function CurriculumDetailPage({
   if (loading || !curriculum) {
     return (
       <div className="container mx-auto py-10">
-        Učitavanje podataka o kurikulumu...
+        Učitavanje podataka o profilu...
       </div>
     );
   }
@@ -243,7 +243,7 @@ export default function CurriculumDetailPage({
         <Link href="/obrazovni-profili">
           <Button variant="ghost" className="gap-1">
             <ArrowLeft className="h-4 w-4" />
-            Nazad na kurikulume
+            Nazad na profile
           </Button>
         </Link>
       </div>
@@ -257,14 +257,14 @@ export default function CurriculumDetailPage({
             <DialogTrigger asChild>
               <Button size="sm" variant="outline">
                 <Pencil className="mr-2 h-4 w-4" />
-                Izmeni kurikulum
+                Izmeni profil
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[400px]">
               <DialogHeader>
-                <DialogTitle>Izmeni naziv kurikuluma</DialogTitle>
+                <DialogTitle>Izmeni naziv profila</DialogTitle>
                 <DialogDescription>
-                  Unesite novi naziv za ovaj kurikulum. Ovo će uticati samo na
+                  Unesite novi naziv za ovaj profil. Ovo će uticati samo na
                   prikaz u admin panelu.
                 </DialogDescription>
               </DialogHeader>
@@ -295,12 +295,12 @@ export default function CurriculumDetailPage({
                       if (!response.isOk)
                         throw new Error(
                           response.error?.message ??
-                            "Neuspešno ažuriranje naziva kurikuluma",
+                            "Neuspešno ažuriranje naziva profila",
                         );
                     }),
                     {
-                      loading: "Ažuriranje naziva kurikuluma...",
-                      success: "Naziv kurikuluma je uspešno ažuriran",
+                      loading: "Ažuriranje naziva profila...",
+                      success: "Naziv profila je uspešno ažuriran",
                       error: (x) => (x as Error).message,
                     },
                   );
@@ -314,7 +314,7 @@ export default function CurriculumDetailPage({
                 <Input
                   name="curriculumName"
                   defaultValue={curriculum.name}
-                  placeholder="Unesite novi naziv kurikuluma"
+                  placeholder="Unesite novi naziv profila"
                   required
                   autoFocus
                 />
@@ -394,7 +394,7 @@ export default function CurriculumDetailPage({
         <TabsContent value="overview">
           <Card>
             <CardHeader>
-              <CardTitle>Pregled kurikuluma</CardTitle>
+              <CardTitle>Pregled profila</CardTitle>
               <CardDescription>Rezime predmeta kroz sve godine</CardDescription>
             </CardHeader>
             <CardContent>
@@ -454,7 +454,7 @@ export default function CurriculumDetailPage({
                       Nema dodatih predmeta
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      Počnite sa dodavanjem predmeta u ovaj kurikulum
+                      Počnite sa dodavanjem predmeta u ovaj profil
                     </p>
                     <Button
                       className="mt-4"
@@ -513,7 +513,7 @@ export default function CurriculumDetailPage({
           <DialogHeader>
             <DialogTitle>Dodaj predmet za {selectedyear}. godinu</DialogTitle>
             <DialogDescription>
-              Dodajte novi predmet u ovaj kurikulum. Popunite sve obavezne
+              Dodajte novi predmet u ovaj profil. Popunite sve obavezne
               informacije.
             </DialogDescription>
           </DialogHeader>
@@ -552,7 +552,7 @@ export default function CurriculumDetailPage({
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Izaberite predmet koji želite da dodate u kurikulum
+                      Izaberite predmet koji želite da dodate u profil
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

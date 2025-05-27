@@ -1,4 +1,5 @@
 using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Response.EducationalProfile;
 using EtsZemun.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,15 @@ public partial class EducationalProfilesController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult> Create([FromBody] CreateEducationalProfileRequestDto request)
+    public async Task<ActionResult<SimpleEducationalProfileResponseDto>> Create(
+        [FromBody] CreateEducationalProfileRequestDto request
+    )
     {
         var result = await profileService.Create(request);
 
         if (result.IsFailed)
             return BadRequest();
 
-        return Created();
+        return Created(null as string, result.Value);
     }
 }
