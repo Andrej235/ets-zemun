@@ -53,7 +53,11 @@ export function SubjectSelector({
 
   const filteredSubjects = subjects.filter((subject) => {
     const searchLower = searchQuery.toLowerCase();
-    return subject.name.includes(searchLower);
+
+    return (
+      subject.name.toLowerCase().includes(searchLower) ||
+      subject.description.toLowerCase().includes(searchLower)
+    );
   });
 
   return (
