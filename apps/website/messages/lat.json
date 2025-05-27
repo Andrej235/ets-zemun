@@ -744,91 +744,532 @@
         ],
         "examData": [
           {
-            "subject": "SRPSKI JEZIK - maturski",
+            "subject": "FIZIKA",
+            "commission": ["Jelena Prnjak", "Aleksandra Gemović"],
+            "date": "29.05.2025.",
+            "time": "09.40",
+            "cabinet": "38"
+          },
+          {
+            "subject": "RAČUNARI U SISTEMIMA UPRAVLJANJA",
             "commission": [
-              "Srđan Gagić",
-              "Nada Đurić",
-              "Marina Ristanović",
-              "Vurdelja Dejan",
-              "Radmila Vidović"
+              "Ljubica Đorđević",
+              "Marija Mijailović",
+              "Nina Dijan"
             ],
-            "date": "Utorak, 28.01.2025.",
-            "time": "14:45, 10:30",
-            "cabinet": "17 ili 18"
+            "date": "20.05.2025",
+            "time": "11.25",
+            "cabinet": "60"
           },
           {
-            "subject": "STRUČNO-TEORIJSKI ISPIT (ARM, IT, ER)",
-            "commission": ["Bogdan Luković", "Anđela Pavlović"],
-            "date": "Sreda, 29.01.2025.",
-            "time": "10:00",
-            "cabinet": "14"
+            "subject": "MIKROKONTROLLERI I MIKRORAČUNARI",
+            "commission": [
+              "Ljubica Đorđević",
+              "Marija Mijailović",
+              "Nina Dijan"
+            ],
+            "date": "20.05.2025",
+            "time": "11.25",
+            "cabinet": "60"
           },
           {
-            "subject": "STRUČNO-TEORIJSKI ISPIT (ARM, IT, ER)",
-            "commission": ["Slavica Per", "Relja Ćurčin", "Vesna Janjić"],
-            "date": "Sreda, 29.01.2025.",
-            "time": "15:35",
-            "cabinet": "14"
+            "subject": "OSNOVE ELEKTROTEHNIKE",
+            "commission": [
+              "Marija Mijailović",
+              "Nina Dijan",
+              "Ljubica Đorđević"
+            ],
+            "date": "20.05.2025",
+            "time": "11.25",
+            "cabinet": "60"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - ARM-A",
-            "commission": ["Slavica Per", "Saša Stošić"],
-            "date": "Četvrtak, 30.01.2025.",
-            "time": "11:15",
-            "cabinet": "44"
+            "subject": "OSNOVE RAČUNARSTVA U OBLAKU",
+            "commission": ["Zoran Ilijć", "Relja Ćurčin", "Olivera Lužnjanin"],
+            "date": "20.05.2025.",
+            "time": "14.00",
+            "cabinet": "45"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - ARM-B",
-            "commission": ["Slavica Per", "Saša Stošić"],
-            "date": "Petak, 31.01.2025.",
-            "time": "13:00",
-            "cabinet": "43"
+            "subject": "PROGRAMIRANJE",
+            "commission": ["Zoran Ilijć", "Relja Ćurčin", "Olivera Lužnjanin"],
+            "date": "20.05.2025.",
+            "time": "14.00",
+            "cabinet": "45"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - ER-A",
-            "commission": ["Radovan Đurić", "Saviša Nikolić"],
-            "date": "Četvrtak, 30.01.2025.",
-            "time": "14:00",
-            "cabinet": "43"
+            "subject": "PRIMENJENE INFORMACIONE TEHNOLOGIJE",
+            "commission": ["Relja Ćurčin", "Zoran Ilijć", "Olivera Lužnjanin"],
+            "date": "20.05.2025",
+            "time": "14.00",
+            "cabinet": "45"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - ER-B",
-            "commission": ["Radovan Đurić", "Slaviša Nikolić"],
-            "date": "Petak, 31.01.2025.",
-            "time": "14:45",
-            "cabinet": "43"
+            "subject": "MATEMATIKA",
+            "commission": ["Zoran Ilijić", "Relja Ćurčin", "Olivera Lužnjanin"],
+            "date": "20.05.2025",
+            "time": "14.00",
+            "cabinet": "45"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - IT-A",
-            "commission": ["Galina Bojović", "Relja Ćurčin"],
-            "date": "Četvrtak, 30.01.2025.",
-            "time": "11:25",
-            "cabinet": "50"
+            "subject": "VEB PROGRAMIRANJE",
+            "commission": ["Relja Ćurčin", "Zoran Ilijić", "Olivera Lužnjanin"],
+            "date": "20.05.2025",
+            "time": "14.00",
+            "cabinet": "45"
           },
           {
-            "subject": "PRAKTIČNI ISPIT - IT-B",
-            "commission": ["Galina Bojović", "Relja Ćurčin"],
-            "date": "Petak, 31.01.2025.",
-            "time": "12:10",
-            "cabinet": "50"
-          },
-          {
-            "subject": "SERVISER TERMIČKIH I RASHLADNIH UREĐAJA",
-            "commission": ["Branko Lončar", "Mavrak Milenko"],
-            "date": "31.01.2025.",
-            "time": "14:00",
-            "cabinet": "73"
-          },
-          {
-            "subject": "MATURSKI ISPIT (elektrotehničar automatike)",
+            "subject": "ELEKTRIČNE MAŠINE SA ISPITIVANJEM",
             "commission": [
               "Cvija Jelenković",
-              "Vesna Janjić",
-              "Branislav Siljković"
+              "Siljković Branislav",
+              "Ilijć Aleksandar"
             ],
-            "date": "30.01.2025., 31.01.2025.",
-            "time": "13:00, 14:00",
-            "cabinet": "40"
+            "date": "21.05.2025",
+            "time": "14.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "ELEKTRIČNE MAŠINE SA REGULACIJOM ELEKTROMOTORNOG POGONA",
+            "commission": [
+              "Ilijć Aleksandar",
+              "Cvija Jelenković",
+              "Siljković Branislav"
+            ],
+            "date": "21.05.2025",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "SISTEMI AUTOMATSKOG UPRAVLJANJA",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijć Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "MERENJA U AUTOMATICI",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijć Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "MERENJA U ELEKTROENERGETICI",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijić Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "ELEKTRIČNA MERENJA I ELEKTRONIKA",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijić Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "SOFTVERSKI ALATI",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijić Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "APLIKATIVNI SOFTVER",
+            "commission": ["Radović Sanja", "Verica Ćirić", "Marina Takov"],
+            "date": "19.05.2025.",
+            "time": "13.05",
+            "cabinet": "/"
+          },
+          {
+            "subject": "ELEKTROMOTORNI POGON",
+            "commission": [
+              "Cvija Jelenković",
+              "Janjić Vesna",
+              "Siljković Branislav"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "ZAŠTITA INFORMACIONIH SISTEMA",
+            "commission": [
+              "Marković Valentina",
+              "Blagojević Svetlana",
+              "Slaviša Nikolić"
+            ],
+            "date": "29.05.2025.",
+            "time": "14.00",
+            "cabinet": "46"
+          },
+          {
+            "subject": "PRIMENA RAČUNARA U ELEKTROTEHNICI",
+            "commission": [
+              "Cvija Jelenković",
+              "Janjić Vesna",
+              "Siljković Branislav"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "ELEKTRONIKA, ELEKTRONIKA 1",
+            "commission": [
+              "Janjić Vesna",
+              "Cvija Jelenković",
+              "Siljković Branislav"
+            ],
+            "date": "21.05.2025.",
+            "time": "14.00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "SOCIOLOGIJA SA PRAVIMA GRAĐANA, SOCIOLOGIJA",
+            "commission": [
+              "Karastojković Pavle",
+              "Milena Čorlja",
+              "Vanja Erceg"
+            ],
+            "date": "22.05.2025",
+            "time": "14.50",
+            "cabinet": "14"
+          },
+          {
+            "subject": "ISTORIJA-ODABRANE TEME",
+            "commission": [
+              "Karastojković Pavle",
+              "Milena Čorlja",
+              "Vanja Erceg"
+            ],
+            "date": "22.05.2025",
+            "time": "14.50",
+            "cabinet": "14"
+          },
+          {
+            "subject": "VERSKA NASTAVA",
+            "commission": [
+              "Karastojković Pavle",
+              "Milena Čorlja",
+              "Vanja Erceg"
+            ],
+            "date": "22.05.2025.",
+            "time": "14.50",
+            "cabinet": "14"
+          },
+          {
+            "subject": "FILOZOFIJA",
+            "commission": [
+              "Karastojković Pavle",
+              "Milena Čorlja",
+              "Ristić Nataša"
+            ],
+            "date": "22.05.2025.",
+            "time": "14,50",
+            "cabinet": "14"
+          },
+          {
+            "subject": "ENGLESKI JEZIK",
+            "commission": [
+              "Dobrila Injac",
+              "Miljana Stojanović",
+              "Snežana Marković"
+            ],
+            "date": "23.05.2025.",
+            "time": "12.15",
+            "cabinet": "19"
+          },
+          {
+            "subject": "SRPSKI JEZIK",
+            "commission": [
+              "Gordana Graić Slavulj",
+              "Srđan Gagić",
+              "Marina Ristanović"
+            ],
+            "date": "28.05.2025",
+            "time": "12.15",
+            "cabinet": "18"
+          },
+          {
+            "subject": "FIZIČKO VASPITANJE, IZBORNI SPORT",
+            "commission": ["Vladan Zec", "Srđan Lukač", "Pavle Karastojković"],
+            "date": "28.05.2025.",
+            "time": "15.55",
+            "cabinet": "SALA"
+          },
+          {
+            "subject": "PREDUZETNIŠTVO, EKONOMIKA I ORGANIZACIJA PREDUZEĆA",
+            "commission": [
+              "Vesna Cerovina",
+              "Zorica Matejević",
+              "Jelena Mrkić"
+            ],
+            "date": "28.05.2025.",
+            "time": "11.25",
+            "cabinet": "/"
+          },
+          {
+            "subject": "GRAĐANSKO VASPITANJE",
+            "commission": [
+              "Vesna Cerovina",
+              "Zorica Matejević",
+              "Jelena Mrkić"
+            ],
+            "date": "28.05.2025.",
+            "time": "11.25",
+            "cabinet": "/"
+          },
+          {
+            "subject": "POSLOVNE KOMUNIKACIJE-IZBORNI",
+            "commission": [
+              "Vesna Cerovina",
+              "Zorica Matejević",
+              "Jelena Mrkić"
+            ],
+            "date": "28.05.2025.",
+            "time": "11.25",
+            "cabinet": "/"
+          },
+          {
+            "subject": "MUZIČKA UMETNOST",
+            "commission": [
+              "Vesna Cerovina",
+              "Zorica Matejević",
+              "Jelena Mrkić"
+            ],
+            "date": "28.05.2025.",
+            "time": "11.25",
+            "cabinet": "/"
+          },
+          {
+            "subject": "EKOLOGIJA I ZAŠTITA ŽIVOTNE SREDINE",
+            "commission": [
+              "Desanka Uzelac",
+              "Svetlana Pavlović",
+              "Mihailo Korugić"
+            ],
+            "date": "29.05.2025.",
+            "time": "11.25",
+            "cabinet": "23"
+          },
+          {
+            "subject": "HEMIJA",
+            "commission": [
+              "Desanka Uzelac",
+              "Svetlana Pavlović",
+              "Mihailo Korugić"
+            ],
+            "date": "29.05.2025.",
+            "time": "11.25",
+            "cabinet": "23"
+          },
+          {
+            "subject": "GEOGRAFIJA",
+            "commission": [
+              "Desanka Uzelac",
+              "Svetlana Pavlović",
+              "Mihailo Korugić"
+            ],
+            "date": "29.05.2025.",
+            "time": "11.25",
+            "cabinet": "23"
+          },
+          {
+            "subject": "OSNOVE MAŠINSTVA",
+            "commission": ["Branko Lončar", "Dejana Vuković", "Vesna Cerovina"],
+            "date": "13.05.2025.",
+            "time": "14.50",
+            "cabinet": "55"
+          },
+          {
+            "subject": "TEHNIČKA DOKUMENTACIJA",
+            "commission": [
+              "Biljana Živković",
+              "Ivana Vujičić",
+              "Merđan Ibraimi"
+            ],
+            "date": "27.05.2025.",
+            "time": "15.55",
+            "cabinet": "15"
+          },
+          {
+            "subject": "OPERATIVNI SISTEMI",
+            "commission": [
+              "Merđan Ibraimi",
+              "Biljana Živković",
+              "Ivana Vujičić"
+            ],
+            "date": "27.05.2025.",
+            "time": "15.55",
+            "cabinet": "15"
+          },
+          {
+            "subject": "MREŽNI OPERATIVNI SISTEMI",
+            "commission": [
+              "Ivana Vujičić",
+              "Merđan Ibraimi",
+              "Biljana Živković"
+            ],
+            "date": "27.05.2025.",
+            "time": "15.55",
+            "cabinet": "15"
+          },
+          {
+            "subject": "RAČUNARSKE MREŽE",
+            "commission": [
+              "Ivana Vujičić",
+              "Merđan Ibraimi",
+              "Biljana Živković"
+            ],
+            "date": "27.05.2025.",
+            "time": "15.55",
+            "cabinet": "15"
+          },
+          {
+            "subject": "SERVERI",
+            "commission": [
+              "Ivica Radisavljević",
+              "Slaviša Nikolić",
+              "Ivana Vujičić"
+            ],
+            "date": "29.05.2025.",
+            "time": "14.00",
+            "cabinet": "46"
+          },
+          {
+            "subject": "RAČUNARSKI SISTEMI",
+            "commission": [
+              "Ivana Vujičić",
+              "Merđan Ibraimi",
+              "Biljana Živković"
+            ],
+            "date": "27.05.2025.",
+            "time": "15.55",
+            "cabinet": "15"
+          },
+          {
+            "subject": "SERVISIRANJE TERMIČKIH I RASHLADNIH UREĐAJA",
+            "commission": [
+              "Mirko Đurđević",
+              "Miodrag Marinković",
+              "Rajko Mitić"
+            ],
+            "date": "27.05.2025.",
+            "time": "13.05",
+            "cabinet": "71/72"
+          },
+          {
+            "subject": "RAČUNARSKA LOGIKA",
+            "commission": [
+              "Ivica Radisavljević",
+              "Ivana Vujičić",
+              "Slaviša Nikolić"
+            ],
+            "date": "13.05.2025.",
+            "time": "14.50",
+            "cabinet": "/"
+          },
+          {
+            "subject": "DIGITALNA ELEKTRONIKA",
+            "commission": [
+              "Ivica Radisavljević",
+              "Slaviša Nikolić",
+              "Ivana Vujičić"
+            ],
+            "date": "13.05.2025.",
+            "time": "14.50",
+            "cabinet": "/"
+          },
+          {
+            "subject": "PRAKTIČNA NASTAVA: SERVISIRANJE ELEKTROTEHNIČKIH UREĐAJA, ELEKTROTEHNIČKI UREĐAJI",
+            "commission": [
+              "Mirko Đurđević",
+              "Miodrag Marinković",
+              "Rajko Mitić"
+            ],
+            "date": "27.05.2025.",
+            "time": "13.05",
+            "cabinet": "71/72"
+          },
+          {
+            "subject": "RAČUNARSKI HARDVER",
+            "commission": [
+              "Slaviša Nikolić",
+              "Ivica Radisavljević",
+              "Ivana Vujičić"
+            ],
+            "date": "13.05.2025.",
+            "time": "14.50",
+            "cabinet": "/"
+          },
+          {
+            "subject": "OSNOVE AUTOMATSKOG UPRAVLJANJA",
+            "commission": [
+              "Cvija Jelenković",
+              "Siljković Branislav",
+              "Ilijć Aleksandar"
+            ],
+            "date": "21.05.2025.",
+            "time": "14:00",
+            "cabinet": "43"
+          },
+          {
+            "subject": "Računari i programiranje",
+            "commission": ["Ilijć Zoran", "Ćurčin Relja", "Lužnjanin Olivera"],
+            "date": "20.05.2025.",
+            "time": "14:00",
+            "cabinet": "19"
+          },
+          {
+            "subject": "Elementi automatizacije, Merenja u elektronici",
+            "commission": [
+              "Ilijć Aleksandar",
+              "Siljković Branislav",
+              "Jelenković Cvija"
+            ],
+            "date": "21.05.2025.",
+            "time": "14.00",
+            "cabinet": "/"
+          },
+          {
+            "subject": "Digitalna elektronika, Elektronika 2",
+            "commission": [
+              "Radisavljević Ivica",
+              "Nikolić Slaviša",
+              "Vujičić Ivana"
+            ],
+            "date": "27.05.2025.",
+            "time": "14:50",
+            "cabinet": "/"
+          },
+          {
+            "subject": "Energetska elektronika",
+            "commission": ["/"],
+            "date": "/",
+            "time": "/",
+            "cabinet": "/"
           }
         ],
         "paymentMethod": {
