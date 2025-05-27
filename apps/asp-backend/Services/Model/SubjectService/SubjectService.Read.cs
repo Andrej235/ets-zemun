@@ -99,8 +99,14 @@ public partial class SubjectService
             x => new AdminSubjectResponseDto
             {
                 Id = x.Id,
-                Name = x.Translations.First().Name,
-                Description = x.Translations.First().Description,
+                Name = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Name,
+                Description = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Description,
                 TeachersCount = x.Teachers.Count,
                 Translations = x.Translations.Select(x => x.LanguageCode),
             },

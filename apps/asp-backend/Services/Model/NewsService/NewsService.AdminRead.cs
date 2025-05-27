@@ -17,8 +17,14 @@ public partial class NewsService
             {
                 Id = x.Id,
                 Date = x.Date,
-                Title = x.Translations.First().Title,
-                Description = x.Translations.First().Description,
+                Title = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Title,
+                Description = x
+                    .Translations.OrderByDescending(x => x.LanguageCode == "sr_lt" ? 1 : 0)
+                    .First()
+                    .Description,
                 IsApproved = x.IsApproved,
                 PreviewImage = x.PreviewImage,
                 Translations = x.Translations.Select(t => t.LanguageCode),
