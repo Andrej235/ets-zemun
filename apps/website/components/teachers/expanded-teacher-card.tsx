@@ -2,7 +2,7 @@
 import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import useOutsideClick from "@/lib/hooks/use-outside-click";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Icon from "../icon/icon";
 
 type ExpandedTeacherCardProps = {
@@ -20,12 +20,19 @@ export default function ExpandedTeacherCard({
   useOutsideClick(containerRef, onRequestClose);
   console.log(teacher);
 
-  const tabs = [
-    { id: "overview", label: "Overview", icon: "user" },
-    { id: "subjects", label: "Subjects", icon: "book" },
-    { id: "qualifications", label: "Qualifications", icon: "graduation-cap" },
-    { id: "contact", label: "Contact", icon: "envelope" },
-  ];
+  const tabs = useMemo(
+    () => [
+      { id: "overview", label: "Overview", icon: "user" },
+      { id: "subjects", label: "Subjects", icon: "book" },
+      teacher.qualifications.length > 0 && {
+        id: "qualifications",
+        label: "Qualifications",
+        icon: "graduation-cap",
+      },
+      { id: "contact", label: "Contact", icon: "envelope" },
+    ],
+    [teacher.qualifications]
+  );
 
   return (
     <div className="expanded-overlay">
@@ -61,27 +68,33 @@ export default function ExpandedTeacherCard({
                 <span className="stat-number">{teacher.subjects.length}</span>
                 <span className="stat-label">Subjects</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">
-                  {teacher.qualifications.length}
-                </span>
-                <span className="stat-label">Qualifications</span>
-              </div>
+
+              {teacher.qualifications.length > 0 && (
+                <div className="stat-item">
+                  <span className="stat-number">
+                    {teacher.qualifications.length}
+                  </span>
+                  <span className="stat-label">Qualifications</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <div className="expanded-tabs">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              <Icon className="tab-icon" name={tab.icon} />
-              {tab.label}
-            </button>
-          ))}
+          {tabs.map(
+            (tab) =>
+              tab && (
+                <button
+                  key={tab.id}
+                  className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  <Icon className="tab-icon" name={tab.icon} />
+                  {tab.label}
+                </button>
+              )
+          )}
         </div>
 
         <div className="expanded-content">
