@@ -1,334 +1,306 @@
 .teachers-page {
-  h1 {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
-    font-size: 4rem;
-    font-weight: 600;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $background 0%, $background-hover 100%);
+
+  .teachers-header {
     text-align: center;
-    color: $text-primary;
+    padding: 8rem 2rem 4rem;
+
+    h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: $accent-secondary;
+    }
+
+    .teachers-subtitle {
+      font-size: 1.8rem;
+      color: $text-secondary;
+      max-width: 60rem;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .teachers-filters {
+    max-width: 120rem;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .search-container {
+      flex: 1;
+      min-width: 30rem;
+
+      .search-input {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        border: 2px solid $accent-secondary;
+        border-radius: 1.2rem;
+        font-size: 1.6rem;
+        background: $secondary-background;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $accent-secondary-highlight;
+          box-shadow: 0 0 5px 3px
+            color-mix(in srgb, transparent 70%, $accent-secondary-highlight 30%);
+        }
+
+        &::placeholder {
+          color: $text-secondary;
+        }
+      }
+    }
+
+    .filter-container {
+      .subject-filter {
+        padding: 1.5rem 2rem;
+        border: 2px solid $accent-secondary;
+        border-radius: 1.2rem;
+        font-size: 1.6rem;
+        background: $secondary-background;
+        min-width: 20rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $accent-secondary-highlight;
+          box-shadow: 0 0 5px 3px
+            color-mix(in srgb, transparent 70%, $accent-secondary-highlight 30%);
+        }
+      }
+    }
   }
 
   .teacher-cards-container {
     max-width: 140rem;
-    padding: 0 2rem;
+    padding: 0 2rem 8rem;
     margin: 0 auto;
-
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 40rem));
+    grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+    gap: 3rem;
     justify-content: center;
-    gap: 5rem;
   }
-}
 
-@media screen and (max-width: 425px) {
-  .teachers-page {
-    h1 {
-      font-size: 3rem !important;
-      margin-bottom: 8rem !important;
-    }
+  .no-results {
+    text-align: center;
+    padding: 8rem 2rem;
 
-    .teacher-card-header {
-      h2 {
-        font-size: 2.4rem !important;
-      }
-
-      p {
-        font-size: 1.8rem !important;
-      }
-    }
-
-    .basic-info {
-      padding: 1rem !important;
+    p {
+      font-size: 1.8rem;
+      color: $text-secondary;
     }
   }
 }
 
 .teacher-card {
-  height: 55rem;
-  width: 100%;
-  background-color: $secondary-background !important;
-  border-radius: 8px;
-  box-shadow: 0px 5px 15px $shadow;
-  transition: translate 0.3s ease;
-  max-width: 40rem;
+  background: $secondary-background;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px $shadow;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
 
-  display: flex;
-  flex-direction: column;
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px $shadow;
 
-  &:not(.expanded):hover {
-    translate: 0 -5px;
+    .teacher-image {
+      transform: scale(1.05);
+    }
+
+    .view-profile-btn {
+      background: $accent-secondary;
+      color: $text-accent;
+      transform: translateX(5px);
+    }
   }
 
-  .teacher-image {
-    align-self: center;
-    width: 20rem;
-    aspect-ratio: 1;
-    margin: 1rem 0;
+  .teacher-card-inner {
     position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-    img {
-      object-fit: fill;
-      border-radius: 1rem;
+  .teacher-image-container {
+    position: relative;
+    padding: 2rem 2rem 1rem;
+
+    .teacher-image {
+      width: 12rem;
+      height: 12rem;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      border: 2px solid $text-secondary;
+
+      img {
+        object-fit: cover;
+      }
     }
+  }
+
+  .teacher-card-content {
+    padding: 0 2rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .teacher-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
     h2 {
-      text-align: center;
-      font-size: 2.8rem;
-      font-weight: bold;
+      font-size: 2.4rem;
+      font-weight: 700;
       color: $accent-secondary-highlight;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
     }
 
-    p {
-      text-align: center;
+    .teacher-title {
       color: $text-secondary;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 500;
-      text-wrap: wrap;
     }
   }
 
-  .basic-info {
-    padding: 2rem;
-    align-self: flex-start;
-    text-align: start;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .teacher-bio {
+    margin-bottom: 2rem;
 
     p {
       color: $text-secondary;
-      font-size: 1.6rem;
-      text-wrap: wrap;
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+  }
+
+  .subjects-section {
+    margin-bottom: 2rem;
+
+    .subjects-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 1rem;
     }
 
-    ul.subjects {
-      padding-inline: 0;
-      list-style: none;
+    .subjects-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
 
-      p {
+      .subject-tag {
+        background: linear-gradient(135deg, $accent, $accent-highlight);
+        color: $text-accent;
+        padding: 0.5rem 1.2rem;
+        border-radius: 2rem;
+        font-size: 1.2rem;
         font-weight: 500;
-        font-size: 1.6rem;
-        color: $text-secondary;
-      }
 
-      li {
-        font-size: 1.5rem;
-        color: $text-secondary;
-        margin-bottom: 0.5rem;
-        line-height: 1.5;
-        padding-left: 1.5rem;
-        position: relative;
-
-        &::before {
-          content: "•";
-          color: $accent-secondary;
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 1.8rem;
+        &.more-subjects {
+          background: $accent;
+          color: $text-accent;
         }
       }
     }
   }
 
-  .email {
+  .teacher-card-footer {
     margin-top: auto;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: 1.6rem;
-    color: $text-secondary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    &:hover {
-      color: $accent-secondary;
+    .contact-info {
+      .email-link {
+        color: $text-secondary;
+        font-size: 1.4rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $accent-secondary;
+        }
+      }
+    }
+
+    .view-profile-btn {
+      background: $accent-secondary;
+      border: 1px solid $accent-secondary-highlight;
+      color: $text-accent;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        transition: transform 0.3s ease;
+      }
     }
   }
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media screen and (max-width: 768px) {
+  .teachers-page {
+    .teachers-header {
+      padding: 6rem 2rem 3rem;
 
-  .teacher-card-expanded-wrapper {
-    max-width: 100rem;
-    width: 90%;
-    height: 60rem;
-    border-radius: 8px;
-    overflow: hidden;
+      h1 {
+        font-size: 3.5rem;
+      }
 
-    display: flex;
+      .teachers-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+
+    .teachers-filters {
+      flex-direction: column;
+      align-items: stretch;
+
+      .search-container {
+        min-width: auto;
+      }
+
+      .filter-container .subject-filter {
+        min-width: auto;
+      }
+    }
+
+    .teacher-cards-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
+}
 
-  .teacher-card-expanded {
-    width: 100%;
-    height: 100%;
-    background-color: $secondary-background !important;
-    transition: translate 0.3s ease;
-
-    display: flex;
-    flex-direction: column;
-
-    .teacher-image {
-      align-self: center;
-      width: 20rem;
-      aspect-ratio: 1;
-      margin: 1rem 0;
-      position: relative;
-
-      img {
-        object-fit: fill;
-        border-radius: 1rem;
-      }
-    }
-
-    .teacher-card-header {
-      h2 {
-        text-align: center;
-        font-size: 2.8rem;
-        font-weight: bold;
-        color: $accent-secondary-highlight;
-      }
-
-      p {
-        text-align: center;
-        color: $text-secondary;
-        font-size: 1.8rem;
-        font-weight: 500;
-      }
-    }
-
-    .basic-info {
-      padding: 2rem;
-      align-self: flex-start;
-      text-align: start;
-
-      display: flex;
+@media screen and (max-width: 425px) {
+  .teacher-card {
+    .teacher-card-footer {
       flex-direction: column;
       gap: 1rem;
+      align-items: stretch;
 
-      p {
-        color: $text-secondary;
-        font-size: 1.6rem;
-        text-wrap: wrap;
+      .view-profile-btn {
+        justify-content: center;
       }
-
-      ul.subjects {
-        padding-inline: 0;
-        list-style: none;
-
-        p {
-          font-weight: 500;
-          font-size: 1.6rem;
-          color: $text-secondary;
-        }
-
-        li {
-          font-size: 1.5rem;
-          color: $text-secondary;
-          margin-bottom: 0.5rem;
-          line-height: 1.5;
-          padding-left: 1.5rem;
-          position: relative;
-
-          &::before {
-            content: "•";
-            color: $accent-secondary;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.8rem;
-          }
-        }
-      }
-    }
-
-    .email {
-      margin-top: auto;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-size: 1.6rem;
-      color: $text-secondary;
-
-      &:hover {
-        color: $accent-secondary;
-      }
-    }
-  }
-
-  .expanded-info-container {
-    top: 0;
-    left: 100%;
-    width: 100%;
-    height: 100%;
-    padding: 1rem 2rem;
-    background-color: $secondary-background;
-    z-index: -1;
-
-    .bio {
-      font-size: 1.5rem;
-      color: $text-secondary;
-
-      .bio-h {
-        font-size: 1.6rem;
-        font-weight: 500;
-      }
-    }
-
-    .qualification {
-      margin-top: 2rem;
-      .qualification-h {
-        font-size: 1.6rem;
-        font-weight: 500;
-        color: $text-secondary;
-      }
-
-      p {
-        font-size: 1.5rem;
-        color: $text-secondary;
-      }
-    }
-  }
-
-  .expanded {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-100%, -50%) !important;
-
-    .expanded-info-container {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      height: 100%;
-      background-color: $secondary-background;
-      z-index: -1;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .teacher-card-expanded-wrapper {
-      max-width: 50rem;
-      width: 100%;
-      min-width: 0;
-      height: auto;
-      max-height: 70%;
-      overflow-y: auto;
-
-      flex-direction: column;
-      align-items: center;
     }
   }
 }
