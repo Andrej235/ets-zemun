@@ -257,6 +257,390 @@
   }
 }
 
+// Expanded Modal
+.expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.expanded-teacher-card {
+  background: $background;
+  border-radius: 2rem;
+  max-width: 90rem;
+  width: 100%;
+  max-height: 90vh;
+  min-height: 70vh;
+  overflow: hidden;
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .close-button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+      transform: rotate(90deg);
+    }
+
+    svg {
+      color: $text-primary;
+    }
+  }
+
+  .expanded-header {
+    background: linear-gradient(
+      135deg,
+      $accent-secondary,
+      $accent-secondary-highlight
+    );
+    padding: 4rem 4rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    color: $text-accent;
+
+    .teacher-image-large {
+      width: 15rem;
+      height: 15rem;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      border: 4px solid color-mix(in srgb, transparent 70%, $text-accent 30%);
+      flex-shrink: 0;
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .teacher-info-header {
+      h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .teacher-title-large {
+        font-size: 2rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      .teacher-stats {
+        display: flex;
+        gap: 3rem;
+
+        .stat-item {
+          text-align: center;
+
+          .stat-number {
+            display: block;
+            font-size: 2.4rem;
+            font-weight: 700;
+          }
+
+          .stat-label {
+            font-size: 1.4rem;
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+
+  .expanded-tabs {
+    display: flex;
+    padding: 1rem;
+
+    .tab-button {
+      flex: 1;
+      padding: 2rem;
+      border: none;
+      background: transparent;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $text-secondary;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+
+      .tab-icon {
+        font-size: 2rem;
+      }
+
+      &.active {
+        color: $text-accent;
+        background: $accent-secondary;
+      }
+
+      &:hover:not(.active) {
+        background: rgba($accent-secondary, 0.05);
+      }
+    }
+  }
+
+  .expanded-content {
+    padding: 4rem;
+    max-height: 50vh;
+    overflow-y: auto;
+
+    .tab-content {
+      animation: fadeInUp 0.3s ease;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 2rem;
+    }
+
+    // Overview Content
+    .overview-content {
+      .bio-section {
+        margin-bottom: 3rem;
+
+        .bio-text {
+          font-size: 1.6rem;
+          line-height: 1.7;
+          color: $text-secondary;
+        }
+      }
+
+      .quick-info {
+        .info-card {
+          background: $secondary-background;
+          padding: 2rem;
+          border-radius: 1rem;
+
+          h4 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: $text-primary;
+            margin-bottom: 1rem;
+          }
+
+          .focus-subjects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+
+            .focus-tag {
+              background: $accent-secondary;
+              color: white;
+              padding: 0.5rem 1rem;
+              border-radius: 2rem;
+              font-size: 1.2rem;
+            }
+          }
+
+          .contact-email {
+            color: $accent-secondary;
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    // Subjects Content
+    .subjects-content {
+      .subjects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+        gap: 2rem;
+
+        .subject-card {
+          background: $secondary-background;
+          padding: 2rem;
+          border-radius: 1rem;
+          text-align: center;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: translateY(-5px);
+          }
+
+          .subject-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+          }
+
+          h4 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: $text-primary;
+          }
+        }
+      }
+    }
+
+    // Qualifications Content
+    .qualifications-content {
+      .qualifications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .qualification-item {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          background: $secondary-background;
+          padding: 2rem;
+          border-radius: 1rem;
+
+          .qualification-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+          }
+
+          .qualification-details {
+            .qualification-date {
+              color: $text-secondary;
+              font-size: 1.2rem;
+            }
+
+            h4 {
+              font-size: 1.8rem;
+              font-weight: 600;
+              color: $text-primary;
+            }
+
+            .qualification-description {
+              color: $text-secondary;
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+
+    // Contact Content
+    .contact-content {
+      .contact-info-detailed {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        .contact-method {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          background: $secondary-background;
+          padding: 2rem;
+          border-radius: 1rem;
+
+          .contact-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+          }
+
+          .contact-details {
+            h4 {
+              font-size: 1.8rem;
+              font-weight: 600;
+              color: $text-primary;
+              margin-bottom: 0.5rem;
+            }
+
+            a {
+              color: $accent-secondary;
+              text-decoration: none;
+              font-weight: 500;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+
+            p {
+              color: $text-secondary;
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Responsive Design
 @media screen and (max-width: 768px) {
   .teachers-page {
     .teachers-header {
@@ -289,6 +673,55 @@
       gap: 2rem;
     }
   }
+
+  .expanded-teacher-card {
+    margin: 1rem;
+    max-height: 95vh;
+
+    .expanded-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 3rem 2rem;
+
+      .teacher-image-large {
+        width: 12rem;
+        height: 12rem;
+      }
+
+      .teacher-info-header {
+        h1 {
+          font-size: 2.8rem;
+        }
+
+        .teacher-title-large {
+          font-size: 1.6rem;
+        }
+
+        .teacher-stats {
+          justify-content: center;
+        }
+      }
+    }
+
+    .expanded-tabs {
+      .tab-button {
+        padding: 1.5rem 1rem;
+        font-size: 1.4rem;
+
+        .tab-icon {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    .expanded-content {
+      padding: 2rem;
+
+      .subjects-content .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -300,6 +733,18 @@
 
       .view-profile-btn {
         justify-content: center;
+      }
+    }
+  }
+
+  .expanded-tabs {
+    .tab-button {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+
+      span:not(.tab-icon) {
+        font-size: 1.2rem;
       }
     }
   }
