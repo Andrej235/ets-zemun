@@ -94,7 +94,16 @@
     }
   },
   "awards": {
-    "title": "Takmičenja i nagrade"
+    "title": "Takmičenja i nagrade",
+    "results": "Prikazano {filtered} od ukupno {total} rezultata",
+    "searchPlaceholder": "Pretraži nagrade...",
+    "noResults": "Nema nagrada koje odgovaraju vašim kriterijumima.",
+    "expandPrompt": "Kliknite za detalje",
+    "student": "Učenik",
+    "description": "Opis",
+    "externalLink": "Dodatne informacije",
+    "viewMore": "Pogledaj više detalja",
+    "close": "Zatvori"
   },
   "heroInfoCard": {
     "button": "Saznaj više"

@@ -149,6 +149,16 @@ function translate(value) {
     ш: "š",
   };
 
+  const skip = [];
+  let match;
+  let idx = 0;
+  const regex = /\{.*?\}/g;
+  while ((match = regex.exec(value)) !== null) {
+    skip.push(match[0]);
+    value = value.replace(match[0], `$${idx}`);
+    idx++;
+  }
+
   // Handle special cases for digraphs first
   const digraphs = ["Lj", "lj", "Nj", "nj", "Dž", "dž", "LJ", "NJ", "DŽ"];
   digraphs.forEach((digraph) => {
@@ -171,5 +181,10 @@ function translate(value) {
 
   value = value.replace(/\|-__/g, "");
   value = value.replace(/__-\|/g, "");
+
+  skip.forEach((s, i) => {
+    value = value.replace(`$${i}`, s);
+  });
+
   return value;
 }

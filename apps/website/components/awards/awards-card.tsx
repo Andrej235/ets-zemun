@@ -1,28 +1,17 @@
 "use client";
-
 import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import Image from "next/image";
-import { type PointerEvent, useState } from "react";
+import { useState } from "react";
 import Icon from "../icon/icon";
+import { useTranslations } from "next-intl";
 
 type AwardsCardProps = {
   award: Schema<"AwardResponseDto">;
 };
 
 export default function AwardsCard({ award }: AwardsCardProps) {
+  const t = useTranslations("awards");
   const [expanded, setExpanded] = useState(false);
-
-  const handleMouseMove = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType !== "mouse") return;
-
-    const target = e.currentTarget;
-    const { top, left } = target.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
-
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-  };
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -31,7 +20,6 @@ export default function AwardsCard({ award }: AwardsCardProps) {
   return (
     <div
       className={`award-card ${expanded ? "expanded" : ""}`}
-      onPointerMove={handleMouseMove}
       onClick={toggleExpand}
     >
       <div className="award-card-inner">
@@ -66,7 +54,7 @@ export default function AwardsCard({ award }: AwardsCardProps) {
             )}
 
             <div className="expand-prompt">
-              <span>Click for details</span>
+              <span>{t("expandPrompt")}</span>
             </div>
           </div>
         </div>
@@ -81,20 +69,20 @@ export default function AwardsCard({ award }: AwardsCardProps) {
 
             <div className="details-content">
               <div className="details-section">
-                <h3>Student</h3>
+                <h3>{t("student")}</h3>
                 <p>{award.student}</p>
               </div>
 
               {award.description && (
                 <div className="details-section">
-                  <h3>Description</h3>
+                  <h3>{t("description")}</h3>
                   <p>{award.description}</p>
                 </div>
               )}
 
               {award.externalLink && (
                 <div className="details-section">
-                  <h3>Additional Information</h3>
+                  <h3>{t("externalLink")}</h3>
                   <a
                     href={award.externalLink}
                     className="external-link"
@@ -102,7 +90,7 @@ export default function AwardsCard({ award }: AwardsCardProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View more details <Icon name="external-link" />
+                    {t("viewMore")} <Icon name="external-link" />
                   </a>
                 </div>
               )}
@@ -115,7 +103,7 @@ export default function AwardsCard({ award }: AwardsCardProps) {
                 setExpanded(false);
               }}
             >
-              Close
+              {t("close")}
             </button>
           </div>
         )}

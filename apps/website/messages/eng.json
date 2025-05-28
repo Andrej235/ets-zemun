@@ -96,7 +96,14 @@
   "awards": {
     "title": "Competitions and Awards",
     "results": "Showing {filtered} out of {total} results",
-    "searchPlaceholder": "Search awards..."
+    "searchPlaceholder": "Search awards...",
+    "noResults": "No awards found matching your criteria.",
+    "expandPrompt": "Click for details",
+    "student": "Student",
+    "description": "Description",
+    "externalLink": "Additional Information",
+    "viewMore": "View more details",
+    "close": "Close"
   },
   "heroInfoCard": {
     "button": "Learn more"

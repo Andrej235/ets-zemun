@@ -37,7 +37,7 @@ export default function Awards({ awards }: AwardsProps) {
         <div className="search-container">
           <input
             type="text"
-            placeholder={t("searchPlaceholder") || "Search awards..."}
+            placeholder={t("searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -61,7 +61,7 @@ export default function Awards({ awards }: AwardsProps) {
           ))
         ) : (
           <div className="no-results">
-            <p>{t("noResults") || "No awards found matching your criteria"}</p>
+            <p>{t("noResults")}</p>
           </div>
         )}
       </div>
