@@ -4,6 +4,7 @@ import useOutsideClick from "@/lib/hooks/use-outside-click";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import Icon from "../icon/icon";
+import { useTranslations } from "next-intl";
 
 type ExpandedTeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -14,24 +15,36 @@ export default function ExpandedTeacherCard({
   teacher,
   onRequestClose,
 }: ExpandedTeacherCardProps) {
+  const t = useTranslations("teachers");
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("overview");
 
   useOutsideClick(containerRef, onRequestClose);
-  console.log(teacher);
 
   const tabs = useMemo(
     () => [
-      { id: "overview", label: "Overview", icon: "user" },
-      { id: "subjects", label: "Subjects", icon: "book" },
+      {
+        id: "overview",
+        label: t("expandedCard.tabs.overview.label"),
+        icon: "user",
+      },
+      {
+        id: "subjects",
+        label: t("expandedCard.tabs.subjects.label"),
+        icon: "book",
+      },
       teacher.qualifications.length > 0 && {
         id: "qualifications",
-        label: "Qualifications",
+        label: t("expandedCard.tabs.qualifications.label"),
         icon: "graduation-cap",
       },
-      { id: "contact", label: "Contact", icon: "envelope" },
+      {
+        id: "contact",
+        label: t("expandedCard.tabs.contact.label"),
+        icon: "envelope",
+      },
     ],
-    [teacher.qualifications]
+    [teacher.qualifications, t]
   );
 
   return (
@@ -66,7 +79,9 @@ export default function ExpandedTeacherCard({
             <div className="teacher-stats">
               <div className="stat-item">
                 <span className="stat-number">{teacher.subjects.length}</span>
-                <span className="stat-label">Subjects</span>
+                <span className="stat-label">
+                  {t("expandedCard.tabs.subjects.label")}
+                </span>
               </div>
 
               {teacher.qualifications.length > 0 && (
@@ -74,7 +89,9 @@ export default function ExpandedTeacherCard({
                   <span className="stat-number">
                     {teacher.qualifications.length}
                   </span>
-                  <span className="stat-label">Qualifications</span>
+                  <span className="stat-label">
+                    {t("expandedCard.tabs.qualifications.label")}
+                  </span>
                 </div>
               )}
             </div>
@@ -101,13 +118,15 @@ export default function ExpandedTeacherCard({
           {activeTab === "overview" && (
             <div className="tab-content overview-content">
               <div className="bio-section">
-                <h3>About {teacher.name}</h3>
+                <h3>
+                  {t("expandedCard.tabs.overview.about")} {teacher.name}
+                </h3>
                 <p className="bio-text">{teacher.bio || "No bio provided."}</p>
               </div>
 
               <div className="quick-info">
                 <div className="info-card">
-                  <h4>Teaching Focus</h4>
+                  <h4>{t("expandedCard.tabs.overview.focus")}</h4>
                   <div className="focus-subjects">
                     {teacher.subjects.slice(0, 3).map((subject) => (
                       <span key={subject.id} className="focus-tag">
@@ -122,7 +141,7 @@ export default function ExpandedTeacherCard({
 
           {activeTab === "subjects" && (
             <div className="tab-content subjects-content">
-              <h3>Teaching Subjects</h3>
+              <h3>{t("expandedCard.tabs.subjects.title")}</h3>
               <div className="subjects-grid">
                 {teacher.subjects.map((subject) => (
                   <div key={subject.id} className="subject-card">
@@ -138,7 +157,7 @@ export default function ExpandedTeacherCard({
 
           {activeTab === "qualifications" && (
             <div className="tab-content qualifications-content">
-              <h3>Qualifications & Certifications</h3>
+              <h3>{t("expandedCard.tabs.qualifications.title")}</h3>
               <div className="qualifications-list">
                 {teacher.qualifications.map((qualification) => (
                   <div key={qualification.id} className="qualification-item">
@@ -167,14 +186,14 @@ export default function ExpandedTeacherCard({
 
           {activeTab === "contact" && (
             <div className="tab-content contact-content">
-              <h3>Get in Touch</h3>
+              <h3>{t("expandedCard.tabs.contact.title")}</h3>
               <div className="contact-info-detailed">
                 <div className="contact-method">
                   <div className="contact-icon">
                     <Icon name="envelope" />
                   </div>
                   <div className="contact-details">
-                    <h4>Email</h4>
+                    <h4>{t("expandedCard.tabs.contact.email")}</h4>
                     <a href={`mailto:${teacher.email}`}>{teacher.email}</a>
                   </div>
                 </div>

@@ -56,7 +56,7 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
               ))}
               {hasMoreSubjects && (
                 <span className="subject-tag more-subjects">
-                  +{teacher.subjects.length - 4} more
+                  +{teacher.subjects.length - 4} {t("teachers.more")}
                 </span>
               )}
             </div>
@@ -74,7 +74,7 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
             </div>
 
             <button className="view-profile-btn">
-              View Profile
+              {t("teachers.viewProfile")}
               <svg
                 width="16"
                 height="16"

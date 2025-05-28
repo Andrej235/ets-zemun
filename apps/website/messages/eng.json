@@ -63,9 +63,35 @@
   },
   "teachers": {
     "title": "Teachers",
-    "subjects": "Subjects:",
-    "bio": "Biography",
-    "qualifications": "Qualifications"
+    "description": "Meet our dedicated educators who are passionate about shaping the future of our students.",
+    "searchPlaceholder": "Search teachers...",
+    "allSubjects": "All subjects",
+    "subjects": "Subjects",
+    "noResults": "No teachers found matching your criteria.",
+    "more": "more",
+    "viewProfile": "View Profile",
+    "expandedCard": {
+      "tabs": {
+        "overview": {
+          "label": "Overview",
+          "about": "About",
+          "focus": "Teaching Focus"
+        },
+        "subjects": {
+          "label": "Subjects",
+          "title": "Teaching Subjects"
+        },
+        "qualifications": {
+          "label": "Qualifications",
+          "title": "Qualifications & Certifications"
+        },
+        "contact": {
+          "label": "Contact",
+          "title": "Get in Touch",
+          "email": "Email"
+        }
+      }
+    }
   },
   "awards": {
     "title": "Competitions and Awards"

@@ -62,17 +62,14 @@ export default function Teachers({ teachers }: TeachersProps) {
       <div className="teachers-page" data-search-key="nastavnici">
         <div className="teachers-header">
           <h1>{t("teachers.title")}</h1>
-          <p className="teachers-subtitle">
-            Meet our dedicated educators who are passionate about shaping the
-            future
-          </p>
+          <p className="teachers-subtitle">{t("teachers.description")}</p>
         </div>
 
         <div className="teachers-filters">
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search teachers..."
+              placeholder={t("teachers.searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
@@ -85,7 +82,7 @@ export default function Teachers({ teachers }: TeachersProps) {
               onChange={(e) => setSelectedSubject(e.target.value)}
               className="subject-filter"
             >
-              <option value="">All Subjects</option>
+              <option value="">{t("teachers.allSubjects")}</option>
               {allSubjects.map((subject) => (
                 <option key={subject} value={subject}>
                   {subject}
@@ -107,7 +104,7 @@ export default function Teachers({ teachers }: TeachersProps) {
 
         {filteredTeachers.length === 0 && (
           <div className="no-results">
-            <p>No teachers found matching your criteria.</p>
+            <p>{t("teachers.noResults")}</p>
           </div>
         )}
       </div>

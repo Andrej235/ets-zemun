@@ -63,9 +63,35 @@
   },
   "teachers": {
     "title": "Nastavnici",
-    "subjects": "Predmeti:",
-    "bio": "Biografija",
-    "qualifications": "Kvalifikacije"
+    "description": "Upoznajte naše posvećene nastavnike koji oblikuju budućnost naših učenika.",
+    "searchPlaceholder": "Pretraži nastavnike...",
+    "allSubjects": "Svi predmeti",
+    "subjects": "Predmeti",
+    "noResults": "Nema nastavnika koji odgovaraju vašim kriterijumima.",
+    "more": "više",
+    "viewProfile": "Pogledaj Profil",
+    "expandedCard": {
+      "tabs": {
+        "overview": {
+          "label": "Pregled",
+          "about": "O nastavniku",
+          "focus": "Fokus nastave"
+        },
+        "subjects": {
+          "label": "Predmeti",
+          "title": "Predmeti koje predaje"
+        },
+        "qualifications": {
+          "label": "Kvalifikacije",
+          "title": "Kvalifikacije i sertifikati"
+        },
+        "contact": {
+          "label": "Kontakt",
+          "title": "Kontaktirajte",
+          "email": "Email"
+        }
+      }
+    }
   },
   "awards": {
     "title": "Takmičenja i nagrade"
