@@ -1,26 +1,26 @@
 "use client";
 import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import Image from "next/image";
-import { useState } from "react";
 import Icon from "../icon/icon";
 import { useTranslations } from "next-intl";
 
 type AwardsCardProps = {
   award: Schema<"AwardResponseDto">;
+  expanded: boolean;
+  onExpand: () => void;
 };
 
-export default function AwardsCard({ award }: AwardsCardProps) {
+export default function AwardsCard({
+  award,
+  expanded,
+  onExpand,
+}: AwardsCardProps) {
   const t = useTranslations("awards");
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <div
       className={`award-card ${expanded ? "expanded" : ""}`}
-      onClick={toggleExpand}
+      onClick={onExpand}
     >
       <div className="award-card-inner">
         <div className="award-card-front">
@@ -100,7 +100,7 @@ export default function AwardsCard({ award }: AwardsCardProps) {
               className="close-details"
               onClick={(e) => {
                 e.stopPropagation();
-                setExpanded(false);
+                onExpand();
               }}
             >
               {t("close")}

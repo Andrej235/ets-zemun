@@ -29,6 +29,8 @@ export default function Awards({ awards }: AwardsProps) {
     [awards, searchTerm]
   );
 
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="awards-pages" data-search-key="takmicenja-i-nagrade">
       <h1>{t("title")}</h1>
@@ -57,7 +59,16 @@ export default function Awards({ awards }: AwardsProps) {
       <div className="awards-list">
         {filteredAwards.length > 0 ? (
           filteredAwards.map((award) => (
-            <AwardsCard key={award.id} award={award} />
+            <AwardsCard
+              key={award.id}
+              award={award}
+              expanded={expanded === award.id}
+              onExpand={() =>
+                setExpanded((expanded) =>
+                  expanded === award.id ? null : award.id
+                )
+              }
+            />
           ))
         ) : (
           <div className="no-results">
