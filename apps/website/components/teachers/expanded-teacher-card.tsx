@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import Icon from "../icon/icon";
 import { useTranslations } from "next-intl";
+import { motion } from "motion/react";
 
 type ExpandedTeacherCardProps = {
   readonly teacher: Schema<"TeacherResponseDto">;
@@ -48,7 +49,17 @@ export default function ExpandedTeacherCard({
   );
 
   return (
-    <div className="expanded-overlay">
+    <motion.div
+      className="expanded-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        transition: {
+          duration: 0.15,
+        },
+      }}
+    >
       <div className="expanded-teacher-card" ref={containerRef}>
         <button className="close-button" onClick={onRequestClose}>
           <svg
@@ -202,6 +213,6 @@ export default function ExpandedTeacherCard({
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

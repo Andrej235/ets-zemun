@@ -1,6 +1,7 @@
 "use client";
 
 import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -24,7 +25,23 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
   const hasMoreSubjects = teacher.subjects.length > 4;
 
   return (
-    <div className="teacher-card" onClick={onSelect}>
+    <motion.div
+      className="teacher-card"
+      onClick={onSelect}
+      layout
+      initial={{
+        opacity: 0,
+        scale: 0.9,
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0.9,
+      }}
+    >
       <div className="teacher-card-inner">
         <div className="teacher-image-container">
           <div className="teacher-image">
@@ -89,7 +106,7 @@ function TeacherCard({ teacher, onSelect }: TeacherCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

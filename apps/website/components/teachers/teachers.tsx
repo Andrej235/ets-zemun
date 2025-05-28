@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo } from "react";
 import ExpandedTeacherCard from "./expanded-teacher-card";
 import TeacherCard from "./teacher-card";
 import "./teachers.scss";
+import { AnimatePresence } from "motion/react";
 
 type TeachersProps = {
   teachers: Schema<"TeacherResponseDto">[];
@@ -93,13 +94,15 @@ export default function Teachers({ teachers }: TeachersProps) {
         </div>
 
         <div className="teacher-cards-container">
-          {filteredTeachers.map((data) => (
-            <TeacherCard
-              teacher={data}
-              key={data.id}
-              onSelect={() => setSelectedTeacher(data)}
-            />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filteredTeachers.map((data) => (
+              <TeacherCard
+                teacher={data}
+                key={data.id}
+                onSelect={() => setSelectedTeacher(data)}
+              />
+            ))}
+          </AnimatePresence>
         </div>
 
         {filteredTeachers.length === 0 && (
@@ -109,12 +112,14 @@ export default function Teachers({ teachers }: TeachersProps) {
         )}
       </div>
 
-      {selectedTeacher && (
-        <ExpandedTeacherCard
-          teacher={selectedTeacher}
-          onRequestClose={() => setSelectedTeacher(null)}
-        />
-      )}
+      <AnimatePresence>
+        {selectedTeacher && (
+          <ExpandedTeacherCard
+            teacher={selectedTeacher}
+            onRequestClose={() => setSelectedTeacher(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
