@@ -94,7 +94,9 @@
     }
   },
   "awards": {
-    "title": "Competitions and Awards"
+    "title": "Competitions and Awards",
+    "results": "Showing {filtered} out of {total} results",
+    "searchPlaceholder": "Search awards..."
   },
   "heroInfoCard": {
     "button": "Learn more"
