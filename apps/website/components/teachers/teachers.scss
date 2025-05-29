@@ -22,9 +22,25 @@
     }
   }
 
-  .teachers-filters {
-    max-width: 120rem;
+  .teachers-filters-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 140rem;
     margin: 0 auto 3rem;
+    padding: 0 3rem;
+    gap: 1rem;
+
+    & > p {
+      margin-left: auto;
+      margin-right: 2.5rem;
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+    }
+  }
+
+  .teachers-filters {
+    width: 100%;
     padding: 0 2rem;
     display: flex;
     gap: 2rem;

@@ -63,6 +63,7 @@
   },
   "teachers": {
     "title": "Nastavnici",
+    "results": "Prikazano {filtered} od ukupno {total} nastavnika",
     "description": "Upoznajte naše posvećene nastavnike koji oblikuju budućnost naših učenika.",
     "searchPlaceholder": "Pretraži nastavnike...",
     "allSubjects": "Svi predmeti",
@@ -93,9 +94,15 @@
       }
     }
   },
+  "news": {
+    "title": "Novosti",
+    "description": "Ostanite u toku sa najnovijim vestima i događajima iz naše škole.",
+    "results": "Prikazano {filtered} od ukupno {total} vesti",
+    "searchPlaceholder": "Pretraži novosti..."
+  },
   "awards": {
     "title": "Takmičenja i nagrade",
-    "results": "Prikazano {filtered} od ukupno {total} rezultata",
+    "results": "Prikazano {filtered} od ukupno {total} nagrada",
     "searchPlaceholder": "Pretraži nagrade...",
     "noResults": "Nema nagrada koje odgovaraju vašim kriterijumima.",
     "expandPrompt": "Kliknite za detalje",

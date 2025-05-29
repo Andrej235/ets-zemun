@@ -1,11 +1,11 @@
 "use client";
 import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { AnimatePresence } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ExpandedTeacherCard from "./expanded-teacher-card";
 import TeacherCard from "./teacher-card";
 import "./teachers.scss";
-import { AnimatePresence } from "motion/react";
 
 type TeachersProps = {
   teachers: Schema<"TeacherResponseDto">[];
@@ -66,31 +66,40 @@ export default function Teachers({ teachers }: TeachersProps) {
           <p className="teachers-subtitle">{t("teachers.description")}</p>
         </div>
 
-        <div className="teachers-filters">
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder={t("teachers.searchPlaceholder")}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
+        <div className="teachers-filters-container">
+          <div className="teachers-filters">
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder={t("teachers.searchPlaceholder")}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+            </div>
+
+            <div className="filter-container">
+              <select
+                value={selectedSubject}
+                onChange={(e) => setSelectedSubject(e.target.value)}
+                className="subject-filter"
+              >
+                <option value="">{t("teachers.allSubjects")}</option>
+                {allSubjects.map((subject) => (
+                  <option key={subject} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className="filter-container">
-            <select
-              value={selectedSubject}
-              onChange={(e) => setSelectedSubject(e.target.value)}
-              className="subject-filter"
-            >
-              <option value="">{t("teachers.allSubjects")}</option>
-              {allSubjects.map((subject) => (
-                <option key={subject} value={subject}>
-                  {subject}
-                </option>
-              ))}
-            </select>
-          </div>
+          <p>
+            {t("teachers.results", {
+              filtered: filteredTeachers.length,
+              total: teachers.length,
+            })}
+          </p>
         </div>
 
         <div className="teacher-cards-container">

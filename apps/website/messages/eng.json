@@ -63,6 +63,7 @@
   },
   "teachers": {
     "title": "Teachers",
+    "results": "Showing {filtered} out of {total} teachers",
     "description": "Meet our dedicated educators who are passionate about shaping the future of our students.",
     "searchPlaceholder": "Search teachers...",
     "allSubjects": "All subjects",
@@ -93,9 +94,15 @@
       }
     }
   },
+  "news": {
+    "title": "News",
+    "description": "Stay updated with the latest news and events from our school.",
+    "results": "Showing {filtered} out of {total} news",
+    "searchPlaceholder": "Search news..."
+  },
   "awards": {
     "title": "Competitions and Awards",
-    "results": "Showing {filtered} out of {total} results",
+    "results": "Showing {filtered} out of {total} awards",
     "searchPlaceholder": "Search awards...",
     "noResults": "No awards found matching your criteria.",
     "expandPrompt": "Click for details",
