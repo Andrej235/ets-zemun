@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import AwardsCard from "./awards-card";
 import "./awards.scss";
 import { useState, useMemo } from "react";
+import { AnimatePresence } from "motion/react";
 
 type AwardsProps = {
   awards: Schema<"AwardResponseDto">[];
@@ -41,7 +42,10 @@ export default function Awards({ awards }: AwardsProps) {
             type="text"
             placeholder={t("searchPlaceholder")}
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setExpanded(null);
+              setSearchTerm(e.target.value);
+            }}
             className="search-input"
           />
         </div>
@@ -57,24 +61,26 @@ export default function Awards({ awards }: AwardsProps) {
       </div>
 
       <div className="awards-list">
-        {filteredAwards.length > 0 ? (
-          filteredAwards.map((award) => (
-            <AwardsCard
-              key={award.id}
-              award={award}
-              expanded={expanded === award.id}
-              onExpand={() =>
-                setExpanded((expanded) =>
-                  expanded === award.id ? null : award.id
-                )
-              }
-            />
-          ))
-        ) : (
-          <div className="no-results">
-            <p>{t("noResults")}</p>
-          </div>
-        )}
+        <AnimatePresence mode="popLayout">
+          {filteredAwards.length > 0 ? (
+            filteredAwards.map((award) => (
+              <AwardsCard
+                key={award.id}
+                award={award}
+                expanded={expanded === award.id}
+                onExpand={() =>
+                  setExpanded((expanded) =>
+                    expanded === award.id ? null : award.id
+                  )
+                }
+              />
+            ))
+          ) : (
+            <div className="no-results">
+              <p>{t("noResults")}</p>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

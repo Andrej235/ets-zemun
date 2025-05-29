@@ -115,9 +115,7 @@
   box-shadow: 0 6px 12px var(--shadow);
   overflow: hidden;
   cursor: pointer;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
   height: auto;
 
   &:hover,
@@ -167,7 +165,7 @@
   .award-card-inner {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100%;
   }
 
   .award-card-front {
