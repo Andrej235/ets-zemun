@@ -29,12 +29,9 @@ type NavItem = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const isLoading = useUserStore((x) => x.isLoading);
   const user = useUserStore((x) => x.user);
 
   const navItems: NavItem[] = useMemo(() => {
-    if (isLoading) return [];
-
     const items = [
       { title: "Početna", href: "/", Icon: Home },
       {
@@ -77,7 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
 
     return items;
-  }, [isLoading, user]);
+  }, [user]);
 
   return (
     <Sidebar collapsible="icon" {...props}>

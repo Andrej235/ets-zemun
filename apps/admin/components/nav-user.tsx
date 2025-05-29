@@ -24,12 +24,9 @@ import { toast } from "sonner";
 export function NavUser() {
   const setUser = useUserStore((x) => x.setUser);
   const user = useUserStore((x) => x.user);
-  const isLoading = useUserStore((x) => x.isLoading);
   const { isMobile } = useSidebar();
   const isWaitingForResponse = useRef(false);
   const router = useRouter();
-
-  if (isLoading) return <></>;
 
   if (!user) return <></>;
 
