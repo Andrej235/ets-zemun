@@ -1,10 +1,11 @@
 "use client";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import NewsPreview from "@/components/news-preview/news-preview";
+import { AnimatePresence } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import "../news-preview/news-preview.scss";
 import "./news.scss";
-import { useState } from "react";
 
 type NewsProps = {
   news: Schema<"NewsPreviewResponseDto">[];
@@ -49,9 +50,11 @@ export default function News({ news }: NewsProps) {
       </div>
 
       <div className="articles-container">
-        {filteredNews.map((data) => (
-          <NewsPreview key={data.id} news={data} />
-        ))}
+        <AnimatePresence mode="popLayout">
+          {filteredNews.map((data) => (
+            <NewsPreview key={data.id} news={data} />
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );
