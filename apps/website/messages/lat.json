@@ -63,12 +63,54 @@
   },
   "teachers": {
     "title": "Nastavnici",
-    "subjects": "Predmeti:",
-    "bio": "Biografija",
-    "qualifications": "Kvalifikacije"
+    "results": "Prikazano {filtered} od ukupno {total} nastavnika",
+    "description": "Upoznajte naše posvećene nastavnike koji oblikuju budućnost naših učenika.",
+    "searchPlaceholder": "Pretraži nastavnike...",
+    "allSubjects": "Svi predmeti",
+    "subjects": "Predmeti",
+    "noResults": "Nema nastavnika koji odgovaraju vašim kriterijumima.",
+    "more": "više",
+    "viewProfile": "Pogledaj Profil",
+    "expandedCard": {
+      "tabs": {
+        "overview": {
+          "label": "Pregled",
+          "about": "O nastavniku",
+          "focus": "Fokus nastave"
+        },
+        "subjects": {
+          "label": "Predmeti",
+          "title": "Predmeti koje predaje"
+        },
+        "qualifications": {
+          "label": "Kvalifikacije",
+          "title": "Kvalifikacije i sertifikati"
+        },
+        "contact": {
+          "label": "Kontakt",
+          "title": "Kontaktirajte",
+          "email": "Email"
+        }
+      }
+    }
+  },
+  "news": {
+    "title": "Novosti",
+    "description": "Ostanite u toku sa najnovijim vestima i događajima iz naše škole.",
+    "results": "Prikazano {filtered} od ukupno {total} vesti",
+    "searchPlaceholder": "Pretraži novosti..."
   },
   "awards": {
-    "title": "Takmičenja i nagrade"
+    "title": "Takmičenja i nagrade",
+    "results": "Prikazano {filtered} od ukupno {total} nagrada",
+    "searchPlaceholder": "Pretraži nagrade...",
+    "noResults": "Nema nagrada koje odgovaraju vašim kriterijumima.",
+    "expandPrompt": "Kliknite za detalje",
+    "student": "Učenik",
+    "description": "Opis",
+    "externalLink": "Dodatne informacije",
+    "viewMore": "Pogledaj više detalja",
+    "close": "Zatvori"
   },
   "heroInfoCard": {
     "button": "Saznaj više"

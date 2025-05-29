@@ -1,7 +1,9 @@
+import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import News from "@/components/news/news";
 import generateAlternateUrls from "@/lib/generate-alternate-urls";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export const revalidate = 10800; // 3 hours
 
@@ -35,4 +37,21 @@ export async function generateMetadata({
   };
 }
 
-export default News;
+export default async function NewsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
+  const { isOk, response } = await sendApiRequestSSR("/news", {
+    method: "get",
+    parameters: {
+      languageCode: localeToLangCode(locale),
+      limit: -1,
+    },
+  });
+
+  if (!isOk) throw new Error("Failed to fetch news");
+
+  return <News news={response?.items ?? []} />;
+}

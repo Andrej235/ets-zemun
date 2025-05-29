@@ -1,8 +1,11 @@
 .news-page-container {
   padding: 5rem 0;
-
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: max-content;
+  max-width: 95vw;
+  margin: 0 auto;
 
   .articles-container {
     display: grid;
@@ -15,6 +18,92 @@
       gap: 3rem;
       padding: 0;
       padding-top: 3.5rem;
+    }
+  }
+
+  .header {
+    h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--text-primary);
+    }
+
+    p {
+      font-size: 1.8rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+  }
+
+  .news-filters {
+    gap: 2rem;
+    border-radius: 1rem;
+    padding: 2rem 3rem;
+
+    @media screen and (max-width: 480px) {
+      padding: 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .search-container {
+      flex: 1 1 100%;
+
+      @media (min-width: 768px) {
+        flex: 2 1 40%;
+      }
+    }
+
+    .results-counter {
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+
+      @media (min-width: 768px) {
+        flex: 1 1 20%;
+      }
+
+      p {
+        font-size: 1.4rem;
+        color: var(--text-secondary);
+      }
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--outline);
+      border-radius: 0.8rem;
+      background-color: var(--background);
+      color: var(--text-primary);
+      font-size: 1.6rem;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+      }
+    }
+
+    .filter-select {
+      flex: 1;
+      min-width: 15rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--outline);
+      border-radius: 0.8rem;
+      background-color: var(--background);
+      color: var(--text-primary);
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
     }
   }
 }

@@ -1,31 +1,60 @@
-import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+"use client";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import NewsPreview from "@/components/news-preview/news-preview";
+import { AnimatePresence } from "motion/react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 import "../news-preview/news-preview.scss";
 import "./news.scss";
-import localeToLangCode from "@/lib/locale-to-lang-code";
 
-export default async function News({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const locale = (await params).locale;
-  const { isOk, response } = await sendApiRequestSSR("/news", {
-    method: "get",
-    parameters: {
-      languageCode: localeToLangCode(locale),
-      limit: -1,
-    },
-  });
+type NewsProps = {
+  news: Schema<"NewsPreviewResponseDto">[];
+};
 
-  if (!isOk) throw new Error("Failed to fetch news");
+export default function News({ news }: NewsProps) {
+  const t = useTranslations("news");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredNews = news.filter(
+    (news) =>
+      news.title.toLowerCase().includes(searchTerm) ||
+      news.description.toLowerCase().includes(searchTerm)
+  );
 
   return (
     <div className="news-page-container" data-search-key="novosti">
+      <div className="header">
+        <h1>{t("title")}</h1>
+        <p>{t("description")}</p>
+      </div>
+
+      <div className="news-filters">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder={t("searchPlaceholder")}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+        </div>
+
+        <div className="results-counter">
+          <p>
+            {t("results", {
+              filtered: filteredNews.length,
+              total: news.length,
+            })}
+          </p>
+        </div>
+      </div>
+
       <div className="articles-container">
-        {response!.items.map((data) => (
-          <NewsPreview key={data.id} news={data} />
-        ))}
+        <AnimatePresence mode="popLayout">
+          {filteredNews.map((data) => (
+            <NewsPreview key={data.id} news={data} />
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );

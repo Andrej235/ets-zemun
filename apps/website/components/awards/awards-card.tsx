@@ -1,44 +1,130 @@
 "use client";
-
-import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import type { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import Image from "next/image";
-import { PointerEvent } from "react";
+import Icon from "../icon/icon";
+import { useTranslations } from "next-intl";
+import { motion } from "motion/react";
+import { forwardRef } from "react";
 
 type AwardsCardProps = {
   award: Schema<"AwardResponseDto">;
+  expanded: boolean;
+  onExpand: () => void;
 };
 
-export default function AwardsCard({ award }: AwardsCardProps) {
-  const handleMouseMove = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType !== "mouse") return;
+const AwardsCard = forwardRef<HTMLDivElement, AwardsCardProps>(
+  ({ award, expanded, onExpand }: AwardsCardProps, ref) => {
+    const t = useTranslations("awards");
 
-    const target = e.currentTarget;
-    const { top, left } = target.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
+    return (
+      <motion.div
+        layout="position"
+        ref={ref}
+        initial={{
+          opacity: 0,
+          scale: 0.9,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.9,
+        }}
+        className={`award-card ${expanded ? "expanded" : ""}`}
+        onClick={onExpand}
+      >
+        <motion.div layout="position" className="award-card-inner">
+          <div className="award-card-front">
+            <div className="img">
+              <Image
+                src={award.image || "/placeholder.svg"}
+                alt={award.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="award-badge">{award.dayOfAward}</div>
+            </div>
 
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-  };
+            <div className="award-card-header">
+              <p>{award.student}</p>
+              <p>{award.dayOfAward}</p>
+            </div>
 
-  return (
-    <div className="award-card" onPointerMove={handleMouseMove}>
-      <div className="img">
-        <Image src={award.image} alt={award.title} fill />
-      </div>
-      <div className="award-card-header">
-        <h2>{award.title}</h2>
-        <div className="award-card-header-line">
-          <p>{award.competition}</p>
-          <p>&nbsp;-&nbsp;</p>
-          <p>{award.dayOfAward}</p>
-        </div>
-      </div>
+            <div className="award-card-content">
+              <h2 className="award-competition">{award.competition}</h2>
+              <p className="award-title">{award.title}</p>
 
-      <div className="content">
-        <h3>Ucenik: {" " + award.student}</h3>
-        {award.description && <p>{award.description}</p>}
-      </div>
-    </div>
-  );
-}
+              {award.description && (
+                <div className="award-description">
+                  <p>
+                    {award.description.length > 150
+                      ? `${award.description.substring(0, 150)}...`
+                      : award.description}
+                  </p>
+                </div>
+              )}
+
+              <div className="expand-prompt">
+                <span>{t("expandPrompt")}</span>
+              </div>
+            </div>
+          </div>
+
+          {expanded && (
+            <div className="award-card-details">
+              <div className="details-header">
+                <h2>{award.title}</h2>
+                <p className="details-competition">{award.competition}</p>
+                <p className="details-date">{award.dayOfAward}</p>
+              </div>
+
+              <div className="details-content">
+                <div className="details-section">
+                  <h3>{t("student")}</h3>
+                  <p>{award.student}</p>
+                </div>
+
+                {award.description && (
+                  <div className="details-section">
+                    <h3>{t("description")}</h3>
+                    <p>{award.description}</p>
+                  </div>
+                )}
+
+                {award.externalLink && (
+                  <div className="details-section">
+                    <h3>{t("externalLink")}</h3>
+                    <a
+                      href={award.externalLink}
+                      className="external-link"
+                      onClick={(e) => e.stopPropagation()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t("viewMore")} <Icon name="external-link" />
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              <button
+                className="close-details"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onExpand();
+                }}
+              >
+                {t("close")}
+              </button>
+            </div>
+          )}
+        </motion.div>
+      </motion.div>
+    );
+  }
+);
+
+AwardsCard.displayName = "AwardCard";
+export default AwardsCard;
