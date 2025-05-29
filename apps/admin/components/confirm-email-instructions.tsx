@@ -9,13 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useUserStore } from "@/stores/user-store";
 import { CheckCircle, Mail } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CountdownTimer from "./countdown-timer";
-import FullPageLoadingIndicator from "./full-page-loading-indicator";
 import {
   Dialog,
   DialogContent,
@@ -26,16 +23,7 @@ import {
 } from "./ui/dialog";
 
 export default function ConfirmEmailInstructions() {
-  const isLoading = useUserStore((x) => x.isLoading);
-  const user = useUserStore((x) => x.user);
-  const router = useRouter();
   const [isDialogOpen, setDialogOpen] = useState(false);
-
-  useEffect(() => {
-    if (isLoading) return;
-    if (user) router.replace("/");
-  }, [isLoading, user, router]);
-
   const [isCountdownActive, setIsCountdownActive] = useState(false);
   const [resendSuccess, setResendSuccess] = useState(false);
 
@@ -48,8 +36,6 @@ export default function ConfirmEmailInstructions() {
     }
     return () => clearTimeout(timer);
   }, [resendSuccess]);
-
-  if (isLoading) return <FullPageLoadingIndicator />;
 
   async function handleResendEmail(email: string) {
     if (!email) {
@@ -89,11 +75,7 @@ export default function ConfirmEmailInstructions() {
           Proverite svoj email
         </CardTitle>
         <CardDescription className="mt-2 text-base">
-          Poslali smo verifikacioni link na{" "}
-          <span className="font-medium">
-            {user?.email || "vašu email adresu"}
-          </span>
-          .
+          Poslali smo verifikacioni link na vašu email adresu
         </CardDescription>
       </CardHeader>
 
@@ -155,7 +137,6 @@ export default function ConfirmEmailInstructions() {
                   name="email"
                   type="email"
                   required
-                  defaultValue={user?.email || ""}
                   className="w-full rounded border px-3 py-2"
                   placeholder="Email adresa"
                 />

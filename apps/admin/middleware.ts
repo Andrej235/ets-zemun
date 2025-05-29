@@ -2,12 +2,21 @@ import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  const loggedOutOnly =
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname === "/confirm-email";
+
   try {
-    const response = await sendApiRequestSSR("/users/perms-only", {
+    const { isOk: isLoggedIn } = await sendApiRequestSSR("/users/perms-only", {
       method: "get",
     });
 
-    if (response.isOk) return NextResponse.next();
+    if (loggedOutOnly) {
+      if (isLoggedIn) return NextResponse.redirect(new URL("/", request.url));
+      else return NextResponse.next();
+    }
+
+    if (isLoggedIn) return NextResponse.next();
     else return NextResponse.redirect(new URL("/login", request.url));
   } catch (error) {
     console.error("Error verifying token:", error);
@@ -19,10 +28,8 @@ export const config = {
   matcher: [
     /*
       Match all paths except:
-      - /login
-      - /confirm-email
       - static files (/_next, /static, /favicon.ico, /robots.txt, /images, etc.)
     */
-    "/((?!login|confirm-email|_next/|static/|favicon.ico|robots.txt|images/).*)",
+    "/((?!_next/|static/|favicon.ico|robots.txt|images/).*)",
   ],
 };

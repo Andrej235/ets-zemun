@@ -1,30 +1,15 @@
 "use client";
 import sendAPIRequest from "@/api-dsl/send-api-request";
-import FullPageLoadingIndicator from "@/components/full-page-loading-indicator";
 import { LoginForm } from "@/components/login-form";
 import { SignUpForm } from "@/components/sign-up-form";
-import { useUserStore } from "@/stores/user-store";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 export default function Page() {
   const [selected, setSelected] = useState<"login" | "register">("login");
   const isWaitingForResponse = useRef(false);
   const router = useRouter();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const isLoadingUserData = useUserStore((x) => x.isLoading);
-  const user = useUserStore((x) => x.user);
-
-  useEffect(() => {
-    if (user) {
-      router.replace(!user.emailConfirmed ? "/confirm-email" : "/");
-      return;
-    }
-
-    if (!isLoadingUserData) setIsLoading(false);
-  }, [isLoadingUserData, user, router]);
 
   async function handleLogin(email: string, password: string) {
     if (isWaitingForResponse.current) {
@@ -65,7 +50,7 @@ export default function Page() {
     isWaitingForResponse.current = false;
 
     if (!isOk) return;
-    window.location.reload();
+    router.push("/");
   }
 
   async function handleRegister(
@@ -109,10 +94,8 @@ export default function Page() {
     isWaitingForResponse.current = false;
 
     if (!isOk) return;
-    setSelected("login");
+    router.push("/confirm-email");
   }
-
-  if (isLoading) return <FullPageLoadingIndicator />;
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
