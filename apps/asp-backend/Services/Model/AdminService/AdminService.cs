@@ -1,7 +1,10 @@
+using System.Security.Claims;
 using EtsZemun.Data;
 using EtsZemun.Dtos.Response.Admin;
+using EtsZemun.Errors;
 using EtsZemun.Models;
 using EtsZemun.Services.Read;
+using EtsZemun.Utilities;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +18,11 @@ public class AdminService(
     ICountService<Subject> subjectCountService,
     ICountService<EducationalProfile> educationalProfileCountService,
     ICountService<Teacher> teacherCountService,
-    ICountService<Award> awardCountService
+    ICountService<Award> awardCountService,
+    UserManager<User> userManager
 ) : IAdminService
 {
-    public async Task<Result<AdminOverviewResponseDto>> GetOverview()
+    public async Task<Result<AdminOverviewResponseDto>> GetOverview(ClaimsPrincipal user)
     {
         var totalNewsResult = await newsCountService.Count(null);
         if (totalNewsResult.IsFailed)
@@ -48,7 +52,7 @@ public class AdminService(
         if (awardsResult.IsFailed)
             return Result.Fail<AdminOverviewResponseDto>(awardsResult.Errors);
 
-        var userLoginsResult = await GetUserLoginsOverview();
+        var userLoginsResult = await GetUserLoginsOverview(user);
 
         return new AdminOverviewResponseDto()
         {
@@ -66,12 +70,18 @@ public class AdminService(
 
     private async Task<
         Result<IEnumerable<AdminUserLoginOverviewResponseDto>>
-    > GetUserLoginsOverview()
+    > GetUserLoginsOverview(ClaimsPrincipal userClaim)
     {
         try
         {
+            var user = await userManager.GetUserAsync(userClaim);
+            if (user is null || !user.EmailConfirmed)
+                return Result.Fail(new Forbidden("User not found or not confirmed"));
+
+            var isAdmin = await userManager.IsInRoleAsync(user, Roles.Admin);
+
             return await context
-                .UserLoginEvent.Where(x => x.User != null)
+                .UserLoginEvent.Where(isAdmin ? (x => x.User != null) : (x => x.UserId == user.Id))
                 .Join(
                     context.Users,
                     login => login.UserId,

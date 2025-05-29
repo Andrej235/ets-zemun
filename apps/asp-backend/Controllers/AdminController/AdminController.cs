@@ -18,7 +18,7 @@ public class AdminController(IAdminService adminService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<AdminOverviewResponseDto>> GetOverview()
     {
-        var result = await adminService.GetOverview();
+        var result = await adminService.GetOverview(User);
 
         if (result.IsFailed)
             return BadRequest(new { result.Errors[0].Message });
