@@ -1,4 +1,5 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import RecentLoginsDescription from "@/components/recent-logins-description";
 import { RoleBadge } from "@/components/role-badge";
 import {
   Card,
@@ -133,7 +134,7 @@ export default async function Dashboard() {
           <CardHeader>
             <CardTitle>Skorašnje prijave</CardTitle>
             <CardDescription>
-              Najnovije prijave na administratorski panel škole
+              <RecentLoginsDescription />
             </CardDescription>
           </CardHeader>
           <CardContent>
