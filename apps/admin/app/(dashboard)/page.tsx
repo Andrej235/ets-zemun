@@ -1,5 +1,7 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import RecentLoginsDescription from "@/components/recent-logins-description";
 import { RoleBadge } from "@/components/role-badge";
+import SystemStatus from "@/components/system-status";
 import {
   Card,
   CardContent,
@@ -133,7 +135,7 @@ export default async function Dashboard() {
           <CardHeader>
             <CardTitle>Skorašnje prijave</CardTitle>
             <CardDescription>
-              Najnovije prijave na administratorski panel škole
+              <RecentLoginsDescription />
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -165,35 +167,7 @@ export default async function Dashboard() {
             <CardDescription>Trenutne performanse sistema</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">Baza podataka</p>
-                  <p className="text-sm text-green-500">Radi</p>
-                </div>
-                <div className="mt-2 h-2 w-full rounded-full bg-muted">
-                  <div className="h-2 w-[85%] rounded-full bg-green-500"></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">Skladište</p>
-                  <p className="text-sm text-amber-500">65% zauzeto</p>
-                </div>
-                <div className="mt-2 h-2 w-full rounded-full bg-muted">
-                  <div className="h-2 w-[65%] rounded-full bg-amber-500"></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium">API</p>
-                  <p className="text-sm text-green-500">Radi</p>
-                </div>
-                <div className="mt-2 h-2 w-full rounded-full bg-muted">
-                  <div className="h-2 w-[95%] rounded-full bg-green-500"></div>
-                </div>
-              </div>
-            </div>
+            <SystemStatus />
           </CardContent>
         </Card>
       </div>

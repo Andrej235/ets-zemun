@@ -50,7 +50,7 @@ export default function Page() {
     isWaitingForResponse.current = false;
 
     if (!isOk) return;
-    router.push("/");
+    window.location.reload();
   }
 
   async function handleRegister(

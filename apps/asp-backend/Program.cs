@@ -514,6 +514,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers().RequireRateLimiting(RateLimitingPolicies.Global);
 
+app.MapMethods("/", ["HEAD"], () => Results.Ok());
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
