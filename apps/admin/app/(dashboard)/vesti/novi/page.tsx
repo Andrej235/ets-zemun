@@ -1,6 +1,7 @@
 "use client";
 import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import RichTextEditor from "@/components/rich-text-editor";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -323,19 +324,17 @@ export default function CreateNewsPage() {
               </div>
               <div>
                 <Label htmlFor="markup">Sadržaj</Label>
-                <Textarea
-                  id="markup"
-                  value={currentTranslation.value.markup}
-                  rows={10}
-                  onChange={(e) =>
+                <RichTextEditor
+                  onChange={(x) =>
                     setCurrentTranslation({
                       ...currentTranslation,
                       value: {
                         ...currentTranslation.value,
-                        markup: e.target.value,
+                        markup: x,
                       },
                     })
                   }
+                  value={currentTranslation.value.markup}
                 />
               </div>
               <div className="flex justify-end">
