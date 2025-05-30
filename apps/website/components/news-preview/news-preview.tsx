@@ -50,7 +50,7 @@ const NewsPreview = forwardRef<HTMLDivElement, NewsPreviewProps>(
             <h1 className="title">{title}</h1>
             <br />
             <p className="description">{description}</p>
-            <p className="date">{new Date(date).toLocaleDateString()}</p>
+            <p className="date">{new Date(date).toLocaleDateString("uk")}</p>
           </div>
         </Link>
       </motion.div>
