@@ -445,6 +445,9 @@ export type ApiMap = {
         }
       }
     },
+    '/': {
+      head: { tags: [ 'EtsZemun' ], responses: { '200': { description: 'OK' } } }
+    },
     '/languages': {
       post: {
         tags: [ 'Language' ],
