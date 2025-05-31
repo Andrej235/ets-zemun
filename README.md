@@ -25,18 +25,45 @@ Now, the project consists of 3 services:
 
 ### Technologies Used
 
-  - [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
-  - [TypeScript](https://www.typescriptlang.org/) for type-safe development.
-  - [SCSS](https://sass-lang.com/) for styling.
-
+- [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
+- [TypeScript](https://www.typescriptlang.org/) for type-safe development.
+- [SCSS](https://sass-lang.com/) for styling.
 
 ### Implementation Details
+
 The website was originally created using React, with react router, and scss, but after the initial deployment, I ([Andrej235](https://github.com/andrej235)) decided to migrate it to Next.js for better performance and ISR (Incremental Static Regeneration).
 ISR allows the server to generate and cache pages at build time, which in turn allows for faster initial load times and better user experience, but unlike SSG (Static Site Generation) ISR is regenerates these pages every 24 hours. This allows for a good balance between performance and being up-to-date.
 
 ### Contributors
-  - [Andrej235](https://github.com/andrej235)
-  - [andjelic-a](https://github.com/andjelic-a)
+
+- [Andrej235](https://github.com/andrej235)
+- [andjelic-a](https://github.com/andjelic-a)
+
+## Admin Panel
+
+### Features
+
+- **CRUD Operations**  
+  The admin panel contains a user interface that allows for easy management of the website's data, such as adding, editing, and deleting news posts, teachers, awards, and more.
+
+- **Authentication and Authorization**  
+  To get access to the admin panel, users must first register and verify their email address, after which they are instructed to request access from an administrator. After the administrator approves the request, the user is granted a role of a moderator, which allows them to modify all content on the main website, but not user's permissions.
+
+### Technologies Used
+
+- [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
+- [TypeScript](https://www.typescriptlang.org/) for type-safe development.
+- [Tailwind CSS](https://tailwindcss.com/) for styling.
+- [Shadcn UI](https://ui.shadcn.com/) for UI components and faster development.
+- [Jodit](https://xdsoft.net/jodit/) for WYSIWYG editor.
+
+### Implementation Details
+
+Unlike the main website, here the user experience is less important than always having the most up-to-date data, so the admin panel does not leverage ISR and instead only relies on SSR (Server Side Rendering). The next's middleware is used to restrict access to the admin panel only to users with the role of a moderator or an administrator.
+
+### Contributors
+
+- [Andrej235](https://github.com/andrej235)
 
 ## License
 
