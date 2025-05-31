@@ -1,1 +1,0 @@
-export default interface SearchMapSchema {     entries: Entry[]; }   interface Entry {     /**      * Unique ID of the resource      */     id: string;     /**      * Keywords to match for      */     keywords: string;     /**      * Title of the resource      */     title: string;     /**      * URL of the resource      */     url: string; }
