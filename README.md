@@ -2,29 +2,41 @@
 
 ## Overview
 
-**ETS Zemun** is a web-based platform tailored for **Elektrotehnička Škola Zemun**, designed to enhance communication and streamline administrative tasks. The app serves as a central hub for students and faculty, providing easy access to essential school resources, including schedules, announcements, assignments, and news. With an intuitive interface and seamless functionality, the platform improves the daily experience of the school community.
+**ETS Zemun** is a website tailored for a Serbian highschool named **Elektrotehnička Škola Zemun**. It was originally created by 2 students and was intended to be a simple react website showcasing the school, it's facilities, and all of what it had to offer to it's students but it quickly grew into something much larger.
 
-## Key Features
+Now, the project consists of 3 services:
 
-- **Student Dashboard**  
-  Students can easily access and view their schedules, assignments, and important updates in a centralized dashboard.
+- **The main website** serving the original purpose and dynamically showcasing information about the school in multiple languages
+- **An admin panel** acting like a CMS that allows for easy management of the website's data
+- **A dedicated backend API** that allows for easy communication between the frontend and the database
 
-- **Teacher Access**  
-  Teachers can manage class schedules, track grades, and communicate directly with students.
+## Website
 
-- **Announcements**  
-  Stay informed with real-time announcements from the school administration.
+### Features
 
-- **Events & News**  
-  View upcoming school events, news, exam schedules, and important deadlines.
+- **Basic Information at a Glance**  
+  Potential Students and their Parents can get a quick overview of the school by just visiting the website's frontpage. By displaying key information about the school, such as it's mission, and statistics, we hoped to provide a clear and concise overview of what the school has to offer in order to build trust and help potential students make an informed decision.
 
-## Technologies Used
+- **Increased Transparency**  
+  Everyone, including potential and current students, parents, teachers and staff, can access information about exactly who is teaching at the school, what their qualifications are, what subjects are taught to each class, all awards students have won, and much more. This information shows that the school has nothing to hide and is committed to transparency and growth.
 
-- **Frontend:**
-  - [React](https://reactjs.org/) for building the user interface.
+- **News**  
+  The website features a news section that displays the latest news, and updates from the school in form of blog posts. These posts can be read by everyone and created by the school's staff through the admin panel, helping keep those interested in the school's activities updated.
+
+### Technologies Used
+
+  - [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
   - [TypeScript](https://www.typescriptlang.org/) for type-safe development.
   - [SCSS](https://sass-lang.com/) for styling.
-  - [Vite](https://vitejs.dev/) for fast development and build tooling.
+
+
+### Implementation Details
+The website was originally created using React, with react router, and scss, but after the initial deployment, I ([Andrej235](https://github.com/andrej235)) decided to migrate it to Next.js for better performance and ISR (Incremental Static Regeneration).
+ISR allows the server to generate and cache pages at build time, which in turn allows for faster initial load times and better user experience, but unlike SSG (Static Site Generation) ISR is regenerates these pages every 24 hours. This allows for a good balance between performance and being up-to-date.
+
+### Contributors
+  - [Andrej235](https://github.com/andrej235)
+  - [andjelic-a](https://github.com/andjelic-a)
 
 ## License
 
@@ -33,5 +45,6 @@ This project is licensed under the **MIT License**.
 ## Contributors
 
 The **ETS Zemun** project is developed and maintained by:
+
 - [Andrej235](https://github.com/andrej235)
 - [andjelic-a](https://github.com/andjelic-a)
