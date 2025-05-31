@@ -427,17 +427,15 @@ export default function CreateNewsPage() {
                   <Label htmlFor={`markup-${translation.languageCode}`}>
                     Sadržaj
                   </Label>
-                  <Textarea
-                    id={`markup-${translation.languageCode}`}
+                  <RichTextEditor
                     value={translation.value.markup}
-                    rows={10}
                     onChange={(e) => {
                       const updatedTranslations = newsData.translations.map(
                         (t) =>
                           t.languageCode === translation.languageCode
                             ? {
                                 ...t,
-                                value: { ...t.value, markup: e.target.value },
+                                value: { ...t.value, markup: e },
                               }
                             : t,
                       );
