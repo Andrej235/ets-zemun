@@ -2,6 +2,7 @@
 import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import ApprovalStatusBadge from "@/components/approval-status-badge";
+import RichTextEditor from "@/components/rich-text-editor";
 import { TranslationStatusBadge } from "@/components/translation-status-badge";
 import {
   AlertDialog,
@@ -512,16 +513,14 @@ export default function NewsEditPage({
                   <Label htmlFor={`markup-${translation.languageCode}`}>
                     Sadržaj
                   </Label>
-                  <Textarea
-                    id={`markup-${translation.languageCode}`}
+                  <RichTextEditor
                     value={translation.value.markup}
-                    rows={10}
                     onChange={(e) => {
                       const updatedTranslations = news.translations.map((t) =>
                         t.languageCode === translation.languageCode
                           ? {
                               ...t,
-                              value: { ...t.value, markup: e.target.value },
+                              value: { ...t.value, markup: e },
                             }
                           : t,
                       );
@@ -595,14 +594,12 @@ export default function NewsEditPage({
               </div>
               <div>
                 <Label htmlFor="new-markup">Sadržaj</Label>
-                <Textarea
-                  id="new-markup"
+                <RichTextEditor
                   value={newTranslation.markup}
-                  rows={10}
                   onChange={(e) =>
                     setNewTranslation({
                       ...newTranslation,
-                      markup: e.target.value,
+                      markup: e,
                     })
                   }
                 />
