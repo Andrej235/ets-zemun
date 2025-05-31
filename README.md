@@ -65,6 +65,32 @@ Unlike the main website, here the user experience is less important than always 
 
 - [Andrej235](https://github.com/andrej235)
 
+## Backend
+
+### Features
+
+- **CRUD Operations**
+  The API allows for easy management of the website's data, such as adding, editing, and deleting news posts, teachers, awards, and more.
+
+- **Authentication and Authorization**  
+  ASP.NET's identity simplifies authentication and authorization and allows for easy management of user roles and permissions.
+
+- **Rate Limiting**
+  It also uses ASP.NET's rate limiting middleware to limit the number of requests that can be made to the API per minute in order to prevent abuse.
+
+### Technologies Used
+
+- [ASP.NET](https://dotnet.microsoft.com/) for everything.
+- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) also for everything as ASP.NET is a framework for C#.
+
+### Implementation Details
+
+The API is a simple and clean implementation of a CRUD API using the controller architecture. It mostly abids by SOLID principles and should be easy to read and understand.
+
+### Contributors
+
+- [Andrej235](https://github.com/andrej235)
+
 ## License
 
 This project is licensed under the **MIT License**.
