@@ -184,7 +184,7 @@ export default function SubjectsPage() {
                 predmeta
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="mx-auto max-w-[90vw] overflow-auto lg:mx-0 lg:max-w-none">
               <Table>
                 <TableHeader>
                   <TableRow>
