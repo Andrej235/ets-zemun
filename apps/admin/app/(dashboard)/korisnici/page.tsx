@@ -116,7 +116,9 @@ export default function UsersPage() {
     toast.promise(
       promise.then((response) => {
         if (!response.isOk)
-          throw new Error(response.error?.message ?? "Neuspešno brisanje korisnika");
+          throw new Error(
+            response.error?.message ?? "Neuspešno brisanje korisnika",
+          );
       }),
       {
         loading: "Brisanje korisnika...",
@@ -187,9 +189,11 @@ export default function UsersPage() {
           <Card>
             <CardHeader>
               <CardTitle>Registrovani korisnici</CardTitle>
-              <CardDescription>Upravljajte korisničkim nalozima i ulogama</CardDescription>
+              <CardDescription>
+                Upravljajte korisničkim nalozima i ulogama
+              </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="mx-auto max-w-[90vw] lg:mx-0 lg:max-w-none">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -253,10 +257,13 @@ export default function UsersPage() {
                               <AlertDialogContent>
                                 <AlertDialogHeader>
                                   <AlertDialogTitle>
-                                    Da li ste sigurni da želite da obrišete ovog korisnika?
+                                    Da li ste sigurni da želite da obrišete ovog
+                                    korisnika?
                                   </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Ova akcija je nepovratna. Ovo će trajno obrisati korisnika i ukloniti njegove podatke iz sistema.
+                                    Ova akcija je nepovratna. Ovo će trajno
+                                    obrisati korisnika i ukloniti njegove
+                                    podatke iz sistema.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
