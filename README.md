@@ -2,20 +2,20 @@
 
 ## Overview
 
-**ETS Zemun** is a website tailored for a Serbian highschool named **Elektrotehnička Škola Zemun**. It was originally created by 2 students and was intended to be a simple react website showcasing the school, it's facilities, and all of what it had to offer to it's students but it quickly grew into something much larger.
+**ETS Zemun** is a website tailored for a Serbian highschool named **Elektrotehnička Škola Zemun**. It was created by 2 students and was originally intended to be a simple react website showcasing the school, its facilities, and all of what it had to offer to its students but has evolved into a full-featured ecosystem including a CMS-like admin panel and a secure backend API.
 
 Now, the project consists of 3 services:
 
-- **The main website** serving the original purpose and dynamically showcasing information about the school in multiple languages
-- **An admin panel** acting like a CMS that allows for easy management of the website's data
-- **A dedicated backend API** that allows for easy communication between the frontend and the database
+- **Main website** - A dynamic and multilingual showcase of the school.
+- **Admin panel** - A CMS-style interface for managing website content.
+- **Backend API** - A secure, structured API that handles communication between frontend and database.
 
 ## Website
 
 ### Features
 
 - **Basic Information at a Glance**  
-  Potential Students and their Parents can get a quick overview of the school by just visiting the website's frontpage. By displaying key information about the school, such as it's mission, and statistics, we hoped to provide a clear and concise overview of what the school has to offer in order to build trust and help potential students make an informed decision.
+  Potential Students and their Parents can get a quick overview of the school by just visiting the website's frontpage. By displaying key information about the school, such as its mission, and statistics, we hoped to provide a clear and concise overview of what the school has to offer in order to build trust and help potential students make an informed decision.
 
 - **Increased Transparency**  
   Everyone, including potential and current students, parents, teachers and staff, can access information about exactly who is teaching at the school, what their qualifications are, what subjects are taught to each class, all awards students have won, and much more. This information shows that the school has nothing to hide and is committed to transparency and growth.
@@ -25,14 +25,13 @@ Now, the project consists of 3 services:
 
 ### Technologies Used
 
-- [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
-- [TypeScript](https://www.typescriptlang.org/) for type-safe development.
-- [SCSS](https://sass-lang.com/) for styling.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [SCSS](https://sass-lang.com/)
 
 ### Implementation Details
 
-The website was originally created using React, with react router, and scss, but after the initial deployment, I ([Andrej235](https://github.com/andrej235)) decided to migrate it to Next.js for better performance and ISR (Incremental Static Regeneration).
-ISR allows the server to generate and cache pages at build time, which in turn allows for faster initial load times and better user experience, but unlike SSG (Static Site Generation) ISR is regenerates these pages every 24 hours. This allows for a good balance between performance and being up-to-date.
+Originally built with React, React Router, and SCSS, the site was later migrated to Next.js by [Andrej235](https://github.com/andrej235) to enable **Incremental Static Regeneration (ISR)** for improved performance and SEO. Pages are regenerated every 24 hours to balance caching and real-time updates.
 
 ### Contributors
 
@@ -43,23 +42,28 @@ ISR allows the server to generate and cache pages at build time, which in turn a
 
 ### Features
 
-- **CRUD Operations**  
-  The admin panel contains a user interface that allows for easy management of the website's data, such as adding, editing, and deleting news posts, teachers, awards, and more.
+- **Full CMS Interface**  
+  Create, edit, and delete teachers, awards, news posts, and more through a secure and easy-to-use interface.
 
 - **Authentication and Authorization**  
-  To get access to the admin panel, users must first register and verify their email address, after which they are instructed to request access from an administrator. After the administrator approves the request, the user is granted a role of a moderator, which allows them to modify all content on the main website, but not user's permissions.
+  Users must verify their email addresses before requesting access. Admins can grant the "moderator" role to verified users, allowing them to manage content without administrative privileges.
 
 ### Technologies Used
 
-- [Next.js](https://nextjs.org/) for building the user interface, server-side rendering, and so much more.
-- [TypeScript](https://www.typescriptlang.org/) for type-safe development.
-- [Tailwind CSS](https://tailwindcss.com/) for styling.
-- [Shadcn UI](https://ui.shadcn.com/) for UI components and faster development.
-- [Jodit](https://xdsoft.net/jodit/) for WYSIWYG editor.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Jodit Editor](https://xdsoft.net/jodit/)
 
 ### Implementation Details
 
-Unlike the main website, here the user experience is less important than always having the most up-to-date data, so the admin panel does not leverage ISR and instead only relies on SSR (Server Side Rendering). The next's middleware is used to restrict access to the admin panel only to users with the role of a moderator or an administrator.
+Since content must always be up to date, the admin panel relies exclusively on **Server-Side Rendering (SSR)**. Middleware is used to restrict access based on user roles.
+
+### Security Measures:
+
+- Only verified email accounts can be granted access.
+- Login tokens are stored as HttpOnly, Secure cookies, scoped to the .ets-zemun.edu.rs domain.
 
 ### Contributors
 
@@ -69,27 +73,87 @@ Unlike the main website, here the user experience is less important than always 
 
 ### Features
 
-- **CRUD Operations**
-  The API allows for easy management of the website's data, such as adding, editing, and deleting news posts, teachers, awards, and more.
+- **Full CRUD API**  
+  Handles all operations for the website content and user data.
 
 - **Authentication and Authorization**  
-  ASP.NET's identity simplifies authentication and authorization and allows for easy management of user roles and permissions.
+  Built using ASP.NET Identity, with role-based access control.
 
 - **Rate Limiting**
-  It also uses ASP.NET's rate limiting middleware to limit the number of requests that can be made to the API per minute in order to prevent abuse.
+  Uses ASP.NET’s built-in middleware to prevent abuse by limiting request frequency.
 
 ### Technologies Used
 
-- [ASP.NET](https://dotnet.microsoft.com/) for everything.
-- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) also for everything as ASP.NET is a framework for C#.
+- [ASP.NET](https://dotnet.microsoft.com/)
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
+- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ### Implementation Details
 
-The API is a simple and clean implementation of a CRUD API using the controller architecture. It mostly abids by SOLID principles and should be easy to read and understand.
+Follows a clean **controller-based architecture** aligned with **SOLID principles** for maintainability and readability.
 
 ### Contributors
 
 - [Andrej235](https://github.com/andrej235)
+
+---
+
+## Project Structure
+
+```
+.
+├── apps
+│   ├── admin/          # Admin panel (Next.js + Tailwind)
+│   ├── website/        # Public website (Next.js + SCSS)
+│   └── asp-backend/    # ASP.NET Core API
+└── top-level files
+```
+
+## Local Setup
+
+> Docker setup is not available - setup must be done manually.
+
+### Pre-requisites
+
+- [Node.js](https://nodejs.org/en/download/)
+- [npm](https://www.npmjs.com/)
+- [Next.js](https://nextjs.org/)
+- [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/)
+- [PostgreSQL](https://www.postgresql.org/) (locally or externally hosted)
+
+### Required Files
+
+> Example files are included in the repository.
+
+- `apps/website/.env`
+- `apps/admin/.env`
+- `apps/asp-backend/secrets.json`
+
+### Installation
+
+- Clone the repository: `git clone https://github.com/andrej235/ets-zemun.git`
+- Navigate to the project directory: `cd ets-zemun`
+- Install dependencies for website and admin panel: `npm run deps`
+
+### Running the Project
+
+- Start the backend: `cd apps/asp-backend && dotnet run EtsZemun.csproj`
+- Start the website: `cd apps/website && npm run dev`
+- Start the admin panel: `cd apps/admin && npm run dev`
+
+## Deployment
+
+All services are deployed and live:
+
+- **Website**: [ets-zemun.edu.rs](https://www.ets-zemun.edu.rs/en)
+- **Admin Panel**: [admin.ets-zemun.edu.rs](https://admin.ets-zemun.edu.rs)
+- **API**: [api.ets-zemun.edu.rs](https://api.ets-zemun.edu.rs)
+
+Deployment services:
+
+- **Vercel** - Used for deploying both frontend services with CI/CD.
+- **Render** - Used for Dockerized deployment of the backend API.
 
 ## License
 
