@@ -512,7 +512,9 @@
       "prefix": "Co-creator of this website",
       "andrej": "Andrej Nenadić",
       "aleksa": "Aleksa Anđelić"
-    }
+    },
+    "openSource": "This website is open-source. View it on",
+    "githubSuffix": ""
   },
   "errorPage": {
     "routeError": {
