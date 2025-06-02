@@ -1,6 +1,6 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
-import "./full-news-article.scss";
 import localeToLangCode from "@/lib/locale-to-lang-code";
+import "./full-news-article.scss";
 
 export default async function FullNewsArticle({
   params,
@@ -24,10 +24,12 @@ export default async function FullNewsArticle({
   if (!isOk) throw new Error("Failed to fetch news");
 
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: response!.markup,
-      }}
-    />
+    <div className="article-container">
+      <div
+        dangerouslySetInnerHTML={{
+          __html: response!.markup,
+        }}
+      />
+    </div>
   );
 }

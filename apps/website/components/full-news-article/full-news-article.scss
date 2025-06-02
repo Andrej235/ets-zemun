@@ -1,0 +1,13 @@
+.article-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  font-size: 1.5rem;
+
+  padding: 4rem;
+  margin-bottom: 4rem;
+
+  div {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
