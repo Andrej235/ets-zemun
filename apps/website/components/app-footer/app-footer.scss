@@ -88,9 +88,28 @@
     padding-top: 2rem;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     font-size: 1.5rem;
+
+    .open-source {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: rgb(99, 156, 209);
+        text-decoration: underline;
+      }
+
+      svg {
+        fill: none;
+        stroke: rgb(99, 156, 209);
+        margin-left: 0.25rem;
+      }
+    }
 
     .social-media-links {
       grid-area: links;

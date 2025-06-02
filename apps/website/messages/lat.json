@@ -506,7 +506,9 @@
       "prefix": "Kreator ovog sajta",
       "andrej": "Andrej Nenadić",
       "aleksa": "Aleksa Anđelić"
-    }
+    },
+    "openSource": "Ovaj sajt je open-source. Pogledajte ga na",
+    "githubSuffix": "-u"
   },
   "errorPage": {
     "routeError": {
