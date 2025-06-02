@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { ComponentProps, useMemo, useRef } from "react";
+import { ComponentProps, useCallback, useMemo, useRef } from "react";
 import imageCompression from "browser-image-compression";
+import debounce from "@/lib/debounce";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -80,7 +81,17 @@ export default function RichTextEditor({
     [],
   );
 
+  // Debounce is required to prevent the editor from updating too often but it is not a react-y function. Still works though, just has a warning
+  // eslint-disable-next-line
+  const debouncedChange = useCallback(debounce(onChange, 500), [onChange]);
+
   return (
-    <JoditEditor ref={editor} value={value} config={config} onBlur={onChange} />
+    <JoditEditor
+      ref={editor}
+      value={value}
+      config={config}
+      onBlur={onChange}
+      onChange={debouncedChange}
+    />
   );
 }

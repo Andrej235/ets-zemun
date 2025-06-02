@@ -31,7 +31,8 @@ public partial class NewsService
             },
             null,
             offset,
-            limit
+            limit,
+            q => q.OrderByDescending(x => x.Date)
         );
     }
 
