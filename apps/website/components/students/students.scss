@@ -44,6 +44,8 @@
         z-index: 1;
         width: 100%;
         padding-inline: 2rem;
+        backdrop-filter: brightness(50%);
+        padding: 1rem 0 2rem;
 
         h1 {
           font-size: 6rem;
@@ -642,7 +644,7 @@
   @media screen and (max-width: 768px) {
     .hero-space {
       .hero-image {
-        height: 40svh;
+        height: 50svh;
         .text {
           h1 {
             font-size: 5rem;
