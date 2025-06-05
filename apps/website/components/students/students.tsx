@@ -55,7 +55,7 @@ export default function Students() {
             <h2>{t("students.hero.tagLine")}</h2>
           </div>
 
-          <Image src="/hero-image.webp" alt="student" fill />
+          <Image src="/images/students/students-hero.webp" alt="student" fill />
         </div>
 
         <div className="hero-block">
