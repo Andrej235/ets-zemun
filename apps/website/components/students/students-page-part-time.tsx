@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 type Deadlines = {
   term: string;
@@ -25,22 +26,31 @@ export default function StudentsPagePartTime() {
 
   const deadlines: Deadlines = useMemo(
     () => t.raw("students.sections.partTime.deadlines") as Deadlines,
-    [t],
+    [t]
   );
 
   const priceList: PriceLists = useMemo(
     () => t.raw("students.sections.partTime.priceList") as PriceLists,
-    [t],
+    [t]
   );
 
   const examData: ExamData = useMemo(
     () => t.raw("students.sections.partTime.examData") as ExamData,
-    [t],
+    [t]
   );
 
   return (
     <div className="part-time-container" data-search-key="vanredni-ucenici">
       <h1>{t("students.sections.partTime.title")}</h1>
+
+      <div className="image-container">
+        <Image
+          src="/images/students/part-time.webp"
+          alt="part-time"
+          width={600}
+          height={400}
+        />
+      </div>
 
       <div className="table-container">
         <table>
@@ -76,10 +86,13 @@ export default function StudentsPagePartTime() {
 
       <div className="payment-method">
         <h2>{t("students.sections.partTime.paymentMethod.title")}</h2>
-        <p>840-31302845-09</p>
-        <p>{t("students.sections.partTime.paymentMethod.description.0")}:</p>
-        <p>{t("students.sections.partTime.paymentMethod.description.1")}</p>
-        <p>97 06601832040174231700</p>
+        <Image
+          className="payment-image"
+          src="/images/students/payment.webp"
+          alt="payment"
+          width={684}
+          height={291}
+        />
       </div>
 
       <div className="table-container">

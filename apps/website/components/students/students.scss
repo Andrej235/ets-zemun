@@ -44,6 +44,8 @@
         z-index: 1;
         width: 100%;
         padding-inline: 2rem;
+        backdrop-filter: brightness(50%);
+        padding: 1rem 0 2rem;
 
         h1 {
           font-size: 6rem;
@@ -218,11 +220,24 @@
       align-items: center;
 
       & > h1 {
-        margin-bottom: 8rem;
+        margin-bottom: 2rem;
 
         font-size: 4rem;
         color: $accent-secondary;
         text-align: center;
+      }
+
+      .image-container {
+        max-width: 90vw;
+        margin: 0 auto 8rem;
+
+        img {
+          max-width: 100%;
+          border-radius: 0.75rem;
+          box-shadow: 3px 5px 15px
+            color-mix(in srgb, $shadow 30%, transparent 70%);
+          object-fit: cover;
+        }
       }
 
       .price-list {
@@ -286,6 +301,12 @@
           font-size: 1.6rem;
           color: $text-primary;
           text-align: center;
+        }
+
+        .payment-image {
+          max-width: 90%;
+          aspect-ratio: 689/291;
+          object-fit: contain;
         }
       }
     }
@@ -623,7 +644,7 @@
   @media screen and (max-width: 768px) {
     .hero-space {
       .hero-image {
-        height: 40svh;
+        height: 50svh;
         .text {
           h1 {
             font-size: 5rem;
