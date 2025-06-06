@@ -33,6 +33,7 @@ public partial class ExamService
             x =>
                 x.SetProperty(x => x.StartTime, request.StartTime)
                     .SetProperty(x => x.Cabinet, request.Cabinet)
+                    .SetProperty(x => x.SubjectId, request.SubjectId)
         );
         return updateResult.IsFailed ? Result.Fail(updateResult.Errors) : Result.Ok();
     }

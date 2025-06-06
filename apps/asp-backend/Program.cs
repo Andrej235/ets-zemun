@@ -5,6 +5,7 @@ using brevo_csharp.Client;
 using EtsZemun.Data;
 using EtsZemun.Dtos.Request.Award;
 using EtsZemun.Dtos.Request.EducationalProfile;
+using EtsZemun.Dtos.Request.Exam;
 using EtsZemun.Dtos.Request.Language;
 using EtsZemun.Dtos.Request.News;
 using EtsZemun.Dtos.Request.Qualification;
@@ -12,6 +13,7 @@ using EtsZemun.Dtos.Request.Subject;
 using EtsZemun.Dtos.Request.Teacher;
 using EtsZemun.Dtos.Response.Award;
 using EtsZemun.Dtos.Response.EducationalProfile;
+using EtsZemun.Dtos.Response.Exam;
 using EtsZemun.Dtos.Response.News;
 using EtsZemun.Dtos.Response.Qualification;
 using EtsZemun.Dtos.Response.Subject;
@@ -24,6 +26,7 @@ using EtsZemun.Services.EmailSender;
 using EtsZemun.Services.Mapping.Request;
 using EtsZemun.Services.Mapping.Request.AwardMappers;
 using EtsZemun.Services.Mapping.Request.EducationalProfileMappers;
+using EtsZemun.Services.Mapping.Request.ExamMappers;
 using EtsZemun.Services.Mapping.Request.LanguageMappers;
 using EtsZemun.Services.Mapping.Request.NewsMappers;
 using EtsZemun.Services.Mapping.Request.QualificationMappers;
@@ -32,6 +35,7 @@ using EtsZemun.Services.Mapping.Request.TeacherMappers;
 using EtsZemun.Services.Mapping.Response;
 using EtsZemun.Services.Mapping.Response.AwardMappers;
 using EtsZemun.Services.Mapping.Response.EducationalProfileMappers;
+using EtsZemun.Services.Mapping.Response.ExamMappers;
 using EtsZemun.Services.Mapping.Response.NewsMappers;
 using EtsZemun.Services.Mapping.Response.QualificationMappers;
 using EtsZemun.Services.Mapping.Response.SubjectMappers;
@@ -39,6 +43,7 @@ using EtsZemun.Services.Mapping.Response.TeacherMappers;
 using EtsZemun.Services.Model.AdminService;
 using EtsZemun.Services.Model.AwardService;
 using EtsZemun.Services.Model.EducationalProfileService;
+using EtsZemun.Services.Model.ExamService;
 using EtsZemun.Services.Model.LanguageService;
 using EtsZemun.Services.Model.NewsService;
 using EtsZemun.Services.Model.QualificationService;
@@ -456,6 +461,25 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<IDeleteService<User>, DeleteService<User>>();
 
 builder.Services.AddScoped<ICreateSingleService<UserLoginEvent>, CreateService<UserLoginEvent>>();
+#endregion
+
+
+#region Exam
+builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<ICreateSingleService<Exam>, CreateService<Exam>>();
+builder.Services.AddScoped<
+    ICreateRangeService<ExamCommissionMember>,
+    CreateService<ExamCommissionMember>
+>();
+builder.Services.AddScoped<IReadRangeService<Exam>, ReadService<Exam>>();
+builder.Services.AddScoped<IExecuteUpdateService<Exam>, UpdateService<Exam>>();
+builder.Services.AddScoped<IDeleteService<Exam>, DeleteService<Exam>>();
+builder.Services.AddScoped<
+    IDeleteService<ExamCommissionMember>,
+    DeleteService<ExamCommissionMember>
+>();
+builder.Services.AddScoped<IRequestMapper<CreateExamRequestDto, Exam>, CreateExamRequestMapper>();
+builder.Services.AddScoped<IResponseMapper<Exam, ExamResponseDto>, ExamResponseMapper>();
 #endregion
 
 #endregion
