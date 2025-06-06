@@ -448,6 +448,96 @@ export type ApiMap = {
     '/': {
       head: { tags: [ 'EtsZemun' ], responses: { '200': { description: 'OK' } } }
     },
+    '/exams': {
+      post: {
+        tags: [ 'Exam' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/CreateExamRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/CreateExamRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/CreateExamRequestDto' } } }
+        },
+        responses: {
+          '201': {
+            description: 'Created',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } } }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      },
+      get: {
+        tags: [ 'Exam' ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: {
+              'text/plain': { schema: { type: 'array', items: { '$ref': '#/components/schemas/ExamResponseDto' } } },
+              'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/ExamResponseDto' } } },
+              'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/ExamResponseDto' } } }
+            }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      },
+      put: {
+        tags: [ 'Exam' ],
+        requestBody: {
+          content: { 'application/json': { schema: { '$ref': '#/components/schemas/UpdateExamRequestDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/UpdateExamRequestDto' } }, 'application/*+json': { schema: { '$ref': '#/components/schemas/UpdateExamRequestDto' } } }
+        },
+        responses: {
+          '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
+    '/exams/{id}': {
+      delete: {
+        tags: [ 'Exam' ],
+        parameters: [ { name: 'id', in: 'path', required: true, schema: { type: 'integer', format: 'int32' } } ],
+        responses: {
+          '204': { description: 'No Content' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/languages': {
       post: {
         tags: [ 'Language' ],
@@ -1931,6 +2021,11 @@ export type ApiMap = {
       },
       CreateAwardTranslationRequestDto: { type: 'object', properties: { awardId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, title: { type: 'string' }, description: { type: 'string', nullable: true }, competition: { type: 'string' }, student: { type: 'string' } }, additionalProperties: false },
       CreateEducationalProfileRequestDto: { type: 'object', properties: { name: { type: 'string' } }, additionalProperties: false },
+      CreateExamRequestDto: {
+        type: 'object',
+        properties: { startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, commission: { type: 'array', items: { type: 'integer', format: 'int32' } } },
+        additionalProperties: false
+      },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
@@ -1960,6 +2055,11 @@ export type ApiMap = {
       EducationalProfileResponseDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
+        additionalProperties: false
+      },
+      ExamResponseDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, subject: { type: 'string' }, commission: { type: 'array', items: { type: 'string' } } },
         additionalProperties: false
       },
       LanguageResponseDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
@@ -2003,6 +2103,11 @@ export type ApiMap = {
       UpdateEducationalProfileRequestDto: {
         type: 'object',
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
+        additionalProperties: false
+      },
+      UpdateExamRequestDto: {
+        type: 'object',
+        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, commission: { type: 'array', items: { type: 'integer', format: 'int32' } } },
         additionalProperties: false
       },
       UpdateLanguageRequestDto: { type: 'object', properties: { oldCode: { type: 'string' }, newCode: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
