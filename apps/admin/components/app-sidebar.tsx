@@ -64,6 +64,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         href: "/nagrade",
         Icon: Award,
       },
+      {
+        title: "Ispiti",
+        href: "/ispiti",
+        Icon: FileText,
+      },
       { title: "Korisnici", href: "/korisnici", Icon: User },
     ];
 
