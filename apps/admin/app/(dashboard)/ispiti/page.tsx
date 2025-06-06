@@ -64,11 +64,11 @@ export default function ExamsPage() {
 
   const filteredExams = exams.filter(
     (exam) =>
-      exam.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      exam.subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exam.cabinet.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exam.startTime.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exam.commission.some((commission) =>
-        commission.toLowerCase().includes(searchTerm.toLowerCase()),
+        commission.name.toLowerCase().includes(searchTerm.toLowerCase()),
       ),
   );
 
@@ -195,13 +195,24 @@ export default function ExamsPage() {
                   {filteredExams.map((exam) => (
                     <TableRow key={exam.id}>
                       <TableCell className="font-medium">
-                        {exam.subject || "Bez predmeta"}
+                        {exam.subject.name || "Bez predmeta"}
                       </TableCell>
                       <TableCell className="max-w-xs truncate">
                         {exam.cabinet || "Nema kabinet"}
                       </TableCell>
                       <TableCell>
-                        {exam.commission.join(", ") || "Nema nastavnika"}
+                        {exam.commission.length === 0
+                          ? "Nema nastavnika"
+                          : exam.commission.length > 3
+                            ? `${
+                                exam.commission
+                                  .slice(0, 2)
+                                  .map((teacher) => teacher.name)
+                                  .join(", ") || "Nepoznato ime nastavnika"
+                              }, +${exam.commission.length - 2} nastavnika`
+                            : exam.commission
+                                .map((teacher) => teacher.name)
+                                .join(", ") || "Nepoznato ime nastavnika"}
                       </TableCell>
                       <TableCell>
                         {format(new Date(exam.startTime), "dd.MM.yyyy HH:mm")}
@@ -234,7 +245,7 @@ export default function ExamsPage() {
                                 </AlertDialogTitle>
                                 <AlertDialogDescription>
                                   Ova akcija će trajno obrisati ispit iz &quot;
-                                  {exam.subject || "Bez predmeta"}
+                                  {exam.subject.name || "Bez predmeta"}
                                   &quot; u kabinetu{" "}
                                   {exam.cabinet || "Nema kabinet"}.
                                 </AlertDialogDescription>

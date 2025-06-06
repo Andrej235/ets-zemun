@@ -9,7 +9,15 @@ public class CreateExamRequestMapper : IRequestMapper<CreateExamRequestDto, Exam
         new()
         {
             Cabinet = from.Cabinet,
-            StartTime = from.StartTime,
+            StartTime = DateTime.SpecifyKind(from.StartTime, DateTimeKind.Utc),
             SubjectId = from.SubjectId,
+            Commission =
+            [
+                .. from.Commission.Select(x => new ExamCommissionMember()
+                {
+                    ExamId = 0,
+                    TeacherId = x,
+                }),
+            ],
         };
 }

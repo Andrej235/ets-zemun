@@ -2059,7 +2059,7 @@ export type ApiMap = {
       },
       ExamResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, subject: { type: 'string' }, commission: { type: 'array', items: { type: 'string' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, commission: { type: 'array', items: { '$ref': '#/components/schemas/SimpleTeacherResponseDto' } } },
         additionalProperties: false
       },
       LanguageResponseDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
