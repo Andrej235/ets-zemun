@@ -23,6 +23,8 @@ namespace EtsZemun.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<ExamCommissionMember> ExamCommisions { get; set; }
         public DbSet<UserLoginEvent> UserLoginEvent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -247,6 +249,35 @@ namespace EtsZemun.Data
             modelBuilder.Entity<TeacherTranslation>(teacherTranslation =>
             {
                 teacherTranslation.HasKey(t => new { t.LanguageCode, t.TeacherId });
+            });
+
+            modelBuilder.Entity<Exam>(exam =>
+            {
+                exam.HasKey(e => e.Id);
+
+                exam.HasOne(e => e.Subject)
+                    .WithMany()
+                    .HasForeignKey(e => e.SubjectId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                exam.HasIndex(e => e.StartTime);
+            });
+
+            modelBuilder.Entity<ExamCommissionMember>(examCommissionMember =>
+            {
+                examCommissionMember.HasKey(e => new { e.ExamId, e.TeacherId });
+
+                examCommissionMember
+                    .HasOne(e => e.Exam)
+                    .WithMany(e => e.Commission)
+                    .HasForeignKey(e => e.ExamId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                examCommissionMember
+                    .HasOne(e => e.Teacher)
+                    .WithMany()
+                    .HasForeignKey(e => e.TeacherId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
