@@ -487,6 +487,10 @@ builder.Services.AddScoped<IResponseMapper<Exam, ExamResponseDto>, ExamResponseM
 #region Captions
 builder.Services.AddScoped<ICaptionService, CaptionService>();
 builder.Services.AddScoped<ICreateSingleService<Caption>, CreateService<Caption>>();
+builder.Services.AddScoped<
+    ICreateSingleService<CaptionTranslation>,
+    CreateService<CaptionTranslation>
+>();
 builder.Services.AddScoped<IReadRangeSelectedService<Caption>, ReadService<Caption>>();
 builder.Services.AddScoped<IReadSingleSelectedService<Caption>, ReadService<Caption>>();
 builder.Services.AddScoped<IExecuteUpdateService<Caption>, UpdateService<Caption>>();

@@ -7,6 +7,7 @@ namespace EtsZemun.Services.Model.CaptionService;
 public interface ICaptionService
 {
     Task<Result> Create(CreateCaptionRequestDto request);
+    Task<Result> CreateTranslation(CaptionTranslationRequestDto request);
     Task<Result<IEnumerable<AdminCaptionResponseDto>>> AdminGetAll();
     Task<Result<AdminCaptionResponseDto>> AdminGetSingle(int id);
     Task<Result<CaptionResponseDto>> GetSingle(int id, string languageCode);

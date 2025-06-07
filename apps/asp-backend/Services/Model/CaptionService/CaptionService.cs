@@ -10,6 +10,7 @@ namespace EtsZemun.Services.Model.CaptionService;
 
 public partial class CaptionService(
     ICreateSingleService<Caption> createService,
+    ICreateSingleService<CaptionTranslation> createTranslationService,
     IReadRangeSelectedService<Caption> readRangeSelectedService,
     IReadSingleSelectedService<Caption> readSingleSelectedService,
     IExecuteUpdateService<Caption> updateService,

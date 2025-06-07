@@ -15,4 +15,18 @@ public partial class CaptionService
 
         return Result.Ok();
     }
+
+    public async Task<Result> CreateTranslation(CaptionTranslationRequestDto request)
+    {
+        var result = await createTranslationService.Add(
+            new Models.CaptionTranslation()
+            {
+                CaptionId = request.CaptionId,
+                LanguageCode = request.LanguageCode,
+                Title = request.Title,
+            }
+        );
+
+        return result.IsFailed ? Result.Fail(result.Errors) : Result.Ok();
+    }
 }
