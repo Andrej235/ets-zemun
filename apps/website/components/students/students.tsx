@@ -23,7 +23,7 @@ export default function Students({ exams }: StudentsProps) {
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] =
-    useState<string>("ucenicki-parlament");
+    useState<string>("vanredni-ucenici");
 
   const sections = [
     { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
@@ -41,8 +41,9 @@ export default function Students({ exams }: StudentsProps) {
     const searchKey = searchParams.get("searchKey");
     if (!searchKey) return;
 
-    setActiveSection(searchKey);
-    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(searchKey === "ispiti" ? "vanredni-ucenici" : searchKey);
+    if (searchKey !== "ispiti")
+      contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [searchParams]);
 
   const handleCardClick = (sectionName: string) => {

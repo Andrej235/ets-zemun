@@ -88,7 +88,7 @@ export default function StudentsPagePartTime({ exams }: Props) {
         />
       </div>
 
-      <div className="table-container">
+      <div className="table-container" data-search-key="ispiti">
         <table className="part-time-table">
           <caption>{t("students.sections.partTime.examDataCaption")}</caption>
           <thead>

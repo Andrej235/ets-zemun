@@ -1687,7 +1687,7 @@
       ],
       "title": "Savet roditelja"
     },
-    "partTimeStundents": {
+    "partTimeStudents": {
       "keywords": [
         "vanredni učenici",
         "vanredni",
@@ -1697,6 +1697,21 @@
         "ученици"
       ],
       "title": "Vanredni učenici"
+    },
+    "exams": {
+      "keywords": [
+        "ispiti",
+        "ispitni rok",
+        "vanredni učenici ispiti",
+        "vanredni ispiti",
+        "ispiti za vanredne učenike",
+        "испити",
+        "испитни рок",
+        "ванредни ученици испити",
+        "ванредни испити",
+        "испити за ванредне ученике"
+      ],
+      "title": "Ispiti za vanredne učenike"
     },
     "ppService": {
       "keywords": [

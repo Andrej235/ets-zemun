@@ -1627,9 +1627,19 @@
       "keywords": ["parent council", "council", "parents"],
       "title": "Parent Council"
     },
-    "partTimeStundents": {
+    "partTimeStudents": {
       "keywords": ["part-time students", "part-time", "students"],
       "title": "Part-Time Students"
+    },
+    "exams": {
+      "keywords": [
+        "exams",
+        "exam schedule",
+        "part-time students exams",
+        "part-time exams",
+        "exams for part-time students"
+      ],
+      "title": "Exams for Part-Time Students"
     },
     "ppService": {
       "keywords": [

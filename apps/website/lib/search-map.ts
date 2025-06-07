@@ -75,9 +75,15 @@ export const searchMap: { entries: SearchEntry[] } = {
     },
     {
       id: "vanredni-ucenici",
-      keywords: "searchKeys.partTimeStundents.keywords",
-      title: "searchKeys.partTimeStundents.title",
+      keywords: "searchKeys.partTimeStudents.keywords",
+      title: "searchKeys.partTimeStudents.title",
       url: "/ucenici?searchKey=vanredni-ucenici",
+    },
+    {
+      id: "ispiti",
+      keywords: "searchKeys.exams.keywords",
+      title: "searchKeys.exams.title",
+      url: "/ucenici?searchKey=ispiti",
     },
     {
       id: "pp-sluzba",
