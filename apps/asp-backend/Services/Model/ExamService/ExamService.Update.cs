@@ -31,7 +31,10 @@ public partial class ExamService
         var updateResult = await updateService.Update(
             x => x.Id == request.Id,
             x =>
-                x.SetProperty(x => x.StartTime, request.StartTime)
+                x.SetProperty(
+                        x => x.StartTime,
+                        DateTime.SpecifyKind(request.StartTime, DateTimeKind.Utc)
+                    )
                     .SetProperty(x => x.Cabinet, request.Cabinet)
                     .SetProperty(x => x.SubjectId, request.SubjectId)
         );

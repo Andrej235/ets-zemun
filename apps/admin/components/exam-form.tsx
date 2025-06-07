@@ -18,6 +18,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { format } from "date-fns";
 
 type Subject = Schema<"SimpleSubjectResponseDto">;
 type Teacher = Schema<"SimpleTeacherResponseDto">;
@@ -41,21 +42,11 @@ export default function ExamForm({
   const [createdExam, setCreatedExam] = useState<
     Schema<"CreateExamRequestDto">
   >({
-    cabinet: "",
-    startTime: "",
-    subjectId: -1,
-    commission: [],
+    cabinet: exam?.cabinet ?? "",
+    startTime: exam ? format(exam.startTime, "yyyy-MM-dd'T'HH:mm") : "",
+    subjectId: exam?.subject.id ?? -1,
+    commission: exam?.commission.map((x) => x.id) ?? [],
   });
-
-  useEffect(() => {
-    if (exam)
-      setCreatedExam({
-        cabinet: exam.cabinet,
-        startTime: exam.startTime,
-        subjectId: exam.subject.id,
-        commission: exam.commission.map((x) => x.id),
-      });
-  }, [exam]);
 
   const handleSave = async () => {
     if (!exam) {
@@ -112,6 +103,8 @@ export default function ExamForm({
 
     router.push("/ispiti");
   };
+
+  useEffect(() => console.log(createdExam.startTime), [createdExam.startTime]);
 
   return (
     <Tabs

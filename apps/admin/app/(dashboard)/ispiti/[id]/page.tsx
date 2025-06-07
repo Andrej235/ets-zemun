@@ -1,60 +1,78 @@
 "use client";
 import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { use, useEffect, useState } from "react";
+import { toast } from "sonner";
 import AddExamForm from "@/components/exam-form";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 type Subject = Schema<"SimpleSubjectResponseDto">;
 type Teacher = Schema<"SimpleTeacherResponseDto">;
+type Exam = Schema<"ExamResponseDto">;
 
-export default function NewExamPage() {
+export default function EditExamPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = use(params);
+  const router = useRouter();
+  const [exam, setExam] = useState<Exam | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{ response: teachers }, { response: subjects }] =
-          await Promise.all([
-            sendApiRequest("/teachers", {
-              method: "get",
-              parameters: {
-                languageCode: "sr_lt",
-                limit: -1,
-              },
-            }),
-            sendApiRequest("/subjects", {
-              method: "get",
-              parameters: {
-                languageCode: "sr_lt",
-                limit: -1,
-              },
-            }),
-          ]);
+        const [
+          { response: exam },
+          { response: teachers },
+          { response: subjects },
+        ] = await Promise.all([
+          sendApiRequest("/exams/{id}", {
+            method: "get",
+            parameters: {
+              id: +id,
+            },
+          }),
+          sendApiRequest("/teachers", {
+            method: "get",
+            parameters: {
+              languageCode: "sr_lt",
+              limit: -1,
+            },
+          }),
+          sendApiRequest("/subjects", {
+            method: "get",
+            parameters: {
+              languageCode: "sr_lt",
+              limit: -1,
+            },
+          }),
+        ]);
 
+        if (!exam) throw new Error("Neuspešno učitavanje ispita");
         if (!teachers) throw new Error("Neuspešno učitavanje nastavnika");
         if (!subjects) throw new Error("Neuspešno učitavanje predmeta");
 
+        setExam(exam);
         setTeachers(teachers.items);
         setSubjects(subjects.items);
-      } catch {
-        toast.error("Neuspešno učitavanje podataka");
+      } catch (err) {
+        toast.error((err as Error)?.message || "Neuspešno učitavanje ispita");
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
-  if (loading) return <></>;
+  if (loading || !exam) return <></>;
 
   return (
     <div className="grid gap-6">
@@ -79,7 +97,7 @@ export default function NewExamPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <AddExamForm subjects={subjects} teachers={teachers} />
+        <AddExamForm subjects={subjects} teachers={teachers} exam={exam} />
       </motion.div>
     </div>
   );

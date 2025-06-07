@@ -26,4 +26,17 @@ public partial class ExamService
 
         return Result.Ok(result.Value.Select(responseMapper.Map));
     }
+
+    public async Task<Result<ExamResponseDto>> AdminGetSingle(int id)
+    {
+        var result = await readSingleService.Get(
+            x => x.Id == id,
+            q => q.Include(x => x.Subject).Include(x => x.Commission).ThenInclude(x => x.Teacher)
+        );
+
+        if (result.IsFailed)
+            return Result.Fail<ExamResponseDto>(result.Errors);
+
+        return Result.Ok(responseMapper.Map(result.Value));
+    }
 }

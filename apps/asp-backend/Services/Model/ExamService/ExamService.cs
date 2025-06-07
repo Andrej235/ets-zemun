@@ -13,6 +13,7 @@ namespace EtsZemun.Services.Model.ExamService;
 public partial class ExamService(
     ICreateSingleService<Exam> createService,
     ICreateRangeService<ExamCommissionMember> commisionMemberCreateService,
+    IReadSingleService<Exam> readSingleService,
     IReadRangeService<Exam> readService,
     IExecuteUpdateService<Exam> updateService,
     IDeleteService<Exam> deleteService,

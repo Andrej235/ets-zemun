@@ -471,6 +471,7 @@ builder.Services.AddScoped<
     ICreateRangeService<ExamCommissionMember>,
     CreateService<ExamCommissionMember>
 >();
+builder.Services.AddScoped<IReadSingleService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IReadRangeService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IExecuteUpdateService<Exam>, UpdateService<Exam>>();
 builder.Services.AddScoped<IDeleteService<Exam>, DeleteService<Exam>>();
