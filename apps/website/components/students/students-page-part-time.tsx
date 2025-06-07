@@ -1,6 +1,8 @@
-import { useMemo } from "react";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useMemo } from "react";
 
 type Deadlines = {
   term: string;
@@ -13,15 +15,11 @@ type PriceLists = {
   itemPrice: string;
 }[];
 
-type ExamData = {
-  subject: string;
-  commission: string[];
-  date: string;
-  time: string;
-  cabinet: string;
-}[];
+type Props = {
+  exams: Schema<"ExamResponseDto">[];
+};
 
-export default function StudentsPagePartTime() {
+export default function StudentsPagePartTime({ exams }: Props) {
   const t = useTranslations();
 
   const deadlines: Deadlines = useMemo(
@@ -31,11 +29,6 @@ export default function StudentsPagePartTime() {
 
   const priceList: PriceLists = useMemo(
     () => t.raw("students.sections.partTime.priceList") as PriceLists,
-    [t]
-  );
-
-  const examData: ExamData = useMemo(
-    () => t.raw("students.sections.partTime.examData") as ExamData,
     [t]
   );
 
@@ -108,12 +101,17 @@ export default function StudentsPagePartTime() {
             </tr>
           </thead>
           <tbody>
-            {examData.map((exam) => (
-              <tr key={exam.commission + exam.subject}>
-                <td>{exam.subject}</td>
-                <td>{exam.commission.join(", ")}</td>
-                <td>{exam.date}</td>
-                <td>{exam.time}</td>
+            {exams.map((exam) => (
+              <tr
+                key={
+                  exam.commission.map((c) => c.name).join(", ") +
+                  exam.subject.name
+                }
+              >
+                <td>{exam.subject.name}</td>
+                <td>{exam.commission.map((c) => c.name).join(", ")}</td>
+                <td>{format(exam.startTime, "dd.MM.yyyy")}</td>
+                <td>{format(exam.startTime, "HH:mm")}</td>
                 <td>{exam.cabinet}</td>
               </tr>
             ))}

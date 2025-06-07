@@ -15,7 +15,7 @@ public class ExamResponseMapper(
         {
             Id = from.Id,
             Cabinet = from.Cabinet,
-            StartTime = from.StartTime,
+            StartTime = DateTime.SpecifyKind(from.StartTime, DateTimeKind.Local),
             Subject = subjectResponseMapper.Map(from.Subject),
             Commission = from.Commission.Select(x => teacherResponseMapper.Map(x.Teacher)),
         };
