@@ -25,6 +25,8 @@ namespace EtsZemun.Data
         public DbSet<TeacherTranslation> TeacherTranslations { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamCommissionMember> ExamCommisions { get; set; }
+        public DbSet<Caption> Captions { get; set; }
+        public DbSet<CaptionTranslation> CaptionTranslations { get; set; }
         public DbSet<UserLoginEvent> UserLoginEvent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -278,6 +280,24 @@ namespace EtsZemun.Data
                     .WithMany()
                     .HasForeignKey(e => e.TeacherId)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Caption>(caption =>
+            {
+                caption.HasKey(c => c.Id);
+
+                caption
+                    .HasMany(c => c.Translations)
+                    .WithOne()
+                    .HasForeignKey(c => c.CaptionId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<CaptionTranslation>(captionTranslation =>
+            {
+                captionTranslation.HasKey(c => new { c.LanguageCode, c.CaptionId });
+
+                captionTranslation.HasIndex(c => c.CaptionId);
             });
         }
     }
