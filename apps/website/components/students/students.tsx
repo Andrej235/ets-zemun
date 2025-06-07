@@ -15,9 +15,10 @@ import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 
 type StudentsProps = {
   exams: Schema<"ExamResponseDto">[];
+  examTitle: string;
 };
 
-export default function Students({ exams }: StudentsProps) {
+export default function Students({ exams, examTitle }: StudentsProps) {
   const t = useTranslations();
   const searchParams = useSearchParams();
 
@@ -30,7 +31,7 @@ export default function Students({ exams }: StudentsProps) {
     { id: "savet-roditelja", component: <StudentsPageParentParliament /> },
     {
       id: "vanredni-ucenici",
-      component: <StudentsPagePartTime exams={exams} />,
+      component: <StudentsPagePartTime exams={exams} examTitle={examTitle} />,
     },
     { id: "pp-sluzba", component: <StudentsPagePPService /> },
     { id: "nasilje", component: <StudentsPageAntiBullying /> },

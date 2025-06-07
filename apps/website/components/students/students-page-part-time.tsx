@@ -17,9 +17,10 @@ type PriceLists = {
 
 type Props = {
   exams: Schema<"ExamResponseDto">[];
+  examTitle: string;
 };
 
-export default function StudentsPagePartTime({ exams }: Props) {
+export default function StudentsPagePartTime({ exams, examTitle }: Props) {
   const t = useTranslations();
 
   const deadlines: Deadlines = useMemo(
@@ -90,7 +91,7 @@ export default function StudentsPagePartTime({ exams }: Props) {
 
       <div className="table-container" data-search-key="ispiti">
         <table className="part-time-table">
-          <caption>{t("students.sections.partTime.examDataCaption")}</caption>
+          <caption>{examTitle}</caption>
           <thead>
             <tr>
               <th>{t("students.sections.partTime.examDataHeaders.0")}</th>

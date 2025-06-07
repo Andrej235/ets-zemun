@@ -49,9 +49,17 @@ export default async function Page({
     },
   });
 
+  const { response: examTitle } = await sendApiRequestSSR("/captions/{id}", {
+    method: "get",
+    parameters: {
+      id: 1,
+      languageCode: localeToLangCode(locale),
+    },
+  });
+
   return (
     <Suspense>
-      <Students exams={exams ?? []} />
+      <Students exams={exams ?? []} examTitle={examTitle?.title ?? ""} />
     </Suspense>
   );
 }
