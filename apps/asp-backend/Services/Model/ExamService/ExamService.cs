@@ -20,4 +20,4 @@ public partial class ExamService(
     IDeleteService<ExamCommissionMember> commisionMemberDeleteService,
     IRequestMapper<CreateExamRequestDto, Exam> createRequestMapper,
     IResponseMapper<Exam, ExamResponseDto> responseMapper
-) : IExamService { }
+) : IExamService;
