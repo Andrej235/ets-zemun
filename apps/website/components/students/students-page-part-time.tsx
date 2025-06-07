@@ -102,18 +102,13 @@ export default function StudentsPagePartTime({ exams, examTitle }: Props) {
             </tr>
           </thead>
           <tbody>
-            {exams.map((exam) => (
-              <tr
-                key={
-                  exam.commission.map((c) => c.name).join(", ") +
-                  exam.subject.name
-                }
-              >
+            {exams.map((exam, i) => (
+              <tr key={i}>
                 <td>{exam.subject.name}</td>
                 <td>{exam.commission.map((c) => c.name).join(", ")}</td>
                 <td>{format(exam.startTime, "dd.MM.yyyy")}</td>
                 <td>{format(exam.startTime, "HH:mm")}</td>
-                <td>{exam.cabinet}</td>
+                <td>{exam.cabinet || "-"}</td>
               </tr>
             ))}
           </tbody>

@@ -50,7 +50,10 @@ public partial class CaptionService
         return readSingleSelectedService.Get(
             x => new CaptionResponseDto()
             {
-                Title = x.Translations.FirstOrDefault(x => x.LanguageCode == languageCode)!.Title,
+                Title =
+                    x.Translations.Where(t => t.LanguageCode == languageCode)
+                        .Select(t => t.Title)
+                        .FirstOrDefault() ?? string.Empty,
             },
             x => x.Id == id
         );
