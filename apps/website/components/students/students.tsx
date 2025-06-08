@@ -11,19 +11,28 @@ import StudentsPagePartTime from "./students-page-part-time";
 import StudentsPagePPService from "./students-page-pp-service";
 import StudentsPageStudentParliament from "./students-page-student-parliament";
 import "./students.scss";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 
-export default function Students() {
+type StudentsProps = {
+  exams: Schema<"ExamResponseDto">[];
+  examTitle: string;
+};
+
+export default function Students({ exams, examTitle }: StudentsProps) {
   const t = useTranslations();
   const searchParams = useSearchParams();
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
   const [activeSection, setActiveSection] =
-    useState<string>("ucenicki-parlament");
+    useState<string>("vanredni-ucenici");
 
   const sections = [
     { id: "ucenicki-parlament", component: <StudentsPageStudentParliament /> },
     { id: "savet-roditelja", component: <StudentsPageParentParliament /> },
-    { id: "vanredni-ucenici", component: <StudentsPagePartTime /> },
+    {
+      id: "vanredni-ucenici",
+      component: <StudentsPagePartTime exams={exams} examTitle={examTitle} />,
+    },
     { id: "pp-sluzba", component: <StudentsPagePPService /> },
     { id: "nasilje", component: <StudentsPageAntiBullying /> },
     { id: "mentalno-zdravlje", component: <StudentsPageMentalHealth /> },
@@ -33,8 +42,9 @@ export default function Students() {
     const searchKey = searchParams.get("searchKey");
     if (!searchKey) return;
 
-    setActiveSection(searchKey);
-    contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(searchKey === "ispiti" ? "vanredni-ucenici" : searchKey);
+    if (searchKey !== "ispiti")
+      contentContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [searchParams]);
 
   const handleCardClick = (sectionName: string) => {
@@ -43,7 +53,7 @@ export default function Students() {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection,
+    (section) => section.id === activeSection
   )?.component;
 
   return (

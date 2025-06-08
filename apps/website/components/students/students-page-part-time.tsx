@@ -1,6 +1,8 @@
-import { useMemo } from "react";
+import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useMemo } from "react";
 
 type Deadlines = {
   term: string;
@@ -13,15 +15,12 @@ type PriceLists = {
   itemPrice: string;
 }[];
 
-type ExamData = {
-  subject: string;
-  commission: string[];
-  date: string;
-  time: string;
-  cabinet: string;
-}[];
+type Props = {
+  exams: Schema<"ExamResponseDto">[];
+  examTitle: string;
+};
 
-export default function StudentsPagePartTime() {
+export default function StudentsPagePartTime({ exams, examTitle }: Props) {
   const t = useTranslations();
 
   const deadlines: Deadlines = useMemo(
@@ -31,11 +30,6 @@ export default function StudentsPagePartTime() {
 
   const priceList: PriceLists = useMemo(
     () => t.raw("students.sections.partTime.priceList") as PriceLists,
-    [t]
-  );
-
-  const examData: ExamData = useMemo(
-    () => t.raw("students.sections.partTime.examData") as ExamData,
     [t]
   );
 
@@ -95,9 +89,9 @@ export default function StudentsPagePartTime() {
         />
       </div>
 
-      <div className="table-container">
+      <div className="table-container" data-search-key="ispiti">
         <table className="part-time-table">
-          <caption>{t("students.sections.partTime.examDataCaption")}</caption>
+          <caption>{examTitle}</caption>
           <thead>
             <tr>
               <th>{t("students.sections.partTime.examDataHeaders.0")}</th>
@@ -108,13 +102,13 @@ export default function StudentsPagePartTime() {
             </tr>
           </thead>
           <tbody>
-            {examData.map((exam) => (
-              <tr key={exam.commission + exam.subject}>
-                <td>{exam.subject}</td>
-                <td>{exam.commission.join(", ")}</td>
-                <td>{exam.date}</td>
-                <td>{exam.time}</td>
-                <td>{exam.cabinet}</td>
+            {exams.map((exam, i) => (
+              <tr key={i}>
+                <td>{exam.subject.name}</td>
+                <td>{exam.commission.map((c) => c.name).join(", ")}</td>
+                <td>{format(exam.startTime, "dd.MM.yyyy")}</td>
+                <td>{format(exam.startTime, "HH:mm")}</td>
+                <td>{exam.cabinet || "-"}</td>
               </tr>
             ))}
           </tbody>

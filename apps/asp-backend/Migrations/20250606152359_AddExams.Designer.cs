@@ -3,6 +3,7 @@ using System;
 using EtsZemun.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EtsZemun.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250606152359_AddExams")]
+    partial class AddExams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,42 +76,6 @@ namespace EtsZemun.Migrations
                     b.HasIndex("AwardId");
 
                     b.ToTable("AwardTranslations");
-                });
-
-            modelBuilder.Entity("EtsZemun.Models.Caption", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AdminDescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Captions");
-                });
-
-            modelBuilder.Entity("EtsZemun.Models.CaptionTranslation", b =>
-                {
-                    b.Property<string>("LanguageCode")
-                        .HasColumnType("text");
-
-                    b.Property<int>("CaptionId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("LanguageCode", "CaptionId");
-
-                    b.HasIndex("CaptionId");
-
-                    b.ToTable("CaptionTranslations");
                 });
 
             modelBuilder.Entity("EtsZemun.Models.EducationalProfile", b =>
@@ -681,15 +648,6 @@ namespace EtsZemun.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EtsZemun.Models.CaptionTranslation", b =>
-                {
-                    b.HasOne("EtsZemun.Models.Caption", null)
-                        .WithMany("Translations")
-                        .HasForeignKey("CaptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EtsZemun.Models.EducationalProfileGeneralSubject", b =>
                 {
                     b.HasOne("EtsZemun.Models.EducationalProfile", "Profile")
@@ -906,11 +864,6 @@ namespace EtsZemun.Migrations
                 });
 
             modelBuilder.Entity("EtsZemun.Models.Award", b =>
-                {
-                    b.Navigation("Translations");
-                });
-
-            modelBuilder.Entity("EtsZemun.Models.Caption", b =>
                 {
                     b.Navigation("Translations");
                 });
