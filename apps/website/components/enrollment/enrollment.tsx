@@ -105,7 +105,7 @@ export default async function Enrollment({
             ))}
           </tbody>
         </table>
-      </div>>
+      </div>
 
       <div className="call-to-action">
         <p>{t("enrollment.callToAction.tagline")}</p>
