@@ -49,7 +49,7 @@ export async function generateMetadata({
 }
 
 export const dynamic = "force-static";
-export const revalidate = 86400; // 24 hours
+export const revalidate = 172800; // 48 hours
 export const dynamicParams = false;
 
 export function generateStaticParams() {

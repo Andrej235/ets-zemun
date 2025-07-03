@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import localeToLangCode from "@/lib/locale-to-lang-code";
 
-export const revalidate = 10800; // 3 hours
+export const revalidate = 172800; // 48 hours
 
 export async function generateMetadata({
   params,
