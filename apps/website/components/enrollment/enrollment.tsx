@@ -72,6 +72,17 @@ export default async function Enrollment({
         </div>
       </div>
 
+      <div className="announcement">
+        <h1>{t("enrollment.announcement.header")}</h1>
+        <p>{t("enrollment.announcement.announcement.0")}</p>
+        <h3>{t("enrollment.announcement.listHeader")}</h3>
+        <ul>
+          <li>{t("enrollment.announcement.list.0")}</li>
+          <li>{t("enrollment.announcement.list.1")}</li>
+          <li>{t("enrollment.announcement.list.2")}</li>
+        </ul>
+      </div>
+
       <div className="enrollment-table">
         <table>
           <caption>{t("enrollment.table.caption")}</caption>
@@ -94,7 +105,7 @@ export default async function Enrollment({
             ))}
           </tbody>
         </table>
-      </div>
+      </div>>
 
       <div className="call-to-action">
         <p>{t("enrollment.callToAction.tagline")}</p>

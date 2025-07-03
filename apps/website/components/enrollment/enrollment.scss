@@ -58,6 +58,20 @@
     }
   }
 
+  .announcement {
+    font-size: 2rem;
+    margin-bottom: 8rem;
+    p {
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+  }
+
   .enrollment-table {
     max-width: 120rem;
     width: 80%;
@@ -76,8 +90,8 @@
 
       caption {
         margin-bottom: 3rem;
-        font-size: 3rem;
-        font-weight: 500;
+        font-size: 3.5rem;
+        font-weight: 600;
         color: $text-primary;
       }
 

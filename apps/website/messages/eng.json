@@ -192,6 +192,18 @@
         "event": "Final results announcement for high school enrollment"
       }
     ],
+    "announcement": {
+      "header": "IMPORTANT NOTICE",
+      "announcement": [
+        "Enrollment of first-grade students will take place on July 7th and 8th, from 8:00 AM to 3:00 PM in the School Ceremony Hall."
+      ],
+      "listHeader": "Required documents for enrollment:",
+      "list": [
+        "Completed Enrollment Application (available at the School)",
+        "Medical Certificate",
+        "Photocopy of Birth Certificate (optional)"
+      ]
+    },
     "courses": [
       {
         "name": "Computer Engineer",
