@@ -192,6 +192,18 @@
         "event": "Objavljivanje konačnih rezultata raspodele po srednjim školama"
       }
     ],
+    "announcement": {
+      "header": "VAŽNO OBAVEŠTENJE",
+      "announcement": [
+        "Upis učenika u 1. razred je 07. i 08. jula od 08:00 do 15:00 časova u Svečanoj sali Škole."
+      ],
+      "listHeader": "Prilikom upisa dostaviti:",
+      "list": [
+        "popunjenu Prijavu za upis (može se dobiti u Školi)",
+        "lekarsko uverenje",
+        "fotokopiju Izvoda iz Matične knjige rođenih (nije obavezno)."
+      ]
+    },
     "courses": [
       {
         "name": "Elektrotehničar informacionih tehnologija",
