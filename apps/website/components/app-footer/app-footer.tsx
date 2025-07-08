@@ -33,15 +33,15 @@ export default function AppFooter() {
               <span>+381 11 261 8155</span>
             </p>
 
-            <p>
+            {/*<p>
               <Icon name="envelope" />
               <a href="mailto:skola@ets-zemun.edu.rs">
                 <span>{"skola@ets-zemun.edu.rs"}</span>
               </a>
-            </p>
+              </p>*/}
           </div>
 
-          <div className="column">
+          {/* <div className="column">
             <p>
               <Icon name="user-tie" />
               <a href="mailto:direktor@ets-zemun.edu.rs">
@@ -69,7 +69,7 @@ export default function AppFooter() {
                 <span>{"ppsluzba@ets-zemun.edu.rs"}</span>
               </a>
             </p>
-          </div>
+          </div>*/}
         </div>
       </div>
 
