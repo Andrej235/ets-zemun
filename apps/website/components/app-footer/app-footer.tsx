@@ -41,7 +41,7 @@ export default function AppFooter() {
               </p>*/}
           </div>
 
-          {/* <div className="column">
+          <div className="column">
             <p>
               <Icon name="user-tie" />
               <a href="mailto:direktor@ets-zemun.edu.rs">
@@ -69,7 +69,7 @@ export default function AppFooter() {
                 <span>{"ppsluzba@ets-zemun.edu.rs"}</span>
               </a>
             </p>
-          </div>*/}
+          </div>
         </div>
       </div>
 
