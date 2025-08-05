@@ -9,7 +9,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Plus } from "lucide-react";
@@ -100,7 +99,7 @@ export default function ExamsPage() {
             <TableHead>Vreme</TableHead>
             <TableHead>Kabinet</TableHead>
           </TableRow>
-          
+
           {exams.map((x) => (
             <TableRow key={x.id}>
               <TableCell>{x.subject}</TableCell>

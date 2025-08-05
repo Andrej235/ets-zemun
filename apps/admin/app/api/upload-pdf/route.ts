@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-
     const result = await pdfParse(buffer);
 
     return new Response(
@@ -41,14 +40,19 @@ type Exam = {
 function extractExams(data: string): Exam[] {
   const pages = data
     .split("\n\n")
-    .map((x) => x.substring(x.indexOf("КАБИНЕТ") + 7).trim())
+    .map((x) =>
+      x.substring((Math.max(0, x.indexOf("КАБИНЕТ")) || -7) + 7).trim(),
+    )
+    .map((x) =>
+      x.substring((Math.max(0, x.indexOf("ГОДИНЕ")) || -6) + 6).trim(),
+    )
     .filter((x) => x);
 
   const exams = pages.join(" ").split("\n").join(" ") + " ";
 
   function extractDates(input: string) {
     const regex =
-      /^(.*?)(((1|2|3)\..+?){1,3})([(\d{1,2}\.\d{1,2}\.\d{4}\.) ]+?)(\d{1,2}:\d{2})(.+?) /;
+      /^(.*?)(((1|2|3)\..+?){1,3})([\d{1,2}\.\d{1,2}\.\d{4}\. ]+?)(\d{1,2}:\d{2})((?:[\d ]+?)?|(?:[^ ]+?)?) /;
 
     const exams: Exam[] = [];
 
@@ -59,7 +63,7 @@ function extractExams(data: string): Exam[] {
           commission: y[1].replace("  ", " ").trim(),
           date: y[4].replace("  ", " ").trim(),
           startTime: y[5].replace("  ", " ").trim(),
-          cabinet: y[6].replace("  ", " ").trim(),
+          cabinet: y[6]?.replace("  ", " ")?.trim() ?? "",
         };
         exams.push(exam);
         return "";
