@@ -468,6 +468,7 @@ builder.Services.AddScoped<ICreateSingleService<UserLoginEvent>, CreateService<U
 #region Exam
 builder.Services.AddScoped<IExamService, ExamService>();
 builder.Services.AddScoped<ICreateSingleService<Exam>, CreateService<Exam>>();
+builder.Services.AddScoped<ICreateRangeService<Exam>, CreateService<Exam>>();
 builder.Services.AddScoped<IReadSingleService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IReadRangeService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IExecuteUpdateService<Exam>, UpdateService<Exam>>();

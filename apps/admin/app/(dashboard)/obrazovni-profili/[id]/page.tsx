@@ -80,9 +80,8 @@ export default function CurriculumDetailPage({
 
   const formSchema = z.object({
     subjectId: z.string().min(1, "Predmet je obavezan"),
-    year: z.coerce.number().int().min(1, "Godina je obavezna"),
-    perWeek: z.coerce
-      .number()
+    year: z.int().min(1, "Godina je obavezna"),
+    perWeek: z
       .int()
       .min(1, "Broj časova nedeljno je obavezan")
       .max(20, "Ne može biti više od 20 časova nedeljno"),
@@ -183,8 +182,7 @@ export default function CurriculumDetailPage({
       promise.then((response) => {
         if (!response.isOk)
           throw new Error(
-            response.error?.message ??
-              "Neuspešno dodavanje predmeta u profil",
+            response.error?.message ?? "Neuspešno dodavanje predmeta u profil",
           );
       }),
       {

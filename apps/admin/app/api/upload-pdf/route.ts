@@ -55,11 +55,11 @@ function extractExams(data: string): Exam[] {
     while (input.length > 0) {
       input = input.replace(regex, (x, ...y) => {
         const exam = {
-          subject: y[0],
-          commission: y[1],
-          date: y[4],
-          startTime: y[5],
-          cabinet: y[6],
+          subject: y[0].replace("  ", " ").trim(),
+          commission: y[1].replace("  ", " ").trim(),
+          date: y[4].replace("  ", " ").trim(),
+          startTime: y[5].replace("  ", " ").trim(),
+          cabinet: y[6].replace("  ", " ").trim(),
         };
         exams.push(exam);
         return "";
