@@ -11,11 +11,9 @@ public partial class ExamController
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<ExamResponseDto>>> GetAll(
-        [FromQuery] string languageCode
-    )
+    public async Task<ActionResult<IEnumerable<ExamResponseDto>>> GetAll()
     {
-        var result = await examService.GetAll(languageCode);
+        var result = await examService.GetAll();
 
         if (result.IsFailed)
             return BadRequest();

@@ -44,9 +44,6 @@ export default async function Page({
   const locale = (await params).locale;
   const { response: exams } = await sendApiRequestSSR("/exams", {
     method: "get",
-    parameters: {
-      languageCode: localeToLangCode(locale),
-    },
   });
 
   const { response: examTitle } = await sendApiRequestSSR("/captions/{id}", {

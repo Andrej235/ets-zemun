@@ -626,9 +626,27 @@ export type ApiMap = {
           '503': { description: 'Service Unavailable' }
         }
       },
+      delete: {
+        tags: [ 'Exam' ],
+        responses: {
+          '204': { description: 'No Content' },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '404': {
+            description: 'Not Found',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      },
       get: {
         tags: [ 'Exam' ],
-        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } } ],
         responses: {
           '200': {
             description: 'OK',
@@ -652,6 +670,37 @@ export type ApiMap = {
         },
         responses: {
           '204': { description: 'No Content' },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '403': {
+            description: 'Forbidden',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
+    '/exams/bulk': {
+      post: {
+        tags: [ 'Exam' ],
+        requestBody: {
+          content: {
+            'application/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/CreateExamRequestDto' } } },
+            'text/json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/CreateExamRequestDto' } } },
+            'application/*+json': { schema: { type: 'array', items: { '$ref': '#/components/schemas/CreateExamRequestDto' } } }
+          }
+        },
+        responses: {
+          '201': {
+            description: 'Created',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } } }
+          },
           '400': {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
@@ -2205,11 +2254,7 @@ export type ApiMap = {
         additionalProperties: false
       },
       CreateEducationalProfileRequestDto: { type: 'object', properties: { name: { type: 'string' } }, additionalProperties: false },
-      CreateExamRequestDto: {
-        type: 'object',
-        properties: { startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, commission: { type: 'array', items: { type: 'integer', format: 'int32' } } },
-        additionalProperties: false
-      },
+      CreateExamRequestDto: { type: 'object', properties: { subject: { type: 'string' }, commission: { type: 'string' }, date: { type: 'string' }, startTime: { type: 'string' }, cabinet: { type: 'string' } }, additionalProperties: false },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',
@@ -2241,11 +2286,7 @@ export type ApiMap = {
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/ProfileSubjectResponseDto' } } },
         additionalProperties: false
       },
-      ExamResponseDto: {
-        type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subject: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' }, commission: { type: 'array', items: { '$ref': '#/components/schemas/SimpleTeacherResponseDto' } } },
-        additionalProperties: false
-      },
+      ExamResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, subject: { type: 'string' }, commission: { type: 'string' }, date: { type: 'string' }, startTime: { type: 'string' }, cabinet: { type: 'string' } }, additionalProperties: false },
       LanguageResponseDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       LoginRequestDto: { type: 'object', properties: { username: { type: 'string' }, password: { type: 'string' } }, additionalProperties: false },
       NewsPreviewResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, title: { type: 'string' }, description: { type: 'string' }, previewImage: { type: 'string' }, date: { type: 'string', format: 'date' }, isApproved: { type: 'boolean' } }, additionalProperties: false },
@@ -2294,11 +2335,7 @@ export type ApiMap = {
         properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, generalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } }, vocationalSubjects: { type: 'array', items: { '$ref': '#/components/schemas/CreateProfileSubjectRequestDto' } } },
         additionalProperties: false
       },
-      UpdateExamRequestDto: {
-        type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, startTime: { type: 'string', format: 'date-time' }, cabinet: { type: 'string' }, subjectId: { type: 'integer', format: 'int32' }, commission: { type: 'array', items: { type: 'integer', format: 'int32' } } },
-        additionalProperties: false
-      },
+      UpdateExamRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, subject: { type: 'string' }, commission: { type: 'string' }, date: { type: 'string' }, startTime: { type: 'string' }, cabinet: { type: 'string' } }, additionalProperties: false },
       UpdateLanguageRequestDto: { type: 'object', properties: { oldCode: { type: 'string' }, newCode: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       UpdateNewsRequestDto: {
         type: 'object',

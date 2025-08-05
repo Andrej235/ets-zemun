@@ -11,32 +11,14 @@ public partial class ExamService
         if (request.Id < 1)
             return Result.Fail(new BadRequest("Invalid request"));
 
-        var deleteResult = await commisionMemberDeleteService.Delete(
-            x => x.ExamId == request.Id,
-            false
-        );
-        if (deleteResult.IsFailed)
-            return Result.Fail(deleteResult.Errors);
-
-        var createResult = await commisionMemberCreateService.Add(
-            request.Commission.Select(x => new Models.ExamCommissionMember()
-            {
-                ExamId = request.Id,
-                TeacherId = x,
-            })
-        );
-        if (createResult.IsFailed)
-            return Result.Fail(createResult.Errors);
-
         var updateResult = await updateService.Update(
             x => x.Id == request.Id,
             x =>
-                x.SetProperty(
-                        x => x.StartTime,
-                        DateTime.SpecifyKind(request.StartTime, DateTimeKind.Utc)
-                    )
+                x.SetProperty(x => x.StartTime, request.StartTime)
                     .SetProperty(x => x.Cabinet, request.Cabinet)
-                    .SetProperty(x => x.SubjectId, request.SubjectId)
+                    .SetProperty(x => x.Subject, request.Subject)
+                    .SetProperty(x => x.Commission, request.Commission)
+                    .SetProperty(x => x.Date, request.Date)
         );
         return updateResult.IsFailed ? Result.Fail(updateResult.Errors) : Result.Ok();
     }

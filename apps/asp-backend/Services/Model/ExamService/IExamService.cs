@@ -7,8 +7,10 @@ namespace EtsZemun.Services.Model.ExamService;
 public interface IExamService
 {
     Task<Result> Create(CreateExamRequestDto request);
-    Task<Result<IEnumerable<ExamResponseDto>>> GetAll(string languageCode);
+    Task<Result> Create(IEnumerable<CreateExamRequestDto> request);
+    Task<Result<IEnumerable<ExamResponseDto>>> GetAll();
     Task<Result<ExamResponseDto>> AdminGetSingle(int id);
     Task<Result> Update(UpdateExamRequestDto request);
     Task<Result> Delete(int id);
+    Task<Result> DeleteAll();
 }
