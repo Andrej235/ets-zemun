@@ -468,18 +468,10 @@ builder.Services.AddScoped<ICreateSingleService<UserLoginEvent>, CreateService<U
 #region Exam
 builder.Services.AddScoped<IExamService, ExamService>();
 builder.Services.AddScoped<ICreateSingleService<Exam>, CreateService<Exam>>();
-builder.Services.AddScoped<
-    ICreateRangeService<ExamCommissionMember>,
-    CreateService<ExamCommissionMember>
->();
 builder.Services.AddScoped<IReadSingleService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IReadRangeService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IExecuteUpdateService<Exam>, UpdateService<Exam>>();
 builder.Services.AddScoped<IDeleteService<Exam>, DeleteService<Exam>>();
-builder.Services.AddScoped<
-    IDeleteService<ExamCommissionMember>,
-    DeleteService<ExamCommissionMember>
->();
 builder.Services.AddScoped<IRequestMapper<CreateExamRequestDto, Exam>, CreateExamRequestMapper>();
 builder.Services.AddScoped<IResponseMapper<Exam, ExamResponseDto>, ExamResponseMapper>();
 #endregion

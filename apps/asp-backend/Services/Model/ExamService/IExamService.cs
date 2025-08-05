@@ -11,4 +11,5 @@ public interface IExamService
     Task<Result<ExamResponseDto>> AdminGetSingle(int id);
     Task<Result> Update(UpdateExamRequestDto request);
     Task<Result> Delete(int id);
+    Task<Result> DeleteAll();
 }

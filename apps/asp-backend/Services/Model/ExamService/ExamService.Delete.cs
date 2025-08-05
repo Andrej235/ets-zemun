@@ -8,4 +8,9 @@ public partial class ExamService
     {
         return deleteService.Delete(x => x.Id == id);
     }
+
+    public Task<Result> DeleteAll()
+    {
+        return deleteService.Delete(x => true);
+    }
 }
