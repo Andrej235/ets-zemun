@@ -6,7 +6,7 @@ namespace EtsZemun.Services.Model.ExamService;
 
 public partial class ExamService
 {
-    public async Task<Result<IEnumerable<ExamResponseDto>>> GetAll(string languageCode)
+    public async Task<Result<IEnumerable<ExamResponseDto>>> GetAll()
     {
         var result = await readService.Get(null, 0, -1, q => q.OrderBy(x => x.Id));
 

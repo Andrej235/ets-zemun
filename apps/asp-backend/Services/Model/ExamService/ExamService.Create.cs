@@ -13,4 +13,13 @@ public partial class ExamService
 
         return Result.Ok();
     }
+
+    public async Task<Result> Create(IEnumerable<CreateExamRequestDto> request)
+    {
+        var newExam = await createRangeService.Add(request.Select(createRequestMapper.Map));
+        if (newExam.IsFailed)
+            return Result.Fail(newExam.Errors);
+
+        return Result.Ok();
+    }
 }
