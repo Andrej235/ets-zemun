@@ -56,7 +56,7 @@ export default async function sendApiRequestSSR<
     ?.join("; ");
 
   const requestInit: RequestInit = {
-    method: requestCopy.method as string,
+    method: (requestCopy.method as string).toUpperCase(),
     signal: abortSignal,
     body: body,
     headers: {
@@ -73,7 +73,6 @@ export default async function sendApiRequestSSR<
 
   try {
     data = await response.json();
-    // eslint-disable-next-line no-empty
   } catch {}
 
   return isOk
