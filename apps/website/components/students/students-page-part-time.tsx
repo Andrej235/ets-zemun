@@ -1,5 +1,4 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
-import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -104,10 +103,10 @@ export default function StudentsPagePartTime({ exams, examTitle }: Props) {
           <tbody>
             {exams.map((exam, i) => (
               <tr key={i}>
-                <td>{exam.subject.name}</td>
-                <td>{exam.commission.map((c) => c.name).join(", ")}</td>
-                <td>{format(exam.startTime, "dd.MM.yyyy")}</td>
-                <td>{format(exam.startTime, "HH:mm")}</td>
+                <td>{exam.subject || "-"}</td>
+                <td>{exam.commission || "-"}</td>
+                <td>{exam.date || "-"}</td>
+                <td>{exam.startTime || "-"}</td>
                 <td>{exam.cabinet || "-"}</td>
               </tr>
             ))}
