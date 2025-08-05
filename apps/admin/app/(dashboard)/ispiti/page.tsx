@@ -1,6 +1,17 @@
 "use client";
 import sendApiRequest from "@/api-dsl/send-api-request";
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,8 +22,7 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+import { Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -70,6 +80,20 @@ export default function ExamsPage() {
     fetchData();
   }, []);
 
+  async function handleDeleteAll() {
+    const { isOk } = await sendApiRequest("/exams", {
+      method: "delete",
+    });
+
+    if (!isOk) {
+      toast.error("Neuspešno brisanje ispita");
+      return;
+    }
+
+    toast.success("Ispiti su uspešno obrisani");
+    location.reload();
+  }
+
   if (loading) return;
 
   return (
@@ -82,12 +106,36 @@ export default function ExamsPage() {
           </p>
         </div>
 
-        <Button asChild>
-          <Link href="/ispiti/novi">
+        <div className="space-x-2">
+          <Button>
             <Plus className="mr-2 h-4 w-4" />
             Dodaj ispit
-          </Link>
-        </Button>
+          </Button>
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive">
+                <Trash2 className="mr-2 h-4 w-4" />
+                Obriši sve ispite
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Potvrdite brisanje</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Da li ste sigurni da želite da obrišete sve ispite? Ova akcija
+                  je nepovratna.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Otkaži</AlertDialogCancel>
+                <AlertDialogAction onClick={handleDeleteAll}>
+                  Potvrdi
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       </div>
 
       <Table>
