@@ -13,6 +13,12 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -22,7 +28,7 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Trash2 } from "lucide-react";
+import { Edit2, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -94,6 +100,23 @@ export default function ExamsPage() {
     location.reload();
   }
 
+  async function handleDelete(id: number) {
+    const { isOk } = await sendApiRequest("/exams/{id}", {
+      method: "delete",
+      parameters: {
+        id,
+      },
+    });
+
+    if (!isOk) {
+      toast.error("Neuspešno brisanje ispita");
+      return;
+    }
+
+    toast.success("Ispit je uspešno obrisan");
+    location.reload();
+  }
+
   if (loading) return;
 
   return (
@@ -149,13 +172,51 @@ export default function ExamsPage() {
           </TableRow>
 
           {exams.map((x) => (
-            <TableRow key={x.id}>
-              <TableCell>{x.subject}</TableCell>
-              <TableCell>{x.commission}</TableCell>
-              <TableCell>{x.date}</TableCell>
-              <TableCell>{x.startTime}</TableCell>
-              <TableCell>{x.cabinet}</TableCell>
-            </TableRow>
+            <ContextMenu key={x.id}>
+              <ContextMenuTrigger asChild>
+                <TableRow>
+                  <TableCell>{x.subject}</TableCell>
+                  <TableCell>{x.commission}</TableCell>
+                  <TableCell>{x.date}</TableCell>
+                  <TableCell>{x.startTime}</TableCell>
+                  <TableCell>{x.cabinet}</TableCell>
+                </TableRow>
+              </ContextMenuTrigger>
+
+              <ContextMenuContent>
+                <ContextMenuItem>
+                  <span>Izmeni</span>
+                  <Edit2 className="ml-auto size-4" />
+                </ContextMenuItem>
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <ContextMenuItem
+                      variant="destructive"
+                      onSelect={(e) => e.preventDefault()}
+                    >
+                      <span>Obriši</span>
+                      <Trash2 className="ml-auto size-4" />
+                    </ContextMenuItem>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Potvrdite brisanje</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Da li ste sigurni da želite da obrišete ovaj ispit? Ova
+                        akcija je nepovratna.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Otkaži</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => handleDelete(x.id)}>
+                        Potvrdi
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </ContextMenuContent>
+            </ContextMenu>
           ))}
         </TableBody>
       </Table>
