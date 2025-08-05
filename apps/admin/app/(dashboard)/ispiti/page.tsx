@@ -32,11 +32,13 @@ export default function ExamsPage() {
       body: formData,
     });
 
-    const exams = (await res.json()) as Omit<Exam, "id">[];
+    const exams = (await res.json()) as {
+      exams: Omit<Exam, "id">[];
+    };
 
     const { isOk } = await sendApiRequest("/exams/bulk", {
       method: "post",
-      payload: exams,
+      payload: exams.exams,
     });
 
     if (!isOk) {
@@ -90,15 +92,15 @@ export default function ExamsPage() {
       </div>
 
       <Table>
-        <TableHeader>
-          <TableHead>Predmet</TableHead>
-          <TableHead>Komisija</TableHead>
-          <TableHead>Datum</TableHead>
-          <TableHead>Vreme</TableHead>
-          <TableHead>Kabinet</TableHead>
-        </TableHeader>
-
         <TableBody>
+          <TableRow>
+            <TableHead>Predmet</TableHead>
+            <TableHead>Komisija</TableHead>
+            <TableHead>Datum</TableHead>
+            <TableHead>Vreme</TableHead>
+            <TableHead>Kabinet</TableHead>
+          </TableRow>
+          
           {exams.map((x) => (
             <TableRow key={x.id}>
               <TableCell>{x.subject}</TableCell>

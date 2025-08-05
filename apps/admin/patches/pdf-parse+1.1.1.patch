@@ -1,31 +1,13 @@
 diff --git a/node_modules/pdf-parse/index.js b/node_modules/pdf-parse/index.js
-index e9fc367..e69de29 100644
+index e9fc367..47fcd1e 100644
 --- a/node_modules/pdf-parse/index.js
 +++ b/node_modules/pdf-parse/index.js
-@@ -1,26 +0,0 @@
--const Fs = require('fs');
--const Pdf = require('./lib/pdf-parse.js');
--
--module.exports = Pdf;
--
+@@ -3,7 +3,7 @@ const Pdf = require('./lib/pdf-parse.js');
+ 
+ module.exports = Pdf;
+ 
 -let isDebugMode = !module.parent; 
--
--//process.env.AUTO_KENT_DEBUG
--
--
--//for testing purpose
--if (isDebugMode) {
--
--    let PDF_FILE = './test/data/05-versions-space.pdf';
--    let dataBuffer = Fs.readFileSync(PDF_FILE);
--    Pdf(dataBuffer).then(function(data) {
--        Fs.writeFileSync(`${PDF_FILE}.txt`, data.text, {
--            encoding: 'utf8',
--            flag: 'w'
--        });
--        debugger;
--    }).catch(function(err) {
--        debugger;
--    });
--
--}
++let isDebugMode = false; 
+ 
+ //process.env.AUTO_KENT_DEBUG
+ 
