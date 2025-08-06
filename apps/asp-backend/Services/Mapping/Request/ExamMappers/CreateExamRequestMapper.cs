@@ -11,7 +11,7 @@ public class CreateExamRequestMapper : IRequestMapper<CreateExamRequestDto, Exam
             Cabinet = from.Cabinet,
             Commission = from.Commission,
             Date = from.Date,
-            StartTime = from.Date,
+            StartTime = from.StartTime,
             Subject = from.Subject,
         };
 }

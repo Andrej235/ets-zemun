@@ -19,6 +19,12 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -28,7 +34,7 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
-import { Edit2, Plus, Trash2 } from "lucide-react";
+import { Edit2, MoreHorizontal, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -169,17 +175,66 @@ export default function ExamsPage() {
             <TableHead>Datum</TableHead>
             <TableHead>Vreme</TableHead>
             <TableHead>Kabinet</TableHead>
+            <TableHead>Akcije</TableHead>
           </TableRow>
 
           {exams.map((x) => (
             <ContextMenu key={x.id}>
               <ContextMenuTrigger asChild>
                 <TableRow>
-                  <TableCell>{x.subject}</TableCell>
-                  <TableCell>{x.commission}</TableCell>
-                  <TableCell>{x.date}</TableCell>
-                  <TableCell>{x.startTime}</TableCell>
-                  <TableCell>{x.cabinet}</TableCell>
+                  <TableCell>{x.subject || "-"}</TableCell>
+                  <TableCell>{x.commission || "-"}</TableCell>
+                  <TableCell>{x.date || "-"}</TableCell>
+                  <TableCell>{x.startTime || "-"}</TableCell>
+                  <TableCell className="text-center">
+                    {x.cabinet || "-"}
+                  </TableCell>
+
+                  <TableCell className="flex justify-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <MoreHorizontal className="h-4 w-4" />
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent>
+                        <DropdownMenuItem>
+                          <span>Izmeni</span>
+                          <Edit2 className="ml-auto size-4" />
+                        </DropdownMenuItem>
+
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <DropdownMenuItem
+                              variant="destructive"
+                              onSelect={(e) => e.preventDefault()}
+                            >
+                              <span>Obriši</span>
+                              <Trash2 className="ml-auto size-4" />
+                            </DropdownMenuItem>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Potvrdite brisanje
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Da li ste sigurni da želite da obrišete ovaj
+                                ispit? Ova akcija je nepovratna.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Otkaži</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleDelete(x.id)}
+                              >
+                                Potvrdi
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
                 </TableRow>
               </ContextMenuTrigger>
 
