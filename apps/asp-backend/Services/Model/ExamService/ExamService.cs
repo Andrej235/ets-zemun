@@ -15,8 +15,9 @@ public partial class ExamService(
     ICreateRangeService<Exam> createRangeService,
     IReadSingleService<Exam> readSingleService,
     IReadRangeService<Exam> readService,
-    IExecuteUpdateService<Exam> updateService,
+    IUpdateSingleService<Exam> updateService,
     IDeleteService<Exam> deleteService,
     IRequestMapper<CreateExamRequestDto, Exam> createRequestMapper,
+    IRequestMapper<UpdateExamRequestDto, Exam> updateRequestMapper,
     IResponseMapper<Exam, ExamResponseDto> responseMapper
 ) : IExamService;

@@ -609,7 +609,7 @@ export type ApiMap = {
         responses: {
           '201': {
             description: 'Created',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } } }
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/CreateExamResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/CreateExamResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/CreateExamResponseDto' } } }
           },
           '400': {
             description: 'Bad Request',
@@ -697,10 +697,7 @@ export type ApiMap = {
           }
         },
         responses: {
-          '201': {
-            description: 'Created',
-            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ExamResponseDto' } } }
-          },
+          '201': { description: 'Created' },
           '400': {
             description: 'Bad Request',
             content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
@@ -2255,6 +2252,7 @@ export type ApiMap = {
       },
       CreateEducationalProfileRequestDto: { type: 'object', properties: { name: { type: 'string' } }, additionalProperties: false },
       CreateExamRequestDto: { type: 'object', properties: { subject: { type: 'string' }, commission: { type: 'string' }, date: { type: 'string' }, startTime: { type: 'string' }, cabinet: { type: 'string' } }, additionalProperties: false },
+      CreateExamResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' } }, additionalProperties: false },
       CreateLanguageRequestDto: { type: 'object', properties: { code: { type: 'string' }, fullName: { type: 'string' } }, additionalProperties: false },
       CreateNewsRequestDto: {
         type: 'object',

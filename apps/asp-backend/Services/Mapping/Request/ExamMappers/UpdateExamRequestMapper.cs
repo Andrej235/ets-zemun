@@ -3,11 +3,12 @@ using EtsZemun.Models;
 
 namespace EtsZemun.Services.Mapping.Request.ExamMappers;
 
-public class CreateExamRequestMapper : IRequestMapper<CreateExamRequestDto, Exam>
+public class UpdateExamRequestMapper : IRequestMapper<UpdateExamRequestDto, Exam>
 {
-    public Exam Map(CreateExamRequestDto from) =>
+    public Exam Map(UpdateExamRequestDto from) =>
         new()
         {
+            Id = from.Id,
             Cabinet = from.Cabinet,
             Commission = from.Commission,
             Date = from.Date,
