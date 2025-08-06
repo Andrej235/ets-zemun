@@ -34,13 +34,29 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 import { Edit2, MoreHorizontal, Plus, Trash2 } from "lucide-react";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Exam = Schema<"ExamResponseDto">;
 
 export default function ExamsPage() {
+  const [editingExam, setEditingExam] = useState<Exam | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setEditingExam(null);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -92,6 +108,20 @@ export default function ExamsPage() {
     fetchData();
   }, []);
 
+  function handleCreateLocalExam() {
+    const newExam = {
+      id: -1,
+      cabinet: "",
+      commission: "",
+      date: "",
+      startTime: "",
+      subject: "",
+    };
+
+    setExams((prev) => [...prev, newExam]);
+    setEditingExam({ ...newExam });
+  }
+
   async function handleDeleteAll() {
     const { isOk } = await sendApiRequest("/exams", {
       method: "delete",
@@ -103,7 +133,7 @@ export default function ExamsPage() {
     }
 
     toast.success("Ispiti su uspešno obrisani");
-    location.reload();
+    setExams([]);
   }
 
   async function handleDelete(id: number) {
@@ -120,7 +150,45 @@ export default function ExamsPage() {
     }
 
     toast.success("Ispit je uspešno obrisan");
-    location.reload();
+    setExams((exams) => exams.filter((e) => e.id !== id));
+  }
+
+  async function handleSave() {
+    if (!editingExam) return;
+
+    const { isOk, response } = await sendApiRequest("/exams", {
+      method: editingExam.id < 0 ? "post" : "put",
+      payload: editingExam,
+    });
+
+    if (!isOk) {
+      toast.error("Neuspešno sačuvanje ispita");
+      return;
+    }
+
+    toast.success("Ispit je uspešno sačuvan");
+    setEditingExam(null);
+    setExams((exams) =>
+      exams.map((e) =>
+        e.id === editingExam.id
+          ? {
+              ...editingExam,
+              id:
+                editingExam.id < 0
+                  ? (response as { id: number })?.id || 0
+                  : editingExam.id,
+            }
+          : e,
+      ),
+    );
+  }
+
+  function handleCancelEdit() {
+    if (!editingExam) return;
+
+    setEditingExam(null);
+    if (editingExam.id < 0)
+      setExams((exams) => exams.filter((e) => e.id !== editingExam.id));
   }
 
   if (loading) return;
@@ -136,14 +204,14 @@ export default function ExamsPage() {
         </div>
 
         <div className="space-x-2">
-          <Button>
+          <Button onClick={handleCreateLocalExam} disabled={!!editingExam}>
             <Plus className="mr-2 h-4 w-4" />
             Dodaj ispit
           </Button>
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">
+              <Button variant="destructive" disabled={!!editingExam}>
                 <Trash2 className="mr-2 h-4 w-4" />
                 Obriši sve ispite
               </Button>
@@ -180,24 +248,105 @@ export default function ExamsPage() {
 
           {exams.map((x) => (
             <ContextMenu key={x.id}>
-              <ContextMenuTrigger asChild>
-                <TableRow>
-                  <TableCell>{x.subject || "-"}</TableCell>
-                  <TableCell>{x.commission || "-"}</TableCell>
-                  <TableCell>{x.date || "-"}</TableCell>
-                  <TableCell>{x.startTime || "-"}</TableCell>
-                  <TableCell className="text-center">
-                    {x.cabinet || "-"}
-                  </TableCell>
+              <ContextMenuTrigger asChild disabled={!!editingExam}>
+                <TableRow
+                  className={cn(
+                    !!editingExam && editingExam.id !== x.id && "opacity-50",
+                    editingExam && editingExam.id === x.id && "bg-muted/50",
+                  )}
+                >
+                  {(!editingExam || editingExam.id !== x.id) && (
+                    <>
+                      <TableCell>{x.subject || "-"}</TableCell>
+                      <TableCell>{x.commission || "-"}</TableCell>
+                      <TableCell>{x.date || "-"}</TableCell>
+                      <TableCell>{x.startTime || "-"}</TableCell>
+                      <TableCell className="text-center">
+                        {x.cabinet || "-"}
+                      </TableCell>
+                    </>
+                  )}
+
+                  {editingExam && editingExam.id === x.id && (
+                    <>
+                      <TableCell>
+                        <Input
+                          value={editingExam.subject}
+                          onChange={(e) =>
+                            setEditingExam({
+                              ...editingExam,
+                              subject: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+
+                      <TableCell>
+                        <Input
+                          value={editingExam.commission}
+                          onChange={(e) =>
+                            setEditingExam({
+                              ...editingExam,
+                              commission: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+
+                      <TableCell>
+                        <Input
+                          value={editingExam.date}
+                          onChange={(e) =>
+                            setEditingExam({
+                              ...editingExam,
+                              date: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+
+                      <TableCell>
+                        <Input
+                          value={editingExam.startTime}
+                          onChange={(e) =>
+                            setEditingExam({
+                              ...editingExam,
+                              startTime: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+
+                      <TableCell className="text-center">
+                        <Input
+                          value={editingExam.cabinet}
+                          onChange={(e) =>
+                            setEditingExam({
+                              ...editingExam,
+                              cabinet: e.target.value,
+                            })
+                          }
+                        />
+                      </TableCell>
+                    </>
+                  )}
 
                   <TableCell className="flex justify-center">
                     <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <MoreHorizontal className="h-4 w-4" />
+                      <DropdownMenuTrigger asChild disabled={!!editingExam}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          disabled={!!editingExam}
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
                       </DropdownMenuTrigger>
 
                       <DropdownMenuContent>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => setEditingExam({ ...x })}
+                        >
                           <span>Izmeni</span>
                           <Edit2 className="ml-auto size-4" />
                         </DropdownMenuItem>
@@ -239,7 +388,7 @@ export default function ExamsPage() {
               </ContextMenuTrigger>
 
               <ContextMenuContent>
-                <ContextMenuItem>
+                <ContextMenuItem onClick={() => setEditingExam({ ...x })}>
                   <span>Izmeni</span>
                   <Edit2 className="ml-auto size-4" />
                 </ContextMenuItem>
@@ -282,6 +431,20 @@ export default function ExamsPage() {
         </Label>
         <Input type="file" accept="application/pdf" onChange={handleUpload} />
       </div>
+
+      <motion.div
+        className="fixed right-16 bottom-16 flex gap-2"
+        animate={{
+          scale: editingExam ? 1 : 0.5,
+          opacity: editingExam ? 1 : 0,
+        }}
+      >
+        <Button variant="outline" onClick={handleCancelEdit}>
+          Otkaži
+        </Button>
+
+        <Button onClick={handleSave}>Sačuvaj</Button>
+      </motion.div>
     </div>
   );
 }

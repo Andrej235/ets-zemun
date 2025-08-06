@@ -14,14 +14,16 @@ public partial class ExamController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult<ExamResponseDto>> Create([FromBody] CreateExamRequestDto request)
+    public async Task<ActionResult<CreateExamResponseDto>> Create(
+        [FromBody] CreateExamRequestDto request
+    )
     {
         var result = await examService.Create(request);
 
         if (result.IsFailed)
             return BadRequest();
 
-        return Created();
+        return Created((string?)null, result.Value);
     }
 
     [Authorize(Roles = Roles.BasicPerms)]
@@ -30,9 +32,7 @@ public partial class ExamController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult<ExamResponseDto>> CreateBulk(
-        [FromBody] IEnumerable<CreateExamRequestDto> request
-    )
+    public async Task<ActionResult> CreateBulk([FromBody] IEnumerable<CreateExamRequestDto> request)
     {
         var result = await examService.Create(request);
 

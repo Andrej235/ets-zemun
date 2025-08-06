@@ -57,7 +57,7 @@ function extractExams(data: string): Exam[] {
     const exams: Exam[] = [];
 
     while (input.length > 0) {
-      input = input.replace(regex, (x, ...y) => {
+      input = input.replace(regex, (_, ...y) => {
         const exam = {
           subject: y[0].replace("  ", " ").trim(),
           commission: y[1].replace("  ", " ").trim(),

@@ -471,9 +471,10 @@ builder.Services.AddScoped<ICreateSingleService<Exam>, CreateService<Exam>>();
 builder.Services.AddScoped<ICreateRangeService<Exam>, CreateService<Exam>>();
 builder.Services.AddScoped<IReadSingleService<Exam>, ReadService<Exam>>();
 builder.Services.AddScoped<IReadRangeService<Exam>, ReadService<Exam>>();
-builder.Services.AddScoped<IExecuteUpdateService<Exam>, UpdateService<Exam>>();
+builder.Services.AddScoped<IUpdateSingleService<Exam>, UpdateService<Exam>>();
 builder.Services.AddScoped<IDeleteService<Exam>, DeleteService<Exam>>();
 builder.Services.AddScoped<IRequestMapper<CreateExamRequestDto, Exam>, CreateExamRequestMapper>();
+builder.Services.AddScoped<IRequestMapper<UpdateExamRequestDto, Exam>, UpdateExamRequestMapper>();
 builder.Services.AddScoped<IResponseMapper<Exam, ExamResponseDto>, ExamResponseMapper>();
 #endregion
 

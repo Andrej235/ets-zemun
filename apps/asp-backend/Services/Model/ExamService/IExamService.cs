@@ -6,7 +6,7 @@ namespace EtsZemun.Services.Model.ExamService;
 
 public interface IExamService
 {
-    Task<Result> Create(CreateExamRequestDto request);
+    Task<Result<CreateExamResponseDto>> Create(CreateExamRequestDto request);
     Task<Result> Create(IEnumerable<CreateExamRequestDto> request);
     Task<Result<IEnumerable<ExamResponseDto>>> GetAll();
     Task<Result<ExamResponseDto>> AdminGetSingle(int id);
