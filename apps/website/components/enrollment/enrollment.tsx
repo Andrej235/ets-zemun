@@ -1,6 +1,7 @@
 import Icon from "@/components/icon/icon";
 import { getTranslations } from "next-intl/server";
 import "./enrollment.scss";
+import Image from "next/image";
 
 export default async function Enrollment({
   params,
@@ -79,8 +80,16 @@ export default async function Enrollment({
         <ul>
           <li>{t("enrollment.announcement.list.0")}</li>
           <li>{t("enrollment.announcement.list.1")}</li>
-          <li>{t("enrollment.announcement.list.2")}</li>
         </ul>
+        <p>{t("enrollment.announcement.text")}</p>
+
+        <Image
+          src="/images/announcement-table.webp"
+          alt={t("enrollment.announcement.tableAlt")}
+          width={1200}
+          height={1600}
+          unoptimized
+        />
       </div>
 
       <div className="enrollment-table">

@@ -195,14 +195,15 @@
     "announcement": {
       "header": "VAŽNO OBAVEŠTENJE",
       "announcement": [
-        "Upis učenika u 1. razred je 07. i 08. jula od 08:00 do 15:00 časova u Svečanoj sali Škole."
+        "Poštovani učenici i roditelji, Školska 2025/2026.godina počinje u ponedeljak 1. septembra 2025. godine."
       ],
-      "listHeader": "Prilikom upisa dostaviti:",
+      "listHeader": "Raspored smena:",
       "list": [
-        "popunjenu Prijavu za upis (može se dobiti u Školi)",
-        "lekarsko uverenje",
-        "fotokopiju Izvoda iz Matične knjige rođenih (nije obavezno)."
-      ]
+        "Prvi i treći razred: pre podne (početak smene je u 7:45 časova).",
+        "Drugi i četvrti razred: posle podne (početak smene je u 14: 00 časova)."
+      ],
+      "text": "Časovi će biti skraćeni na 30 minuta. Prijem, prozivka i upoznavanje prvaka sa odeljenjskim starešinama biće od 7:30, časova u dvorištu škole. Prva dva časa svi učenici će imati sa svojim odeljenjskim starešinama a od 3. časa prema rasporedu časova. Budućim prvacima i ostalim učenicima Elektrotehničke škole Zemun želimo srećan početak školske godine i mnogo uspeha učenju! Kolektiv i direktor Elektrotehničke škole Zemun!",
+      "tableAlt": "Razredni starešine"
     },
     "courses": [
       {
