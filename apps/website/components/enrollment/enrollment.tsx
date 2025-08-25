@@ -79,8 +79,8 @@ export default async function Enrollment({
         <ul>
           <li>{t("enrollment.announcement.list.0")}</li>
           <li>{t("enrollment.announcement.list.1")}</li>
-          <li>{t("enrollment.announcement.list.2")}</li>
         </ul>
+        <p>{t("enrollment.announcement.text")}</p>
       </div>
 
       <div className="enrollment-table">

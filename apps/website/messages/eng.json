@@ -195,14 +195,14 @@
     "announcement": {
       "header": "IMPORTANT NOTICE",
       "announcement": [
-        "Enrollment of first-grade students will take place on July 7th and 8th, from 8:00 AM to 3:00 PM in the School Ceremony Hall."
+        "Dear students and parents, the 2025/2026 school year begins on Monday, September 1, 2025."
       ],
-      "listHeader": "Required documents for enrollment:",
+      "listHeader": "Shift schedule:",
       "list": [
-        "Completed Enrollment Application (available at the School)",
-        "Medical Certificate",
-        "Photocopy of Birth Certificate (optional)"
-      ]
+        "First and third grade: before noon (shift starts at 7:45 a.m.).",
+        "Second and fourth grade: in the afternoon (shift starts at 2:00 p.m.)."
+      ],
+      "text": "Classes will be shortened to 30 minutes. The reception, roll call and introduction of the champions to the class leaders will be from 7:30 in the school yard. The first two classes all students will have with their class leaders and from the 3rd class according to the class schedule. We wish the future champions and other students of the Zemun School of Electrical Engineering a happy start to the school year and much success in their studies! The collective and director of the Zemun School of Electrical Engineering!"
     },
     "courses": [
       {

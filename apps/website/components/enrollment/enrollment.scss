@@ -61,9 +61,12 @@
   .announcement {
     font-size: 2rem;
     margin-bottom: 8rem;
+    max-width: 128rem;
+
     p {
-      margin-bottom: 1rem;
+      margin-block: 1rem;
     }
+
     h1 {
       font-size: 3.5rem;
       font-weight: 600;
