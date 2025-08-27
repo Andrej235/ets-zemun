@@ -95,6 +95,27 @@ export default async function About({
         </div>
       </section>
 
+      <section className="important-alerts">
+        <div className="announcement">
+                <h1>{t("enrollment.announcement.header")}</h1>
+                <p>{t("enrollment.announcement.announcement.0")}</p>
+                <h3>{t("enrollment.announcement.listHeader")}</h3>
+                <ul>
+                  <li>{t("enrollment.announcement.list.0")}</li>
+                  <li>{t("enrollment.announcement.list.1")}</li>
+                </ul>
+                <p>{t("enrollment.announcement.text")}</p>
+        
+                <Image
+                  src="/images/announcement-table.webp"
+                  alt={t("enrollment.announcement.tableAlt")}
+                  width={1200}
+                  height={1600}
+                  unoptimized
+                />
+              </div>
+      </section>
+
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
           count={75}

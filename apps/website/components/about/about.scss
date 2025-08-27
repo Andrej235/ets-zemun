@@ -19,6 +19,36 @@
     width: 100svw;
   }
 
+  .announcement {
+    font-size: 2rem;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+    max-width: 120rem;
+    width: 90%;
+
+    p {
+      margin-block: 1rem;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    img {
+      display: block;
+      margin: 1.5rem auto 0;
+      max-width: 70rem;
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      object-fit: contain;
+      border-radius: 1rem;
+    }
+  }
+
   .hero-space {
     max-width: 100%;
     min-width: 100%;
@@ -72,6 +102,7 @@
           text-shadow: $text-secondary 0px 0px 10px;
         }
       }
+
       img {
         position: absolute;
         width: 100%;
@@ -101,11 +132,11 @@
         display: flex;
         justify-content: center;
 
-        & > * {
+        &>* {
           width: 25%;
         }
 
-        & > :nth-child(even) {
+        &> :nth-child(even) {
           background-color: $secondary-background;
 
           .hero-block-button::before {
@@ -113,7 +144,7 @@
           }
         }
 
-        & > :nth-child(odd) {
+        &> :nth-child(odd) {
           background-color: $background;
 
           .hero-block-button::before {
@@ -229,6 +260,7 @@
             .hero-block-icon {
               transform: translateY(-5rem);
             }
+
             .hero-block-header {
               opacity: 0;
               transform: translateY(-6rem);
@@ -446,12 +478,10 @@
         width: 100%;
         height: 100%;
         background: transparent;
-        background: linear-gradient(
-          180deg,
-          transparent 0%,
-          transparent 85%,
-          $secondary-background 100%
-        );
+        background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 85%,
+            $secondary-background 100%);
         top: 0;
         left: 0;
         opacity: 1;
@@ -484,11 +514,11 @@
         flex-direction: column;
         align-items: center;
 
-        & > * {
+        &>* {
           width: 100%;
         }
 
-        & > :nth-child(even) {
+        &> :nth-child(even) {
           background-color: $background;
 
           .hero-block-button::before {
@@ -496,7 +526,7 @@
           }
         }
 
-        & > :nth-child(odd) {
+        &> :nth-child(odd) {
           background-color: $secondary-background;
 
           .hero-block-button::before {
@@ -608,11 +638,13 @@
 @media screen and (max-width: 1260px) {
   #about-page {
     .hero-block-element {
+
       &:hover,
       &:focus-within {
         .hero-block-icon {
           transform: translateY(-5rem) !important;
         }
+
         .hero-block-header {
           height: 4rem;
         }
