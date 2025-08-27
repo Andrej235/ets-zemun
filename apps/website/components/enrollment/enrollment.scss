@@ -58,10 +58,11 @@
     }
   }
 
-  .announcement {
+   .announcement {
     font-size: 2rem;
     margin-bottom: 8rem;
-    max-width: 128rem;
+    max-width: 120rem;
+    width: 90%;
 
     p {
       margin-block: 1rem;
@@ -75,8 +76,14 @@
     }
 
     img {
+      display: block;
+      margin: 1.5rem auto 0;
+      max-width: 70rem;
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      object-fit: contain;
       border-radius: 1rem;
-      margin-top: 1.5rem;
     }
   }
 
