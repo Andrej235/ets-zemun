@@ -759,28 +759,28 @@
         "deadlines": [
           {
             "term": "OKTOBARSKI",
-            "registration": "09-27.09.2024.",
-            "exam": "07-31.10.2024."
+            "registration": "08-30.09.2025.",
+            "exam": "01-31.10.2025."
           },
           {
             "term": "DECEMBARSKI",
-            "registration": "04-22.11.2024.",
-            "exam": "02-27.12.2024."
+            "registration": "10-28.11.2025.",
+            "exam": "08-31.12.2025."
           },
           {
             "term": "MARTOVSKI",
-            "registration": "03-21.02.2025.",
-            "exam": "03-28.03.2025."
+            "registration": "03-21.02.2026.",
+            "exam": "09-31.03.2026."
           },
           {
             "term": "MAJSKI",
-            "registration": "01-25.04.2025.",
-            "exam": "12-30.05.2025."
+            "registration": "06-30.04.2026.",
+            "exam": "04-26.05.2026."
           },
           {
             "term": "AVGUSTOVSKI",
-            "registration": "02-20.06.2025.",
-            "exam": "18-29.08.2025."
+            "registration": "08-30.06.2026.",
+            "exam": "17-28.08.2026."
           }
         ],
         "priceList": [
