@@ -801,9 +801,9 @@
           "title": "INVOICE FOR PART-TIME STUDENTS",
           "description": ["OBLIGATORY:", "INVOICE NUMBER:"]
         },
-        "deadlinesCaption": "DEADLINES FOR PART-TIME STUDENTS IN THE 2024/2025 SCHOOL YEAR",
+        "deadlinesCaption": "DEADLINES FOR PART-TIME STUDENTS IN THE 2025/2026 SCHOOL YEAR",
         "deadlinesHeaders": ["DEADLINES", "EXAM PERIOD", "REGISTRATION"],
-        "priceListTitle": "PRICE LIST FOR PART-TIME STUDENTS IN THE 2024/2025 SCHOOL YEAR",
+        "priceListTitle": "PRICE LIST FOR PART-TIME STUDENTS IN THE 2025/2026 SCHOOL YEAR",
         "examDataHeaders": [
           "SUBJECT",
           "COMMISSION",
