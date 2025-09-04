@@ -802,7 +802,7 @@
           "description": ["OBLIGATORY:", "INVOICE NUMBER:"]
         },
         "deadlinesCaption": "DEADLINES FOR PART-TIME STUDENTS IN THE 2025/2026 SCHOOL YEAR",
-        "deadlinesHeaders": ["DEADLINES", "EXAM PERIOD", "REGISTRATION"],
+        "deadlinesHeaders": ["DEADLINES", "REGISTRATION", "EXAM PERIOD"],
         "priceListTitle": "PRICE LIST FOR PART-TIME STUDENTS IN THE 2025/2026 SCHOOL YEAR",
         "examDataHeaders": [
           "SUBJECT",

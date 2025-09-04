@@ -804,7 +804,7 @@
           "description": ["OBAVEZNO:", "POZIV NA BROJ:"]
         },
         "deadlinesCaption": "ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2025/2026. GODINI",
-        "deadlinesHeaders": ["ROKOVI", "POLAGANJA", "PRIJAVLJIVANJA"],
+        "deadlinesHeaders": ["ROKOVI", "PRIJAVLJIVANJA", "POLAGANJA"],
         "priceListTitle": "CENOVNIK VANREDNOG ŠKOLOVANJA ZA ŠKOLSKU 2025/2026. GODINU",
         "examDataHeaders": [
           "PREDMET",
