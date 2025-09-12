@@ -99,13 +99,19 @@ export default async function About({
 
       <section className="important-alerts">
         <div className="announcement">
-          <h1>{t("enrollment.announcement.header")}</h1>
-          <p>{t("enrollment.announcement.announcement.0")}</p>
-          <h3>{t("enrollment.announcement.listHeader")}</h3>
-          <ul>
-            <li>{t("enrollment.announcement.list.0")}</li>
-            <li>{t("enrollment.announcement.list.1")}</li>
-          </ul>
+          <div>
+            <h1>{t("enrollment.announcement.header")}</h1>
+            <p>{t("enrollment.announcement.announcement.0")}</p>
+          </div>
+
+          <div>
+            <h2>{t("enrollment.announcement.listHeader")}</h2>
+            <ul>
+              <li>{t("enrollment.announcement.list.0")}</li>
+              <li>{t("enrollment.announcement.list.1")}</li>
+            </ul>
+          </div>
+
           <p>{t("enrollment.announcement.text")}</p>
 
           <Image

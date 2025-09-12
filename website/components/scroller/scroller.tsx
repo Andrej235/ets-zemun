@@ -6,10 +6,12 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import "./scroller.scss";
 
 export default function Scroller() {
+  const t = useTranslations("scroller");
   const [isScrollerVisible, setIsScrollerVisible] = useState(false);
   const [isScrollerAvailable, setIsScrollerAvailable] = useState(false);
 
@@ -29,7 +31,7 @@ export default function Scroller() {
       typeof document === "undefined"
         ? 0
         : document.scrollingElement!.clientHeight * 0.7,
-    [],
+    []
   );
 
   const exitTopThreashold = useMemo(
@@ -37,7 +39,7 @@ export default function Scroller() {
       typeof document === "undefined"
         ? 0
         : document.scrollingElement!.clientHeight * 0.6,
-    [],
+    []
   );
 
   const { scrollY } = useScroll();
@@ -118,6 +120,8 @@ export default function Scroller() {
             />
           </svg>
         </div>
+
+        <p className="sr-only">{t("aria")}</p>
       </motion.button>
     </motion.div>
   );

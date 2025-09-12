@@ -34,7 +34,7 @@ export default function AppFooter() {
             </p>
           </div>
 
-          <div className="column">
+          <div className="emails">
             <p>
               <Icon name="user-tie" />
               <a href="mailto:direktor@ets-zemun.edu.rs">

@@ -524,6 +524,9 @@
     "openSource": "This website is open-source. View it on",
     "githubSuffix": ""
   },
+  "scroller": {
+    "aria": "Scroll to top"
+  },
   "errorPage": {
     "routeError": {
       "title": "We couldn't find the page you were looking for.",

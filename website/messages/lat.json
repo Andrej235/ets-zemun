@@ -530,6 +530,9 @@
     "openSource": "Ovaj sajt je open-source. Pogledajte ga na",
     "githubSuffix": "-u"
   },
+  "scroller": {
+    "aria": "Skrolujte do vrha"
+  },
   "errorPage": {
     "routeError": {
       "title": "Nismo mogli da pronađemo stranu koju ste tražili!",
