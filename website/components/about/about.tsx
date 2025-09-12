@@ -97,7 +97,7 @@ export default async function About({
         </div>
       </section>
 
-      <section className="important-alerts">
+      {/* <section className="important-alerts">
         <div className="announcement">
           <div>
             <h1>{t("enrollment.announcement.header")}</h1>
@@ -122,7 +122,7 @@ export default async function About({
             unoptimized
           />
         </div>
-      </section>
+      </section> */}
 
       <section className="school-preview-cards-container">
         <SchoolPreviewCard

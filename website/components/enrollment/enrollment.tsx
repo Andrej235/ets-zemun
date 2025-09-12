@@ -1,7 +1,6 @@
 import Icon from "@/components/icon/icon";
 import { getTranslations } from "next-intl/server";
 import "./enrollment.scss";
-import Image from "next/image";
 
 export default async function Enrollment({
   params,
@@ -73,7 +72,7 @@ export default async function Enrollment({
         </div>
       </div>
 
-      <div className="announcement">
+      {/*       <div className="announcement">
         <h1>{t("enrollment.announcement.header")}</h1>
         <p>{t("enrollment.announcement.announcement.0")}</p>
         <h3>{t("enrollment.announcement.listHeader")}</h3>
@@ -90,7 +89,7 @@ export default async function Enrollment({
           height={1600}
           unoptimized
         />
-      </div>
+      </div> */}
 
       <div className="enrollment-table">
         <table>
