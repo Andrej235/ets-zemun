@@ -496,7 +496,13 @@
     ]
   },
   "header": {
-    "links": ["O nama", "Obrazovni profili", "Učenici", "Novosti", "Dokumenta"],
+    "links": [
+      "Početna",
+      "Obrazovni profili",
+      "Učenici",
+      "Novosti",
+      "Dokumenta"
+    ],
     "searchBarPlaceholder": "Pretraži"
   },
   "footer": {

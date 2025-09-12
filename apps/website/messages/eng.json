@@ -496,13 +496,7 @@
     ]
   },
   "header": {
-    "links": [
-      "About Us",
-      "Educational Profiles",
-      "Students",
-      "News",
-      "Documents"
-    ],
+    "links": ["Home", "Educational Profiles", "Students", "News", "Documents"],
     "searchBarPlaceholder": "Search"
   },
   "footer": {
