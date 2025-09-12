@@ -9,17 +9,13 @@ export default async function FullNewsArticle({
 }) {
   const { newsId, locale } = await params;
 
-  const { isOk, response } = await sendApiRequestSSR(
-    "/news/{id}",
-    {
-      method: "get",
-      parameters: {
-        id: newsId,
-        languageCode: localeToLangCode(locale),
-      },
+  const { isOk, response } = await sendApiRequestSSR("/news/{id}", {
+    method: "get",
+    parameters: {
+      id: newsId,
+      languageCode: localeToLangCode(locale),
     },
-    86400
-  );
+  });
 
   if (!isOk) throw new Error("Failed to fetch news");
 
