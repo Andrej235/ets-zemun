@@ -2,8 +2,8 @@
   "type": "module",
   "scripts": {
     "lint": "cd website && npm run lint && cd ../admin && npm run lint",
-    "deps": "cd website && npm i && cd ../admin && npm i --force",
-    "gen:api-map": "./scripts/run-gen:api-map.sh",
-    "gen:sr_cr": "./scripts/run-gen:sr_cr.sh"
+    "deps": "cd website && npm i && cd ../admin && npm i",
+    "api-map": "./scripts/run-gen:api-map.sh",
+    "srb": "./scripts/run-gen:sr_cr.sh"
   }
 }
