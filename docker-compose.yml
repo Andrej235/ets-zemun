@@ -1,10 +1,10 @@
 services:
-  asp-backend:
+  backend:
     image: andrejnenadic/ets-zemun-backend
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     build:
       context: .
-      dockerfile: apps/asp-backend/Dockerfile
+      dockerfile: backend/Dockerfile
     ports:
       - 5000:5000

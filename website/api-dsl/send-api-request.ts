@@ -23,7 +23,7 @@ export default async function sendApiRequest<
   endpoint: Endpoint,
   request: T,
   includeCookies: boolean = true,
-  abortSignal?: AbortSignal,
+  abortSignal?: AbortSignal
 ): Promise<Response<Endpoint, T>> {
   const url = new URL(baseApiUrl + endpoint);
   const requestCopy = structuredClone(request);
@@ -40,7 +40,7 @@ export default async function sendApiRequest<
     }
 
     url.search = new URLSearchParams(
-      requestCopy.parameters as Record<string, string>,
+      requestCopy.parameters as Record<string, string>
     ).toString();
   }
 
@@ -64,7 +64,6 @@ export default async function sendApiRequest<
 
   try {
     data = await response.json();
-    // eslint-disable-next-line no-empty
   } catch {}
 
   return isOk

@@ -10,10 +10,10 @@ USER app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["apps/asp-backend/EtsZemun.csproj", "apps/asp-backend/"]
-RUN dotnet restore "apps/asp-backend/EtsZemun.csproj"
+COPY ["backend/EtsZemun.csproj", "backend/"]
+RUN dotnet restore "backend/EtsZemun.csproj"
 COPY . .
-WORKDIR "/src/apps/asp-backend"
+WORKDIR "/src/backend"
 RUN dotnet build "EtsZemun.csproj" -c "$configuration" -o /app/build
 
 FROM build AS publish

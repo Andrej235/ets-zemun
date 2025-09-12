@@ -103,10 +103,10 @@ Follows a clean **controller-based architecture** aligned with **SOLID principle
 
 ```
 .
-├── apps
-│   ├── admin/          # Admin panel (Next.js + Tailwind)
-│   ├── website/        # Public website (Next.js + SCSS)
-│   └── asp-backend/    # ASP.NET Core API
+│
+├── admin/          # Admin panel (Next.js + Tailwind)
+├── website/        # Public website (Next.js + SCSS)
+├── backend/        # ASP.NET Core API
 └── top-level files
 ```
 
@@ -126,9 +126,9 @@ Follows a clean **controller-based architecture** aligned with **SOLID principle
 
 > Example files are included in the repository.
 
-- `apps/website/.env`
-- `apps/admin/.env`
-- `apps/asp-backend/secrets.json`
+- `website/.env`
+- `admin/.env`
+- `backend/secrets.json`
 
 ### Installation
 
@@ -138,9 +138,9 @@ Follows a clean **controller-based architecture** aligned with **SOLID principle
 
 ### Running the Project
 
-- Start the backend: `cd apps/asp-backend && dotnet run EtsZemun.csproj`
-- Start the website: `cd apps/website && npm run dev`
-- Start the admin panel: `cd apps/admin && npm run dev`
+- Start the backend: `cd backend && dotnet run EtsZemun.csproj`
+- Start the website: `cd website && npm run dev`
+- Start the admin panel: `cd admin && npm run dev`
 
 ## Deployment
 

@@ -1,1 +1,1 @@
-node `pwd`/scripts/run-gen:sr_cr.cjs `pwd`/apps/website/messages/lat.json `pwd`/apps/website/messages/srb.json
+node `pwd`/scripts/run-gen:sr_cr.cjs `pwd`/website/messages/lat.json `pwd`/website/messages/srb.json
