@@ -1,9 +1,9 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./single-profile-page.scss";
 import SingleProfileSubjectsSegment from "./single-profile-subjects-segment";
-import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function SingleProfileITPage({
   params,
@@ -21,7 +21,7 @@ export default async function SingleProfileITPage({
 
   if (!profileData.isOk) throw new Error("Failed to load profile data");
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale });
 
   return (
     <div className="single-profile-page">

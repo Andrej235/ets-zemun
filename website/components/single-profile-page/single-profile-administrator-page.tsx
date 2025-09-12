@@ -21,7 +21,7 @@ export default async function SingleProfileNetworkAdminPage({
 
   if (!profileData.isOk) throw new Error("Failed to load profile data");
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale });
 
   return (
     <div className="single-profile-page">
