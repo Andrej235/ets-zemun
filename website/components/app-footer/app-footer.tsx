@@ -79,7 +79,9 @@ export default function AppFooter() {
             <a
               href={"https://www.nenadic.dev"}
               target="_blank"
-              aria-label={t("footer.credits.prefix")}
+              aria-label={
+                t("footer.credits.prefix") + " " + t("footer.credits.andrej")
+              }
             >
               {t("footer.credits.andrej")}
             </a>
@@ -87,7 +89,9 @@ export default function AppFooter() {
             <a
               href={"https://github.com/andjelic-a"}
               target="_blank"
-              aria-label={t("footer.credits.prefix")}
+              aria-label={
+                t("footer.credits.prefix") + " " + t("footer.credits.aleksa")
+              }
             >
               {t("footer.credits.aleksa")}
             </a>
