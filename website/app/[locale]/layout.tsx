@@ -1,8 +1,11 @@
 import AppFooter from "@/components/app-footer/app-footer";
 import AppHeader from "@/components/app-header/app-header";
-import Scroller from "@/components/scroller/scroller";
+import ScrollToSearchEntry from "@/components/scroll-to-seach-entry";
+import Scroller from "@/components/scroller/scroller-client-only";
 import { routing } from "@/i18n/routing";
 import generateAlternateUrls from "@/lib/generate-alternate-urls";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import {
@@ -11,9 +14,6 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import ScrollToSearchEntry from "@/components/scroll-to-seach-entry";
-import { Analytics } from "@vercel/analytics/next";
 
 export async function generateMetadata({
   params,

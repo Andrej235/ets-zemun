@@ -2,8 +2,8 @@
 import HamburgerMenu from "@/components/hamburger-menu/hamburger-menu";
 import HeaderSearchBar from "@/components/header-search-bar/header-search-bar";
 import Icon from "@/components/icon/icon";
-import useOutsideClick from "@/lib/hooks/use-outside-click";
 import { Link, usePathname } from "@/i18n/navigation";
+import useOutsideClick from "@/lib/hooks/use-outside-click";
 import { FocusTrap } from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -67,7 +67,13 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           tabIndex={isHamburgerMenuOpen ? -1 : undefined}
           aria-hidden={isHamburgerMenuOpen}
         >
-          <Image src="/logo.png" alt="Logo" width={96} height={96} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={96}
+            height={96}
+            fetchPriority="low"
+          />
         </Link>
         <div className="app-header-navigation">
           <div className="nav-bar header-nav-bar">

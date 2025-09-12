@@ -32,13 +32,6 @@ export default function AppFooter() {
               <Icon name="phone" />
               <span>+381 11 261 8155</span>
             </p>
-
-            {/*<p>
-              <Icon name="envelope" />
-              <a href="mailto:skola@ets-zemun.edu.rs">
-                <span>{"skola@ets-zemun.edu.rs"}</span>
-              </a>
-              </p>*/}
           </div>
 
           <div className="column">
