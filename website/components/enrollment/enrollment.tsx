@@ -17,32 +17,32 @@ export default async function Enrollment({
     {
       name: t("enrollment.courses.0.name"),
       duration: t("enrollment.courses.0.duration"),
-      students: 60,
-      requiredPoints: 80.04,
+      students: 56,
+      requiredPoints: 70.91,
     },
     {
       name: t("enrollment.courses.1.name"),
       duration: t("enrollment.courses.1.duration"),
-      students: 60,
-      requiredPoints: 69.86,
+      students: 84,
+      requiredPoints: 75.34,
     },
     {
       name: t("enrollment.courses.2.name"),
       duration: t("enrollment.courses.2.duration"),
-      students: 30,
-      requiredPoints: 66.86,
+      students: 54,
+      requiredPoints: 70.5,
     },
     {
       name: t("enrollment.courses.3.name"),
       duration: t("enrollment.courses.3.duration"),
-      students: 30,
-      requiredPoints: 70.69,
+      students: 25,
+      requiredPoints: 70.0,
     },
     {
       name: t("enrollment.courses.4.name"),
       duration: t("enrollment.courses.4.duration"),
-      students: 30,
-      requiredPoints: 47.64,
+      students: 28,
+      requiredPoints: 46.44,
     },
   ];
 

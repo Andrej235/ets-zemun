@@ -207,23 +207,17 @@
     },
     "courses": [
       {
-        "name": "Computer Engineer",
+        "name": "Computer Network Administration Technician",
+        "duration": "4 years"
+      },
+      { "name": "Information Technology Technician", "duration": "4 years" },
+      { "name": "Computer Electrical Technician", "duration": "4 years" },
+      {
+        "name": "Electronics and Automation Technician",
         "duration": "4 years"
       },
       {
-        "name": "Electronics",
-        "duration": "4 years"
-      },
-      {
-        "name": "Telecommunications",
-        "duration": "3 years"
-      },
-      {
-        "name": "Energy Engineering",
-        "duration": "4 years"
-      },
-      {
-        "name": "Electromechanical Technician for Cooling and Thermal Devices",
+        "name": "Thermal and Cooling Device Service Technician",
         "duration": "3 years"
       }
     ],
