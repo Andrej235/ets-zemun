@@ -497,7 +497,8 @@
   },
   "header": {
     "links": ["Home", "Educational Profiles", "Students", "News", "Documents"],
-    "searchBarPlaceholder": "Search"
+    "searchBarPlaceholder": "Search",
+    "theme": "Theme"
   },
   "footer": {
     "about": {
@@ -522,6 +523,9 @@
     },
     "openSource": "This website is open-source. View it on",
     "githubSuffix": ""
+  },
+  "scroller": {
+    "aria": "Scroll to top"
   },
   "errorPage": {
     "routeError": {

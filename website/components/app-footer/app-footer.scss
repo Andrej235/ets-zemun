@@ -100,7 +100,7 @@
       a {
         display: flex;
         align-items: center;
-        color: rgb(99, 156, 209);
+        color: rgb(135, 180, 230);
         text-decoration: underline;
       }
 
@@ -195,4 +195,8 @@
       }
     }
   }
+}
+
+.emails * {
+  padding: 2px 0;
 }

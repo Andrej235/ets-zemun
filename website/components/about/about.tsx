@@ -4,10 +4,10 @@ import Icon from "@/components/icon/icon";
 import NewsPreview from "@/components/news-preview/news-preview";
 import SchoolPreviewCard from "@/components/school-preview-card/school-preview-card";
 import { Link } from "@/i18n/navigation";
+import localeToLangCode from "@/lib/locale-to-lang-code";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./about.scss";
-import localeToLangCode from "@/lib/locale-to-lang-code";
 
 export default async function About({
   params,
@@ -37,6 +37,7 @@ export default async function About({
             fill
             priority
             fetchPriority="high"
+            sizes="100vw"
           />
 
           <div className="text">
@@ -89,6 +90,7 @@ export default async function About({
                 alt="Misija i vizija"
                 height={300}
                 width={300}
+                fetchPriority="low"
               />
             </div>
           </div>
@@ -97,13 +99,19 @@ export default async function About({
 
       <section className="important-alerts">
         <div className="announcement">
-          <h1>{t("enrollment.announcement.header")}</h1>
-          <p>{t("enrollment.announcement.announcement.0")}</p>
-          <h3>{t("enrollment.announcement.listHeader")}</h3>
-          <ul>
-            <li>{t("enrollment.announcement.list.0")}</li>
-            <li>{t("enrollment.announcement.list.1")}</li>
-          </ul>
+          <div>
+            <h1>{t("enrollment.announcement.header")}</h1>
+            <p>{t("enrollment.announcement.announcement.0")}</p>
+          </div>
+
+          <div>
+            <h2>{t("enrollment.announcement.listHeader")}</h2>
+            <ul>
+              <li>{t("enrollment.announcement.list.0")}</li>
+              <li>{t("enrollment.announcement.list.1")}</li>
+            </ul>
+          </div>
+
           <p>{t("enrollment.announcement.text")}</p>
 
           <Image

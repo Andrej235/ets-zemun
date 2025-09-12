@@ -503,7 +503,8 @@
       "Novosti",
       "Dokumenta"
     ],
-    "searchBarPlaceholder": "Pretraži"
+    "searchBarPlaceholder": "Pretraži",
+    "theme": "Tema"
   },
   "footer": {
     "about": {
@@ -528,6 +529,9 @@
     },
     "openSource": "Ovaj sajt je open-source. Pogledajte ga na",
     "githubSuffix": "-u"
+  },
+  "scroller": {
+    "aria": "Skrolujte do vrha"
   },
   "errorPage": {
     "routeError": {

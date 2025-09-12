@@ -32,16 +32,9 @@ export default function AppFooter() {
               <Icon name="phone" />
               <span>+381 11 261 8155</span>
             </p>
-
-            {/*<p>
-              <Icon name="envelope" />
-              <a href="mailto:skola@ets-zemun.edu.rs">
-                <span>{"skola@ets-zemun.edu.rs"}</span>
-              </a>
-              </p>*/}
           </div>
 
-          <div className="column">
+          <div className="emails">
             <p>
               <Icon name="user-tie" />
               <a href="mailto:direktor@ets-zemun.edu.rs">
@@ -86,7 +79,9 @@ export default function AppFooter() {
             <a
               href={"https://www.nenadic.dev"}
               target="_blank"
-              aria-label={t("footer.credits.prefix")}
+              aria-label={
+                t("footer.credits.prefix") + " " + t("footer.credits.andrej")
+              }
             >
               {t("footer.credits.andrej")}
             </a>
@@ -94,7 +89,9 @@ export default function AppFooter() {
             <a
               href={"https://github.com/andjelic-a"}
               target="_blank"
-              aria-label={t("footer.credits.prefix")}
+              aria-label={
+                t("footer.credits.prefix") + " " + t("footer.credits.aleksa")
+              }
             >
               {t("footer.credits.aleksa")}
             </a>
@@ -103,11 +100,7 @@ export default function AppFooter() {
 
         <p className="open-source">
           <span>{t("footer.openSource")}</span>
-          <a
-            href="https://github.com/andrej235/ets-zemun"
-            target="_blank"
-            aria-label="GitHub repository"
-          >
+          <a href="https://github.com/andrej235/ets-zemun" target="_blank">
             <span>GitHub{t("footer.githubSuffix")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
