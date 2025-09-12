@@ -25,7 +25,7 @@ const data: {
       documents: [
         {
           title: "documents.groups.6.documents.0",
-          url: "/documents/gp-2024-25.docx",
+          url: "/documents/godisnji-plan.docx",
         },
         {
           title: "documents.groups.6.documents.1",
