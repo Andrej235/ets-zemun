@@ -179,23 +179,6 @@
       }
     }
 
-    .theme-icons-container {
-      position: absolute;
-      bottom: -2.5rem;
-
-      width: 6rem;
-      height: 6rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      transition: 0.5s;
-    }
-
-    .dark-theme-active {
-      transform: rotate(180deg);
-    }
-
     .language-button,
     .theme-button {
       width: 100%;

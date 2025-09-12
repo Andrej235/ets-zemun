@@ -503,7 +503,8 @@
       "Novosti",
       "Dokumenta"
     ],
-    "searchBarPlaceholder": "Pretraži"
+    "searchBarPlaceholder": "Pretraži",
+    "theme": "Tema"
   },
   "footer": {
     "about": {

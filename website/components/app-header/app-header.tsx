@@ -6,30 +6,15 @@ import { Link, usePathname } from "@/i18n/navigation";
 import useOutsideClick from "@/lib/hooks/use-outside-click";
 import { FocusTrap } from "focus-trap-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import Image from "next/image";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import "./app-header.scss";
+import ThemeSelector from "./theme-selector-client-only";
 
 const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
-  const { setTheme, theme } = useTheme();
-  const themeRef = useRef<HTMLDivElement>(null!);
-
-  useEffect(() => {
-    if (theme === "dark") {
-      themeRef.current.classList.add("dark-theme-active");
-      themeRef.current.children[0].classList.add("active");
-      themeRef.current.children[1].classList.remove("active");
-    } else {
-      themeRef.current.classList.remove("dark-theme-active");
-      themeRef.current.children[0].classList.remove("active");
-      themeRef.current.children[1].classList.add("active");
-    }
-  }, [theme]);
-
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const t = useTranslations();
+  const t = useTranslations("header");
   const currentLanguage = useLocale();
   const pathname = usePathname();
 
@@ -61,6 +46,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
           onRequestOpen={() => setIsHamburgerMenuOpen(true)}
           onRequestClose={() => setIsHamburgerMenuOpen(false)}
         />
+
         <Link
           href="/"
           className="logo"
@@ -75,13 +61,14 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             fetchPriority="low"
           />
         </Link>
+
         <div className="app-header-navigation">
           <div className="nav-bar header-nav-bar">
-            <Link href="/">{t("header.links.0")}</Link>
-            <Link href="/profili">{t("header.links.1")}</Link>
-            <Link href="/ucenici">{t("header.links.2")}</Link>
-            <Link href="/novosti">{t("header.links.3")}</Link>
-            <Link href="/dokumenta">{t("header.links.4")}</Link>
+            <Link href="/">{t("links.0")}</Link>
+            <Link href="/profili">{t("links.1")}</Link>
+            <Link href="/ucenici">{t("links.2")}</Link>
+            <Link href="/novosti">{t("links.3")}</Link>
+            <Link href="/dokumenta">{t("links.4")}</Link>
           </div>
 
           <HeaderSearchBar />
@@ -98,7 +85,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
               className={`gear ${
                 isPopupOpen ? "active" : ""
               } ignore-use-outside-click`}
-            ></Icon>
+            />
           </button>
 
           <div
@@ -139,30 +126,8 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
                 {languageOptions.eng}
               </Link>
             </div>
-            <button
-              className="theme-button"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            >
-              <div
-                suppressHydrationWarning
-                className={`theme-icons-container ${
-                  theme === "dark" ? "dark-theme-active" : ""
-                }`}
-                ref={themeRef}
-              >
-                <Icon
-                  suppressHydrationWarning
-                  name="lightbulb"
-                  className={`sun ${theme === "light" ? "active" : ""}`}
-                />
 
-                <Icon
-                  suppressHydrationWarning
-                  name="moon"
-                  className={`moon ${theme === "dark" ? "active" : ""}`}
-                />
-              </div>
-            </button>
+            <ThemeSelector />
           </div>
         </div>
         <div className="background" />
