@@ -1,7 +1,6 @@
 import Icon from "@/components/icon/icon";
 import { getTranslations } from "next-intl/server";
 import "./enrollment.scss";
-import Image from "next/image";
 
 export default async function Enrollment({
   params,
@@ -53,22 +52,18 @@ export default async function Enrollment({
 
       <div className="timeline">
         <div className="card">
-          <h1>{t("enrollment.timeline.0.date")}</h1>
           <p>{t("enrollment.timeline.0.event")}</p>
         </div>
 
         <div className="card">
-          <h1>{t("enrollment.timeline.1.date")}</h1>
           <p>{t("enrollment.timeline.1.event")}</p>
         </div>
 
         <div className="card">
-          <h1>{t("enrollment.timeline.2.date")}</h1>
           <p>{t("enrollment.timeline.2.event")}</p>
         </div>
 
         <div className="card">
-          <h1>{t("enrollment.timeline.3.date")}</h1>
           <p>{t("enrollment.timeline.3.event")}</p>
         </div>
       </div>
