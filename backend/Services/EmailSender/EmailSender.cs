@@ -1,20 +1,12 @@
-using brevo_csharp.Api;
-using brevo_csharp.Model;
-using EtsZemun.Exceptions;
 using EtsZemun.Models;
 using Microsoft.AspNetCore.Identity;
+using Resend;
 using Task = System.Threading.Tasks.Task;
 
 namespace EtsZemun.Services.EmailSender;
 
-public class EmailSender(IConfiguration configuration) : IEmailSender<User>
+public class EmailSender(IResend resend) : IEmailSender<User>
 {
-    private readonly TransactionalEmailsApi emailApi = new();
-    private readonly string senderEmail =
-        configuration["Brevo:SenderEmail"] ?? throw new MissingConfigException("Sender Email");
-    private readonly string senderName =
-        configuration["Brevo:SenderName"] ?? throw new MissingConfigException("Sender Name");
-
     public async Task SendConfirmationLinkAsync(User user, string email, string confirmationLink)
     {
         var subject = "Confirm Your Email";
@@ -62,13 +54,14 @@ public class EmailSender(IConfiguration configuration) : IEmailSender<User>
 
     private async Task SendEmailAsync(string toEmail, string subject, string htmlContent)
     {
-        var sendSmtpEmail = new SendSmtpEmail(
-            sender: new SendSmtpEmailSender(senderName, senderEmail),
-            to: [new(toEmail)],
-            subject: subject,
-            htmlContent: htmlContent
-        );
+        var message = new EmailMessage
+        {
+            From = "Ets Zemun <ets@nenadic.dev>",
+            Subject = subject,
+            HtmlBody = htmlContent,
+            To = [toEmail],
+        };
 
-        await emailApi.SendTransacEmailAsync(sendSmtpEmail);
+        await resend.EmailSendAsync(message);
     }
 }

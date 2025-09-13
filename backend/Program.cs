@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
-using brevo_csharp.Client;
 using EtsZemun.Data;
 using EtsZemun.Dtos.Request.Award;
 using EtsZemun.Dtos.Request.Caption;
@@ -60,6 +59,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Resend;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,7 +77,17 @@ builder
 
 var configuration = builder.Configuration;
 builder.Services.AddSingleton(configuration);
-Configuration.Default.ApiKey.Add("api-key", configuration["Brevo:ApiKey"]);
+builder.Services.AddOptions();
+builder.Services.AddHttpClient<ResendClient>();
+builder.Services.Configure<ResendClientOptions>(options =>
+{
+    var apiKey = configuration["Resend:ApiKey"];
+    if (string.IsNullOrWhiteSpace(apiKey))
+        throw new MissingConfigException("Resend API key is null or empty");
+
+    options.ApiToken = apiKey;
+});
+builder.Services.AddTransient<IResend, ResendClient>();
 
 builder.Logging.ClearProviders().AddConsole();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
