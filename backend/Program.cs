@@ -129,10 +129,13 @@ builder
     .Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.Password.RequireUppercase = false;
+        options.Tokens.EmailConfirmationTokenProvider = "ShortEmail";
+        options.Tokens.PasswordResetTokenProvider = "ShortEmail";
     })
     .AddEntityFrameworkStores<DataContext>()
     .AddApiEndpoints()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddTokenProvider<EmailTokenProvider<User>>("ShortEmail");
 
 builder.Services.AddTransient<IEmailSender<User>, EmailSender>();
 
