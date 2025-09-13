@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(request: NextRequest) {
   const loggedOutOnly =
     request.nextUrl.pathname === "/login" ||
-    request.nextUrl.pathname === "/confirm-email";
+    request.nextUrl.pathname === "/confirm-email" ||
+    request.nextUrl.pathname === "/reset-password";
 
   try {
     const { isOk: isLoggedIn } = await sendApiRequestSSR("/users/perms-only", {
