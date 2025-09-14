@@ -490,7 +490,13 @@
     ]
   },
   "header": {
-    "links": ["Home", "Educational Profiles", "Students", "News", "Documents"],
+    "links": [
+      "Home",
+      "Educational Profiles",
+      "Students",
+      "Useful",
+      "Documents"
+    ],
     "searchBarPlaceholder": "Search",
     "theme": "Theme"
   },
