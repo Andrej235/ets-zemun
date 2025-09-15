@@ -515,7 +515,8 @@
       "andrej": "Andrej Nenadić",
       "aleksa": "Aleksa Anđelić"
     },
-    "openSource": "This website is open-source. View it on",
+    "openSource": "This website is open-source.",
+    "view": "View it on",
     "githubSuffix": ""
   },
   "scroller": {
