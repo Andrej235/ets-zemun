@@ -35,6 +35,14 @@ const data: {
           title: "documents.groups.6.documents.2",
           url: "/documents/aneks-2-2024-25.pdf",
         },
+        {
+          title: "documents.groups.6.documents.3",
+          url: "/documents/izvestaj-o-realizaciji-GPR-za-2024-25.docx",
+        },
+        {
+          title: "documents.groups.6.documents.4",
+          url: "/documents/izvestaj-o-radu-direktora-2024-2025.docx",
+        },
       ],
     },
     {
