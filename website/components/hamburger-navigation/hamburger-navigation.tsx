@@ -75,8 +75,8 @@ export default function HamburgerNavigation({
             </div>
 
             <div className="nav-bar-tab">
-              <Link href="/novosti" onClick={onRequestClose}>
-                <Icon name="newspaper" />
+              <Link href="/zvono" onClick={onRequestClose}>
+                <Icon name="bell" />
                 <p>{t("header.links.3")}</p>
               </Link>
             </div>
