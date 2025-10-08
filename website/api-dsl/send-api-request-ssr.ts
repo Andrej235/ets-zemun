@@ -48,6 +48,9 @@ export default async function sendApiRequestSSR<
     headers: {
       "Content-Type": "application/json",
     },
+    next: {
+      revalidate: 86400,
+    },
   };
 
   const response = await fetch(url, requestInit);

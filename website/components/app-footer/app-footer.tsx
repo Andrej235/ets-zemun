@@ -17,7 +17,7 @@ export default function AppFooter() {
         <div className="contact">
           <h1>{t("footer.contact.title")}</h1>
 
-          <div className="column">
+          <div className="column contact-options">
             <p>
               <Icon name="location-dot" />
               <span>{t("footer.contact.address")}</span>
@@ -25,16 +25,20 @@ export default function AppFooter() {
 
             <p>
               <Icon name="phone" />
-              <span>+381 11 316 1849</span>
+              <a href="tel:+381113161849">
+                <span>+381 11 316 1849</span>
+              </a>
             </p>
 
             <p>
               <Icon name="phone" />
-              <span>+381 11 261 8155</span>
+              <a href="tel:+381112618155">
+                <span>+381 11 261 8155</span>
+              </a>
             </p>
           </div>
 
-          <div className="emails">
+          <div className="emails contact-options">
             <p>
               <Icon name="user-tie" />
               <a href="mailto:direktor@ets-zemun.edu.rs">
@@ -101,7 +105,9 @@ export default function AppFooter() {
         <p className="open-source">
           <span>{t("footer.openSource")}</span>
           <a href="https://github.com/andrej235/ets-zemun" target="_blank">
-            <span>GitHub{t("footer.githubSuffix")}</span>
+            <span>
+              {t("footer.view")} GitHub{t("footer.githubSuffix")}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

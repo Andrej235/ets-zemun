@@ -29,7 +29,8 @@
         grid-column-end: 3;
       }
 
-      p {
+      p,
+      a {
         display: flex;
         gap: 1rem;
         align-items: center;
@@ -65,18 +66,16 @@
       }
 
       .contact {
-        grid-template-columns: 1fr;
-        width: 90%;
-        height: max-content;
-        max-width: 27rem;
+        display: block;
+        min-width: 90%;
 
         h1 {
-          grid-row: 1;
-          grid-column: 1;
-          grid-column-end: 2;
-
           display: flex;
           justify-content: center;
+        }
+
+        .contact-options {
+          margin: 0 auto;
         }
       }
     }
@@ -197,6 +196,13 @@
   }
 }
 
-.emails * {
+.contact-options * {
   padding: 2px 0;
+}
+
+@media screen and (max-width: 570px) {
+  .open-source {
+    justify-content: center;
+    flex-direction: column;
+  }
 }

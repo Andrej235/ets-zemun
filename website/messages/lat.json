@@ -522,7 +522,9 @@
         "documents": [
           "Godišnji plan 2025/2026",
           "Aneks 1 2024/2025",
-          "Aneks 2 2024/2025"
+          "Aneks 2 2024/2025",
+          "Izveštaj o realizaciji GPR za 2024/2025",
+          "Izveštaj o radu direktora 2024/2025"
         ]
       },
       {
@@ -563,7 +565,8 @@
       "andrej": "Andrej Nenadić",
       "aleksa": "Aleksa Anđelić"
     },
-    "openSource": "Ovaj sajt je open-source. Pogledajte ga na",
+    "openSource": "Ovaj sajt je open-source.",
+    "view": "Pogledajte ga na",
     "githubSuffix": "-u"
   },
   "scroller": {

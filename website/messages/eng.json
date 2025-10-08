@@ -525,7 +525,9 @@
         "documents": [
           "Annual Plan 2025/2026",
           "Annex 1 2024/2025",
-          "Annex 2 2024/2025"
+          "Annex 2 2024/2025",
+          "Report on the realization of the Annual Plan for 2024/2025",
+          "Report on the work of the director 2024/2025"
         ]
       },
       {
@@ -566,7 +568,8 @@
       "andrej": "Andrej Nenadić",
       "aleksa": "Aleksa Anđelić"
     },
-    "openSource": "This website is open-source. View it on",
+    "openSource": "This website is open-source.",
+    "view": "View it on",
     "githubSuffix": ""
   },
   "scroller": {

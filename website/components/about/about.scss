@@ -405,11 +405,12 @@
         background-color: transparent;
         border: 1px solid $accent;
         transition: 0.2s linear;
+        color: $text-primary;
 
         &:hover {
-          background-color: #fff;
+          background-color: $accent;
           border: none;
-          color: black;
+          color: white;
         }
       }
     }
