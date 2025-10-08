@@ -14,6 +14,21 @@
         ["6th class 12:15-13:00", "6th class 18:30-19:15"],
         ["7th class 13:05-13:50", "7th class 19:20-20:05"]
       ]
+    },
+    "header2": "Short Classes",
+    "table2": {
+      "header": ["Morning Shift", "Afternoon Shift"],
+      "content": [
+        ["1st class 07:45-08:15", "1st class 12:15-12:45"],
+        ["2nd class 08:20-08:50", "2nd class 12:50-13:20"],
+        ["Break - 20 min", "Break - 20 min"],
+        ["3rd class 09:10-09:40", "3rd class 13:40-14:10"],
+        ["4th class 09:45-10:15", "4th class 14:15-14:45"],
+        ["Break - 10 min", "Break - 10 min"],
+        ["5th class 10:25-10:55", "5th class 14:55-15:25"],
+        ["6th class 11:00-11:30", "6th class 15:30-16:00"],
+        ["7th class 11:35-12:05", "7th class 16:05-16:35"]
+      ]
     }
   },
   "about": {

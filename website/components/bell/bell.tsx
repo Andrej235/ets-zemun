@@ -61,6 +61,57 @@ export default async function Useful({
             </tbody>
           </table>
         </div>
+      </section>{" "}
+      <section>
+        <h1>{t("bell.header2")}</h1>
+        <div className="enrollment-table">
+          <table>
+            <thead>
+              <tr>
+                <th>{t("bell.table2.header.0")}</th>
+                <th>{t("bell.table2.header.1")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{t("bell.table2.content.0.0")}</td>
+                <td>{t("bell.table2.content.0.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.1.0")}</td>
+                <td>{t("bell.table2.content.1.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.2.0")}</td>
+                <td>{t("bell.table2.content.2.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.3.0")}</td>
+                <td>{t("bell.table2.content.3.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.4.0")}</td>
+                <td>{t("bell.table2.content.4.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.5.0")}</td>
+                <td>{t("bell.table2.content.5.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.6.0")}</td>
+                <td>{t("bell.table2.content.6.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.7.0")}</td>
+                <td>{t("bell.table2.content.7.1")}</td>
+              </tr>
+              <tr>
+                <td>{t("bell.table2.content.8.0")}</td>
+                <td>{t("bell.table2.content.8.1")}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   );
