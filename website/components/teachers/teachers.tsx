@@ -19,7 +19,7 @@ export default function Teachers({ teachers }: TeachersProps) {
       id: 1,
       name: t("teachers.staff.1.name"),
       title: t("teachers.staff.1.title"),
-      bio: "",
+      bio: "direktor@ets-zemun.edu.rs",
       email: "",
       image: "/images/teachers/radulovic.png",
       startOfOpenOfficeHoursFirstShift: null,
@@ -44,7 +44,7 @@ export default function Teachers({ teachers }: TeachersProps) {
       name: t("teachers.staff.3.name"),
       title: t("teachers.staff.3.title"),
       bio: "",
-      email: "",
+      email: "sekretar@ets-zemun.edu.rs",
       image: "/images/teachers/stojkovic.jpg",
       startOfOpenOfficeHoursFirstShift: null,
       startOfOpenOfficeHoursSecondShift: null,
@@ -56,7 +56,7 @@ export default function Teachers({ teachers }: TeachersProps) {
       name: t("teachers.staff.4.name"),
       title: t("teachers.staff.4.title"),
       bio: "",
-      email: "",
+      email: "rac@ets-zemun.edu.rs",
       image: "",
       startOfOpenOfficeHoursFirstShift: null,
       startOfOpenOfficeHoursSecondShift: null,
@@ -68,7 +68,7 @@ export default function Teachers({ teachers }: TeachersProps) {
       name: t("teachers.staff.5.name"),
       title: t("teachers.staff.5.title"),
       bio: "",
-      email: "",
+      email: "ppsluzba@ets-zemun.edu.rs",
       image: "",
       startOfOpenOfficeHoursFirstShift: null,
       startOfOpenOfficeHoursSecondShift: null,
@@ -80,7 +80,7 @@ export default function Teachers({ teachers }: TeachersProps) {
       name: t("teachers.staff.6.name"),
       title: t("teachers.staff.6.title"),
       bio: "",
-      email: "",
+      email: "ppsluzba@ets-zemun.edu.rs",
       image: "",
       startOfOpenOfficeHoursFirstShift: null,
       startOfOpenOfficeHoursSecondShift: null,
@@ -160,11 +160,7 @@ export default function Teachers({ teachers }: TeachersProps) {
           <div className="teacher-cards-container">
             <AnimatePresence mode="popLayout">
               {leadership.map((data) => (
-                <TeacherCard
-                  teacher={data}
-                  key={data.id}
-                  onSelect={() => setSelectedTeacher(data)}
-                />
+                <TeacherCard teacher={data} key={data.id} onSelect={() => {}} />
               ))}
             </AnimatePresence>
           </div>
