@@ -67,7 +67,7 @@ const AppHeader = forwardRef<HTMLDivElement>((_, ref) => {
             <Link href="/">{t("links.0")}</Link>
             <Link href="/profili">{t("links.1")}</Link>
             <Link href="/ucenici">{t("links.2")}</Link>
-            <Link href="/korisno">{t("links.3")}</Link>
+            <Link href="/zvono">{t("links.3")}</Link>
             <Link href="/dokumenta">{t("links.4")}</Link>
           </div>
 

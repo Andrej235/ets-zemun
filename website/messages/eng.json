@@ -1,4 +1,21 @@
 {
+  "bell": {
+    "header": "Bell Schedule",
+    "table": {
+      "header": ["Morning Shift", "Afternoon Shift"],
+      "content": [
+        ["1st class 07:45-08:30", "1st class 14:00-14:45"],
+        ["2nd class 08:35-09:20", "2nd class 14:50-15:35"],
+        ["Break - 20 min", "Break - 20 min"],
+        ["3rd class 09:40-10:25", "3rd class 15:55-16:40"],
+        ["4th class 10:30-11:15", "4th class 16:45-17:30"],
+        ["Break - 10 min", "Break - 10 min"],
+        ["5th class 11:25-12:10", "5th class 17:40-18:25"],
+        ["6th class 12:15-13:00", "6th class 18:30-19:15"],
+        ["7th class 13:05-13:50", "7th class 19:20-20:05"]
+      ]
+    }
+  },
   "about": {
     "hero": {
       "title": "Electrotechnical School \"Zemun\"",
@@ -10,8 +27,8 @@
           "description": "Review of our school's history and key moments."
         },
         "teachers": {
-          "title": "Teachers",
-          "description": "Learn more about our teachers and their qualifications."
+          "title": "Community",
+          "description": "Learn more about our teachers and leadership."
         },
         "enrollment": {
           "title": "Enrollment",
@@ -62,7 +79,26 @@
     }
   },
   "teachers": {
-    "title": "Teachers",
+    "title": "Community",
+    "leadership": "School Board",
+    "staff": {
+      "1": {
+        "name": "Jelena Radulović",
+        "title": "School Director, Mathematics Teacher"
+      },
+      "2": {
+        "name": "Radmila Vidović",
+        "title": "Assistant Director, Serbian Language and Literature Teacher"
+      },
+      "3": { "name": "Vesna Nikolić Stojković", "title": "Lawyer" },
+      "4": {
+        "name": "Snežana Vuletić",
+        "title": "Administrative and Financial Officer"
+      },
+      "5": { "name": "Ivana Maćešić", "title": "Psychologist" },
+      "6": { "name": "Anđela Mijović", "title": "Pedagogue" },
+      "7": { "name": "Biljana Nedić", "title": "Librarian" }
+    },
     "results": "Showing {filtered} out of {total} teachers",
     "description": "Meet our dedicated educators who are passionate about shaping the future of our students.",
     "searchPlaceholder": "Search teachers...",
@@ -490,13 +526,7 @@
     ]
   },
   "header": {
-    "links": [
-      "Home",
-      "Educational Profiles",
-      "Students",
-      "Useful",
-      "Documents"
-    ],
+    "links": ["Home", "Educational Profiles", "Students", "Bell", "Documents"],
     "searchBarPlaceholder": "Search",
     "theme": "Theme"
   },

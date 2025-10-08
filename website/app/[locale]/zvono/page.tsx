@@ -1,4 +1,4 @@
-import Useful from "@/components/useful/useful";
+import Bell from "@/components/bell/bell";
 import generateAlternateUrls from "@/lib/generate-alternate-urls";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -19,7 +19,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("profiles.title"),
       description: t("profiles.description"),
-      url: `${baseUrl}/${locale}/korisno`,
+      url: `${baseUrl}/${locale}/zvono`,
       siteName: t("siteName"),
       locale,
       type: "website",
@@ -29,8 +29,8 @@ export async function generateMetadata({
       title: t("profiles.title"),
       description: t("profiles.description"),
     },
-    alternates: generateAlternateUrls(locale, "korisno"),
+    alternates: generateAlternateUrls(locale, "zvono"),
   };
 }
 
-export default Useful;
+export default Bell;

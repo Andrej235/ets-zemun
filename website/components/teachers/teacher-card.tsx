@@ -66,21 +66,23 @@ const TeacherCard = forwardRef<HTMLDivElement, TeacherCardProps>(
               <p>{truncateBio(teacher.bio)}</p>
             </div>
 
-            <div className="subjects-section">
-              <h4 className="subjects-title">{t("teachers.subjects")}</h4>
-              <div className="subjects-tags">
-                {displayedSubjects.map((subject) => (
-                  <span key={subject.id} className="subject-tag">
-                    {subject.name}
-                  </span>
-                ))}
-                {hasMoreSubjects && (
-                  <span className="subject-tag more-subjects">
-                    +{teacher.subjects.length - 4} {t("teachers.more")}
-                  </span>
-                )}
+            {teacher.subjects && teacher.subjects.length > 0 && (
+              <div className="subjects-section">
+                <h4 className="subjects-title">{t("teachers.subjects")}</h4>
+                <div className="subjects-tags">
+                  {displayedSubjects.map((subject) => (
+                    <span key={subject.id} className="subject-tag">
+                      {subject.name}
+                    </span>
+                  ))}
+                  {hasMoreSubjects && (
+                    <span className="subject-tag more-subjects">
+                      +{teacher.subjects.length - 4} {t("teachers.more")}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="teacher-card-footer">
               <div className="contact-info">
@@ -111,7 +113,7 @@ const TeacherCard = forwardRef<HTMLDivElement, TeacherCardProps>(
         </div>
       </motion.div>
     );
-  }
+  },
 );
 
 TeacherCard.displayName = "TeacherCard";

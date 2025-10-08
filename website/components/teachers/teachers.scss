@@ -22,6 +22,20 @@
     }
   }
 
+  h2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: $text-secondary;
+  }
+
+  .leadership {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+  }
+
   .teachers-filters-container {
     display: flex;
     flex-direction: column;

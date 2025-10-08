@@ -14,6 +14,93 @@ type TeachersProps = {
 export default function Teachers({ teachers }: TeachersProps) {
   const t = useTranslations();
 
+  const leadership: Schema<"TeacherResponseDto">[] = [
+    {
+      id: 1,
+      name: t("teachers.staff.1.name"),
+      title: t("teachers.staff.1.title"),
+      bio: "",
+      email: "",
+      image: "/images/teachers/radulovic.png",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 2,
+      name: t("teachers.staff.2.name"),
+      title: t("teachers.staff.2.title"),
+      bio: "",
+      email: "",
+      image: "",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 3,
+      name: t("teachers.staff.3.name"),
+      title: t("teachers.staff.3.title"),
+      bio: "",
+      email: "",
+      image: "/images/teachers/stojkovic.jpg",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 4,
+      name: t("teachers.staff.4.name"),
+      title: t("teachers.staff.4.title"),
+      bio: "",
+      email: "",
+      image: "",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 5,
+      name: t("teachers.staff.5.name"),
+      title: t("teachers.staff.5.title"),
+      bio: "",
+      email: "",
+      image: "",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 6,
+      name: t("teachers.staff.6.name"),
+      title: t("teachers.staff.6.title"),
+      bio: "",
+      email: "",
+      image: "",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+    {
+      id: 7,
+      name: t("teachers.staff.7.name"),
+      title: t("teachers.staff.7.title"),
+      bio: "",
+      email: "",
+      image: "/images/teachers/nedic.jpg",
+      startOfOpenOfficeHoursFirstShift: null,
+      startOfOpenOfficeHoursSecondShift: null,
+      qualifications: [],
+      subjects: [],
+    },
+  ];
+
   const [selectedTeacher, setSelectedTeacher] =
     useState<Schema<"TeacherResponseDto"> | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -66,6 +153,24 @@ export default function Teachers({ teachers }: TeachersProps) {
           <p className="teachers-subtitle">{t("teachers.description")}</p>
         </div>
 
+        <div className="leadership">
+          <div className="leadership-header">
+            <h2>{t("teachers.leadership")}</h2>
+          </div>
+          <div className="teacher-cards-container">
+            <AnimatePresence mode="popLayout">
+              {leadership.map((data) => (
+                <TeacherCard
+                  teacher={data}
+                  key={data.id}
+                  onSelect={() => setSelectedTeacher(data)}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <h2>Nastavnici</h2>
         <div className="teachers-filters-container">
           <div className="teachers-filters">
             <div className="search-container">

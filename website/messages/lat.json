@@ -1,4 +1,21 @@
 {
+  "bell": {
+    "header": "Raspored zvona",
+    "table": {
+      "header": ["Prepodnevna smena", "Popodnevna smena"],
+      "content": [
+        ["1. čas 07:45-08:30", "1. čas 14:00-14:45"],
+        ["2. čas 08:35-09:20", "2. čas 14:50-15:35"],
+        ["Odmor - 20 min", "Odmor - 20 min"],
+        ["3. čas 09:40-10:25", "3. čas 15:55-16:40"],
+        ["4. čas 10:30-11:15", "4. čas 16:45-17:30"],
+        ["Odmor - 10 min", "Odmor - 10 min"],
+        ["5. čas 11:25-12:10", "5. čas 17:40-18:25"],
+        ["6. čas 12:15-13:00", "6. čas 18:30-19:15"],
+        ["7. čas 13:05-13:50", "7. čas 19:20-20:05"]
+      ]
+    }
+  },
   "about": {
     "hero": {
       "title": "Elektrotehnička škola \"Zemun\"",
@@ -10,8 +27,8 @@
           "description": "Pregled istorije naše škole i značajnih trenutaka."
         },
         "teachers": {
-          "title": "Nastavnici",
-          "description": "Saznajte više o našim nastavnicima i njihovim kvalifikacijama."
+          "title": "Kolektiv",
+          "description": "Saznajte više o našim nastavnicima i rukovodstvu."
         },
         "enrollment": {
           "title": "Upis i prijem",
@@ -62,7 +79,26 @@
     }
   },
   "teachers": {
-    "title": "Nastavnici",
+    "title": "Kolektiv",
+    "leadership": "Školski odbor",
+    "staff": {
+      "1": {
+        "name": "Jelena Radulović",
+        "title": "Direktor škole, nastavnik matematike"
+      },
+      "2": {
+        "name": "Radmila Vidović",
+        "title": "Pomoćnik direktora, nastavnik srpskog jezika i književnosti"
+      },
+      "3": { "name": "Vesna Nikolić Stojković", "title": "Dipl. pravnik" },
+      "4": {
+        "name": "Snežana Vuletić",
+        "title": "Administrativno finansijski radnik"
+      },
+      "5": { "name": "Ivana Maćešić", "title": "Psiholog" },
+      "6": { "name": "Anđela Mijović", "title": "Pedagog" },
+      "7": { "name": "Biljana Nedić", "title": "Bibliotekar" }
+    },
     "results": "Prikazano {filtered} od ukupno {total} nastavnika",
     "description": "Upoznajte naše posvećene nastavnike koji oblikuju budućnost naših učenika.",
     "searchPlaceholder": "Pretraži nastavnike...",
@@ -487,13 +523,7 @@
     ]
   },
   "header": {
-    "links": [
-      "Početna",
-      "Obrazovni profili",
-      "Učenici",
-      "Korisno",
-      "Dokumenta"
-    ],
+    "links": ["Početna", "Obrazovni profili", "Učenici", "Zvono", "Dokumenta"],
     "searchBarPlaceholder": "Pretraži",
     "theme": "Tema"
   },

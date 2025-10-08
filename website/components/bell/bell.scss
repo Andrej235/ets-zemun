@@ -1,0 +1,85 @@
+#useful-page {
+  justify-self: center;
+  max-width: 100svw;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  @media screen and (max-width: 1440px) {
+    padding: 0;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100svw;
+
+    h1 {
+      margin-top: 8rem;
+      margin-bottom: 8rem;
+      font-size: 4rem;
+      color: $text-primary;
+      text-align: center;
+    }
+
+    .enrollment-table {
+      max-width: 120rem;
+      width: 80%;
+      margin-bottom: 8rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0px 5px 15px $shadow;
+        border: 2px solid $background;
+        overflow: hidden;
+
+        caption {
+          margin-bottom: 3rem;
+          font-size: 3.5rem;
+          font-weight: 600;
+          color: $text-primary;
+        }
+
+        th,
+        td {
+          width: 25%;
+          padding: 2rem;
+          font-size: 1.6rem;
+          text-align: center;
+        }
+
+        th {
+          color: $text-primary;
+          background-color: $secondary-background;
+          border-bottom: 2px solid $background;
+        }
+
+        td {
+          color: $text-primary;
+          border-bottom: 1px solid $background;
+        }
+
+        tr:nth-child(even) {
+          background-color: $secondary-background;
+        }
+
+        tr:nth-child(odd) {
+          background-color: $secondary-background;
+        }
+
+        tr:hover {
+          background-color: $background;
+        }
+      }
+    }
+  }
+}
