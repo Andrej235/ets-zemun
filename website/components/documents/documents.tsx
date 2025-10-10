@@ -166,7 +166,7 @@ const data: {
       documents: [
         {
           title: "documents.groups.5.documents.0",
-          url: "/documents/statut.docx",
+          url: "/documents/statut.doc",
         },
       ],
     },
@@ -210,7 +210,7 @@ export default async function Documents({
                 ))}
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </div>
