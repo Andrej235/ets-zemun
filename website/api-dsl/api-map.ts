@@ -1705,6 +1705,23 @@ export type ApiMap = {
         }
       }
     },
+    '/teachers/open-hours': {
+      get: {
+        tags: [ 'Teacher' ],
+        parameters: [ { name: 'languageCode', in: 'query', schema: { type: 'string' } }, { name: 'offset', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'limit', in: 'query', schema: { type: 'integer', format: 'int32' } }, { name: 'q', in: 'query', schema: { type: 'string' } } ],
+        responses: {
+          '200': {
+            description: 'OK',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'application/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } }, 'text/json': { schema: { '$ref': '#/components/schemas/SimpleTeacherResponseDtoLazyLoadResponse' } } }
+          },
+          '400': {
+            description: 'Bad Request',
+            content: { 'text/plain': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'application/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } }, 'text/json': { schema: { '$ref': '#/components/schemas/ProblemDetails' } } }
+          },
+          '503': { description: 'Service Unavailable' }
+        }
+      }
+    },
     '/teachers/simple/for-subject/{subjectId}': {
       get: {
         tags: [ 'Teacher' ],

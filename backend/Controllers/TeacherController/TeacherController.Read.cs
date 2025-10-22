@@ -45,6 +45,24 @@ public partial class TeacherController
         return Ok(result.Value);
     }
 
+    [HttpGet("open-hours")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllOpenHours(
+        [FromQuery] string languageCode,
+        [FromQuery] int? offset,
+        [FromQuery] int? limit,
+        [FromQuery] string? q
+    )
+    {
+        var result = await teacherService.GetAllOpenHours(languageCode, offset, limit, q);
+
+        if (result.IsFailed)
+            return BadRequest("Language not found");
+
+        return Ok(result.Value);
+    }
+
     [HttpGet("simple/for-subject/{subjectId:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
