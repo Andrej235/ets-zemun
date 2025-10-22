@@ -96,24 +96,25 @@
   "teachers": {
     "title": "Community",
     "leadership": "School Board",
-    "staff": {
-      "1": {
+    "staff": [
+      {
         "name": "Jelena Radulović",
         "title": "School Director, Mathematics Teacher"
       },
-      "2": {
+      {
         "name": "Radmila Vidović",
-        "title": "Assistant Director, Serbian Language and Literature Teacher"
+        "title": "Assistant Director, Librarian, Serbian Language and Literature Teacher"
       },
-      "3": { "name": "Vesna Nikolić Stojković", "title": "Lawyer" },
-      "4": {
+      { "name": "Vesna Nikolić Stojković", "title": "Lawyer" },
+      {
         "name": "Snežana Vuletić",
         "title": "Administrative and Financial Officer"
       },
-      "5": { "name": "Ivana Maćešić", "title": "Psychologist" },
-      "6": { "name": "Anđela Mijović", "title": "Pedagogue" },
-      "7": { "name": "Biljana Nedić", "title": "Librarian" }
-    },
+      { "name": "Ivana Maćešić", "title": "Psychologist" },
+      { "name": "Anđela Mijović", "title": "Pedagogue" },
+      { "name": "Dobrila Injac", "title": "Librarian" },
+      { "name": "Marija Milinković", "title": "Librarian" }
+    ],
     "results": "Showing {filtered} out of {total} teachers",
     "description": "Meet our dedicated educators who are passionate about shaping the future of our students.",
     "searchPlaceholder": "Search teachers...",

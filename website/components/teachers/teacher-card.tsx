@@ -7,8 +7,8 @@ import Image from "next/image";
 import { forwardRef } from "react";
 
 type TeacherCardProps = {
-  readonly teacher: Schema<"TeacherResponseDto">;
-  readonly onSelect: () => void;
+  teacher: Schema<"TeacherResponseDto">;
+  onSelect: (() => void) | null;
 };
 
 const TeacherCard = forwardRef<HTMLDivElement, TeacherCardProps>(
@@ -30,7 +30,7 @@ const TeacherCard = forwardRef<HTMLDivElement, TeacherCardProps>(
       <motion.div
         ref={ref}
         className="teacher-card"
-        onClick={onSelect}
+        onClick={onSelect ?? undefined}
         layout
         initial={{
           opacity: 0,
@@ -95,25 +95,27 @@ const TeacherCard = forwardRef<HTMLDivElement, TeacherCardProps>(
                 </a>
               </div>
 
-              <button className="view-profile-btn">
-                {t("teachers.viewProfile")}
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
+              {onSelect && (
+                <button className="view-profile-btn">
+                  {t("teachers.viewProfile")}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
         </div>
       </motion.div>
     );
-  },
+  }
 );
 
 TeacherCard.displayName = "TeacherCard";
