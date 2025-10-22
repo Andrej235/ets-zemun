@@ -84,8 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="flex-row items-center gap-4 px-4">
-        <Image src="/logo.png" alt="logo" width={32} height={32} />
-        <h1 className="font-normal">Admin Panel</h1>
+        <Image src="/logo.png" alt="logo" width={32} height={32} unoptimized />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navItems} />

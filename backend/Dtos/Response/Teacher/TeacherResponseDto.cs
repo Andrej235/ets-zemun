@@ -11,8 +11,8 @@ public class TeacherResponseDto
     public string Bio { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string Image { get; set; } = null!;
-    public TimeOnly? StartOfOpenOfficeHoursFirstShift { get; set; }
-    public TimeOnly? StartOfOpenOfficeHoursSecondShift { get; set; }
+    public string? StartOfOpenOfficeHoursFirstShift { get; set; }
+    public string? StartOfOpenOfficeHoursSecondShift { get; set; }
     public IEnumerable<QualificationResponseDto> Qualifications { get; set; } = [];
     public IEnumerable<SimpleSubjectResponseDto> Subjects { get; set; } = [];
 }

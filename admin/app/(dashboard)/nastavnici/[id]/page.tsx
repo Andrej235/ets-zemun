@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import compressImage from "@/lib/compress-image";
@@ -182,8 +183,10 @@ export default function TeacherDetailPage() {
         id: teacher.id,
         email: teacher.email,
         image: imageBase64,
-        startOfOpenOfficeHoursFirstShift: null,
-        startOfOpenOfficeHoursSecondShift: null,
+        startOfOpenOfficeHoursFirstShift:
+          teacher.startOfOpenOfficeHoursFirstShift,
+        startOfOpenOfficeHoursSecondShift:
+          teacher.startOfOpenOfficeHoursSecondShift,
       },
     });
 
@@ -279,7 +282,7 @@ export default function TeacherDetailPage() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="space-y-2">
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground">
                       Email
@@ -287,92 +290,163 @@ export default function TeacherDetailPage() {
                     <p>{teacher.email}</p>
                   </div>
 
-                  <div className="mt-4">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="w-full justify-center"
-                          type="button"
-                        >
-                          Izmeni email
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Izmeni email</DialogTitle>
-                          <DialogDescription>
-                            Unesite novu email adresu za nastavnika.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <Input type="email" defaultValue={teacher.email} />
-                          <DialogFooter className="grid grid-cols-2">
-                            <DialogClose asChild>
-                              <Button
-                                variant="outline"
-                                className="w-full justify-center"
-                                type="button"
-                              >
-                                Otkaži
-                              </Button>
-                            </DialogClose>
+                  <div>
+                    <h3 className="text-sm font-medium text-muted-foreground">
+                      Otvorena vrata kada su I i III razred prva smena
+                    </h3>
+                    <p>
+                      {teacher.startOfOpenOfficeHoursFirstShift ||
+                        "Nije postavljeno"}
+                    </p>
+                  </div>
 
-                            <DialogClose asChild>
-                              <Button
-                                className="w-full justify-center"
-                                type="submit"
-                                onClick={async (e) => {
-                                  const editedEmail = (
-                                    e.target as HTMLElement
-                                  ).parentElement?.parentElement?.querySelector(
-                                    "input",
-                                  )?.value;
-                                  if (!editedEmail) return;
-
-                                  const promise = sendApiRequest(`/teachers`, {
-                                    method: "put",
-                                    payload: {
-                                      id: teacher.id,
-                                      image: teacher.image,
-                                      email: editedEmail,
-                                      startOfOpenOfficeHoursFirstShift: null,
-                                      startOfOpenOfficeHoursSecondShift: null,
-                                    },
-                                  });
-
-                                  setTeacher((prev) => ({
-                                    ...prev!,
-                                    email: editedEmail,
-                                  }));
-
-                                  toast.promise(
-                                    promise.then((response) => {
-                                      if (!response.isOk)
-                                        throw new Error(
-                                          response.error?.message ??
-                                            "Neuspešno ažuriranje email adrese",
-                                        );
-                                    }),
-                                    {
-                                      loading: "Ažuriranje email adrese...",
-                                      success:
-                                        "Email adresa je uspešno ažurirana",
-                                      error:
-                                        "Neuspešno ažuriranje email adrese",
-                                    },
-                                  );
-                                }}
-                              >
-                                Ažuriraj
-                              </Button>
-                            </DialogClose>
-                          </DialogFooter>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                  <div>
+                    <h3 className="text-sm font-medium text-muted-foreground">
+                      Otvorena vrata kada su I i III razred druga smena
+                    </h3>
+                    <p>
+                      {teacher.startOfOpenOfficeHoursSecondShift ||
+                        "Nije postavljeno"}
+                    </p>
                   </div>
                 </div>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-center"
+                      type="button"
+                    >
+                      Izmeni podatke
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>
+                        Izmeni podatke o {teacher.translations[0].value.name}
+                      </DialogTitle>
+                      <DialogDescription>
+                        Unesite nove podatke za nastavnika.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          type="email"
+                          id="email"
+                          defaultValue={teacher.email}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="hours-1">
+                          Otvorena vrata kada su I i III razred prva smena
+                        </Label>
+                        <Input
+                          id="hours-1"
+                          defaultValue={
+                            teacher.startOfOpenOfficeHoursFirstShift ?? ""
+                          }
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="hours-2">
+                          Otvorena vrata kada su I i III razred druga smena
+                        </Label>
+                        <Input
+                          id="hours-2"
+                          defaultValue={
+                            teacher.startOfOpenOfficeHoursSecondShift ?? ""
+                          }
+                        />
+                      </div>
+
+                      <DialogFooter className="grid grid-cols-2">
+                        <DialogClose asChild>
+                          <Button
+                            variant="outline"
+                            className="w-full justify-center"
+                            type="button"
+                          >
+                            Otkaži
+                          </Button>
+                        </DialogClose>
+
+                        <DialogClose asChild>
+                          <Button
+                            className="w-full justify-center"
+                            type="submit"
+                            onClick={async (e) => {
+                              const parent = (e.target as HTMLElement)
+                                .parentElement?.parentElement;
+
+                              const editedEmail = (
+                                parent?.querySelector(
+                                  "#email",
+                                ) as HTMLInputElement
+                              )?.value;
+                              const hours1 = (
+                                parent?.querySelector(
+                                  "#hours-1",
+                                ) as HTMLInputElement
+                              )?.value;
+                              const hours2 = (
+                                parent?.querySelector(
+                                  "#hours-2",
+                                ) as HTMLInputElement
+                              )?.value;
+
+                              if (!editedEmail) return;
+
+                              const promise = sendApiRequest(`/teachers`, {
+                                method: "put",
+                                payload: {
+                                  id: teacher.id,
+                                  image: teacher.image,
+                                  email: editedEmail,
+                                  startOfOpenOfficeHoursFirstShift:
+                                    hours1 || null,
+                                  startOfOpenOfficeHoursSecondShift:
+                                    hours2 || null,
+                                },
+                              });
+
+                              setTeacher((prev) => ({
+                                ...prev!,
+                                email: editedEmail,
+                                startOfOpenOfficeHoursFirstShift:
+                                  hours1 || null,
+                                startOfOpenOfficeHoursSecondShift:
+                                  hours2 || null,
+                              }));
+
+                              toast.promise(
+                                promise.then((response) => {
+                                  if (!response.isOk)
+                                    throw new Error(
+                                      response.error?.message ??
+                                        "Neuspešno ažuriranje email adrese",
+                                    );
+                                }),
+                                {
+                                  loading: "Ažuriranje podataka...",
+                                  success: "Podaci su uspešno ažurirani",
+                                  error: "Neuspešno ažuriranje podataka",
+                                },
+                              );
+                            }}
+                          >
+                            Ažuriraj
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </CardContent>
           </Card>

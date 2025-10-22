@@ -2190,11 +2190,7 @@ export type ApiMap = {
       },
       AdminFullSubjectTranslationDto: { type: 'object', properties: { name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
       AdminFullSubjectTranslationDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullSubjectTranslationDto' } }, additionalProperties: false },
-      AdminFullTeacherResponseDto: {
-        type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDtoTranslationWrapper' } }, email: { type: 'string' }, image: { type: 'string' }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/AdminQualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
-        additionalProperties: false
-      },
+      AdminFullTeacherResponseDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, translations: { type: 'array', items: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDtoTranslationWrapper' } }, email: { type: 'string' }, image: { type: 'string' }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/AdminQualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } }, startOfOpenOfficeHoursFirstShift: { type: 'string', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', nullable: true } }, additionalProperties: false },
       AdminFullTeacherTranslationResponseDto: { type: 'object', properties: { name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       AdminFullTeacherTranslationResponseDtoTranslationWrapper: { type: 'object', properties: { languageCode: { type: 'string' }, value: { '$ref': '#/components/schemas/AdminFullTeacherTranslationResponseDto' } }, additionalProperties: false },
       AdminNewsPreviewResponseDto: {
@@ -2312,7 +2308,7 @@ export type ApiMap = {
       SubjectType: { enum: [ 'Vocational', 'General' ], type: 'string' },
       TeacherResponseDto: {
         type: 'object',
-        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
+        properties: { id: { type: 'integer', format: 'int32' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', nullable: true }, qualifications: { type: 'array', items: { '$ref': '#/components/schemas/QualificationResponseDto' } }, subjects: { type: 'array', items: { '$ref': '#/components/schemas/SimpleSubjectResponseDto' } } },
         additionalProperties: false
       },
       TeacherResponseDtoLazyLoadResponse: { type: 'object', properties: { items: { type: 'array', items: { '$ref': '#/components/schemas/TeacherResponseDto' } }, loadedCount: { type: 'integer', format: 'int32' }, totalCount: { type: 'integer', format: 'int32' }, nextCursor: { type: 'string', nullable: true } }, additionalProperties: false },
@@ -2354,7 +2350,7 @@ export type ApiMap = {
         additionalProperties: false
       },
       UpdateSubjectTranslationRequestDto: { type: 'object', properties: { subjectId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, description: { type: 'string' } }, additionalProperties: false },
-      UpdateTeacherRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', format: 'time', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', format: 'time', nullable: true } }, additionalProperties: false },
+      UpdateTeacherRequestDto: { type: 'object', properties: { id: { type: 'integer', format: 'int32' }, email: { type: 'string' }, image: { type: 'string' }, startOfOpenOfficeHoursFirstShift: { type: 'string', nullable: true }, startOfOpenOfficeHoursSecondShift: { type: 'string', nullable: true } }, additionalProperties: false },
       UpdateTeacherTranslationRequestDto: { type: 'object', properties: { teacherId: { type: 'integer', format: 'int32' }, languageCode: { type: 'string' }, name: { type: 'string' }, title: { type: 'string' }, bio: { type: 'string' } }, additionalProperties: false },
       UserResponseDto: { type: 'object', properties: { username: { type: 'string' }, email: { type: 'string' }, role: { type: 'string' }, emailConfirmed: { type: 'boolean' } }, additionalProperties: false }
     }

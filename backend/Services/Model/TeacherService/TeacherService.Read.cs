@@ -204,6 +204,8 @@ public partial class TeacherService : ITeacherService
                 Id = x.Id,
                 Email = x.Email,
                 Image = x.Image,
+                StartOfOpenOfficeHoursFirstShift = x.StartOfOpenOfficeHoursFirstShift,
+                StartOfOpenOfficeHoursSecondShift = x.StartOfOpenOfficeHoursSecondShift,
                 Qualifications = x.Qualifications.Select(
                     q => new Dtos.Response.Qualification.AdminQualificationResponseDto()
                     {
