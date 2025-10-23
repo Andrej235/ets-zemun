@@ -139,8 +139,8 @@
           "title": "Qualifications & Certifications"
         },
         "contact": {
-          "openOfficeHoursFirstShift": "Open Office Hours First Shift",
-          "openOfficeHoursSecondShift": "Open Office Hours Second Shift",
+          "openOfficeHoursFirstShift": "Open Office Hours When the First and Third Grades are in the First Shift",
+          "openOfficeHoursSecondShift": "Open Office Hours When the Second and Fourth Grades are in the Second Shift",
           "label": "Contact",
           "title": "Get in Touch",
           "email": "Email"
