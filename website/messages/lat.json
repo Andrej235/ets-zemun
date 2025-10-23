@@ -139,6 +139,8 @@
           "title": "Kvalifikacije i sertifikati"
         },
         "contact": {
+          "openOfficeHoursFirstShift": "Otvorena vrata prva smena",
+          "openOfficeHoursSecondShift": "Otvorena vrata druga smena",
           "label": "Kontakt",
           "title": "Kontaktirajte",
           "email": "Email"

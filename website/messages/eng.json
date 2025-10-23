@@ -139,6 +139,8 @@
           "title": "Qualifications & Certifications"
         },
         "contact": {
+          "openOfficeHoursFirstShift": "Open Office Hours First Shift",
+          "openOfficeHoursSecondShift": "Open Office Hours Second Shift",
           "label": "Contact",
           "title": "Get in Touch",
           "email": "Email"
