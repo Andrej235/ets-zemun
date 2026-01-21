@@ -8,7 +8,6 @@ import localeToLangCode from "@/lib/locale-to-lang-code";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./about.scss";
-import ImportantNotice from "../important-notice/important-notice";
 
 export default async function About({
   params,
@@ -97,8 +96,6 @@ export default async function About({
           </div>
         </div>
       </section>
-
-      <ImportantNotice />
 
       <section className="school-preview-cards-container">
         <SchoolPreviewCard
