@@ -123,6 +123,10 @@ const data: {
           title: "documents.groups.2.documents.1",
           url: "/documents/pravilnik-o-merama-zastite-ucenika.docx",
         },
+        {
+          title: "documents.groups.2.documents.2",
+          url: "/documents/pravilnik-o-video-nadzoru.docx",
+        },
       ],
     },
     {
