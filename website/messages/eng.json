@@ -840,9 +840,13 @@
           }
         ],
         "priceList": [
-          { "itemName": "REGISTRATION FEE", "itemPrice": "7.500,00 din." },
+          { "itemName": "REGISTRATION FEE", "itemPrice": "4.500,00 din." },
           { "itemName": "RENEWAL FEE", "itemPrice": "1.500,00 din." },
           { "itemName": "EXAM FEE", "itemPrice": "1.000,00 din." },
+          {
+            "itemName": "CONSULTATIVE TEACHING HOUR (GROUP UP TO 15 STUDENTS)",
+            "itemPrice": "200,00 din."
+          },
           { "itemName": "PRACTICAL EXAM FEE", "itemPrice": "1.000,00 din." },
           { "itemName": "FINAL EXAM FEE", "itemPrice": "2.500,00 din." },
           { "itemName": "MATURSKY EXAM FEE", "itemPrice": "3.000,00 din." }

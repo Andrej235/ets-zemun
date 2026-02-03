@@ -837,7 +837,7 @@
           }
         ],
         "priceList": [
-          { "itemName": "UPIS GODINE", "itemPrice": "7.500,00 din." },
+          { "itemName": "UPIS GODINE", "itemPrice": "4.500,00 din." },
           { "itemName": "OBNOVA GODINE", "itemPrice": "1.500,00 din." },
           {
             "itemName": "ISPIT SA PISMENIM RADOM",
@@ -845,8 +845,8 @@
           },
           { "itemName": "ISPIT BEZ PISMENOG", "itemPrice": "1.000,00 din." },
           {
-            "itemName": "ISPIT IZ PRAKTIČNE NASTAVE",
-            "itemPrice": "1.000,00 din."
+            "itemName": "ČAS KONSULTATIVNE NASTAVE (GRUPA DO 15 UČENIKA)",
+            "itemPrice": "200,00 din."
           },
           { "itemName": "ISPIT SA VEŽBAMA", "itemPrice": "1.000,00 din." },
           { "itemName": "ZAVRŠNI ISPIT", "itemPrice": "2.500,00 din." },
