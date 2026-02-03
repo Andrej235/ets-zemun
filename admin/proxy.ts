@@ -1,7 +1,7 @@
 import sendApiRequestSSR from "@/api-dsl/send-api-request-ssr";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const loggedOutOnly =
     request.nextUrl.pathname === "/login" ||
     request.nextUrl.pathname === "/confirm-email" ||
