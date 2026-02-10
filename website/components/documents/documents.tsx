@@ -43,6 +43,10 @@ const data: {
           title: "documents.groups.6.documents.4",
           url: "/documents/izvestaj-o-radu-direktora-2024-2025.docx",
         },
+        {
+          title: "documents.groups.6.documents.5",
+          url: "/documents/informator-o-radu-skole-2024.docx",
+        },
       ],
     },
     {
