@@ -836,12 +836,27 @@
           }
         ],
         "priceList": [
-          { "itemName": "REGISTRATION FEE", "itemPrice": "7.500,00 din." },
-          { "itemName": "RENEWAL FEE", "itemPrice": "1.500,00 din." },
-          { "itemName": "EXAM FEE", "itemPrice": "1.000,00 din." },
-          { "itemName": "PRACTICAL EXAM FEE", "itemPrice": "1.000,00 din." },
-          { "itemName": "FINAL EXAM FEE", "itemPrice": "2.500,00 din." },
-          { "itemName": "MATURSKY EXAM FEE", "itemPrice": "3.000,00 din." }
+          { "itemName": "ENROLLMENT", "itemPrice": "4,500.00 RSD" },
+          { "itemName": "YEAR RENEWAL", "itemPrice": "1,500.00 RSD" },
+          { "itemName": "EXAM", "itemPrice": "1,000.00 RSD" },
+          {
+            "itemName": "EXAM WITH WRITTEN ASSIGNMENT",
+            "itemPrice": "1,000.00 RSD"
+          },
+          {
+            "itemName": "EXAM WITH PRACTICAL EXERCISES",
+            "itemPrice": "1,000.00 RSD"
+          },
+          {
+            "itemName": "PRACTICAL TRAINING EXAM",
+            "itemPrice": "1,000.00 RSD"
+          },
+          {
+            "itemName": "CONSULTATIVE CLASS (GROUP UP TO 15 STUDENTS)",
+            "itemPrice": "250.00 RSD"
+          },
+          { "itemName": "FINAL EXAM", "itemPrice": "2,500.00 RSD" },
+          { "itemName": "GRADUATION EXAM", "itemPrice": "3,000.00 RSD" }
         ],
         "paymentMethod": {
           "title": "INVOICE FOR PART-TIME STUDENTS",

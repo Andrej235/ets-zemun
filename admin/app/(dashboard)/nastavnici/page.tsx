@@ -46,7 +46,7 @@ export default function TeachersPage() {
         const data = await sendApiRequest("/teachers/admin", {
           method: "get",
         });
-        setTeachers(data.response!);
+        setTeachers(data.response ?? []);
       } catch {
         toast.error("Neuspešno učitavanje nastavnika");
       } finally {
