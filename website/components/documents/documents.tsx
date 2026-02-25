@@ -43,6 +43,10 @@ const data: {
           title: "documents.groups.6.documents.4",
           url: "/documents/izvestaj-o-radu-direktora-2024-2025.docx",
         },
+        {
+          title: "documents.groups.6.documents.5",
+          url: "/documents/informator-o-radu-skole-2024.docx",
+        },
       ],
     },
     {
@@ -123,6 +127,10 @@ const data: {
           title: "documents.groups.2.documents.1",
           url: "/documents/pravilnik-o-merama-zastite-ucenika.docx",
         },
+        {
+          title: "documents.groups.2.documents.2",
+          url: "/documents/pravilnik-o-video-nadzoru.docx",
+        },
       ],
     },
     {
@@ -166,7 +174,7 @@ const data: {
       documents: [
         {
           title: "documents.groups.5.documents.0",
-          url: "/documents/statut.docx",
+          url: "/documents/statut.doc",
         },
       ],
     },
@@ -210,7 +218,7 @@ export default async function Documents({
                 ))}
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </div>

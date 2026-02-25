@@ -22,6 +22,12 @@ public interface ITeacherService
         int? limit,
         string? search
     );
+    Task<Result<LazyLoadResponse<TeacherOpenHoursResponseDto>>> GetAllOpenHours(
+        string languageCode,
+        int? offset,
+        int? limit,
+        string? search
+    );
     Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllForSubject(
         string languageCode,
         int subjectId,

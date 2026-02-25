@@ -111,6 +111,62 @@ public partial class TeacherService : ITeacherService
         return Result.Ok(result);
     }
 
+    public async Task<Result<LazyLoadResponse<TeacherOpenHoursResponseDto>>> GetAllOpenHours(
+        string languageCode,
+        int? offset,
+        int? limit,
+        string? search
+    )
+    {
+        var teachersResult = await readRangeSelectedService.Get(
+            x => new TeacherOpenHoursResponseDto()
+            {
+                Id = x.Id,
+                Name = x.Translations.First(x => x.LanguageCode == languageCode).Name,
+                StartOfOpenOfficeHoursFirstShift = x.StartOfOpenOfficeHoursFirstShift,
+                StartOfOpenOfficeHoursSecondShift = x.StartOfOpenOfficeHoursSecondShift,
+            },
+            search is null
+                ? null
+                : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%")),
+            offset,
+            limit ?? 10,
+            q =>
+                q.Include(x => x.Translations.Where(t => t.LanguageCode == languageCode))
+                    .OrderByDescending(x => x.Id)
+        );
+
+        if (teachersResult.IsFailed)
+            return Result.Fail<LazyLoadResponse<TeacherOpenHoursResponseDto>>(
+                teachersResult.Errors
+            );
+
+        LazyLoadResponse<TeacherOpenHoursResponseDto> result = new()
+        {
+            Items = teachersResult.Value,
+            LoadedCount = teachersResult.Value.Count(),
+            TotalCount = await hybridCache.GetOrCreateAsync(
+                $"teachers-count-q-{search ?? ""}",
+                async (_) =>
+                {
+                    var result = await countService.Count(
+                        search is null
+                            ? null
+                            : x => x.Translations.Any(t => EF.Functions.Like(t.Name, $"%{search}%"))
+                    );
+                    return result.Value;
+                },
+                new() { Expiration = TimeSpan.FromHours(6) }
+            ),
+        };
+        result.NextCursor =
+            result.LoadedCount < (limit ?? 10)
+                ? null
+                : $"teacher/simple?languageCode={languageCode}&offset={(offset ?? 0) + (limit ?? 10)}&limit={limit ?? 10}{(search is null ? "" : "&q=" + search)}";
+
+        return Result.Ok(result);
+    }
+
     public async Task<Result<LazyLoadResponse<SimpleTeacherResponseDto>>> GetAllForSubject(
         string languageCode,
         int subjectId,
@@ -204,6 +260,8 @@ public partial class TeacherService : ITeacherService
                 Id = x.Id,
                 Email = x.Email,
                 Image = x.Image,
+                StartOfOpenOfficeHoursFirstShift = x.StartOfOpenOfficeHoursFirstShift,
+                StartOfOpenOfficeHoursSecondShift = x.StartOfOpenOfficeHoursSecondShift,
                 Qualifications = x.Qualifications.Select(
                     q => new Dtos.Response.Qualification.AdminQualificationResponseDto()
                     {

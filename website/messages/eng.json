@@ -96,24 +96,25 @@
   "teachers": {
     "title": "Community",
     "leadership": "School Board",
-    "staff": {
-      "1": {
+    "staff": [
+      {
         "name": "Jelena Radulović",
         "title": "School Director, Mathematics Teacher"
       },
-      "2": {
+      {
         "name": "Radmila Vidović",
-        "title": "Assistant Director, Serbian Language and Literature Teacher"
+        "title": "Assistant Director, Librarian, Serbian Language and Literature Teacher"
       },
-      "3": { "name": "Vesna Nikolić Stojković", "title": "Lawyer" },
-      "4": {
+      { "name": "Vesna Nikolić Stojković", "title": "Lawyer" },
+      {
         "name": "Snežana Vuletić",
         "title": "Administrative and Financial Officer"
       },
-      "5": { "name": "Ivana Maćešić", "title": "Psychologist" },
-      "6": { "name": "Anđela Mijović", "title": "Pedagogue" },
-      "7": { "name": "Biljana Nedić", "title": "Librarian" }
-    },
+      { "name": "Ivana Maćešić", "title": "Psychologist" },
+      { "name": "Anđela Mijović", "title": "Pedagogue" },
+      { "name": "Dobrila Injac", "title": "Librarian" },
+      { "name": "Marija Milinković", "title": "Librarian" }
+    ],
     "results": "Showing {filtered} out of {total} teachers",
     "description": "Meet our dedicated educators who are passionate about shaping the future of our students.",
     "searchPlaceholder": "Search teachers...",
@@ -138,6 +139,8 @@
           "title": "Qualifications & Certifications"
         },
         "contact": {
+          "openOfficeHoursFirstShift": "Open Office Hours When the First and Third Grades are in the First Shift",
+          "openOfficeHoursSecondShift": "Open Office Hours When the Second and Fourth Grades are in the Second Shift",
           "label": "Contact",
           "title": "Get in Touch",
           "email": "Email"
@@ -498,7 +501,8 @@
         "title": "Safety Protocols",
         "documents": [
           "Safety and Health at Work Regulations",
-          "Regulations on Measures, Methods, and Procedures for the Protection and Safety of Students during School Stay and all Activities Organized"
+          "Regulations on Measures, Methods, and Procedures for the Protection and Safety of Students during School Stay and all Activities Organized",
+          "Regulations on Video Surveillance"
         ]
       },
       {
@@ -527,7 +531,8 @@
           "Annex 1 2024/2025",
           "Annex 2 2024/2025",
           "Report on the realization of the Annual Plan for 2024/2025",
-          "Report on the work of the director 2024/2025"
+          "Report on the work of the director 2024/2025",
+          "School Work Information 2024"
         ]
       },
       {
@@ -815,24 +820,24 @@
             "exam": "01-31.10.2025."
           },
           {
-            "term": "DECEMBER",
+            "term": "DECEMBER/JANUARY",
             "registration": "10-28.11.2025.",
             "exam": "08-31.12.2025."
           },
           {
-            "term": "MARCH",
-            "registration": "03-21.02.2026.",
-            "exam": "09-31.03.2026."
+            "term": "APRIL",
+            "registration": "02-27.03.2026.",
+            "exam": "01-30.04.2026."
           },
           {
-            "term": "MAY",
-            "registration": "06-30.04.2026.",
-            "exam": "04-26.05.2026."
+            "term": "MAY/JUNE",
+            "registration": "11-28.05.2026.",
+            "exam": "01-19.06.2026."
           },
           {
             "term": "AUGUST",
-            "registration": "08-30.06.2026.",
-            "exam": "17-28.08.2026."
+            "registration": "01-19.06.2026.",
+            "exam": "17-31.08.2026."
           }
         ],
         "priceList": [

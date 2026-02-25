@@ -96,24 +96,25 @@
   "teachers": {
     "title": "Kolektiv",
     "leadership": "Školski odbor",
-    "staff": {
-      "1": {
+    "staff": [
+      {
         "name": "Jelena Radulović",
         "title": "Direktor škole, nastavnik matematike"
       },
-      "2": {
+      {
         "name": "Radmila Vidović",
-        "title": "Pomoćnik direktora, nastavnik srpskog jezika i književnosti"
+        "title": "Pomoćnik direktora, bibliotekar, nastavnik srpskog jezika i književnosti"
       },
-      "3": { "name": "Vesna Nikolić Stojković", "title": "Dipl. pravnik" },
-      "4": {
+      { "name": "Vesna Nikolić Stojković", "title": "Dipl. pravnik" },
+      {
         "name": "Snežana Vuletić",
         "title": "Administrativno finansijski radnik"
       },
-      "5": { "name": "Ivana Maćešić", "title": "Psiholog" },
-      "6": { "name": "Anđela Mijović", "title": "Pedagog" },
-      "7": { "name": "Biljana Nedić", "title": "Bibliotekar" }
-    },
+      { "name": "Ivana Maćešić", "title": "Psiholog" },
+      { "name": "Anđela Mijović", "title": "Pedagog" },
+      { "name": "Dobrila Injac", "title": "Bibliotekar" },
+      { "name": "Marija Milinković", "title": "Bibliotekar" }
+    ],
     "results": "Prikazano {filtered} od ukupno {total} nastavnika",
     "description": "Upoznajte naše posvećene nastavnike koji oblikuju budućnost naših učenika.",
     "searchPlaceholder": "Pretraži nastavnike...",
@@ -138,6 +139,8 @@
           "title": "Kvalifikacije i sertifikati"
         },
         "contact": {
+          "openOfficeHoursFirstShift": "Otvorena vrata kada su I i III razred prva smena",
+          "openOfficeHoursSecondShift": "Otvorena vrata kada su II i IV razred prva smena",
           "label": "Kontakt",
           "title": "Kontaktirajte",
           "email": "Email"
@@ -495,7 +498,8 @@
         "title": "Bezbednosni protokoli",
         "documents": [
           "Pravilnik o bezbednosti i zdravlju na radu",
-          "Pravilnik o merama, načinu i postupku zaštite i bezbednosti učenika za vreme boravka u školi i svih aktivnosti koje organizuje"
+          "Pravilnik o merama, načinu i postupku zaštite i bezbednosti učenika za vreme boravka u školi i svih aktivnosti koje organizuje",
+          "Pravilnik o video nadzoru"
         ]
       },
       {
@@ -524,7 +528,8 @@
           "Aneks 1 2024/2025",
           "Aneks 2 2024/2025",
           "Izveštaj o realizaciji GPR za 2024/2025",
-          "Izveštaj o radu direktora 2024/2025"
+          "Izveštaj o radu direktora 2024/2025",
+          "Informator o radu Škole 2024"
         ]
       },
       {
@@ -812,24 +817,24 @@
             "exam": "01-31.10.2025."
           },
           {
-            "term": "DECEMBARSKI",
+            "term": "DECEMBARSKO/JANUARSKI",
             "registration": "10-28.11.2025.",
             "exam": "08-31.12.2025."
           },
           {
-            "term": "MARTOVSKI",
-            "registration": "03-21.02.2026.",
-            "exam": "09-31.03.2026."
+            "term": "APRILSKI",
+            "registration": "02-27.03.2026.",
+            "exam": "01-30.04.2026."
           },
           {
-            "term": "MAJSKI",
-            "registration": "06-30.04.2026.",
-            "exam": "04-26.05.2026."
+            "term": "MAJSKO/JUNSKI",
+            "registration": "11-28.05.2026.",
+            "exam": "01-19.06.2026."
           },
           {
             "term": "AVGUSTOVSKI",
-            "registration": "08-30.06.2026.",
-            "exam": "17-28.08.2026."
+            "registration": "01-19.06.2026.",
+            "exam": "17-31.08.2026."
           }
         ],
         "priceList": [
@@ -842,8 +847,8 @@
           },
           { "itemName": "ISPIT SA VEŽBAMA", "itemPrice": "1.000,00 din." },
           {
-            "itemName": "ISPIT IZ PRAKTIČNE NASTAVE",
-            "itemPrice": "1.000,00 din."
+            "itemName": "ČAS KONSULTATIVNE NASTAVE (GRUPA DO 15 UČENIKA)",
+            "itemPrice": "200,00 din."
           },
           {
             "itemName": "ČAS KONSULTATIVNE NASTAVE(GRUPA DO 15 UČENIKA)",

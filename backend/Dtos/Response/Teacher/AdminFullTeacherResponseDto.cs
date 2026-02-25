@@ -14,4 +14,7 @@ public class AdminFullTeacherResponseDto
     public string Image { get; set; } = null!;
     public IEnumerable<AdminQualificationResponseDto> Qualifications { get; set; } = [];
     public IEnumerable<SimpleSubjectResponseDto> Subjects { get; set; } = [];
+
+    public string? StartOfOpenOfficeHoursFirstShift { get; set; }
+    public string? StartOfOpenOfficeHoursSecondShift { get; set; }
 }

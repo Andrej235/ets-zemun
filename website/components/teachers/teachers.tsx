@@ -14,92 +14,57 @@ type TeachersProps = {
 export default function Teachers({ teachers }: TeachersProps) {
   const t = useTranslations();
 
-  const leadership: Schema<"TeacherResponseDto">[] = [
-    {
-      id: 1,
-      name: t("teachers.staff.1.name"),
-      title: t("teachers.staff.1.title"),
-      bio: "direktor@ets-zemun.edu.rs",
-      email: "",
-      image: "/images/teachers/radulovic.png",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 2,
-      name: t("teachers.staff.2.name"),
-      title: t("teachers.staff.2.title"),
-      bio: "",
-      email: "",
-      image: "",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 3,
-      name: t("teachers.staff.3.name"),
-      title: t("teachers.staff.3.title"),
-      bio: "",
-      email: "sekretar@ets-zemun.edu.rs",
-      image: "/images/teachers/stojkovic.jpg",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 4,
-      name: t("teachers.staff.4.name"),
-      title: t("teachers.staff.4.title"),
-      bio: "",
-      email: "rac@ets-zemun.edu.rs",
-      image: "",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 5,
-      name: t("teachers.staff.5.name"),
-      title: t("teachers.staff.5.title"),
-      bio: "",
-      email: "ppsluzba@ets-zemun.edu.rs",
-      image: "",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 6,
-      name: t("teachers.staff.6.name"),
-      title: t("teachers.staff.6.title"),
-      bio: "",
-      email: "ppsluzba@ets-zemun.edu.rs",
-      image: "",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-    {
-      id: 7,
-      name: t("teachers.staff.7.name"),
-      title: t("teachers.staff.7.title"),
-      bio: "",
-      email: "",
-      image: "/images/teachers/nedic.jpg",
-      startOfOpenOfficeHoursFirstShift: null,
-      startOfOpenOfficeHoursSecondShift: null,
-      qualifications: [],
-      subjects: [],
-    },
-  ];
+  const leadership: Schema<"TeacherResponseDto">[] = useMemo(
+    () =>
+      [
+        {
+          email: "direktor@ets-zemun.edu.rs",
+          image: "/images/teachers/radulovic.webp",
+        },
+        {
+          email: "",
+          image: "",
+        },
+        {
+          email: "sekretar@ets-zemun.edu.rs",
+          image: "/images/teachers/stojkovic.webp",
+        },
+        {
+          email: "rac@ets-zemun.edu.rs",
+          image: "",
+        },
+        {
+          email: "ppsluzba@ets-zemun.edu.rs",
+          image: "",
+        },
+        {
+          email: "ppsluzba@ets-zemun.edu.rs",
+          image: "",
+        },
+        {
+          email: "",
+          image: "",
+        },
+        {
+          email: "",
+          image: "",
+        },
+      ].map(
+        (x, i) =>
+          ({
+            ...x,
+            id: i,
+            name: t(`teachers.staff.${i}.name`),
+            title: t(`teachers.staff.${i}.title`),
+            qualifications: [],
+            startOfOpenOfficeHoursFirstShift: null,
+            startOfOpenOfficeHoursSecondShift: null,
+            subjects: [],
+            bio: "",
+          }) satisfies Schema<"TeacherResponseDto">
+      ),
+    [t]
+  );
 
   const [selectedTeacher, setSelectedTeacher] =
     useState<Schema<"TeacherResponseDto"> | null>(null);
@@ -160,7 +125,7 @@ export default function Teachers({ teachers }: TeachersProps) {
           <div className="teacher-cards-container">
             <AnimatePresence mode="popLayout">
               {leadership.map((data) => (
-                <TeacherCard teacher={data} key={data.id} onSelect={() => {}} />
+                <TeacherCard teacher={data} key={data.id} onSelect={null} />
               ))}
             </AnimatePresence>
           </div>

@@ -373,11 +373,11 @@ namespace EtsZemun.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<TimeOnly?>("StartOfOpenOfficeHoursFirstShift")
-                        .HasColumnType("time without time zone");
+                    b.Property<string>("StartOfOpenOfficeHoursFirstShift")
+                        .HasColumnType("text");
 
-                    b.Property<TimeOnly?>("StartOfOpenOfficeHoursSecondShift")
-                        .HasColumnType("time without time zone");
+                    b.Property<string>("StartOfOpenOfficeHoursSecondShift")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

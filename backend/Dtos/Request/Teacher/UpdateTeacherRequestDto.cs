@@ -6,6 +6,6 @@ public class UpdateTeacherRequestDto
     public string Email { get; set; } = null!;
     public string Image { get; set; } = null!;
 
-    public TimeOnly? StartOfOpenOfficeHoursFirstShift { get; set; }
-    public TimeOnly? StartOfOpenOfficeHoursSecondShift { get; set; }
+    public string? StartOfOpenOfficeHoursFirstShift { get; set; }
+    public string? StartOfOpenOfficeHoursSecondShift { get; set; }
 }

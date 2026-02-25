@@ -55,6 +55,7 @@ export default async function sendApiRequest<
       "Content-Type": "application/json",
     },
     credentials: includeCookies ? "include" : "omit",
+    cache: "no-store",
   };
 
   const response = await fetch(url, requestInit);

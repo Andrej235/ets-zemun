@@ -45,7 +45,7 @@ export default function ExpandedTeacherCard({
         icon: "envelope",
       },
     ],
-    [teacher.qualifications, t]
+    [teacher.qualifications, t],
   );
 
   return (
@@ -121,7 +121,7 @@ export default function ExpandedTeacherCard({
                   <Icon className="tab-icon" name={tab.icon} />
                   {tab.label}
                 </button>
-              )
+              ),
           )}
         </div>
 
@@ -178,7 +178,7 @@ export default function ExpandedTeacherCard({
                     <div className="qualification-details">
                       <p className="qualification-date">
                         {new Date(
-                          qualification.dateObtained
+                          qualification.dateObtained,
                         ).toLocaleDateString()}
                       </p>
 
@@ -199,6 +199,24 @@ export default function ExpandedTeacherCard({
             <div className="tab-content contact-content">
               <h3>{t("expandedCard.tabs.contact.title")}</h3>
               <div className="contact-info-detailed">
+                {teacher.startOfOpenOfficeHoursFirstShift ? (
+                  <>
+                    <h4>
+                      {t("expandedCard.tabs.contact.openOfficeHoursFirstShift")}
+                    </h4>
+                    <p>{teacher.startOfOpenOfficeHoursFirstShift}</p>
+                  </>
+                ) : null}
+                {teacher.startOfOpenOfficeHoursSecondShift ? (
+                  <>
+                    <h4>
+                      {t(
+                        "expandedCard.tabs.contact.openOfficeHoursSecondShift",
+                      )}
+                    </h4>
+                    <p>{teacher.startOfOpenOfficeHoursSecondShift}</p>
+                  </>
+                ) : null}
                 <div className="contact-method">
                   <div className="contact-icon">
                     <Icon name="envelope" />

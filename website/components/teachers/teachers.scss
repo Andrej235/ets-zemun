@@ -581,12 +581,19 @@
 
     // Contact Content
     .contact-content {
+      h4 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1.4rem;
+      }
       .contact-info-detailed {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 1rem;
 
         .contact-method {
+          margin-top: 2rem;
           display: flex;
           align-items: center;
           gap: 2rem;
