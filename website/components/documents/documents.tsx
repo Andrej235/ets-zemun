@@ -29,11 +29,11 @@ const data: {
         },
         {
           title: "documents.groups.6.documents.1",
-          url: "/documents/aneks-1-2024-25.pdf",
+          url: "/documents/aneks-1-2024-25.docx",
         },
         {
           title: "documents.groups.6.documents.2",
-          url: "/documents/aneks-2-2024-25.pdf",
+          url: "/documents/aneks-2-2024-25.docx",
         },
         {
           title: "documents.groups.6.documents.3",
@@ -149,6 +149,10 @@ const data: {
         {
           title: "documents.groups.3.documents.2",
           url: "/documents/pravilnik-o-organizaciji-radnih-mesta.docx",
+        },
+        {
+          title: "documents.groups.3.documents.3",
+          url: "/documents/GFI-2025-01832-1_2026-02-27T11-53-05.pdf",
         },
       ],
     },
