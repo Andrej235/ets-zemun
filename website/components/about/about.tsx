@@ -8,13 +8,6 @@ import localeToLangCode from "@/lib/locale-to-lang-code";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./about.scss";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@/components/ui/table";
 
 export default async function About({
   params,
