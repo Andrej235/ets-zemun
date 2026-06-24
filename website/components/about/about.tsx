@@ -8,6 +8,13 @@ import localeToLangCode from "@/lib/locale-to-lang-code";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import "./about.scss";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@/components/ui/table";
 
 export default async function About({
   params,
@@ -94,6 +101,100 @@ export default async function About({
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="table-container">
+          <table>
+            <caption>
+              Raspored razrednih ispita u junskom roku 2025/2026 godine
+            </caption>
+
+            <thead>
+              <tr>
+                <th>Predmet</th>
+                <th>Datum</th>
+                <th>Profesori</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Mrežni i operativni sistemi</td>
+                <td>26.06.2026. 10h</td>
+                <td>Merdžan Ibraimi, Biljana Živković, Saša Stošić</td>
+              </tr>
+
+              <tr>
+                <td>Hemija</td>
+                <td>26.06.2026. 12h</td>
+                <td>Relja Ćurčin, Svetlana Pavlović, Valentina Ivanov</td>
+              </tr>
+
+              <tr>
+                <td>Fizika</td>
+                <td>30.06.2026. 10h</td>
+                <td>
+                  Svetlana Lazić, Jelena Prnjak, Aleksandra Gemović Stepić
+                </td>
+              </tr>
+
+              <tr>
+                <td>Matematika</td>
+                <td>02.07.2026. 10h</td>
+                <td>Svetlana Lazić, Zorica Lukić, Ljiljana Stanojčić</td>
+              </tr>
+
+              <tr>
+                <td>Veb programiranje</td>
+                <td>02.07.2026. 10h</td>
+                <td>Zorica Lukić, Slaviša Simović, Marina Takov</td>
+              </tr>
+
+              <tr>
+                <td>Srpski jezik i književnost</td>
+                <td>29.06.2026. 10h</td>
+                <td>Adriana Đurić, Nada Đurić, Vladimir Pavković</td>
+              </tr>
+
+              <tr>
+                <td>Fizičko vaspitanje</td>
+                <td>26.06.2026. 10h</td>
+                <td>Svetlana Lazić, Srđan Lukač, Ivana Jovanović</td>
+              </tr>
+
+              <tr>
+                <td>Ekologija</td>
+                <td>26.06.2026. 10h</td>
+                <td>Jovana Milovanović, Desanka Uzelac, Biserka Radenković</td>
+              </tr>
+
+              <tr>
+                <td>Engleski jezik</td>
+                <td>01.07.2026. 10h</td>
+                <td>Jovana Milovanović, Dobrila Injac, Miljana Stojanović</td>
+              </tr>
+
+              <tr>
+                <td>Računarski hardver</td>
+                <td>01.07.2026. 10h</td>
+                <td>Svetlana Lazić, Ivica Radisavljević, Dejan Stanković</td>
+              </tr>
+
+              <tr>
+                <td>Programiranje</td>
+                <td>02.07.2026. 10h</td>
+                <td>Svetlana Lazić, Adriana Đurić, Dejan Vurdelja</td>
+              </tr>
+
+              <tr>
+                <td>Pasivne i aktivne komponente</td>
+                <td>01.07.2026. 10h</td>
+                <td>Olivera Lužnjanin, Dragana Joksimović, Radovan Đurić</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
