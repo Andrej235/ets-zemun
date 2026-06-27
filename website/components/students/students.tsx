@@ -53,7 +53,7 @@ export default function Students({ exams, examTitle }: StudentsProps) {
   };
 
   const activeComponent = sections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   )?.component;
 
   return (
