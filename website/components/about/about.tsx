@@ -116,7 +116,7 @@ export default async function About({
               <tr>
                 <td>Mrežni i operativni sistemi</td>
                 <td>26.06.2026. 10h</td>
-                <td>Merdžan Ibraimi, Biljana Živković, Saša Stošić</td>
+                <td>Merdžan Ibraimi, Relja Ćuričin, Saša Stošić</td>
               </tr>
 
               <tr>
@@ -129,14 +129,20 @@ export default async function About({
                 <td>Fizika</td>
                 <td>30.06.2026. 10h</td>
                 <td>
-                  Svetlana Lazić, Jelena Prnjak, Aleksandra Gemović Stepić
+                  Pavle Karastojković, Jovana Milovanovић, Nataša Avdić, Olivera
+                  Lužnjarin, Relja Ćurčin, Svetlana Lazić, Jelena Prnjak,
+                  Aleksandra Gemović Stepić
                 </td>
               </tr>
 
               <tr>
                 <td>Matematika</td>
                 <td>02.07.2026. 10h</td>
-                <td>Svetlana Lazić, Zorica Lukić, Ljiljana Stanojčić</td>
+                <td>
+                  Aleksandar Ilijić, Branislav Siljković, Jovana Milovanovић,
+                  Zorica Lukić, Ljiljana Stanojčić, Pavle Karastojković, Snežana
+                  Aleksić, Rajka Miletić
+                </td>
               </tr>
 
               <tr>
@@ -148,7 +154,11 @@ export default async function About({
               <tr>
                 <td>Srpski jezik i književnost</td>
                 <td>29.06.2026. 10h</td>
-                <td>Adriana Đurić, Nada Đurić, Vladimir Pavković</td>
+                <td>
+                  Adriana Đurić, Nada Đurić, Vladimir Pavković, (maturski),
+                  Svetlana Lazić, Jovana Milovanovић, Marina Ristanović,
+                  Vladimir Pavković
+                </td>
               </tr>
 
               <tr>
