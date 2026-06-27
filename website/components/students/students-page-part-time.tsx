@@ -1,6 +1,5 @@
 import { Schema } from "@/api-dsl/types/endpoints/schema-parser";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { useMemo } from "react";
 
 type Deadlines = {
@@ -24,26 +23,17 @@ export default function StudentsPagePartTime({ exams, examTitle }: Props) {
 
   const deadlines: Deadlines = useMemo(
     () => t.raw("students.sections.partTime.deadlines") as Deadlines,
-    [t]
+    [t],
   );
 
   const priceList: PriceLists = useMemo(
     () => t.raw("students.sections.partTime.priceList") as PriceLists,
-    [t]
+    [t],
   );
 
   return (
     <div className="part-time-container" data-search-key="vanredni-ucenici">
       <h1>{t("students.sections.partTime.title")}</h1>
-
-      <div className="image-container">
-        <Image
-          src="/images/students/part-time.webp"
-          alt="part-time"
-          width={600}
-          height={400}
-        />
-      </div>
 
       <div className="table-container">
         <table>
@@ -79,13 +69,11 @@ export default function StudentsPagePartTime({ exams, examTitle }: Props) {
 
       <div className="payment-method">
         <h2>{t("students.sections.partTime.paymentMethod.title")}</h2>
-        <Image
-          className="payment-image"
-          src="/images/students/payment.webp"
-          alt="payment"
-          width={684}
-          height={291}
-        />
+        <div className="invoice-number">840-31302845-09</div>
+        <p className="info-label">
+          {t("students.sections.partTime.paymentMethod.infoLabel")}
+        </p>
+        <p className="info-value">97 66018320401742317‌00</p>
       </div>
 
       <div className="table-container" data-search-key="ispiti">

@@ -866,7 +866,8 @@
         ],
         "paymentMethod": {
           "title": "INVOICE FOR PART-TIME STUDENTS",
-          "description": ["OBLIGATORY:", "INVOICE NUMBER:"]
+          "description": ["OBLIGATORY:", "INVOICE NUMBER:"],
+          "infoLabel": "REQUIRED REFERENCE NUMBER:"
         },
         "deadlinesCaption": "DEADLINES FOR PART-TIME STUDENTS IN THE 2025/2026 SCHOOL YEAR",
         "deadlinesHeaders": ["DEADLINES", "REGISTRATION", "EXAM PERIOD"],

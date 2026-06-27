@@ -859,8 +859,9 @@
           { "itemName": "MATURSKI ISPIT", "itemPrice": "3.000,00 din." }
         ],
         "paymentMethod": {
-          "title": "RAČUN ZA UPLATU ZA VANREDNE UČENIKE",
-          "description": ["OBAVEZNO:", "POZIV NA BROJ:"]
+          "title": "RAČUN ZA VANREDNE UČENIKE",
+          "description": ["OBAVEZNO:", "POZIV NA BROJ:"],
+          "infoLabel": "OBAVEZNO POZIV NA BROJ:"
         },
         "deadlinesCaption": "ROKOVI ZA VANREDNE UČENIKE U ŠKOLSKOJ 2025/2026. GODINI",
         "deadlinesHeaders": ["ROKOVI", "PRIJAVLJIVANJA", "POLAGANJA"],
