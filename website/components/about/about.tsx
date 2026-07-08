@@ -101,7 +101,7 @@ export default async function About({
         <div className="table-container">
           <table>
             <caption>
-              Raspored razrednih ispita u junskom roku 2025/2026 godine
+              Raspored razrednih ispita u avgustovskom roku 2025/2026 godine
             </caption>
 
             <thead>
@@ -154,7 +154,23 @@ export default async function About({
                 <td>21.08.2026. 10h</td>
                 <td>Marina Ristanović, Galina Bojović, Adriana Đurić </td>
               </tr>
+            </tbody>
+          </table>
 
+          <table>
+            <caption>
+              Raspored popravnih ispita u avgustovskom roku 2025/2026 godine
+            </caption>
+
+            <thead>
+              <tr>
+                <th>Predmet</th>
+                <th>Datum</th>
+                <th>Profesori</th>
+              </tr>
+            </thead>
+
+            <tbody>
               <tr>
                 <td>MATEMATIKA</td>
                 <td>27.08.2026. 10h</td>
